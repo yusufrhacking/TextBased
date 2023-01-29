@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_RENDERER_H
 #define TEXTBASED_RENDERER_H
 #include <SDL2/SDL.h>
-#include "Window.h"
+#include "../Window/Window.h"
 
 
 

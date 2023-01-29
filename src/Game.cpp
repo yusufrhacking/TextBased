@@ -6,9 +6,9 @@ void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         return;
     }
+
     window = new Window();
     renderer = new Renderer(window);
-
     SDL_SetWindowFullscreen(window->getWindow(), SDL_WINDOW_FULLSCREEN);
 
     isRunning = true;

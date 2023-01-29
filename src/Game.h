@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_GAME_H
 #define TEXTBASED_GAME_H
 #include <SDL2/SDL.h>
-#include "Renderer.h"
+#include "Renderer/Renderer.h"
 
 
 

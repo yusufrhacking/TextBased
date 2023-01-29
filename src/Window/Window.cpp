@@ -16,4 +16,9 @@ Window::Window() {
             SDL_WINDOW_BORDERLESS
     );
 }
+
+SDL_Window *Window::getWindow() {
+    return window;
 }
+
+
