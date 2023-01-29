@@ -14,6 +14,10 @@ void Game::initialize() {
     isRunning = true;
 }
 
+void Game::Setup() {
+
+}
+
 void Game::run() {
     Setup();
     while(isRunning){
@@ -21,10 +25,6 @@ void Game::run() {
         Update();
         renderer->Render();
     }
-}
-
-void Game::Setup() {
-
 }
 
 void Game::ProcessInput() {
