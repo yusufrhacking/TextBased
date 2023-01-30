@@ -1,8 +1,9 @@
 #ifndef TEXTBASED_GAME_H
 #define TEXTBASED_GAME_H
 #include <SDL2/SDL.h>
+#include <SDL_ttf.h>
 #include "Renderer/Renderer.h"
-
+#include "InputProcessor/InputProcessor.h"
 
 
 class Game{
@@ -11,7 +12,9 @@ private:
         bool isRunning;
         Window* window;
         Renderer* renderer;
-        void createWindow();
+        InputProcessor* inputProcessor;
+        TTF_Font* font;
+
 
 
 public:
@@ -21,9 +24,6 @@ public:
     void run();
 
     void close();
-
-    int windowWidth;
-    int windowHeight;
 
     void Setup();
 
