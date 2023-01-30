@@ -10,7 +10,7 @@ Renderer::Renderer(Window *window) {
         std::cout << "TTF INIT FAIL" << std::endl;
     }
 
-    font = TTF_OpenFont("/Users/yusufhacking/Documents/Projects/BobbyMart/resources/Monaco.ttf", FONT_SIZE);
+    font = TTF_OpenFont("../../resources/Monaco.ttf", FONT_SIZE);
     if ( !font ) {
         std::cout << "OPEN FONT FAIL" << std::endl;
     }
