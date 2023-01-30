@@ -13,7 +13,6 @@ private:
         Window* window;
         Renderer* renderer;
         InputProcessor* inputProcessor;
-        TTF_Font* font;
 
 
 

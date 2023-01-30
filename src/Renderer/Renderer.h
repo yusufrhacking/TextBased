@@ -5,11 +5,14 @@
 #include <SDl2/SDL_ttf.h>
 
 
+static const int FONT_SIZE = 24;
 
 class Renderer {
     SDL_Renderer* renderer;
     Window window;
     TTF_Font* font;
+
+
 
 
 public:
