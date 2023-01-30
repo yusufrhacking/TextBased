@@ -7,3 +7,6 @@ https://github.com/JodyAndrews/SDL2_Basic_Setup
 Some of the starter code for the Game loop I got from Gustavo Pezzi's
 tutorial on how to build a 2D gae engine from scratch.
 From pikuma.com
+
+https://github.com/gabime/spdlog/blob/v1.x/LICENSE
+License for the logging library
