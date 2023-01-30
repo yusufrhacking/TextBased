@@ -2,6 +2,7 @@
 #define TEXTBASED_GAME_H
 #include <SDL2/SDL.h>
 #include <SDL_ttf.h>
+#include "spdlog/spdlog.h"
 #include "Renderer/Renderer.h"
 #include "InputProcessor/InputProcessor.h"
 

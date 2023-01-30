@@ -3,7 +3,7 @@
 
 void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        return;
+        spdlog::error("SDL INIT FAILED");
     }
 
     window = new Window();
