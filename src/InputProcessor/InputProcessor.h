@@ -4,7 +4,7 @@
 
 class InputProcessor {
 public:
-    bool ProcessInput(SDL_Event event);
+    bool processInput(SDL_Event event);
 };
 
 

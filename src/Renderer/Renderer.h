@@ -19,7 +19,7 @@ class Renderer {
 
 public:
     explicit Renderer(Window* window);
-    void Render();
+    void render();
     ~Renderer();
 
 private:

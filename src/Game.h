@@ -25,11 +25,11 @@ public:
 
     void close();
 
-    void Setup();
+    void setup();
 
-    void ProcessInput();
+    void processInput();
 
-    void Update();
+    void update();
 
 };
 

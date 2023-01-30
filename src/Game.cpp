@@ -14,27 +14,27 @@ void Game::initialize() {
     isRunning = true;
 }
 
-void Game::Setup() {
+void Game::setup() {
 
 }
 
 void Game::run() {
-    Setup();
+    setup();
     while(isRunning){
-        ProcessInput();
-        Update();
-        renderer->Render();
+        processInput();
+        update();
+        renderer->render();
     }
 }
 
-void Game::ProcessInput() {
+void Game::processInput() {
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)){
-        isRunning = inputProcessor->ProcessInput(sdlEvent);
+        isRunning = inputProcessor->processInput(sdlEvent);
     }
 }
 
-void Game::Update() {
+void Game::update() {
 
 }
 

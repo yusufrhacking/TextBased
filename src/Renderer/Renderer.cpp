@@ -18,7 +18,7 @@ Renderer::Renderer(Window *window) {
 
 }
 
-void Renderer::Render() {
+void Renderer::render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
     SDL_Color color = {255, 255, 255};
