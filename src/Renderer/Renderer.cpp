@@ -7,11 +7,13 @@ Renderer::Renderer(Window *window) {
     this->renderer = SDL_CreateRenderer(this->window.getWindow(), -1, 0);
 
     if (TTF_Init() < 0){
+        spdlog::error("TFT INIT FAIL");
         std::cout << "TTF INIT FAIL" << std::endl;
     }
 
     font = TTF_OpenFont("../../resources/Monaco.ttf", FONT_SIZE);
     if ( !font ) {
+        spdlog::error("OPEN FONT FAIL");
         std::cout << "OPEN FONT FAIL" << std::endl;
     }
 
