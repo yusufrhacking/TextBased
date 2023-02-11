@@ -7,14 +7,12 @@
 
 
 
-static const int FONT_SIZE = 24;
+static const int FONT_SIZE = 10;
 
 class Renderer {
     SDL_Renderer* renderer;
     Window window;
     TTF_Font* font;
-
-
 
 
 public:
@@ -23,7 +21,11 @@ public:
     ~Renderer();
 
 private:
+    void renderDummyText() const;
 
+    bool isImproperlyInitialized() const;
+
+    bool isFontFound() const;
 };
 
 

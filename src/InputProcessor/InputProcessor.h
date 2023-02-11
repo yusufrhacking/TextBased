@@ -5,7 +5,10 @@
 class InputProcessor {
 public:
     bool processInput(SDL_Event event);
+
+private:
+    bool handleKeyPress(SDL_Event event);
 };
 
 
-#endif //TEXTBASED_INPUTPROCESSOR_H
+#endif

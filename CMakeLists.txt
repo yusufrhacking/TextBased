@@ -20,7 +20,15 @@ set(SOURCE_FILES
         src/Game.cpp src/Game.h
         src/Main.cpp
         src/Renderer/Renderer.cpp src/Renderer/Renderer.h
-        src/Window/Window.cpp src/Window/Window.h src/InputProcessor/InputProcessor.cpp src/InputProcessor/InputProcessor.h)
+        src/Window/Window.cpp src/Window/Window.h
+        src/InputProcessor/InputProcessor.cpp src/InputProcessor/InputProcessor.h
+        src/ECS/Components/TransformComponent.h
+        src/Objects/Position.h src/Objects/Velocity.h
+        src/ECS/Systems/MovementSystem.cpp src/ECS/Systems/MovementSystem.h
+        "src/ECS/Design/Entity.cpp" "src/ECS/Design/Entity.h"
+        "src/ECS/Design/Component.cpp" "src/ECS/Design/Component.h"
+        "src/ECS/Design/System.cpp" "src/ECS/Design/System.h"
+        "src/ECS/Design/Registry.cpp" "src/ECS/Design/Registry.h")
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
