@@ -28,7 +28,7 @@ set(SOURCE_FILES
         "src/ECS/Design/Entity.cpp" "src/ECS/Design/Entity.h"
         "src/ECS/Design/Component.cpp" "src/ECS/Design/Component.h"
         "src/ECS/Design/System.cpp" "src/ECS/Design/System.h"
-        "src/ECS/Design/Registry.cpp" "src/ECS/Design/Registry.h")
+        "src/ECS/Design/ECSManager.cpp" "src/ECS/Design/ECSManager.h" src/ECS/Design/Group.cpp src/ECS/Design/Group.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
