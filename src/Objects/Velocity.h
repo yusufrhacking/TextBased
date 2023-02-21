@@ -4,6 +4,11 @@
 struct Velocity{
     int xVelocity;
     int yVelocity;
+
+    Velocity(int x, int y){
+        xVelocity = x;
+        yVelocity = y;
+    }
 };
 
 #endif //TEXTBASED_VELOCITY_H

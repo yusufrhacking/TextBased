@@ -5,6 +5,11 @@
 struct Position {
     int xPos;
     int yPos;
+
+    Position(int x, int y){
+        this->xPos = x;
+        this->yPos = y;
+    }
 };
 
 

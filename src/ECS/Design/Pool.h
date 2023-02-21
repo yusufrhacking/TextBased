@@ -1,24 +1,24 @@
-#ifndef TEXTBASED_GROUP_H
-#define TEXTBASED_GROUP_H
+#ifndef TEXTBASED_POOL_H
+#define TEXTBASED_POOL_H
 #include <vector>
 #include <cstdlib>
 
-class GenericGroup{
+class GenericPool{
 public:
-    virtual ~GenericGroup() { }
+    virtual ~GenericPool() { }
 };
 
 template <typename T>
-class Group: GenericGroup {
+class Pool: GenericPool {
 private:
     std::vector<T> elements;
 
 public:
-    explicit Group(int size = 100){
+    explicit Pool(int size = 100){
         elements.resize(size);
     }
 
-    virtual ~Group() = default;
+    virtual ~Pool() = default;
 
     bool isEmpty() const{
         return elements.empty();
@@ -54,4 +54,4 @@ public:
 };
 
 
-#endif //TEXTBASED_GROUP_H
+#endif //TEXTBASED_POOL_H

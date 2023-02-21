@@ -10,6 +10,7 @@ protected:
 //IDs should be for types of components, not individual components
 template <typename T>
 class Component: public GenericComponent {
+public:
     static int getId(){
         nextId++;
         static auto newId = nextId;
