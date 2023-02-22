@@ -8,9 +8,10 @@
 #include <unordered_map>
 #include <typeindex>
 #include "../Objects/Entity.h"
+#include "EntityManager.h"
 
 typedef std::vector<GenericPool*> ComponentPoolsArr;
-typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
+typedef std::bitset<MAX_COMPONENTS> ComponentSignature;
 typedef std::unordered_map<std::type_index, System*> SystemsMap;
 
 int GenericComponent::nextId = 0;
@@ -21,9 +22,8 @@ private:
 
     ComponentPoolsArr componentPools;
     std::vector<ComponentSignature> entityComponentSignatures;
-    std::vector<Entity> entitiesToBeAdded;
-    std::vector<Entity> entitiesToBeKilled;
     SystemsMap systems;
+    EntityManager* entityManager;
 
 public:
     ECSManager() = default;
@@ -32,8 +32,6 @@ public:
     Entity createEntity();
 
     void Update();
-
-    void addEntityToSystem(Entity entity);
 
     //Refactor in a componentManager class
     template <typename TComponent, typename ...TArgs>
@@ -48,6 +46,8 @@ public:
     template <typename TSystem, typename ... TArgs>
     void addSystem(TArgs&& ... args);
 
+    void addEntityToSystem(Entity entity);
+
     template <typename TSystem>
     void removeSystem();
 
@@ -56,8 +56,6 @@ public:
 
     template <typename TSystem>
     TSystem& getSystem() const;
-
-    void addEntityToSystems(Entity entity);
 
 
 private:
@@ -153,6 +151,8 @@ TSystem& ECSManager::getSystem() const {
     TSystem* systemToReturn = systems.find(std::type_index(typeid(TSystem)));
     return *(std::static_pointer_cast<TSystem>(systemToReturn->second));
 }
+
+
 //MAKE EVENTUALLY
 //std::type_index ECSManager::getKeyIndex(TSystem?) const {
 //

@@ -6,12 +6,7 @@ void ECSManager::Update(){
 }
 
 Entity ECSManager::createEntity() {
-    int entityId = numOfEntities;
-    numOfEntities++;
-    Entity entity(entityId);
-    entitiesToBeAdded.push_back(entity);
-    spdlog::error(&"Entity created with id: " [entityId]);
-    return entity;
+    return entityManager->createEntity();
 }
 
 void ECSManager::addEntityToSystem(Entity entity){
@@ -28,6 +23,11 @@ void ECSManager::addEntityToSystem(Entity entity){
     }
 }
 
+
 bool ECSManager::signaturesMatch(const std::bitset<64> &entityComponentSignature,
-                                 const ComponentSignature &systemComponentSignature) const { return (entityComponentSignature & systemComponentSignature) == systemComponentSignature; }
+                                 const ComponentSignature &systemComponentSignature) const {
+    return (entityComponentSignature & systemComponentSignature) == systemComponentSignature; }
+
+
+
 

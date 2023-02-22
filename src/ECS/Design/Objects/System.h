@@ -5,9 +5,9 @@
 #include "Entity.h"
 #include "Component.h"
 
-const unsigned int NUM_OF_COMPONENTS = 64;
+const unsigned int MAX_COMPONENTS = 64;
 
-typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
+typedef std::bitset<MAX_COMPONENTS> ComponentSignature;
 
 //The system works on components with specific signatures
 class System {
