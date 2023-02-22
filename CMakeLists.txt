@@ -25,10 +25,10 @@ set(SOURCE_FILES
         src/ECS/Components/TransformComponent.h
         src/Objects/Position.h src/Objects/Velocity.h
         src/ECS/Systems/MovementSystem.cpp src/ECS/Systems/MovementSystem.h
-        "src/ECS/Design/Entity.cpp" "src/ECS/Design/Entity.h"
-        "src/ECS/Design/Component.cpp" "src/ECS/Design/Component.h"
-        "src/ECS/Design/System.cpp" "src/ECS/Design/System.h"
-        "src/ECS/Design/ECSManager.cpp" "src/ECS/Design/ECSManager.h" src/ECS/Design/Pool.cpp src/ECS/Design/Pool.h)
+        "src/ECS/Design/Objects/Entity.cpp" "src/ECS/Design/Objects/Entity.h"
+        "src/ECS/Design/Objects/Component.cpp" "src/ECS/Design/Objects/Component.h"
+        "src/ECS/Design/Objects/System.cpp" "src/ECS/Design/Objects/System.h"
+        "src/ECS/Design/Managers/ECSManager.cpp" "src/ECS/Design/Managers/ECSManager.h" src/ECS/Design/Objects/Pool.cpp src/ECS/Design/Objects/Pool.h src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
