@@ -10,7 +10,7 @@ class Window {
 public:
     Window();
     SDL_Window* getWindow();
-
+private:
     void createWindow();
 
     void showWindow() const;
