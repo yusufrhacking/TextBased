@@ -5,6 +5,7 @@
 #include "spdlog/spdlog.h"
 #include "Renderer/Renderer.h"
 #include "InputProcessor/InputProcessor.h"
+#include "ECS/Design/Managers/ECSManager.h"
 
 
 class Game{
@@ -14,7 +15,7 @@ private:
         Window* window;
         Renderer* renderer;
         InputProcessor* inputProcessor;
-
+        ECSManager* manager;
 
 
 public:

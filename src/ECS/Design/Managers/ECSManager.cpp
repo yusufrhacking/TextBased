@@ -3,8 +3,12 @@
 
 int GenericComponent::nextId = 0;
 
-void ECSManager::Update(){
-
+void ECSManager::update(){
+    for (Entity entity : entitiesToBeAdded){
+//        addEntityToSystems(entity);
+        spdlog::info("Entity " + std::to_string(entity.getId()) + " added");
+    }
+    entitiesToBeAdded.clear();
 }
 
 Entity ECSManager::createEntity() {
@@ -12,7 +16,7 @@ Entity ECSManager::createEntity() {
     numOfEntities++;
     Entity entity(entityId);
     entitiesToBeAdded.push_back(entity);
-    spdlog::error(&"Entity created with id: " [entityId]);
+    spdlog::info("Entity " + std::to_string(entityId) + " created");
     return entity;
 }
 

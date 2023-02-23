@@ -9,13 +9,14 @@ void Game::initialize() {
     window = new Window();
     renderer = new Renderer(window);
     inputProcessor = new InputProcessor();
-//    SDL_SetWindowSize(window->getWindow(), 1600, 1600);
-    SDL_SetWindowFullscreen(window->getWindow(), SDL_WINDOW_FULLSCREEN);
+    manager = new ECSManager();
+
+//    SDL_SetWindowFullscreen(window->getWindow(), SDL_WINDOW_FULLSCREEN);
     isRunning = true;
 }
 
 void Game::setup() {
-
+    Entity tank = manager->createEntity();
 }
 
 void Game::run() {
@@ -35,7 +36,7 @@ void Game::processInput() {
 }
 
 void Game::update() {
-
+    manager->update();
 }
 
 void Game::close() {

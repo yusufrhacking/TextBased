@@ -11,7 +11,7 @@ public:
     void Update() {
         // Loop all entities the system cares about
 //        for (auto entity: getEntities()){
-//            //Update entity position based on its velocity
+//            //update entity position based on its velocity
 //        }
     }
 };

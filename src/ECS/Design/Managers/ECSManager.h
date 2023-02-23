@@ -30,7 +30,7 @@ public:
     //Refactor in an Entity manager class
     Entity createEntity();
 
-    void Update();
+    void update();
 
     void addEntityToSystem(Entity entity);
 
