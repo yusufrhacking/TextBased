@@ -1,5 +1,6 @@
 #include "Window.h"
 #include <SDL2/SDL.h>
+#include <spdlog/spdlog.h>
 
 Window::Window() {
     SDL_DisplayMode displayMode;
@@ -13,8 +14,12 @@ Window::Window() {
             SDL_WINDOWPOS_CENTERED,
             windowWidth,
             windowHeight,
-            SDL_WINDOW_BORDERLESS
+            0
     );
+
+    if (window == NULL){
+        spdlog::error("Window initialization failed");
+    }
 }
 
 SDL_Window *Window::getWindow() {

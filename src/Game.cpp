@@ -9,8 +9,8 @@ void Game::initialize() {
     window = new Window();
     renderer = new Renderer(window);
     inputProcessor = new InputProcessor();
+//    SDL_SetWindowSize(window->getWindow(), 1600, 1600);
     SDL_SetWindowFullscreen(window->getWindow(), SDL_WINDOW_FULLSCREEN);
-
     isRunning = true;
 }
 
