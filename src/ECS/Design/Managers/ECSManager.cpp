@@ -6,7 +6,7 @@ int GenericComponent::nextId = 0;
 void ECSManager::update(){
     for (Entity entity : entitiesToBeAdded){
         addEntityToSystems(entity);
-        spdlog::info("Entity " + std::to_string(entity.getId()) + " added");
+        spdlog::info("Entity " + std::to_string(entity.getId()) + " fully added");
     }
     entitiesToBeAdded.clear();
 }
@@ -35,6 +35,7 @@ void ECSManager::addEntityToSystems(Entity entity){
 
         if (signaturesMatch(entityComponentSignature, systemComponentSignature)){
             system->addEntity(entity);
+            spdlog::info("Added Entity " + std::to_string(entityId) + " to system ");//Need System ID?
         }
     }
 }
