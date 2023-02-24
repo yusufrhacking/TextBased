@@ -9,7 +9,7 @@ class Window {
 
 public:
     Window();
-    ~Window() = default;
+    ~Window();
     SDL_Window* getWindow();
 private:
     void createWindow();

@@ -4,9 +4,11 @@
 
 Window::Window() {
     createWindow();
-
     showWindow();
+}
 
+Window::~Window() {
+    SDL_DestroyWindow(window);
 }
 
 void Window::showWindow() const {
@@ -18,6 +20,7 @@ void Window::showWindow() const {
     }
 
     SDL_UpdateWindowSurface(window);
+
 }
 
 void Window::createWindow() {

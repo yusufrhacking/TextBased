@@ -6,8 +6,13 @@ struct Velocity{
     int yVelocity;
 
     Velocity(int x, int y){
-        xVelocity = x;
-        yVelocity = y;
+        this->xVelocity = x;
+        this->yVelocity = y;
+    }
+
+    Velocity(){
+        this->xVelocity = 0;
+        this->yVelocity = 0;
     }
 };
 

@@ -10,6 +10,11 @@ struct Position {
         this->xPos = x;
         this->yPos = y;
     }
+
+    Position(){
+        this->xPos = 0;
+        this->yPos = 0;
+    }
 };
 
 

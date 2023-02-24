@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "ECS/Components/TransformComponent.h"
 
 Game::Game(){
     spdlog::info("Game object constructed");
@@ -18,6 +19,8 @@ void Game::initialize() {
 
 void Game::setup() {
     Entity tank = manager->createEntity();
+
+    manager->addComponent<TransformComponent>(tank, new Position, new Velocity);
 }
 
 void Game::run() {
