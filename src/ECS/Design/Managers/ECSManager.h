@@ -9,9 +9,9 @@
 #include <typeindex>
 #include "../Objects/Entity.h"
 
-typedef std::vector<GenericPool*> ComponentPoolsArr;
+typedef std::vector<std::shared_ptr<GenericPool>> ComponentPoolsArr;
 typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
-typedef std::unordered_map<std::type_index, System*> SystemsMap;
+typedef std::unordered_map<std::type_index, std::shared_ptr<System>> SystemsMap;
 
 
 class ECSManager {
@@ -69,7 +69,7 @@ private:
     bool isComponentPoolsResizeNeeded(int componentId) const;
 
     template<typename TComponent>
-    Pool<TComponent> *getValidPool(int componentId, int entityId);
+    std::shared_ptr<Pool<TComponent>> getValidPool(int componentId, int entityId);
 
 
     bool signaturesMatch(const std::bitset<64> &entityComponentSignature,
@@ -81,7 +81,7 @@ void ECSManager::addComponent(Entity entity, TArgs &&...args) {
     const int componentId = Component<TComponent>::getId();
     const int entityId = entity.getId();
 
-    Pool<TComponent> *componentPool = getValidPool<TComponent>(componentId, entityId);
+    std::shared_ptr<Pool<TComponent>> componentPool = getValidPool<TComponent>(componentId, entityId);
 
     TComponent newComponent(std::forward<TArgs>(args)...);
 
@@ -91,17 +91,17 @@ void ECSManager::addComponent(Entity entity, TArgs &&...args) {
 }
 
 template<typename TComponent>
-Pool<TComponent> *ECSManager::getValidPool(const int componentId, const int entityId) {
+std::shared_ptr<Pool<TComponent>> ECSManager::getValidPool(const int componentId, const int entityId) {
     if (isComponentPoolsResizeNeeded(componentId)){
         componentPools.resize(componentId + 1, nullptr);
     }
 
     if (isComponentUnitialized(componentId)){
-        auto newComponentPool = new Pool<TComponent>();
+        auto newComponentPool = std::make_shared<Pool<TComponent>>();
         componentPools[componentId] = newComponentPool;
     }
 
-    Pool<TComponent>* componentPool = componentPools[componentId];
+    std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
 
     if (entityId >= componentPool->getSize()){
         componentPool->resize(numOfEntities);
@@ -127,7 +127,7 @@ bool ECSManager::hasComponent(Entity entity){
 
 template<typename TSystem, typename... TArgs>
 void ECSManager::addSystem(TArgs &&... args) {
-    TSystem* newSystem(TSystem(std::forward<TArgs>(args)...));
+    std::shared_ptr<TSystem> newSystem = std::make_shared<TSystem>(std::forward<TArgs>(args)...);
     systems.insert(std::make_pair(
             std::type_index(typeid(TSystem)),//The key in this case is the type of System, as a num
             newSystem));//THIS IS HARAM
@@ -135,7 +135,7 @@ void ECSManager::addSystem(TArgs &&... args) {
 
 template<typename TSystem>
 void ECSManager::removeSystem() {
-    TSystem* systemToRemove = systems.find(std::type_index(typeid(TSystem)));
+    auto systemToRemove = systems.find(std::type_index(typeid(TSystem)));
     systems.erase(systemToRemove);
 }
 
@@ -148,7 +148,7 @@ bool ECSManager::hasSystem() const {
 
 template<typename TSystem>
 TSystem& ECSManager::getSystem() const {
-    TSystem* systemToReturn = systems.find(std::type_index(typeid(TSystem)));
+    std::shared_ptr<TSystem> systemToReturn = systems.find(std::type_index(typeid(TSystem)));
     return *(std::static_pointer_cast<TSystem>(systemToReturn->second));
 }
 //MAKE EVENTUALLY

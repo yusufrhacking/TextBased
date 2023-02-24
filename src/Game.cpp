@@ -20,7 +20,7 @@ void Game::initialize() {
 void Game::setup() {
     Entity tank = manager->createEntity();
 
-    manager->addComponent<TransformComponent>(tank, new Position, new Velocity);
+    manager->addComponent<TransformComponent>(tank, new Position(), new Velocity());
 }
 
 void Game::run() {

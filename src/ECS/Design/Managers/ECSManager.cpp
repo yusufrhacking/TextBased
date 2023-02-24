@@ -30,7 +30,7 @@ void ECSManager::addEntityToSystems(Entity entity){
     auto entityComponentSignature = entityComponentSignatures[entityId];
 
     for (auto& systemKeyValuePair: systems){
-        System* system = systemKeyValuePair.second;
+        std::shared_ptr<System> system = systemKeyValuePair.second;
         ComponentSignature systemComponentSignature = system->getComponentSignature();
 
         if (signaturesMatch(entityComponentSignature, systemComponentSignature)){

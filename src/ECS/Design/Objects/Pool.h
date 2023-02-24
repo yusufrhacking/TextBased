@@ -5,11 +5,11 @@
 
 class GenericPool{
 public:
-    virtual ~GenericPool() { }
+    virtual ~GenericPool() = default;
 };
 
 template <typename T>
-class Pool: GenericPool {
+class Pool: public GenericPool {
 private:
     std::vector<T> elements;
 
@@ -18,7 +18,7 @@ public:
         elements.resize(size);
     }
 
-    virtual ~Pool() = default;
+    ~Pool() override = default;
 
     bool isEmpty() const{
         return elements.empty();
