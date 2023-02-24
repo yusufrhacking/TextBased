@@ -4,6 +4,8 @@
 
 class InputProcessor {
 public:
+    InputProcessor() = default;
+    ~InputProcessor() = default;
     bool processInput(SDL_Event event);
 
 private:

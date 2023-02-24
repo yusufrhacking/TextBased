@@ -6,19 +6,22 @@
 #include "Renderer/Renderer.h"
 #include "InputProcessor/InputProcessor.h"
 #include "ECS/Design/Managers/ECSManager.h"
-
+#include <memory>
 
 class Game{
 
 private:
         bool isRunning;
-        Window* window;
-        Renderer* renderer;
-        InputProcessor* inputProcessor;
-        ECSManager* manager;
+        std::unique_ptr<Window> window;
+        std::unique_ptr<Renderer> renderer;
+        std::unique_ptr<InputProcessor> inputProcessor;
+        std::unique_ptr<ECSManager> manager;
 
 
 public:
+
+    Game();
+    ~Game();
 
     void initialize();
 

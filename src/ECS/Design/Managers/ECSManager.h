@@ -25,14 +25,18 @@ private:
     SystemsMap systems;
 
 public:
-    ECSManager() = default;
+    ECSManager() {
+        spdlog::info("ECS manager constructed");
+    }
+
+    ~ECSManager() {
+        spdlog::info("ECS manager destroyed");
+    }
 
     //Refactor in an Entity manager class
     Entity createEntity();
 
     void update();
-
-    void addEntityToSystem(Entity entity);
 
     //Refactor in a componentManager class
     template <typename TComponent, typename ...TArgs>

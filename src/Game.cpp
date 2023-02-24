@@ -1,17 +1,18 @@
 #include "Game.h"
 
+Game::Game(){
+    spdlog::info("Game object constructed");
+}
 
 void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         spdlog::error("SDL INIT FAILED");
     }
+    window = std::make_unique<Window>();
+    renderer = std::make_unique<Renderer>(window->getWindow());
+    inputProcessor = std::make_unique<InputProcessor>();
+    manager = std::make_unique<ECSManager>();
 
-    window = new Window();
-    renderer = new Renderer(window);
-    inputProcessor = new InputProcessor();
-    manager = new ECSManager();
-
-//    SDL_SetWindowFullscreen(window->getWindow(), SDL_WINDOW_FULLSCREEN);
     isRunning = true;
 }
 
@@ -40,7 +41,11 @@ void Game::update() {
 }
 
 void Game::close() {
-    delete renderer;
-    delete window;
     SDL_Quit();
 }
+
+Game::~Game() {
+    spdlog::info("Game destructor called");
+}
+
+

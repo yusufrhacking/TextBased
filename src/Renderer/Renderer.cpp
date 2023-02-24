@@ -2,9 +2,9 @@
 #include <iostream>
 
 
-Renderer::Renderer(Window *window) {
-    this->window = *window;
-    this->renderer = SDL_CreateRenderer(this->window.getWindow(), -1, 0);
+Renderer::Renderer(SDL_Window* window) {
+    this->window = window;
+    this->renderer = SDL_CreateRenderer(this->window, -1, 0);
 
     if (isImproperlyInitialized()){
         spdlog::error("TFT INIT FAIL");
@@ -16,7 +16,7 @@ Renderer::Renderer(Window *window) {
 }
 
 void Renderer::render() {
-    SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
+    SDL_SetRenderDrawColor(renderer, 100, 21, 21, 100);
     SDL_RenderClear(renderer);
 //    renderDummyText();
 
