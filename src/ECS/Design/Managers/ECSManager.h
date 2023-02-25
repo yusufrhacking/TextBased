@@ -88,6 +88,8 @@ void ECSManager::addComponent(Entity entity, TArgs &&...args) {
     componentPool->set(entityId, newComponent);
 
     entityComponentSignatures[entityId].set(componentId);
+
+    spdlog::info("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entityId));
 }
 
 template<typename TComponent>
