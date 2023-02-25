@@ -4,7 +4,7 @@
 int GenericComponent::nextId = 0;
 
 void ECSManager::update(){
-    for (Entity entity : entitiesToBeAdded){
+    for (const Entity& entity : entitiesToBeAdded){
         addEntityToSystems(entity);
         spdlog::info("Entity " + std::to_string(entity.getId()) + " fully added");
     }
@@ -18,7 +18,6 @@ Entity ECSManager::createEntity() {
     if(numOfEntities >= entityComponentSignatures.size()){
         entityComponentSignatures.resize(numOfEntities);
     }
-
     Entity entity(entityId);
     entitiesToBeAdded.push_back(entity);
     spdlog::info("Entity " + std::to_string(entityId) + " created");

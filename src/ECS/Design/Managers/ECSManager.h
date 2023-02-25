@@ -40,7 +40,7 @@ public:
 
     //Refactor in a componentManager class
     template <typename TComponent, typename ...TArgs>
-    void addComponent(Entity entity, TArgs&& ... args);
+    void addComponentToEntity(Entity entity, TArgs&& ... args);
 
     template <typename T>
     void removeComponent(Entity entity);
@@ -77,7 +77,7 @@ private:
 };
 
 template <typename TComponent, typename ...TArgs>
-void ECSManager::addComponent(Entity entity, TArgs &&...args) {
+void ECSManager::addComponentToEntity(Entity entity, TArgs &&...args) {
     const int componentId = Component<TComponent>::getId();
     const int entityId = entity.getId();
 

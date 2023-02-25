@@ -21,7 +21,7 @@ public:
 
     void addEntity(Entity entity);
     void removeEntity(Entity entity);
-    std::vector<Entity> getEntities(Entity entity) const;
+    std::vector<Entity> getEntities() const;
     ComponentSignature getComponentSignature() const;
 
     //Templates should be implemented in the header file

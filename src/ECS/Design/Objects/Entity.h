@@ -11,10 +11,6 @@ public:
         this->id = id;
     }
 
-//    ~Entity(){
-//        spdlog::info("Entity " + std::to_string(id) + " destroyed");
-//    }
-
 
     Entity(const Entity& entity) = default;
 

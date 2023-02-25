@@ -21,8 +21,8 @@ void Game::initialize() {
 void Game::setup() {
     Entity tank = manager->createEntity();
 
-    manager->addComponent<PositionComponent>(tank, std::make_shared<Position>());
-    manager->addComponent<MovementComponent>(tank, std::make_shared<Velocity>());
+    manager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>());
+    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>());
 }
 
 void Game::run() {
