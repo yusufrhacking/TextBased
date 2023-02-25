@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "ECS/Components/PositionComponent.h"
 #include "ECS/Components/MovementComponent.h"
+#include "ECS/Systems/MovementSystem.h"
 
 Game::Game(ECSManager &manager) : manager(manager) {
     spdlog::info("Game object constructed");
@@ -19,6 +20,8 @@ void Game::initialize() {
 }
 
 void Game::setup() {
+    manager.addSystem<MovementSystem>(manager);
+
     Entity tank = manager.createEntity();
 
     manager.addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>());
