@@ -1,13 +1,15 @@
 #include "MovementSystem.h"
 
-void MovementSystem::update() {
+void MovementSystem::update(double deltaTime) {
     // Loop all entities the system cares about
     for (Entity entity: getEntities()){
         auto& position = manager.getComponent<PositionComponent>(entity);
         const auto movement = manager.getComponent<MovementComponent>(entity);
 
-        position.position->xPos += movement.velocity->xVelocity;
-        position.position->yPos += movement.velocity->yVelocity;
+        double xChange = movement.velocity->xVelocity * deltaTime;
+        double yChange = movement.velocity->yVelocity * deltaTime;
+        position.position->xPos += xChange;
+        position.position->yPos += yChange;
 
         spdlog::info(
                 "Entity " + std::to_string(entity.getId())

@@ -25,9 +25,7 @@ void Game::setup() {
     Entity tank = manager.createEntity();
 
     manager.addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
-    manager.addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(1, 1));
-
-    manager.removeComponent<PositionComponent>(tank);
+    manager.addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
 }
 
 void Game::run() {
@@ -58,7 +56,7 @@ void Game::update() {
     // Store the "previous" frame time
     millisecsPreviousFrame = SDL_GetTicks();
 
-    manager.getSystem<MovementSystem>().update();
+    manager.getSystem<MovementSystem>().update(deltaTime);
     manager.update();
 }
 
