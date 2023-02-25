@@ -3,7 +3,11 @@
 void MovementSystem::Update() {
     // Loop all entities the system cares about
     for (Entity entity: getEntities()){
-        auto& component1 = manager.getComponent<PositionComponent>(entity);
+        auto& position = manager.getComponent<PositionComponent>(entity);
+        const auto movement = manager.getComponent<MovementComponent>(entity);
+
+        position.position->xPos += movement.velocity->xVelocity;
+        position.position->yPos += movement.velocity->yVelocity;
     }
 }
 
