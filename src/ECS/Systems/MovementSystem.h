@@ -8,9 +8,9 @@
 
 class MovementSystem: public System{
 public:
-    ECSManager& manager;
+//    ECSManager& manager;
 
-    explicit MovementSystem(ECSManager &manager);
+    explicit MovementSystem();
 
 
     void Update();

@@ -4,7 +4,8 @@
 #include <vector>
 #include "Entity.h"
 #include "Component.h"
-#include "../Managers/ECSManager.h"
+
+const unsigned int NUM_OF_COMPONENTS = 64;
 
 typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
 
@@ -13,9 +14,9 @@ class System {
 private:
     ComponentSignature componentSignature;
     std::vector<Entity> entities;
-    ECSManager temp;
 
 public:
+    class ECSManager* manager;
     System() = default;
     virtual ~System() = default;
 

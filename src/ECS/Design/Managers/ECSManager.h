@@ -9,7 +9,6 @@
 #include <typeindex>
 #include "../Objects/Entity.h"
 
-const unsigned int NUM_OF_COMPONENTS = 64;
 
 typedef std::vector<std::shared_ptr<GenericPool>> ComponentPoolsArr;
 typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
