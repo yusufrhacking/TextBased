@@ -24,10 +24,10 @@ void Game::setup() {
 
     Entity tank = manager.createEntity();
 
-    manager.addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>());
-    manager.addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>());
+    manager.addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
+    manager.addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(1, 1));
 
-    manager.getSystem<MovementSystem>().update();
+    manager.removeComponent<PositionComponent>(tank);
 }
 
 void Game::run() {
@@ -47,6 +47,18 @@ void Game::processInput() {
 }
 
 void Game::update() {
+    int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPreviousFrame);
+    if (timeToWait > 0 && timeToWait <= MILLISECS_PER_FRAME) {
+        SDL_Delay(timeToWait);
+    }
+
+    // The difference in ticks since the last frame, converted to seconds
+    double deltaTime = (SDL_GetTicks() - millisecsPreviousFrame) / 1000.0;
+
+    // Store the "previous" frame time
+    millisecsPreviousFrame = SDL_GetTicks();
+
+    manager.getSystem<MovementSystem>().update();
     manager.update();
 }
 

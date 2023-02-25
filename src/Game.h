@@ -8,6 +8,9 @@
 #include "ECS/Design/Managers/ECSManager.h"
 #include <memory>
 
+const int FPS = 60;
+const int MILLISECS_PER_FRAME = 1000 / FPS;
+
 class Game{
 
 private:
@@ -16,6 +19,7 @@ private:
         std::unique_ptr<Renderer> renderer;
         std::unique_ptr<InputProcessor> inputProcessor;
         ECSManager& manager;
+        int millisecsPreviousFrame = 0;
 
 
 public:

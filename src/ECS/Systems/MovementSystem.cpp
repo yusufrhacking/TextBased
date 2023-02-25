@@ -8,6 +8,11 @@ void MovementSystem::update() {
 
         position.position->xPos += movement.velocity->xVelocity;
         position.position->yPos += movement.velocity->yVelocity;
+
+        spdlog::info(
+                "Entity " + std::to_string(entity.getId())
+                + " is at " + std::to_string(position.position->xPos)
+                + ", " + std::to_string(position.position->yPos));
     }
 }
 
