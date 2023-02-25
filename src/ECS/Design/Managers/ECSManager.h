@@ -168,7 +168,7 @@ bool ECSManager::hasSystem() const {
 
 template<typename TSystem>
 TSystem& ECSManager::getSystem() const {
-    std::shared_ptr<TSystem> systemToReturn = systems.find(std::type_index(typeid(TSystem)));
+    auto systemToReturn = systems.find(std::type_index(typeid(TSystem)));
     return *(std::static_pointer_cast<TSystem>(systemToReturn->second));
 }
 //MAKE EVENTUALLY

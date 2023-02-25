@@ -1,6 +1,6 @@
 #include "MovementSystem.h"
 
-void MovementSystem::Update() {
+void MovementSystem::update() {
     // Loop all entities the system cares about
     for (Entity entity: getEntities()){
         auto& position = manager.getComponent<PositionComponent>(entity);

@@ -26,6 +26,8 @@ void Game::setup() {
 
     manager.addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>());
     manager.addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>());
+
+    manager.getSystem<MovementSystem>().update();
 }
 
 void Game::run() {

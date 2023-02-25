@@ -13,7 +13,7 @@ public:
     explicit MovementSystem(ECSManager &manager);
 
 
-    void Update();
+    void update();
 };
 
 
