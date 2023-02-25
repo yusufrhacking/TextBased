@@ -15,12 +15,12 @@ private:
         std::unique_ptr<Window> window;
         std::unique_ptr<Renderer> renderer;
         std::unique_ptr<InputProcessor> inputProcessor;
-        std::unique_ptr<ECSManager> manager;
+        ECSManager& manager;
 
 
 public:
 
-    Game();
+    Game(ECSManager &manager);
     ~Game();
 
     void initialize();

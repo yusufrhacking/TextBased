@@ -1,6 +1,7 @@
 #ifndef TEXTBASED_ENTITY_H
 #define TEXTBASED_ENTITY_H
 #include <spdlog/spdlog.h>
+//#include "../Managers/ECSManager.h"
 
 class Entity {
 private:
@@ -25,6 +26,8 @@ public:
     bool operator != (const Entity& other) const {
         return id != other.getId();
     }
+
+//    ECSManager* manager;
 
 //    friend bool operator== (const Entity& e1, const Entity& e2){
 //        return e1.id == e2.id;

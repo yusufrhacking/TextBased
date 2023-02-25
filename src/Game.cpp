@@ -2,8 +2,9 @@
 #include "ECS/Components/PositionComponent.h"
 #include "ECS/Components/MovementComponent.h"
 
-Game::Game(){
+Game::Game(ECSManager &manager) : manager(manager) {
     spdlog::info("Game object constructed");
+    manager = ECSManager::getInstance();
 }
 
 void Game::initialize() {
@@ -13,16 +14,15 @@ void Game::initialize() {
     window = std::make_unique<Window>();
     renderer = std::make_unique<Renderer>(window->getWindow());
     inputProcessor = std::make_unique<InputProcessor>();
-    manager = std::make_unique<ECSManager>();
 
     isRunning = true;
 }
 
 void Game::setup() {
-    Entity tank = manager->createEntity();
+    Entity tank = manager.createEntity();
 
-    manager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>());
-    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>());
+    manager.addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>());
+    manager.addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>());
 }
 
 void Game::run() {
@@ -42,7 +42,7 @@ void Game::processInput() {
 }
 
 void Game::update() {
-    manager->update();
+    manager.update();
 }
 
 void Game::close() {

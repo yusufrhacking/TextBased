@@ -29,7 +29,7 @@ set(SOURCE_FILES
         "src/ECS/Design/Objects/Entity.cpp" "src/ECS/Design/Objects/Entity.h"
         "src/ECS/Design/Objects/Component.cpp" "src/ECS/Design/Objects/Component.h"
         "src/ECS/Design/Objects/System.cpp" "src/ECS/Design/Objects/System.h"
-        "src/ECS/Design/Managers/ECSManager.cpp" "src/ECS/Design/Managers/ECSManager.h" src/ECS/Design/Objects/Pool.cpp src/ECS/Design/Objects/Pool.h src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h src/ECS/Components/MovementComponent.h)
+        "src/ECS/Design/Managers/ECSManager.cpp" "src/ECS/Design/Managers/ECSManager.h" src/ECS/Design/Objects/Pool.cpp src/ECS/Design/Objects/Pool.h src/ECS/Components/MovementComponent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

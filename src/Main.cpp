@@ -2,7 +2,7 @@
 #include "spdlog/spdlog.h"
 
 int main() {
-    std::unique_ptr<Game> game = std::make_unique<Game>();
+    Game* game = new Game(ECSManager::getInstance());
 
     game->initialize();
     game->run();

@@ -24,9 +24,15 @@ private:
     std::vector<Entity> entitiesToBeKilled;
     SystemsMap systems;
 
-public:
     ECSManager() {
         spdlog::info("ECS manager constructed");
+    }
+
+public:
+
+    static ECSManager& getInstance(){
+        static ECSManager theInstance;
+        return theInstance;
     }
 
     ~ECSManager() {
@@ -47,6 +53,9 @@ public:
 
     template <typename T>
     bool hasComponent(Entity entity);
+
+    template <typename TComponent>
+    TComponent& getComponent(Entity entity) const;
 
     template <typename TSystem, typename ... TArgs>
     void addSystem(TArgs&& ... args);
@@ -125,6 +134,14 @@ bool ECSManager::hasComponent(Entity entity){
     const int entityId = entity.getId();
 
     return entityComponentSignatures[entityId].test(componentId);
+}
+
+template <typename TComponent>
+TComponent& ECSManager::getComponent(Entity entity) const {
+    const auto componentId = Component<TComponent>::getId();
+    const auto entityId = entity.getId();
+    auto componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
+    return componentPool->get(entityId);
 }
 
 template<typename TSystem, typename... TArgs>
