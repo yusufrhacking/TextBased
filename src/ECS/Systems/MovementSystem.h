@@ -5,7 +5,7 @@
 class MovementSystem{
 public:
     MovementSystem(){
-        //requireComponent<TransformComponent>();
+        //requireComponent<PositionComponent>();
     }
 
     void Update() {
