@@ -16,7 +16,6 @@ private:
     std::vector<Entity> entities;
 
 public:
-    class ECSManager* manager;
     System() = default;
     virtual ~System() = default;
 
