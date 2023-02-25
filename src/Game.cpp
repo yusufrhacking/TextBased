@@ -47,13 +47,13 @@ void Game::processInput() {
 }
 
 void Game::update() {
-    int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPreviousFrame);
+    size_t timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPreviousFrame);
     if (timeToWait > 0 && timeToWait <= MILLISECS_PER_FRAME) {
         SDL_Delay(timeToWait);
     }
 
     // The difference in ticks since the last frame, converted to seconds
-    double deltaTime = (SDL_GetTicks() - millisecsPreviousFrame) / 1000.0;
+    double deltaTime = (double)(SDL_GetTicks() - millisecsPreviousFrame) / 1000.0;
 
     // Store the "previous" frame time
     millisecsPreviousFrame = SDL_GetTicks();
