@@ -2,19 +2,17 @@
 #define TEXTBASED_POSITIONCOMPONENT_H
 #include "../../Objects/Position.h"
 #include "../../Objects/Velocity.h"
-
+#include <memory>
+#include <utility>
 struct PositionComponent {
-    Position* position;
+    std::shared_ptr<Position> position;
 
-
-    PositionComponent(Position* position, Velocity* velocity){
-        this->position = position;
-        this->velocity = velocity;
+    explicit PositionComponent(std::shared_ptr<Position>position){
+        this->position = std::move(position);
     }
 
     PositionComponent() {
-        this->position = new Position(0, 0);
-        this->velocity = new Velocity(0, 0);
+        this->position = std::make_shared<Position>(0, 0);
     }
 };
 

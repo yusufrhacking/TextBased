@@ -1,5 +1,6 @@
 #include "Game.h"
-#include "ECS/Components/TransformComponent.h"
+#include "ECS/Components/PositionComponent.h"
+#include "ECS/Components/MovementComponent.h"
 
 Game::Game(){
     spdlog::info("Game object constructed");
@@ -20,7 +21,8 @@ void Game::initialize() {
 void Game::setup() {
     Entity tank = manager->createEntity();
 
-    manager->addComponent<TransformComponent>(tank, new Position(), new Velocity());
+    manager->addComponent<PositionComponent>(tank, std::make_shared<Position>());
+    manager->addComponent<MovementComponent>(tank, std::make_shared<Velocity>());
 }
 
 void Game::run() {
