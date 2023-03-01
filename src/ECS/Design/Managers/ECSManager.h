@@ -8,11 +8,14 @@
 #include <unordered_map>
 #include <typeindex>
 #include "../Objects/Entity.h"
+#include "EntityManager.h"
+#include "ComponentManager.h"
+#include "SystemManager.h"
 
 
-typedef std::vector<std::shared_ptr<GenericPool>> ComponentPoolsArr;
-typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
-typedef std::unordered_map<std::type_index, std::shared_ptr<System>> SystemsMap;
+using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
+using ComponentSignature = std::bitset<NUM_OF_COMPONENTS>;
+using SystemsMap = std::unordered_map<std::type_index, std::shared_ptr<System>>;
 
 
 class ECSManager {
@@ -24,6 +27,11 @@ private:
     std::vector<Entity> entitiesToBeAdded;
     std::vector<Entity> entitiesToBeKilled;
     SystemsMap systems;
+
+    std::unique_ptr<EntityManager> entityManager;
+    std::unique_ptr<ComponentManager> componentManager;
+    std::unique_ptr<SystemManager> systemManager;
+
 
     ECSManager() {
         spdlog::info("ECS manager constructed");
