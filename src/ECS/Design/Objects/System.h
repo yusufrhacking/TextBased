@@ -1,9 +1,10 @@
 #ifndef TEXTBASED_SYSTEM_H
 #define TEXTBASED_SYSTEM_H
 #include <bitset>
-#include <vector>
+#include <set>
 #include "Entity.h"
 #include "Component.h"
+#include "../../../Constants.h"
 
 typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
 
@@ -11,7 +12,7 @@ typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
 class System {
 private:
     ComponentSignature componentSignature;
-    std::vector<Entity> entities;
+    std::set<Entity> entities;
 
 public:
     System() = default;
@@ -26,9 +27,9 @@ public:
     template <typename ComponentGeneric> void requireComponent();
 };
 
-template <typename ComponentGeneric>
+template <typename TComponent>
 void System::requireComponent() {
-    const auto componentId = Component<ComponentGeneric>::getId();
+    const auto componentId = Component<TComponent>::getId();
     componentSignature.set(componentId);
 }
 
