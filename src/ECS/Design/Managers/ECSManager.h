@@ -24,8 +24,7 @@ private:
 
     ComponentPoolsArr componentPools;
     std::vector<ComponentSignature> entityComponentSignatures;
-    std::vector<Entity> entitiesToBeAdded;
-    std::vector<Entity> entitiesToBeKilled;
+
     SystemsMap systems;
 
     std::unique_ptr<EntityManager> entityManager;
@@ -48,7 +47,6 @@ public:
         spdlog::info("ECS manager destroyed");
     }
 
-    //Refactor in an Entity manager class
     Entity createEntity();
 
     void update();
