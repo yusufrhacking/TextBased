@@ -1,0 +1,10 @@
+#ifndef TEXTBASED_COMPONENTMANAGER_H
+#define TEXTBASED_COMPONENTMANAGER_H
+
+
+class ComponentManager {
+
+};
+
+
+#endif //TEXTBASED_COMPONENTMANAGER_H

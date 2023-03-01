@@ -1,0 +1,10 @@
+#ifndef TEXTBASED_ENTITYMANAGER_H
+#define TEXTBASED_ENTITYMANAGER_H
+
+
+class EntityManager {
+
+};
+
+
+#endif //TEXTBASED_ENTITYMANAGER_H
