@@ -1,6 +1,0 @@
-#ifndef TEXTBASED_CONSTANTS_H
-#define TEXTBASED_CONSTANTS_H
-
-const unsigned int NUM_OF_COMPONENTS = 64;
-
-#endif //TEXTBASED_CONSTANTS_H

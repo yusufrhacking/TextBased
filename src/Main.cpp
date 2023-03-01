@@ -2,7 +2,7 @@
 #include "spdlog/spdlog.h"
 
 int main() {
-    Game* game = new Game(ECSManager::getInstance());
+    Game* game = new Game();
 
     game->initialize();
     game->run();

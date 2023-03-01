@@ -3,9 +3,11 @@
 #include "ECS/Components/MovementComponent.h"
 #include "ECS/Systems/MovementSystem.h"
 
-Game::Game(ECSManager &manager) : manager(manager) {
+std::unique_ptr<ECSManager> manager;
+
+Game::Game(){
     spdlog::info("Game object constructed");
-    manager = ECSManager::getInstance();
+    manager = std::make_unique<ECSManager>();
 }
 
 void Game::initialize() {
@@ -20,12 +22,12 @@ void Game::initialize() {
 }
 
 void Game::setup() {
-    manager.addSystem<MovementSystem>(manager);
+    manager->addSystem<MovementSystem>();
 
-    Entity tank = manager.createEntity();
+    Entity tank = manager->createEntity();
 
-    manager.addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
-    manager.addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
+    manager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
+    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
 }
 
 void Game::run() {
@@ -56,8 +58,7 @@ void Game::update() {
     // Store the "previous" frame time
     millisecsPreviousFrame = SDL_GetTicks();
 
-    manager.getSystem<MovementSystem>().update(deltaTime);
-    manager.update();
+    manager->update(deltaTime);
 }
 
 void Game::close() {

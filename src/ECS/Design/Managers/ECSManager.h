@@ -35,9 +35,7 @@ private:
     std::unique_ptr<SystemManager> systemManager;
 
 //
-//    ECSManager() {
-//        spdlog::info("ECS manager constructed");
-//    }
+
 
 public:
 //
@@ -46,29 +44,34 @@ public:
 //        return theInstance;
 //    }
 
+    ECSManager() {
+        entityManager = std::make_unique<EntityManager>();
+        componentManager = std::make_unique<ComponentManager>();
+        systemManager = std::make_unique<SystemManager>();
+        spdlog::info("ECS manager constructed");
+    }
+
     ~ECSManager() {
         spdlog::info("ECS manager destroyed");
     }
 
     Entity createEntity();
 
-    void update();
+    void update(double deltaTime);
 
     //Refactor in a componentManager class
-    template <typename TComponent, typename ...TArgs>
-    void addComponentToEntity(Entity entity, TArgs&& ... args);
+    template <typename TComponent, typename... TArgs>
+    void addComponentToEntity(Entity entity, TArgs &&...args);
 
     template <typename T>
     void removeComponent(Entity entity);
 
-    template <typename T>
-    bool hasComponent(Entity entity);
 
     template <typename TComponent>
     TComponent& getComponent(Entity entity) const;
 
-    template <typename TSystem, typename ... TArgs>
-    void addSystem(TArgs&& ... args);
+    template <typename TSystem, typename... TArgs>
+    void addSystem(TArgs &&...args);
 
     template <typename TSystem>
     void removeSystem();
@@ -79,111 +82,59 @@ public:
     template <typename TSystem>
     TSystem& getSystem() const;
 
-    void addEntityToSystems(Entity entity);
-
-
-private:
-    bool isComponentUnitialized(int componentId);
-
-    bool isComponentPoolsResizeNeeded(int componentId) const;
-
-    template<typename TComponent>
-    std::shared_ptr<Pool<TComponent>> getValidPool(int componentId, int entityId);
-
-
-    bool signaturesMatch(const std::bitset<64> &entityComponentSignature,
-                    const ComponentSignature &systemComponentSignature) const;
 };
 
-template <typename TComponent, typename ...TArgs>
+template <typename TComponent, typename... TArgs>
 void ECSManager::addComponentToEntity(Entity entity, TArgs &&...args) {
-    const int componentId = Component<TComponent>::getId();
-    const int entityId = entity.getId();
+    int componentId = Component<TComponent>::getId();
 
-    std::shared_ptr<Pool<TComponent>> componentPool = getValidPool<TComponent>(componentId, entityId);
+    componentManager->addComponentToEntity<TComponent>(entity, std::forward<TArgs>(args)...);
 
-    TComponent newComponent(std::forward<TArgs>(args)...);
+    auto signature = entityManager->getSignature(entity);
+    signature.set(componentId, true);
+    entityManager->setSignature(entity, signature);
 
-    componentPool->set(entityId, newComponent);
-
-    entityComponentSignatures[entityId].set(componentId);
-
-    spdlog::info("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entityId));
-}
-
-template<typename TComponent>
-std::shared_ptr<Pool<TComponent>> ECSManager::getValidPool(const int componentId, const int entityId) {
-    if (isComponentPoolsResizeNeeded(componentId)){
-        componentPools.resize(componentId + 1, nullptr);
-    }
-
-    if (isComponentUnitialized(componentId)){
-        auto newComponentPool = std::make_shared<Pool<TComponent>>();
-        componentPools[componentId] = newComponentPool;
-    }
-
-    std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
-
-    if (entityId >= componentPool->getSize()){
-        componentPool->resize(numOfEntities);
-    }
-    return componentPool;
+    systemManager->updateEntityInSystems(entity, signature);
+    spdlog::info("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entity.getId()));
 }
 
 template <typename TComponent>
 void ECSManager::removeComponent(Entity entity){
-    const int componentId = Component<TComponent>::getId();
-    const int entityId = entity.getId();
+    int componentId = Component<TComponent>::getId();
 
-    entityComponentSignatures[entityId].set(componentId, false);
-}
+    componentManager->removeComponent<TComponent>(entity);
 
-template <typename TComponent>
-bool ECSManager::hasComponent(Entity entity){
-    const int componentId = Component<TComponent>::getId();
-    const int entityId = entity.getId();
+    auto signature = entityManager->getSignature(entity);
+    signature.set(componentId, true);
+    entityManager->setSignature(entity, signature);
 
-    return entityComponentSignatures[entityId].test(componentId);
+    systemManager->updateEntityInSystems(entity, signature);
 }
 
 template <typename TComponent>
 TComponent& ECSManager::getComponent(Entity entity) const {
-    const auto componentId = Component<TComponent>::getId();
-    const auto entityId = entity.getId();
-    auto componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
-    return componentPool->get(entityId);
+    return componentManager->getComponent<TComponent>(entity);
 }
 
 template<typename TSystem, typename... TArgs>
 void ECSManager::addSystem(TArgs &&... args) {
-    std::shared_ptr<TSystem> newSystem = std::make_shared<TSystem>(std::forward<TArgs>(args)...);
-    systems.insert(std::make_pair(
-            std::type_index(typeid(TSystem)),//The key in this case is the type of System, as a num
-            newSystem));//THIS IS HARAM
+    systemManager->addSystem<TSystem>(std::forward<TArgs>(args)...);
 }
 
 template<typename TSystem>
 void ECSManager::removeSystem() {
-    auto systemToRemove = systems.find(std::type_index(typeid(TSystem)));
-    systems.erase(systemToRemove);
+    systemManager->template removeSystem<TSystem>();
 }
 
 template<typename TSystem>
 bool ECSManager::hasSystem() const {
-    return systems.find(std::type_index(typeid(TSystem))) != systems.end();
-    // If the systems map does not find the system, it will return the "end"
-    // So, if the systems map find result is not the "end", then it contains it
+    return systemManager->template hasSystem<TSystem>();
 }
 
 template<typename TSystem>
 TSystem& ECSManager::getSystem() const {
-    auto systemToReturn = systems.find(std::type_index(typeid(TSystem)));
-    return *(std::static_pointer_cast<TSystem>(systemToReturn->second));
+    systemManager->getSystem<TSystem>();
 }
-//MAKE EVENTUALLY
-//std::type_index ECSManager::getKeyIndex(TSystem?) const {
-//
-//}
 
 
 #endif

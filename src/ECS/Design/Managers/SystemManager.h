@@ -12,9 +12,6 @@ class SystemManager {
 private:
     SystemsMap systems;
 
-    bool signaturesMatch(const ComponentSignature &entityComponentSignature,
-                         const ComponentSignature &systemComponentSignature) ;
-
 public:
 
     template <typename TSystem, typename ... TArgs>
@@ -29,7 +26,11 @@ public:
     template <typename TSystem>
     TSystem& getSystem() const;
 
-    void addEntityToSystems(Entity entity, ComponentSignature entitySignature);
+    SystemsMap getSystems() const;
+
+    void updateEntityInSystems(Entity entity, ComponentSignature entitySignature);
+
+    void addNewEntityToSystem(Entity entity, ComponentSignature entitySignature);
 };
 
 template<typename TSystem, typename... TArgs>
@@ -57,6 +58,11 @@ template<typename TSystem>
 TSystem& SystemManager::getSystem() const {
     auto systemToReturn = systems.find(std::type_index(typeid(TSystem)));
     return *(std::static_pointer_cast<TSystem>(systemToReturn->second));
+}
+
+
+SystemsMap SystemManager::getSystems() const {
+    return systems;
 }
 
 

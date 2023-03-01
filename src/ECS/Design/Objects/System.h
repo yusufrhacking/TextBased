@@ -4,7 +4,7 @@
 #include <set>
 #include "Entity.h"
 #include "Component.h"
-#include "../../../Constants.h"
+#include "../../../Globals.h"
 
 using ComponentSignature =  std::bitset<NUM_OF_COMPONENTS>;
 
@@ -21,6 +21,8 @@ public:
     void removeEntity(Entity entity);
     std::set<Entity> getEntities() const;
     ComponentSignature getComponentSignature() const;
+
+    virtual void update(double deltaTime) = 0;
 
     template <typename ComponentGeneric> void requireComponent();
 };

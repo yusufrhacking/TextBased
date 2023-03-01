@@ -5,11 +5,10 @@
 #include "../Objects/Entity.h"
 #include "../Objects/Component.h"
 #include "../Objects/Pool.h"
-#include "../../../Constants.h"
+#include "../../../Globals.h"
 #include <bitset>
 
 using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
-using ComponentSignature = std::bitset<NUM_OF_COMPONENTS>;
 
 
 class ComponentManager {
