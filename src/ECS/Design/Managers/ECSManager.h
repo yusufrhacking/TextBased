@@ -13,38 +13,38 @@
 #include "SystemManager.h"
 
 
-using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
-using ComponentSignature = std::bitset<NUM_OF_COMPONENTS>;
-using SystemsMap = std::unordered_map<std::type_index, std::shared_ptr<System>>;
+//using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
+//using ComponentSignature = std::bitset<NUM_OF_COMPONENTS>;
+//using SystemsMap = std::unordered_map<std::type_index, std::shared_ptr<System>>;
 
 
 class ECSManager {
 private:
-    int numOfEntities = 0;
-
-    ComponentPoolsArr componentPools;
-    std::vector<ComponentSignature> entityComponentSignatures;
-
-    std::vector<Entity> entitiesToBeAdded;
-    std::vector<Entity> entitiesToBeKilled;
-
-    SystemsMap systems;
+//    int numOfEntities = 0;
+//
+//    ComponentPoolsArr componentPools;
+//    std::vector<ComponentSignature> entityComponentSignatures;
+//
+//    std::vector<Entity> entitiesToBeAdded;
+//    std::vector<Entity> entitiesToBeKilled;
+//
+//    SystemsMap systems;
 
     std::unique_ptr<EntityManager> entityManager;
     std::unique_ptr<ComponentManager> componentManager;
     std::unique_ptr<SystemManager> systemManager;
 
-
-    ECSManager() {
-        spdlog::info("ECS manager constructed");
-    }
+//
+//    ECSManager() {
+//        spdlog::info("ECS manager constructed");
+//    }
 
 public:
-
-    static ECSManager& getInstance(){
-        static ECSManager theInstance;
-        return theInstance;
-    }
+//
+//    static ECSManager& getInstance(){
+//        static ECSManager theInstance;
+//        return theInstance;
+//    }
 
     ~ECSManager() {
         spdlog::info("ECS manager destroyed");

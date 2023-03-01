@@ -8,7 +8,6 @@
 
 using ComponentSignature =  std::bitset<NUM_OF_COMPONENTS>;
 
-//The system works on components with specific signatures
 class System {
 private:
     ComponentSignature componentSignature;
@@ -23,7 +22,6 @@ public:
     std::set<Entity> getEntities() const;
     ComponentSignature getComponentSignature() const;
 
-    //Templates should be implemented in the header file
     template <typename ComponentGeneric> void requireComponent();
 };
 

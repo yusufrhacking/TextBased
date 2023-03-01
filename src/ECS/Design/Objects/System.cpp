@@ -1,5 +1,4 @@
 #include "System.h"
-#include "Component.h"
 
 void System::addEntity(Entity entity) {
     entities.insert(entity);
