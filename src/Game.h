@@ -6,6 +6,9 @@
 #include "Renderer/Renderer.h"
 #include "InputProcessor/InputProcessor.h"
 #include "ECS/Design/Managers/ECSManager.h"
+#include "ECS/Components/PositionComponent.h"
+#include "ECS/Components/MovementComponent.h"
+#include "ECS/Systems/MovementSystem.h"
 #include <memory>
 
 const size_t FPS = 60;

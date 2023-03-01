@@ -5,7 +5,7 @@
 #include "../Objects/Entity.h"
 #include "../Objects/Component.h"
 #include "../Objects/Pool.h"
-#include "../../../Globals.h"
+//#include "../../../Globals.h"
 #include <bitset>
 
 using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;

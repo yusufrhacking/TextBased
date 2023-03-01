@@ -1,7 +1,4 @@
 #include "Game.h"
-#include "ECS/Components/PositionComponent.h"
-#include "ECS/Components/MovementComponent.h"
-#include "ECS/Systems/MovementSystem.h"
 
 std::unique_ptr<ECSManager> manager;
 

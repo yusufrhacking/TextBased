@@ -1,8 +1,8 @@
 #include "MovementSystem.h"
 
+extern std::unique_ptr<ECSManager> manager;
 
 void MovementSystem::update(double deltaTime) {
-    extern std::unique_ptr<ECSManager> manager;
     // Loop all entities the system cares about
     for (Entity entity: getEntities()){
         auto& position = manager->getComponent<PositionComponent>(entity);
