@@ -6,7 +6,7 @@
 #include "Component.h"
 #include "../../../Constants.h"
 
-typedef std::bitset<NUM_OF_COMPONENTS> ComponentSignature;
+using ComponentSignature =  std::bitset<NUM_OF_COMPONENTS>;
 
 //The system works on components with specific signatures
 class System {
@@ -20,7 +20,7 @@ public:
 
     void addEntity(Entity entity);
     void removeEntity(Entity entity);
-    std::vector<Entity> getEntities() const;
+    std::set<Entity> getEntities() const;
     ComponentSignature getComponentSignature() const;
 
     //Templates should be implemented in the header file

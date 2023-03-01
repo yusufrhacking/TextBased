@@ -24,7 +24,11 @@ public:
     }
 
     bool operator != (const Entity& other) const {
-        return id != other.getId();
+        return id != other.id;
+    }
+
+    bool operator < (const Entity& other) const{
+        return id < other.id;
     }
 
 //    ECSManager* manager;
