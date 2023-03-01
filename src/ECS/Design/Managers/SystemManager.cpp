@@ -32,3 +32,7 @@ void SystemManager::updateEntityInSystems(Entity entity, ComponentSignature enti
         }
     }
 }
+
+SystemsMap SystemManager::getSystems() const {
+    return systems;
+}

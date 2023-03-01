@@ -4,11 +4,8 @@
 #include <set>
 #include "Entity.h"
 #include "Component.h"
-//#include "../../../Globals.h"
+#include "../../../Globals.h"
 
-
-
-using ComponentSignature =  std::bitset<NUM_OF_COMPONENTS>;
 
 class System {
 private:

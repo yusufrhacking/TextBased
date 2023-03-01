@@ -5,7 +5,7 @@
 #include "../Objects/Entity.h"
 #include "../Objects/Component.h"
 #include "../Objects/Pool.h"
-//#include "../../../Globals.h"
+#include "../../../Globals.h"
 #include <bitset>
 
 using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
@@ -98,10 +98,6 @@ TComponent& ComponentManager::getComponent(Entity entity) const {
     auto componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
     return componentPool->get(entityId);
 }
-
-bool ComponentManager::isComponentPoolsResizeNeeded(const int componentId) const { return componentId >= componentPools.size(); }
-
-bool ComponentManager::isComponentUninitialized(const int componentId) { return !componentPools[componentId]; }
 
 
 

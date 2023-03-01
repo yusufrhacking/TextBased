@@ -61,9 +61,4 @@ TSystem& SystemManager::getSystem() const {
 }
 
 
-SystemsMap SystemManager::getSystems() const {
-    return systems;
-}
-
-
 #endif //TEXTBASED_SYSTEMMANAGER_H
