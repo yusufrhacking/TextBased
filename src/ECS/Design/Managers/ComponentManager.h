@@ -51,6 +51,10 @@ void ComponentManager::addComponentToEntity(Entity entity, TArgs &&...args) {
 
     componentPool->set(entityId, newComponent);
 
+    if (entityId >= entityComponentSignatures.size()){
+        entityComponentSignatures.resize(entityId * 2 + 1);
+    }
+
     entityComponentSignatures[entityId].set(componentId);
 
     spdlog::info("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entityId));
