@@ -25,6 +25,9 @@ private:
     ComponentPoolsArr componentPools;
     std::vector<ComponentSignature> entityComponentSignatures;
 
+    std::vector<Entity> entitiesToBeAdded;
+    std::vector<Entity> entitiesToBeKilled;
+
     SystemsMap systems;
 
     std::unique_ptr<EntityManager> entityManager;

@@ -11,12 +11,10 @@ private:
     std::vector<Entity> entitiesToBeKilled;
 
 public:
-    int getNumOfEntities();
+    int getNumOfEntities() const;
     Entity createEntity();
     std::vector<Entity> getEntitiesToBeAdded();
     std::vector<Entity> getEntitiesToBeKilled();
-
-
 
 };
 

@@ -26,6 +26,11 @@ Entity ECSManager::createEntity() {
 
 void ECSManager::addEntityToSystems(Entity entity){
     int entityId = entity.getId();
+
+    if(entityId >= entityComponentSignatures.size()){
+        entityComponentSignatures.resize(entityId * 2);
+    }
+
     auto entityComponentSignature = entityComponentSignatures[entityId];
 
     for (auto& systemKeyValuePair: systems){
