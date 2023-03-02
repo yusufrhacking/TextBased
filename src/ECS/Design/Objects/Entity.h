@@ -12,6 +12,7 @@ public:
         this->id = id;
     }
 
+    Entity() = default;
 
     Entity(const Entity& entity) = default;
 

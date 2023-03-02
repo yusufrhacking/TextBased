@@ -31,7 +31,7 @@ set(SOURCE_FILES
         "src/ECS/Design/Objects/System.cpp" "src/ECS/Design/Objects/System.h"
         "src/ECS/Design/Managers/ECSManager.cpp" "src/ECS/Design/Managers/ECSManager.h"
         src/ECS/Design/Objects/Pool.cpp src/ECS/Design/Objects/Pool.h
-        src/ECS/Components/MovementComponent.h src/ECS/Design/Managers/SystemManager.cpp src/ECS/Design/Managers/SystemManager.h src/ECS/Design/Managers/ComponentManager.cpp src/ECS/Design/Managers/ComponentManager.h src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h src/Globals.h src/ECS/Systems/RenderSystem.cpp src/ECS/Systems/RenderSystem.h src/ECS/Components/SpriteComponent.h src/ECS/Design/Objects/UpdateSystem.h)
+        src/ECS/Components/MovementComponent.h src/ECS/Design/Managers/SystemManager.cpp src/ECS/Design/Managers/SystemManager.h src/ECS/Design/Managers/ComponentManager.cpp src/ECS/Design/Managers/ComponentManager.h src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h src/Globals.h src/ECS/Systems/RenderSystem.cpp src/ECS/Systems/RenderSystem.h src/ECS/Components/SpriteComponent.h src/ECS/Design/Objects/UpdateSystem.h src/Game/GameObjects/TextPerson.cpp src/Game/GameObjects/TextPerson.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
