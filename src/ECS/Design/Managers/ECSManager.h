@@ -12,6 +12,7 @@
 #include "ComponentManager.h"
 #include "SystemManager.h"
 #include "../../../GameSystems/Renderer/Renderer.h"
+#include "../../Systems/RenderSystem.h"
 
 
 //using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;

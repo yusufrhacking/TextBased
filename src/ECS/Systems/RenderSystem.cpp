@@ -7,11 +7,10 @@ RenderSystem::RenderSystem() {
     requireComponent<SpriteComponent>();
 }
 
-void RenderSystem::update(double deltaTime){
+void RenderSystem::update(std::shared_ptr<Renderer> renderer){
     for (auto entity : getEntities()){
         const auto positionComponent = manager->getComponent<PositionComponent>(entity);
         const auto spriteComponent = manager->getComponent<SpriteComponent>(entity);
-
 
     }
 }

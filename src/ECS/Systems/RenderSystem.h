@@ -11,8 +11,7 @@ class RenderSystem: public System {
 public:
     explicit RenderSystem();
 
-
-    void update(double deltaTime) override;
+    void update(std::shared_ptr<Renderer> renderer);
 
 private:
 };

@@ -5,7 +5,10 @@
 int GenericComponent::nextId = 0;
 
 void ECSManager::render(std::shared_ptr<Renderer> renderer){
-
+    for (const auto& systemKeyPair : systemManager->getSystemsOfType<RenderSystem>()){
+        std::shared_ptr<RenderSystem> system = systemKeyPair.second;
+        system->update(renderer);
+    }
 }
 
 void ECSManager::update(double deltaTime){
