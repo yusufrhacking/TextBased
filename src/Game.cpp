@@ -20,11 +20,15 @@ void Game::initialize() {
 
 void Game::setup() {
     manager->addSystem<MovementSystem>();
+    manager->addSystem<RenderSystem>();
 
     Entity tank = manager->createEntity();
 
     manager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
     manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
+
+    std::string text = "Robert C. Martin";
+    manager->addComponentToEntity<SpriteComponent>(tank, text);
 }
 
 void Game::run() {

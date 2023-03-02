@@ -23,6 +23,10 @@ struct SpriteComponent {
         this->height = height;
     }
 
+    SpriteComponent() {
+        this->text = "Robert C. Martin";
+    }
+
 };
 
 

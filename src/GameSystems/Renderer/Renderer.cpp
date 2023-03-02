@@ -35,6 +35,8 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
     SDL_Rect dstRect = {static_cast<int>(position->xPos), static_cast<int>(position->yPos), width, height};
 
     SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
+
+    spdlog::info("Have rendered copy");
 }
 
 void Renderer::render() {

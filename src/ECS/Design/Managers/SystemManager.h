@@ -66,11 +66,22 @@ std::unordered_map<std::type_index, std::shared_ptr<TSystem>> SystemManager::get
     std::unordered_map<std::type_index, std::shared_ptr<TSystem>> systemsOfType;
     for (const auto& systemKeyPair : systems){
         auto system = systemKeyPair.second;
-        if (typeid(system) == typeid(TSystem)){
+
+        auto result = dynamic_pointer_cast<TSystem>(system);
+
+        if (result){
             systemsOfType.insert(std::make_pair(
                     std::type_index(typeid(system)),//The key in this case is the type of System, as a num
                     std::static_pointer_cast<TSystem>(system)));
         }
+
+//        const char * typeSystem = typeid(system).name();
+//        const char * typeTSystem = typeid(TSystem).name();
+//        if (typeSystem == typeTSystem){
+//            systemsOfType.insert(std::make_pair(
+//                    std::type_index(typeid(system)),//The key in this case is the type of System, as a num
+//                    std::static_pointer_cast<TSystem>(system)));
+//        }
     }
     return systemsOfType;
 }
