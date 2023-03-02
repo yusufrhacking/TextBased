@@ -17,9 +17,8 @@ Renderer::Renderer(SDL_Window* window) {
     }
 }
 
-void Renderer::renderText(const std::shared_ptr<Position>& position, SpriteComponent sprite){
+void Renderer::renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite){
     SDL_Color color = {255, 255, 255};
-
 
     SDL_Surface* surface = TTF_RenderText_Blended(
             font,
@@ -38,12 +37,11 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, SpriteCompo
     SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
 }
 
-//void Renderer::render() {
-//    SDL_SetRenderDrawColor(renderer, 100, 21, 21, 100);
-//    SDL_RenderClear(renderer);
-//
-//    SDL_RenderPresent(renderer);
-//}
+void Renderer::render() {
+    SDL_SetRenderDrawColor(renderer, 100, 21, 21, 100);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+}
 
 //void Renderer::renderDummyText() const {
 //    SDL_Color color = {255, 255, 255};

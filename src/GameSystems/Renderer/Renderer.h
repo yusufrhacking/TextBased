@@ -19,7 +19,8 @@ class Renderer {
 public:
     explicit Renderer(SDL_Window* window);
     ~Renderer();
-    void renderText(const std::shared_ptr<Position>& position, SpriteComponent sprite);
+    void renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite);
+    void render();
 
 private:
     bool isImproperlyInitialized() const;

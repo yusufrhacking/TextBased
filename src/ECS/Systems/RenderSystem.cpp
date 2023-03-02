@@ -13,6 +13,7 @@ void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
         const auto spriteComponent = manager->getComponent<SpriteComponent>(entity);
 
         renderer->renderText(positionComponent.position, spriteComponent);
-
     }
+
+    renderer->render();
 }
