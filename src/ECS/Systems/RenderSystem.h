@@ -1,0 +1,10 @@
+#ifndef TEXTBASED_RENDERSYSTEM_H
+#define TEXTBASED_RENDERSYSTEM_H
+
+
+class RenderSystem {
+
+};
+
+
+#endif //TEXTBASED_RENDERSYSTEM_H
