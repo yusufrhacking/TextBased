@@ -27,7 +27,7 @@ void ECSManager::addNewEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeAdded()){
         auto signature = entityManager->getSignature(entity);
         systemManager->addNewEntityToSystem(entity, signature);
-        spdlog::info("Entity " + std::to_string(entity.getId()) + " fully added");
+        spdlog::debug("Entity " + std::to_string(entity.getId()) + " fully added");
     }
     entityManager->clearEntitiesToBeAdded();
 }

@@ -50,11 +50,11 @@ public:
         entityManager = std::make_unique<EntityManager>();
         componentManager = std::make_unique<ComponentManager>();
         systemManager = std::make_unique<SystemManager>();
-        spdlog::info("ECS manager constructed");
+        spdlog::debug("ECS manager constructed");
     }
 
     ~ECSManager() {
-        spdlog::info("ECS manager destroyed");
+        spdlog::debug("ECS manager destroyed");
     }
 
     Entity createEntity();
@@ -104,7 +104,7 @@ void ECSManager::addComponentToEntity(Entity entity, TArgs &&...args) {
     entityManager->setSignature(entity, signature);
 
     systemManager->updateEntityInSystems(entity, signature);
-    spdlog::info("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entity.getId()));
+    spdlog::debug("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entity.getId()));
 }
 
 template <typename TComponent>

@@ -13,7 +13,7 @@ void MovementSystem::update(double deltaTime) {
         position.position->xPos += xChange;
         position.position->yPos += yChange;
 
-        spdlog::info(
+        spdlog::debug(
                 "Entity " + std::to_string(entity.getId())
                 + " is at " + std::to_string(position.position->xPos)
                 + ", " + std::to_string(position.position->yPos));

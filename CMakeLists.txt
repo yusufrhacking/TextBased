@@ -18,11 +18,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
 set(SOURCE_FILES
-        src/Game.cpp src/Game.h
+        src/Game/Game.cpp src/Game/Game.h
         src/Main.cpp
-        src/GameSystems/Renderer/Renderer.cpp src/GameSystems/Renderer/Renderer.h
-        src/GameSystems/Window/Window.cpp src/GameSystems/Window/Window.h
-        src/GameSystems/InputProcessor/InputProcessor.cpp src/GameSystems/InputProcessor/InputProcessor.h
+        src/Game/GameSystems/Renderer/Renderer.cpp src/Game/GameSystems/Renderer/Renderer.h
+        src/Game/GameSystems/Window/Window.cpp src/Game/GameSystems/Window/Window.h
+        src/Game/GameSystems/InputProcessor/InputProcessor.cpp src/Game/GameSystems/InputProcessor/InputProcessor.h
         src/ECS/Components/PositionComponent.h
         src/Objects/Position.h src/Objects/Velocity.h
         src/ECS/Systems/MovementSystem.cpp src/ECS/Systems/MovementSystem.h

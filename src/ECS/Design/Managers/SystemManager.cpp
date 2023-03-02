@@ -10,7 +10,7 @@ void SystemManager::addNewEntityToSystem(Entity entity, ComponentSignature entit
 
         if (signaturesMatch(entitySignature, systemComponentSignature)){
             system->addEntity(entity);
-            spdlog::info("Added Entity " + std::to_string(entityId) + " to system ");//Need System ID?
+            spdlog::debug("Added Entity " + std::to_string(entityId) + " to system ");//Need System ID?
         }
     }
 }
@@ -24,11 +24,11 @@ void SystemManager::updateEntityInSystems(Entity entity, ComponentSignature enti
 
         if (signaturesMatch(entitySignature, systemComponentSignature)){
             system->addEntity(entity);
-            spdlog::info("Added Entity " + std::to_string(entityId) + " to system ");//Need System ID?
+            spdlog::debug("Added Entity " + std::to_string(entityId) + " to system ");//Need System ID?
         }
         else{
             system->removeEntity(entity);
-            spdlog::info("Removed Entity " + std::to_string(entityId) + " to system ");//Need System ID?
+            spdlog::debug("Removed Entity " + std::to_string(entityId) + " to system ");//Need System ID?
         }
     }
 }
