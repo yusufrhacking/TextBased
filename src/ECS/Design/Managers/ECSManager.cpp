@@ -1,5 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "ECSManager.h"
+#include "../Objects/UpdateSystem.h"
 
 int GenericComponent::nextId = 0;
 
@@ -13,8 +14,8 @@ void ECSManager::update(double deltaTime){
 }
 
 void ECSManager::updateSystems(double deltaTime) const {
-    for (const auto& systemKeyPair : systemManager->getUpdateSystems()){
-        auto system = systemKeyPair.second;
+    for (const auto& systemKeyPair : systemManager->getSystemsOfType<UpdateSystem>()){
+        std::shared_ptr<UpdateSystem> system = systemKeyPair.second;
         system->update(deltaTime);
     }
 }

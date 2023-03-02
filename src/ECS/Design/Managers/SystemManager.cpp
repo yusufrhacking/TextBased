@@ -32,15 +32,3 @@ void SystemManager::updateEntityInSystems(Entity entity, ComponentSignature enti
         }
     }
 }
-
-SystemsMap SystemManager::getUpdateSystems() const {
-    std::type_info updateSystemType = typeid(U)
-
-    for (const auto& systemKeyPair : systems){
-        auto system = systemKeyPair.second;
-        if (typeid(system)){
-
-        }
-    }
-    return systems;
-}
