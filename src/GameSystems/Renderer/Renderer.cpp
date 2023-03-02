@@ -20,11 +20,10 @@ Renderer::Renderer(SDL_Window* window) {
 void Renderer::renderText(const std::shared_ptr<Position>& position, SpriteComponent sprite){
     SDL_Color color = {255, 255, 255};
 
-    const char* renderedText = sprite.text;
 
     SDL_Surface* surface = TTF_RenderText_Blended(
             font,
-            renderedText,
+            sprite.text.c_str(),
             color
     );
 
