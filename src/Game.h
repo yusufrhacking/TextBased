@@ -3,12 +3,13 @@
 #include <SDL2/SDL.h>
 #include <SDL_ttf.h>
 #include "spdlog/spdlog.h"
-#include "Renderer/Renderer.h"
-#include "InputProcessor/InputProcessor.h"
 #include "ECS/Design/Managers/ECSManager.h"
 #include "ECS/Components/PositionComponent.h"
 #include "ECS/Components/MovementComponent.h"
 #include "ECS/Systems/MovementSystem.h"
+#include "GameSystems/Window/Window.h"
+#include "GameSystems/InputProcessor/InputProcessor.h"
+#include "GameSystems/Renderer/Renderer.h"
 #include <memory>
 
 const size_t FPS = 60;
@@ -26,6 +27,16 @@ private:
         std::unique_ptr<InputProcessor> inputProcessor;
         size_t millisecsPreviousFrame = 0;
 
+        double waitForDeltaTime();
+
+        void setup();
+
+        void processInput();
+
+        void update();
+
+        void render();
+
 
 public:
 
@@ -37,13 +48,6 @@ public:
     void run();
 
     void close();
-
-    void setup();
-
-    void processInput();
-
-    void update();
-
 };
 
 

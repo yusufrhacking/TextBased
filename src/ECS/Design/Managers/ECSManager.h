@@ -82,6 +82,9 @@ public:
     template <typename TSystem>
     TSystem& getSystem() const;
 
+    void addNewEntities();
+
+    void updateSystems(double deltaTime) const;
 };
 
 template <typename TComponent, typename... TArgs>

@@ -32,7 +32,7 @@ void Game::run() {
     while(isRunning){
         processInput();
         update();
-        renderer->render();
+        render();
     }
 }
 
@@ -44,6 +44,16 @@ void Game::processInput() {
 }
 
 void Game::update() {
+    double deltaTime = waitForDeltaTime();
+    manager->update(deltaTime);
+}
+
+void Game::render() {
+    renderer->render();
+
+}
+
+double Game::waitForDeltaTime() {
     size_t timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPreviousFrame);
     if (timeToWait > 0 && timeToWait <= MILLISECS_PER_FRAME) {
         SDL_Delay(timeToWait);
@@ -54,8 +64,7 @@ void Game::update() {
 
     // Store the "previous" frame time
     millisecsPreviousFrame = SDL_GetTicks();
-
-    manager->update(deltaTime);
+    return deltaTime;
 }
 
 void Game::close() {
@@ -65,5 +74,7 @@ void Game::close() {
 Game::~Game() {
     spdlog::info("Game destructor called");
 }
+
+
 
 

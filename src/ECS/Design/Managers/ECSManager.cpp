@@ -4,11 +4,19 @@
 int GenericComponent::nextId = 0;
 
 void ECSManager::update(double deltaTime){
+    addNewEntities();
+
+    updateSystems(deltaTime);
+}
+
+void ECSManager::updateSystems(double deltaTime) const {
     for (const auto& systemKeyPair : systemManager->getSystems()){
         auto system = systemKeyPair.second;
         system->update(deltaTime);
     }
+}
 
+void ECSManager::addNewEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeAdded()){
         auto signature = entityManager->getSignature(entity);
         systemManager->addNewEntityToSystem(entity, signature);

@@ -20,9 +20,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
 set(SOURCE_FILES
         src/Game.cpp src/Game.h
         src/Main.cpp
-        src/Renderer/Renderer.cpp src/Renderer/Renderer.h
-        src/Window/Window.cpp src/Window/Window.h
-        src/InputProcessor/InputProcessor.cpp src/InputProcessor/InputProcessor.h
+        src/GameSystems/Renderer/Renderer.cpp src/GameSystems/Renderer/Renderer.h
+        src/GameSystems/Window/Window.cpp src/GameSystems/Window/Window.h
+        src/GameSystems/InputProcessor/InputProcessor.cpp src/GameSystems/InputProcessor/InputProcessor.h
         src/ECS/Components/PositionComponent.h
         src/Objects/Position.h src/Objects/Velocity.h
         src/ECS/Systems/MovementSystem.cpp src/ECS/Systems/MovementSystem.h
