@@ -11,7 +11,7 @@ const Size DEFAULT_HEIGHT = 10;
 struct SpriteComponent {
     Size width = DEFAULT_WIDTH;
     Size height = DEFAULT_HEIGHT;
-    const char *text;
+    std::string text;
 
     explicit SpriteComponent(std::string text){
         this->text = std::move(text);

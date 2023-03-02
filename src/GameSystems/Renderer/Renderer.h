@@ -18,17 +18,14 @@ class Renderer {
 
 public:
     explicit Renderer(SDL_Window* window);
-    void render();
     ~Renderer();
+    void renderText(const std::shared_ptr<Position>& position, SpriteComponent sprite);
 
 private:
-    void renderDummyText() const;
-
     bool isImproperlyInitialized() const;
 
     bool isFontFound() const;
 
-    void renderText(Position position, SpriteComponent sprite);
 };
 
 
