@@ -9,6 +9,7 @@ RenderSystem::RenderSystem() {
 
 void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
     for (auto entity : getEntities()){
+        spdlog::info("Rendering entity " + std::to_string(entity.getId()));
         const auto positionComponent = manager->getComponent<PositionComponent>(entity);
         const auto spriteComponent = manager->getComponent<SpriteComponent>(entity);
 

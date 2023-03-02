@@ -74,7 +74,7 @@ std::shared_ptr<Pool<TComponent>> ComponentManager::getValidPool(const int compo
     std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
 
     if (entityId >= componentPool->getSize()){
-        componentPool->resize(componentPool->getSize() * 2);
+        componentPool->resize(componentPool->getSize() + 1);
     }
     return componentPool;
 }

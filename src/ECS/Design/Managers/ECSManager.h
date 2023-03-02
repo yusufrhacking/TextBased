@@ -114,7 +114,7 @@ void ECSManager::removeComponent(Entity entity){
     componentManager->removeComponent<TComponent>(entity);
 
     auto signature = entityManager->getSignature(entity);
-    signature.set(componentId, true);
+    signature.set(componentId, false);
     entityManager->setSignature(entity, signature);
 
     systemManager->updateEntityInSystems(entity, signature);
