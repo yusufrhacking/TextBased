@@ -4,7 +4,8 @@
 #include "../Window/Window.h"
 #include <SDL_ttf.h>
 #include "spdlog/spdlog.h"
-
+#include "../../Objects/Position.h"
+#include "../../ECS/Components/SpriteComponent.h"
 
 
 static const int FONT_SIZE = 10;
@@ -26,6 +27,8 @@ private:
     bool isImproperlyInitialized() const;
 
     bool isFontFound() const;
+
+    void renderText(Position position, SpriteComponent sprite);
 };
 
 

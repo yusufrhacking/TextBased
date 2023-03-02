@@ -1,4 +1,6 @@
 #include "Renderer.h"
+#include "../../Objects/Position.h"
+#include "../../ECS/Components/SpriteComponent.h"
 #include <iostream>
 
 
@@ -13,6 +15,26 @@ Renderer::Renderer(SDL_Window* window) {
     if (!isFontFound()) {
         spdlog::error("OPEN FONT FAIL");
     }
+}
+
+void Renderer::renderText(Position position, SpriteComponent sprite){
+    SDL_Color color = {255, 255, 255};
+
+    SDL_Surface* surface = TTF_RenderText_Blended(
+            font,
+            sprite.text,
+            color
+    );
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    int width = (int)sprite.width;
+    int height = (int)sprite.height;
+    SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+
+    SDL_Rect dstRect = {static_cast<int>(position.xPos), static_cast<int>(position.yPos), width, height};
+
+    SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
 }
 
 void Renderer::render() {
