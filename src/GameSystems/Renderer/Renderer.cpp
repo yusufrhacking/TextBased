@@ -22,7 +22,6 @@ Renderer::Renderer(SDL_Window* window) {
 
 void Renderer::renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite){
     SDL_SetRenderDrawColor(renderer, 30, 30, 30, 100);
-    SDL_RenderClear(renderer);
 
     SDL_Color color = {255, 255, 255};
 
@@ -45,6 +44,7 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
 
 void Renderer::render() {
     SDL_RenderPresent(renderer);
+    SDL_RenderClear(renderer);
 }
 
 //void Renderer::renderDummyText() const {

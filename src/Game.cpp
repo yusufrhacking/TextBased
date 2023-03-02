@@ -36,7 +36,6 @@ void Game::setup() {
 //    manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(50, 50));
 //
     manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
-    manager->removeComponent<PositionComponent>(json);
 }
 
 void Game::run() {
