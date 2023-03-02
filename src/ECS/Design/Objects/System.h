@@ -21,8 +21,6 @@ public:
     std::set<Entity> getEntities() const;
     ComponentSignature getComponentSignature() const;
 
-    virtual void update(double deltaTime) = 0;
-
     template <typename ComponentGeneric> void requireComponent();
 };
 

@@ -5,9 +5,10 @@
 #include "../Components/PositionComponent.h"
 #include "../Components/MovementComponent.h"
 #include "../Design/Managers/ECSManager.h"
+#include "../Design/Objects/UpdateSystem.h"
 
 
-class MovementSystem: public System{
+class MovementSystem: public UpdateSystem{
 public:
 
     explicit MovementSystem();

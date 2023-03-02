@@ -12,7 +12,7 @@ void Game::initialize() {
         spdlog::error("SDL INIT FAILED");
     }
     window = std::make_unique<Window>();
-    renderer = std::make_unique<Renderer>(window->getWindow());
+    renderer = std::make_shared<Renderer>(window->getWindow());
     inputProcessor = std::make_unique<InputProcessor>();
 
     isRunning = true;
@@ -49,8 +49,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    renderer->render();
-
+    manager->render(renderer);
 }
 
 double Game::waitForDeltaTime() {

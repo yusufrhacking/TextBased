@@ -3,14 +3,17 @@
 
 int GenericComponent::nextId = 0;
 
+void ECSManager::render(std::shared_ptr<Renderer> renderer){
+
+}
+
 void ECSManager::update(double deltaTime){
     addNewEntities();
-
     updateSystems(deltaTime);
 }
 
 void ECSManager::updateSystems(double deltaTime) const {
-    for (const auto& systemKeyPair : systemManager->getSystems()){
+    for (const auto& systemKeyPair : systemManager->getUpdateSystems()){
         auto system = systemKeyPair.second;
         system->update(deltaTime);
     }

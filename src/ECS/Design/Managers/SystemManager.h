@@ -26,7 +26,8 @@ public:
     template <typename TSystem>
     TSystem& getSystem() const;
 
-    SystemsMap getSystems() const;
+    template <typename TSystem>
+    SystemsMap getSystemsOfType() const;
 
     void updateEntityInSystems(Entity entity, ComponentSignature entitySignature);
 
@@ -58,6 +59,21 @@ template<typename TSystem>
 TSystem& SystemManager::getSystem() const {
     auto systemToReturn = systems.find(std::type_index(typeid(TSystem)));
     return *(std::static_pointer_cast<TSystem>(systemToReturn->second));
+}
+
+template<typename TSystem>
+SystemsMap SystemManager::getSystemsOfType() const {
+    SystemsMap systemsOfType;
+
+    for (const auto& systemKeyPair : systems){
+        auto system = systemKeyPair.second;
+        if (typeid(system) == typeid(TSystem)){
+            systemsOfType.insert(std::make_pair(
+                    std::type_index(typeid(system)),//The key in this case is the type of System, as a num
+                    system));
+        }
+    }
+    return systemsOfType;
 }
 
 

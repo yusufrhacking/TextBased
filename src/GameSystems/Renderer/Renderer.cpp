@@ -28,7 +28,7 @@ void Renderer::renderDummyText() const {
 
     SDL_Surface* surface = TTF_RenderText_Blended(
             font,
-            "Hello",
+            "Robert C. Martin",
             color
             );
 

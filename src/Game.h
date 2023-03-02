@@ -23,7 +23,7 @@ class Game{
 private:
         bool isRunning;
         std::unique_ptr<Window> window;
-        std::unique_ptr<Renderer> renderer;
+        std::shared_ptr<Renderer> renderer;
         std::unique_ptr<InputProcessor> inputProcessor;
         size_t millisecsPreviousFrame = 0;
 

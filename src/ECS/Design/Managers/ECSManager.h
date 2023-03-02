@@ -11,6 +11,7 @@
 #include "EntityManager.h"
 #include "ComponentManager.h"
 #include "SystemManager.h"
+#include "../../../GameSystems/Renderer/Renderer.h"
 
 
 //using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
@@ -59,6 +60,9 @@ public:
 
     void update(double deltaTime);
 
+    void render(std::shared_ptr<Renderer> renderer);
+
+
     //Refactor in a componentManager class
     template <typename TComponent, typename... TArgs>
     void addComponentToEntity(Entity entity, TArgs &&...args);
@@ -85,6 +89,7 @@ public:
     void addNewEntities();
 
     void updateSystems(double deltaTime) const;
+
 };
 
 template <typename TComponent, typename... TArgs>
