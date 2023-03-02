@@ -11,7 +11,7 @@
 #include "EntityManager.h"
 #include "ComponentManager.h"
 #include "SystemManager.h"
-#include "../../../GameSystems/Renderer/Renderer.h"
+#include "../../../Game/GameSystems/Renderer/Renderer.h"
 #include "../../Systems/RenderSystem.h"
 
 
