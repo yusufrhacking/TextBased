@@ -12,7 +12,6 @@ static const int FONT_SIZE = 10;
 
 class Renderer {
     SDL_Renderer* renderer;
-    SDL_Window* window;
     TTF_Font* font;
 
 

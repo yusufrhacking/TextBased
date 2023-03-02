@@ -14,7 +14,6 @@ public:
 private:
     void createWindow();
 
-    void showWindow() const;
 };
 
 

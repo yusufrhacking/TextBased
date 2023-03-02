@@ -5,13 +5,11 @@
 
 
 Renderer::Renderer(SDL_Window* window) {
-    this->window = window;
-    this->renderer = SDL_CreateRenderer(this->window, -1, 0);
+    this->renderer = SDL_CreateRenderer(window, -1, 0);
     if(this->renderer == nullptr){
         spdlog::error("RENDERER NOT CREATED");
         spdlog::error(SDL_GetError());
     }
-//    spdlog::info("Renderer created");
 
     if (isImproperlyInitialized()){
         spdlog::error("TFT INIT FAIL");
@@ -23,7 +21,7 @@ Renderer::Renderer(SDL_Window* window) {
 }
 
 void Renderer::renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite){
-    SDL_SetRenderDrawColor(renderer, 100, 21, 21, 100);
+    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 100);
     SDL_RenderClear(renderer);
 
     SDL_Color color = {255, 255, 255};

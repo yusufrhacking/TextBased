@@ -8,8 +8,6 @@ RenderSystem::RenderSystem() {
 }
 
 void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
-//    renderer->render();
-
     for (auto entity : getEntities()){
         const auto positionComponent = manager->getComponent<PositionComponent>(entity);
         const auto spriteComponent = manager->getComponent<SpriteComponent>(entity);

@@ -29,6 +29,15 @@ void Game::setup() {
 
     std::string text = "Robert C. Martin";
     manager->addComponentToEntity<SpriteComponent>(tank, text);
+
+
+    Entity json = manager->createEntity();
+
+    manager->addComponentToEntity<PositionComponent>(json, std::make_shared<Position>(200, 200));
+    manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(50, 50));
+
+    std::string jaeson = "Jaeson Martin";
+    manager->addComponentToEntity<SpriteComponent>(json, jaeson);
 }
 
 void Game::run() {

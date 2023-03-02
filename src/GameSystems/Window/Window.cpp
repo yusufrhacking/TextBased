@@ -4,24 +4,12 @@
 
 Window::Window() {
     createWindow();
-    showWindow();
 }
 
 Window::~Window() {
     SDL_DestroyWindow(window);
 }
 
-void Window::showWindow() const {
-    SDL_Surface *window_surface = SDL_GetWindowSurface(window);
-
-    if(!window_surface)
-    {
-        spdlog::error("Window surface initialization failed");
-    }
-
-    SDL_UpdateWindowSurface(window);
-
-}
 
 void Window::createWindow() {
     SDL_DisplayMode displayMode;
@@ -38,10 +26,11 @@ void Window::createWindow() {
             0
     );
 
-    if (window == NULL){
+    if (window == nullptr){
         spdlog::error("Window initialization failed");
     }
 }
+
 
 SDL_Window *Window::getWindow() {
     return window;
