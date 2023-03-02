@@ -3,7 +3,7 @@
 std::unique_ptr<ECSManager> manager;
 
 Game::Game(){
-    spdlog::info("Game object constructed");
+    spdlog::debug("Game object constructed");
     manager = std::make_unique<ECSManager>();
 }
 
