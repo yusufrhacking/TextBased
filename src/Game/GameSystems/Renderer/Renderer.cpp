@@ -26,10 +26,11 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
     SDL_SetRenderDrawColor(renderer, 30, 30, 30, 100);
 
 
-    SDL_Surface* surface = TTF_RenderText_Blended(
+    SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(
             font,
             sprite.text.c_str(),
-            color
+            color,
+            0
     );
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);

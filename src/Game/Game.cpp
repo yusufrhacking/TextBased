@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "GameObjects/TextPerson.h"
+#include "GameObjects/Mountain.h"
 
 std::unique_ptr<ECSManager> manager;
 
@@ -41,6 +42,8 @@ void Game::setup() {
     manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
 
     manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
+
+    std::unique_ptr<Mountain> mountain = std::make_unique<Mountain>();
 }
 
 void Game::run() {
