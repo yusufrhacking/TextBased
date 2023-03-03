@@ -1,6 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "ECSManager.h"
-#include "../Objects/UpdateSystem.h"
+#include "../../Systems/UpdateSystem.h"
 
 int GenericComponent::nextId = 0;
 

@@ -37,8 +37,6 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
     int width = (int)sprite.width;
     int height = (int)sprite.height;
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
-    spdlog::info("Width " + std::to_string(width));
-    spdlog::info("Height " + std::to_string(height));
 
     SDL_Rect dstRect = {static_cast<int>(position->xPos), static_cast<int>(position->yPos), width, height};
 

@@ -14,7 +14,7 @@ struct SpriteComponent {
     std::string text;
 
     explicit SpriteComponent(std::string text){
-        this->text = std::move(text);
+        this->text = text;
         this->width = text.size() * DEFAULT_WIDTH_SCALER;
         this->height = DEFAULT_HEIGHT;
     }
@@ -27,6 +27,8 @@ struct SpriteComponent {
 
     SpriteComponent() {
         this->text = "Robert C. Martin";
+        this->width = text.size() * DEFAULT_WIDTH_SCALER;
+        this->height = DEFAULT_HEIGHT;
     }
 
 };
