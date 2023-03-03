@@ -7,6 +7,7 @@ class TextPerson {
 private:
     std::string text;
     Entity entity;
+    Position position;
 
     void setUpTextPerson();
 

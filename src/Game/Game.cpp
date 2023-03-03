@@ -23,24 +23,24 @@ void Game::setup() {
     manager->addSystem<MovementSystem>();
     manager->addSystem<RenderSystem>();
 
-    std::unique_ptr<TextPerson> bobby = std::make_unique<TextPerson>();
-    std::unique_ptr<TextPerson> json = std::make_unique<TextPerson>("Jaeson Martin");
-//
-//
-//    Entity tank = manager->createEntity();
-//
-//    manager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
-//    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
-//
-//    manager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
-//
-//
-//    Entity json = manager->createEntity();
-//
-//    manager->addComponentToEntity<PositionComponent>(json, std::make_shared<Position>(200, 200));
-//    manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
-//
-//    manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
+//    std::unique_ptr<TextPerson> bobby = std::make_unique<TextPerson>();
+//    std::unique_ptr<TextPerson> json = std::make_unique<TextPerson>("Jaeson Martin");
+
+
+    Entity tank = manager->createEntity();
+
+    manager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
+    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
+
+    manager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
+
+
+    Entity json = manager->createEntity();
+
+    manager->addComponentToEntity<PositionComponent>(json, std::make_shared<Position>(200, 200));
+    manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
+
+    manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
 }
 
 void Game::run() {

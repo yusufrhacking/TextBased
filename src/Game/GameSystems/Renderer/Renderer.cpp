@@ -3,6 +3,8 @@
 #include "../../../ECS/Components/SpriteComponent.h"
 #include <iostream>
 
+const static SDL_Color color = {255, 255, 255};
+
 
 Renderer::Renderer(SDL_Window* window) {
     this->renderer = SDL_CreateRenderer(window, -1, 0);
@@ -23,7 +25,6 @@ Renderer::Renderer(SDL_Window* window) {
 void Renderer::renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite){
     SDL_SetRenderDrawColor(renderer, 30, 30, 30, 100);
 
-    SDL_Color color = {255, 255, 255};
 
     SDL_Surface* surface = TTF_RenderText_Blended(
             font,
@@ -36,6 +37,8 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
     int width = (int)sprite.width;
     int height = (int)sprite.height;
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+    spdlog::info("Width " + std::to_string(width));
+    spdlog::info("Height " + std::to_string(height));
 
     SDL_Rect dstRect = {static_cast<int>(position->xPos), static_cast<int>(position->yPos), width, height};
 

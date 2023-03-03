@@ -20,7 +20,6 @@ TextPerson::TextPerson(const std::string& text) {
 void TextPerson::setUpTextPerson(){
     manager->addComponentToEntity<PositionComponent>(entity, std::make_shared<Position>(50, 50));
     manager->addComponentToEntity<MovementComponent>(entity, std::make_shared<Velocity>(20, 1));
-
     manager->addComponentToEntity<SpriteComponent>(entity, text);
 }
 
