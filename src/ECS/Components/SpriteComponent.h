@@ -5,26 +5,26 @@
 #include "../../Globals.h"
 
 struct SpriteComponent {
-    Size width;
-    Size height;
+    WindowNum renderWidth;
+    WindowNum renderHeight;
     std::string text;
 
     explicit SpriteComponent(std::string text){
         this->text = text;
-        this->width = text.size() * RENDERED_TEXT_WIDTH_SCALER;
-        this->height = RENDERED_TEXT_HEIGHT;
+        this->renderWidth = text.size() * RENDERED_TEXT_WIDTH_SCALER;
+        this->renderHeight = RENDERED_TEXT_HEIGHT;
     }
 
-    explicit SpriteComponent(std::string text, Size width, Size height ){
+    explicit SpriteComponent(std::string text, WindowNum width, WindowNum height ){
         this->text = text;
-        this->width = text.size() * RENDERED_TEXT_WIDTH_SCALER;
-        this->height = height;
+        this->renderWidth = text.size() * RENDERED_TEXT_WIDTH_SCALER;
+        this->renderHeight = height;
     }
 
     SpriteComponent() {
         this->text = "Robert C. Martin";
-        this->width = text.size() * RENDERED_TEXT_WIDTH_SCALER;
-        this->height = RENDERED_TEXT_HEIGHT;
+        this->renderWidth = text.size() * RENDERED_TEXT_WIDTH_SCALER;
+        this->renderHeight = RENDERED_TEXT_HEIGHT;
     }
 
 };

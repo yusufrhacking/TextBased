@@ -4,12 +4,14 @@
 
 class Tree: public GameObject {
 public:
-    Tree();
+    Tree(Position starterPosition);
 
 private:
     void loadTreeText();
 
     static std::string getXOffCenterOffset(int diff);
+    Position getRenderPosition(Position anchorPosition);
+    WindowNum getHeightOffset();
 };
 
 

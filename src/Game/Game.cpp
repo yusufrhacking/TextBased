@@ -47,7 +47,7 @@ void Game::setup() {
     manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
 
     std::unique_ptr<Mountain> mountain = std::make_unique<Mountain>();
-    std::unique_ptr<Tree> tree = std::make_unique<Tree>();
+    std::unique_ptr<Tree> tree = std::make_unique<Tree>(window->getBottomLeftPosition());
 }
 
 void Game::run() {
