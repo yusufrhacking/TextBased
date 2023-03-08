@@ -4,6 +4,7 @@
 #include "GameObjects/Tree.h"
 
 std::unique_ptr<ECSManager> manager;
+std::unique_ptr<Window> window;
 
 Game::Game(){
     spdlog::debug("Game object constructed");
@@ -14,6 +15,7 @@ void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         spdlog::error("SDL INIT FAILED");
     }
+
     window = std::make_unique<Window>();
     renderer = std::make_shared<Renderer>(window->getWindow());
     inputProcessor = std::make_unique<InputProcessor>();

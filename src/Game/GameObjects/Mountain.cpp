@@ -9,7 +9,7 @@ Mountain::Mountain() {
 
 void Mountain::loadMountainText() {
     text = "";
-    text.append("                       Top\n");
+    text.append("                       Mtn\n");
     text.append("                    Mountain\n");
     text.append("                MountainMountain\n");
     text.append("            MountainMountainMountain\n");

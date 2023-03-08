@@ -1,17 +1,29 @@
 #ifndef TEXTBASED_WINDOW_H
 #define TEXTBASED_WINDOW_H
 #include <SDL2/SDL.h>
+#include "../../../Objects/Position.h"
 
 class Window {
-    int windowWidth;
-    int windowHeight;
-    SDL_Window* window;
 
 public:
     Window();
     ~Window();
     SDL_Window* getWindow();
+    int getWindowWidth();
+    int getWindowHeight();
+
+    [[nodiscard]] Position getTopLeftPosition() const;
+
+    [[nodiscard]] Position getBottomLeftPosition() const;
+
+    [[nodiscard]] Position getTopRightPosition() const;
+
+    [[nodiscard]] Position getBottomRightPosition() const;
+
 private:
+    SDL_Window* window;
+    int windowWidth;
+    int windowHeight;
     void createWindow();
 
 };

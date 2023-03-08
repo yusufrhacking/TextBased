@@ -2,11 +2,7 @@
 #define TEXTBASED_SPRITECOMPONENT_H
 #include <string>
 #include <utility>
-
-using Size = unsigned int;
-
-const Size DEFAULT_WIDTH_SCALER = 6;
-const Size DEFAULT_HEIGHT = 11;
+#include "../../Globals.h"
 
 struct SpriteComponent {
     Size width;
@@ -15,20 +11,20 @@ struct SpriteComponent {
 
     explicit SpriteComponent(std::string text){
         this->text = text;
-        this->width = text.size() * DEFAULT_WIDTH_SCALER;
-        this->height = DEFAULT_HEIGHT;
+        this->width = text.size() * RENDERED_TEXT_WIDTH_SCALER;
+        this->height = RENDERED_TEXT_HEIGHT;
     }
 
     explicit SpriteComponent(std::string text, Size width, Size height ){
         this->text = text;
-        this->width = text.size() * DEFAULT_WIDTH_SCALER;
+        this->width = text.size() * RENDERED_TEXT_WIDTH_SCALER;
         this->height = height;
     }
 
     SpriteComponent() {
         this->text = "Robert C. Martin";
-        this->width = text.size() * DEFAULT_WIDTH_SCALER;
-        this->height = DEFAULT_HEIGHT;
+        this->width = text.size() * RENDERED_TEXT_WIDTH_SCALER;
+        this->height = RENDERED_TEXT_HEIGHT;
     }
 
 };

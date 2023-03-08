@@ -14,7 +14,6 @@
 
 const size_t FPS = 60;
 const size_t MILLISECS_PER_FRAME = 1000 / FPS;
-extern std::unique_ptr<ECSManager> manager;
 
 class Game{
 
@@ -22,7 +21,6 @@ class Game{
 
 private:
         bool isRunning;
-        std::unique_ptr<Window> window;
         std::shared_ptr<Renderer> renderer;
         std::unique_ptr<InputProcessor> inputProcessor;
         size_t millisecsPreviousFrame = 0;

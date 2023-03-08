@@ -1,7 +1,5 @@
 #ifndef TEXTBASED_TREE_H
 #define TEXTBASED_TREE_H
-
-
 #include "GameObject.h"
 
 class Tree: public GameObject {
