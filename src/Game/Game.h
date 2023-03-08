@@ -10,6 +10,7 @@
 #include "GameSystems/Window/Window.h"
 #include "GameSystems/InputProcessor/InputProcessor.h"
 #include "GameSystems/Renderer/Renderer.h"
+#include "GameManager.h"
 #include <memory>
 
 const size_t FPS = 60;
@@ -23,6 +24,7 @@ private:
         bool isRunning;
         std::shared_ptr<Renderer> renderer;
         std::unique_ptr<InputProcessor> inputProcessor;
+        std::unique_ptr<GameManager> kirk;
         size_t millisecsPreviousFrame = 0;
 
         double waitForDeltaTime();

@@ -1,15 +1,12 @@
 #include "Game.h"
-#include "GameObjects/TextPerson.h"
-#include "GameObjects/Mountain.h"
-#include "GameObjects/Tree.h"
 #include "TextGenerator.h"
 
-std::unique_ptr<ECSManager> manager;
+std::unique_ptr<ECSManager> ecsManager;
 std::unique_ptr<Window> window;
 
 Game::Game(){
     spdlog::debug("Game object constructed");
-    manager = std::make_unique<ECSManager>();
+    ecsManager = std::make_unique<ECSManager>();
 }
 
 void Game::initialize() {
@@ -25,27 +22,7 @@ void Game::initialize() {
 }
 
 void Game::setup() {
-    manager->addSystem<MovementSystem>();
-    manager->addSystem<RenderSystem>();
-
-    Entity tank = manager->createEntity();
-    manager->addComponentToEntity<TransformComponent>(tank, std::make_shared<Position>(50, 50));
-    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
-    manager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
-
-
-    Entity json = manager->createEntity();
-    manager->addComponentToEntity<TransformComponent>(json, std::make_shared<Position>(200, 200));
-    manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
-    manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
-
-    Entity tree = manager->createEntity();
-    manager->addComponentToEntity<TransformComponent>(tree, window->getTopLeftPosition());
-    manager->addComponentToEntity<SpriteComponent>(tree, TextGenerator::getTreeText());
-
-    auto sprite = manager->getComponent<SpriteComponent>(tree);
-
-
+    kirk->setup();
 }
 
 void Game::run() {
@@ -66,11 +43,11 @@ void Game::processInput() {
 
 void Game::update() {
     double deltaTime = waitForDeltaTime();
-    manager->update(deltaTime);
+    ecsManager->update(deltaTime);
 }
 
 void Game::render() {
-    manager->render(renderer);
+    ecsManager->render(renderer);
 }
 
 double Game::waitForDeltaTime() {

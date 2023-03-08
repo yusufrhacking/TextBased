@@ -50,11 +50,11 @@ public:
         entityManager = std::make_unique<EntityManager>();
         componentManager = std::make_unique<ComponentManager>();
         systemManager = std::make_unique<SystemManager>();
-        spdlog::debug("ECS manager constructed");
+        spdlog::debug("ECS ecsManager constructed");
     }
 
     ~ECSManager() {
-        spdlog::debug("ECS manager destroyed");
+        spdlog::debug("ECS ecsManager destroyed");
     }
 
     Entity createEntity();
