@@ -15,3 +15,20 @@ int GameObject::getTextHeight() {
     return height;
 }
 
+
+Position GameObject::getRenderPosition(Position anchorPosition) {
+    WindowNum heightOffset = getHeightOffset();
+
+    Position renderPosition;
+    double xPos = anchorPosition.xPos;
+    double yPos = anchorPosition.yPos - heightOffset;
+
+    renderPosition = {xPos, yPos};
+
+    return renderPosition;
+}
+
+WindowNum GameObject::getHeightOffset() {
+    return getTextHeight() * (RENDERED_TEXT_HEIGHT+RENDERED_LINE_HEIGHT);
+}
+

@@ -17,6 +17,9 @@ protected:
 
     int findTextWidth();
     int getTextHeight();
+
+    Position getRenderPosition(Position anchorPosition);
+    WindowNum getHeightOffset();
 };
 
 #endif
