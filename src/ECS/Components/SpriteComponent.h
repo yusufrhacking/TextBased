@@ -3,30 +3,46 @@
 #include <string>
 #include <utility>
 #include "../../Globals.h"
+#include "../../Objects/Size.h"
+#include <sstream>
 
 struct SpriteComponent {
-    WindowNum renderWidth;
-    WindowNum renderHeight;
+    Size surfaceSize;
     std::string text;
 
     explicit SpriteComponent(std::string text){
         this->text = text;
-        this->renderWidth = text.size() * RENDERED_TEXT_WIDTH_SCALER;
-        this->renderHeight = RENDERED_TEXT_HEIGHT;
-    }
-
-    explicit SpriteComponent(std::string text, WindowNum width, WindowNum height ){
-        this->text = text;
-        this->renderWidth = text.size() * RENDERED_TEXT_WIDTH_SCALER;
-        this->renderHeight = height;
+        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT};
+        spdlog::info("Width: " + std::to_string(surfaceSize.width));
     }
 
     SpriteComponent() {
         this->text = "Robert C. Martin";
-        this->renderWidth = text.size() * RENDERED_TEXT_WIDTH_SCALER;
-        this->renderHeight = RENDERED_TEXT_HEIGHT;
+        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT};
     }
 
+private:
+    int getTextHeight() {
+        int height = 0;
+        std::istringstream textStream(text);
+        std::string token;
+        while(std::getline(textStream, token, '\n')) {
+            height++;
+        }
+        return height;
+    }
+
+    unsigned int getTextWidth() {
+        unsigned int longestWidth = 0;
+        std::istringstream textStream(text);
+        std::string token;
+        while(std::getline(textStream, token, '\n')) {
+            if (token.size() > longestWidth){
+                longestWidth = token.size();
+            }
+        }
+        return longestWidth;
+    }
 };
 
 

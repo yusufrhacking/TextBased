@@ -4,7 +4,7 @@
 #include <SDL_ttf.h>
 #include "spdlog/spdlog.h"
 #include "../ECS/Design/Managers/ECSManager.h"
-#include "../ECS/Components/PositionComponent.h"
+#include "../ECS/Components/TransformComponent.h"
 #include "../ECS/Components/MovementComponent.h"
 #include "../ECS/Systems/MovementSystem.h"
 #include "GameSystems/Window/Window.h"

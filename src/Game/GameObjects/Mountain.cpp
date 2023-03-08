@@ -3,7 +3,7 @@
 Mountain::Mountain() {
     loadMountainText();
     entity = manager->createEntity();
-    manager->addComponentToEntity<PositionComponent>(entity, std::make_shared<Position>(500, 500));
+    manager->addComponentToEntity<TransformComponent>(entity, std::make_shared<Position>(500, 500));
     manager->addComponentToEntity<SpriteComponent>(entity, text);
 }
 

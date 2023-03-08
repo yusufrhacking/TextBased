@@ -4,6 +4,7 @@
 #include <string>
 #include "../../ECS/Design/Objects/Entity.h"
 #include "../../ECS/Design/Managers/ECSManager.h"
+#include "../../Objects/Size.h"
 #include <sstream>
 
 extern std::unique_ptr<ECSManager> manager;

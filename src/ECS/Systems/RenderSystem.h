@@ -3,7 +3,7 @@
 
 
 #include "../Design/Objects/System.h"
-#include "../Components/PositionComponent.h"
+#include "../Components/TransformComponent.h"
 #include "../Components/SpriteComponent.h"
 #include "../Design/Managers/ECSManager.h"
 

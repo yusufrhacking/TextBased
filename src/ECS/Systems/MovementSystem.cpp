@@ -5,7 +5,7 @@ extern std::unique_ptr<ECSManager> manager;
 void MovementSystem::update(double deltaTime) {
     // Loop all entities the system cares about
     for (Entity entity: getEntities()){
-        auto& position = manager->getComponent<PositionComponent>(entity);
+        auto& position = manager->getComponent<TransformComponent>(entity);
         const auto movement = manager->getComponent<MovementComponent>(entity);
 
         double xChange = movement.velocity->xVelocity * deltaTime;
@@ -21,8 +21,8 @@ void MovementSystem::update(double deltaTime) {
 }
 
 MovementSystem::MovementSystem(){
-    requireComponent<PositionComponent>();
+    requireComponent<TransformComponent>();
     requireComponent<MovementComponent>();
-    //requireComponent<PositionComponent>();
+    //requireComponent<TransformComponent>();
 
 }

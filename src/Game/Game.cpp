@@ -33,7 +33,7 @@ void Game::setup() {
 
     Entity tank = manager->createEntity();
 
-    manager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
+    manager->addComponentToEntity<TransformComponent>(tank, std::make_shared<Position>(50, 50));
     manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
 
     manager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
@@ -41,7 +41,7 @@ void Game::setup() {
 
     Entity json = manager->createEntity();
 
-    manager->addComponentToEntity<PositionComponent>(json, std::make_shared<Position>(200, 200));
+    manager->addComponentToEntity<TransformComponent>(json, std::make_shared<Position>(200, 200));
     manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
 
     manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");

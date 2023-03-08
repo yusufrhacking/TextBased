@@ -8,7 +8,7 @@ Tree::Tree(Position starterPosition) {
 
     Position renderPosition = getRenderPosition(starterPosition);
 
-    manager->addComponentToEntity<PositionComponent>(entity, std::make_shared<Position>(renderPosition.xPos, renderPosition.yPos));
+    manager->addComponentToEntity<TransformComponent>(entity, std::make_shared<Position>(renderPosition.xPos, renderPosition.yPos));
     manager->addComponentToEntity<SpriteComponent>(entity, text);
 }
 
@@ -34,20 +34,4 @@ std::string Tree::getXOffCenterOffset(int diff){
     }
     return newOffset;
 
-}
-
-Position Tree::getRenderPosition(Position anchorPosition) {
-    WindowNum heightOffset = getHeightOffset();
-
-    Position renderPosition;
-    double xPos = anchorPosition.xPos;
-    double yPos = anchorPosition.yPos - heightOffset;
-
-    renderPosition = {xPos, yPos};
-
-    return renderPosition;
-}
-
-WindowNum Tree::getHeightOffset() {
-    return getTextHeight() * (RENDERED_TEXT_HEIGHT+RENDERED_LINE_HEIGHT);
 }

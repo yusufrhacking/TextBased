@@ -23,7 +23,7 @@ set(SOURCE_FILES
         src/Game/GameSystems/Renderer/Renderer.cpp src/Game/GameSystems/Renderer/Renderer.h
         src/Game/GameSystems/Window/Window.cpp src/Game/GameSystems/Window/Window.h
         src/Game/GameSystems/InputProcessor/InputProcessor.cpp src/Game/GameSystems/InputProcessor/InputProcessor.h
-        src/ECS/Components/PositionComponent.h
+        src/ECS/Components/TransformComponent.h
         src/Objects/Position.h src/Objects/Velocity.h
         src/ECS/Systems/MovementSystem.cpp src/ECS/Systems/MovementSystem.h
         "src/ECS/Design/Objects/Entity.cpp" "src/ECS/Design/Objects/Entity.h"
@@ -31,7 +31,7 @@ set(SOURCE_FILES
         "src/ECS/Design/Objects/System.cpp" "src/ECS/Design/Objects/System.h"
         "src/ECS/Design/Managers/ECSManager.cpp" "src/ECS/Design/Managers/ECSManager.h"
         src/ECS/Design/Objects/Pool.cpp src/ECS/Design/Objects/Pool.h
-        src/ECS/Components/MovementComponent.h src/ECS/Design/Managers/SystemManager.cpp src/ECS/Design/Managers/SystemManager.h src/ECS/Design/Managers/ComponentManager.cpp src/ECS/Design/Managers/ComponentManager.h src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h src/Globals.h src/ECS/Systems/RenderSystem.cpp src/ECS/Systems/RenderSystem.h src/ECS/Components/SpriteComponent.h src/ECS/Systems/UpdateSystem.h src/Game/GameObjects/TextPerson.cpp src/Game/GameObjects/TextPerson.h src/Game/GameObjects/Mountain.cpp src/Game/GameObjects/Mountain.h src/Game/GameObjects/GameObject.h src/Game/GameObjects/Tree.cpp src/Game/GameObjects/Tree.h src/Game/GameObjects/GameObject.cpp)
+        src/ECS/Components/MovementComponent.h src/ECS/Design/Managers/SystemManager.cpp src/ECS/Design/Managers/SystemManager.h src/ECS/Design/Managers/ComponentManager.cpp src/ECS/Design/Managers/ComponentManager.h src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h src/Globals.h src/ECS/Systems/RenderSystem.cpp src/ECS/Systems/RenderSystem.h src/ECS/Components/SpriteComponent.h src/ECS/Systems/UpdateSystem.h src/Game/GameObjects/TextPerson.cpp src/Game/GameObjects/TextPerson.h src/Game/GameObjects/Mountain.cpp src/Game/GameObjects/Mountain.h src/Game/GameObjects/GameObject.h src/Game/GameObjects/Tree.cpp src/Game/GameObjects/Tree.h src/Game/GameObjects/GameObject.cpp src/Objects/Size.h src/ECS/Components/BoxComponent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
