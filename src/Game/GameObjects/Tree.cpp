@@ -7,7 +7,7 @@ Tree::Tree() {
     entity = manager->createEntity();
     Position anchorPosition = window->getBottomLeftPosition();
     double xPos = anchorPosition.xPos;
-    double yPos = anchorPosition.yPos - getTextHeight() * RENDERED_TEXT_HEIGHT;
+    double yPos = anchorPosition.yPos - getTextHeight() * (RENDERED_TEXT_HEIGHT+RENDERED_LINE_HEIGHT);
     spdlog::info(anchorPosition.yPos);
     spdlog::info(getTextHeight());
     spdlog::info(yPos);
