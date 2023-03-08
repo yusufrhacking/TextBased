@@ -2,6 +2,7 @@
 #include "GameObjects/TextPerson.h"
 #include "GameObjects/Mountain.h"
 #include "GameObjects/Tree.h"
+#include "TextGenerator.h"
 
 std::unique_ptr<ECSManager> manager;
 std::unique_ptr<Window> window;
@@ -29,7 +30,7 @@ void Game::setup() {
 
     Entity tank = manager->createEntity();
     manager->addComponentToEntity<TransformComponent>(tank, std::make_shared<Position>(50, 50));
-    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
+    manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
     manager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
 
 
@@ -40,7 +41,11 @@ void Game::setup() {
 
     Entity tree = manager->createEntity();
     manager->addComponentToEntity<TransformComponent>(tree, window->getTopLeftPosition());
-    manager->addComponentToEntity<SpriteComponent>(tree, Tree::getTreeText());
+    manager->addComponentToEntity<SpriteComponent>(tree, TextGenerator::getTreeText());
+
+    auto sprite = manager->getComponent<SpriteComponent>(tree);
+
+
 }
 
 void Game::run() {
