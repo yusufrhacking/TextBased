@@ -35,12 +35,12 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
-    int width = (int)sprite.surfaceSize.width;
-    int height = (int)sprite.surfaceSize.height;
+    int width = 0;
+    int height = 0;
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 
     SDL_Rect dstRect = {static_cast<int>(position->xPos), static_cast<int>(position->yPos), width, height};
-
+    spdlog::info("Height: " + std::to_string(height));
     SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
 }
 

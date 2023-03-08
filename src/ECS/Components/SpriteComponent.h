@@ -12,7 +12,7 @@ struct SpriteComponent {
 
     explicit SpriteComponent(std::string text){
         this->text = text;
-        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT};
+        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT * getTextHeight()};
         spdlog::info("Width: " + std::to_string(surfaceSize.width));
     }
 
@@ -22,7 +22,7 @@ struct SpriteComponent {
     }
 
 private:
-    int getTextHeight() {
+    int getTextHeight() const {
         int height = 0;
         std::istringstream textStream(text);
         std::string token;
@@ -32,7 +32,7 @@ private:
         return height;
     }
 
-    unsigned int getTextWidth() {
+    unsigned int getTextWidth() const {
         unsigned int longestWidth = 0;
         std::istringstream textStream(text);
         std::string token;
