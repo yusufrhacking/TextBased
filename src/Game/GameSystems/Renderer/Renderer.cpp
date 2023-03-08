@@ -6,8 +6,8 @@
 const static SDL_Color color = {255, 255, 255};
 
 
-Renderer::Renderer(SDL_Window* window) {
-    this->renderer = SDL_CreateRenderer(window, -1, 0);
+Renderer::Renderer(SDL_Window* sdlWindow) {
+    this->renderer = SDL_CreateRenderer(sdlWindow, -1, 0);
     if(this->renderer == nullptr){
         spdlog::error("RENDERER NOT CREATED");
         spdlog::error(SDL_GetError());
@@ -40,7 +40,6 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 
     SDL_Rect dstRect = {static_cast<int>(position->xPos), static_cast<int>(position->yPos), width, height};
-    spdlog::info("Height: " + std::to_string(height));
     SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
 }
 

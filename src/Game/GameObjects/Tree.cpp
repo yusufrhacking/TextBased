@@ -3,7 +3,7 @@
 std::string Center_Offset = "        ";
 
 Tree::Tree(Position starterPosition) {
-    loadTreeText();
+    text = getTreeText();
     entity = manager->createEntity();
 
     Position renderPosition = getRenderPosition(starterPosition);
@@ -12,8 +12,8 @@ Tree::Tree(Position starterPosition) {
     manager->addComponentToEntity<SpriteComponent>(entity, text);
 }
 
-void Tree::loadTreeText() {
-    text = Center_Offset + "Tree"
+std::string Tree::getTreeText() {
+    return Center_Offset + "Tree"
            + "\n" + getXOffCenterOffset(2) + "TreeTree"
            + "\n" + getXOffCenterOffset(4) + "TreeTreeTree"
            + "\n" + getXOffCenterOffset(6) + "TreeTreeTreeTree"

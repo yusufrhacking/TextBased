@@ -27,27 +27,20 @@ void Game::setup() {
     manager->addSystem<MovementSystem>();
     manager->addSystem<RenderSystem>();
 
-//    std::unique_ptr<TextPerson> bobby = std::make_unique<TextPerson>();
-//    std::unique_ptr<TextPerson> json = std::make_unique<TextPerson>("Jaeson Martin");
-
-
     Entity tank = manager->createEntity();
-
     manager->addComponentToEntity<TransformComponent>(tank, std::make_shared<Position>(50, 50));
     manager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 1));
-
     manager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
 
 
     Entity json = manager->createEntity();
-
     manager->addComponentToEntity<TransformComponent>(json, std::make_shared<Position>(200, 200));
     manager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
-
     manager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
 
-    std::unique_ptr<Mountain> mountain = std::make_unique<Mountain>();
-    std::unique_ptr<Tree> tree = std::make_unique<Tree>(window->getBottomLeftPosition());
+    Entity tree = manager->createEntity();
+    manager->addComponentToEntity<TransformComponent>(tree, window->getTopLeftPosition());
+    manager->addComponentToEntity<SpriteComponent>(tree, Tree::getTreeText());
 }
 
 void Game::run() {

@@ -11,6 +11,10 @@ struct TransformComponent {
         this->position = std::move(position);
     }
 
+    explicit TransformComponent(Position position){
+        this->position = std::make_shared<Position>(position.xPos, position.yPos);
+    }
+
     TransformComponent() {
         this->position = std::make_shared<Position>(0, 0);
     }

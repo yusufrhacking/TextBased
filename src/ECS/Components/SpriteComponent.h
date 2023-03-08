@@ -13,7 +13,6 @@ struct SpriteComponent {
     explicit SpriteComponent(std::string text){
         this->text = text;
         surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT * getTextHeight()};
-        spdlog::info("Width: " + std::to_string(surfaceSize.width));
     }
 
     SpriteComponent() {
