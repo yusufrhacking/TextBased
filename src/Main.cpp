@@ -2,7 +2,7 @@
 #include "spdlog/spdlog.h"
 
 int main() {
-    spdlog::set_level(spdlog::level::debug);
+//    spdlog::set_level(spdlog::level::debug);
     Game* game = new Game();
 
     game->initialize();
