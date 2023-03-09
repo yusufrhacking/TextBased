@@ -680,7 +680,7 @@ FC_Rect FC_DefaultRenderCallback(FC_Image* src, FC_Rect* srcrect, FC_Target* des
     float h = srcrect->h * yscale;
     FC_Rect result;
 
-=#ifdef FC_USE_SDL_GPU
+#ifdef FC_USE_SDL_GPU
     {
         GPU_Rect r = *srcrect;
         GPU_BlitScale(src, &r, dest, x + xscale*r.w/2.0f, y + r.h/2.0f, xscale, yscale);
@@ -2620,7 +2620,7 @@ static int FC_GetAscentFromCodepoint(FC_Font* font, Uint32 codepoint)
     if(font == NULL)
         return 0;
 
-=    FC_GetGlyphData(font, &glyph, codepoint);
+    FC_GetGlyphData(font, &glyph, codepoint);
     return glyph.rect.h;
 }
 
