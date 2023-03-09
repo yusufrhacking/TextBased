@@ -1,3 +1,5 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #include "GameManager.h"
 #include "../ECS/Systems/MovementSystem.h"
 #include "TextGenerator.h"
@@ -8,7 +10,13 @@ void GameManager::setup() {
 
     createBobby();
     createJSON();
-    createForest(2, window->getTopLeftPosition());
+
+    auto spriteForDimensions = std::make_unique<SpriteComponent>(TextGenerator::getTreeText());
+
+    int treeWidth = 2;
+    Position forestPosition = {window->getTopRightPosition().xPos - spriteForDimensions->surfaceSize.width * treeWidth, window->getTopRightPosition().yPos};
+
+    createForest(treeWidth, forestPosition);
 }
 
 void GameManager::createForest(int widthInTrees, Position location) const {
@@ -44,3 +52,5 @@ void GameManager::createBobby() const {
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::__1::make_shared<Velocity>(20, 0));
     ecsManager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
 }
+
+#pragma clang diagnostic pop
