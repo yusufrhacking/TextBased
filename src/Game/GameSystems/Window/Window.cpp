@@ -54,17 +54,17 @@ Position Window::getTopLeftPosition() const {
 }
 
 Position Window::getBottomLeftPosition() const {
-    Position BOTTOM_LEFT_POSITION = {0, static_cast<double>(windowHeight)};
+    Position BOTTOM_LEFT_POSITION = {0, static_cast<float>(windowHeight)};
     return BOTTOM_LEFT_POSITION;
 }
 
 Position Window::getTopRightPosition() const {
-    Position TOP_RIGHT_POSITION = {static_cast<double>(windowWidth), 0};
+    Position TOP_RIGHT_POSITION = {static_cast<float>(windowWidth), 0};
     return TOP_RIGHT_POSITION;
 }
 
 Position Window::getBottomRightPosition() const {
-    Position BOTTOM_RIGHT_POSITION = {static_cast<double>(windowWidth), static_cast<double>(windowHeight)};
+    Position BOTTOM_RIGHT_POSITION = {static_cast<float>(windowWidth), static_cast<float>(windowHeight)};
     return BOTTOM_RIGHT_POSITION;
 }
 

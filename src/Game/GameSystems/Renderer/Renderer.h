@@ -6,6 +6,11 @@
 #include "spdlog/spdlog.h"
 #include "../../../Objects/Position.h"
 #include "../../../ECS/Components/SpriteComponent.h"
+#include "../../../../resources/SDL_FontCache.h"
+#include "../../../Objects/Position.h"
+#include "../../../ECS/Components/SpriteComponent.h"
+#include <iostream>
+#include "../../../../resources/SDL_FontCache.h"
 
 
 static const int FONT_SIZE = 10;
@@ -13,6 +18,7 @@ static const int FONT_SIZE = 10;
 class Renderer {
     SDL_Renderer* renderer;
     TTF_Font* font;
+    FC_Font* fcFont;
 
 
 public:

@@ -3,10 +3,10 @@
 
 
 struct Position {
-    double xPos;
-    double yPos;
+    float xPos;
+    float yPos;
 
-    Position(double x, double y){
+    Position(float x, float y){
         this->xPos = x;
         this->yPos = y;
     }
