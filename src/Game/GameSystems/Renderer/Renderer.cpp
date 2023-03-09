@@ -16,11 +16,11 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
     }
 
     fcFont = FC_CreateFont();
-    FC_LoadFont(fcFont, renderer, "../../resources/Monaco.ttf", 20, FC_MakeColor(255,255,255,255), TTF_STYLE_NORMAL);
-    font = TTF_OpenFont("../../resources/Monaco.ttf", FONT_SIZE);
-    if (!isFontFound()) {
-        spdlog::error("OPEN FONT FAIL");
-    }
+    FC_LoadFont(fcFont, renderer, "../../resources/Monaco.ttf", FONT_SIZE, FC_MakeColor(255,255,255,255), TTF_STYLE_NORMAL);
+//    font = TTF_OpenFont("../../resources/Monaco.ttf", FONT_SIZE);
+//    if (!isFontFound()) {
+//        spdlog::error("OPEN FONT FAIL");
+//    }
 }
 
 void Renderer::renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite){
