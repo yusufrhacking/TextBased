@@ -13,7 +13,6 @@ project(TextBased)
 
 # ------- Set Vars ------- #
 
-set(CMAKE_C_STANDARD 14)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
@@ -39,7 +38,8 @@ set(SOURCE_FILES
         src/ECS/Systems/RenderSystem.cpp src/ECS/Systems/RenderSystem.h
         src/ECS/Components/SpriteComponent.h src/ECS/Systems/UpdateSystem.h
         src/Objects/Size.h
-        src/Game/TextGenerator.cpp src/Game/TextGenerator.h src/Game/GameManager.cpp src/Game/GameManager.h)
+        src/Game/TextGenerator.cpp src/Game/TextGenerator.h src/Game/GameManager.cpp src/Game/GameManager.h
+        src/SDL_FontCache.c src/SDL_FontCache.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -103,6 +103,8 @@ Message( STATUS "SDL2Mixer_FOUND: " ${SDL2Mixer_FOUND} )
 Message("")
 
 file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+
 
 # ------- End Finds ------ #
 

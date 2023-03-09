@@ -12,3 +12,6 @@ License for the logging library
 
 https://www.libsdl.org/license.php
 SDL license
+
+https://github.com/grimfang4/SDL_FontCache/blob/master/LICENSE
+FotCache license
