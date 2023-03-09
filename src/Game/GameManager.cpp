@@ -13,10 +13,14 @@ void GameManager::setup() {
 
     auto spriteForDimensions = std::make_unique<SpriteComponent>(TextGenerator::getTreeText());
 
-    int treeWidth = 2;
-    Position forestPosition = {window->getTopRightPosition().xPos - spriteForDimensions->surfaceSize.width * treeWidth, window->getTopRightPosition().yPos};
+    int treeWidth = 4;
+    Position rightForestPosition = {window->getTopRightPosition().xPos - spriteForDimensions->surfaceSize.width * treeWidth, window->getTopRightPosition().yPos};
 
-    createForest(treeWidth, forestPosition);
+    createForest(treeWidth, rightForestPosition);
+
+    Position leftForestPosition = {window->getTopLeftPosition().xPos, window->getTopRightPosition().yPos};
+
+    createForest(treeWidth, leftForestPosition);
 }
 
 void GameManager::createForest(int widthInTrees, Position location) const {
