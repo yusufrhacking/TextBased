@@ -13,7 +13,7 @@ void GameManager::setup() {
 
     auto spriteForDimensions = std::make_unique<SpriteComponent>(TextGenerator::getTreeText());
 
-    int treeWidth = 4;
+    int treeWidth = 2;
     Position rightForestPosition = {window->getTopRightPosition().xPos - (float)spriteForDimensions->surfaceSize.width * (float)treeWidth, window->getTopRightPosition().yPos};
 
     createForest(treeWidth, rightForestPosition);

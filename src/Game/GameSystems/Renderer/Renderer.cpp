@@ -27,6 +27,10 @@ void Renderer::renderText(const std::shared_ptr<Position>& position, const Sprit
     SDL_SetRenderDrawColor(renderer, 30, 30, 30, 100);
 
     FC_Draw(fcFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
+    int width = FC_GetWidth(fcFont,sprite.text.c_str());
+    spdlog::info("Font Cache size: " + std::to_string(width));
+    spdlog::info("Sprite size: " + std::to_string(sprite.surfaceSize.width));
+
 
 
 //    SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(

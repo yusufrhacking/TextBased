@@ -12,12 +12,12 @@ struct SpriteComponent {
 
     explicit SpriteComponent(std::string text){
         this->text = text;
-        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT * getTextHeight()};
+        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
     SpriteComponent() {
         this->text = "Robert C. Martin";
-        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT};
+        surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), HEIGHT_OF_A_LINE_OF_TEXT};
     }
 
 
