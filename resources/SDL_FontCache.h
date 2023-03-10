@@ -131,11 +131,11 @@ FC_GlyphData FC_MakeGlyphData(int cache_level, Sint16 x, Sint16 y, Uint16 w, Uin
 FC_Font* FC_CreateFont(void);
 
 #ifdef FC_USE_SDL_GPU
-Uint8 FC_LoadFont(FC_Font* font, const char* filename_ttf, Uint32 pointSize, SDL_Color color, int style);
+Uint8 FC_LoadFont(FC_Font* font, const char* filename_ttf, Uint32 pointSize, SDL_Color textColor, int style);
 
-Uint8 FC_LoadFontFromTTF(FC_Font* font, TTF_Font* ttf, SDL_Color color);
+Uint8 FC_LoadFontFromTTF(FC_Font* font, TTF_Font* ttf, SDL_Color textColor);
 
-Uint8 FC_LoadFont_RW(FC_Font* font, SDL_RWops* file_rwops_ttf, Uint8 own_rwops, Uint32 pointSize, SDL_Color color, int style);
+Uint8 FC_LoadFont_RW(FC_Font* font, SDL_RWops* file_rwops_ttf, Uint8 own_rwops, Uint32 pointSize, SDL_Color textColor, int style);
 #else
 Uint8 FC_LoadFont(FC_Font* font, SDL_Renderer* renderer, const char* filename_ttf, Uint32 pointSize, SDL_Color color, int style);
 

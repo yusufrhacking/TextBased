@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
 
-const static SDL_Color color = {255, 255, 255};
+const static SDL_Color textColor = {255, 255, 255};
 
 
 Renderer::Renderer(SDL_Window* sdlWindow) {
@@ -24,19 +24,14 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
 }
 
 void Renderer::renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite){
-    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 100);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     FC_Draw(fcFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
-    int width = FC_GetWidth(fcFont,sprite.text.c_str());
-    spdlog::info("Font Cache size: " + std::to_string(width));
-    spdlog::info("Sprite size: " + std::to_string(sprite.surfaceSize.width));
-
-
 
 //    SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(
 //            font,
 //            sprite.text.c_str(),
-//            color,
+//            textColor,
 //            0
 //    );
 //

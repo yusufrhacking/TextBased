@@ -14,7 +14,7 @@ public:
 
     void createJSON() const;
 
-    void createForest(int widthInTrees, Position location) const;
+    void createForest(int widthInTrees, Position startingPosition) const;
 };
 
 

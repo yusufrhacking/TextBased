@@ -23,13 +23,13 @@ void GameManager::setup() {
     createForest(treeWidth, leftForestPosition);
 }
 
-void GameManager::createForest(int widthInTrees, Position location) const {
+void GameManager::createForest(int widthInTrees, Position startingPosition) const {
     auto spriteForDimensions = std::make_unique<SpriteComponent>(TextGenerator::getTreeText());
 
     unsigned int forestWidthInTrees = widthInTrees;
     unsigned int forestHeightInTrees = (window->getWindowHeight() / spriteForDimensions->surfaceSize.height) + 1;
 
-    Position treePosition = location;
+    Position treePosition = startingPosition;
     for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
         for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
             Entity tree = ecsManager->createEntity();

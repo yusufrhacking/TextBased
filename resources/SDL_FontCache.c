@@ -924,7 +924,7 @@ static Uint8 FC_GrowGlyphCache(FC_Font* font)
 #endif
         return 0;
     }
-    // bug: we do not have the correct color here, this might be the wrong color!
+    // bug: we do not have the correct textColor here, this might be the wrong textColor!
     //      , most functions use set_color_for_all_caches()
     //   - for evading this bug, you must use FC_SetDefaultColor(), before using any draw functions
     set_color(new_level, font->default_color.r, font->default_color.g, font->default_color.b, FC_GET_ALPHA(font->default_color));
@@ -1167,7 +1167,7 @@ FC_Font* FC_CreateFont(void)
 #define FC_LOAD_MAX_SURFACES 10
 
 #ifdef FC_USE_SDL_GPU
-Uint8 FC_LoadFontFromTTF(FC_Font* font, TTF_Font* ttf, SDL_Color color)
+Uint8 FC_LoadFontFromTTF(FC_Font* font, TTF_Font* ttf, SDL_Color textColor)
 #else
 Uint8 FC_LoadFontFromTTF(FC_Font* font, SDL_Renderer* renderer, TTF_Font* ttf, SDL_Color color)
 #endif
@@ -1293,7 +1293,7 @@ Uint8 FC_LoadFontFromTTF(FC_Font* font, SDL_Renderer* renderer, TTF_Font* ttf, S
 
 
 #ifdef FC_USE_SDL_GPU
-Uint8 FC_LoadFont(FC_Font* font, const char* filename_ttf, Uint32 pointSize, SDL_Color color, int style)
+Uint8 FC_LoadFont(FC_Font* font, const char* filename_ttf, Uint32 pointSize, SDL_Color textColor, int style)
 #else
 Uint8 FC_LoadFont(FC_Font* font, FC_Target* renderer, const char* filename_ttf, Uint32 pointSize, SDL_Color color, int style)
 #endif
@@ -1312,14 +1312,14 @@ Uint8 FC_LoadFont(FC_Font* font, FC_Target* renderer, const char* filename_ttf, 
     }
 
 #ifdef FC_USE_SDL_GPU
-    return FC_LoadFont_RW(font, rwops, 1, pointSize, color, style);
+    return FC_LoadFont_RW(font, rwops, 1, pointSize, textColor, style);
 #else
     return FC_LoadFont_RW(font, renderer, rwops, 1, pointSize, color, style);
 #endif
 }
 
 #ifdef FC_USE_SDL_GPU
-Uint8 FC_LoadFont_RW(FC_Font* font, SDL_RWops* file_rwops_ttf, Uint8 own_rwops, Uint32 pointSize, SDL_Color color, int style)
+Uint8 FC_LoadFont_RW(FC_Font* font, SDL_RWops* file_rwops_ttf, Uint8 own_rwops, Uint32 pointSize, SDL_Color textColor, int style)
 #else
 Uint8 FC_LoadFont_RW(FC_Font* font, FC_Target* renderer, SDL_RWops* file_rwops_ttf, Uint8 own_rwops, Uint32 pointSize, SDL_Color color, int style)
 #endif
@@ -1358,7 +1358,7 @@ Uint8 FC_LoadFont_RW(FC_Font* font, FC_Target* renderer, SDL_RWops* file_rwops_t
     TTF_SetFontStyle(ttf, style);
 
 #ifdef FC_USE_SDL_GPU
-    result = FC_LoadFontFromTTF(font, ttf, color);
+    result = FC_LoadFontFromTTF(font, ttf, textColor);
 #else
     result = FC_LoadFontFromTTF(font, renderer, ttf, color);
 #endif
