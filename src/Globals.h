@@ -15,6 +15,8 @@ const WindowNum RENDERED_TEXT_WIDTH_SCALER = 6;
 const WindowNum RENDERED_TEXT_HEIGHT = 11;
 const WindowNum RENDERED_LINE_HEIGHT = 6;
 
+static const int FONT_SIZE = 10;
+
 
 static bool signaturesMatch(const ComponentSignature &entityComponentSignature, const ComponentSignature &systemComponentSignature) {
     return (entityComponentSignature & systemComponentSignature) == systemComponentSignature;

@@ -14,7 +14,7 @@ void GameManager::setup() {
     auto spriteForDimensions = std::make_unique<SpriteComponent>(TextGenerator::getTreeText());
 
     int treeWidth = 4;
-    Position rightForestPosition = {window->getTopRightPosition().xPos - spriteForDimensions->surfaceSize.width * treeWidth, window->getTopRightPosition().yPos};
+    Position rightForestPosition = {window->getTopRightPosition().xPos - (float)spriteForDimensions->surfaceSize.width * (float)treeWidth, window->getTopRightPosition().yPos};
 
     createForest(treeWidth, rightForestPosition);
 
@@ -36,10 +36,10 @@ void GameManager::createForest(int widthInTrees, Position location) const {
             ecsManager->addComponentToEntity<TransformComponent>(tree, treePosition);
             ecsManager->addComponentToEntity<SpriteComponent>(tree, TextGenerator::getTreeText());
 
-            treePosition.yPos += spriteForDimensions->surfaceSize.height;
+            treePosition.yPos += (float)spriteForDimensions->surfaceSize.height;
         }
         treePosition.yPos = 0;
-        treePosition.xPos += spriteForDimensions->surfaceSize.width;
+        treePosition.xPos += (float)spriteForDimensions->surfaceSize.width;
     }
 }
 

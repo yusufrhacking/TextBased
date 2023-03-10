@@ -20,6 +20,7 @@ struct SpriteComponent {
         surfaceSize = {static_cast<WindowNum>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), RENDERED_TEXT_HEIGHT};
     }
 
+
 private:
     int getTextHeight() const {
         int height = 0;

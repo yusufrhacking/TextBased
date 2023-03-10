@@ -13,7 +13,6 @@
 #include "../../../../resources/SDL_FontCache.h"
 
 
-static const int FONT_SIZE = 10;
 
 class Renderer {
     SDL_Renderer* renderer;
