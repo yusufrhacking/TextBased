@@ -11,7 +11,7 @@ const unsigned int MAX_ENTITIES = 1000;
 
 using WindowNum = unsigned int;
 
-static const int FONT_SIZE = 10; //Must be a multiple of 5 in current config
+static const int FONT_SIZE = 15; //Must be a multiple of 5 in current config
 
 const WindowNum RENDERED_TEXT_WIDTH_SCALER = FONT_SIZE * .6;
 const WindowNum HEIGHT_OF_A_LINE_OF_TEXT = FONT_SIZE+1;
