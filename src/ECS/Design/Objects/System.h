@@ -18,8 +18,8 @@ public:
 
     void addEntity(Entity entity);
     void removeEntity(Entity entity);
-    std::set<Entity> getEntities() const;
-    ComponentSignature getComponentSignature() const;
+    [[nodiscard]] std::set<Entity> getReleventEntities() const;
+    [[nodiscard]] ComponentSignature getComponentSignature() const;
 
     template <typename ComponentGeneric> void requireComponent();
 };

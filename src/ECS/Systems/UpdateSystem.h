@@ -4,8 +4,8 @@
 #include "../Design/Objects/System.h"
 
 class UpdateSystem: public System {
-public:
-    virtual void update(double deltaTime) = 0;
+    public:
+        virtual void update(double deltaTime) = 0;
 };
 
 

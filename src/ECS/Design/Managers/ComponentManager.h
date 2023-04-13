@@ -10,34 +10,33 @@
 
 using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
 
-
 class ComponentManager {
-private:
-    ComponentPoolsArr componentPools;
-    std::vector<ComponentSignature> entityComponentSignatures;
+    private:
+        ComponentPoolsArr componentPools;
+        std::vector<ComponentSignature> entityComponentSignatures;
 
-    template<typename TComponent>
-    std::shared_ptr<Pool<TComponent>> getValidPool(int componentId, int entityId);
+        template<typename TComponent>
+        std::shared_ptr<Pool<TComponent>> getValidPool(int componentId, int entityId);
 
-    bool isComponentPoolsResizeNeeded(int componentId) const;
+        [[nodiscard]] bool isComponentPoolsResizeNeeded(int componentId) const;
 
-    bool isComponentUninitialized(int componentId);
-
-
+        [[nodiscard]] bool isComponentUninitialized(int componentId);
 
 
-public:
-    template <typename TComponent, typename ...TArgs>
-    void addComponentToEntity(Entity entity, TArgs&& ... args);
 
-    template <typename T>
-    void removeComponent(Entity entity);
 
-    template <typename T>
-    bool hasComponent(Entity entity);
+    public:
+        template <typename TComponent, typename ...TArgs>
+        void addComponentToEntity(Entity entity, TArgs&& ... args);
 
-    template <typename TComponent>
-    TComponent& getComponent(Entity entity) const;
+        template <typename T>
+        void removeComponent(Entity entity);
+
+        template <typename T>
+        bool hasComponent(Entity entity);
+
+        template <typename TComponent>
+        TComponent& getComponent(Entity entity) const;
 };
 
 template <typename TComponent, typename ...TArgs>
@@ -103,7 +102,4 @@ TComponent& ComponentManager::getComponent(Entity entity) const {
     return componentPool->get(entityId);
 }
 
-
-
-
-#endif //TEXTBASED_COMPONENTMANAGER_H
+#endif

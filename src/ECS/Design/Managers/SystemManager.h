@@ -1,45 +1,42 @@
 #ifndef TEXTBASED_SYSTEMMANAGER_H
 #define TEXTBASED_SYSTEMMANAGER_H
 #include <typeindex>
-
 #include "../Objects/Entity.h"
 #include "../Objects/System.h"
 
 using SystemsMap = std::unordered_map<std::type_index, std::shared_ptr<System>>;
 
-
 class SystemManager {
-private:
-    SystemsMap systems;
+    private:
+        SystemsMap systems;
 
-public:
+    public:
+        template <typename TSystem, typename ... TArgs>
+        void addSystem(TArgs&& ... args);
 
-    template <typename TSystem, typename ... TArgs>
-    void addSystem(TArgs&& ... args);
+        template <typename TSystem>
+        void removeSystem();
 
-    template <typename TSystem>
-    void removeSystem();
+        template <typename TSystem>
+        bool hasSystem() const;
 
-    template <typename TSystem>
-    bool hasSystem() const;
+        template <typename TSystem>
+        TSystem& getSystem() const;
 
-    template <typename TSystem>
-    TSystem& getSystem() const;
+        template <typename TSystem>
+        std::unordered_map<std::type_index, std::shared_ptr<TSystem>> getSystemsOfType() const;
 
-    template <typename TSystem>
-    std::unordered_map<std::type_index, std::shared_ptr<TSystem>> getSystemsOfType() const;
+        void updateEntityInSystems(Entity entity, ComponentSignature entitySignature);
 
-    void updateEntityInSystems(Entity entity, ComponentSignature entitySignature);
-
-    void addNewEntityToSystem(Entity entity, ComponentSignature entitySignature);
+        void addNewEntityToSystem(Entity entity, ComponentSignature entitySignature);
 };
 
 template<typename TSystem, typename... TArgs>
 void SystemManager::addSystem(TArgs &&... args) {
     std::shared_ptr<TSystem> newSystem = std::make_shared<TSystem>(std::forward<TArgs>(args)...);
     systems.insert(std::make_pair(
-            std::type_index(typeid(TSystem)),//The key in this case is the type of System, as a num
-            newSystem));//THIS IS HARAM
+            std::type_index(typeid(TSystem)),
+            newSystem));
 }
 
 template<typename TSystem>
@@ -51,8 +48,6 @@ void SystemManager::removeSystem() {
 template<typename TSystem>
 bool SystemManager::hasSystem() const {
     return systems.find(std::type_index(typeid(TSystem))) != systems.end();
-    // If the systems map does not find the system, it will return the "end"
-    // So, if the systems map find result is not the "end", then it contains it
 }
 
 template<typename TSystem>
@@ -64,6 +59,7 @@ TSystem& SystemManager::getSystem() const {
 template<typename TSystem>
 std::unordered_map<std::type_index, std::shared_ptr<TSystem>> SystemManager::getSystemsOfType() const {
     std::unordered_map<std::type_index, std::shared_ptr<TSystem>> systemsOfType;
+
     for (const auto& systemKeyPair : systems){
         auto system = systemKeyPair.second;
 
@@ -79,4 +75,4 @@ std::unordered_map<std::type_index, std::shared_ptr<TSystem>> SystemManager::get
 }
 
 
-#endif //TEXTBASED_SYSTEMMANAGER_H
+#endif

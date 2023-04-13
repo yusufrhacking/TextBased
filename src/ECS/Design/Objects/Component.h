@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif //TEXTBASED_COMPONENT_H
+#endif

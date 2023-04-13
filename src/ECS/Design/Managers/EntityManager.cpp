@@ -1,6 +1,5 @@
 #include "EntityManager.h"
 
-
 Entity EntityManager::createEntity() {
     int entityId = numOfEntities;
     numOfEntities++;

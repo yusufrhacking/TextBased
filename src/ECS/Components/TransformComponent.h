@@ -4,6 +4,7 @@
 #include "../../Objects/Velocity.h"
 #include <memory>
 #include <utility>
+
 struct TransformComponent {
     std::shared_ptr<Position> position;
 
@@ -21,4 +22,4 @@ struct TransformComponent {
 };
 
 
-#endif //TEXTBASED_TRANSFORMCOMPONENT_H
+#endif

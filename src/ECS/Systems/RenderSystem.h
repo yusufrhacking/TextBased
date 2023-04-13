@@ -8,12 +8,12 @@
 #include "../Design/Managers/ECSManager.h"
 
 class RenderSystem: public System {
-public:
-    explicit RenderSystem();
+    public:
+        explicit RenderSystem();
 
-    void update(const std::shared_ptr<Renderer>& renderer);
+        void update(const std::shared_ptr<Renderer>& renderer);
 
-private:
+    private:
 };
 
 

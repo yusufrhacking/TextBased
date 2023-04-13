@@ -8,7 +8,7 @@ RenderSystem::RenderSystem() {
 }
 
 void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
-    for (auto entity : getEntities()){
+    for (auto entity : getReleventEntities()){
         spdlog::debug("Rendering entity " + std::to_string(entity.getId()));
         const auto positionComponent = ecsManager->getComponent<TransformComponent>(entity);
         const auto spriteComponent = ecsManager->getComponent<SpriteComponent>(entity);

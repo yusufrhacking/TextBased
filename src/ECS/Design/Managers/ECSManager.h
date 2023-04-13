@@ -14,82 +14,54 @@
 #include "../../../Game/GameSystems/Renderer/Renderer.h"
 #include "../../Systems/RenderSystem.h"
 
-
-//using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
-//using ComponentSignature = std::bitset<NUM_OF_COMPONENTS>;
-//using SystemsMap = std::unordered_map<std::type_index, std::shared_ptr<System>>;
-
-
 class ECSManager {
-private:
-//    int numOfEntities = 0;
-//
-//    ComponentPoolsArr componentPools;
-//    std::vector<ComponentSignature> entityComponentSignatures;
-//
-//    std::vector<Entity> entitiesToBeAdded;
-//    std::vector<Entity> entitiesToBeKilled;
-//
-//    SystemsMap systems;
+    private:
+        std::unique_ptr<EntityManager> entityManager;
+        std::unique_ptr<ComponentManager> componentManager;
+        std::unique_ptr<SystemManager> systemManager;
 
-    std::unique_ptr<EntityManager> entityManager;
-    std::unique_ptr<ComponentManager> componentManager;
-    std::unique_ptr<SystemManager> systemManager;
+    public:
+        ECSManager() {
+            entityManager = std::make_unique<EntityManager>();
+            componentManager = std::make_unique<ComponentManager>();
+            systemManager = std::make_unique<SystemManager>();
+            spdlog::debug("ECS ecsManager constructed");
+        }
 
-//
+        ~ECSManager() {
+            spdlog::debug("ECS ecsManager destroyed");
+        }
 
+        Entity createEntity();
 
-public:
-//
-//    static ECSManager& getInstance(){
-//        static ECSManager theInstance;
-//        return theInstance;
-//    }
+        void update(double deltaTime);
 
-    ECSManager() {
-        entityManager = std::make_unique<EntityManager>();
-        componentManager = std::make_unique<ComponentManager>();
-        systemManager = std::make_unique<SystemManager>();
-        spdlog::debug("ECS ecsManager constructed");
-    }
+        void render(std::shared_ptr<Renderer> renderer);
 
-    ~ECSManager() {
-        spdlog::debug("ECS ecsManager destroyed");
-    }
+        template <typename TComponent, typename... TArgs>
+        void addComponentToEntity(Entity entity, TArgs &&...args);
 
-    Entity createEntity();
+        template <typename T>
+        void removeComponent(Entity entity);
 
-    void update(double deltaTime);
+        template <typename TComponent>
+        TComponent& getComponent(Entity entity) const;
 
-    void render(std::shared_ptr<Renderer> renderer);
+        template <typename TSystem, typename... TArgs>
+        void addSystem(TArgs &&...args);
 
+        template <typename TSystem>
+        void removeSystem();
 
-    //Refactor in a componentManager class
-    template <typename TComponent, typename... TArgs>
-    void addComponentToEntity(Entity entity, TArgs &&...args);
+        template <typename TSystem>
+        bool hasSystem() const;
 
-    template <typename T>
-    void removeComponent(Entity entity);
+        template <typename TSystem>
+        TSystem& getSystem() const;
 
+        void addNewEntities();
 
-    template <typename TComponent>
-    TComponent& getComponent(Entity entity) const;
-
-    template <typename TSystem, typename... TArgs>
-    void addSystem(TArgs &&...args);
-
-    template <typename TSystem>
-    void removeSystem();
-
-    template <typename TSystem>
-    bool hasSystem() const;
-
-    template <typename TSystem>
-    TSystem& getSystem() const;
-
-    void addNewEntities();
-
-    void updateSystems(double deltaTime) const;
+        void updateSystems(double deltaTime) const;
 
 };
 

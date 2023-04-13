@@ -5,6 +5,7 @@ void SystemManager::addNewEntityToSystem(Entity entity, ComponentSignature entit
     int entityId = entity.getId();
 
     for (auto& systemKeyValuePair: systems){
+
         auto const& system = systemKeyValuePair.second;
         auto const& systemComponentSignature = system->getComponentSignature();
 
@@ -12,11 +13,13 @@ void SystemManager::addNewEntityToSystem(Entity entity, ComponentSignature entit
             system->addEntity(entity);
             spdlog::debug("Added Entity " + std::to_string(entityId) + " to system ");//Need System ID?
         }
+
     }
 }
 
 void SystemManager::updateEntityInSystems(Entity entity, ComponentSignature entitySignature){
     int entityId = entity.getId();
+
 
     for (auto& systemKeyValuePair: systems){
         auto const& system = systemKeyValuePair.second;
@@ -30,5 +33,6 @@ void SystemManager::updateEntityInSystems(Entity entity, ComponentSignature enti
             system->removeEntity(entity);
             spdlog::debug("Removed Entity " + std::to_string(entityId) + " to system ");//Need System ID?
         }
+
     }
 }

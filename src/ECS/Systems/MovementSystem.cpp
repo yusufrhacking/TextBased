@@ -3,15 +3,14 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 void MovementSystem::update(double deltaTime) {
-    // Loop all entities the system cares about
-    for (Entity entity: getEntities()){
+    for (Entity entity: getReleventEntities()){
         auto& position = ecsManager->getComponent<TransformComponent>(entity);
         const auto movement = ecsManager->getComponent<MovementComponent>(entity);
 
         double xChange = movement.velocity->xVelocity * deltaTime;
         double yChange = movement.velocity->yVelocity * deltaTime;
-        position.position->xPos += xChange;
-        position.position->yPos += yChange;
+        position.position->xPos += (float)xChange;
+        position.position->yPos += (float)yChange;
 
         spdlog::debug(
                 "Entity " + std::to_string(entity.getId())
@@ -23,6 +22,4 @@ void MovementSystem::update(double deltaTime) {
 MovementSystem::MovementSystem(){
     requireComponent<TransformComponent>();
     requireComponent<MovementComponent>();
-    //requireComponent<TransformComponent>();
-
 }

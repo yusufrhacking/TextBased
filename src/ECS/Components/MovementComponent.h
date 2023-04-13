@@ -17,4 +17,4 @@ struct MovementComponent{
     }
 };
 
-#endif //TEXTBASED_MOVEMENTCOMPONENT_H
+#endif

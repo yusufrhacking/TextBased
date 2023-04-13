@@ -9,12 +9,11 @@
 
 
 class MovementSystem: public UpdateSystem{
-public:
+    public:
+        explicit MovementSystem();
 
-    explicit MovementSystem();
 
-
-    void update(double deltaTime) override;
+        void update(double deltaTime) override;
 };
 
 

@@ -22,7 +22,7 @@ struct SpriteComponent {
 
 
 private:
-    int getTextHeight() const {
+    [[nodiscard]] int getTextHeight() const {
         int height = 0;
         std::istringstream textStream(text);
         std::string token;
@@ -32,7 +32,7 @@ private:
         return height;
     }
 
-    unsigned int getTextWidth() const {
+    [[nodiscard]] unsigned int getTextWidth() const {
         unsigned int longestWidth = 0;
         std::istringstream textStream(text);
         std::string token;
@@ -46,4 +46,4 @@ private:
 };
 
 
-#endif //TEXTBASED_SPRITECOMPONENT_H
+#endif
