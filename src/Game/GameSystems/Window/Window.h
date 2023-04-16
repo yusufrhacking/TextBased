@@ -5,26 +5,26 @@
 
 class Window {
 
-public:
-    Window();
-    ~Window();
-    SDL_Window* getWindow();
-    int getWindowWidth();
-    int getWindowHeight();
+    public:
+        Window();
+        ~Window();
+        SDL_Window* getWindow();
+        int getWindowWidth();
+        int getWindowHeight();
 
-    [[nodiscard]] Position getTopLeftPosition() const;
+        [[nodiscard]] Position getTopLeftPosition() const;
 
-    [[nodiscard]] Position getBottomLeftPosition() const;
+        [[nodiscard]] Position getBottomLeftPosition() const;
 
-    [[nodiscard]] Position getTopRightPosition() const;
+        [[nodiscard]] Position getTopRightPosition() const;
 
-    [[nodiscard]] Position getBottomRightPosition() const;
+        [[nodiscard]] Position getBottomRightPosition() const;
 
-private:
-    SDL_Window* window;
-    int windowWidth;
-    int windowHeight;
-    void createWindow();
+    private:
+        SDL_Window* window;
+        int windowWidth;
+        int windowHeight;
+        void createWindow();
 
 };
 

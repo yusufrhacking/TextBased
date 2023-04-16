@@ -39,7 +39,7 @@ set(SOURCE_FILES
         src/ECS/Components/SpriteComponent.h src/ECS/Systems/UpdateSystem.h
         src/Objects/Size.h
         src/Game/TextGenerator.cpp src/Game/TextGenerator.h src/Game/GameManager.cpp src/Game/GameManager.h
-        resources/SDL_FontCache.c resources/SDL_FontCache.h)
+        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

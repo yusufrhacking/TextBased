@@ -45,7 +45,7 @@ void GameManager::createForest(int widthInTrees, Position startingPosition) cons
 
 void GameManager::createJSON() const {
     Entity json = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TransformComponent>(json, std::make_shared<Position>(200, 200));
+    ecsManager->addComponentToEntity<TransformComponent>(json, std::make_shared<Position>(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
 }

@@ -13,23 +13,21 @@
 #include "../../../../resources/SDL_FontCache.h"
 
 
-
 class Renderer {
     SDL_Renderer* renderer;
     TTF_Font* font;
     FC_Font* fcFont;
 
+    public:
+        explicit Renderer(SDL_Window* sdlWindow);
+        ~Renderer();
+        void renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite);
+        void renderFrame();
 
-public:
-    explicit Renderer(SDL_Window* sdlWindow);
-    ~Renderer();
-    void renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite);
-    void renderFrame();
+    private:
+        bool isImproperlyInitialized() const;
 
-private:
-    bool isImproperlyInitialized() const;
-
-    bool isFontFound() const;
+        bool isFontFound() const;
 
 };
 
