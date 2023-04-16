@@ -22,7 +22,7 @@ set(SOURCE_FILES
         src/Game/GameSystems/Renderer/Renderer.cpp src/Game/GameSystems/Renderer/Renderer.h
         src/Game/GameSystems/Window/Window.cpp src/Game/GameSystems/Window/Window.h
         src/Game/GameSystems/InputProcessor/InputProcessor.cpp src/Game/GameSystems/InputProcessor/InputProcessor.h
-        src/ECS/Components/TransformComponent.h
+        src/ECS/Components/PositionComponent.h
         src/Objects/Position.h src/Objects/Velocity.h
         src/ECS/Systems/MovementSystem.cpp src/ECS/Systems/MovementSystem.h
         "src/ECS/Design/Objects/Entity.cpp" "src/ECS/Design/Objects/Entity.h"
@@ -36,10 +36,10 @@ set(SOURCE_FILES
         src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h
         src/Globals.h
         src/ECS/Systems/RenderSystem.cpp src/ECS/Systems/RenderSystem.h
-        src/ECS/Components/SpriteComponent.h src/ECS/Systems/UpdateSystem.h
+        src/ECS/Components/TextComponent.h src/ECS/Systems/UpdateSystem.h
         src/Objects/Size.h
         src/Game/TextGenerator.cpp src/Game/TextGenerator.h src/Game/GameManager.cpp src/Game/GameManager.h
-        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h)
+        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h src/ECS/Systems/CollisionSystem.cpp src/ECS/Systems/CollisionSystem.h src/ECS/Components/ShowComponent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

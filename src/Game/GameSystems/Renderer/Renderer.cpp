@@ -20,7 +20,7 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
                 FONT_SIZE, FC_MakeColor(255,255,255,255), TTF_STYLE_NORMAL);
 }
 
-void Renderer::renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite){
+void Renderer::renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     FC_Draw(fcFont, renderer, position->xPos, position->yPos, sprite.text.c_str());

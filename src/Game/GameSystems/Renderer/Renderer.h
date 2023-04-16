@@ -5,10 +5,10 @@
 #include <SDL_ttf.h>
 #include "spdlog/spdlog.h"
 #include "../../../Objects/Position.h"
-#include "../../../ECS/Components/SpriteComponent.h"
+#include "../../../ECS/Components/TextComponent.h"
 #include "../../../../resources/SDL_FontCache.h"
 #include "../../../Objects/Position.h"
-#include "../../../ECS/Components/SpriteComponent.h"
+#include "../../../ECS/Components/TextComponent.h"
 #include <iostream>
 #include "../../../../resources/SDL_FontCache.h"
 
@@ -21,7 +21,7 @@ class Renderer {
     public:
         explicit Renderer(SDL_Window* sdlWindow);
         ~Renderer();
-        void renderText(const std::shared_ptr<Position>& position, const SpriteComponent& sprite);
+        void renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite);
         void renderFrame();
 
     private:

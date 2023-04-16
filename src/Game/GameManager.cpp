@@ -12,7 +12,7 @@ void GameManager::setup() {
     createBobby();
     createJSON();
 
-    auto spriteForDimensions = std::make_unique<SpriteComponent>(TextGenerator::getTreeText());
+    auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     int treeWidth = 2;
     Position rightForestPosition = {window->getTopRightPosition().xPos - (float)spriteForDimensions->surfaceSize.width * (float)treeWidth, window->getTopRightPosition().yPos};
@@ -25,7 +25,7 @@ void GameManager::setup() {
 }
 
 void GameManager::createForest(int widthInTrees, Position startingPosition) const {
-    auto spriteForDimensions = std::make_unique<SpriteComponent>(TextGenerator::getTreeText());
+    auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     unsigned int forestWidthInTrees = widthInTrees;
     unsigned int forestHeightInTrees = (window->getWindowHeight() / spriteForDimensions->surfaceSize.height) + 1;
@@ -34,8 +34,9 @@ void GameManager::createForest(int widthInTrees, Position startingPosition) cons
     for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
         for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
             Entity tree = ecsManager->createEntity();
-            ecsManager->addComponentToEntity<TransformComponent>(tree, treePosition);
-            ecsManager->addComponentToEntity<SpriteComponent>(tree, TextGenerator::getTreeText());
+            ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
+            ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
+            ecsManager->addComponentToEntity<ShowComponent>(tree);
 
             treePosition.yPos += (float)spriteForDimensions->surfaceSize.height;
         }
@@ -46,17 +47,19 @@ void GameManager::createForest(int widthInTrees, Position startingPosition) cons
 
 void GameManager::createJSON() const {
     Entity json = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TransformComponent>(json, std::make_shared<Position>(400, 300));
+    ecsManager->addComponentToEntity<PositionComponent>(json, std::make_shared<Position>(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
-    ecsManager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
-    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponent<SpriteComponent>(json).surfaceSize); //.surfaceSize.width, ecsManager->getComponent<SpriteComponent>(json).surfaceSize.height);
+    ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
+    ecsManager->addComponentToEntity<ShowComponent>(json);
+    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponent<TextComponent>(json).surfaceSize); //.surfaceSize.width, ecsManager->getComponent<TextComponent>(json).surfaceSize.height);
 }
 
 void GameManager::createBobby() const {
     Entity tank = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TransformComponent>(tank, std::make_shared<Position>(50, 50));
+    ecsManager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
-    ecsManager->addComponentToEntity<SpriteComponent>(tank, "Robert C. Martin");
+    ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
+    ecsManager->addComponentToEntity<ShowComponent>(tank);
 }
 
 #pragma clang diagnostic pop

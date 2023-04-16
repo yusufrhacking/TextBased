@@ -1,22 +1,22 @@
-#ifndef TEXTBASED_TRANSFORMCOMPONENT_H
-#define TEXTBASED_TRANSFORMCOMPONENT_H
+#ifndef TEXTBASED_POSITIONCOMPONENT_H
+#define TEXTBASED_POSITIONCOMPONENT_H
 #include "../../Objects/Position.h"
 #include "../../Objects/Velocity.h"
 #include <memory>
 #include <utility>
 
-struct TransformComponent {
+struct PositionComponent {
     std::shared_ptr<Position> position;
 
-    explicit TransformComponent(std::shared_ptr<Position>position){
+    explicit PositionComponent(std::shared_ptr<Position>position){
         this->position = std::move(position);
     }
 
-    explicit TransformComponent(Position position){
+    explicit PositionComponent(Position position){
         this->position = std::make_shared<Position>(position.xPos, position.yPos);
     }
 
-    TransformComponent() {
+    PositionComponent() {
         this->position = std::make_shared<Position>(0, 0);
     }
 };

@@ -1,21 +1,21 @@
-#ifndef TEXTBASED_SPRITECOMPONENT_H
-#define TEXTBASED_SPRITECOMPONENT_H
+#ifndef TEXTBASED_TEXTCOMPONENT_H
+#define TEXTBASED_TEXTCOMPONENT_H
 #include <string>
 #include <utility>
 #include "../../Globals.h"
 #include "../../Objects/Size.h"
 #include <sstream>
 
-struct SpriteComponent {
+struct TextComponent {
     Size surfaceSize;
     std::string text;
 
-    explicit SpriteComponent(std::string text){
+    explicit TextComponent(std::string text){
         this->text = text;
         surfaceSize = {static_cast<RenderedVal>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
-    SpriteComponent() {
+    TextComponent() {
         this->text = "Robert C. Martin";
         surfaceSize = {static_cast<RenderedVal>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), HEIGHT_OF_A_LINE_OF_TEXT};
     }

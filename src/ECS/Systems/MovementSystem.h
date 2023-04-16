@@ -2,7 +2,7 @@
 #define TEXTBASED_MOVEMENTSYSTEM_H
 
 #include "../Design/Objects/System.h"
-#include "../Components/TransformComponent.h"
+#include "../Components/PositionComponent.h"
 #include "../Components/MovementComponent.h"
 #include "../Design/Managers/ECSManager.h"
 #include "UpdateSystem.h"

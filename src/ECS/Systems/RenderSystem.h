@@ -3,9 +3,10 @@
 
 
 #include "../Design/Objects/System.h"
-#include "../Components/TransformComponent.h"
-#include "../Components/SpriteComponent.h"
+#include "../Components/PositionComponent.h"
+#include "../Components/TextComponent.h"
 #include "../Design/Managers/ECSManager.h"
+#include "../Components/ShowComponent.h"
 
 class RenderSystem: public System {
     public:
