@@ -4,10 +4,10 @@
 #include "../Globals.h"
 
 struct Size {
-    WindowNum width;
-    WindowNum height;
+    RenderedVal width;
+    RenderedVal height;
 
-    Size(WindowNum x, WindowNum y){
+    Size(RenderedVal x, RenderedVal y){
         this->width = x;
         this->height = y;
     }

@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "../ECS/Systems/MovementSystem.h"
 #include "TextGenerator.h"
+#include "../ECS/Components/ColliderComponent.h"
 
 void GameManager::setup() {
     ecsManager->addSystem<MovementSystem>();
@@ -48,6 +49,7 @@ void GameManager::createJSON() const {
     ecsManager->addComponentToEntity<TransformComponent>(json, std::make_shared<Position>(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<SpriteComponent>(json, "Jaeson Martin");
+    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponent<SpriteComponent>(json).surfaceSize); //.surfaceSize.width, ecsManager->getComponent<SpriteComponent>(json).surfaceSize.height);
 }
 
 void GameManager::createBobby() const {
