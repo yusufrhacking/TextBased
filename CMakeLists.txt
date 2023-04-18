@@ -39,7 +39,7 @@ set(SOURCE_FILES
         src/ECS/Components/TextComponent.h src/ECS/Systems/UpdateSystem.h
         src/Objects/Size.h
         src/Game/TextGenerator.cpp src/Game/TextGenerator.h src/Game/GameManager.cpp src/Game/GameManager.h
-        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h src/ECS/Systems/CollisionSystem.cpp src/ECS/Systems/CollisionSystem.h src/ECS/Components/ShowComponent.h)
+        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h src/ECS/Systems/CollisionSystem.cpp src/ECS/Systems/CollisionSystem.h src/ECS/Components/StyleComponent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

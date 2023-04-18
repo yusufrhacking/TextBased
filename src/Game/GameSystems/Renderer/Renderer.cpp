@@ -15,15 +15,19 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
         spdlog::error("TFT INIT FAIL");
     }
 
-    fcFont = FC_CreateFont();
-    FC_LoadFont(fcFont, renderer, "../../resources/Monaco.ttf",
+    genericMonacoFont = FC_CreateFont();
+    FC_LoadFont(genericMonacoFont, renderer, "../../resources/Monaco.ttf",
                 FONT_SIZE, FC_MakeColor(255,255,255,255), TTF_STYLE_NORMAL);
 }
 
-void Renderer::renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite){
+void Renderer::renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite, const StyleComponent& style){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-    FC_Draw(fcFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
+    if (style.getStyle() == WHITE_MONACO_GENERIC){
+
+    }
+
+    FC_Draw(genericMonacoFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
 }
 
 void Renderer::renderFrame() {

@@ -6,7 +6,7 @@
 #include "../Components/PositionComponent.h"
 #include "../Components/TextComponent.h"
 #include "../Design/Managers/ECSManager.h"
-#include "../Components/ShowComponent.h"
+#include "../Components/StyleComponent.h"
 
 class RenderSystem: public System {
     public:

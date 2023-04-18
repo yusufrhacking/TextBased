@@ -1711,7 +1711,7 @@ static FC_Rect FC_RenderLeft(FC_Font* font, FC_Target* dest, float x, float y, F
             continue;
         }
 
-        codepoint = FC_GetCodepointFromUTF8(&c, 1);  // Increments 'ShowComponent' to skip the extra UTF-8 bytes
+        codepoint = FC_GetCodepointFromUTF8(&c, 1);  // Increments 'StyleComponent' to skip the extra UTF-8 bytes
         if(!FC_GetGlyphData(font, &glyph, codepoint))
         {
             codepoint = ' ';

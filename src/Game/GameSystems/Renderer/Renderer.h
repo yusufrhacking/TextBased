@@ -11,17 +11,18 @@
 #include "../../../ECS/Components/TextComponent.h"
 #include <iostream>
 #include "../../../../resources/SDL_FontCache.h"
+#include "../../../ECS/Components/StyleComponent.h"
 
 
 class Renderer {
     SDL_Renderer* renderer;
     TTF_Font* font;
-    FC_Font* fcFont;
+    FC_Font* genericMonacoFont;
 
     public:
         explicit Renderer(SDL_Window* sdlWindow);
         ~Renderer();
-        void renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite);
+        void renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite, const StyleComponent& style);
         void renderFrame();
 
     private:

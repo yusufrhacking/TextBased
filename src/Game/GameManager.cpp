@@ -36,7 +36,7 @@ void GameManager::createForest(int widthInTrees, Position startingPosition) cons
             Entity tree = ecsManager->createEntity();
             ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
             ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
-            ecsManager->addComponentToEntity<ShowComponent>(tree);
+            ecsManager->addComponentToEntity<StyleComponent>(tree);
 
             treePosition.yPos += (float)spriteForDimensions->surfaceSize.height;
         }
@@ -50,7 +50,7 @@ void GameManager::createJSON() const {
     ecsManager->addComponentToEntity<PositionComponent>(json, std::make_shared<Position>(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
-    ecsManager->addComponentToEntity<ShowComponent>(json);
+    ecsManager->addComponentToEntity<StyleComponent>(json);
     ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponent<TextComponent>(json).surfaceSize); //.surfaceSize.width, ecsManager->getComponent<TextComponent>(json).surfaceSize.height);
 }
 
@@ -59,7 +59,7 @@ void GameManager::createBobby() const {
     ecsManager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
     ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
-    ecsManager->addComponentToEntity<ShowComponent>(tank);
+    ecsManager->addComponentToEntity<StyleComponent>(tank);
 }
 
 #pragma clang diagnostic pop

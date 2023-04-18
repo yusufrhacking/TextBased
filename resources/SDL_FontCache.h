@@ -9,7 +9,7 @@ License:
     whenever these files or parts of them are distributed in uncompiled form.
 
     The long:
-Copyright (ShowComponent) 2019 Jonathan Dearborn
+Copyright (StyleComponent) 2019 Jonathan Dearborn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

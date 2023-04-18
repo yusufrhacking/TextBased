@@ -5,7 +5,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 RenderSystem::RenderSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
-    requireComponent<ShowComponent>();
+    requireComponent<StyleComponent>();
 }
 
 void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
@@ -13,8 +13,9 @@ void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
         spdlog::debug("Rendering entity " + std::to_string(entity.getId()));
         const auto positionComponent = ecsManager->getComponent<PositionComponent>(entity);
         const auto spriteComponent = ecsManager->getComponent<TextComponent>(entity);
+        const auto styleComponent = ecsManager->getComponent<StyleComponent>(entity);
 
-        renderer->renderText(positionComponent.position, spriteComponent);
+        renderer->renderText(positionComponent.position, spriteComponent, styleComponent);
     }
 
     renderer->renderFrame();
