@@ -18,7 +18,6 @@
 
 class Renderer {
     SDL_Renderer* renderer;
-    TTF_Font* font;
     FC_Font* genericMonacoFont;
 
     public:
@@ -29,8 +28,6 @@ class Renderer {
 
     private:
         bool isImproperlyInitialized() const;
-
-        bool isFontFound() const;
 
 };
 

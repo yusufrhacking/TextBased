@@ -9,6 +9,7 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
     if(this->renderer == nullptr){
         spdlog::error("RENDERER NOT CREATED");
         spdlog::error(SDL_GetError());
+//        throw SDL_GetError();
     }
 
     if (isImproperlyInitialized()){
@@ -21,16 +22,13 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
 }
 
 void Renderer::renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite, const StyleComponent& style){
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
     switch (style.getStyle()){
         case WHITE_MONACO_GENERIC:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(genericMonacoFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
             break;
         default: throw NoStyleException();
     }
-
-    FC_Draw(genericMonacoFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
 }
 
 void Renderer::renderFrame() {
@@ -39,12 +37,8 @@ void Renderer::renderFrame() {
 }
 
 Renderer::~Renderer() {
-    TTF_CloseFont(font);
     TTF_Quit();
     SDL_DestroyRenderer(renderer);
 }
-
-
-bool Renderer::isFontFound() const { return font; }
 
 bool Renderer::isImproperlyInitialized() const { return TTF_Init() < 0; }
