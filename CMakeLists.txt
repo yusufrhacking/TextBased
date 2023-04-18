@@ -39,7 +39,9 @@ set(SOURCE_FILES
         src/ECS/Components/TextComponent.h src/ECS/Systems/UpdateSystem.h
         src/Objects/Size.h
         src/Game/TextGenerator.cpp src/Game/TextGenerator.h src/Game/GameManager.cpp src/Game/GameManager.h
-        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h src/ECS/Systems/CollisionSystem.cpp src/ECS/Systems/CollisionSystem.h src/ECS/Components/StyleComponent.h src/Exceptions/NoStyleException.h)
+        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h
+        src/ECS/Systems/CollisionSystem.cpp src/ECS/Systems/CollisionSystem.h
+        src/ECS/Components/StyleComponent.h src/Exceptions/NoStyleException.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -104,7 +106,18 @@ Message("")
 
 file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
+Include(FetchContent)
 
+FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG        v3.0.1 # or a later release
+)
+
+FetchContent_MakeAvailable(Catch2)
+
+add_executable(tests test.cpp)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
 # ------- End Finds ------ #
 
