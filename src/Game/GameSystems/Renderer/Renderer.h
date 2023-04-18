@@ -12,6 +12,8 @@
 #include <iostream>
 #include "../../../../resources/SDL_FontCache.h"
 #include "../../../ECS/Components/StyleComponent.h"
+#include <exception>
+#include "../../../Exceptions/NoStyleException.h"
 
 
 class Renderer {

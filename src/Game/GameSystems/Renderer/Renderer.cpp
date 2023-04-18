@@ -23,8 +23,11 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
 void Renderer::renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite, const StyleComponent& style){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-    if (style.getStyle() == WHITE_MONACO_GENERIC){
-
+    switch (style.getStyle()){
+        case WHITE_MONACO_GENERIC:
+            FC_Draw(genericMonacoFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
+            break;
+        default: throw NoStyleException();
     }
 
     FC_Draw(genericMonacoFont, renderer, position->xPos, position->yPos, sprite.text.c_str());
