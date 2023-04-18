@@ -13,7 +13,8 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
     }
 
     if (isImproperlyInitialized()){
-        spdlog::error("TFT INIT FAIL");
+        spdlog::error("TTF INIT FAIL");
+        throw std::runtime_error("TTF INIT FAIL");
     }
 
     genericMonacoFont = FC_CreateFont();

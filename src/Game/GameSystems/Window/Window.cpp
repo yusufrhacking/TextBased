@@ -32,6 +32,7 @@ void Window::createWindow() {
     if (window == nullptr){
         spdlog::error("Window initialization failed");
         spdlog::error(SDL_GetError());
+        throw std::runtime_error(SDL_GetError());
     }
 }
 
