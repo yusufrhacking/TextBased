@@ -6,11 +6,11 @@
 #include "spdlog/spdlog.h"
 #include "../../../Objects/Position.h"
 #include "../../../ECS/Components/TextComponent.h"
-#include "../../../../resources/SDL_FontCache.h"
+#include "../../../../../resources/SDL_FontCache.h"
 #include "../../../Objects/Position.h"
 #include "../../../ECS/Components/TextComponent.h"
 #include <iostream>
-#include "../../../../resources/SDL_FontCache.h"
+#include "../../../../../resources/SDL_FontCache.h"
 #include "../../../ECS/Components/StyleComponent.h"
 #include <stdexcept>
 #include "../../../Exceptions/NoStyleException.h"

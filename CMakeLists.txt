@@ -17,31 +17,31 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
 set(SOURCE_FILES
-        src/Game/Game.cpp src/Game/Game.h
-        src/Main.cpp
-        src/Game/GameSystems/Renderer/Renderer.cpp src/Game/GameSystems/Renderer/Renderer.h
-        src/Game/GameSystems/Window/Window.cpp src/Game/GameSystems/Window/Window.h
-        src/Game/GameSystems/InputProcessor/InputProcessor.cpp src/Game/GameSystems/InputProcessor/InputProcessor.h
-        src/ECS/Components/PositionComponent.h
-        src/Objects/Position.h src/Objects/Velocity.h
-        src/ECS/Systems/MovementSystem.cpp src/ECS/Systems/MovementSystem.h
-        "src/ECS/Design/Objects/Entity.cpp" "src/ECS/Design/Objects/Entity.h"
-        "src/ECS/Design/Objects/Component.cpp" "src/ECS/Design/Objects/Component.h"
-        "src/ECS/Design/Objects/System.cpp" "src/ECS/Design/Objects/System.h"
-        "src/ECS/Design/Managers/ECSManager.cpp" "src/ECS/Design/Managers/ECSManager.h"
-        src/ECS/Design/Objects/Pool.cpp src/ECS/Design/Objects/Pool.h
-        src/ECS/Components/MovementComponent.h
-        src/ECS/Design/Managers/SystemManager.cpp src/ECS/Design/Managers/SystemManager.h
-        src/ECS/Design/Managers/ComponentManager.cpp src/ECS/Design/Managers/ComponentManager.h
-        src/ECS/Design/Managers/EntityManager.cpp src/ECS/Design/Managers/EntityManager.h
-        src/Globals.h
-        src/ECS/Systems/RenderSystem.cpp src/ECS/Systems/RenderSystem.h
-        src/ECS/Components/TextComponent.h src/ECS/Systems/UpdateSystem.h
-        src/Objects/Size.h
-        src/Game/TextGenerator.cpp src/Game/TextGenerator.h src/Game/GameManager.cpp src/Game/GameManager.h
-        resources/SDL_FontCache.c resources/SDL_FontCache.h src/ECS/Components/ColliderComponent.h
-        src/ECS/Systems/CollisionSystem.cpp src/ECS/Systems/CollisionSystem.h
-        src/ECS/Components/StyleComponent.h src/Exceptions/NoStyleException.h)
+        src/main/Game/Game.cpp src/main/Game/Game.h
+        src/main/Main.cpp
+        src/main/Game/GameSystems/Renderer/Renderer.cpp src/main/Game/GameSystems/Renderer/Renderer.h
+        src/main/Game/GameSystems/Window/Window.cpp src/main/Game/GameSystems/Window/Window.h
+        src/main/Game/GameSystems/InputProcessor/InputProcessor.cpp src/main/Game/GameSystems/InputProcessor/InputProcessor.h
+        src/main/ECS/Components/PositionComponent.h
+        src/main/Objects/Position.h src/main/Objects/Velocity.h
+        src/main/ECS/Systems/MovementSystem.cpp src/main/ECS/Systems/MovementSystem.h
+        "src/main/ECS/Design/Objects/Entity.cpp" "src/main/ECS/Design/Objects/Entity.h"
+        "src/main/ECS/Design/Objects/Component.cpp" "src/main/ECS/Design/Objects/Component.h"
+        "src/main/ECS/Design/Objects/System.cpp" "src/main/ECS/Design/Objects/System.h"
+        "src/main/ECS/Design/Managers/ECSManager.cpp" "src/main/ECS/Design/Managers/ECSManager.h"
+        src/main/ECS/Design/Objects/Pool.cpp src/main/ECS/Design/Objects/Pool.h
+        src/main/ECS/Components/MovementComponent.h
+        src/main/ECS/Design/Managers/SystemManager.cpp src/main/ECS/Design/Managers/SystemManager.h
+        src/main/ECS/Design/Managers/ComponentManager.cpp src/main/ECS/Design/Managers/ComponentManager.h
+        src/main/ECS/Design/Managers/EntityManager.cpp src/main/ECS/Design/Managers/EntityManager.h
+        src/main/Globals.h
+        src/main/ECS/Systems/RenderSystem.cpp src/main/ECS/Systems/RenderSystem.h
+        src/main/ECS/Components/TextComponent.h src/main/ECS/Systems/UpdateSystem.h
+        src/main/Objects/Size.h
+        src/main/Game/TextGenerator.cpp src/main/Game/TextGenerator.h src/main/Game/GameManager.cpp src/main/Game/GameManager.h
+        resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/ColliderComponent.h
+        src/main/ECS/Systems/CollisionSystem.cpp src/main/ECS/Systems/CollisionSystem.h
+        src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -116,7 +116,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests test.cpp)
+add_executable(tests src/test/test.cpp)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
 # ------- End Finds ------ #
