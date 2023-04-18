@@ -9,7 +9,7 @@ Renderer::Renderer(SDL_Window* sdlWindow) {
     if(this->renderer == nullptr){
         spdlog::error("RENDERER NOT CREATED");
         spdlog::error(SDL_GetError());
-//        throw SDL_GetError();
+        throw std::runtime_error(SDL_GetError());
     }
 
     if (isImproperlyInitialized()){

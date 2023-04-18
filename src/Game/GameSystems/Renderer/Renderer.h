@@ -12,7 +12,7 @@
 #include <iostream>
 #include "../../../../resources/SDL_FontCache.h"
 #include "../../../ECS/Components/StyleComponent.h"
-#include <exception>
+#include <stdexcept>
 #include "../../../Exceptions/NoStyleException.h"
 
 
