@@ -11,8 +11,6 @@ Message( STATUS "CMAKE_FINDCMAKE: " ${CMAKE_SOURCE_DIR}/CMAKE )
 
 project(TextBased)
 
-enable_testing()
-
 # ------- Set Vars ------- #
 
 set(CMAKE_CXX_STANDARD 20)
@@ -54,7 +52,10 @@ Message("")
 
 # ------- Executable ----- #
 
-ADD_EXECUTABLE(TextBased ${SOURCE_FILES})
+add_library(TextBasedLib OBJECT ${SOURCE_FILES})
+ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib>)
+
+#ADD_EXECUTABLE(TextBased ${SOURCE_FILES})
 
 # ------- End Executable - #
 
@@ -129,13 +130,26 @@ file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 ## ------- Inc & Link ---- #
 ##
 ##
-find_package(Catch2 3 REQUIRED)
-# These tests can use the Catch2-provided main
-add_executable(tests src/main/ECS/Design/Managers/ECSManager.cpp)
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
+
+find_package(Catch2 3 REQUIRED)
+add_library(test_sources OBJECT src/tests/entityTest.cpp src/tests/firstTryTest.cpp)
+target_link_libraries(test_sources Catch2::Catch2)
+
+
+#ADD_EXECUTABLE(test_tga $<TARGET_OBJECTS:TextBasedLib>
+#        src/tests/entityTest.cpp src/tests/firstTryTest.cpp)
+## These tests can use the Catch2-provided main
+add_executable(tests src/tests/entityTest.cpp src/tests/firstTryTest.cpp)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
+#target_link_libraries(tests TextLibraryLib)
+#
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
+
 # ------- End ----------- #
 
 
