@@ -13,6 +13,8 @@
 #include "SystemManager.h"
 #include "../../../Game/GameSystems/Renderer/Renderer.h"
 #include "../../Systems/RenderSystem.h"
+#include <spdlog/spdlog.h>
+#include "../../Systems/UpdateSystem.h"
 
 class ECSManager {
     private:

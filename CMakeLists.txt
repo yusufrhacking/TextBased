@@ -123,7 +123,6 @@ target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 # ------- End Finds ------ #
 
 # ------- Inc & Link ---- #
-
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY} spdlog::spdlog_header_only)
 
