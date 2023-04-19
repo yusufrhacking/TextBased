@@ -106,8 +106,9 @@ Message("")
 
 file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
-Include(FetchContent)
 
+# all this Catch2 stuff from here: https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#top
+Include(FetchContent)
 FetchContent_Declare(
         Catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
@@ -116,7 +117,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests src/test/test.cpp)
+add_executable(tests src/test/firstTryTest.cpp src/test/entityTest.cpp)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
 # ------- End Finds ------ #
@@ -126,6 +127,10 @@ target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY} spdlog::spdlog_header_only)
 
+list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
 # ------- End ----------- #
 
 
