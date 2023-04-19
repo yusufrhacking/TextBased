@@ -1,6 +1,7 @@
 #ifndef TEXTBASED_SYSTEMMANAGER_H
 #define TEXTBASED_SYSTEMMANAGER_H
 #include <typeindex>
+#include <unordered_map>
 #include "../Objects/Entity.h"
 #include "../Objects/System.h"
 

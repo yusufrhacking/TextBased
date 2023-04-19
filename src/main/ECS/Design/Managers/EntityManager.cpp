@@ -5,7 +5,6 @@ Entity EntityManager::createEntity() {
     numOfEntities++;
     Entity entity(entityId);
     entitiesToBeAdded.push_back(entity);
-    spdlog::debug("Entity " + std::to_string(entityId) + " created");
     return entity;
 }
 

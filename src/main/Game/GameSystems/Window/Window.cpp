@@ -2,7 +2,7 @@
 #pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 #include "Window.h"
 #include <SDL2/SDL.h>
-#include <spdlog/spdlog.h>
+#include <stdexcept>
 
 
 Window::Window() {
@@ -30,8 +30,6 @@ void Window::createWindow() {
     );
 
     if (window == nullptr){
-        spdlog::error("Window initialization failed");
-        spdlog::error(SDL_GetError());
         throw std::runtime_error(SDL_GetError());
     }
 }

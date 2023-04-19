@@ -11,6 +11,8 @@ Message( STATUS "CMAKE_FINDCMAKE: " ${CMAKE_SOURCE_DIR}/CMAKE )
 
 project(TextBased)
 
+enable_testing()
+
 # ------- Set Vars ------- #
 
 set(CMAKE_CXX_STANDARD 20)
@@ -41,7 +43,8 @@ set(SOURCE_FILES
         src/main/Game/TextGenerator.cpp src/main/Game/TextGenerator.h src/main/Game/GameManager.cpp src/main/Game/GameManager.h
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/ColliderComponent.h
         src/main/ECS/Systems/CollisionSystem.cpp src/main/ECS/Systems/CollisionSystem.h
-        src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h)
+        src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
+        )
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -108,28 +111,31 @@ file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 
 # all this Catch2 stuff from here: https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#top
-Include(FetchContent)
-FetchContent_Declare(
-        Catch2
-        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG        v3.0.1 # or a later release
-)
-
-FetchContent_MakeAvailable(Catch2)
-
-add_executable(tests src/test/firstTryTest.cpp src/test/entityTest.cpp)
+#Include(FetchContent)
+#
+#FetchContent_Declare(
+#        Catch2
+#        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+#        GIT_TAG        v3.0.1 # or a later release
+#)
+#
+#FetchContent_MakeAvailable(Catch2)
+#
+#add_library(tests src/tests/firstTryTest.cpp src/tests/entityTest.cpp)
+#target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+#
+## ------- End Finds ------ #
+#
+## ------- Inc & Link ---- #
+##
+##
+find_package(Catch2 3 REQUIRED)
+# These tests can use the Catch2-provided main
+add_executable(tests src/main/ECS/Design/Managers/ECSManager.cpp)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
-# ------- End Finds ------ #
-
-# ------- Inc & Link ---- #
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY} spdlog::spdlog_header_only)
-
-list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
-include(CTest)
-include(Catch)
-catch_discover_tests(tests)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
 # ------- End ----------- #
 
 

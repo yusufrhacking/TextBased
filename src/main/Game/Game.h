@@ -2,7 +2,6 @@
 #define TEXTBASED_GAME_H
 #include <SDL2/SDL.h>
 #include <SDL_ttf.h>
-#include "spdlog/spdlog.h"
 #include "../ECS/Design/Managers/ECSManager.h"
 #include "../ECS/Components/PositionComponent.h"
 #include "../ECS/Components/MovementComponent.h"

@@ -7,13 +7,10 @@ const static SDL_Color textColor = {255, 255, 255};
 Renderer::Renderer(SDL_Window* sdlWindow) {
     this->renderer = SDL_CreateRenderer(sdlWindow, -1, 0);
     if(this->renderer == nullptr){
-        spdlog::error("RENDERER NOT CREATED");
-        spdlog::error(SDL_GetError());
         throw std::runtime_error(SDL_GetError());
     }
 
     if (isImproperlyInitialized()){
-        spdlog::error("TTF INIT FAIL");
         throw std::runtime_error("TTF INIT FAIL");
     }
 

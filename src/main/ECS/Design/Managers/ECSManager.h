@@ -13,7 +13,6 @@
 #include "SystemManager.h"
 #include "../../../Game/GameSystems/Renderer/Renderer.h"
 #include "../../Systems/RenderSystem.h"
-#include <spdlog/spdlog.h>
 #include "../../Systems/UpdateSystem.h"
 
 class ECSManager {
@@ -27,11 +26,10 @@ class ECSManager {
             entityManager = std::make_unique<EntityManager>();
             componentManager = std::make_unique<ComponentManager>();
             systemManager = std::make_unique<SystemManager>();
-            spdlog::debug("ECS ecsManager constructed");
         }
 
         ~ECSManager() {
-            spdlog::debug("ECS ecsManager destroyed");
+            //log destroyed
         }
 
         Entity createEntity();
@@ -78,7 +76,6 @@ void ECSManager::addComponentToEntity(Entity entity, TArgs &&...args) {
     entityManager->setSignature(entity, signature);
 
     systemManager->updateEntityInSystems(entity, signature);
-    spdlog::debug("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entity.getId()));
 }
 
 template <typename TComponent>

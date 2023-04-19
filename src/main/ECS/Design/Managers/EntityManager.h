@@ -1,5 +1,7 @@
 #ifndef TEXTBASED_ENTITYMANAGER_H
 #define TEXTBASED_ENTITYMANAGER_H
+#include <vector>
+#include <array>
 #include "../Objects/Entity.h"
 #include "../../../Globals.h"
 

@@ -1,17 +1,17 @@
 #include "Game.h"
 #include "TextGenerator.h"
+#include <stdexcept>
 
 std::unique_ptr<ECSManager> ecsManager;
 std::unique_ptr<Window> window;
 
 Game::Game(){
-    spdlog::debug("Game object constructed");
     ecsManager = std::make_unique<ECSManager>();
 }
 
 void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        spdlog::error("SDL INIT FAILED");
+        std::runtime_error("SDL Init Failed");
     }
 
     window = std::make_unique<Window>();
@@ -69,7 +69,7 @@ void Game::close() {
 }
 
 Game::~Game() {
-    spdlog::info("Game destructor called");
+    //log destructor called
 }
 
 

@@ -56,7 +56,6 @@ void ComponentManager::addComponentToEntity(Entity entity, TArgs &&...args) {
 
     entityComponentSignatures[entityId].set(componentId);
 
-    spdlog::debug("Component " + std::to_string(componentId) + " was added to Entity " + std::to_string(entityId));
 }
 
 template<typename TComponent>

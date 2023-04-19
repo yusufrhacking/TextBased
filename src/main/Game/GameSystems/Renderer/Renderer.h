@@ -3,7 +3,6 @@
 #include <SDL2/SDL.h>
 #include "../Window/Window.h"
 #include <SDL_ttf.h>
-#include "spdlog/spdlog.h"
 #include "../../../Objects/Position.h"
 #include "../../../ECS/Components/TextComponent.h"
 #include "../../../../../resources/SDL_FontCache.h"

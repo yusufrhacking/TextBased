@@ -1,6 +1,5 @@
 #ifndef TEXTBASED_ENTITY_H
 #define TEXTBASED_ENTITY_H
-#include <spdlog/spdlog.h>
 
 class Entity {
 private:
