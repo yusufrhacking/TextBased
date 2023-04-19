@@ -18,7 +18,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
 set(SOURCE_FILES
         src/main/Game/Game.cpp src/main/Game/Game.h
-        src/main/Main.cpp
         src/main/Game/GameSystems/Renderer/Renderer.cpp src/main/Game/GameSystems/Renderer/Renderer.h
         src/main/Game/GameSystems/Window/Window.cpp src/main/Game/GameSystems/Window/Window.h
         src/main/Game/GameSystems/InputProcessor/InputProcessor.cpp src/main/Game/GameSystems/InputProcessor/InputProcessor.h
@@ -53,7 +52,8 @@ Message("")
 # ------- Executable ----- #
 
 add_library(TextBasedLib OBJECT ${SOURCE_FILES})
-ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib>)
+ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib>         src/main/Main.cpp
+        )
 
 #ADD_EXECUTABLE(TextBased ${SOURCE_FILES})
 
