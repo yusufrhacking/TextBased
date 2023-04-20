@@ -17,7 +17,8 @@ class CollisionSystem: public UpdateSystem {
         void update(double deltaTime) override;
 
     private:
-        void aabbCollision(PositionComponent position, ColliderComponent collider);
+        bool checkAABBCollision(std::shared_ptr<Position> firstPosition, ColliderComponent firstCollider,
+                                std::shared_ptr<Position> secondPosition, ColliderComponent secondCollider);
 };
 
 

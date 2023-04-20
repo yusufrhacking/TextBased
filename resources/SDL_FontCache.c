@@ -154,7 +154,7 @@ static char* replace_concat(char** a, const char* b)
 }
 
 
-// Width of a tab in units of the space width (sorry, no tab alignment!)
+// Width of a tab in units of the space widthCollisionRange (sorry, no tab alignment!)
 static unsigned int fc_tab_width = 4;
 
 // Shared buffer for variadic text
@@ -467,7 +467,7 @@ static FC_Rect FC_RenderRight(FC_Font* font, FC_Target* dest, float x, float y, 
 static_inline SDL_Surface* FC_CreateSurface32(Uint32 width, Uint32 height)
 {
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-return SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
+return SDL_CreateRGBSurface(SDL_SWSURFACE, widthCollisionRange, heightCollisionRange, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
 #else
 return SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 32, 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000);
 #endif
@@ -909,7 +909,7 @@ static Uint8 FC_GrowGlyphCache(FC_Font* font)
     if(font == NULL)
         return 0;
 #ifdef FC_USE_SDL_GPU
-    GPU_Image* new_level = GPU_CreateImage(font->height * 12, font->height * 12, GPU_FORMAT_RGBA);
+    GPU_Image* new_level = GPU_CreateImage(font->heightCollisionRange * 12, font->heightCollisionRange * 12, GPU_FORMAT_RGBA);
     GPU_SetAnchor(new_level, 0.5f, 0.5f);  // Just in case the default is different
 #else
     SDL_Texture* new_level = SDL_CreateTexture(font->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, font->height * 12, font->height * 12);
@@ -1200,7 +1200,7 @@ Uint8 FC_LoadFontFromTTF(FC_Font* font, SDL_Renderer* renderer, TTF_Font* ttf, S
     font->ascent = TTF_FontAscent(ttf);
     font->descent = -TTF_FontDescent(ttf);
 
-    // Some bug for certain fonts can result in an incorrect height.
+    // Some bug for certain fonts can result in an incorrect heightCollisionRange.
     if(font->height < font->ascent - font->descent)
         font->height = font->ascent - font->descent;
 
@@ -2502,8 +2502,8 @@ Uint16 FC_GetHeight(FC_Font* font, const char* formatted_text, ...)
             numLines++;
     }
 
-    //   Actual height of letter region + line spacing
-    return font->height*numLines + font->lineSpacing*(numLines - 1);  //height*numLines;
+    //   Actual heightCollisionRange of letter region + line spacing
+    return font->height*numLines + font->lineSpacing*(numLines - 1);  //heightCollisionRange*numLines;
 }
 
 Uint16 FC_GetWidth(FC_Font* font, const char* formatted_text, ...)
@@ -2536,7 +2536,7 @@ Uint16 FC_GetWidth(FC_Font* font, const char* formatted_text, ...)
     return bigWidth;
 }
 
-// If width == -1, use no width limit
+// If widthCollisionRange == -1, use no widthCollisionRange limit
 FC_Rect FC_GetCharacterOffset(FC_Font* font, Uint16 position_index, int column_width, const char* formatted_text, ...)
 {
     FC_Rect result = {0, 0, 1, FC_GetLineHeight(font)};

@@ -3,17 +3,17 @@
 #include "../../Objects/Size.h"
 
 struct ColliderComponent{
-    RenderedVal width;
-    RenderedVal height;
+    RenderedVal widthCollisionRange;
+    RenderedVal heightCollisionRange;
 
     explicit ColliderComponent(Size surfaceSize){
-        this->width = surfaceSize.width;
-        this->height = surfaceSize.height;
+        this->widthCollisionRange = surfaceSize.width;
+        this->heightCollisionRange = surfaceSize.height;
     }
 
     explicit ColliderComponent(int width = 0, int height = 0){
-        this->width = width;
-        this->height = height;
+        this->widthCollisionRange = width;
+        this->heightCollisionRange = height;
     }
 };
 

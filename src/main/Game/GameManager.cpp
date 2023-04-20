@@ -51,7 +51,7 @@ void GameManager::createJSON() const {
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
     ecsManager->addComponentToEntity<StyleComponent>(json);
-    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.width, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.height);
+    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
 }
 
 void GameManager::createBobby() const {
