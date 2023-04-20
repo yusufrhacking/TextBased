@@ -9,12 +9,6 @@ extern std::unique_ptr<ECSManager> ecsManager;
 class GameManager {
 public:
     void setup();
-
-    void createBobby() const;
-
-    void createJSON() const;
-
-    void createForest(int widthInTrees, Position startingPosition) const;
 };
 
 

@@ -21,6 +21,8 @@ void CollisionSystem::update(double deltaTime) {
             auto& secondCollider = ecsManager->getComponentFromEntity<ColliderComponent>(second);
 
             bool isAABCollision = checkAABBCollision(firstPosition.position, firstCollider, secondPosition.position, secondCollider);
+
+
         }
     }
 }

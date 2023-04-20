@@ -41,7 +41,7 @@ set(SOURCE_FILES
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/ColliderComponent.h
         src/main/ECS/Systems/CollisionSystem.cpp src/main/ECS/Systems/CollisionSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        )
+        src/main/Game/Level1.cpp src/main/Game/Level1.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
