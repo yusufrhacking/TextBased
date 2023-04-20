@@ -1,5 +1,5 @@
 #include "InputProcessor.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 bool InputProcessor::processInput(SDL_Event event) {
     unsigned int eventType = event.type;

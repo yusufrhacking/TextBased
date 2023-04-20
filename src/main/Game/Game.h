@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_GAME_H
 #define TEXTBASED_GAME_H
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <SDL_ttf.h>
 #include "../ECS/Design/Managers/ECSManager.h"
 #include "../ECS/Components/PositionComponent.h"

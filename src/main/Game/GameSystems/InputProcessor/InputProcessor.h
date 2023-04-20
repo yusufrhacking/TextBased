@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_INPUTPROCESSOR_H
 #define TEXTBASED_INPUTPROCESSOR_H
-#include "SDL2/SDL.h"
+#include <SDL.h>
 
 class InputProcessor {
     public:

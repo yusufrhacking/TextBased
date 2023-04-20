@@ -1,7 +1,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 #include "Window.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <stdexcept>
 
 
