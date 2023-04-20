@@ -52,8 +52,7 @@ Message("")
 # ------- Executable ----- #
 
 add_library(TextBasedLib OBJECT ${SOURCE_FILES})
-ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib>         src/main/Main.cpp
-        )
+ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib> src/main/Main.cpp)
 
 #ADD_EXECUTABLE(TextBased ${SOURCE_FILES})
 
@@ -127,10 +126,11 @@ file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 ##
 
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
+TARGET_LINK_LIBRARIES(TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/entityTest.cpp src/tests/firstTryTest.cpp src/tests/MovementSystemTest.cpp)
+add_library(test_sources OBJECT src/tests/firstTryTest.cpp src/tests/MovementSystemTest.cpp src/tests/entityTest.cpp src/tests/RandomTest.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
 
 
@@ -138,7 +138,7 @@ target_link_libraries(test_sources Catch2::Catch2)
 #        src/tests/entityTest.cpp src/tests/firstTryTest.cpp)
 ## These tests can use the Catch2-provided main
 add_executable(tests)
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain test_sources TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain test_sources TextBasedLib)
 #target_link_libraries(tests TextLibraryLib)
 #
 include(CTest)
