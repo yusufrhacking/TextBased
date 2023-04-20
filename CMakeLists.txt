@@ -61,11 +61,6 @@ ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib>         src/main/Main.cp
 
 # ------- Finds ---------- #
 
-if(NOT TARGET spdlog)
-    # Stand-alone build
-    find_package(spdlog REQUIRED)
-endif()
-
 FIND_PACKAGE(SDL2 REQUIRED)
 Message("")
 Message( STATUS "FINDING SDL2" )

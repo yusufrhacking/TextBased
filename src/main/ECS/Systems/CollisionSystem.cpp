@@ -27,13 +27,13 @@ void CollisionSystem::update(double deltaTime) {
 
 bool CollisionSystem::checkAABBCollision(std::shared_ptr<Position> firstPosition, ColliderComponent firstCollider,
                                          std::shared_ptr<Position> secondPosition, ColliderComponent secondCollider) {
-    bool firstXOverlap = firstPosition->xPos < (secondPosition.xPos + secondCollider.widthCollisionRange);
-    bool secondXOverlap = (firstPosition->xPos + firstCollider.widthCollisionRange) > secondPosition.xPos;
+    bool firstXOverlap = firstPosition->xPos < (secondPosition->xPos + secondCollider.widthCollisionRange);
+    bool secondXOverlap = (firstPosition->xPos + firstCollider.widthCollisionRange) > secondPosition->xPos;
     bool xOverlap = firstXOverlap && secondXOverlap;
 
-    bool firstYOverlap = firstPosition->yPos < secondPosition.yPos + secondCollider.heightCollisionRange;
-    bool secondYOverlap = firstPosition->yPos + firstCollider.heightCollisionRange > secondPosition.yPos;
-    bool yOverlap = firstXOverlap&& secondYOverlap;
+    bool firstYOverlap = firstPosition->yPos < secondPosition->yPos + secondCollider.heightCollisionRange;
+    bool secondYOverlap = firstPosition->yPos + firstCollider.heightCollisionRange > secondPosition->yPos;
+    bool yOverlap = firstYOverlap && secondYOverlap;
 
     return xOverlap && yOverlap;
 }
