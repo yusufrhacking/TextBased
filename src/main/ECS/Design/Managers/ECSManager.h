@@ -17,20 +17,18 @@
 
 class ECSManager {
     private:
-        std::unique_ptr<EntityManager> entityManager;
-        std::unique_ptr<ComponentManager> componentManager;
-        std::unique_ptr<SystemManager> systemManager;
+        std::shared_ptr<EntityManager> entityManager;
+        std::shared_ptr<ComponentManager> componentManager;
+        std::shared_ptr<SystemManager> systemManager;
 
     public:
         ECSManager() {
-            entityManager = std::make_unique<EntityManager>();
-            componentManager = std::make_unique<ComponentManager>();
-            systemManager = std::make_unique<SystemManager>();
+            entityManager = std::make_shared<EntityManager>();
+            componentManager = std::make_shared<ComponentManager>();
+            systemManager = std::make_shared<SystemManager>();
         }
 
-        ~ECSManager() {
-            //log destroyed
-        }
+        ~ECSManager() = default;
 
         Entity createEntity();
 

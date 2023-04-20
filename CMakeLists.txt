@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.13.1)
+#set(CMAKE_XCODE_GENERATE_SCHEME ON)
+#set(CMAKE_XCODE_SCHEME_ADDRESS_SANITIZER ON)
+#set(CMAKE_XCODE_SCHEME_ADDRESS_SANITIZER_USE_AFTER_RETURN ON)
 
 Message("")
 Message( STATUS "CMAKE_BINARY_DIR: " ${CMAKE_BINARY_DIR} )
@@ -125,13 +128,28 @@ file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 ##
 ##
 
+#add_compile_options(-fsanitize=address)
+#add_link_options(-fsanitize=address)
+
+
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
 TARGET_LINK_LIBRARIES(TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
+#
+#if(CMAKE_BUILD_TYPE MATCHES "Debug")
+#    set(
+#            CMAKE_C_FLAGS
+#            "${CMAKE_C_FLAGS} -Werror -fsanitize=undefined -fsanitize=address"
+#    )
+#    target_link_options(TextBased
+#            BEFORE PUBLIC -fsanitize=undefined PUBLIC -fsanitize=address
+#            )
+#endif()
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/firstTryTest.cpp src/tests/MovementSystemTest.cpp src/tests/entityTest.cpp src/tests/RandomTest.cpp)
+add_library(test_sources OBJECT src/tests/firstTryTest.cpp src/tests/entityTest.cpp src/tests/RandomTest.cpp src/tests/MovementSystemTest.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
+
 
 
 #ADD_EXECUTABLE(test_tga $<TARGET_OBJECTS:TextBasedLib>
