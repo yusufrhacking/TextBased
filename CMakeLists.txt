@@ -130,15 +130,15 @@ INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCL
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/entityTest.cpp src/tests/firstTryTest.cpp)
+add_library(test_sources OBJECT src/tests/entityTest.cpp src/tests/firstTryTest.cpp src/tests/MovementSystemTest.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
 
 
 #ADD_EXECUTABLE(test_tga $<TARGET_OBJECTS:TextBasedLib>
 #        src/tests/entityTest.cpp src/tests/firstTryTest.cpp)
 ## These tests can use the Catch2-provided main
-add_executable(tests src/tests/entityTest.cpp src/tests/firstTryTest.cpp)
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
+add_executable(tests)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain test_sources TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
 #target_link_libraries(tests TextLibraryLib)
 #
 include(CTest)

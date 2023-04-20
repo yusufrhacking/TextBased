@@ -113,7 +113,7 @@ bool ECSManager::hasSystem() const {
 
 template<typename TSystem>
 TSystem& ECSManager::getSystem() const {
-    systemManager->getSystem<TSystem>();
+    return systemManager->getSystem<TSystem>();
 }
 
 

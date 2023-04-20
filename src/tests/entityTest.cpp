@@ -2,7 +2,6 @@
 #include "../main/ECS/Design/Managers/ECSManager.h"
 
 TEST_CASE("Entity Testing"){
-    ECSManager my;
     std::unique_ptr<ECSManager> manager = std::make_unique<ECSManager>();
     Entity testEntity = manager->createEntity();
     SECTION("Add and retrieve component"){
