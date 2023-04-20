@@ -5,8 +5,8 @@ extern std::unique_ptr<ECSManager> ecsManager;
 void CollisionSystem::update(double deltaTime) {
 
     for (Entity entity: getReleventEntities()){
-        auto& position = ecsManager->getComponent<PositionComponent>(entity);
-        auto& collider = ecsManager->getComponent<ColliderComponent>(entity);
+        auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+        auto& collider = ecsManager->getComponentFromEntity<ColliderComponent>(entity);
     }
 }
 

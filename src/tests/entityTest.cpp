@@ -7,14 +7,14 @@ TEST_CASE("Entity Testing"){
     Entity testEntity = manager->createEntity();
     SECTION("Add and retrieve component"){
         manager->addComponentToEntity<StyleComponent>(testEntity);
-        REQUIRE(typeid(manager->getComponent<StyleComponent>(testEntity)) == typeid(StyleComponent));
+        REQUIRE(typeid(manager->getComponentFromEntity<StyleComponent>(testEntity)) == typeid(StyleComponent));
     }
     SECTION("Add and remove component"){
         manager->addComponentToEntity<StyleComponent>(testEntity);
 
         manager->removeComponentFromEntity<StyleComponent>(testEntity);
 
-        REQUIRE_THROWS(manager->getComponent<StyleComponent>(testEntity));
+        REQUIRE_THROWS(manager->getComponentFromEntity<StyleComponent>(testEntity));
     }
 
 }

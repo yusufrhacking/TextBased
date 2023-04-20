@@ -45,7 +45,7 @@ class ECSManager {
         void removeComponentFromEntity(Entity entity);
 
         template <typename TComponent>
-        TComponent& getComponent(Entity entity) const;
+        TComponent& getComponentFromEntity(Entity entity) const;
 
         template <typename TSystem, typename... TArgs>
         void addSystem(TArgs &&...args);
@@ -92,7 +92,7 @@ void ECSManager::removeComponentFromEntity(Entity entity){
 }
 
 template <typename TComponent>
-TComponent& ECSManager::getComponent(Entity entity) const {
+TComponent& ECSManager::getComponentFromEntity(Entity entity) const {
     return componentManager->getComponent<TComponent>(entity);
 }
 

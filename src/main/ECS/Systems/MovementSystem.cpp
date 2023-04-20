@@ -9,8 +9,8 @@ MovementSystem::MovementSystem(){
 
 void MovementSystem::update(double deltaTime) {
     for (Entity entity: getReleventEntities()){
-        auto& position = ecsManager->getComponent<PositionComponent>(entity);
-        const auto movement = ecsManager->getComponent<MovementComponent>(entity);
+        auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+        const auto movement = ecsManager->getComponentFromEntity<MovementComponent>(entity);
 
         double xChange = movement.velocity->xVelocity * deltaTime;
         double yChange = movement.velocity->yVelocity * deltaTime;

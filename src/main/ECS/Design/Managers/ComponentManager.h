@@ -7,6 +7,7 @@
 #include "../Objects/Pool.h"
 #include "../../../Globals.h"
 #include <bitset>
+#include <stdexcept>
 
 using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
 
@@ -82,6 +83,12 @@ void ComponentManager::removeComponent(Entity entity){
     const int componentId = Component<TComponent>::getId();
     const int entityId = entity.getId();
 
+    bool isComponentPresent = entityComponentSignatures[entityId].test(componentId);
+
+    if (!isComponentPresent){
+        throw std::runtime_error("Entity does not have requested component to remove");
+    }
+
     entityComponentSignatures[entityId].set(componentId, false);
 }
 
@@ -98,6 +105,12 @@ TComponent& ComponentManager::getComponent(Entity entity) const {
     const auto componentId = Component<TComponent>::getId();
     const auto entityId = entity.getId();
     auto componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
+    bool isComponentPresent = entityComponentSignatures[entityId].test(componentId);
+
+    if (!isComponentPresent){
+        throw std::runtime_error("Entity does not have requested component to remove");
+    }
+
     return componentPool->get(entityId);
 }
 

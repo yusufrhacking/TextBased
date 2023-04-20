@@ -10,9 +10,9 @@ RenderSystem::RenderSystem() {
 
 void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
     for (auto entity : getReleventEntities()){
-        const auto positionComponent = ecsManager->getComponent<PositionComponent>(entity);
-        const auto spriteComponent = ecsManager->getComponent<TextComponent>(entity);
-        const auto styleComponent = ecsManager->getComponent<StyleComponent>(entity);
+        const auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+        const auto spriteComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
+        const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
 
         renderer->renderText(positionComponent.position, spriteComponent, styleComponent);
     }
