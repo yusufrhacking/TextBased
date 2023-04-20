@@ -1,10 +1,20 @@
 #include <catch2/catch_test_macros.hpp>
 #include "../main/ECS/Design/Managers/ECSManager.h"
 
-TEST_CASE("Add and retrieve entity?"){
+TEST_CASE("Entity Testing"){
     ECSManager my;
     std::unique_ptr<ECSManager> manager = std::make_unique<ECSManager>();
     Entity testEntity = manager->createEntity();
-    manager->addComponentToEntity<StyleComponent>(testEntity);
-    REQUIRE(typeid(manager->getComponent<StyleComponent>(testEntity)) == typeid(StyleComponent));
+    SECTION("Add and retrieve component"){
+        manager->addComponentToEntity<StyleComponent>(testEntity);
+        REQUIRE(typeid(manager->getComponent<StyleComponent>(testEntity)) == typeid(StyleComponent));
+    }
+    SECTION("Add and remove component"){
+        manager->addComponentToEntity<StyleComponent>(testEntity);
+
+        manager->removeComponentFromEntity<StyleComponent>(testEntity);
+
+        REQUIRE_THROWS(manager->getComponent<StyleComponent>(testEntity));
+    }
+
 }
