@@ -63,6 +63,8 @@ ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib> src/main/Main.cpp)
 
 # ------- Finds ---------- #
 
+find_package(spdlog CONFIG REQUIRED)
+
 FIND_PACKAGE(SDL2 REQUIRED)
 Message("")
 Message( STATUS "FINDING SDL2" )

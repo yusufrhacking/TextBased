@@ -1,7 +1,9 @@
 #ifndef TEXTBASED_SYSTEMMANAGER_H
 #define TEXTBASED_SYSTEMMANAGER_H
+#include <memory>
 #include <typeindex>
 #include <unordered_map>
+#include <vector>
 #include "../Objects/Entity.h"
 #include "../Objects/System.h"
 
@@ -25,7 +27,7 @@ class SystemManager {
         TSystem& getSystem() const;
 
         template <typename TSystem>
-        std::unordered_map<std::type_index, std::shared_ptr<TSystem>> getSystemsOfType() const;
+        std::vector<std::shared_ptr<TSystem>> getSystemsOfType() const;
 
         void updateEntityInSystems(Entity entity, ComponentSignature entitySignature);
 
@@ -58,18 +60,16 @@ TSystem& SystemManager::getSystem() const {
 }
 
 template<typename TSystem>
-std::unordered_map<std::type_index, std::shared_ptr<TSystem>> SystemManager::getSystemsOfType() const {
-    std::unordered_map<std::type_index, std::shared_ptr<TSystem>> systemsOfType;
+std::vector<std::shared_ptr<TSystem>> SystemManager::getSystemsOfType() const {
+    std::vector<std::shared_ptr<TSystem>> systemsOfType;
 
     for (const auto& systemKeyPair : systems){
         auto system = systemKeyPair.second;
 
-        auto result = dynamic_pointer_cast<TSystem>(system);
+        auto isSystemOfType = dynamic_pointer_cast<TSystem>(system);
 
-        if (result){
-            systemsOfType.insert(std::make_pair(
-                    std::type_index(typeid(system)),
-                    std::static_pointer_cast<TSystem>(system)));
+        if (isSystemOfType){
+            systemsOfType.push_back(std::static_pointer_cast<TSystem>(system));
         }
     }
     return systemsOfType;

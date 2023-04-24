@@ -1,8 +1,10 @@
 #include "Level1.h"
+#include "GameManager.h"
 
 void Level1::setup() {
     ecsManager->addSystem<MovementSystem>();
     ecsManager->addSystem<RenderSystem>();
+    ecsManager->addSystem<CollisionSystem>();
 
     createBobby();
     createJSON();
@@ -46,7 +48,7 @@ void Level1::createJSON() const {
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
     ecsManager->addComponentToEntity<StyleComponent>(json);
-    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
+//    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
 }
 
 void Level1::createBobby() const {

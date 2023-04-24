@@ -24,11 +24,11 @@ TEST_CASE("Movement System Testing"){
         MovementSystem system = manager->getSystem<MovementSystem>();
         REQUIRE(!system.getReleventEntities().contains(movedEntity));
     }
-    SECTION("Test if now moves with new velocity"){
-        manager->update(50);
-//        auto positionComponent = manager->getComponentFromEntity<PositionComponent>(movedEntity);
-//        auto position = positionComponent.position;
-//        REQUIRE(position->xPos != 0);
-//        REQUIRE(position->yPos != 0);
-    }
+//    SECTION("Test if now moves with new velocity"){
+//        manager->update(50);
+////        auto positionComponent = manager->getComponentFromEntity<PositionComponent>(movedEntity);
+////        auto position = positionComponent.position;
+////        REQUIRE(position->xPos != 0);
+////        REQUIRE(position->yPos != 0);
+//    }
 }

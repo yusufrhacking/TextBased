@@ -11,7 +11,7 @@ Game::Game(){
 
 void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        std::runtime_error("SDL Init Failed");
+        throw std::runtime_error("SDL Init Failed");
     }
 
     window = std::make_unique<Window>();

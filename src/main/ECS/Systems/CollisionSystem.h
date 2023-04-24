@@ -8,17 +8,30 @@
 
 class CollisionSystem: public UpdateSystem {
     public:
-        CollisionSystem(){
-            requireComponent<PositionComponent>();
-            requireComponent<TextComponent>();//Eventually want to not require something to be visible to collide
-            requireComponent<ColliderComponent>();
-        }
+        CollisionSystem();
 
         void update(double deltaTime) override;
 
     private:
         bool checkAABBCollision(std::shared_ptr<Position> firstPosition, ColliderComponent firstCollider,
                                 std::shared_ptr<Position> secondPosition, ColliderComponent secondCollider);
+
+    void handleCollision(Entity entity, Entity entity1);
+
+    void
+    resolveCollisionY(PositionComponent &firstPosition, ColliderComponent &firstCollider,
+                      PositionComponent &secondPosition,
+                      ColliderComponent &secondCollider, float collisionDepthY);
+
+    void resolveCollisionX(PositionComponent& firstPosition, ColliderComponent& firstCollider,
+                                            PositionComponent& secondPosition, ColliderComponent& secondCollider,
+                                            float collisionDepthX);
+
+    float getCollisionDepthY(PositionComponent &firstPosition, ColliderComponent &firstCollider,
+                             PositionComponent &secondPosition, ColliderComponent &secondCollider);
+
+    float getCollisionDepthX(PositionComponent &firstPosition, ColliderComponent &firstCollider,
+                             PositionComponent &secondPosition, ColliderComponent &secondCollider);
 };
 
 

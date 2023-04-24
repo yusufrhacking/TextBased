@@ -8,15 +8,13 @@ void ECSManager::update(double deltaTime){
 }
 
 void ECSManager::updateSystems(double deltaTime) const {
-    for (const auto& systemKeyPair : systemManager->getSystemsOfType<UpdateSystem>()){
-        std::shared_ptr<UpdateSystem> system = systemKeyPair.second;
+    for (const auto& system : systemManager->getSystemsOfType<UpdateSystem>()){
         system->update(deltaTime);
     }
 }
 
 void ECSManager::render(std::shared_ptr<Renderer> renderer){
-    for (const auto& systemKeyPair : systemManager->getSystemsOfType<RenderSystem>()){
-        std::shared_ptr<RenderSystem> system = systemKeyPair.second;
+    for (const auto& system : systemManager->getSystemsOfType<RenderSystem>()){
         system->update(renderer);
     }
 }
