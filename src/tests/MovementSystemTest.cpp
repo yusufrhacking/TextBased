@@ -11,18 +11,18 @@ TEST_CASE("Movement System Testing"){
 
     SECTION("Test if in Movement System"){
         MovementSystem system = manager->getSystem<MovementSystem>();
-        REQUIRE(system.getReleventEntities().contains(movedEntity));
+        REQUIRE(system.getRelevantEntities().contains(movedEntity));
     }
     SECTION("Test Removing MovementComponent removes entity from Movement System"){
         manager->removeComponentFromEntity<MovementComponent>(movedEntity);
         MovementSystem system = manager->getSystem<MovementSystem>();
-        REQUIRE(!system.getReleventEntities().contains(movedEntity));
+        REQUIRE(!system.getRelevantEntities().contains(movedEntity));
 
     }
     SECTION("Test Removing PositionComponent removes entity from Movement System"){
         manager->removeComponentFromEntity<PositionComponent>(movedEntity);
         MovementSystem system = manager->getSystem<MovementSystem>();
-        REQUIRE(!system.getReleventEntities().contains(movedEntity));
+        REQUIRE(!system.getRelevantEntities().contains(movedEntity));
     }
 //    SECTION("Test if now moves with new velocity"){
 //        manager->update(50);

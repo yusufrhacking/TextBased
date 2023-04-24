@@ -4,14 +4,13 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 CollisionSystem::CollisionSystem() {
     requireComponent<PositionComponent>();
-    requireComponent<TextComponent>();//Eventually want to not require something to be visible to collide
+    requireComponent<TextComponent>();
     requireComponent<ColliderComponent>();
 }
 
 
-
 void CollisionSystem::update(double deltaTime) {
-    auto relevantEntities = getReleventEntities();
+    auto relevantEntities = getRelevantEntities();
 
     for (auto firstEntity = relevantEntities.begin(); firstEntity != relevantEntities.end(); firstEntity++){
         Entity first = *firstEntity;

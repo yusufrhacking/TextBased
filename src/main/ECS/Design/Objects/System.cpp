@@ -8,7 +8,7 @@ void System::removeEntity(Entity entity) {
     entities.erase(entity);
 }
 
-std::set<Entity> System::getReleventEntities() const {
+std::set<Entity> System::getRelevantEntities() const {
     return entities;
 }
 

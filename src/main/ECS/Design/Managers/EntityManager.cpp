@@ -1,8 +1,14 @@
 #include "EntityManager.h"
 
 Entity EntityManager::createEntity() {
-    int entityId = numOfEntities;
-    numOfEntities++;
+    int entityId;
+    if (freedEntityIDs.empty()){
+        entityId = numOfEntities;
+        numOfEntities++;
+    } else{
+        entityId = freedEntityIDs.top();
+        freedEntityIDs.pop();
+    }
     Entity entity(entityId);
     entitiesToBeAdded.push_back(entity);
     return entity;
@@ -17,7 +23,7 @@ std::vector<Entity> EntityManager::getEntitiesToBeAdded() {
 }
 
 std::vector<Entity> EntityManager::getEntitiesToBeKilled() {
-    return entitiesToBeKilled;
+    return entitiesToBeRemoved;
 }
 
 ComponentSignature EntityManager::getSignature(Entity entity) {
@@ -32,6 +38,14 @@ void EntityManager::clearEntitiesToBeAdded() {
     entitiesToBeAdded.clear();
 }
 
-void EntityManager::clearEntitiesToBeKilled() {
-    entitiesToBeKilled.clear();
+void EntityManager::clearEntitiesToBeRemoved() {
+    entitiesToBeRemoved.clear();
+}
+
+void EntityManager::killEntity(Entity entity) {
+    entitiesToBeRemoved.push_back(entity);
+}
+
+void EntityManager::freeEntityID(int id) {
+    freedEntityIDs.push(id);
 }

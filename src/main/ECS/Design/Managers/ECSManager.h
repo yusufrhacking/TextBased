@@ -20,8 +20,11 @@ class ECSManager {
         std::shared_ptr<EntityManager> entityManager;
         std::shared_ptr<ComponentManager> componentManager;
         std::shared_ptr<SystemManager> systemManager;
+        void removeDeadEntities();
+        void addNewEntities();
+        void updateSystems(double deltaTime) const;
 
-    public:
+public:
         ECSManager() {
             entityManager = std::make_shared<EntityManager>();
             componentManager = std::make_shared<ComponentManager>();
@@ -31,6 +34,7 @@ class ECSManager {
         ~ECSManager() = default;
 
         Entity createEntity();
+        void killEntity(Entity entity);
 
         void update(double deltaTime);
 
@@ -56,11 +60,6 @@ class ECSManager {
 
         template <typename TSystem>
         TSystem& getSystem() const;
-
-        void addNewEntities();
-
-        void updateSystems(double deltaTime) const;
-
 };
 
 template <typename TComponent, typename... TArgs>

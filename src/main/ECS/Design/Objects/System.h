@@ -18,7 +18,7 @@ public:
 
     void addEntity(Entity entity);
     void removeEntity(Entity entity);
-    [[nodiscard]] std::set<Entity> getReleventEntities() const;
+    [[nodiscard]] std::set<Entity> getRelevantEntities() const;
     [[nodiscard]] ComponentSignature getComponentSignature() const;
 
     template <typename ComponentGeneric> void requireComponent();

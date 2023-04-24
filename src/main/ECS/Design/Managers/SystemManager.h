@@ -32,6 +32,7 @@ class SystemManager {
         void updateEntityInSystems(Entity entity, ComponentSignature entitySignature);
 
         void addNewEntityToSystem(Entity entity, ComponentSignature entitySignature);
+
 };
 
 template<typename TSystem, typename... TArgs>
