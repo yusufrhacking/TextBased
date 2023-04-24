@@ -48,7 +48,7 @@ void Level1::createJSON() const {
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
     ecsManager->addComponentToEntity<StyleComponent>(json);
-//    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
+    ecsManager->addComponentToEntity<ColliderComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
 }
 
 void Level1::createBobby() const {
@@ -57,4 +57,5 @@ void Level1::createBobby() const {
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
     ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
     ecsManager->addComponentToEntity<StyleComponent>(tank);
+    ecsManager->addComponentToEntity<ColliderComponent>(tank, ecsManager->getComponentFromEntity<TextComponent>(tank).surfaceSize);
 }
