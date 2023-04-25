@@ -1,4 +1,5 @@
 #include "RenderSystem.h"
+#include "../Design/Managers/ECSManager.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

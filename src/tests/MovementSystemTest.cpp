@@ -2,8 +2,10 @@
 #include "../main/ECS/Design/Managers/ECSManager.h"
 #include "../main/ECS/Systems/MovementSystem.h"
 
+std::unique_ptr<ECSManager> ecsManager;
+
 TEST_CASE("Movement System Testing", "[UpdateSystem]"){
-    std::unique_ptr<ECSManager> ecsManager = std::make_unique<ECSManager>();
+    ecsManager = std::make_unique<ECSManager>();
     ecsManager->addSystem<MovementSystem>();
     Entity movedEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(movedEntity, std::make_shared<Position>(0, 0));

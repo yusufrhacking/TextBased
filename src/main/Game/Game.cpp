@@ -2,11 +2,10 @@
 #include "TextGenerator.h"
 #include <stdexcept>
 
-std::unique_ptr<ECSManager> ecsManager;
+
 std::unique_ptr<Window> window;
 
 Game::Game(){
-    ecsManager = std::make_unique<ECSManager>();
 }
 
 void Game::initialize() {

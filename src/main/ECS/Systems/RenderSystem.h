@@ -1,11 +1,10 @@
 #ifndef TEXTBASED_RENDERSYSTEM_H
 #define TEXTBASED_RENDERSYSTEM_H
 
-
+#include "../../Game/GameSystems/Renderer/Renderer.h"
 #include "../Design/Objects/System.h"
 #include "../Components/PositionComponent.h"
 #include "../Components/TextComponent.h"
-#include "../Design/Managers/ECSManager.h"
 #include "../Components/StyleComponent.h"
 
 class RenderSystem: public System {
