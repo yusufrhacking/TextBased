@@ -2,7 +2,7 @@
 #include "../main/ECS/Design/Managers/ECSManager.h"
 #include "../main/ECS/Systems/MovementSystem.h"
 
-TEST_CASE("Movement System Testing"){
+TEST_CASE("Movement System Testing", "[UpdateSystem]"){
     std::unique_ptr<ECSManager> manager = std::make_unique<ECSManager>();
     manager->addSystem<MovementSystem>();
     Entity movedEntity = manager->createEntity();
@@ -26,9 +26,9 @@ TEST_CASE("Movement System Testing"){
     }
 //    SECTION("Test if now moves with new velocity"){
 //        manager->update(50);
-////        auto positionComponent = manager->getComponentFromEntity<PositionComponent>(movedEntity);
-////        auto position = positionComponent.position;
-////        REQUIRE(position->xPos != 0);
-////        REQUIRE(position->yPos != 0);
+//        auto positionComponent = manager->getComponentFromEntity<PositionComponent>(movedEntity);
+//        auto position = positionComponent.position;
+//        REQUIRE(position->xPos != 0);
+//        REQUIRE(position->yPos != 0);
 //    }
 }
