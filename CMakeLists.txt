@@ -149,7 +149,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 #endif()
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/firstTryTest.cpp src/tests/entityTest.cpp src/tests/RandomTest.cpp src/tests/MovementSystemTest.cpp)
+add_library(test_sources OBJECT src/tests/firstTryTest.cpp src/tests/entityTest.cpp src/tests/RandomTest.cpp src/tests/MovementSystemTest.cpp src/tests/ECSTest.cpp src/tests/ECSTest.h)
 target_link_libraries(test_sources Catch2::Catch2)
 
 
