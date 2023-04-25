@@ -34,6 +34,7 @@ using Catch::Matchers::WithinAbs;
 TEST_CASE("MovementSystem update function moves entities correctly", "[UpdateMethod]") {
     // Create an ECSManager instance or mock it as needed
     ecsManager = std::make_unique<ECSManager>();
+    ecsManager->addSystem<MovementSystem>();
     // Create a PositionComponent and MovementComponent
     PositionComponent position;
     position.position->xPos = 0.0f;
@@ -44,14 +45,18 @@ TEST_CASE("MovementSystem update function moves entities correctly", "[UpdateMet
 
     // Add the components to an entity
     Entity entity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(entity, std::move(position));
-    ecsManager->addComponentToEntity<MovementComponent>(entity, std::move(movement));
+    ecsManager->addComponentToEntity<PositionComponent>(entity, position.position);
+    ecsManager->addComponentToEntity<MovementComponent>(entity, movement.velocity);
+
+
 
     // Update the MovementSystem with a deltaTime of 1.0
-    MovementSystem movementSystem;
-    movementSystem.update(1.0);
+//    MovementSystem movementSystem;
+//    movementSystem.update(1.0);
 
     // Check if the position has been updated correctly
+    ecsManager->update(1);
+
     const auto& updatedPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     REQUIRE_THAT(updatedPosition.position->xPos, WithinAbs(2.0, 1e-6)); // Check x position with a margin of error
     REQUIRE_THAT(updatedPosition.position->yPos, WithinAbs(3.0, 1e-6)); // Check y position with a margin of error
