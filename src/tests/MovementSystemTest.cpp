@@ -1,28 +1,28 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
+#include <memory>
 #include "../main/ECS/Design/Managers/ECSManager.h"
 #include "../main/ECS/Systems/MovementSystem.h"
 #include "ECSTest.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
-TEST_CASE("Movement System Testing", "[UpdateSystem]"){
+
+TEST_CASE("Movement System Testing", "[UpdateSystem]") {
     ecsManager = std::make_unique<ECSManager>();
     ecsManager->addSystem<MovementSystem>();
     Entity movedEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(movedEntity, std::make_shared<Position>(0, 0));
     ecsManager->addComponentToEntity<MovementComponent>(movedEntity, std::make_shared<Velocity>(20, 20));
 
-    SECTION("Test if in Movement System"){
+    SECTION("Test if in Movement System") {
         MovementSystem system = ecsManager->getSystem<MovementSystem>();
         REQUIRE(system.getRelevantEntities().contains(movedEntity));
-    }
-    SECTION("Test Removing MovementComponent removes entity from Movement System"){
+    }SECTION("Test Removing MovementComponent removes entity from Movement System") {
         ecsManager->removeComponentFromEntity<MovementComponent>(movedEntity);
         MovementSystem system = ecsManager->getSystem<MovementSystem>();
         REQUIRE(!system.getRelevantEntities().contains(movedEntity));
 
-    }
-    SECTION("Test Removing PositionComponent removes entity from Movement System"){
+    }SECTION("Test Removing PositionComponent removes entity from Movement System") {
         ecsManager->removeComponentFromEntity<PositionComponent>(movedEntity);
         MovementSystem system = ecsManager->getSystem<MovementSystem>();
         REQUIRE(!system.getRelevantEntities().contains(movedEntity));
@@ -32,29 +32,20 @@ TEST_CASE("Movement System Testing", "[UpdateSystem]"){
 using Catch::Matchers::WithinAbs;
 
 TEST_CASE("MovementSystem update function moves entities correctly", "[UpdateMethod]") {
-    // Create an ECSManager instance or mock it as needed
     ecsManager = std::make_unique<ECSManager>();
+
     ecsManager->addSystem<MovementSystem>();
-    // Create a PositionComponent and MovementComponent
-    PositionComponent position;
-    position.position->xPos = 0.0f;
-    position.position->yPos = 0.0f;
-    MovementComponent movement;
-    movement.velocity->xVelocity = 2.0;
-    movement.velocity->yVelocity = 3.0;
 
-    // Add the components to an entity
+
+    Position pos;
+    pos.xPos = 0.0f;
+    pos.yPos = 0.0f;
+    std::shared_ptr<Velocity> velocity = std::make_shared<Velocity>(2.0, 3.0);
+
     Entity entity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(entity, position.position);
-    ecsManager->addComponentToEntity<MovementComponent>(entity, movement.velocity);
+    ecsManager->addComponentToEntity<PositionComponent>(entity, pos);
+    ecsManager->addComponentToEntity<MovementComponent>(entity, velocity);
 
-
-
-    // Update the MovementSystem with a deltaTime of 1.0
-//    MovementSystem movementSystem;
-//    movementSystem.update(1.0);
-
-    // Check if the position has been updated correctly
     ecsManager->update(1);
 
     const auto& updatedPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity);
