@@ -11,7 +11,7 @@ class RenderSystem: public System {
     public:
         explicit RenderSystem();
 
-        void update(const std::shared_ptr<Renderer>& renderer);
+        void render(const std::shared_ptr<Renderer>& renderer);
 
     private:
 };

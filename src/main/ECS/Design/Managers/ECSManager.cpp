@@ -17,7 +17,7 @@ void ECSManager::updateSystems(double deltaTime) const {
 
 void ECSManager::render(std::shared_ptr<Renderer> renderer){
     for (const auto& system : systemManager->getSystemsOfType<RenderSystem>()){
-        system->update(renderer);
+        system->render(renderer);
     }
 }
 

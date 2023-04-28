@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "GameSystems/Renderer/SDLRenderer.h"
 #include "TextGenerator.h"
 #include <stdexcept>
 
@@ -14,7 +15,7 @@ void Game::initialize() {
     }
 
     window = std::make_unique<Window>();
-    renderer = std::make_shared<Renderer>(window->getWindow());
+    renderer = std::make_shared<SDLRenderer>(window->getWindow());
     inputProcessor = std::make_unique<InputProcessor>();
 
     isRunning = true;

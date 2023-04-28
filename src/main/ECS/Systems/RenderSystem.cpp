@@ -9,7 +9,7 @@ RenderSystem::RenderSystem() {
     requireComponent<StyleComponent>();
 }
 
-void RenderSystem::update(const std::shared_ptr<Renderer>& renderer){
+void RenderSystem::render(const std::shared_ptr<Renderer>& renderer){
     for (auto entity : getRelevantEntities()){
         const auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto spriteComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
