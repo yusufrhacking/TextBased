@@ -165,7 +165,7 @@ FetchContent_Declare(
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
-target_link_libraries(test_sources googletest)
+target_link_libraries(test_sources gmock)
 
 
 #ADD_EXECUTABLE(test_tga $<TARGET_OBJECTS:TextBasedLib>
@@ -175,6 +175,8 @@ add_executable(tests)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain test_sources TextBasedLib)
 #target_link_libraries(tests TextLibraryLib)
 #
+
+include(GoogleTest)
 include(CTest)
 include(Catch)
 catch_discover_tests(tests)

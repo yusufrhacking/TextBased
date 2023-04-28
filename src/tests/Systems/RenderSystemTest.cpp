@@ -1,4 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
+#include "gmock/gmock.h"
 #include "../../main/ECS/Design/Managers/ECSManager.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
