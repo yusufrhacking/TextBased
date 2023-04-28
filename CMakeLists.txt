@@ -110,6 +110,9 @@ Message("")
 file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 
+
+
+
 # all this Catch2 stuff from here: https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#top
 #Include(FetchContent)
 #
@@ -148,10 +151,21 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 #            )
 #endif()
 
+
+
 find_package(Catch2 3 REQUIRED)
 add_library(test_sources OBJECT src/tests/firstTryTest.cpp src/tests/entityTest.cpp src/tests/RandomTest.cpp src/tests/Systems/MovementSystemTest.cpp src/tests/ECSManagerDeclaration.cpp src/tests/ECSManagerDeclaration.h src/tests/Systems/RenderSystemTest.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
 
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/0bdaac5a1401fffac6b64581efc639734aded793.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+target_link_libraries(test_sources googletest)
 
 
 #ADD_EXECUTABLE(test_tga $<TARGET_OBJECTS:TextBasedLib>
