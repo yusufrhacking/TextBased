@@ -39,11 +39,8 @@ TEST_CASE("Render System", "[System][RenderSystem]") {
     SECTION("Updating"){
         std::shared_ptr<MockRenderer> mr = std::make_shared<MockRenderer>();
         auto mockGuard = MockScopeGuard(mr);
-
-        EXPECT_CALL(*mr, renderText(testing::_, testing::_, testing::_));
-        EXPECT_CALL(*mr, renderFrame());
+        EXPECT_CALL(*mr, renderText(testing::_, testing::_, testing::_)).Times(1);
+        EXPECT_CALL(*mr, renderFrame()).Times(1);
         ecsManager->render(mr);
-//        SUCCEED();
-//        testing::Mock::VerifyAndClearExpectations(&mockRenderer);
     }
 }
