@@ -1,10 +1,15 @@
 #include <catch2/catch_test_macros.hpp>
 #include "gmock/gmock.h"
+#include <memory>
+#include "../MockScopeGuard.h"
 #include "../../main/ECS/Design/Managers/ECSManager.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 TEST_CASE("Render System", "[System][RenderSystem]") {
+    ::testing::InitGoogleTest();
+    ::testing::GTEST_FLAG(throw_on_failure) = true;
     ecsManager = std::make_unique<ECSManager>();
+
     ecsManager->addSystem<RenderSystem>();
     Entity entity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(entity, std::make_shared<Position>(0, 0));
@@ -32,8 +37,13 @@ TEST_CASE("Render System", "[System][RenderSystem]") {
         }
     }
     SECTION("Updating"){
+        std::shared_ptr<MockRenderer> mr = std::make_shared<MockRenderer>();
+        auto mockGuard = MockScopeGuard(mr);
 
-
-        ecsManager->update(1);
+        EXPECT_CALL(*mr, renderText(testing::_, testing::_, testing::_));
+        EXPECT_CALL(*mr, renderFrame());
+        ecsManager->render(mr);
+//        SUCCEED();
+//        testing::Mock::VerifyAndClearExpectations(&mockRenderer);
     }
 }
