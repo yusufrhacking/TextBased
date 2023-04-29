@@ -164,7 +164,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/firstTryTest.cpp src/tests/entityTest.cpp src/tests/RandomTest.cpp src/tests/Systems/MovementSystemTest.cpp src/tests/ECSManagerDeclaration.cpp src/tests/ECSManagerDeclaration.h src/tests/Systems/RenderSystemTest.cpp)
+add_library(test_sources OBJECT src/tests/Catch2SetupTest.cpp src/tests/entityTest.cpp src/tests/Systems/MovementSystemTest.cpp src/tests/ECSManagerDeclaration.cpp src/tests/ECSManagerDeclaration.h src/tests/Systems/RenderSystemTest.cpp src/tests/Systems/CollisionRemovalTest.cpp src/tests/Systems/CollisionSystemTest.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
 
 

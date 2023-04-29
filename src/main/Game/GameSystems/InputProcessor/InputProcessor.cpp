@@ -10,6 +10,8 @@ bool InputProcessor::processInput(SDL_Event event) {
         case SDL_KEYDOWN:
             result = handleKeyPress(event);
             break;
+        default:
+            break;
     }
     return result;
 }
