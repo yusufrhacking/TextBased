@@ -30,6 +30,8 @@ class ComponentManager {
         template <typename TComponent, typename ...TArgs>
         void addComponentToEntity(Entity entity, TArgs&& ... args);
 
+        void clearEntity(Entity entity);
+
         template <typename T>
         void removeComponent(Entity entity);
 

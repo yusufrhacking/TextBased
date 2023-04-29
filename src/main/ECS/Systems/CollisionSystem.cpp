@@ -12,13 +12,13 @@ CollisionSystem::CollisionSystem() {
 void CollisionSystem::update(double deltaTime) {
     auto relevantEntities = getRelevantEntities();
 
-    for (auto firstEntity = relevantEntities.begin(); firstEntity != relevantEntities.end(); firstEntity++){
-        Entity first = *firstEntity;
+    for (auto firstIterator = relevantEntities.begin(); firstIterator != relevantEntities.end(); firstIterator++){
+        Entity first = *firstIterator;
         auto& firstPosition = ecsManager->getComponentFromEntity<PositionComponent>(first);
         auto& firstCollider = ecsManager->getComponentFromEntity<ColliderComponent>(first);
 
-        for (auto secondEntity = firstEntity; secondEntity != relevantEntities.end(); secondEntity++){
-            Entity second = *secondEntity;
+        for (auto secondIterator = firstIterator; secondIterator != relevantEntities.end(); secondIterator++){
+            Entity second = *secondIterator;
 
             if (first == second){
                 continue;
@@ -30,7 +30,9 @@ void CollisionSystem::update(double deltaTime) {
             bool isAABCollision = checkAABBCollision(firstPosition.position, firstCollider, secondPosition.position, secondCollider);
 
             if (isAABCollision){
-                handleCollision(first, second);
+                ecsManager->killEntity(first);
+                ecsManager->killEntity(second);
+//                handleCollision(first, second);
             }
 
         }

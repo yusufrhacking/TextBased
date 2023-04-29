@@ -36,14 +36,16 @@ TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemo
 
     addComponentsToEntities(staticEntity, movingEntity);
 
-    auto collisionSystem = ecsManager->getSystem<CollisionSystem>();
-    auto movementSystem = ecsManager->getSystem<MovementSystem>();
+    auto& collisionSystem = ecsManager->getSystem<CollisionSystem>();
+    auto& movementSystem = ecsManager->getSystem<MovementSystem>();
 
     REQUIRE(collisionSystem.getRelevantEntities().contains(staticEntity));
     REQUIRE(collisionSystem.getRelevantEntities().contains(movingEntity));
     REQUIRE(movementSystem.getRelevantEntities().contains(movingEntity));
 
-    ecsManager->update(DELTA_TIME);
+    movementSystem.update(DELTA_TIME);
+    collisionSystem.update(DELTA_TIME);
+    ecsManager->update(DELTA_TIME);//Required to flush out entitiesToBeKilled() --> this is why this should realistically be a mocked version of the ECS manager
 
     REQUIRE(!collisionSystem.getRelevantEntities().contains(staticEntity));
     REQUIRE(!collisionSystem.getRelevantEntities().contains(movingEntity));

@@ -1,5 +1,6 @@
 #include "ECSManager.h"
 #include "../../Systems/MovementSystem.h"
+#include <bitset>
 
 int GenericComponent::nextId = 0;
 
@@ -33,9 +34,11 @@ void ECSManager::addNewEntities() {
 
 void ECSManager::removeDeadEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeKilled()){
-        ComponentSignature entitySignature = entityManager->getSignature(entity);
-        entitySignature.reset();
-        systemManager->updateEntityInSystems(entity, entitySignature);
+        ComponentSignature clearSignature = std::bitset<NUM_OF_COMPONENTS>();
+        entityManager->setSignature(entity, clearSignature);
+        ComponentSignature postSig = entityManager->getSignature(entity);
+        componentManager->clearEntity(entity);
+        systemManager->updateEntityInSystems(entity, clearSignature);
         entityManager->freeEntityID(entity.getId());
     }
     entityManager->clearEntitiesToBeRemoved();
