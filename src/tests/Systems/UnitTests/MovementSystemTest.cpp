@@ -1,8 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <memory>
-#include "../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../main/ECS/Systems/MovementSystem.h"
+#include "../../../main/ECS/Design/Managers/ECSManager.h"
+#include "../../../main/ECS/Systems/MovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
