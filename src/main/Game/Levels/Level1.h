@@ -6,7 +6,7 @@
 #include "../../Helpers/Objects/Position.h"
 #include "../../ECS/Design/Managers/ECSManager.h"
 #include <memory>
-#include "../../ECS/Systems/CollisionSystem.h"
+#include "../../ECS/Systems/CollisionCheckSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

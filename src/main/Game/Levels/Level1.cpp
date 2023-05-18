@@ -4,7 +4,7 @@
 void Level1::setup() {
     ecsManager->addSystem<MovementSystem>();
     ecsManager->addSystem<RenderSystem>();
-    ecsManager->addSystem<CollisionSystem>();
+    ecsManager->addSystem<CollisionCheckSystem>();
 
     createBobby();
     createJSON();

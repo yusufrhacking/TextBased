@@ -1,15 +1,15 @@
-#include "CollisionSystem.h"
+#include "CollisionCheckSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-CollisionSystem::CollisionSystem() {
+CollisionCheckSystem::CollisionCheckSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
     requireComponent<ColliderComponent>();
 }
 
 
-void CollisionSystem::update(double deltaTime) {
+void CollisionCheckSystem::update(std::shared_ptr<EventBus> eventBus) {
     auto relevantEntities = getRelevantEntities();
 
     for (auto firstIterator = relevantEntities.begin(); firstIterator != relevantEntities.end(); firstIterator++){
@@ -39,8 +39,8 @@ void CollisionSystem::update(double deltaTime) {
     }
 }
 
-bool CollisionSystem::checkAABBCollision(std::shared_ptr<Position> firstPosition, ColliderComponent firstCollider,
-                                         std::shared_ptr<Position> secondPosition, ColliderComponent secondCollider) {
+bool CollisionCheckSystem::checkAABBCollision(std::shared_ptr<Position> firstPosition, ColliderComponent firstCollider,
+                                              std::shared_ptr<Position> secondPosition, ColliderComponent secondCollider) {
     bool firstXOverlap = firstPosition->xPos < (secondPosition->xPos + secondCollider.widthCollisionRange);
     bool secondXOverlap = (firstPosition->xPos + firstCollider.widthCollisionRange) > secondPosition->xPos;
     bool xOverlap = firstXOverlap && secondXOverlap;
@@ -52,7 +52,7 @@ bool CollisionSystem::checkAABBCollision(std::shared_ptr<Position> firstPosition
     return xOverlap && yOverlap;
 }
 
-void CollisionSystem::handleCollision(Entity firstEntity, Entity secondEntity) {
+void CollisionCheckSystem::handleCollision(Entity firstEntity, Entity secondEntity) {
     // Get relevant components
     auto& firstPosition = ecsManager->getComponentFromEntity<PositionComponent>(firstEntity);
     auto& firstCollider = ecsManager->getComponentFromEntity<ColliderComponent>(firstEntity);
@@ -71,8 +71,8 @@ void CollisionSystem::handleCollision(Entity firstEntity, Entity secondEntity) {
     }
 }
 
-float CollisionSystem::getCollisionDepthX(PositionComponent& firstPosition, ColliderComponent& firstCollider,
-                                          PositionComponent& secondPosition, ColliderComponent& secondCollider) {
+float CollisionCheckSystem::getCollisionDepthX(PositionComponent& firstPosition, ColliderComponent& firstCollider,
+                                               PositionComponent& secondPosition, ColliderComponent& secondCollider) {
     if (firstPosition.position->xPos < secondPosition.position->xPos) {
         return (firstPosition.position->xPos + firstCollider.widthCollisionRange) - secondPosition.position->xPos;
     } else {
@@ -80,8 +80,8 @@ float CollisionSystem::getCollisionDepthX(PositionComponent& firstPosition, Coll
     }
 }
 
-float CollisionSystem::getCollisionDepthY(PositionComponent& firstPosition, ColliderComponent& firstCollider,
-                                          PositionComponent& secondPosition, ColliderComponent& secondCollider) {
+float CollisionCheckSystem::getCollisionDepthY(PositionComponent& firstPosition, ColliderComponent& firstCollider,
+                                               PositionComponent& secondPosition, ColliderComponent& secondCollider) {
     if (firstPosition.position->yPos < secondPosition.position->yPos) {
         return (firstPosition.position->yPos + firstCollider.heightCollisionRange) - secondPosition.position->yPos;
     } else {
@@ -89,9 +89,9 @@ float CollisionSystem::getCollisionDepthY(PositionComponent& firstPosition, Coll
     }
 }
 
-void CollisionSystem::resolveCollisionX(PositionComponent& firstPosition, ColliderComponent& firstCollider,
-                                        PositionComponent& secondPosition, ColliderComponent& secondCollider,
-                                        float collisionDepthX) {
+void CollisionCheckSystem::resolveCollisionX(PositionComponent& firstPosition, ColliderComponent& firstCollider,
+                                             PositionComponent& secondPosition, ColliderComponent& secondCollider,
+                                             float collisionDepthX) {
     if (firstPosition.position->xPos < secondPosition.position->xPos) {
         firstPosition.position->xPos -= collisionDepthX / 2.0f;
         secondPosition.position->xPos += collisionDepthX / 2.0f;
@@ -101,9 +101,9 @@ void CollisionSystem::resolveCollisionX(PositionComponent& firstPosition, Collid
     }
 }
 
-void CollisionSystem::resolveCollisionY(PositionComponent& firstPosition, ColliderComponent& firstCollider,
-                                        PositionComponent& secondPosition, ColliderComponent& secondCollider,
-                                        float collisionDepthY) {
+void CollisionCheckSystem::resolveCollisionY(PositionComponent& firstPosition, ColliderComponent& firstCollider,
+                                             PositionComponent& secondPosition, ColliderComponent& secondCollider,
+                                             float collisionDepthY) {
     if (firstPosition.position->yPos < secondPosition.position->yPos) {
         firstPosition.position->yPos -= collisionDepthY / 2.0f;
         secondPosition.position->yPos += collisionDepthY / 2.0f;

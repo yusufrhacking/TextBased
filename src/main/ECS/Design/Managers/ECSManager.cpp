@@ -1,5 +1,6 @@
 #include "ECSManager.h"
 #include "../../Systems/MovementSystem.h"
+#include "../../Systems/EventCreationSystem.h"
 #include <bitset>
 
 int GenericComponent::nextId = 0;
@@ -7,14 +8,22 @@ int GenericComponent::nextId = 0;
 void ECSManager::update(double deltaTime){
     addNewEntities();
     removeDeadEntities();
-    updateSystems(deltaTime);
+    runUpdateSystems(deltaTime);
+    runEventCreationSystems();
 }
 
-void ECSManager::updateSystems(double deltaTime) const {
+void ECSManager::runUpdateSystems(double deltaTime) const {
     for (const auto& system : systemManager->getSystemsOfType<UpdateSystem>()){
         system->update(deltaTime);
     }
 }
+
+void ECSManager::runEventCreationSystems() {
+    for (const auto& system: systemManager->getSystemsOfType<EventCreationSystem>()){
+        system->update(eventBus);
+    }
+}
+
 
 void ECSManager::render(std::shared_ptr<Renderer> renderer){
     for (const auto& system : systemManager->getSystemsOfType<RenderSystem>()){

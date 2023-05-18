@@ -1,16 +1,18 @@
-#ifndef TEXTBASED_COLLISIONSYSTEM_H
-#define TEXTBASED_COLLISIONSYSTEM_H
+#ifndef TEXTBASED_COLLISIONCHECKSYSTEM_H
+#define TEXTBASED_COLLISIONCHECKSYSTEM_H
 #include "UpdateSystem.h"
 #include "../Components/ColliderComponent.h"
 #include "../Components/TextComponent.h"
 #include "../Design/Managers/ECSManager.h"
+#include "../../Helpers/EventSystem/EventBus/EventBus.h"
+#include "EventCreationSystem.h"
 
 
-class CollisionSystem: public UpdateSystem {
+class CollisionCheckSystem: public EventCreationSystem {
     public:
-        CollisionSystem();
+        CollisionCheckSystem();
 
-        void update(double deltaTime) override;
+        void update(std::shared_ptr<EventBus> eventBus) override;
 
     private:
         bool checkAABBCollision(std::shared_ptr<Position> firstPosition, ColliderComponent firstCollider,
@@ -35,4 +37,4 @@ class CollisionSystem: public UpdateSystem {
 };
 
 
-#endif //TEXTBASED_COLLISIONSYSTEM_H
+#endif //TEXTBASED_COLLISIONCHECKSYSTEM_H

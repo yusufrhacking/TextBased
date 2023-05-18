@@ -14,21 +14,25 @@
 #include "../../../Game/GameSystems/Renderer/Renderer.h"
 #include "../../Systems/RenderSystem.h"
 #include "../../Systems/UpdateSystem.h"
+#include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 
 class ECSManager {
     private:
         std::shared_ptr<EntityManager> entityManager;
         std::shared_ptr<ComponentManager> componentManager;
         std::shared_ptr<SystemManager> systemManager;
+        std::shared_ptr<EventBus> eventBus;
         void removeDeadEntities();
         void addNewEntities();
-        void updateSystems(double deltaTime) const;
+        void runUpdateSystems(double deltaTime) const;
+        void runEventCreationSystems();
 
 public:
         ECSManager() {
             entityManager = std::make_shared<EntityManager>();
             componentManager = std::make_shared<ComponentManager>();
             systemManager = std::make_shared<SystemManager>();
+            eventBus = std::make_shared<EventBus>();
         }
 
         ~ECSManager() = default;
@@ -60,6 +64,7 @@ public:
 
         template <typename TSystem>
         TSystem& getSystem() const;
+
 };
 
 template <typename TComponent, typename... TArgs>

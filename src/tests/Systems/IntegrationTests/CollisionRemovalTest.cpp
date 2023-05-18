@@ -3,7 +3,7 @@
 #include "../../../main/Globals.h"
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
 #include "../../../main/ECS/Systems/MovementSystem.h"
-#include "../../../main/ECS/Systems/CollisionSystem.h"
+#include "../../../main/ECS/Systems/CollisionCheckSystem.h"
 
 const int X_POINT_OF_COLLISION = 20;
 const int Y_POINT_OF_COLLISION = 20;
@@ -29,14 +29,14 @@ static void addComponentsToEntities(Entity staticEntity, Entity movingEntity){
 TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemoval]") {
     ecsManager = std::make_unique<ECSManager>();
     ecsManager->addSystem<MovementSystem>();
-    ecsManager->addSystem<CollisionSystem>();
+    ecsManager->addSystem<CollisionCheckSystem>();
 
     Entity staticEntity = ecsManager->createEntity();
     Entity movingEntity = ecsManager->createEntity();
 
     addComponentsToEntities(staticEntity, movingEntity);
 
-    auto& collisionSystem = ecsManager->getSystem<CollisionSystem>();
+    auto& collisionSystem = ecsManager->getSystem<CollisionCheckSystem>();
     auto& movementSystem = ecsManager->getSystem<MovementSystem>();
 
     REQUIRE(collisionSystem.getRelevantEntities().contains(staticEntity));
