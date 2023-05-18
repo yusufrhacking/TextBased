@@ -1,7 +1,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #include "GameManager.h"
-#include "../ECS/Systems/MovementSystem.h"
+#include "../ECS/Systems/UpdateSystems/MovementSystem.h"
 #include "TextGenerator.h"
 #include "../ECS/Components/ColliderComponent.h"
 #include "Levels/Level1.h"

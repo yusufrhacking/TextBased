@@ -2,8 +2,8 @@
 #include <sys/stat.h>
 #include "../../../main/Globals.h"
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../../main/ECS/Systems/MovementSystem.h"
-#include "../../../main/ECS/Systems/CollisionCheckSystem.h"
+#include "../../../main/ECS/Systems/UpdateSystems/MovementSystem.h"
+#include "../../../main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h"
 
 const int X_POINT_OF_COLLISION = 20;
 const int Y_POINT_OF_COLLISION = 20;

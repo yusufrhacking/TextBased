@@ -13,7 +13,7 @@
 #include "SystemManager.h"
 #include "../../../Game/GameSystems/Renderer/Renderer.h"
 #include "../../Systems/RenderSystem.h"
-#include "../../Systems/UpdateSystem.h"
+#include "../../Systems/UpdateSystems/UpdateSystem.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 
 class ECSManager {
@@ -25,7 +25,7 @@ class ECSManager {
         void removeDeadEntities();
         void addNewEntities();
         void runUpdateSystems(double deltaTime) const;
-        void runEventCreationSystems();
+        void runEventSystems();
 
 public:
         ECSManager() {

@@ -1,10 +1,10 @@
 #ifndef TEXTBASED_COLLISIONCHECKSYSTEM_H
 #define TEXTBASED_COLLISIONCHECKSYSTEM_H
-#include "UpdateSystem.h"
-#include "../Components/ColliderComponent.h"
-#include "../Components/TextComponent.h"
-#include "../Design/Managers/ECSManager.h"
-#include "../../Helpers/EventSystem/EventBus/EventBus.h"
+#include "../UpdateSystems/UpdateSystem.h"
+#include "../../Components/ColliderComponent.h"
+#include "../../Components/TextComponent.h"
+#include "../../Design/Managers/ECSManager.h"
+#include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 #include "EventCreationSystem.h"
 
 
