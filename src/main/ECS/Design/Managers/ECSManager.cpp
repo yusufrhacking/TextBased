@@ -1,6 +1,8 @@
 #include "ECSManager.h"
 #include "../../Systems/UpdateSystems/MovementSystem.h"
-#include "../../Systems/EventCreationSystems/EventCreationSystem.h"
+#include "../../Systems/EventCreationSystems/EventProducerSystem.h"
+#include "../../Systems/EventCreationSystems/CollisionCheckSystem.h"
+#include "../../Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include <bitset>
 
 int GenericComponent::nextId = 0;
@@ -9,7 +11,7 @@ void ECSManager::update(double deltaTime){
     addNewEntities();
     removeDeadEntities();
     runUpdateSystems(deltaTime);
-    runEventSystems();
+    runEventProducerSystems();
 }
 
 void ECSManager::runUpdateSystems(double deltaTime) const {
@@ -18,8 +20,8 @@ void ECSManager::runUpdateSystems(double deltaTime) const {
     }
 }
 
-void ECSManager::runEventSystems() {
-    for (const auto& system: systemManager->getSystemsOfType<EventSystem>()){
+void ECSManager::runEventProducerSystems() {
+    for (const auto& system: systemManager->getSystemsOfType<EventProducerSystem>()){
         system->update(eventBus);
     }
 }
@@ -59,5 +61,12 @@ Entity ECSManager::createEntity() {
 
 void ECSManager::killEntity(Entity entity) {
     entityManager->killEntity(entity);
+}
+
+void ECSManager::setup() {
+    addSystem<MovementSystem>();
+    addSystem<RenderSystem>();
+    addSystem<CollisionCheckSystem>();
+    addSystem<CollisionHandleSystem>(eventBus);
 }
 

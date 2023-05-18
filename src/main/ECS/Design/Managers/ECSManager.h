@@ -25,7 +25,7 @@ class ECSManager {
         void removeDeadEntities();
         void addNewEntities();
         void runUpdateSystems(double deltaTime) const;
-        void runEventSystems();
+        void runEventProducerSystems();
 
 public:
         ECSManager() {
@@ -43,6 +43,8 @@ public:
         void update(double deltaTime);
 
         void render(std::shared_ptr<Renderer> renderer);
+
+        void setup();
 
         template <typename TComponent, typename... TArgs>
         void addComponentToEntity(Entity entity, TArgs &&...args);

@@ -4,10 +4,10 @@
 #include <typeindex>
 #include <list>
 #include <memory>
-#include "../EventCallback/EventCallback.h"
+#include "../EventCallback/EventFunctionWrapper.h"
 
 
-typedef std::list<std::unique_ptr<IEventCallback>>EventHandlerList;
+typedef std::list<std::unique_ptr<IEventFunctionWrapper>>EventHandlerList;
 
 class EventBus {
 private:
@@ -33,7 +33,7 @@ void EventBus::listenToEvent(TOwner *ownerOfFunction, void (TOwner::*functionToB
         listeners[typeid(TEvent)] = std::make_unique<EventHandlerList>();
     }
 
-    auto listener = std::make_unique<EventCallback<TOwner, TEvent>>(ownerOfFunction, functionToBeCalled);
+    auto listener = std::make_unique<EventFunctionWrapper<TEvent, TOwner>>(ownerOfFunction, functionToBeCalled);
     listeners[typeid(TEvent)]->push_back(std::move(listener));
 }
 

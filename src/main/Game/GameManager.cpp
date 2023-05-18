@@ -3,10 +3,11 @@
 #include "GameManager.h"
 #include "../ECS/Systems/UpdateSystems/MovementSystem.h"
 #include "TextGenerator.h"
-#include "../ECS/Components/ColliderComponent.h"
+#include "../ECS/Components/CollisionComponent.h"
 #include "Levels/Level1.h"
 
 void GameManager::setup() {
+    ecsManager->setup();
     Level1 level1;
     level1.setup();
 }

@@ -12,7 +12,7 @@ TEST_CASE("Collision System", "[System][Collision]") {
     ecsManager->addComponentToEntity<PositionComponent>(entity, std::make_shared<Position>(0, 0));
     ecsManager->addComponentToEntity<TextComponent>(entity, "text");
     Size size = ecsManager->getComponentFromEntity<TextComponent>(entity).surfaceSize;
-    ecsManager->addComponentToEntity<ColliderComponent>(entity, size);
+    ecsManager->addComponentToEntity<CollisionComponent>(entity, size);
 
     SECTION("Adding and Removing Components") {
         SECTION("Test if in Collision System") {
@@ -30,7 +30,7 @@ TEST_CASE("Collision System", "[System][Collision]") {
             REQUIRE(!system.getRelevantEntities().contains(entity));
         }
         SECTION("Test removing Collider removes entity from Collision System") {
-            ecsManager->removeComponentFromEntity<ColliderComponent>(entity);
+            ecsManager->removeComponentFromEntity<CollisionComponent>(entity);
             auto system = ecsManager->getSystem<CollisionCheckSystem>();
             REQUIRE(!system.getRelevantEntities().contains(entity));
         }

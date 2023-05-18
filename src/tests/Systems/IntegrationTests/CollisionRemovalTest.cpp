@@ -4,24 +4,27 @@
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
 #include "../../../main/ECS/Systems/UpdateSystems/MovementSystem.h"
 #include "../../../main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h"
+#include "../../../main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 
 const int X_POINT_OF_COLLISION = 20;
 const int Y_POINT_OF_COLLISION = 20;
 const int DELTA_TIME = 1;
 
 extern std::unique_ptr<ECSManager> ecsManager;
+std::shared_ptr<EventBus> eventBus;
+
 
 static void addComponentsToEntities(Entity staticEntity, Entity movingEntity){
     ecsManager->addComponentToEntity<PositionComponent>(
             staticEntity, std::make_shared<Position>(X_POINT_OF_COLLISION, Y_POINT_OF_COLLISION));
     ecsManager->addComponentToEntity<TextComponent>(staticEntity, "Static Entity");
     Size staticEntitySize = ecsManager->getComponentFromEntity<TextComponent>(staticEntity).surfaceSize;
-    ecsManager->addComponentToEntity<ColliderComponent>(staticEntity, staticEntitySize);
+    ecsManager->addComponentToEntity<CollisionComponent>(staticEntity, staticEntitySize);
 
     ecsManager->addComponentToEntity<PositionComponent>(movingEntity, std::make_shared<Position>(0, 0));
     ecsManager->addComponentToEntity<TextComponent>(movingEntity, "Moving Entity");
     Size movingEntitySize = ecsManager->getComponentFromEntity<TextComponent>(movingEntity).surfaceSize;
-    ecsManager->addComponentToEntity<ColliderComponent>(movingEntity,movingEntitySize);
+    ecsManager->addComponentToEntity<CollisionComponent>(movingEntity, movingEntitySize);
     ecsManager->addComponentToEntity<MovementComponent>(
             movingEntity, std::make_shared<Velocity>(X_POINT_OF_COLLISION*DELTA_TIME, Y_POINT_OF_COLLISION*DELTA_TIME));
 }
@@ -31,6 +34,10 @@ TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemo
     ecsManager->addSystem<MovementSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
 
+    eventBus = std::make_shared<EventBus>();
+    ecsManager->addSystem<CollisionHandleSystem>(eventBus);
+    ecsManager->getSystem<CollisionHandleSystem>().listenToEvents(eventBus);
+
     Entity staticEntity = ecsManager->createEntity();
     Entity movingEntity = ecsManager->createEntity();
 
@@ -38,13 +45,15 @@ TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemo
 
     auto& collisionSystem = ecsManager->getSystem<CollisionCheckSystem>();
     auto& movementSystem = ecsManager->getSystem<MovementSystem>();
+    auto& collisionHandleSystem = ecsManager->getSystem<CollisionHandleSystem>();
 
     REQUIRE(collisionSystem.getRelevantEntities().contains(staticEntity));
     REQUIRE(collisionSystem.getRelevantEntities().contains(movingEntity));
     REQUIRE(movementSystem.getRelevantEntities().contains(movingEntity));
+    REQUIRE(collisionHandleSystem.getRelevantEntities().contains(movingEntity));
 
-    movementSystem.update(DELTA_TIME);
-    collisionSystem.update(DELTA_TIME);
+    ecsManager->update(DELTA_TIME);
+    ecsManager->update(DELTA_TIME);
     ecsManager->update(DELTA_TIME);//Required to flush out entitiesToBeKilled() --> this is why this should realistically be a mocked version of the ECS manager
 
     REQUIRE(!collisionSystem.getRelevantEntities().contains(staticEntity));

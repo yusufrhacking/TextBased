@@ -2,7 +2,7 @@
 #define TEXTBASED_LEVEL1_H
 #include "../../ECS/Systems/UpdateSystems/MovementSystem.h"
 #include "../TextGenerator.h"
-#include "../../ECS/Components/ColliderComponent.h"
+#include "../../ECS/Components/CollisionComponent.h"
 #include "../../Helpers/Objects/Position.h"
 #include "../../ECS/Design/Managers/ECSManager.h"
 #include <memory>

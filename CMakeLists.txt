@@ -41,10 +41,10 @@ set(SOURCE_FILES
         src/main/ECS/Components/TextComponent.h src/main/ECS/Systems/UpdateSystems/UpdateSystem.h
         src/main/Helpers/Objects/Size.h
         src/main/Game/TextGenerator.cpp src/main/Game/TextGenerator.h src/main/Game/GameManager.cpp src/main/Game/GameManager.h
-        resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/ColliderComponent.h
+        resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/CollisionComponent.h
         src/main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.cpp src/main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventCallback.cpp src/main/Helpers/EventSystem/EventCallback/EventCallback.h src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventCreationSystem.h src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/EventHandlerSystem.h src/main/ECS/Systems/EventSystem.h)
+        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventProducerSystem.h src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h src/main/ECS/Systems/EventSystem.h src/main/Helpers/EventSystem/Events/CollisionEvent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

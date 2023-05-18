@@ -1,19 +1,19 @@
-#ifndef TEXTBASED_EVENTCALLBACK_H
-#define TEXTBASED_EVENTCALLBACK_H
+#ifndef TEXTBASED_EVENTFUNCTIONWRAPPER_H
+#define TEXTBASED_EVENTFUNCTIONWRAPPER_H
 
 #include "../Events/Event.h"
 #include <functional>
 
-class IEventCallback {
+class IEventFunctionWrapper {
 private:
     virtual void call(Event& event) = 0;
 public:
-    virtual ~IEventCallback() = default;
+    virtual ~IEventFunctionWrapper() = default;
     void execute(Event& event);
 };
 
 template <typename TEvent, typename TOwner>
-class EventCallback: public IEventCallback {
+class EventFunctionWrapper: public IEventFunctionWrapper {
 private:
     typedef void (TOwner::*FunctionToBeCalled)(TEvent&);
 
@@ -23,17 +23,17 @@ private:
     void call(Event& event) override;
 
 public:
-    EventCallback(TOwner* ownerOfFunction, FunctionToBeCalled functionToBeCalled){
+    EventFunctionWrapper(TOwner* ownerOfFunction, FunctionToBeCalled functionToBeCalled){
         this->ownerOfFunction = ownerOfFunction;
         this->functionToBeCalled = functionToBeCalled;
     }
-    ~EventCallback() override = default;
+    ~EventFunctionWrapper() override = default;
 };
 
 template<typename TEvent, typename TOwner>
-void EventCallback<TEvent, TOwner>::call(Event &event) {
-    std::invoke(functionToBeCalled, ownerOfFunction, static_cast<TEvent*>(event));
+void EventFunctionWrapper<TEvent, TOwner>::call(Event &event) {
+    std::invoke(functionToBeCalled, ownerOfFunction, static_cast<TEvent&>(event));
 }
 
 
-#endif //TEXTBASED_EVENTCALLBACK_H
+#endif

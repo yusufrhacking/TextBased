@@ -1,17 +1,17 @@
-#ifndef TEXTBASED_COLLIDERCOMPONENT_H
-#define TEXTBASED_COLLIDERCOMPONENT_H
+#ifndef TEXTBASED_COLLISIONCOMPONENT_H
+#define TEXTBASED_COLLISIONCOMPONENT_H
 #include "../../Helpers/Objects/Size.h"
 
-struct ColliderComponent{
+struct CollisionComponent{
     RenderedVal widthCollisionRange;
     RenderedVal heightCollisionRange;
 
-    explicit ColliderComponent(Size surfaceSize){
+    explicit CollisionComponent(Size surfaceSize){
         this->widthCollisionRange = surfaceSize.width;
         this->heightCollisionRange = surfaceSize.height;
     }
 
-    explicit ColliderComponent(int width = 0, int height = 0){
+    explicit CollisionComponent(int width = 0, int height = 0){
         this->widthCollisionRange = width;
         this->heightCollisionRange = height;
     }
