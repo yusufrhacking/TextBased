@@ -1,5 +1,5 @@
 #include "Level1.h"
-#include "GameManager.h"
+#include "../GameManager.h"
 
 void Level1::setup() {
     ecsManager->addSystem<MovementSystem>();

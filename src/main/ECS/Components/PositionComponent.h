@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_POSITIONCOMPONENT_H
 #define TEXTBASED_POSITIONCOMPONENT_H
-#include "../../Objects/Position.h"
-#include "../../Objects/Velocity.h"
+#include "../../Helpers/Objects/Position.h"
+#include "../../Helpers/Objects/Velocity.h"
 #include <memory>
 #include <utility>
 

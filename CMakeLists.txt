@@ -25,7 +25,7 @@ set(SOURCE_FILES
         src/main/Game/GameSystems/Window/Window.cpp src/main/Game/GameSystems/Window/Window.h
         src/main/Game/GameSystems/InputProcessor/InputProcessor.cpp src/main/Game/GameSystems/InputProcessor/InputProcessor.h
         src/main/ECS/Components/PositionComponent.h
-        src/main/Objects/Position.h src/main/Objects/Velocity.h
+        src/main/Helpers/Objects/Position.h src/main/Helpers/Objects/Velocity.h
         src/main/ECS/Systems/MovementSystem.cpp src/main/ECS/Systems/MovementSystem.h
         "src/main/ECS/Design/Objects/Entity.cpp" "src/main/ECS/Design/Objects/Entity.h"
         "src/main/ECS/Design/Objects/Component.cpp" "src/main/ECS/Design/Objects/Component.h"
@@ -39,12 +39,12 @@ set(SOURCE_FILES
         src/main/Globals.h
         src/main/ECS/Systems/RenderSystem.cpp src/main/ECS/Systems/RenderSystem.h
         src/main/ECS/Components/TextComponent.h src/main/ECS/Systems/UpdateSystem.h
-        src/main/Objects/Size.h
+        src/main/Helpers/Objects/Size.h
         src/main/Game/TextGenerator.cpp src/main/Game/TextGenerator.h src/main/Game/GameManager.cpp src/main/Game/GameManager.h
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/ColliderComponent.h
         src/main/ECS/Systems/CollisionSystem.cpp src/main/ECS/Systems/CollisionSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Level1.cpp src/main/Game/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h)
+        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventCallback.cpp src/main/Helpers/EventSystem/EventCallback/EventCallback.h src/main/Helpers/EventSystem/Events/Event.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

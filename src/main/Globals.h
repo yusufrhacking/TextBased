@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_GLOBALS_H
 #define TEXTBASED_GLOBALS_H
 #include <bitset>
-#include "Objects/Position.h"
+#include "Helpers/Objects/Position.h"
 #include "Game/GameSystems/Window/Window.h"
 extern std::unique_ptr<Window> window;
 

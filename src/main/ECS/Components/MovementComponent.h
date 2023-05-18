@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_MOVEMENTCOMPONENT_H
 #define TEXTBASED_MOVEMENTCOMPONENT_H
 
-#include "../../Objects/Velocity.h"
+#include "../../Helpers/Objects/Velocity.h"
 #include <memory>
 #include <utility>
 

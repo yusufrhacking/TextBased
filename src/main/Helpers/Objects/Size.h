@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_SIZE_H
 #define TEXTBASED_SIZE_H
 
-#include "../Globals.h"
+#include "../../Globals.h"
 
 struct Size {
     RenderedVal width;

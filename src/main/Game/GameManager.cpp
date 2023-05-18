@@ -4,7 +4,7 @@
 #include "../ECS/Systems/MovementSystem.h"
 #include "TextGenerator.h"
 #include "../ECS/Components/ColliderComponent.h"
-#include "Level1.h"
+#include "Levels/Level1.h"
 
 void GameManager::setup() {
     Level1 level1;

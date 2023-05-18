@@ -3,10 +3,9 @@
 #include <SDL.h>
 #include "../Window/Window.h"
 #include <SDL_ttf.h>
-#include "../../../Objects/Position.h"
+#include "../../../Helpers/Objects/Position.h"
 #include "../../../ECS/Components/TextComponent.h"
 #include "../../../../../resources/SDL_FontCache.h"
-#include "../../../Objects/Position.h"
 #include "../../../ECS/Components/TextComponent.h"
 #include <iostream>
 #include "../../../../../resources/SDL_FontCache.h"

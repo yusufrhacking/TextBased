@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_WINDOW_H
 #define TEXTBASED_WINDOW_H
 #include <SDL.h>
-#include "../../../Objects/Position.h"
+#include "../../../Helpers/Objects/Position.h"
 
 class Window {
 

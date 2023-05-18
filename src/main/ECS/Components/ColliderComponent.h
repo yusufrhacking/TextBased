@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_COLLIDERCOMPONENT_H
 #define TEXTBASED_COLLIDERCOMPONENT_H
-#include "../../Objects/Size.h"
+#include "../../Helpers/Objects/Size.h"
 
 struct ColliderComponent{
     RenderedVal widthCollisionRange;
