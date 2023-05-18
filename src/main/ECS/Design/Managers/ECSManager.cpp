@@ -7,6 +7,8 @@
 
 int GenericComponent::nextId = 0;
 
+extern std::unique_ptr<EventBus> eventBus;
+
 void ECSManager::update(double deltaTime){
     addNewEntities();
     removeDeadEntities();
@@ -22,7 +24,7 @@ void ECSManager::runUpdateSystems(double deltaTime) const {
 
 void ECSManager::runEventProducerSystems() {
     for (const auto& system: systemManager->getSystemsOfType<EventProducerSystem>()){
-        system->update(eventBus);
+        system->update();
     }
 }
 
@@ -67,6 +69,6 @@ void ECSManager::setup() {
     addSystem<MovementSystem>();
     addSystem<RenderSystem>();
     addSystem<CollisionCheckSystem>();
-    addSystem<CollisionHandleSystem>(eventBus);
+    addSystem<CollisionHandleSystem>();
 }
 

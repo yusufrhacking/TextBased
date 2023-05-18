@@ -11,7 +11,7 @@ const int Y_POINT_OF_COLLISION = 20;
 const int DELTA_TIME = 1;
 
 extern std::unique_ptr<ECSManager> ecsManager;
-std::shared_ptr<EventBus> eventBus;
+extern std::unique_ptr<EventBus> eventBus;
 
 
 static void addComponentsToEntities(Entity staticEntity, Entity movingEntity){
@@ -31,12 +31,12 @@ static void addComponentsToEntities(Entity staticEntity, Entity movingEntity){
 
 TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemoval]") {
     ecsManager = std::make_unique<ECSManager>();
+    eventBus = std::make_unique<EventBus>();
     ecsManager->addSystem<MovementSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
 
-    eventBus = std::make_shared<EventBus>();
-    ecsManager->addSystem<CollisionHandleSystem>(eventBus);
-    ecsManager->getSystem<CollisionHandleSystem>().listenToEvents(eventBus);
+    ecsManager->addSystem<CollisionHandleSystem>();
+    ecsManager->getSystem<CollisionHandleSystem>().listenToEvents();
 
     Entity staticEntity = ecsManager->createEntity();
     Entity movingEntity = ecsManager->createEntity();

@@ -44,7 +44,7 @@ set(SOURCE_FILES
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/CollisionComponent.h
         src/main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.cpp src/main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventProducerSystem.h src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h src/main/ECS/Systems/EventSystem.h src/main/Helpers/EventSystem/Events/CollisionEvent.h)
+        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventProducerSystem.h src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h src/main/Helpers/EventSystem/Events/CollisionEvent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -164,7 +164,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/Catch2SetupTest.cpp src/tests/entityTest.cpp src/tests/Systems/UnitTests/MovementSystemTest.cpp src/tests/ECSManagerDeclaration.cpp src/tests/ECSManagerDeclaration.h src/tests/Systems/UnitTests/RenderSystemTest.cpp src/tests/Systems/IntegrationTests/CollisionRemovalTest.cpp src/tests/Systems/UnitTests/CollisionSystemTest.cpp)
+add_library(test_sources OBJECT src/tests/Catch2SetupTest.cpp src/tests/entityTest.cpp src/tests/Systems/UnitTests/MovementSystemTest.cpp src/tests/TestExternDeclarations.cpp src/tests/TestExternDeclarations.h src/tests/Systems/UnitTests/RenderSystemTest.cpp src/tests/Systems/IntegrationTests/CollisionRemovalTest.cpp src/tests/Systems/UnitTests/CollisionSystemTest.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
 
 

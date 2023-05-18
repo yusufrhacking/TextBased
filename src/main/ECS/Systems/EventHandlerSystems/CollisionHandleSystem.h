@@ -7,16 +7,11 @@
 
 class CollisionHandleSystem: public EventConsumerSystem {
 public:
-    explicit CollisionHandleSystem(std::shared_ptr<EventBus> eventBus) {
-        requireComponent<CollisionComponent>();
-        listenToEvents(eventBus);
-    }
+    CollisionHandleSystem();
 
-    void listenToEvents(std::shared_ptr<EventBus> eventBus);
+    void listenToEvents();
 
     void onCollision(CollisionEvent& event);
-
-    void update(std::shared_ptr<EventBus> eventBus) override;
 };
 
 

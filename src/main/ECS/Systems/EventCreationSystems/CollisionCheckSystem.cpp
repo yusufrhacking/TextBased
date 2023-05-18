@@ -2,6 +2,7 @@
 #include "../../../Helpers/EventSystem/Events/CollisionEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<EventBus> eventBus;
 
 CollisionCheckSystem::CollisionCheckSystem() {
     requireComponent<PositionComponent>();
@@ -10,7 +11,7 @@ CollisionCheckSystem::CollisionCheckSystem() {
 }
 
 
-void CollisionCheckSystem::update(std::shared_ptr<EventBus> eventBus) {
+void CollisionCheckSystem::update() {
     auto relevantEntities = getRelevantEntities();
 
     for (auto firstIterator = relevantEntities.begin(); firstIterator != relevantEntities.end(); firstIterator++){

@@ -12,7 +12,7 @@ class CollisionCheckSystem: public EventProducerSystem {
     public:
         CollisionCheckSystem();
 
-        void update(std::shared_ptr<EventBus> eventBus) override;
+        void update() override;
 
     private:
 

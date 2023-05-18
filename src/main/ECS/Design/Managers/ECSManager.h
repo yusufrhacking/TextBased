@@ -1,5 +1,6 @@
 #ifndef TEXTBASED_ECSMANAGER_H
 #define TEXTBASED_ECSMANAGER_H
+#include <memory>
 #include <vector>
 #include <bitset>
 #include <set>
@@ -16,12 +17,12 @@
 #include "../../Systems/UpdateSystems/UpdateSystem.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 
+
 class ECSManager {
     private:
         std::shared_ptr<EntityManager> entityManager;
         std::shared_ptr<ComponentManager> componentManager;
         std::shared_ptr<SystemManager> systemManager;
-        std::shared_ptr<EventBus> eventBus;
         void removeDeadEntities();
         void addNewEntities();
         void runUpdateSystems(double deltaTime) const;
@@ -32,7 +33,6 @@ public:
             entityManager = std::make_shared<EntityManager>();
             componentManager = std::make_shared<ComponentManager>();
             systemManager = std::make_shared<SystemManager>();
-            eventBus = std::make_shared<EventBus>();
         }
 
         ~ECSManager() = default;

@@ -2,6 +2,12 @@
 #include "../../Design/Managers/ECSManager.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<EventBus> eventBus;
+
+CollisionHandleSystem::CollisionHandleSystem() {
+    requireComponent<CollisionComponent>();
+    listenToEvents();
+}
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
     printf("Here\n");
@@ -9,10 +15,6 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
     ecsManager->killEntity(event.b);
 }
 
-void CollisionHandleSystem::listenToEvents(std::shared_ptr<EventBus> eventBus) {
+void CollisionHandleSystem::listenToEvents() {
     eventBus->listenToEvent<CollisionEvent>(this, &CollisionHandleSystem::onCollision);
-}
-
-void CollisionHandleSystem::update(std::shared_ptr<EventBus> eventBus) {
-
 }
