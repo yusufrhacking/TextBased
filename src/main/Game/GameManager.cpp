@@ -1,15 +1,25 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #include "GameManager.h"
-#include "../ECS/Systems/UpdateSystems/MovementSystem.h"
+#include "../ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h"
 #include "TextGenerator.h"
 #include "../ECS/Components/CollisionComponent.h"
 #include "Levels/Level1.h"
+#include "../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
+#include "../ECS/Systems/UpdateSystems/PlayerMovementSystem.h"
 
 void GameManager::setup() {
-    ecsManager->setup();
+    setupSystems();
     Level1 level1;
     level1.setup();
+}
+
+void GameManager::setupSystems() const {
+    ecsManager->addSystem<AutonomousMovementSystem>();
+    ecsManager->addSystem<RenderSystem>();
+    ecsManager->addSystem<CollisionCheckSystem>();
+    ecsManager->addSystem<CollisionHandleSystem>();
+    ecsManager->addSystem<PlayerMovementSystem>();
 }
 
 #pragma clang diagnostic pop

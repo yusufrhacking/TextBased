@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_LEVEL1_H
 #define TEXTBASED_LEVEL1_H
-#include "../../ECS/Systems/UpdateSystems/MovementSystem.h"
+#include "../../ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h"
 #include "../TextGenerator.h"
 #include "../../ECS/Components/CollisionComponent.h"
 #include "../../Helpers/Objects/Position.h"
@@ -20,6 +20,8 @@ private:
     void createJSON() const;
 
     void createForest(int widthInTrees, Position startingPosition) const;
+
+    void createPlayer();
 };
 
 

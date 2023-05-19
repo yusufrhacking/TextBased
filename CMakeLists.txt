@@ -26,7 +26,7 @@ set(SOURCE_FILES
         src/main/Game/GameSystems/InputProcessor/InputProcessor.cpp src/main/Game/GameSystems/InputProcessor/InputProcessor.h
         src/main/ECS/Components/PositionComponent.h
         src/main/Helpers/Objects/Position.h src/main/Helpers/Objects/Velocity.h
-        src/main/ECS/Systems/UpdateSystems/MovementSystem.cpp src/main/ECS/Systems/UpdateSystems/MovementSystem.h
+        src/main/ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.cpp src/main/ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h
         "src/main/ECS/Design/Objects/Entity.cpp" "src/main/ECS/Design/Objects/Entity.h"
         "src/main/ECS/Design/Objects/Component.cpp" "src/main/ECS/Design/Objects/Component.h"
         "src/main/ECS/Design/Objects/System.cpp" "src/main/ECS/Design/Objects/System.h"
@@ -44,7 +44,7 @@ set(SOURCE_FILES
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/CollisionComponent.h
         src/main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.cpp src/main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventProducerSystem.h src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h src/main/Helpers/EventSystem/Events/CollisionEvent.h)
+        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventProducerSystem.h src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h src/main/Helpers/EventSystem/Events/CollisionEvent.h src/main/Helpers/EventSystem/Events/KeyEvent.h src/main/ECS/Components/PlayerMovementComponent.h src/main/ECS/Systems/UpdateSystems/PlayerMovementSystem.cpp src/main/ECS/Systems/UpdateSystems/PlayerMovementSystem.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

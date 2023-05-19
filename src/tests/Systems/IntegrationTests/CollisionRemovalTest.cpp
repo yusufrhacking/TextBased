@@ -2,7 +2,7 @@
 #include <sys/stat.h>
 #include "../../../main/Globals.h"
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../../main/ECS/Systems/UpdateSystems/MovementSystem.h"
+#include "../../../main/ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h"
 #include "../../../main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h"
 #include "../../../main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 
@@ -32,7 +32,7 @@ static void addComponentsToEntities(Entity staticEntity, Entity movingEntity){
 TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemoval]") {
     ecsManager = std::make_unique<ECSManager>();
     eventBus = std::make_unique<EventBus>();
-    ecsManager->addSystem<MovementSystem>();
+    ecsManager->addSystem<AutonomousMovementSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
 
     ecsManager->addSystem<CollisionHandleSystem>();
@@ -44,7 +44,7 @@ TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemo
     addComponentsToEntities(staticEntity, movingEntity);
 
     auto& collisionSystem = ecsManager->getSystem<CollisionCheckSystem>();
-    auto& movementSystem = ecsManager->getSystem<MovementSystem>();
+    auto& movementSystem = ecsManager->getSystem<AutonomousMovementSystem>();
     auto& collisionHandleSystem = ecsManager->getSystem<CollisionHandleSystem>();
 
     REQUIRE(collisionSystem.getRelevantEntities().contains(staticEntity));

@@ -10,7 +10,6 @@ CollisionHandleSystem::CollisionHandleSystem() {
 }
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
-    printf("Here\n");
     ecsManager->killEntity(event.a);
     ecsManager->killEntity(event.b);
 }

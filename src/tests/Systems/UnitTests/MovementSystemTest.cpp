@@ -2,38 +2,38 @@
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <memory>
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../../main/ECS/Systems/UpdateSystems/MovementSystem.h"
+#include "../../../main/ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-TEST_CASE("Movement System Testing", "[System][MovementSystem]") {
+TEST_CASE("Movement System Testing", "[System][AutonomousMovementSystem]") {
     ecsManager = std::make_unique<ECSManager>();
-    ecsManager->addSystem<MovementSystem>();
+    ecsManager->addSystem<AutonomousMovementSystem>();
     Entity movedEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(movedEntity, std::make_shared<Position>(0, 0));
     ecsManager->addComponentToEntity<MovementComponent>(movedEntity, std::make_shared<Velocity>(20, 20));
 
     SECTION("Test if in Movement System") {
-        MovementSystem system = ecsManager->getSystem<MovementSystem>();
+        AutonomousMovementSystem system = ecsManager->getSystem<AutonomousMovementSystem>();
         REQUIRE(system.getRelevantEntities().contains(movedEntity));
     }SECTION("Test Removing MovementComponent removes entity from Movement System") {
         ecsManager->removeComponentFromEntity<MovementComponent>(movedEntity);
-        MovementSystem system = ecsManager->getSystem<MovementSystem>();
+        AutonomousMovementSystem system = ecsManager->getSystem<AutonomousMovementSystem>();
         REQUIRE(!system.getRelevantEntities().contains(movedEntity));
 
     }SECTION("Test Removing PositionComponent removes entity from Movement System") {
         ecsManager->removeComponentFromEntity<PositionComponent>(movedEntity);
-        MovementSystem system = ecsManager->getSystem<MovementSystem>();
+        AutonomousMovementSystem system = ecsManager->getSystem<AutonomousMovementSystem>();
         REQUIRE(!system.getRelevantEntities().contains(movedEntity));
     }
 }
 
 using Catch::Matchers::WithinAbs;
 
-TEST_CASE("MovementSystem update function moves entities correctly", "[System][MovementSystemUpdate][UpdateMethod]") {
+TEST_CASE("AutonomousMovementSystem update function moves entities correctly", "[System][MovementSystemUpdate][UpdateMethod]") {
     ecsManager = std::make_unique<ECSManager>();
 
-    ecsManager->addSystem<MovementSystem>();
+    ecsManager->addSystem<AutonomousMovementSystem>();
 
 
     Position pos;

@@ -1,13 +1,13 @@
-#include "MovementSystem.h"
+#include "AutonomousMovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-MovementSystem::MovementSystem(){
+AutonomousMovementSystem::AutonomousMovementSystem(){
     requireComponent<PositionComponent>();
     requireComponent<MovementComponent>();
 }
 
-void MovementSystem::update(double deltaTime) {
+void AutonomousMovementSystem::update(double deltaTime) {
     for (Entity entity: getRelevantEntities()){
         auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto movement = ecsManager->getComponentFromEntity<MovementComponent>(entity);

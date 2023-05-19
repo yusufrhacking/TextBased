@@ -9,7 +9,7 @@ class InputProcessor {
         bool processInput(SDL_Event event);
 
     private:
-        bool handleKeyPress(SDL_Event event);
+        bool handleKeyPress(SDL_KeyCode key);
 };
 
 

@@ -1,5 +1,5 @@
 #include "ECSManager.h"
-#include "../../Systems/UpdateSystems/MovementSystem.h"
+#include "../../Systems/EventHandlerSystems/AutonomousMovementSystem.h"
 #include "../../Systems/EventCreationSystems/EventProducerSystem.h"
 #include "../../Systems/EventCreationSystems/CollisionCheckSystem.h"
 #include "../../Systems/EventHandlerSystems/CollisionHandleSystem.h"
@@ -65,10 +65,4 @@ void ECSManager::killEntity(Entity entity) {
     entityManager->killEntity(entity);
 }
 
-void ECSManager::setup() {
-    addSystem<MovementSystem>();
-    addSystem<RenderSystem>();
-    addSystem<CollisionCheckSystem>();
-    addSystem<CollisionHandleSystem>();
-}
 
