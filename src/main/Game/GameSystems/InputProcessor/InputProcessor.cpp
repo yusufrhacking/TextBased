@@ -5,6 +5,9 @@
 #include <SDL.h>
 extern std::unique_ptr<EventBus> eventBus;
 
+const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
+
+
 bool InputProcessor::processInput(SDL_Event event) {
     unsigned int eventType = event.type;
     bool result = true;
@@ -22,21 +25,30 @@ bool InputProcessor::processInput(SDL_Event event) {
 }
 
 bool InputProcessor::handleKeyPress(SDL_KeyCode key){
-    KEY_TYPE keyType;
-    switch(key){
-        case SDLK_ESCAPE:
-            return false;
-        case SDLK_w:
-            keyType = W_KEY; break;
-        case SDLK_a:
-            keyType = A_KEY; break;
-        case SDLK_s:
-            keyType = S_KEY; break;
-        case SDLK_d:
-            keyType = D_KEY; break;
-        default:
-            break;
+    if(key == SDLK_ESCAPE){
+        return false;
     }
-    eventBus->emitEvent<KeyEvent>(keyType);
+    if (keyboard_state_array[SDL_SCANCODE_W] && !(keyboard_state_array[SDL_SCANCODE_S]))
+    {
+        KEY_TYPE keyType = W_KEY;
+        eventBus->emitEvent<KeyEvent>(keyType);
+
+    }
+    else if (!keyboard_state_array[SDL_SCANCODE_W] && keyboard_state_array[SDL_SCANCODE_S])
+    {
+        KEY_TYPE keyType = S_KEY;
+        eventBus->emitEvent<KeyEvent>(keyType);
+    }
+
+    if (keyboard_state_array[SDL_SCANCODE_D] && !keyboard_state_array[SDL_SCANCODE_A])
+    {
+        KEY_TYPE keyType = D_KEY;
+        eventBus->emitEvent<KeyEvent>(keyType);
+    }
+    else if (!keyboard_state_array[SDL_SCANCODE_D] && keyboard_state_array[SDL_SCANCODE_A])
+    {
+        KEY_TYPE keyType = A_KEY;
+        eventBus->emitEvent<KeyEvent>(keyType);
+    }
     return true;
 }
