@@ -1,12 +1,11 @@
 #include "Level1.h"
 #include "../GameManager.h"
-#include "../../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../../ECS/Components/PlayerMovementComponent.h"
 
 void Level1::setup() {
-//    createBobby();
-//    createJSON();
     createPlayer();
+    createBobby();
+    createJSON();
 
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
@@ -61,7 +60,7 @@ void Level1::createBobby() const {
 
 void Level1::createPlayer() {
     Entity giddu = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(giddu, std::make_shared<Position>(400, 300));
+    ecsManager->addComponentToEntity<PositionComponent>(giddu, std::make_shared<Position>(400, 000));
     ecsManager->addComponentToEntity<PlayerMovementComponent>(giddu, std::make_shared<Velocity>(10, 10));
     ecsManager->addComponentToEntity<TextComponent>(giddu, "Giddu");
     ecsManager->addComponentToEntity<StyleComponent>(giddu);
