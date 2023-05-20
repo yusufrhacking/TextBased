@@ -4,7 +4,7 @@
 #include "../../Game/GameSystems/Renderer/Renderer.h"
 #include "../Design/Objects/System.h"
 #include "../Components/PositionComponent.h"
-#include "../Components/TextComponent.h"
+#include "../Components/TextComponents/TextComponent.h"
 #include "../Components/StyleComponent.h"
 
 class RenderSystem: public System {

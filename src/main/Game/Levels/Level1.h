@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_LEVEL1_H
 #define TEXTBASED_LEVEL1_H
-#include "../../ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h"
+#include "../../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../TextGenerator.h"
 #include "../../ECS/Components/CollisionComponent.h"
 #include "../../Helpers/Objects/Position.h"

@@ -2,7 +2,7 @@
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <memory>
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../../main/ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h"
+#include "../../../main/ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

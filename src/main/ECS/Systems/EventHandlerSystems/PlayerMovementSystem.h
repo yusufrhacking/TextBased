@@ -4,7 +4,7 @@
 #include "../../Components/MovementComponent.h"
 #include "../../Components/PositionComponent.h"
 #include "../../Design/Managers/ECSManager.h"
-#include "../EventHandlerSystems/EventConsumerSystem.h"
+#include "EventConsumerSystem.h"
 #include "../../../Helpers/EventSystem/Events/KeyEvent.h"
 
 

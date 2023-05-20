@@ -2,7 +2,7 @@
 #include <sys/stat.h>
 #include "../../../main/Globals.h"
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../../main/ECS/Systems/EventHandlerSystems/AutonomousMovementSystem.h"
+#include "../../../main/ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../../../main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h"
 #include "../../../main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 

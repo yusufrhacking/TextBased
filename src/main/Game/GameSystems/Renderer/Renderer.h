@@ -3,7 +3,7 @@
 #include <gmock/gmock.h>
 
 
-#include "../../../ECS/Components/TextComponent.h"
+#include "../../../ECS/Components/TextComponents/TextComponent.h"
 #include "../../../ECS/Components/StyleComponent.h"
 
 class Renderer {

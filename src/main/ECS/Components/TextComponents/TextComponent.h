@@ -2,8 +2,8 @@
 #define TEXTBASED_TEXTCOMPONENT_H
 #include <string>
 #include <utility>
-#include "../../Globals.h"
-#include "../../Helpers/Objects/Size.h"
+#include "../../../Globals.h"
+#include "../../../Helpers/Objects/Size.h"
 #include <sstream>
 
 struct TextComponent {

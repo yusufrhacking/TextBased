@@ -1,6 +1,6 @@
 #include "PlayerMovementSystem.h"
 #include "../../../Helpers/EventSystem/Events/KeyEvent.h"
-#include "../EventHandlerSystems/AutonomousMovementSystem.h"
+#include "../UpdateSystems/AutonomousMovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

@@ -2,7 +2,7 @@
 #define TEXTBASED_COLLISIONCHECKSYSTEM_H
 #include "../UpdateSystems/UpdateSystem.h"
 #include "../../Components/CollisionComponent.h"
-#include "../../Components/TextComponent.h"
+#include "../../Components/TextComponents/TextComponent.h"
 #include "../../Design/Managers/ECSManager.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 #include "EventProducerSystem.h"

@@ -5,7 +5,7 @@
 #include "../../Components/PositionComponent.h"
 #include "../../Components/MovementComponent.h"
 #include "../../Design/Managers/ECSManager.h"
-#include "../UpdateSystems/UpdateSystem.h"
+#include "UpdateSystem.h"
 
 
 class AutonomousMovementSystem: public UpdateSystem{

@@ -4,9 +4,9 @@
 #include "../Window/Window.h"
 #include <SDL_ttf.h>
 #include "../../../Helpers/Objects/Position.h"
-#include "../../../ECS/Components/TextComponent.h"
+#include "../../../ECS/Components/TextComponents/TextComponent.h"
 #include "../../../../../resources/SDL_FontCache.h"
-#include "../../../ECS/Components/TextComponent.h"
+#include "../../../ECS/Components/TextComponents/TextComponent.h"
 #include <iostream>
 #include "../../../../../resources/SDL_FontCache.h"
 #include "../../../ECS/Components/StyleComponent.h"
