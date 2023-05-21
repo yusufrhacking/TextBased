@@ -13,7 +13,6 @@ void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         throw std::runtime_error("SDL Init Failed");
     }
-
     window = std::make_unique<Window>();
     renderer = std::make_shared<SDLRenderer>(window->getWindow());
     inputProcessor = std::make_unique<InputProcessor>();

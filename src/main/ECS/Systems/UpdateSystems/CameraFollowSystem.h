@@ -7,10 +7,8 @@
 #include "UpdateSystem.h"
 
 class CameraFollowSystem: public UpdateSystem {
-    CameraFollowSystem(){
-        requireComponent<MainPlayerComponent>();
-        requireComponent<PositionComponent>();
-    }
+public:
+    explicit CameraFollowSystem();
 
     void update(double deltaTime) override;
 };

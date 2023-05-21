@@ -72,5 +72,21 @@ Position Window::getBottomRightPosition() const {
     return BOTTOM_RIGHT_POSITION;
 }
 
+void Window::positionCamera(Position position) {
+    camera.x = (int)position.xPos;
+    camera.y = (int)position.yPos;
+}
+
+Position Window::getCameraPosition() {
+    auto xPos = (float)camera.x;
+    auto yPos = (float)camera.y;
+    return {xPos, yPos};
+}
+
+Position Window::getMiddlePosition() {
+    Position MIDDLE = {static_cast<float>(windowWidth)/2, static_cast<float>(windowHeight)/2};
+    return MIDDLE;
+}
+
 
 #pragma clang diagnostic pop

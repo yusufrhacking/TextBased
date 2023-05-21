@@ -21,7 +21,7 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerMovementSystem>();
-//    ecsManager->addSystem<CameraFollowSystem>();
+    ecsManager->addSystem<CameraFollowSystem>();
 }
 
 #pragma clang diagnostic pop
