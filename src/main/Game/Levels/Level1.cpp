@@ -1,6 +1,7 @@
 #include "Level1.h"
 #include "../GameManager.h"
 #include "../../ECS/Components/PlayerMovementComponent.h"
+#include "../../ECS/Components/TextComponents/TreeComponent.h"
 
 void Level1::setup() {
     createPlayer();
@@ -30,9 +31,8 @@ void Level1::createForest(int widthInTrees, Position startingPosition) const {
         for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
             Entity tree = ecsManager->createEntity();
             ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
-            ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
+            ecsManager->addComponentToEntity<TreeComponent>(tree);
             ecsManager->addComponentToEntity<StyleComponent>(tree);
-
             treePosition.yPos += (float)spriteForDimensions->surfaceSize.height;
         }
         treePosition.yPos = 0;

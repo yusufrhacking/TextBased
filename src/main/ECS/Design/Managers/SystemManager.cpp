@@ -2,10 +2,7 @@
 
 
 void SystemManager::addNewEntityToSystem(Entity entity, ComponentSignature entitySignature){
-    int entityId = entity.getId();
-
     for (auto& systemKeyValuePair: systems){
-
         auto const& system = systemKeyValuePair.second;
         auto const& systemComponentSignature = system->getComponentSignature();
 
@@ -17,8 +14,6 @@ void SystemManager::addNewEntityToSystem(Entity entity, ComponentSignature entit
 }
 
 void SystemManager::updateEntityInSystems(Entity entity, ComponentSignature entitySignature){
-    int entityId = entity.getId();
-
     for (auto& systemKeyValuePair: systems){
         auto const& system = systemKeyValuePair.second;
         auto const& systemComponentSignature = system->getComponentSignature();

@@ -22,6 +22,7 @@ public:
     [[nodiscard]] ComponentSignature getComponentSignature() const;
 
     template <typename ComponentGeneric> void requireComponent();
+
 };
 
 template <typename TComponent>

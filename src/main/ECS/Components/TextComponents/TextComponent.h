@@ -21,7 +21,7 @@ struct TextComponent {
     }
 
 
-private:
+protected:
     [[nodiscard]] int getTextHeight() const {
         int height = 0;
         std::istringstream textStream(text);

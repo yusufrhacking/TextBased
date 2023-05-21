@@ -12,18 +12,10 @@ const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
 
 bool InputProcessor::processInput(SDL_Event event) {
     unsigned int eventType = event.type;
-    bool result = true;
-    switch(eventType){
-        case SDL_QUIT:
-            return false;
-        case SDL_KEYDOWN:
-            break;
-        default:
-            break;
+    if(eventType == SDL_QUIT){
+        return false;
     }
-    result = readInput(static_cast<SDL_KeyCode>(event.key.keysym.sym));
-
-    return result;
+    return readInput(static_cast<SDL_KeyCode>(event.key.keysym.sym));
 }
 
 bool InputProcessor::readInput(SDL_KeyCode key){
@@ -40,8 +32,6 @@ bool InputProcessor::readInput(SDL_KeyCode key){
         eventBus->emitEvent<KeyEvent>(KeyEvent(S_KEY));
     }
     if (keyboard_state_array[SDL_SCANCODE_D]){
-        printf("Going right: %d\n", counter);
-        counter++;
         eventBus->emitEvent<KeyEvent>(KeyEvent(D_KEY));
     }
     return true;
