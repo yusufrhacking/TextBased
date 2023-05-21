@@ -22,6 +22,7 @@ class Window {
 
     private:
         SDL_Window* window;
+        SDL_Rect camera;
         int windowWidth;
         int windowHeight;
         void createWindow();

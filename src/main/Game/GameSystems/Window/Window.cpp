@@ -32,6 +32,11 @@ void Window::createWindow() {
     if (window == nullptr){
         throw std::runtime_error(SDL_GetError());
     }
+
+    camera.x = 0;
+    camera.y = 0;
+    camera.w = windowWidth;
+    camera.h = windowHeight;
 }
 
 

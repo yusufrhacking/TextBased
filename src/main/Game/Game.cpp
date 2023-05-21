@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 
-std::unique_ptr<Window> window;
+extern std::unique_ptr<Window> window;
 
 Game::Game(){
 }

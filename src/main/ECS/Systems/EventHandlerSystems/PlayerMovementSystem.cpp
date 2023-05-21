@@ -8,14 +8,14 @@ extern std::unique_ptr<EventBus> eventBus;
 PlayerMovementSystem::PlayerMovementSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
-    requireComponent<PlayerMovementComponent>();
+    requireComponent<MainPlayerComponent>();
     eventBus->listenToEvent<KeyEvent>(this, &PlayerMovementSystem::onKeyPressed);
 }
 
 void PlayerMovementSystem::onKeyPressed(KeyEvent& event) {
     for (auto entity: getRelevantEntities()){
         auto position = ecsManager->getComponentFromEntity<PositionComponent>(entity).position;
-        auto playerVelocity = ecsManager->getComponentFromEntity<PlayerMovementComponent>(entity).velocity;
+        auto playerVelocity = ecsManager->getComponentFromEntity<MainPlayerComponent>(entity).movementSpeed;
         auto xChange = playerVelocity->xVelocity;
         auto yChange = playerVelocity->yVelocity;
 

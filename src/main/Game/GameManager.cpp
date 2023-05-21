@@ -7,6 +7,7 @@
 #include "Levels/Level1.h"
 #include "../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../ECS/Systems/EventHandlerSystems/PlayerMovementSystem.h"
+#include "../ECS/Systems/UpdateSystems/CameraFollowSystem.h"
 
 void GameManager::setup() {
     setupSystems();
@@ -20,6 +21,7 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerMovementSystem>();
+//    ecsManager->addSystem<CameraFollowSystem>();
 }
 
 #pragma clang diagnostic pop

@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_PLAYERMOVEMENTSYSTEM_H
 #define TEXTBASED_PLAYERMOVEMENTSYSTEM_H
-#include "../../Components/PlayerMovementComponent.h"
+#include "../../Components/MainPlayerComponent.h"
 #include "../../Components/MovementComponent.h"
 #include "../../Components/PositionComponent.h"
 #include "../../Design/Managers/ECSManager.h"
