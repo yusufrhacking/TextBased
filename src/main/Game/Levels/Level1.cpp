@@ -5,8 +5,8 @@
 
 void Level1::setup() {
     createPlayer();
-    createBobby();
-    createJSON();
+//    createBobby();
+//    createJSON();
 
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
@@ -33,6 +33,7 @@ void Level1::createForest(int widthInTrees, Position startingPosition) const {
             ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
             ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
             ecsManager->addComponentToEntity<StyleComponent>(tree);
+            ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
             treePosition.yPos += (float)spriteForDimensions->surfaceSize.height;
         }
         treePosition.yPos = 0;
@@ -60,9 +61,9 @@ void Level1::createBobby() const {
 
 void Level1::createPlayer() {
     Entity giddu = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(giddu, window->getTopRightPosition());
-    ecsManager->addComponentToEntity<MainPlayerComponent>(giddu, std::make_shared<Velocity>(5, 5));
     ecsManager->addComponentToEntity<TextComponent>(giddu, "Giddu");
+    ecsManager->addComponentToEntity<PositionComponent>(giddu, window->getMiddlePosition());
+    ecsManager->addComponentToEntity<MainPlayerComponent>(giddu, std::make_shared<Velocity>(5, 5));
     ecsManager->addComponentToEntity<StyleComponent>(giddu);
     ecsManager->addComponentToEntity<CollisionComponent>(giddu, ecsManager->getComponentFromEntity<TextComponent>(giddu).surfaceSize);
 }

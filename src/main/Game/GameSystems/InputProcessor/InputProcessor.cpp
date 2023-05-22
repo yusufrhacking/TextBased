@@ -7,7 +7,6 @@ extern std::unique_ptr<EventBus> eventBus;
 
 static int counter=0;
 
-const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
 
 
 bool InputProcessor::processInput(SDL_Event event) {
@@ -19,6 +18,9 @@ bool InputProcessor::processInput(SDL_Event event) {
 }
 
 bool InputProcessor::readInput(SDL_KeyCode key){
+    SDL_PumpEvents();
+    const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
+
     if(key == SDLK_ESCAPE){
         return false;
     }

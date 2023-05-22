@@ -44,7 +44,9 @@ public:
 
         void render(std::shared_ptr<Renderer> renderer);
 
-        void setup();
+
+        template <typename TComponent>
+        bool hasComponent(Entity entity) const;
 
         template <typename TComponent, typename... TArgs>
         void addComponentToEntity(Entity entity, TArgs &&...args);
@@ -68,6 +70,11 @@ public:
         TSystem& getSystem() const;
 
 };
+
+template<typename TComponent>
+bool ECSManager::hasComponent(Entity entity) const {
+    return componentManager->hasComponent<TComponent>(entity);
+}
 
 template <typename TComponent, typename... TArgs>
 void ECSManager::addComponentToEntity(Entity entity, TArgs &&...args) {

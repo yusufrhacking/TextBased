@@ -1,5 +1,6 @@
 #include "CollisionHandleSystem.h"
 #include "../../Design/Managers/ECSManager.h"
+#include "../../Components/MainPlayerComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -10,8 +11,12 @@ CollisionHandleSystem::CollisionHandleSystem() {
 }
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
-    ecsManager->killEntity(event.a);
-    ecsManager->killEntity(event.b);
+    if (!ecsManager->hasComponent<MainPlayerComponent>(event.a)){
+        ecsManager->killEntity(event.a);
+    }
+    if (!ecsManager->hasComponent<MainPlayerComponent>(event.b)){
+        ecsManager->killEntity(event.b);
+    }
 }
 
 void CollisionHandleSystem::listenToEvents() {
