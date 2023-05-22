@@ -11,12 +11,9 @@ CollisionHandleSystem::CollisionHandleSystem() {
 }
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
-    if (!ecsManager->hasComponent<MainPlayerComponent>(event.a)){
-        ecsManager->killEntity(event.a);
-    }
-    if (!ecsManager->hasComponent<MainPlayerComponent>(event.b)){
-        ecsManager->killEntity(event.b);
-    }
+    ecsManager->killEntity(event.a);
+    ecsManager->killEntity(event.b);
+
 }
 
 void CollisionHandleSystem::listenToEvents() {

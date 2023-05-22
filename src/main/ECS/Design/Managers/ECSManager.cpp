@@ -3,6 +3,7 @@
 #include "../../Systems/EventCreationSystems/EventProducerSystem.h"
 #include "../../Systems/EventCreationSystems/CollisionCheckSystem.h"
 #include "../../Systems/EventHandlerSystems/CollisionHandleSystem.h"
+#include "../../Components/MainPlayerComponent.h"
 #include <bitset>
 
 int GenericComponent::nextId = 0;
@@ -62,7 +63,8 @@ Entity ECSManager::createEntity() {
 }
 
 void ECSManager::killEntity(Entity entity) {
-    entityManager->killEntity(entity);
+    if (!hasComponent<MainPlayerComponent>(entity))
+        entityManager->killEntity(entity);
 }
 
 
