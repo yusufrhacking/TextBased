@@ -11,7 +11,7 @@ CollisionCheckSystem::CollisionCheckSystem() {
 }
 
 
-void CollisionCheckSystem::update() {
+void CollisionCheckSystem::update(double deltaTime) {
     auto relevantEntities = getRelevantEntities();
 
     for (auto firstIterator = relevantEntities.begin(); firstIterator != relevantEntities.end(); firstIterator++){
@@ -32,7 +32,7 @@ void CollisionCheckSystem::update() {
             bool isAABCollision = checkAABBCollision(firstPosition.position, firstCollider, secondPosition.position, secondCollider);
 
             if (isAABCollision){
-                eventBus->emitEvent<CollisionEvent>(first, second);
+                eventBus->emitEvent<CollisionEvent>(first, second, deltaTime);
 //                ecsManager->killEntity(first);
 //                ecsManager->killEntity(second);
             }

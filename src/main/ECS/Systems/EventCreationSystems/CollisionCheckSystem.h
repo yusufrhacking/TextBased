@@ -8,11 +8,11 @@
 #include "EventProducerSystem.h"
 
 
-class CollisionCheckSystem: public EventProducerSystem {
+class CollisionCheckSystem: public UpdateSystem {
     public:
         CollisionCheckSystem();
 
-        void update() override;
+        void update(double deltaTime) override;
 
     private:
 

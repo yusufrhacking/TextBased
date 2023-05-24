@@ -8,6 +8,8 @@ extern std::unique_ptr<Window> window;
 const unsigned int NUM_OF_COMPONENTS = 64;
 using ComponentSignature = std::bitset<NUM_OF_COMPONENTS>;
 const unsigned int MAX_ENTITIES = 1000;
+const unsigned int MAP_WIDTH = 1000;
+const unsigned int MAP_HEIGHT = 1000;
 
 using RenderedVal = unsigned int;
 
