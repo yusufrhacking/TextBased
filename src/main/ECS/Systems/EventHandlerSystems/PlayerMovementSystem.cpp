@@ -14,21 +14,24 @@ PlayerMovementSystem::PlayerMovementSystem() {
 
 void PlayerMovementSystem::onKeyPressed(KeyEvent& event) {
     for (auto entity: getRelevantEntities()){
-        auto position = ecsManager->getComponentFromEntity<PositionComponent>(entity).position;
+        auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         auto playerVelocity = ecsManager->getComponentFromEntity<MainPlayerComponent>(entity).movementSpeed;
-        auto xChange = playerVelocity->xVelocity;
-        auto yChange = playerVelocity->yVelocity;
+        int xChange = 0;
+        int yChange = 0;
 
         switch (event.keyType){
             case W_KEY:
-                position->yPos -= (float)yChange; break;
+                yChange = -1*playerVelocity->yVelocity; break;
             case A_KEY:
-                position->xPos -= (float)xChange; break;
+                xChange = -1*playerVelocity->xVelocity; break;
             case S_KEY:
-                position->yPos += (float)yChange; break;
+                yChange = playerVelocity->yVelocity; break;
             case D_KEY:
-                position->xPos += (float)xChange; break;
+                xChange = playerVelocity->xVelocity; break;
         }
+
+        positionComponent.changePosition(xChange, yChange);
+
     }
 }
 

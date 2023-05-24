@@ -19,12 +19,12 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 FONT_SIZE, FC_MakeColor(255,255,255,255), TTF_STYLE_NORMAL);
 }
 
-void SDLRenderer::renderText(const std::shared_ptr<Position>& position, const TextComponent& sprite, const StyleComponent& style){
+void SDLRenderer::renderText(Position position, const TextComponent& sprite, const StyleComponent& style){
     auto cameraPos = window->getCameraPosition();
     switch (style.getStyle()){
         case WHITE_MONACO_GENERIC:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(genericMonacoFont, renderer, position->xPos - cameraPos.xPos, position->yPos - cameraPos.yPos, sprite.text.c_str());
+            FC_Draw(genericMonacoFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
             break;
         default: throw NoStyleException();
     }

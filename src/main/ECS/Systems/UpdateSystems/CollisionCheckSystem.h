@@ -14,27 +14,10 @@ class CollisionCheckSystem: public UpdateSystem {
 
         void update(double deltaTime) override;
 
+    static bool checkAABBCollision(Position firstPosition, CollisionComponent firstCollider,
+                                   Position secondPosition, CollisionComponent secondCollider);
+
     private:
-
-        bool checkAABBCollision(std::shared_ptr<Position> firstPosition, CollisionComponent firstCollider,
-                                std::shared_ptr<Position> secondPosition, CollisionComponent secondCollider);
-
-    void handleCollision(Entity entity, Entity entity1);
-
-    void
-    resolveCollisionY(PositionComponent &firstPosition, CollisionComponent &firstCollider,
-                      PositionComponent &secondPosition,
-                      CollisionComponent &secondCollider, float collisionDepthY);
-
-    void resolveCollisionX(PositionComponent& firstPosition, CollisionComponent& firstCollider,
-                           PositionComponent& secondPosition, CollisionComponent& secondCollider,
-                           float collisionDepthX);
-
-    float getCollisionDepthY(PositionComponent &firstPosition, CollisionComponent &firstCollider,
-                             PositionComponent &secondPosition, CollisionComponent &secondCollider);
-
-    float getCollisionDepthX(PositionComponent &firstPosition, CollisionComponent &firstCollider,
-                             PositionComponent &secondPosition, CollisionComponent &secondCollider);
 };
 
 

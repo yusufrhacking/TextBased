@@ -1,4 +1,5 @@
 #include "AutonomousMovementSystem.h"
+#include "CollisionCheckSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -14,8 +15,8 @@ void AutonomousMovementSystem::update(double deltaTime) {
 
         double xChange = movement.velocity->xVelocity * deltaTime;
         double yChange = movement.velocity->yVelocity * deltaTime;
-        position.position->xPos += (float)xChange;
-        position.position->yPos += (float)yChange;
+
+        position.changePosition(xChange, yChange);
     }
 }
 

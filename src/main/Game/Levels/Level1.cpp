@@ -62,7 +62,7 @@ void Level1::createBobby() const {
 void Level1::createPlayer() {
     Entity giddu = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(giddu, "Giddu");
-    ecsManager->addComponentToEntity<PositionComponent>(giddu, window->getTopLeftPosition());
+    ecsManager->addComponentToEntity<PositionComponent>(giddu, window->getMiddlePosition());
     ecsManager->addComponentToEntity<MainPlayerComponent>(giddu, std::make_shared<Velocity>(5, 5));
     ecsManager->addComponentToEntity<StyleComponent>(giddu);
     ecsManager->addComponentToEntity<CollisionComponent>(giddu, ecsManager->getComponentFromEntity<TextComponent>(giddu).surfaceSize);
