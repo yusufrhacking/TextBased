@@ -3,7 +3,7 @@
 #include "../../../main/Globals.h"
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
 #include "../../../main/ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
-#include "../../../main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h"
+#include "../../../main/ECS/Systems/UpdateSystems/CollisionCheckSystem.h"
 #include "../../../main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 
 const int X_POINT_OF_COLLISION = 20;

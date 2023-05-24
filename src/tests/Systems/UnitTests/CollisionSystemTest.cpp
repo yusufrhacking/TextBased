@@ -1,7 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <memory>
 #include "../../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../../main/ECS/Systems/EventCreationSystems/CollisionCheckSystem.h"
+#include "../../../main/ECS/Systems/UpdateSystems/CollisionCheckSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 TEST_CASE("Collision System", "[System][Collision]") {

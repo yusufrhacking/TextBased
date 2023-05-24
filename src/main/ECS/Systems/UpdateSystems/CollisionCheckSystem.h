@@ -1,11 +1,11 @@
 #ifndef TEXTBASED_COLLISIONCHECKSYSTEM_H
 #define TEXTBASED_COLLISIONCHECKSYSTEM_H
-#include "../UpdateSystems/UpdateSystem.h"
+#include "UpdateSystem.h"
 #include "../../Components/CollisionComponent.h"
 #include "../../Components/TextComponents/TextComponent.h"
 #include "../../Design/Managers/ECSManager.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
-#include "EventProducerSystem.h"
+#include "../EventCreationSystems/EventProducerSystem.h"
 
 
 class CollisionCheckSystem: public UpdateSystem {

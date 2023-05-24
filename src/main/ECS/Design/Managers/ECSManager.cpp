@@ -1,7 +1,7 @@
 #include "ECSManager.h"
 #include "../../Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../../Systems/EventCreationSystems/EventProducerSystem.h"
-#include "../../Systems/EventCreationSystems/CollisionCheckSystem.h"
+#include "../../Systems/UpdateSystems/CollisionCheckSystem.h"
 #include "../../Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../../Components/MainPlayerComponent.h"
 #include <bitset>
