@@ -26,7 +26,7 @@ class ECSManager {
         void removeDeadEntities();
         void addNewEntities();
         void runUpdateSystems(double deltaTime) const;
-        void runEventProducerSystems();
+        void runUntimedSystems();
 
 public:
         ECSManager() {

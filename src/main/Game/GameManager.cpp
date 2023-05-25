@@ -6,8 +6,9 @@
 #include "../ECS/Components/CollisionComponent.h"
 #include "Levels/Level1.h"
 #include "../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
-#include "../ECS/Systems/EventHandlerSystems/PlayerMovementSystem.h"
+#include "../ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h"
 #include "../ECS/Systems/UpdateSystems/CameraFollowSystem.h"
+#include "../ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedMovementSystem.h"
 
 void GameManager::setup() {
     setupSystems();
@@ -20,8 +21,9 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<RenderSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
-    ecsManager->addSystem<PlayerMovementSystem>();
+    ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
+    ecsManager->addSystem<UnprocessedMovementSystem>();
 }
 
 #pragma clang diagnostic pop

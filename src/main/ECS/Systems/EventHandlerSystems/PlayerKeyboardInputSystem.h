@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_PLAYERMOVEMENTSYSTEM_H
-#define TEXTBASED_PLAYERMOVEMENTSYSTEM_H
+#ifndef TEXTBASED_PLAYERKEYBOARDINPUTSYSTEM_H
+#define TEXTBASED_PLAYERKEYBOARDINPUTSYSTEM_H
 #include "../../Components/MainPlayerComponent.h"
 #include "../../Components/MovementComponent.h"
 #include "../../Components/PositionComponent.h"
@@ -8,14 +8,13 @@
 #include "../../../Helpers/EventSystem/Events/KeyEvent.h"
 
 
-class PlayerMovementSystem: public EventConsumerSystem {
+class PlayerKeyboardInputSystem: public EventConsumerSystem {
 private:
     void onKeyPressed(KeyEvent& event);
 public:
-    explicit PlayerMovementSystem();
-
+    explicit PlayerKeyboardInputSystem();
 
 };
 
 
-#endif //TEXTBASED_PLAYERMOVEMENTSYSTEM_H
+#endif //TEXTBASED_PLAYERKEYBOARDINPUTSYSTEM_H

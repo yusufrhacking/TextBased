@@ -6,11 +6,11 @@
 #include "../../Components/PositionComponent.h"
 #include "UpdateSystem.h"
 
-class CameraFollowSystem: public UpdateSystem {
+class CameraFollowSystem: public System {
 public:
     explicit CameraFollowSystem();
 
-    void update(double deltaTime) override;
+    void update();
 };
 
 

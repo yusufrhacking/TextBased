@@ -5,8 +5,8 @@
 
 void Level1::setup() {
     createPlayer();
-//    createBobby();
-//    createJSON();
+    createBobby();
+    createJSON();
 
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
@@ -56,7 +56,7 @@ void Level1::createBobby() const {
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
     ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
     ecsManager->addComponentToEntity<StyleComponent>(tank);
-    ecsManager->addComponentToEntity<CollisionComponent>(tank, ecsManager->getComponentFromEntity<TextComponent>(tank).surfaceSize);
+//    ecsManager->addComponentToEntity<CollisionComponent>(tank, ecsManager->getComponentFromEntity<TextComponent>(tank).surfaceSize);
 }
 
 void Level1::createPlayer() {

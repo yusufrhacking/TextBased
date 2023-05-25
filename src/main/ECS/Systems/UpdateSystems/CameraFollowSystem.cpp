@@ -11,7 +11,10 @@ CameraFollowSystem::CameraFollowSystem() {
 }
 
 
-void CameraFollowSystem::update(double deltaTime) {
+void CameraFollowSystem::update() {
+    if(getRelevantEntities().empty()){
+        return;
+    }
     auto entity = *getRelevantEntities().begin();
     auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
 
