@@ -30,13 +30,9 @@ public:
         this->previousPosition = Position(0, 0);
     }
 
-    void updatePreviousPosition(){
-        previousPosition = *position;
-    }
 
     void changePosition(double xChange, double yChange){
-        updatePreviousPosition();
-        printf("Found curr frame: %d\n", currFrame);
+        previousPosition = *position;
         frameLastMoved = currFrame;
         position->xPos += (float)xChange;
         position->yPos += (float)yChange;
@@ -55,13 +51,7 @@ public:
     }
 
     void revertPosition(){
-//        printf("REVERTING POSITION\n");
-//        printf("UPDATING\n");
-//        printf("Previous X Pos: %f\n", previousPosition.xPos);
-//        printf("Previous Y Pos: %f\n", previousPosition.yPos);
         *position = previousPosition;
-//        printf("New X Pos: %f\n", position->xPos);
-//        printf("New Y Pos: %f\n", position->yPos);
     }
 
 };

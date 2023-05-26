@@ -7,8 +7,6 @@
 #include "../../Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../../Systems/UpdateSystems/CameraFollowSystem.h"
 
-#include <bitset>
-
 int GenericComponent::nextId = 0;
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -53,7 +51,7 @@ void ECSManager::addNewEntities() {
 
 void ECSManager::removeDeadEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeKilled()){
-        ComponentSignature clearSignature = std::bitset<NUM_OF_COMPONENTS>();
+        ComponentSignature clearSignature;
         entityManager->setSignature(entity, clearSignature);
         ComponentSignature postSig = entityManager->getSignature(entity);
         componentManager->clearEntity(entity);

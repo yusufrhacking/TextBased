@@ -44,7 +44,18 @@ set(SOURCE_FILES
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/CollisionComponent.h
         src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.cpp src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventProducerSystem.h src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h src/main/Helpers/EventSystem/Events/CollisionEvent.h src/main/Helpers/EventSystem/Events/KeyEvent.h src/main/ECS/Components/MainPlayerComponent.h src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.cpp src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h src/main/ECS/Components/TextComponents/TreeComponent.h src/main/ECS/Systems/UpdateSystems/CameraFollowSystem.cpp src/main/ECS/Systems/UpdateSystems/CameraFollowSystem.h src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedMovement.cpp src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedMovement.h src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.cpp src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h)
+        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h
+        src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h
+        src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h
+        src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h
+        src/main/Helpers/EventSystem/Events/Event.h src/main/ECS/Systems/EventCreationSystems/EventProducerSystem.h
+        src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h
+        src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h
+        src/main/Helpers/EventSystem/Events/CollisionEvent.h
+        src/main/Helpers/EventSystem/Events/KeyEvent.h
+        src/main/ECS/Components/MainPlayerComponent.h
+        src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.cpp src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h
+        src/main/ECS/Components/TextComponents/TreeComponent.h src/main/ECS/Systems/UpdateSystems/CameraFollowSystem.cpp src/main/ECS/Systems/UpdateSystems/CameraFollowSystem.h src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedMovement.cpp src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedMovement.h src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.cpp src/main/ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h src/main/ECS/Design/Objects/ComponentSignature.cpp src/main/ECS/Design/Objects/ComponentSignature.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
