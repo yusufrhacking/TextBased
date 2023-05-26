@@ -6,10 +6,11 @@
 
 class CollisionEvent: public Event{
 public:
-    Entity a;
-    Entity b;
+    Entity offender;
+    Entity defender;
     double deltaTime;
-    CollisionEvent(Entity a, Entity b, double deltaTime): a(a), b(b), deltaTime(deltaTime) {}
+    CollisionEvent(Entity offender, Entity defender, double deltaTime):
+    offender(offender), defender(defender), deltaTime(deltaTime) {}
 };
 
 #endif //TEXTBASED_COLLISIONEVENT_H

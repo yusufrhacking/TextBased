@@ -32,7 +32,10 @@ void CollisionCheckSystem::update(double deltaTime) {
             bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstCollider, secondPosition.getPosition(), secondCollider);
 
             if (isAABCollision){
-                eventBus->emitEvent<CollisionEvent>(first, second, deltaTime);
+                Entity offender = findOffender(first, second);
+                Entity defender = findDefender(first, second);
+
+                eventBus->emitEvent<CollisionEvent>(offender, defender, deltaTime);
 //                ecsManager->killEntity(first);
 //                ecsManager->killEntity(second);
             }
@@ -52,6 +55,48 @@ bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, Coll
     bool yOverlap = firstYOverlap && secondYOverlap;
 
     return xOverlap && yOverlap;
+}
+
+Entity CollisionCheckSystem::findOffender(Entity a, Entity b) {
+    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
+    auto aCurrPosition = aPositionComponent.getPosition();
+    auto aPrevPosition = aPositionComponent.getPreviousPosition();
+    auto aMovementTotal = getMovementTotal(aCurrPosition, aPrevPosition);
+
+    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
+    auto bCurrPosition = bPositionComponent.getPosition();
+    auto bPrevPosition = bPositionComponent.getPreviousPosition();
+    auto bMovementTotal = getMovementTotal(bCurrPosition, bPrevPosition);
+
+    if (aMovementTotal > bMovementTotal){
+        return a;
+    } else{
+        return b;
+    }
+}
+
+Entity CollisionCheckSystem::findDefender(Entity a, Entity b) {
+    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
+    auto aCurrPosition = aPositionComponent.getPosition();
+    auto aPrevPosition = aPositionComponent.getPreviousPosition();
+    auto aMovementTotal = getMovementTotal(aCurrPosition, aPrevPosition);
+
+    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
+    auto bCurrPosition = bPositionComponent.getPosition();
+    auto bPrevPosition = bPositionComponent.getPreviousPosition();
+    auto bMovementTotal = getMovementTotal(bCurrPosition, bPrevPosition);
+
+    if (aMovementTotal < bMovementTotal){
+        return a;
+    } else{
+        return b;
+    }
+}
+
+float CollisionCheckSystem::getMovementTotal(Position currentPos, Position previousPos) {
+    float xChange = currentPos.xPos - previousPos.xPos;
+    float yChange = currentPos.yPos - previousPos.yPos;
+    return abs(xChange)+abs(yChange);
 }
 
 

@@ -18,6 +18,11 @@ class CollisionCheckSystem: public UpdateSystem {
                                    Position secondPosition, CollisionComponent secondCollider);
 
     private:
+    Entity findOffender(Entity a, Entity b);
+
+    Entity findDefender(Entity a, Entity b);
+
+    float getMovementTotal(Position currentPos, Position previousPos);
 };
 
 

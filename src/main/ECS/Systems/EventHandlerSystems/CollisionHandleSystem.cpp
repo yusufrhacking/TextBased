@@ -12,8 +12,7 @@ CollisionHandleSystem::CollisionHandleSystem() {
 }
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
-    ecsManager->getComponentFromEntity<PositionComponent>(event.a).revertPosition();
-    ecsManager->getComponentFromEntity<PositionComponent>(event.b).revertPosition();
+    ecsManager->getComponentFromEntity<PositionComponent>(event.offender).revertPosition();
 }
 
 void CollisionHandleSystem::listenToEvents() {
