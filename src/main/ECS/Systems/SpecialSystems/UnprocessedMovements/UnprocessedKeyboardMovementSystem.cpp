@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "UnprocessedKeyboardMovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -24,14 +25,17 @@ void UnprocessedKeyboardMovementSystem::processMovement() {
             totalChangeForEntities[entity] = velocity;
         }
     }
+    spdlog::trace("Unprocessed Movements Tallied");
     for (const auto& changes : totalChangeForEntities) {
         int entityID = changes.first;
         const Velocity& velocity = changes.second;
         auto& position = ecsManager->getComponentFromEntity<PositionComponent>(Entity(entityID));
         position.changePosition(velocity.xVelocity, velocity.yVelocity);
+        spdlog::trace("Entity {} moved {}, {}", entityID, velocity.xVelocity, velocity.yVelocity);
     }
     unprocessedMovements->clear();
     totalChangeForEntities.clear();
+    spdlog::debug("Done processing movements");
 
 }
 

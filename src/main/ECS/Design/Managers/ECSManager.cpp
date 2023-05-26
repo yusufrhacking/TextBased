@@ -5,8 +5,8 @@
 #include "../../Systems/UpdateSystems/CollisionCheckSystem.h"
 #include "../../Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../../Components/MainPlayerComponent.h"
-#include "../../Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
-#include "../../Systems/UpdateSystems/CameraFollowSystem.h"
+#include "../../Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
+#include "../../Systems/SpecialSystems/CameraFollowSystem.h"
 
 int GenericComponent::nextId = 0;
 

@@ -7,8 +7,8 @@
 #include "Levels/Level1.h"
 #include "../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h"
-#include "../ECS/Systems/UpdateSystems/CameraFollowSystem.h"
-#include "../ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
+#include "../ECS/Systems/SpecialSystems/CameraFollowSystem.h"
+#include "../ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 
 void GameManager::setup() {
     setupSystems();

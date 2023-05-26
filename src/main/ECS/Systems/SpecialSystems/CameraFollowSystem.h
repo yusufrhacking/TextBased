@@ -4,7 +4,7 @@
 
 #include "../../Components/MainPlayerComponent.h"
 #include "../../Components/PositionComponent.h"
-#include "UpdateSystem.h"
+#include "../UpdateSystems/UpdateSystem.h"
 
 class CameraFollowSystem: public System {
 public:
