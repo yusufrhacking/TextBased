@@ -29,11 +29,7 @@ void Level1::createForest(int widthInTrees, Position startingPosition) const {
     Position treePosition = startingPosition;
     for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
         for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
-            Entity tree = ecsManager->createEntity();
-            ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
-            ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
-            ecsManager->addComponentToEntity<StyleComponent>(tree);
-            ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
+            createTreeAtPosition(treePosition);
             treePosition.yPos += (float)spriteForDimensions->surfaceSize.height;
         }
         treePosition.yPos = 0;
@@ -66,4 +62,12 @@ void Level1::createPlayer() {
     ecsManager->addComponentToEntity<MainPlayerComponent>(giddu, std::make_shared<Velocity>(5, 5));
     ecsManager->addComponentToEntity<StyleComponent>(giddu);
     ecsManager->addComponentToEntity<CollisionComponent>(giddu, ecsManager->getComponentFromEntity<TextComponent>(giddu).surfaceSize);
+}
+
+void Level1::createTreeAtPosition(Position position) const {
+    Entity tree = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<PositionComponent>(tree, position);
+    ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
+    ecsManager->addComponentToEntity<StyleComponent>(tree);
+    ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
 }
