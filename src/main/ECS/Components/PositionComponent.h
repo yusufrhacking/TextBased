@@ -2,6 +2,7 @@
 #define TEXTBASED_POSITIONCOMPONENT_H
 #include "../../Helpers/Objects/Position.h"
 #include "../../Helpers/Objects/Velocity.h"
+#include "../../Globals.h"
 #include <memory>
 #include <utility>
 
@@ -9,6 +10,7 @@ struct PositionComponent {
 private:
     std::shared_ptr<Position> position;
     Position previousPosition;
+    int frameLastMoved = -1;
 public:
 
     explicit PositionComponent(std::shared_ptr<Position> position) {
@@ -32,6 +34,7 @@ public:
 
     void changePosition(double xChange, double yChange){
         updatePreviousPosition();
+        frameLastMoved = currFrame;
         position->xPos += (float)xChange;
         position->yPos += (float)yChange;
     }
@@ -42,6 +45,10 @@ public:
 
     [[nodiscard]] Position getPreviousPosition() const{
         return previousPosition;
+    }
+
+    [[nodiscard]] int getFrameLastMoved() const{
+        return frameLastMoved;
     }
 
     void revertPosition(){

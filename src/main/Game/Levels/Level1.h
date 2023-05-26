@@ -24,6 +24,8 @@ private:
     void createPlayer();
 
     void createTreeAtPosition(Position position) const;
+
+    void createForests();
 };
 
 

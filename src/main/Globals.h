@@ -10,6 +10,8 @@ using ComponentSignature = std::bitset<NUM_OF_COMPONENTS>;
 const unsigned int MAX_ENTITIES = 1000;
 const unsigned int MAP_WIDTH = 1000;
 const unsigned int MAP_HEIGHT = 1000;
+static int currFrame = 0;
+
 
 using RenderedVal = unsigned int;
 

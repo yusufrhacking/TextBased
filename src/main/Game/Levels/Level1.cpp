@@ -7,7 +7,10 @@ void Level1::setup() {
     createPlayer();
     createBobby();
     createJSON();
+    createForests();
+}
 
+void Level1::createForests() {
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     int treeWidth = 2;
@@ -71,3 +74,4 @@ void Level1::createTreeAtPosition(Position position) const {
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
 }
+

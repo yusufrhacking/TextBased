@@ -58,10 +58,13 @@ bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, Coll
 }
 
 Entity CollisionCheckSystem::findOffender(Entity a, Entity b) {
-    auto aMovementTotal = getMovementTotal(a);
-    auto bMovementTotal = getMovementTotal(b);
+    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
+    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
 
-    if (aMovementTotal > bMovementTotal){
+    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
+    auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
+
+    if (aLastFrameMoved > bLastFrameMoved){
         return a;
     } else{
         return b;
@@ -69,10 +72,13 @@ Entity CollisionCheckSystem::findOffender(Entity a, Entity b) {
 }
 
 Entity CollisionCheckSystem::findDefender(Entity a, Entity b) {
-    auto aMovementTotal = getMovementTotal(a);
-    auto bMovementTotal = getMovementTotal(b);
+    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
+    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
 
-    if (aMovementTotal < bMovementTotal){
+    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
+    auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
+
+    if (aLastFrameMoved < bLastFrameMoved){
         return a;
     } else{
         return b;
@@ -80,9 +86,9 @@ Entity CollisionCheckSystem::findDefender(Entity a, Entity b) {
 }
 
 float CollisionCheckSystem::getMovementTotal(Entity entity) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    auto currentPos = aPositionComponent.getPosition();
-    auto previousPos = aPositionComponent.getPreviousPosition();
+    auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    auto currentPos = positionComponent.getPosition();
+    auto previousPos = positionComponent.getPreviousPosition();
 
     float xChange = currentPos.xPos - previousPos.xPos;
     float yChange = currentPos.yPos - previousPos.yPos;

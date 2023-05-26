@@ -6,6 +6,7 @@
 
 extern std::unique_ptr<Window> window;
 
+
 Game::Game(){
 }
 
@@ -30,6 +31,7 @@ void Game::run() {
         processInput();
         update();
         render();
+        currFrame++;
     }
 }
 
