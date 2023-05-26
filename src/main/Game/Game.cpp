@@ -2,6 +2,7 @@
 #include "GameSystems/Renderer/SDLRenderer.h"
 #include "TextGenerator.h"
 #include <stdexcept>
+#include "spdlog/spdlog.h"
 
 
 extern std::unique_ptr<Window> window;
@@ -38,12 +39,14 @@ void Game::run() {
 void Game::processInput() {
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)){
+        spdlog::trace("Event polled");
         isRunning = inputProcessor->processInput(sdlEvent);
     }
 }
 
 void Game::update() {
     double deltaTime = waitForDeltaTime();
+    spdlog::debug("Delta Time: {}", deltaTime);
     ecsManager->update(deltaTime);
 }
 
