@@ -1,7 +1,7 @@
 #include "PlayerKeyboardInputSystem.h"
 #include "../../../Helpers/EventSystem/Events/KeyEvent.h"
 #include "../UpdateSystems/AutonomousMovementSystem.h"
-#include "../UpdateSystems/UnprocessedMovements/UnprocessedMovementSystem.h"
+#include "../UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -34,7 +34,7 @@ void PlayerKeyboardInputSystem::onKeyPressed(KeyEvent& event) {
 
         UnprocessedMovement movement = UnprocessedMovement(entity, xChange, yChange);
 
-        ecsManager->getSystem<UnprocessedMovementSystem>().queueMovement(movement);
+        ecsManager->getSystem<UnprocessedKeyboardMovementSystem>().queueMovement(movement);
 
     }
 }

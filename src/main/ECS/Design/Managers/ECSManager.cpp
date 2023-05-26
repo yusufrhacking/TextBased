@@ -4,7 +4,7 @@
 #include "../../Systems/UpdateSystems/CollisionCheckSystem.h"
 #include "../../Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../../Components/MainPlayerComponent.h"
-#include "../../Systems/UpdateSystems/UnprocessedMovements/UnprocessedMovementSystem.h"
+#include "../../Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../../Systems/UpdateSystems/CameraFollowSystem.h"
 
 #include <bitset>
@@ -16,7 +16,7 @@ extern std::unique_ptr<EventBus> eventBus;
 void ECSManager::update(double deltaTime){
     addNewEntities();
     removeDeadEntities();
-    systemManager->getSystem<UnprocessedMovementSystem>().processMovement();
+    systemManager->getSystem<UnprocessedKeyboardMovementSystem>().processMovement();
     runUpdateSystems(deltaTime);
     runUntimedSystems();
     systemManager->getSystem<CameraFollowSystem>().update();

@@ -8,7 +8,7 @@
 #include "../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h"
 #include "../ECS/Systems/UpdateSystems/CameraFollowSystem.h"
-#include "../ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedMovementSystem.h"
+#include "../ECS/Systems/UpdateSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 
 void GameManager::setup() {
     setupSystems();
@@ -23,7 +23,7 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
-    ecsManager->addSystem<UnprocessedMovementSystem>();
+    ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
 }
 
 #pragma clang diagnostic pop

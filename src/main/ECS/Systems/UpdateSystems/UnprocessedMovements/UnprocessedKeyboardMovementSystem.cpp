@@ -1,16 +1,16 @@
-#include "UnprocessedMovementSystem.h"
+#include "UnprocessedKeyboardMovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-UnprocessedMovementSystem::UnprocessedMovementSystem() {
+UnprocessedKeyboardMovementSystem::UnprocessedKeyboardMovementSystem() {
     unprocessedMovements = std::make_unique<std::vector<UnprocessedMovement>>();
 }
 
-void UnprocessedMovementSystem::queueMovement(UnprocessedMovement movement) {
+void UnprocessedKeyboardMovementSystem::queueMovement(UnprocessedMovement movement) {
     unprocessedMovements->push_back(movement);
 }
 
-void UnprocessedMovementSystem::processMovement() {
+void UnprocessedKeyboardMovementSystem::processMovement() {
     for (auto unprocessedMovement : *unprocessedMovements) {
         int entity = unprocessedMovement.entity.getId();
         if (totalChangeForEntities.count(entity) > 0) {
