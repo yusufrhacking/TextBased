@@ -58,15 +58,8 @@ bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, Coll
 }
 
 Entity CollisionCheckSystem::findOffender(Entity a, Entity b) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
-    auto aCurrPosition = aPositionComponent.getPosition();
-    auto aPrevPosition = aPositionComponent.getPreviousPosition();
-    auto aMovementTotal = getMovementTotal(aCurrPosition, aPrevPosition);
-
-    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
-    auto bCurrPosition = bPositionComponent.getPosition();
-    auto bPrevPosition = bPositionComponent.getPreviousPosition();
-    auto bMovementTotal = getMovementTotal(bCurrPosition, bPrevPosition);
+    auto aMovementTotal = getMovementTotal(a);
+    auto bMovementTotal = getMovementTotal(b);
 
     if (aMovementTotal > bMovementTotal){
         return a;
@@ -76,15 +69,8 @@ Entity CollisionCheckSystem::findOffender(Entity a, Entity b) {
 }
 
 Entity CollisionCheckSystem::findDefender(Entity a, Entity b) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
-    auto aCurrPosition = aPositionComponent.getPosition();
-    auto aPrevPosition = aPositionComponent.getPreviousPosition();
-    auto aMovementTotal = getMovementTotal(aCurrPosition, aPrevPosition);
-
-    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
-    auto bCurrPosition = bPositionComponent.getPosition();
-    auto bPrevPosition = bPositionComponent.getPreviousPosition();
-    auto bMovementTotal = getMovementTotal(bCurrPosition, bPrevPosition);
+    auto aMovementTotal = getMovementTotal(a);
+    auto bMovementTotal = getMovementTotal(b);
 
     if (aMovementTotal < bMovementTotal){
         return a;
@@ -93,7 +79,11 @@ Entity CollisionCheckSystem::findDefender(Entity a, Entity b) {
     }
 }
 
-float CollisionCheckSystem::getMovementTotal(Position currentPos, Position previousPos) {
+float CollisionCheckSystem::getMovementTotal(Entity entity) {
+    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    auto currentPos = aPositionComponent.getPosition();
+    auto previousPos = aPositionComponent.getPreviousPosition();
+
     float xChange = currentPos.xPos - previousPos.xPos;
     float yChange = currentPos.yPos - previousPos.yPos;
     return abs(xChange)+abs(yChange);

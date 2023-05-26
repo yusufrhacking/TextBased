@@ -22,7 +22,7 @@ class CollisionCheckSystem: public UpdateSystem {
 
     Entity findDefender(Entity a, Entity b);
 
-    float getMovementTotal(Position currentPos, Position previousPos);
+    float getMovementTotal(Entity entity);
 };
 
 
