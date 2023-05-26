@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "EntityManager.h"
 
 Entity EntityManager::createEntity() {
@@ -10,6 +11,7 @@ Entity EntityManager::createEntity() {
         freedEntityIDs.pop();
     }
     Entity entity(entityId);
+    spdlog::debug("Entity {} created and set to be added", entityId);
     entitiesToBeAdded.push_back(entity);
     return entity;
 }

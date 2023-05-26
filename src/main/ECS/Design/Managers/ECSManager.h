@@ -69,6 +69,7 @@ public:
         template <typename TSystem>
         TSystem& getSystem() const;
 
+    void removeEntity(const Entity &entity);
 };
 
 template<typename TComponent>
