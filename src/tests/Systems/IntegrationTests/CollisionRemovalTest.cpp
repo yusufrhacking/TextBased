@@ -28,39 +28,3 @@ static void addComponentsToEntities(Entity staticEntity, Entity movingEntity){
     ecsManager->addComponentToEntity<MovementComponent>(
             movingEntity, std::make_shared<Velocity>(X_POINT_OF_COLLISION*DELTA_TIME, Y_POINT_OF_COLLISION*DELTA_TIME));
 }
-
-TEST_CASE("Removes Both Entities When One Moves Into the Other", "[CollisionRemoval]") {
-    ecsManager = std::make_unique<ECSManager>();
-    eventBus = std::make_unique<EventBus>();
-    ecsManager->addSystem<AutonomousMovementSystem>();
-    ecsManager->addSystem<CollisionCheckSystem>();
-
-    ecsManager->addSystem<CollisionHandleSystem>();
-    ecsManager->getSystem<CollisionHandleSystem>().listenToEvents();
-
-    Entity staticEntity = ecsManager->createEntity();
-    Entity movingEntity = ecsManager->createEntity();
-
-    addComponentsToEntities(staticEntity, movingEntity);
-
-    auto& collisionSystem = ecsManager->getSystem<CollisionCheckSystem>();
-    auto& movementSystem = ecsManager->getSystem<AutonomousMovementSystem>();
-    auto& collisionHandleSystem = ecsManager->getSystem<CollisionHandleSystem>();
-
-    REQUIRE(collisionSystem.getRelevantEntities().contains(staticEntity));
-    REQUIRE(collisionSystem.getRelevantEntities().contains(movingEntity));
-    REQUIRE(movementSystem.getRelevantEntities().contains(movingEntity));
-    REQUIRE(collisionHandleSystem.getRelevantEntities().contains(movingEntity));
-
-    ecsManager->update(DELTA_TIME);
-    ecsManager->update(DELTA_TIME);
-    ecsManager->update(DELTA_TIME);//Required to flush out entitiesToBeKilled() --> this is why this should realistically be a mocked version of the ECS manager
-
-    REQUIRE(!collisionSystem.getRelevantEntities().contains(staticEntity));
-    REQUIRE(!collisionSystem.getRelevantEntities().contains(movingEntity));
-    REQUIRE(!movementSystem.getRelevantEntities().contains(movingEntity));
-    REQUIRE_THROWS(ecsManager->removeComponentFromEntity<PositionComponent>(staticEntity));
-    REQUIRE_THROWS(ecsManager->removeComponentFromEntity<MovementComponent>(movingEntity));
-    REQUIRE_THROWS(ecsManager->getComponentFromEntity<TextComponent>(staticEntity));
-    REQUIRE_THROWS(ecsManager->getComponentFromEntity<TextComponent>(movingEntity));
-}

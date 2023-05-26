@@ -46,7 +46,7 @@ TEST_CASE("AutonomousMovementSystem update function moves entities correctly", "
     ecsManager->addComponentToEntity<PositionComponent>(entity, pos);
     ecsManager->addComponentToEntity<MovementComponent>(entity, velocity);
 
-    ecsManager->update(1);
+    ecsManager->getSystem<AutonomousMovementSystem>().update(1);
 
     const auto& updatedPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     REQUIRE_THAT(updatedPosition.getPosition().xPos, WithinAbs(2.0, 1e-6)); // Check x position with a margin of error
