@@ -3,12 +3,13 @@
 #include "../../../main/ECS/Components/TextComponents/TextComponent.h"
 #include "../../../main/ECS/Components/TextComponents/TreeComponent.h"
 #include "../../../main/ECS/Design/Objects/Component.h"
+#include "../../../main/ECS/Components/PositionComponent.h"
 
 TEST_CASE("Component Signature Testing", "[ECS]"){
     ComponentSignature systemSignature;
     ComponentSignature entitySignature;
 
-    systemSignature.set(Component<TextComponent>::getId());
-    entitySignature.set(Component<TreeComponent>::getId()); //A tree component inherits from Text Component
+    systemSignature.set<TextComponent>();
+    entitySignature.set<TreeComponent>(); //A tree component inherits from Text Component
     REQUIRE(ComponentSignature::systemHoldsEntity(systemSignature, entitySignature));
 }

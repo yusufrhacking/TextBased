@@ -23,8 +23,33 @@ public:
     [[nodiscard]] bool matches(ComponentSignature otherSignature) const;
 
     static bool systemHoldsEntity(ComponentSignature systemSignature, ComponentSignature entitySignature);
+
+    template <typename TComponent>
+    [[nodiscard]] bool test() const;
+
+    template <typename TComponent>
+    void set();
+
+    template <typename TComponent>
+    void set(bool flag);
 };
 
+template <typename TComponent>
+[[nodiscard]] bool ComponentSignature::test() const{
 
+}
 
-#endif //TEXTBASED_COMPONENTSIGNATURE_H
+template <typename TComponent>
+void ComponentSignature::set(){
+    if (std::is_base_of<TextComponent, TComponent>::value){
+        signature.set(Component<TextComponent>::getId());
+    }
+    signature.set(Component<TComponent>::getId());
+}
+
+template <typename TComponent>
+void ComponentSignature::set(bool flag){
+
+}
+
+#endif
