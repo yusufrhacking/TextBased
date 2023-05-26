@@ -23,6 +23,8 @@ public:
     [[nodiscard]] std::bitset<MAX_COMPONENTS> getSignature() const;
 
     [[nodiscard]] bool matches(ComponentSignature otherSignature) const;
+
+    static bool systemHoldsEntity(ComponentSignature systemSignature, ComponentSignature entitySignature);
 };
 
 

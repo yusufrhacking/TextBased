@@ -6,7 +6,7 @@ void SystemManager::addNewEntityToSystem(Entity entity, ComponentSignature entit
         auto const& system = systemKeyValuePair.second;
         auto const& systemComponentSignature = system->getComponentSignature();
 
-        if (entitySignature.matches(systemComponentSignature)){
+        if (ComponentSignature::systemHoldsEntity(systemComponentSignature, entitySignature)){
             system->addEntity(entity);
         }
 
@@ -18,7 +18,7 @@ void SystemManager::updateEntityInSystems(Entity entity, ComponentSignature enti
         auto const& system = systemKeyValuePair.second;
         auto const& systemComponentSignature = system->getComponentSignature();
 
-        if (entitySignature.matches(systemComponentSignature)){
+        if (ComponentSignature::systemHoldsEntity(systemComponentSignature, entitySignature)){
             system->addEntity(entity);
         }
         else{

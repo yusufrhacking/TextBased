@@ -18,11 +18,15 @@ void ComponentSignature::reset() {
 
 bool ComponentSignature::matches(ComponentSignature otherSignature) const {
     return (signature & otherSignature.getSignature()) == signature
-    || (otherSignature.getSignature() & signature) == otherSignature.getSignature();
+    && (otherSignature.getSignature() & signature) == otherSignature.getSignature();
 }
 
 std::bitset<MAX_COMPONENTS> ComponentSignature::getSignature() const {
     return signature;
+}
+
+ bool ComponentSignature::systemHoldsEntity(ComponentSignature systemSignature, ComponentSignature entitySignature) {
+    return (systemSignature.getSignature() & entitySignature.getSignature()) == systemSignature.getSignature();
 }
 
 
