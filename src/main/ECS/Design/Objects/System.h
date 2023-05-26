@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Component.h"
 #include "../../../Globals.h"
+#include "ComponentSignature.h"
 
 
 class System {

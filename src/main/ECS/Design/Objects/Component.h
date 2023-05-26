@@ -15,8 +15,7 @@ template<typename T>
 class Component : public GenericComponent {
 public:
     static int getId(){
-        nextId++;
-        static auto newId = nextId;
+        static auto newId = nextId++;
         return newId;
     }
 };

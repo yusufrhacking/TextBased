@@ -9,6 +9,6 @@ TEST_CASE("Component Signature Testing", "[ECS]"){
     ComponentSignature entitySignature;
 
     systemSignature.set(Component<TextComponent>::getId());
-    entitySignature.set(Component<TreeComponent>::getId());
+    entitySignature.set(Component<TreeComponent>::getId()); //A tree component inherits from Text Component
     REQUIRE(ComponentSignature::systemHoldsEntity(systemSignature, entitySignature));
 }

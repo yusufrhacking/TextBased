@@ -5,6 +5,8 @@
 #include <array>
 #include "../Objects/Entity.h"
 #include "../../../Globals.h"
+#include "../Objects/ComponentSignature.h"
+
 
 class EntityManager {
     private:

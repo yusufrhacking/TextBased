@@ -1,18 +1,16 @@
 #ifndef TEXTBASED_COMPONENTSIGNATURE_H
 #define TEXTBASED_COMPONENTSIGNATURE_H
 #include <bitset>
+#include "Component.h"
 
 const unsigned int MAX_COMPONENTS = 64;
 
 class ComponentSignature {
     std::bitset<MAX_COMPONENTS> signature;
-    //test
-    //flip
-    //reset
 public:
     ComponentSignature() = default;
 
-    bool test(int index) const;
+    [[nodiscard]] bool test(int index) const;
 
     void set(int index);
 
@@ -26,6 +24,7 @@ public:
 
     static bool systemHoldsEntity(ComponentSignature systemSignature, ComponentSignature entitySignature);
 };
+
 
 
 #endif //TEXTBASED_COMPONENTSIGNATURE_H

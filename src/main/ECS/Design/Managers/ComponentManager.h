@@ -6,6 +6,7 @@
 #include "../Objects/Component.h"
 #include "../Objects/Pool.h"
 #include "../../../Globals.h"
+#include "../Objects/ComponentSignature.h"
 #include <bitset>
 #include <stdexcept>
 

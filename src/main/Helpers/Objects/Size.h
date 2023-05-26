@@ -18,4 +18,4 @@ struct Size {
     }
 };
 
-#endif //TEXTBASED_SIZE_H
+#endif
