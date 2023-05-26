@@ -18,8 +18,6 @@ const size_t MILLISECS_PER_FRAME = 1000 / FPS;
 
 class Game{
 
-
-
 private:
         bool isRunning;
         std::shared_ptr<Renderer> renderer;

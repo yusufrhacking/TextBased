@@ -6,6 +6,8 @@
 #include <memory>
 #include <utility>
 
+extern int currFrame;
+
 struct PositionComponent {
 private:
     std::shared_ptr<Position> position;
@@ -34,6 +36,7 @@ public:
 
     void changePosition(double xChange, double yChange){
         updatePreviousPosition();
+        printf("Found curr frame: %d\n", currFrame);
         frameLastMoved = currFrame;
         position->xPos += (float)xChange;
         position->yPos += (float)yChange;

@@ -11,8 +11,15 @@ public:
 
     void listenToEvents();
 
-    void onCollision(CollisionEvent& event);
-};
+    void onCollision(CollisionEvent &event);
 
+private:
+    Entity findOffender(Entity a, Entity b);
+
+    Entity findDefender(Entity a, Entity b);
+
+    float getMovementTotal(Entity entity);
+
+};
 
 #endif //TEXTBASED_COLLISIONHANDLESYSTEM_H

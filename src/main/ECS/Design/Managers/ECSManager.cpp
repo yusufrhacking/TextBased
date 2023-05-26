@@ -17,12 +17,12 @@ void ECSManager::update(double deltaTime){
     addNewEntities();
     removeDeadEntities();
     systemManager->getSystem<UnprocessedKeyboardMovementSystem>().processMovement();
-    runUpdateSystems(deltaTime);
+    runTimedSystems(deltaTime);
     runUntimedSystems();
     systemManager->getSystem<CameraFollowSystem>().update();
 }
 
-void ECSManager::runUpdateSystems(double deltaTime) const {
+void ECSManager::runTimedSystems(double deltaTime) const {
     for (const auto& system : systemManager->getSystemsOfType<UpdateSystem>()){
         system->update(deltaTime);
     }

@@ -32,10 +32,7 @@ void CollisionCheckSystem::update(double deltaTime) {
             bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstCollider, secondPosition.getPosition(), secondCollider);
 
             if (isAABCollision){
-                Entity offender = findOffender(first, second);
-                Entity defender = findDefender(first, second);
-
-                eventBus->emitEvent<CollisionEvent>(offender, defender, deltaTime);
+                eventBus->emitEvent<CollisionEvent>(first, second, deltaTime);
 //                ecsManager->killEntity(first);
 //                ecsManager->killEntity(second);
             }
@@ -57,42 +54,5 @@ bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, Coll
     return xOverlap && yOverlap;
 }
 
-Entity CollisionCheckSystem::findOffender(Entity a, Entity b) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
-    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
-
-    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
-    auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
-
-    if (aLastFrameMoved > bLastFrameMoved){
-        return a;
-    } else{
-        return b;
-    }
-}
-
-Entity CollisionCheckSystem::findDefender(Entity a, Entity b) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
-    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
-
-    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
-    auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
-
-    if (aLastFrameMoved < bLastFrameMoved){
-        return a;
-    } else{
-        return b;
-    }
-}
-
-float CollisionCheckSystem::getMovementTotal(Entity entity) {
-    auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    auto currentPos = positionComponent.getPosition();
-    auto previousPos = positionComponent.getPreviousPosition();
-
-    float xChange = currentPos.xPos - previousPos.xPos;
-    float yChange = currentPos.yPos - previousPos.yPos;
-    return abs(xChange)+abs(yChange);
-}
 
 

@@ -17,12 +17,6 @@ class CollisionCheckSystem: public UpdateSystem {
     static bool checkAABBCollision(Position firstPosition, CollisionComponent firstCollider,
                                    Position secondPosition, CollisionComponent secondCollider);
 
-    private:
-    Entity findOffender(Entity a, Entity b);
-
-    Entity findDefender(Entity a, Entity b);
-
-    float getMovementTotal(Entity entity);
 };
 
 

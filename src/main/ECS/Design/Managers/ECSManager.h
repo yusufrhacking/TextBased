@@ -25,7 +25,7 @@ class ECSManager {
         std::shared_ptr<SystemManager> systemManager;
         void removeDeadEntities();
         void addNewEntities();
-        void runUpdateSystems(double deltaTime) const;
+        void runTimedSystems(double deltaTime) const;
         void runUntimedSystems();
 
 public:

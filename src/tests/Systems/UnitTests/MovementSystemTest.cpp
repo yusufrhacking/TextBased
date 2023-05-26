@@ -33,6 +33,7 @@ using Catch::Matchers::WithinAbs;
 TEST_CASE("AutonomousMovementSystem update function moves entities correctly", "[System][MovementSystemUpdate][UpdateMethod]") {
     ecsManager = std::make_unique<ECSManager>();
 
+
     ecsManager->addSystem<AutonomousMovementSystem>();
 
 
@@ -48,6 +49,6 @@ TEST_CASE("AutonomousMovementSystem update function moves entities correctly", "
     ecsManager->update(1);
 
     const auto& updatedPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    REQUIRE_THAT(updatedPosition.position->xPos, WithinAbs(2.0, 1e-6)); // Check x position with a margin of error
-    REQUIRE_THAT(updatedPosition.position->yPos, WithinAbs(3.0, 1e-6)); // Check y position with a margin of error
+    REQUIRE_THAT(updatedPosition.getPosition().xPos, WithinAbs(2.0, 1e-6)); // Check x position with a margin of error
+    REQUIRE_THAT(updatedPosition.getPosition().yPos, WithinAbs(3.0, 1e-6)); // Check y position with a margin of error
 }

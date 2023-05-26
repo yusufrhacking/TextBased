@@ -5,7 +5,7 @@
 
 
 extern std::unique_ptr<Window> window;
-
+int currFrame;
 
 Game::Game(){
 }
