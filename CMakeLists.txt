@@ -157,9 +157,17 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+Include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.9.2
+)
+FetchContent_MakeAvailable(spdlog)
+
 
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
-TARGET_LINK_LIBRARIES(TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY} gmock)
+TARGET_LINK_LIBRARIES(TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY} gmock spdlog::spdlog)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 #
 #if(CMAKE_BUILD_TYPE MATCHES "Debug")
