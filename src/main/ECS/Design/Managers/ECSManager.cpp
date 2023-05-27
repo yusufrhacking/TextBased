@@ -4,6 +4,7 @@
 #include "../../Components/MainPlayerComponent.h"
 #include "../../Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../../Systems/SpecialSystems/CameraFollowSystem.h"
+#include "../../Systems/SpecialSystems/MapGenerationSystem.h"
 
 int GenericComponent::nextId = 0;
 
@@ -15,6 +16,7 @@ void ECSManager::update(double deltaTime){
     systemManager->getSystem<UnprocessedKeyboardMovementSystem>().processMovement();
     runTimedSystems(deltaTime);
     systemManager->getSystem<CameraFollowSystem>().update();
+    systemManager->getSystem<MapGenerationSystem>().update();
 }
 
 void ECSManager::addNewEntities() {

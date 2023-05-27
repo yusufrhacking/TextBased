@@ -9,6 +9,7 @@
 #include "../ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h"
 #include "../ECS/Systems/SpecialSystems/CameraFollowSystem.h"
 #include "../ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
+#include "../ECS/Systems/SpecialSystems/MapGenerationSystem.h"
 
 void GameManager::setup() {
     setupSystems();
@@ -24,6 +25,7 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
+    ecsManager->addSystem<MapGenerationSystem>();
 }
 
 #pragma clang diagnostic pop

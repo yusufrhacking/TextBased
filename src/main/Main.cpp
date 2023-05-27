@@ -8,7 +8,7 @@ std::unique_ptr<Window> window;
 int main() {
     ecsManager = std::make_unique<ECSManager>();
     eventBus = std::make_unique<EventBus>();
-    spdlog::set_level(spdlog::level::trace);
+    spdlog::set_level(spdlog::level::info);
 
     Game* game = new Game();
 

@@ -18,7 +18,7 @@ void AutonomousMovementSystem::update(double deltaTime) {
         double yChange = movement.velocity->yVelocity * deltaTime;
 
         position.changePosition(xChange, yChange);
-        spdlog::trace("Entity {} moved {}, {}", entity.getId(), xChange, yChange);
+        spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), xChange, yChange, position.getPosition().xPos, position.getPosition().yPos);
     }
 }
 

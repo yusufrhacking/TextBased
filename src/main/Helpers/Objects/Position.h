@@ -15,6 +15,10 @@ struct Position {
         this->xPos = 0;
         this->yPos = 0;
     }
+
+    float getAbsoluteDifference(Position position) const{
+        return abs(position.xPos - this->xPos) + abs(position.yPos - this->yPos);
+    }
 };
 
 
