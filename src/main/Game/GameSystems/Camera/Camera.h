@@ -7,13 +7,13 @@
 
 class Camera {
 private:
-    SDL_Rect camera;
+    SDL_Rect camera{};
 public:
     explicit Camera(Position startingPosition);
 
     void positionCamera(Position position);
 
-    Position getCameraPosition();
+    [[nodiscard]] Position getCameraPosition() const;
 };
 
 

@@ -2,8 +2,8 @@
 #include "../Window/Window.h"
 
 Camera::Camera(Position startingPosition) {
-    camera.x = 0;
-    camera.y = 0;
+    camera.x = (int)startingPosition.xPos;
+    camera.y = (int)startingPosition.yPos;
     camera.w = Window::windowWidth;
     camera.h = Window::windowHeight;
 }
@@ -13,7 +13,7 @@ void Camera::positionCamera(Position position) {
     camera.y = (int)position.yPos;
 }
 
-Position Camera::getCameraPosition() {
+Position Camera::getCameraPosition() const {
     auto xPos = (float)camera.x;
     auto yPos = (float)camera.y;
     return {xPos, yPos};

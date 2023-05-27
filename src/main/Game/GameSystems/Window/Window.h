@@ -14,8 +14,6 @@ class Window {
 
         static void initializeWindowSize();
 
-
-
         [[nodiscard]] Position getTopLeftPosition() const;
 
         [[nodiscard]] Position getBottomLeftPosition() const;
