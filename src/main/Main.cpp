@@ -10,7 +10,7 @@ std::unique_ptr<Camera> camera;
 int main() {
     ecsManager = std::make_unique<ECSManager>();
     eventBus = std::make_unique<EventBus>();
-    camera = std::make_unique<Camera>(Position(1000, 1000));
+    camera = std::make_unique<Camera>(Game::startingPosition);
     spdlog::set_level(spdlog::level::trace);
 
     Game* game = new Game();

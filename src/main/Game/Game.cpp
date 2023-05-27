@@ -6,7 +6,7 @@
 
 
 extern std::unique_ptr<Window> window;
-
+Position Game::startingPosition = {0, 0};
 int currFrame;
 
 Game::Game(){

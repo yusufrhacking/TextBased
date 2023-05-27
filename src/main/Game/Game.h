@@ -46,6 +46,8 @@ public:
     void run();
 
     void close();
+
+    static Position startingPosition;
 };
 
 
