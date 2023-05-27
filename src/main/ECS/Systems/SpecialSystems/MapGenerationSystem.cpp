@@ -16,7 +16,7 @@ void MapGenerationSystem::update() {
     auto unusedCameraWidth = currentCameraPosition.xPos - relativeCameraPosition.xPos;
     auto unusedCameraHeight = currentCameraPosition.yPos - relativeCameraPosition.yPos;
 
-    spdlog::info("free camera width, height {}, {}", unusedCameraWidth, unusedCameraHeight);
+//    spdlog::info("free camera width, height {}, {}", unusedCameraWidth, unusedCameraHeight);
     auto cameraDifference = currentCameraPosition.getAbsoluteDifference(relativeCameraPosition);
 
 }

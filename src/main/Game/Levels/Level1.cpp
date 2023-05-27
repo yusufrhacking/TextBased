@@ -3,6 +3,8 @@
 #include "../../ECS/Components/MainPlayerComponent.h"
 #include "../../ECS/Components/TextComponents/TreeComponent.h"
 
+Position startingPosition = {1000, 1000};
+
 void Level1::setup() {
     createPlayer();
     createBobby();
@@ -42,7 +44,7 @@ void Level1::createForest(int widthInTrees, Position startingPosition) const {
 
 void Level1::createJSON() const {
     Entity json = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(json, std::make_shared<Position>(400, 300));
+    ecsManager->addComponentToEntity<PositionComponent>(json, startingPosition+Position(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
     ecsManager->addComponentToEntity<StyleComponent>(json);
@@ -51,7 +53,7 @@ void Level1::createJSON() const {
 
 void Level1::createBobby() const {
     Entity tank = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tank, std::make_shared<Position>(50, 50));
+    ecsManager->addComponentToEntity<PositionComponent>(tank, startingPosition+Position(50, 50));
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
     ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
     ecsManager->addComponentToEntity<StyleComponent>(tank);
@@ -61,7 +63,7 @@ void Level1::createBobby() const {
 void Level1::createPlayer() {
     Entity witt = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
-    ecsManager->addComponentToEntity<PositionComponent>(witt, window->getMiddlePosition());
+    ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition+window->getMiddlePosition());
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(5, 5));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
@@ -69,7 +71,7 @@ void Level1::createPlayer() {
 
 void Level1::createTreeAtPosition(Position position) const {
     Entity tree = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tree, position);
+    ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition+position);
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);

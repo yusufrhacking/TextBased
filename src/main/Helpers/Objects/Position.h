@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_POSITION_H
 #define TEXTBASED_POSITION_H
-
+#include <stdlib.h>
 
 struct Position {
     float xPos;
@@ -18,6 +18,16 @@ struct Position {
 
     float getAbsoluteDifference(Position position) const{
         return abs(position.xPos - this->xPos) + abs(position.yPos - this->yPos);
+    }
+
+    Position operator+(const Position& other) const {
+        return {this->xPos + other.xPos, this->yPos + other.yPos};
+    }
+
+    Position& operator+=(const Position& other) {
+        this->xPos += other.xPos;
+        this->yPos += other.yPos;
+        return *this;
     }
 };
 
