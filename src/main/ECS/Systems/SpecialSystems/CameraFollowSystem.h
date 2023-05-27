@@ -6,6 +6,7 @@
 #include "../../Components/PositionComponent.h"
 #include "../UpdateSystems/UpdateSystem.h"
 
+
 class CameraFollowSystem: public System {
 public:
     explicit CameraFollowSystem();

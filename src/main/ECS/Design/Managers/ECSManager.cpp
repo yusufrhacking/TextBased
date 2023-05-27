@@ -1,9 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "ECSManager.h"
-#include "../../Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../../Systems/EventCreationSystems/EventProducerSystem.h"
-#include "../../Systems/UpdateSystems/CollisionCheckSystem.h"
-#include "../../Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../../Components/MainPlayerComponent.h"
 #include "../../Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../../Systems/SpecialSystems/CameraFollowSystem.h"
@@ -17,7 +14,6 @@ void ECSManager::update(double deltaTime){
     removeDeadEntities();
     systemManager->getSystem<UnprocessedKeyboardMovementSystem>().processMovement();
     runTimedSystems(deltaTime);
-    runUntimedSystems();
     systemManager->getSystem<CameraFollowSystem>().update();
 }
 
@@ -51,12 +47,6 @@ void ECSManager::removeEntity(const Entity &entity) {
 void ECSManager::runTimedSystems(double deltaTime) const {
     for (const auto& system : systemManager->getSystemsOfType<UpdateSystem>()){
         system->update(deltaTime);
-    }
-}
-
-void ECSManager::runUntimedSystems() {
-    for (const auto& system: systemManager->getSystemsOfType<EventProducerSystem>()){
-        system->update();
     }
 }
 

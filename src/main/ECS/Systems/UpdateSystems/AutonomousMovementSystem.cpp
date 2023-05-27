@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "AutonomousMovementSystem.h"
 #include "CollisionCheckSystem.h"
 
@@ -17,6 +18,7 @@ void AutonomousMovementSystem::update(double deltaTime) {
         double yChange = movement.velocity->yVelocity * deltaTime;
 
         position.changePosition(xChange, yChange);
+        spdlog::trace("Entity {} moved {}, {}", entity.getId(), xChange, yChange);
     }
 }
 

@@ -35,7 +35,7 @@ void UnprocessedKeyboardMovementSystem::processMovement() {
     }
     unprocessedMovements->clear();
     totalChangeForEntities.clear();
-    spdlog::debug("Done processing movements");
+    spdlog::trace("Done processing movements");
 
 }
 

@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "CollisionCheckSystem.h"
 #include "../../../Helpers/EventSystem/Events/CollisionEvent.h"
 
@@ -32,9 +33,8 @@ void CollisionCheckSystem::update(double deltaTime) {
             bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstCollider, secondPosition.getPosition(), secondCollider);
 
             if (isAABCollision){
+                spdlog::debug("COLLISION between entities {} and {}", first.getId(), second.getId());
                 eventBus->emitEvent<CollisionEvent>(first, second, deltaTime);
-//                ecsManager->killEntity(first);
-//                ecsManager->killEntity(second);
             }
 
         }

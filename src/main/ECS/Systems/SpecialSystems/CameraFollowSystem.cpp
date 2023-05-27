@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "CameraFollowSystem.h"
 #include "../../Design/Managers/ECSManager.h"
 
@@ -32,5 +33,5 @@ void CameraFollowSystem::update() {
     }
 
     window->positionCamera(freshCameraPosition);
-
+    spdlog::trace("Camera moved to position {}, {}", freshCameraPosition.xPos, freshCameraPosition.yPos);
 }

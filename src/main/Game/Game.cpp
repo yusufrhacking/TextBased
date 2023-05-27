@@ -46,7 +46,7 @@ void Game::processInput() {
 
 void Game::update() {
     double deltaTime = waitForDeltaTime();
-    spdlog::debug("Delta Time: {}", deltaTime);
+    spdlog::trace("Delta Time: {}", deltaTime);
     ecsManager->update(deltaTime);
 }
 
