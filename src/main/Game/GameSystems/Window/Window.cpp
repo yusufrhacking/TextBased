@@ -30,11 +30,6 @@ void Window::createWindow() {
     if (window == nullptr){
         throw std::runtime_error(SDL_GetError());
     }
-
-    camera.x = 0;
-    camera.y = 0;
-    camera.w = windowWidth;
-    camera.h = windowHeight;
 }
 
 
@@ -60,17 +55,6 @@ Position Window::getTopRightPosition() const {
 Position Window::getBottomRightPosition() const {
     Position BOTTOM_RIGHT_POSITION = {static_cast<float>(windowWidth), static_cast<float>(windowHeight)};
     return BOTTOM_RIGHT_POSITION;
-}
-
-void Window::positionCamera(Position position) {
-    camera.x = (int)position.xPos;
-    camera.y = (int)position.yPos;
-}
-
-Position Window::getCameraPosition() {
-    auto xPos = (float)camera.x;
-    auto yPos = (float)camera.y;
-    return {xPos, yPos};
 }
 
 Position Window::getMiddlePosition() {

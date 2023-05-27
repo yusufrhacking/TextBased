@@ -24,13 +24,9 @@ class Window {
 
         Position getMiddlePosition();
 
-        void positionCamera(Position position);
-
-        Position getCameraPosition();
 
     private:
         SDL_Window* window;
-        SDL_Rect camera;
         void createWindow();
 
 };

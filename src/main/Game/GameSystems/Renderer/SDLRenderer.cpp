@@ -1,8 +1,9 @@
 #include "SDLRenderer.h"
+#include "../Camera/Camera.h"
 
 const static SDL_Color textColor = {255, 255, 255};
 
-extern std::unique_ptr<Window> window;
+extern std::unique_ptr<Camera> camera;
 
 SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     this->renderer = SDL_CreateRenderer(sdlWindow, -1, 0);
@@ -20,7 +21,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 }
 
 void SDLRenderer::renderText(Position position, const TextComponent& sprite, const StyleComponent& style){
-    auto cameraPos = window->getCameraPosition();
+    auto cameraPos = camera->getCameraPosition();
     switch (style.getStyle()){
         case WHITE_MONACO_GENERIC:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

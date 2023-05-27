@@ -1,9 +1,10 @@
 #include <spdlog/spdlog.h>
 #include "CameraFollowSystem.h"
 #include "../../Design/Managers/ECSManager.h"
-
+#include "../../../Game/GameSystems/Camera/Camera.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<Camera> camera;
 
 CameraFollowSystem::CameraFollowSystem() {
     requireComponent<MainPlayerComponent>();
@@ -21,7 +22,7 @@ void CameraFollowSystem::update() {
 
     auto playerSizeOffset = ecsManager->getComponentFromEntity<TextComponent>(entity).surfaceSize;
 
-    auto freshCameraPosition = window->getCameraPosition();
+    auto freshCameraPosition = camera->getCameraPosition();
     auto cameraWidth = Window::windowWidth;
     auto cameraHeight = Window::windowHeight;
 
@@ -32,6 +33,6 @@ void CameraFollowSystem::update() {
         freshCameraPosition.yPos = playerPosition.yPos - (float)Window::windowHeight/2;
     }
 
-    window->positionCamera(freshCameraPosition);
+    camera->positionCamera(freshCameraPosition);
     spdlog::trace("Camera moved to position {}, {}", freshCameraPosition.xPos, freshCameraPosition.yPos);
 }
