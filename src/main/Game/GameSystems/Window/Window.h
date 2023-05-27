@@ -9,8 +9,12 @@ class Window {
         Window();
         ~Window();
         SDL_Window* getWindow();
-        int getWindowWidth();
-        int getWindowHeight();
+        static int windowWidth;
+        static int windowHeight;
+
+        static void initializeWindowSize();
+
+
 
         [[nodiscard]] Position getTopLeftPosition() const;
 
@@ -29,8 +33,6 @@ class Window {
     private:
         SDL_Window* window;
         SDL_Rect camera;
-        int windowWidth;
-        int windowHeight;
         void createWindow();
 
 };

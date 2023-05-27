@@ -22,14 +22,14 @@ void CameraFollowSystem::update() {
     auto playerSizeOffset = ecsManager->getComponentFromEntity<TextComponent>(entity).surfaceSize;
 
     auto freshCameraPosition = window->getCameraPosition();
-    auto cameraWidth = window->getWindowWidth();
-    auto cameraHeight = window->getWindowHeight();
+    auto cameraWidth = Window::windowWidth;
+    auto cameraHeight = Window::windowHeight;
 
-    if (playerPosition.xPos + ((float)cameraWidth/2) < (float)window->getWindowWidth()){
-        freshCameraPosition.xPos = playerPosition.xPos - (float)window->getWindowWidth()/2 + (float)playerSizeOffset.width/2;
+    if (playerPosition.xPos + ((float)cameraWidth/2) < (float)Window::windowWidth){
+        freshCameraPosition.xPos = playerPosition.xPos - (float)Window::windowWidth/2 + (float)playerSizeOffset.width/2;
     }
-    if (playerPosition.yPos + ((float)cameraHeight/2) < (float)window->getWindowHeight()){
-        freshCameraPosition.yPos = playerPosition.yPos - (float)window->getWindowHeight()/2;
+    if (playerPosition.yPos + ((float)cameraHeight/2) < (float)Window::windowHeight){
+        freshCameraPosition.yPos = playerPosition.yPos - (float)Window::windowHeight/2;
     }
 
     window->positionCamera(freshCameraPosition);

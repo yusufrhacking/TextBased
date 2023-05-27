@@ -29,7 +29,7 @@ void Level1::createForest(int widthInTrees, Position startingPosition) const {
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     unsigned int forestWidthInTrees = widthInTrees;
-    unsigned int forestHeightInTrees = (window->getWindowHeight() / spriteForDimensions->surfaceSize.height) + 1;
+    unsigned int forestHeightInTrees = (Window::windowHeight / spriteForDimensions->surfaceSize.height) + 1;
 
     Position treePosition = startingPosition;
     for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){

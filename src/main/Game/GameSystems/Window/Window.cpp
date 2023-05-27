@@ -4,6 +4,8 @@
 #include <SDL.h>
 #include <stdexcept>
 
+int Window::windowWidth = 0;
+int Window::windowHeight = 0;
 
 Window::Window() {
     createWindow();
@@ -15,11 +17,7 @@ Window::~Window() {
 
 
 void Window::createWindow() {
-    SDL_DisplayMode displayMode;
-    SDL_GetCurrentDisplayMode(0, &displayMode);
-    windowWidth = displayMode.w;
-    windowHeight = displayMode.h;
-
+    initializeWindowSize();
     window = SDL_CreateWindow(
             nullptr,
             SDL_WINDOWPOS_CENTERED,
@@ -42,14 +40,6 @@ void Window::createWindow() {
 
 SDL_Window *Window::getWindow() {
     return window;
-}
-
-int Window::getWindowWidth() {
-    return windowWidth;
-}
-
-int Window::getWindowHeight() {
-    return windowHeight;
 }
 
 Position Window::getTopLeftPosition() const {
@@ -86,6 +76,15 @@ Position Window::getCameraPosition() {
 Position Window::getMiddlePosition() {
     Position MIDDLE = {static_cast<float>(windowWidth)/2, static_cast<float>(windowHeight)/2};
     return MIDDLE;
+}
+
+void Window::initializeWindowSize() {
+    if (windowWidth == 0 || windowHeight == 0) {
+        SDL_DisplayMode displayMode;
+        SDL_GetCurrentDisplayMode(0, &displayMode);
+        windowWidth = displayMode.w;
+        windowHeight = displayMode.h;
+    }
 }
 
 
