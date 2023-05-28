@@ -24,18 +24,11 @@ void CameraFollowSystem::update() {
     auto playerSizeOffset = ecsManager->getComponentFromEntity<TextComponent>(entity).surfaceSize;
 
     auto freshCameraPosition = camera->getCameraPosition();
-    auto cameraWidth = Window::windowWidth;
-    auto cameraHeight = Window::windowHeight;
 
-    auto relativeXPosition = playerPosition.xPos - Game::startingPosition.xPos;
-    auto relativeYPosition = playerPosition.yPos - Game::startingPosition.yPos;
-
-    if (relativeXPosition + ((float)cameraWidth/2) < (float)Window::windowWidth){
-        freshCameraPosition.xPos = playerPosition.xPos - (float)Window::windowWidth/2 + (float)playerSizeOffset.width/2;
-    }
-    if (relativeYPosition + ((float)cameraHeight/2) < (float)Window::windowHeight){
-        freshCameraPosition.yPos = playerPosition.yPos - (float)Window::windowHeight/2;
-    }
+    auto xPositionWithPlayerInMiddle = playerPosition.xPos - (float)Window::windowWidth/2;
+    freshCameraPosition.xPos = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width/2;
+    auto yPositionWithPlayerInMiddle = playerPosition.yPos - (float)Window::windowHeight/2;
+    freshCameraPosition.yPos = yPositionWithPlayerInMiddle;
 
     camera->positionCamera(freshCameraPosition);
     spdlog::trace("Camera moved to position {}, {}", freshCameraPosition.xPos, freshCameraPosition.yPos);
