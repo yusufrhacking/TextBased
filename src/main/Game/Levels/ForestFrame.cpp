@@ -1,16 +1,16 @@
-#include "ForestScene.h"
+#include "ForestFrame.h"
 #include "../Game.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-ForestScene::ForestScene(Position startingPosition) {
+ForestFrame::ForestFrame(Position startingPosition) {
     this->startingPosition = startingPosition;
     createJSON();
     createBobby();
     createForests();
 }
 
-void ForestScene::createForests() {
+void ForestFrame::createForests() {
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     int treeWidth = 2;
@@ -23,7 +23,7 @@ void ForestScene::createForests() {
     createForest(treeWidth, leftForestPosition);
 }
 
-void ForestScene::createForest(int widthInTrees, Position startingPosition) const {
+void ForestFrame::createForest(int widthInTrees, Position startingPosition) const {
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     unsigned int forestWidthInTrees = widthInTrees;
@@ -40,7 +40,7 @@ void ForestScene::createForest(int widthInTrees, Position startingPosition) cons
     }
 }
 
-void ForestScene::createJSON() const {
+void ForestFrame::createJSON() const {
     Entity json = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(json, startingPosition+Position(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
@@ -49,7 +49,7 @@ void ForestScene::createJSON() const {
     ecsManager->addComponentToEntity<CollisionComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
 }
 
-void ForestScene::createBobby() const {
+void ForestFrame::createBobby() const {
     Entity tank = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(tank, startingPosition+Position(50, 50));
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
@@ -58,7 +58,7 @@ void ForestScene::createBobby() const {
 //    ecsManager->addComponentToEntity<CollisionComponent>(tank, ecsManager->getComponentFromEntity<TextComponent>(tank).surfaceSize);
 }
 
-void ForestScene::createTreeAtPosition(Position position) const {
+void ForestFrame::createTreeAtPosition(Position position) const {
     Entity tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition+position);
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());

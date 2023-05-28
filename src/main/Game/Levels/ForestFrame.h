@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_FORESTSCENE_H
-#define TEXTBASED_FORESTSCENE_H
+#ifndef TEXTBASED_FORESTFRAME_H
+#define TEXTBASED_FORESTFRAME_H
 #include "../../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../TextGenerator.h"
 #include "../../ECS/Components/CollisionComponent.h"
@@ -9,9 +9,9 @@
 #include "../../ECS/Systems/UpdateSystems/CollisionCheckSystem.h"
 #include "../../Helpers/Objects/Position.h"
 
-class ForestScene {
+class ForestFrame {
 public:
-    explicit ForestScene(Position startingPosition);
+    explicit ForestFrame(Position startingPosition);
 private:
     Position startingPosition;
 
@@ -28,4 +28,4 @@ private:
 };
 
 
-#endif //TEXTBASED_FORESTSCENE_H
+#endif //TEXTBASED_FORESTFRAME_H

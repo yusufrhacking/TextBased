@@ -3,12 +3,12 @@
 #include "../../ECS/Components/MainPlayerComponent.h"
 #include "../../ECS/Components/TextComponents/TreeComponent.h"
 #include "../Game.h"
-#include "ForestScene.h"
+#include "ForestFrame.h"
 extern std::unique_ptr<ECSManager> ecsManager;
 
 void BasicSetup::setup() {
     createPlayer();
-    ForestScene(Position(1000, 1000));
+    ForestFrame(Position(1000, 1000));
 }
 
 void BasicSetup::createPlayer() {
