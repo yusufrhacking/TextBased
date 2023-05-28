@@ -4,7 +4,7 @@
 #include "../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "TextGenerator.h"
 #include "../ECS/Components/CollisionComponent.h"
-#include "Levels/Level1.h"
+#include "Levels/BasicSetup.h"
 #include "../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h"
 #include "../ECS/Systems/SpecialSystems/CameraFollowSystem.h"
@@ -13,7 +13,7 @@
 
 void GameManager::setup() {
     setupSystems();
-    Level1 level1;
+    BasicSetup level1;
     level1.setup();
 }
 

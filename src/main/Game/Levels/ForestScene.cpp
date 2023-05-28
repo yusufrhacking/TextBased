@@ -1,17 +1,16 @@
-#include "Level1.h"
-#include "../GameManager.h"
-#include "../../ECS/Components/MainPlayerComponent.h"
-#include "../../ECS/Components/TextComponents/TreeComponent.h"
+#include "ForestScene.h"
 #include "../Game.h"
 
-void Level1::setup() {
-    createPlayer();
-    createBobby();
+extern std::unique_ptr<ECSManager> ecsManager;
+
+ForestScene::ForestScene(Position startingPosition) {
+    this->startingPosition = startingPosition;
     createJSON();
+    createBobby();
     createForests();
 }
 
-void Level1::createForests() {
+void ForestScene::createForests() {
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     int treeWidth = 2;
@@ -24,7 +23,7 @@ void Level1::createForests() {
     createForest(treeWidth, leftForestPosition);
 }
 
-void Level1::createForest(int widthInTrees, Position startingPosition) const {
+void ForestScene::createForest(int widthInTrees, Position startingPosition) const {
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     unsigned int forestWidthInTrees = widthInTrees;
@@ -41,38 +40,30 @@ void Level1::createForest(int widthInTrees, Position startingPosition) const {
     }
 }
 
-void Level1::createJSON() const {
+void ForestScene::createJSON() const {
     Entity json = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(json, Game::startingPosition+Position(400, 300));
+    ecsManager->addComponentToEntity<PositionComponent>(json, startingPosition+Position(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
     ecsManager->addComponentToEntity<StyleComponent>(json);
     ecsManager->addComponentToEntity<CollisionComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
 }
 
-void Level1::createBobby() const {
+void ForestScene::createBobby() const {
     Entity tank = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tank, Game::startingPosition+Position(50, 50));
+    ecsManager->addComponentToEntity<PositionComponent>(tank, startingPosition+Position(50, 50));
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
     ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
     ecsManager->addComponentToEntity<StyleComponent>(tank);
 //    ecsManager->addComponentToEntity<CollisionComponent>(tank, ecsManager->getComponentFromEntity<TextComponent>(tank).surfaceSize);
 }
 
-void Level1::createPlayer() {
-    Entity witt = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
-    ecsManager->addComponentToEntity<PositionComponent>(witt, Game::startingPosition+window->getMiddlePosition());
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(5, 5));
-    ecsManager->addComponentToEntity<StyleComponent>(witt);
-    ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
-}
-
-void Level1::createTreeAtPosition(Position position) const {
+void ForestScene::createTreeAtPosition(Position position) const {
     Entity tree = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tree, Game::startingPosition+position);
+    ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition+position);
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
 }
+
 

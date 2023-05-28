@@ -44,7 +44,7 @@ set(SOURCE_FILES
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/CollisionComponent.h
         src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.cpp src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Levels/Level1.cpp src/main/Game/Levels/Level1.h
+        src/main/Game/Levels/BasicSetup.cpp src/main/Game/Levels/BasicSetup.h
         src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h
         src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h
         src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h
@@ -55,7 +55,7 @@ set(SOURCE_FILES
         src/main/Helpers/EventSystem/Events/KeyEvent.h
         src/main/ECS/Components/MainPlayerComponent.h
         src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.cpp src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h
-        src/main/ECS/Components/TextComponents/TreeComponent.h "src/main/ECS/Systems/SpecialSystems/CameraFollowSystem.cpp" "src/main/ECS/Systems/SpecialSystems/CameraFollowSystem.h" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedMovement.cpp" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedMovement.h" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.cpp" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h" src/main/ECS/Design/Objects/ComponentSignature.cpp src/main/ECS/Design/Objects/ComponentSignature.h src/main/ECS/Systems/SpecialSystems/MapGenerationSystem.cpp src/main/ECS/Systems/SpecialSystems/MapGenerationSystem.h src/main/Game/GameSystems/Camera/Camera.cpp src/main/Game/GameSystems/Camera/Camera.h)
+        src/main/ECS/Components/TextComponents/TreeComponent.h "src/main/ECS/Systems/SpecialSystems/CameraFollowSystem.cpp" "src/main/ECS/Systems/SpecialSystems/CameraFollowSystem.h" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedMovement.cpp" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedMovement.h" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.cpp" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h" src/main/ECS/Design/Objects/ComponentSignature.cpp src/main/ECS/Design/Objects/ComponentSignature.h src/main/ECS/Systems/SpecialSystems/MapGenerationSystem.cpp src/main/ECS/Systems/SpecialSystems/MapGenerationSystem.h src/main/Game/GameSystems/Camera/Camera.cpp src/main/Game/GameSystems/Camera/Camera.h src/main/Game/Levels/ForestScene.cpp src/main/Game/Levels/ForestScene.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

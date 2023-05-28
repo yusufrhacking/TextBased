@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_LEVEL1_H
-#define TEXTBASED_LEVEL1_H
+#ifndef TEXTBASED_FORESTSCENE_H
+#define TEXTBASED_FORESTSCENE_H
 #include "../../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../TextGenerator.h"
 #include "../../ECS/Components/CollisionComponent.h"
@@ -7,26 +7,25 @@
 #include "../../ECS/Design/Managers/ECSManager.h"
 #include <memory>
 #include "../../ECS/Systems/UpdateSystems/CollisionCheckSystem.h"
+#include "../../Helpers/Objects/Position.h"
 
-extern std::unique_ptr<ECSManager> ecsManager;
-
-class Level1 {
+class ForestScene {
 public:
-    void setup();
-
+    explicit ForestScene(Position startingPosition);
 private:
+    Position startingPosition;
+
     void createBobby() const;
 
     void createJSON() const;
 
-    void createForest(int widthInTrees, Position startingPosition) const;
+    void createForests();
 
-    void createPlayer();
+    void createForest(int widthInTrees, Position startingPosition) const;
 
     void createTreeAtPosition(Position position) const;
 
-    void createForests();
 };
 
 
-#endif //TEXTBASED_LEVEL1_H
+#endif //TEXTBASED_FORESTSCENE_H
