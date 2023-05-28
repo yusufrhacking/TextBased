@@ -2,6 +2,7 @@
 #include "CameraFollowSystem.h"
 #include "../../Design/Managers/ECSManager.h"
 #include "../../../Game/GameSystems/Camera/Camera.h"
+#include "../../../Game/Game.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<Camera> camera;
@@ -26,10 +27,13 @@ void CameraFollowSystem::update() {
     auto cameraWidth = Window::windowWidth;
     auto cameraHeight = Window::windowHeight;
 
-    if (playerPosition.xPos + ((float)cameraWidth/2) < (float)Window::windowWidth){
+    auto relativeXPosition = playerPosition.xPos - Game::startingPosition.xPos;
+    auto relativeYPosition = playerPosition.yPos - Game::startingPosition.yPos;
+
+    if (relativeXPosition + ((float)cameraWidth/2) < (float)Window::windowWidth){
         freshCameraPosition.xPos = playerPosition.xPos - (float)Window::windowWidth/2 + (float)playerSizeOffset.width/2;
     }
-    if (playerPosition.yPos + ((float)cameraHeight/2) < (float)Window::windowHeight){
+    if (relativeYPosition + ((float)cameraHeight/2) < (float)Window::windowHeight){
         freshCameraPosition.yPos = playerPosition.yPos - (float)Window::windowHeight/2;
     }
 

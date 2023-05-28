@@ -4,9 +4,7 @@
 #include <stdexcept>
 #include "spdlog/spdlog.h"
 
-
-extern std::unique_ptr<Window> window;
-Position Game::startingPosition = {0, 0};
+Position Game::startingPosition = {1000, 1000};
 int currFrame;
 
 Game::Game(){
