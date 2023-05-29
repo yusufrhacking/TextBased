@@ -4,12 +4,14 @@
 #include "../../ECS/Components/TextComponents/TreeComponent.h"
 #include "../Game.h"
 #include "ForestFrame.h"
+#include "../GameSystems/Camera/Camera.h"
+
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<Camera> camera;
 
 void BasicSetup::setup() {
     createPlayer();
-    auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(witt).getPosition();
-    ForestFrame(playerPosition-window->getMiddlePosition());
+    ForestFrame(camera->getCameraPosition());
 }
 
 void BasicSetup::createPlayer() {

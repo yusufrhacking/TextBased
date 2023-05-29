@@ -31,7 +31,7 @@ void UnprocessedKeyboardMovementSystem::processMovement() {
         const Velocity& velocity = changes.second;
         auto& position = ecsManager->getComponentFromEntity<PositionComponent>(Entity(entityID));
         position.changePosition(velocity.xVelocity, velocity.yVelocity);
-        spdlog::trace("Entity {} moved {}, {}", entityID, velocity.xVelocity, velocity.yVelocity);
+        spdlog::trace("Entity {} moved {}, {} to {}, {}", entityID, velocity.xVelocity, velocity.yVelocity, position.getPosition().xPos, position.getPosition().yPos);
     }
     unprocessedMovements->clear();
     totalChangeForEntities.clear();
