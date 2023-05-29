@@ -11,7 +11,6 @@ extern std::unique_ptr<Camera> camera;
 
 void BasicSetup::setup() {
     createPlayer();
-    ForestFrame(camera->getCameraPosition());
 }
 
 void BasicSetup::createPlayer() {

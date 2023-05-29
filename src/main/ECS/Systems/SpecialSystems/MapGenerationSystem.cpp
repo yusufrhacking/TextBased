@@ -4,6 +4,7 @@
 #include "../../Components/PositionComponent.h"
 #include "../../Design/Managers/ECSManager.h"
 #include "../../../Game/GameSystems/Camera/Camera.h"
+#include "../../../Game/Levels/ForestFrame.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<Camera> camera;
@@ -13,12 +14,7 @@ MapGenerationSystem::MapGenerationSystem() {
 }
 
 void MapGenerationSystem::update() {
-    auto const currentCameraPosition = camera->getCameraPosition();
-
-    auto unusedCameraWidth = currentCameraPosition.xPos - relativeCameraPosition.xPos;
-    auto unusedCameraHeight = currentCameraPosition.yPos - relativeCameraPosition.yPos;
-
-//    spdlog::info("free camera width, height {}, {}", unusedCameraWidth, unusedCameraHeight);
-    auto cameraDifference = currentCameraPosition.getAbsoluteDifference(relativeCameraPosition);
-
+    if(currFrame > 0){
+        ForestFrame(camera->getCameraPosition());
+    }
 }
