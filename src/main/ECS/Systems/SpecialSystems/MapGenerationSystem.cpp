@@ -11,10 +11,13 @@ extern std::unique_ptr<Camera> camera;
 
 MapGenerationSystem::MapGenerationSystem() {
     relativeCameraPosition = camera->getCameraPosition();
+    doneBefore = false;
 }
 
 void MapGenerationSystem::update() {
-    if(currFrame > 0){
+    if(currFrame > 100 && !doneBefore){
+        spdlog::debug("Forest Frame inputted");
         ForestFrame(camera->getCameraPosition());
+        doneBefore = true;
     }
 }

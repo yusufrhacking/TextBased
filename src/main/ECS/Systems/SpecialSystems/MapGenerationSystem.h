@@ -5,6 +5,7 @@
 class MapGenerationSystem: public System {
 private:
     Position relativeCameraPosition;
+    bool doneBefore;
 public:
     MapGenerationSystem();
 
