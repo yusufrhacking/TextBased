@@ -24,6 +24,10 @@ struct Position {
         return {this->xPos + other.xPos, this->yPos + other.yPos};
     }
 
+    Position operator-(const Position& other) const {
+        return {this->xPos - other.xPos, this->yPos - other.yPos};
+    }
+
     Position& operator+=(const Position& other) {
         this->xPos += other.xPos;
         this->yPos += other.yPos;

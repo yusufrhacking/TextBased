@@ -11,9 +11,9 @@
 
 class ForestFrame {
 public:
-    explicit ForestFrame(Position startingPosition);
+    explicit ForestFrame(Position referencePosition);
 private:
-    Position startingPosition;
+    Position referencePosition;
 
     void createBobby() const;
 
@@ -21,7 +21,7 @@ private:
 
     void createForests();
 
-    void createForest(int widthInTrees, Position startingPosition) const;
+    void createForest(int widthInTrees, Position referencePosition) const;
 
     void createTreeAtPosition(Position position) const;
 

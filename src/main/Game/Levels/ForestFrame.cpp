@@ -3,8 +3,7 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-ForestFrame::ForestFrame(Position startingPosition) {
-    this->startingPosition = startingPosition;
+ForestFrame::ForestFrame(Position referencePosition): referencePosition(referencePosition) {
     createJSON();
     createBobby();
     createForests();
@@ -23,13 +22,13 @@ void ForestFrame::createForests() {
     createForest(treeWidth, leftForestPosition);
 }
 
-void ForestFrame::createForest(int widthInTrees, Position startingPosition) const {
+void ForestFrame::createForest(int widthInTrees, Position referencePosition) const {
     auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
 
     unsigned int forestWidthInTrees = widthInTrees;
     unsigned int forestHeightInTrees = (Window::windowHeight / spriteForDimensions->surfaceSize.height) + 1;
 
-    Position treePosition = startingPosition;
+    Position treePosition = referencePosition;
     for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
         for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
             createTreeAtPosition(treePosition);
@@ -42,7 +41,7 @@ void ForestFrame::createForest(int widthInTrees, Position startingPosition) cons
 
 void ForestFrame::createJSON() const {
     Entity json = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(json, startingPosition+Position(400, 300));
+    ecsManager->addComponentToEntity<PositionComponent>(json, referencePosition + Position(400, 300));
     ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
     ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
     ecsManager->addComponentToEntity<StyleComponent>(json);
@@ -51,7 +50,7 @@ void ForestFrame::createJSON() const {
 
 void ForestFrame::createBobby() const {
     Entity tank = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tank, startingPosition+Position(50, 50));
+    ecsManager->addComponentToEntity<PositionComponent>(tank, referencePosition + Position(50, 50));
     ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
     ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
     ecsManager->addComponentToEntity<StyleComponent>(tank);
@@ -60,7 +59,7 @@ void ForestFrame::createBobby() const {
 
 void ForestFrame::createTreeAtPosition(Position position) const {
     Entity tree = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition+position);
+    ecsManager->addComponentToEntity<PositionComponent>(tree, referencePosition + position);
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);

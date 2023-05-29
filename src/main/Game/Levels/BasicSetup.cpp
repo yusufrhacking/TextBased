@@ -8,11 +8,12 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 void BasicSetup::setup() {
     createPlayer();
-    ForestFrame(Position(1000, 1000));
+    auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(witt).getPosition();
+    ForestFrame(playerPosition-window->getMiddlePosition());
 }
 
 void BasicSetup::createPlayer() {
-    Entity witt = ecsManager->createEntity();
+    witt = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, Game::startingPosition+window->getMiddlePosition());
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(5, 5));

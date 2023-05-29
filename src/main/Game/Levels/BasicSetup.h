@@ -16,6 +16,7 @@ public:
 
 private:
     void createPlayer();
+    Entity witt;
 };
 
 
