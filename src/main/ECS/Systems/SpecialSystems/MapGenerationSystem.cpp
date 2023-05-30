@@ -15,7 +15,11 @@ MapGenerationSystem::MapGenerationSystem() {
 }
 
 void MapGenerationSystem::update() {
-    if(currFrame > 100 && !doneBefore){
+    //Idea, when I get to the middle of the frame, I need to fill in the 8 frames around me
+    //Do this forever
+    //To do this, I will need a map object that can check if frames are "generated"
+    //And then also;
+    if(currFrame > 200 && !doneBefore){
         spdlog::debug("Forest Frame inputted");
         ForestFrame(camera->getCameraPosition());
         doneBefore = true;
