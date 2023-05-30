@@ -11,7 +11,7 @@ class FrameMap {
     //Will create the initial frame, and perhaps surrounding frames (or leave this to what is called in the update)
 
     //Frame getCurrentFrame(Position position);
-    //
+    //Decode the mapping between the
 
     //void surroundLocation(Position playerLocation); --> this is called in the MapGenerationSystem, like every frame
     //Will seed the 8 locations

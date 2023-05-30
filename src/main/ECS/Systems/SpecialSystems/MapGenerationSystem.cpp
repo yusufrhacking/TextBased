@@ -19,7 +19,7 @@ void MapGenerationSystem::update() {
     //Do this forever
     //To do this, I will need a map object that can check if frames are "generated"
     //And then also;
-    if(currFrame > 200 && !doneBefore){
+    if(currFrame > 0 && !doneBefore){
         spdlog::debug("Forest Frame inputted");
         ForestFrame(camera->getCameraPosition());
         doneBefore = true;

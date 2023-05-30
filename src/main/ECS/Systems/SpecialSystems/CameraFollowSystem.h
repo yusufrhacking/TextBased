@@ -12,6 +12,11 @@ public:
     explicit CameraFollowSystem();
 
     void update();
+private:
+
+    bool isOutsideTopOfScreen(float relativePlayerYPos, float playerHeight) const;
+
+    bool isOutsideBottomOfScreen(float relativePlayerYPos, float playerHeight);
 };
 
 
