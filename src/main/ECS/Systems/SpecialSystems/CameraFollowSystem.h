@@ -13,7 +13,6 @@ public:
 
     void update();
 private:
-
     bool isAboveScreen(float relativePlayerYPos, float playerHeight) const;
 
     bool isBelowScreen(float relativePlayerYPos, float playerHeight);
