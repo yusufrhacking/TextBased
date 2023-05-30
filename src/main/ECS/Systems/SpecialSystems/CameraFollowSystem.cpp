@@ -25,7 +25,6 @@ void CameraFollowSystem::update() {
     auto newCameraPosition = camera->getCameraPosition();
 
     auto relativePlayerYPos = playerPosition.yPos - camera->getCameraPosition().yPos;
-
     if (isAboveScreen(relativePlayerYPos, (float) playerSizeOffset.height)){
         newCameraPosition.yPos -= (float)Window::windowHeight;
     }
@@ -34,10 +33,10 @@ void CameraFollowSystem::update() {
     }
 
     auto relativePlayerXPos = playerPosition.xPos - camera->getCameraPosition().xPos;
-    if (this->isRightOfScreen(relativePlayerXPos, (float) playerSizeOffset.width)){
+    if (isRightOfScreen(relativePlayerXPos, (float) playerSizeOffset.width)){
         newCameraPosition.xPos -= (float)Window::windowWidth;
     }
-    if (this->isLeftOfScreen(relativePlayerXPos, (float) playerSizeOffset.height)){
+    if (isLeftOfScreen(relativePlayerXPos, (float) playerSizeOffset.height)){
         newCameraPosition.xPos += (float)Window::windowWidth;
     }
 
