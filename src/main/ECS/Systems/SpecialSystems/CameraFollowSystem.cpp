@@ -25,36 +25,47 @@ void CameraFollowSystem::update() {
     auto newCameraPosition = camera->getCameraPosition();
 
     auto relativePlayerYPos = playerPosition.yPos - camera->getCameraPosition().yPos;
+    auto relativePlayerXPos = playerPosition.xPos - camera->getCameraPosition().xPos;
+
+
     spdlog::info("Player Pos y {}", playerPosition.yPos);
     spdlog::info("Camera pos y {}", camera->getCameraPosition().yPos);
-    if (isOutsideTopOfScreen(relativePlayerYPos, (float)playerSizeOffset.height)){
+    if (isAboveScreen(relativePlayerYPos, (float) playerSizeOffset.height)){
         newCameraPosition.yPos -= (float)Window::windowHeight;
-        spdlog::info("Lesser CAMERA");
     }
-    if (isOutsideBottomOfScreen(relativePlayerYPos, (float)playerSizeOffset.height)){
+    if (isBelowScreen(relativePlayerYPos, (float) playerSizeOffset.height)){
         newCameraPosition.yPos += (float)Window::windowHeight;
-        spdlog::info("GREATER CAMERA");
+    }
+    if (isRightOfScreen(relativePlayerXPos, (float) playerSizeOffset.width)){
+        newCameraPosition.xPos -= (float)Window::windowWidth;
+    }
+    if (isLeftOfScreen(relativePlayerXPos, (float) playerSizeOffset.height)){
+        newCameraPosition.xPos += (float)Window::windowWidth;
     }
 
     camera->positionCamera(newCameraPosition);
+    spdlog::debug("Camera moved to position {}, {}", newCameraPosition.xPos, newCameraPosition.yPos);
+}
 
-//
-//    auto playerSizeOffset = ecsManager->getComponentFromEntity<TextComponent>(entity).surfaceSize;
-//
-//
+bool CameraFollowSystem::isAboveScreen(float relativePlayerYPos, float playerHeight) const {
+    return (relativePlayerYPos + playerHeight) < 0;
+}
+
+bool CameraFollowSystem::isBelowScreen(float relativePlayerYPos, float playerHeight) {
+    return (relativePlayerYPos - playerHeight) > (float)Window::windowHeight;
+}
+
+bool CameraFollowSystem::isRightOfScreen(float relativePlayerXPos, float playerWidth) {
+    return (relativePlayerXPos + playerWidth) < 0;
+}
+
+bool CameraFollowSystem::isLeftOfScreen(float relativePlayerXPos, float playerWidth) {
+    return (relativePlayerXPos - playerWidth) > (float)Window::windowWidth;
+}
+
 //    auto xPositionWithPlayerInMiddle = playerPosition.xPos - (float)Window::windowWidth/2;
 //    newCameraPosition.xPos = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width / 2;
 //    auto yPositionWithPlayerInMiddle = playerPosition.yPos - (float)Window::windowHeight/2;
 //    newCameraPosition.yPos = yPositionWithPlayerInMiddle;
 //
 //    camera->positionCamera(newCameraPosition);
-//    spdlog::trace("Camera moved to position {}, {}", newCameraPosition.xPos, newCameraPosition.yPos);
-}
-
-bool CameraFollowSystem::isOutsideTopOfScreen(float relativePlayerYPos, float playerHeight) const {
-    return (relativePlayerYPos + playerHeight) < 0;
-}
-
-bool CameraFollowSystem::isOutsideBottomOfScreen(float relativePlayerYPos, float playerHeight) {
-    return (relativePlayerYPos - playerHeight) > (float)Window::windowHeight;
-}

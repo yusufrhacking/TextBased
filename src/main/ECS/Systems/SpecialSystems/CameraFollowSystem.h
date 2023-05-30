@@ -14,9 +14,13 @@ public:
     void update();
 private:
 
-    bool isOutsideTopOfScreen(float relativePlayerYPos, float playerHeight) const;
+    bool isAboveScreen(float relativePlayerYPos, float playerHeight) const;
 
-    bool isOutsideBottomOfScreen(float relativePlayerYPos, float playerHeight);
+    bool isBelowScreen(float relativePlayerYPos, float playerHeight);
+
+    bool isRightOfScreen(float relativePlayerXPos, float playerWidth);
+
+    bool isLeftOfScreen(float relativePlayerXPos, float playerWidth);
 };
 
 
