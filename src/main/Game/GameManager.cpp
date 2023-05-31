@@ -10,6 +10,7 @@
 #include "../ECS/Systems/SpecialSystems/CameraFollowSystem.h"
 #include "../ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../ECS/Systems/SpecialSystems/MapGenerationSystem.h"
+#include "Game.h"
 
 void GameManager::setup() {
     setupSystems();
@@ -25,7 +26,9 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
-    ecsManager->addSystem<MapGenerationSystem>();
+
+    std::shared_ptr<FrameMap> frameMap = std::make_shared<FrameMap>(Game::startingPosition);
+    ecsManager->addSystem<MapGenerationSystem>(frameMap);
 }
 
 #pragma clang diagnostic pop

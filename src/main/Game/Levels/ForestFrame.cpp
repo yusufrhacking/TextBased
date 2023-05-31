@@ -4,8 +4,8 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 ForestFrame::ForestFrame(Position referencePosition){
     this->referencePosition = referencePosition;
-    createJSON();
-    createBobby();
+//    createJSON();
+//    createBobby();
     createForests();
 }
 

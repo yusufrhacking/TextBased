@@ -30,7 +30,9 @@ void FrameMap::surroundLocation(Position playerPosition) {
             if (neighborX >= 0 && neighborY >= 0) {
                 auto& neighborCell = frameMap[neighborX][neighborY];
                 if (!neighborCell.isFilled) {
-                    neighborCell.frame = std::make_unique<Frame>();
+                    auto newPosition = getGamePositionFromMapPosition(playerMapPosition);
+                    newPosition += Position((float)deltaX * (float)frameWidth, (float)deltaY * -1 * (float)frameHeight);
+                    neighborCell.frame = std::make_unique<ForestFrame>(newPosition);
                     neighborCell.isFilled = true;
                 }
             }
@@ -45,17 +47,13 @@ bool FrameMap::isFrameAtPositionFilled(Position position) {
 }
 
 MapPosition FrameMap::getMapPositionFromGamePosition(Position playerPosition) {
-    int frameWidth = Window::windowWidth;
     int rowPos = (int)playerPosition.xPos/frameWidth;
-    int frameHeight = Window::windowHeight;
     int colPos = (int)playerPosition.yPos/frameHeight;
     return {rowPos, colPos};
 }
 
 Position FrameMap::getGamePositionFromMapPosition(MapPosition mapPosition) {
-    int frameWidth = Window::windowWidth;
     int xPos = mapPosition.xPos * frameWidth;
-    int frameHeight = Window::windowHeight;
     int yPos = (int)mapPosition.yPos * frameHeight;
     return {static_cast<float>(xPos), static_cast<float>(yPos)};
 }

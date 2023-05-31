@@ -24,6 +24,9 @@ private:
     std::vector<std::vector<FrameCell>> frameMap;
     Position startingPosition;
     MapPosition startingMapPosition;
+    int frameWidth = Window::windowWidth;
+    int frameHeight = Window::windowHeight;
+
 
 
 public:

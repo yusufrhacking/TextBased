@@ -1,13 +1,13 @@
 #ifndef TEXTBASED_MAPGENERATIONSYSTEM_H
 #define TEXTBASED_MAPGENERATIONSYSTEM_H
 #include "../../Design/Objects/System.h"
+#include "../../../Game/Map/FrameMap/FrameMap.h"
 
 class MapGenerationSystem: public System {
 private:
-    Position relativeCameraPosition;
-    bool doneBefore;
+    std::shared_ptr<FrameMap> frameMap;
 public:
-    MapGenerationSystem();
+    explicit MapGenerationSystem(std::shared_ptr<FrameMap> frameMap);
 
     void update();
 };
