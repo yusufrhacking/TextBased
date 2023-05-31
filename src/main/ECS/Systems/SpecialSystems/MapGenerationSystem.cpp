@@ -5,6 +5,7 @@
 #include "../../Design/Managers/ECSManager.h"
 #include "../../../Game/GameSystems/Camera/Camera.h"
 #include "../../../Game/Levels/ForestFrame.h"
+#include "../../../Game/Map/FrameMap/FrameMap.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<Camera> camera;
@@ -12,6 +13,7 @@ extern std::unique_ptr<Camera> camera;
 MapGenerationSystem::MapGenerationSystem() {
     relativeCameraPosition = camera->getCameraPosition();
     doneBefore = false;
+    FrameMap frameMap(relativeCameraPosition);
 }
 
 void MapGenerationSystem::update() {
@@ -19,9 +21,9 @@ void MapGenerationSystem::update() {
     //Do this forever
     //To do this, I will need a map object that can check if frames are "generated"
     //And then also;
-    if(currFrame > 0 && !doneBefore){
-        spdlog::debug("Forest Frame inputted");
-        ForestFrame(camera->getCameraPosition());
-        doneBefore = true;
-    }
+//    if(currFrame > 0 && !doneBefore){
+//        spdlog::debug("Forest Frame inputted");
+//        ForestFrame give_me_a_name(camera->getCameraPosition());
+//        doneBefore = true;
+//    }
 }

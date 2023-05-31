@@ -3,7 +3,8 @@
 
 
 class Frame {
-
+public:
+    virtual ~Frame() = default;
 };
 
 

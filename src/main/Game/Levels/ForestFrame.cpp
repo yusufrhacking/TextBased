@@ -1,9 +1,9 @@
 #include "ForestFrame.h"
-#include "../Game.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-ForestFrame::ForestFrame(Position referencePosition): referencePosition(referencePosition) {
+ForestFrame::ForestFrame(Position referencePosition){
+    this->referencePosition = referencePosition;
     createJSON();
     createBobby();
     createForests();
