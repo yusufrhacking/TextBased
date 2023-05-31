@@ -3,7 +3,9 @@
 extern std::unique_ptr<Window> window;
 
 TEST_CASE("Frame Map Test", "[FrameMap]"){
-    window = std::make_unique<Window>();
+//    window = std::make_unique<Window>();
+    window->windowWidth = 1000;
+    window->windowHeight = 1000;
     Position startingPosition(1000, 1000);
     FrameMap frameMap(startingPosition);
 

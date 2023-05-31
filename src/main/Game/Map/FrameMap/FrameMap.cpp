@@ -4,9 +4,9 @@
 FrameMap::FrameMap(Position startingPosition) {
     this->startingPosition = startingPosition;
     frameMap = std::vector<std::vector<FrameCell>>(numRows, std::vector<FrameCell>(numCols));
-    startingMapPosition = getMapPositionFromGamePosition(this->startingPosition);
+    startingMapPosition = getMapPositionFromGamePosition(startingPosition);
     auto startingCell = frameMap[startingMapPosition.xPos][startingMapPosition.yPos];
-    startingCell.frame = std::make_unique<ForestFrame>(this->startingPosition);
+    startingCell.frame = std::make_shared<Frame>();
     startingCell.isFilled = true;
 }
 
@@ -31,7 +31,7 @@ void FrameMap::surroundLocation(Position playerPosition) {
             if (neighborX >= 0 && neighborY >= 0) {
                 auto& neighborCell = frameMap[neighborX][neighborY];
                 if (!neighborCell.isFilled) {
-                    neighborCell.frame = std::make_unique<ForestFrame>(getGamePositionFromMapPosition({ neighborX, neighborY }));
+                    neighborCell.frame = std::make_shared<Frame>();
                     neighborCell.isFilled = true;
                 }
             }

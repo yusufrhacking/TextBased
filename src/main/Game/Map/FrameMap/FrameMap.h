@@ -18,8 +18,8 @@ class FrameMap {
     //requireComponent<MovementComponent> --> needs polymorphic components too
     //Check ALL entities at the beginning, and then require position/movement components so the update tracks those
 private:
-    int numRows = 10000;
-    int numCols = 10000;
+    static const int numRows = 10000;
+    static const int numCols = 10000;
     FrameCell startingFrame;
     std::vector<std::vector<FrameCell>> frameMap;
     Position startingPosition;

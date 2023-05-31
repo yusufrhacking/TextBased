@@ -4,7 +4,7 @@
 #include "../Frame/Frame.h"
 
 struct FrameCell {
-    std::unique_ptr<Frame> frame;
+    std::shared_ptr<Frame> frame;
     bool isFilled;
 
     FrameCell(){
