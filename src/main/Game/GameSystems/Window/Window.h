@@ -24,12 +24,13 @@ class Window {
 
         static Position getMiddlePosition();
 
+        static Position deriveRelativeTopLeft(Position position);
 
-    private:
+
+private:
         SDL_Window* window;
         void createWindow();
 
-    static Position deriveRelativeTopLeft(Position position);
 };
 
 

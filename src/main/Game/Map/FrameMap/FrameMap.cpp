@@ -17,9 +17,8 @@ Frame &FrameMap::getFrame(Position position) {
 
 void FrameMap::surroundLocation(Position playerPosition) {
     auto playerMapPosition = getMapPositionFromGamePosition(playerPosition);
-
-    for (int deltaX = -1; deltaX <= 1; ++deltaX) {
-        for (int deltaY = -1; deltaY <= 1; ++deltaY) {
+    for (int deltaX = -1; deltaX <= -1; ++deltaX) {
+        for (int deltaY = -1; deltaY <= -1; ++deltaY) {
             if (deltaX == 0 && deltaY == 0) {
                 continue;
             }
@@ -30,8 +29,9 @@ void FrameMap::surroundLocation(Position playerPosition) {
             if (neighborX >= 0 && neighborY >= 0) {
                 auto& neighborCell = frameMap[neighborX][neighborY];
                 if (!neighborCell.isFilled) {
-                    auto newPosition = getGamePositionFromMapPosition(playerMapPosition);
-                    newPosition += Position((float)deltaX * (float)frameWidth, (float)deltaY * -1 * (float)frameHeight);
+                    auto newPosition = Window::deriveRelativeTopLeft(playerPosition);
+                    auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * -1 * (float)frameHeight);
+                    newPosition += positionDirection;
                     neighborCell.frame = std::make_unique<ForestFrame>(newPosition);
                     neighborCell.isFilled = true;
                 }

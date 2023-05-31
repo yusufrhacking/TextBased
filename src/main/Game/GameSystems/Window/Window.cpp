@@ -63,7 +63,9 @@ Position Window::getMiddlePosition() {
 }
 
 Position Window::deriveRelativeTopLeft(Position position){
-    Position topLeft = {((float)((int)position.xPos / windowWidth) * windowWidth), (float)((int)position.yPos / windowHeight) * windowHeight}
+    Position topLeft = {((float)((int)position.xPos / windowWidth) * windowWidth),
+                        (float)((int)position.yPos / windowHeight) * windowHeight};
+    return topLeft;
 }
 
 void Window::initializeWindowSize() {
