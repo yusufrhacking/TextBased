@@ -16,9 +16,14 @@ void FrameMap::surroundLocation(Position playerPosition) {
 }
 
 int FrameMap::getXIndexFromPosition(float xPos) {
+
     return 0;
 }
 
 int FrameMap::getYIndexFromPosition(float yPos) {
     return 0;
+}
+
+bool FrameMap::isFrameAtPositionFilled(Position position) {
+    return false;
 }

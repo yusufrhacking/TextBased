@@ -15,10 +15,15 @@ private:
     int frameHeight = Window::windowHeight;
     std::vector<std::vector<Frame>> frameMap;
     Position startingPosition;
+    int startingFrameLocationX;
+    int startingFrameLocationY;
+
 
 public:
     //Will create the initial frame, and perhaps surrounding frames (or leave this to what is called in the update)
     explicit FrameMap(Position startingPosition);
+
+    bool isFrameAtPositionFilled(Position position);
 
     Frame& getFrame(Position position);
 

@@ -2,7 +2,7 @@
 #define TEXTBASED_TESTEXTERNDECLARATIONS_H
 #include <memory>
 #include "../main/ECS/Design/Managers/ECSManager.h"
-
+#include "../main/Game/GameSystems/Camera/Camera.h"
 
 class TestExternDeclarations {
 };
