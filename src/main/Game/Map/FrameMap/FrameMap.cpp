@@ -2,13 +2,14 @@
 
 FrameMap::FrameMap(Position startingPosition) {
     this->startingPosition = startingPosition;
+    frameMap = std::vector<std::vector<FrameCell>>(numRows, std::vector<FrameCell>(numCols, startingFrame));
     //create frame at this position
 }
 
 Frame &FrameMap::getFrame(Position position) {
     int xIndex = getXIndexFromPosition(position.xPos);
     int yIndex = getYIndexFromPosition(position.yPos);
-    return frameMap[xIndex][yIndex].frame;
+    return *frameMap[xIndex][yIndex].frame;
 }
 
 void FrameMap::surroundLocation(Position playerPosition) {
