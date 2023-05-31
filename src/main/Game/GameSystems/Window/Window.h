@@ -14,21 +14,22 @@ class Window {
 
         static void initializeWindowSize();
 
-        [[nodiscard]] Position getTopLeftPosition() const;
+        [[nodiscard]] static Position getTopLeftPosition() ;
 
-        [[nodiscard]] Position getBottomLeftPosition() const;
+        [[nodiscard]] static Position getBottomLeftPosition() ;
 
-        [[nodiscard]] Position getTopRightPosition() const;
+        [[nodiscard]] static Position getTopRightPosition() ;
 
-        [[nodiscard]] Position getBottomRightPosition() const;
+        [[nodiscard]] static Position getBottomRightPosition() ;
 
-        Position getMiddlePosition();
+        static Position getMiddlePosition();
 
 
     private:
         SDL_Window* window;
         void createWindow();
 
+    static Position deriveRelativeTopLeft(Position position);
 };
 
 

@@ -37,22 +37,22 @@ SDL_Window *Window::getWindow() {
     return window;
 }
 
-Position Window::getTopLeftPosition() const {
+Position Window::getTopLeftPosition() {
     Position TOP_LEFT_POSITION = {0, 0};
     return TOP_LEFT_POSITION;
 }
 
-Position Window::getBottomLeftPosition() const {
+Position Window::getBottomLeftPosition() {
     Position BOTTOM_LEFT_POSITION = {0, static_cast<float>(windowHeight)};
     return BOTTOM_LEFT_POSITION;
 }
 
-Position Window::getTopRightPosition() const {
+Position Window::getTopRightPosition() {
     Position TOP_RIGHT_POSITION = {static_cast<float>(windowWidth), 0};
     return TOP_RIGHT_POSITION;
 }
 
-Position Window::getBottomRightPosition() const {
+Position Window::getBottomRightPosition() {
     Position BOTTOM_RIGHT_POSITION = {static_cast<float>(windowWidth), static_cast<float>(windowHeight)};
     return BOTTOM_RIGHT_POSITION;
 }
@@ -60,6 +60,10 @@ Position Window::getBottomRightPosition() const {
 Position Window::getMiddlePosition() {
     Position MIDDLE = {static_cast<float>(windowWidth)/2, static_cast<float>(windowHeight)/2};
     return MIDDLE;
+}
+
+Position Window::deriveRelativeTopLeft(Position position){
+    Position topLeft = {((float)((int)position.xPos / windowWidth) * windowWidth), (float)((int)position.yPos / windowHeight) * windowHeight}
 }
 
 void Window::initializeWindowSize() {

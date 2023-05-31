@@ -17,7 +17,7 @@ void ForestFrame::createForests() {
 
     createForest(treeWidth, rightForestPosition);
 
-    Position leftForestPosition = {window->getTopLeftPosition().xPos, window->getTopRightPosition().yPos};
+    Position leftForestPosition = {window->getTopLeftPosition().xPos, window->getTopLeftPosition().yPos};
 
     createForest(treeWidth, leftForestPosition);
 }
