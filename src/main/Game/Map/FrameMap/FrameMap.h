@@ -4,6 +4,7 @@
 #include "../Frame/Frame.h"
 #include "../../GameSystems/Window/Window.h"
 #include "FrameCell.h"
+#include "../../../Helpers/Objects/MapPosition.h"
 #include <vector>
 
 
@@ -36,11 +37,11 @@ public:
 
     void surroundLocation(Position playerPosition);
 
+    MapPosition getMapPositionFromGamePosition(Position playerPosition);
+
+
     //void surroundLocation(Position playerLocation); --> this is called in the MapGenerationSystem, like every frame
     //Will seed the 8 locations
-    int getXIndexFromPosition(float xPos);
-
-    int getYIndexFromPosition(float yPos);
 };
 
 

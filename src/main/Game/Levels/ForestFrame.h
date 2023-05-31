@@ -8,8 +8,9 @@
 #include <memory>
 #include "../../ECS/Systems/UpdateSystems/CollisionCheckSystem.h"
 #include "../../Helpers/Objects/Position.h"
+#include "../Map/Frame/Frame.h"
 
-class ForestFrame {
+class ForestFrame: public Frame {
 public:
     explicit ForestFrame(Position referencePosition);
 private:
