@@ -2,8 +2,7 @@
 #include "../../main/Game/Map/FrameMap/FrameMap.h"
 extern std::unique_ptr<Window> window;
 
-TEST_CASE("Frame Map Test"){
-    SDL_Init(SDL_INIT_EVERYTHING);
+TEST_CASE("Frame Map Test", "[FrameMap]"){
     window = std::make_unique<Window>();
     Position startingPosition(1000, 1000);
     FrameMap frameMap(startingPosition);
