@@ -8,7 +8,7 @@ FrameMap::FrameMap(Position startingPosition) {
 Frame &FrameMap::getFrame(Position position) {
     int xIndex = getXIndexFromPosition(position.xPos);
     int yIndex = getYIndexFromPosition(position.yPos);
-    return frameMap[xIndex][yIndex];
+    return frameMap[xIndex][yIndex].frame;
 }
 
 void FrameMap::surroundLocation(Position playerPosition) {
@@ -16,7 +16,6 @@ void FrameMap::surroundLocation(Position playerPosition) {
 }
 
 int FrameMap::getXIndexFromPosition(float xPos) {
-
     return 0;
 }
 

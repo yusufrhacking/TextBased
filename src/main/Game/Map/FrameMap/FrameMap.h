@@ -3,6 +3,7 @@
 #include "../../../Helpers/Objects/Position.h"
 #include "../Frame/Frame.h"
 #include "../../GameSystems/Window/Window.h"
+#include "FrameCell.h"
 #include <vector>
 
 
@@ -10,10 +11,15 @@ class FrameMap {
     //Need to make it that frames can only be created here, so that I can track it that way
     //Perhaps store all the frames in this folder, and then make it protected so nobody else can call the constructors?
     //Will interact a lot with the MapGenerationSystem
+
+    //Data structure should be like a matrix, let's say 10k x 10k, and then if it goes beyond that, 2x that dimension
+    //Frames will track what entities are inside them, this will need a system to keep track of this too
+    //requireComponent<MovementComponent> --> needs polymorphic components too
+    //Check ALL entities at the beginning, and then require position/movement components so the update tracks those
 private:
     int frameWidth = Window::windowWidth;
     int frameHeight = Window::windowHeight;
-    std::vector<std::vector<Frame>> frameMap;
+    std::vector<std::vector<FrameCell>> frameMap;
     Position startingPosition;
     int startingFrameLocationX;
     int startingFrameLocationY;
