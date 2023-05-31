@@ -4,11 +4,16 @@
 #include "../Frame/Frame.h"
 
 struct FrameCell {
-    Frame frame;
+    std::unique_ptr<Frame> frame;
     bool isFilled;
 
     FrameCell(){
         isFilled = false;
+    }
+
+    FrameCell(const FrameCell& other) {
+        isFilled = other.isFilled;
+        // Copy any other member variables here
     }
 
 };

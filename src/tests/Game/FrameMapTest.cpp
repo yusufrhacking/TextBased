@@ -1,14 +1,14 @@
 #include <catch2/catch_test_macros.hpp>
 #include "../../main/Game/Map/FrameMap/FrameMap.h"
+extern std::unique_ptr<Window> window;
 
 TEST_CASE("Frame Map Test"){
+    SDL_Init(SDL_INIT_EVERYTHING);
+    window = std::make_unique<Window>();
     Position startingPosition(1000, 1000);
     FrameMap frameMap(startingPosition);
 
-    SECTION("Filling Frame At Top Right"){
-        frameMap.surroundLocation(startingPosition);
-        Position topRight = startingPosition + Position((float)Window::windowWidth, (float)Window::windowHeight);
-        REQUIRE(frameMap.isFrameAtPositionFilled(topRight));
-    }
-    //surround a frame, check the position windowWidth to the right and see if the frame is filled
+    frameMap.surroundLocation(startingPosition);
+    Position topRight = startingPosition + Position((float)Window::windowWidth, (float)Window::windowHeight);
+    REQUIRE(frameMap.isFrameAtPositionFilled(topRight));
 }

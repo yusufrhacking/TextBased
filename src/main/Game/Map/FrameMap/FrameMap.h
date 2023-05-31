@@ -23,8 +23,7 @@ private:
     FrameCell startingFrame;
     std::vector<std::vector<FrameCell>> frameMap;
     Position startingPosition;
-    int startingFrameLocationX;
-    int startingFrameLocationY;
+    MapPosition startingMapPosition;
 
 
 public:
@@ -42,6 +41,7 @@ public:
 
     //void surroundLocation(Position playerLocation); --> this is called in the MapGenerationSystem, like every frame
     //Will seed the 8 locations
+    Position getGamePositionFromMapPosition(MapPosition mapPosition);
 };
 
 
