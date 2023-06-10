@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include "spdlog/spdlog.h"
 
-Position Game::startingPosition = {10000, 10000};
+Position Game::startingPosition = {0, 0};
 int currFrame;
 
 Game::Game(){

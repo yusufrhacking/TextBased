@@ -26,6 +26,7 @@ private:
     MapPosition startingMapPosition;
     int frameWidth = Window::windowWidth;
     int frameHeight = Window::windowHeight;
+    MapPosition positionAdjustment;
 
 
 

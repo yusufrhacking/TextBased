@@ -5,9 +5,9 @@ FrameMap::FrameMap(Position startingPosition) {
     this->startingPosition = startingPosition;
     frameMap = std::vector<std::vector<FrameCell>>(numRows, std::vector<FrameCell>(numCols));
     startingMapPosition = getMapPositionFromGamePosition(startingPosition);
-    auto startingCell = frameMap[startingMapPosition.xPos][startingMapPosition.yPos];
+    auto startingCell = frameMap[startingMapPosition.xPos][startingMapPosition.yPos];//need to add adjustment to make the middle though
     startingCell.frame = std::make_unique<ForestFrame>(startingPosition);
-    startingCell.isFilled = true;
+    startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
 }
 
 Frame &FrameMap::getFrame(Position position) {
@@ -17,8 +17,8 @@ Frame &FrameMap::getFrame(Position position) {
 
 void FrameMap::surroundLocation(Position playerPosition) {
     auto playerMapPosition = getMapPositionFromGamePosition(playerPosition);
-    for (int deltaX = -1; deltaX <= -1; ++deltaX) {
-        for (int deltaY = -1; deltaY <= -1; ++deltaY) {
+    for (int deltaX = -1; deltaX <= 1; ++deltaX) {
+        for (int deltaY = -1; deltaY <= 1; ++deltaY) {
             if (deltaX == 0 && deltaY == 0) {
                 continue;
             }
@@ -30,8 +30,8 @@ void FrameMap::surroundLocation(Position playerPosition) {
                 auto& neighborCell = frameMap[neighborX][neighborY];
                 if (!neighborCell.isFilled) {
                     auto newPosition = Window::deriveRelativeTopLeft(playerPosition);
-                    auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * -1 * (float)frameHeight);
-                    newPosition += positionDirection;
+                    auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
+                    newPosition += Window::deriveRelativeTopLeft(positionDirection);
                     neighborCell.frame = std::make_unique<ForestFrame>(newPosition);
                     neighborCell.isFilled = true;
                 }

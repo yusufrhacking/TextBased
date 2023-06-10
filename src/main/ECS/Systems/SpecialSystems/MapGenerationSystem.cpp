@@ -13,6 +13,10 @@ MapGenerationSystem::MapGenerationSystem(std::shared_ptr<FrameMap> frameMap) {
     this->frameMap = frameMap;
     requireComponent<PositionComponent>();
     requireComponent<MainPlayerComponent>();
+
+    Entity entity = *getRelevantEntities().begin();
+    auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
+    frameMap->surroundLocation(playerPosition);
 }
 
 void MapGenerationSystem::update() {
@@ -22,7 +26,7 @@ void MapGenerationSystem::update() {
     Entity entity = *getRelevantEntities().begin();
     auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
 
-    frameMap->surroundLocation(playerPosition);
+//    frameMap->surroundLocation(playerPosition);
 
     //Idea, when I get to the middle of the frame, I need to fill in the 8 frames around me
     //Do this forever
