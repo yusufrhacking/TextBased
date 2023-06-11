@@ -1,8 +1,10 @@
+#include <spdlog/spdlog.h>
 #include "ForestFrame.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 ForestFrame::ForestFrame(Position referencePosition){
+    spdlog::warn("Reference Position USED: {}, {}", referencePosition.xPos, referencePosition.yPos);
     this->referencePosition = referencePosition;
 //    createJSON();
 //    createBobby();

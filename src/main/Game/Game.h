@@ -47,7 +47,7 @@ public:
 
     void close();
 
-    static Position startingPosition;
+    static Position startingTopLeftPosition;
 };
 
 

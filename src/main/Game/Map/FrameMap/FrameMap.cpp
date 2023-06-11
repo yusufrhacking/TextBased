@@ -31,7 +31,8 @@ void FrameMap::surroundLocation(Position playerPosition) {
                 if (!neighborCell.isFilled) {
                     auto newPosition = Window::deriveRelativeTopLeft(playerPosition);
                     auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
-                    newPosition += Window::deriveRelativeTopLeft(positionDirection);
+                    newPosition += positionDirection;
+                    int shouldBeZero = (int)newPosition.xPos % frameWidth;
                     neighborCell.frame = std::make_unique<ForestFrame>(newPosition);
                     neighborCell.isFilled = true;
                 }
