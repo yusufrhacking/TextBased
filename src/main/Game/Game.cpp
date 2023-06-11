@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include "spdlog/spdlog.h"
 
-Position Game::startingTopLeftPosition = {11760, 10516};
+Position Game::startingTopLeftPosition = {11760, 10516}; //Multiple of the frame height/width
 int currFrame;
 
 Game::Game(){

@@ -4,7 +4,7 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 ForestFrame::ForestFrame(Position referencePosition){
-    spdlog::warn("Reference Position USED: {}, {}", referencePosition.xPos, referencePosition.yPos);
+    spdlog::debug("Forest Frame created at: {}, {}", referencePosition.xPos, referencePosition.yPos);
     this->referencePosition = referencePosition;
 //    createJSON();
 //    createBobby();
