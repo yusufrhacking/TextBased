@@ -66,11 +66,11 @@ std::string ForestFrame::getStubTreeText() const {
 
     auto verticalCapacityForTrees = Window::windowHeight / treeHeight;
     auto spaceUsed = verticalCapacityForTrees * treeHeight;
-    auto verticalRenderSpace = Window::windowHeight - spaceUsed;
+    int verticalRenderSpace = (int)Window::windowHeight - spaceUsed;
 
     std::string stubTreeText;
     for (const auto & lineCounter : linesOfText){
-        if (verticalRenderSpace - HEIGHT_OF_A_LINE_OF_TEXT < 0){
+        if (HEIGHT_OF_A_LINE_OF_TEXT > verticalRenderSpace){
             break;
         }
         stubTreeText += lineCounter;

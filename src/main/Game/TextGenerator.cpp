@@ -11,7 +11,7 @@ std::string TextGenerator::getTreeText() {
            + "\n" + centerOffset + "Tree"
            + "\n" + centerOffset + "Tree"
            + "\n" + centerOffset + "Tree"
-//           + "\n" + centerOffset + "Tree"
+           + "\n" + centerOffset + "Tree"
            + "\n" + centerOffset + "Tree";
 }
 
