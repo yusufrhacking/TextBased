@@ -16,6 +16,17 @@ void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referenc
     createStubTrees(forestWidthInTrees, stubReferencePosition);
 }
 
+//Render as much as you can option instead of dimensioned uncut
+Position ForestFrame::createDimensionedForest(int widthInTrees, int heightInTrees, const Position referencePosition) const {
+    unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
+    if (heightInTrees < verticalCapacityForTrees){
+        createDimensionedUncutForest(widthInTrees, heightInTrees, referencePosition);
+    } else{
+        auto stubReferencePosition = createDimensionedUncutForest(widthInTrees, (int)verticalCapacityForTrees, referencePosition);
+        createStubTrees(widthInTrees, stubReferencePosition);
+    }
+}
+
 Position ForestFrame::createDimensionedUncutForest(int widthInTrees, int heightInTrees, const Position &referencePosition) const {
     Position treePosition = referencePosition;
     for (int heightIndex = 0; heightIndex < heightInTrees; heightIndex++){

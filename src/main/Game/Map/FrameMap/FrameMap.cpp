@@ -30,9 +30,6 @@ void FrameMap::surroundLocation(Position playerPosition) {
             int neighborY = playerMapPosition.yPos + deltaY;
 
             if (neighborX >= 0 && neighborY >= 0) {
-                if (neighborX == 8 && neighborY == 11){
-                    spdlog::warn("FUCK");
-                }
                 auto& neighborCell = frameMap[neighborX][neighborY];
                 if (!neighborCell.isFilled) {
                     auto newPosition = Window::deriveRelativeTopLeft(playerPosition);

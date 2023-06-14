@@ -19,7 +19,7 @@ public:
     int treeHeight = treeSprite.surfaceSize.height;
 protected:
     Position frameReferencePosition;
-
+    Position createDimensionedForest(int widthInTrees, int heightInTrees, const Position referencePosition) const;
     void createVerticalForest(int widthInTrees, Position referencePosition) const;
 
     void createGenericTreeAtPosition(Position position) const;
@@ -33,9 +33,10 @@ protected:
 
     [[nodiscard]] std::string getStubTreeText() const;
 
-    Position createDimensionedUncutForest(int heightInTrees, int widthInTrees, const Position &referencePosition) const;
+    Position createDimensionedUncutForest(int widthInTrees, int heightInTrees, const Position &referencePosition) const;
 
     Position getStartingRightPositionFromWidth(int forestWidthInTrees);
+
 };
 
 
