@@ -18,12 +18,12 @@ void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referenc
 
 //Render as much as you can option instead of dimensioned uncut
 Position ForestFrame::createDimensionedForest(int widthInTrees, int heightInTrees, const Position referencePosition) const {
-    unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
+    int verticalCapacityForTrees = getTreeCapacityFromPosition(referencePosition);
     if (heightInTrees < verticalCapacityForTrees){
-        createDimensionedUncutForest(widthInTrees, heightInTrees, referencePosition);
+        return createDimensionedUncutForest(widthInTrees, heightInTrees, referencePosition);
     } else{
         auto stubReferencePosition = createDimensionedUncutForest(widthInTrees, (int)verticalCapacityForTrees, referencePosition);
-        createStubTrees(widthInTrees, stubReferencePosition);
+        return createStubTrees(widthInTrees, stubReferencePosition);
     }
 }
 
@@ -49,7 +49,7 @@ void ForestFrame::createGenericTreeAtPosition(Position position) const {
 }
 
 
-void ForestFrame::createStubTrees(int forestWidthInTrees, Position referencePosition) const {
+Position ForestFrame::createStubTrees(int forestWidthInTrees, Position referencePosition) const {
     std::string stubTreeText = getStubTreeText();
 
     Position treePosition = referencePosition;
@@ -57,6 +57,7 @@ void ForestFrame::createStubTrees(int forestWidthInTrees, Position referencePosi
         this->createStubTreeAtPosition(stubTreeText, treePosition);
         treePosition.xPos += (float)treeWidth;
     }
+    return treePosition;
 }
 
 std::string ForestFrame::getStubTreeText() const {
@@ -97,5 +98,9 @@ void ForestFrame::createStubTreeAtPosition(std::string stubTreeText, Position tr
 
 Position ForestFrame::getStartingRightPositionFromWidth(int forestWidthInTrees){
     return {Window::getTopRightPosition().xPos - (float)treeWidth * (float)forestWidthInTrees, Window::getTopRightPosition().yPos};
+}
+
+int ForestFrame::getTreeCapacityFromPosition(Position position) const {
+    return Window::windowHeight / treeHeight;
 }
 

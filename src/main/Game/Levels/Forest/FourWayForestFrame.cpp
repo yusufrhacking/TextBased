@@ -4,7 +4,7 @@ FourWayForestFrame::FourWayForestFrame(Position referencePosition) : ForestFrame
     int forestWidthInTrees = 3;
     int forestHeightInTrees = 2;
     Position rightForestPosition = getStartingRightPositionFromWidth(forestWidthInTrees);
-    auto finishedPosition = createDimensionedUncutForest(forestWidthInTrees,forestHeightInTrees, rightForestPosition);
+    auto finishedPosition = createDimensionedForest(forestWidthInTrees,forestHeightInTrees, rightForestPosition);
 
     auto nextRightPosition = finishedPosition + Position(0, (finishedPosition.yPos-(finishedPosition.yPos/(float)forestHeightInTrees)));
     createDimensionedForest(forestWidthInTrees, forestHeightInTrees, nextRightPosition);

@@ -15,8 +15,8 @@ public:
     explicit ForestFrame(Position referencePosition);
 
     TextComponent treeSprite = TextComponent(TextGenerator::getTreeText());
-    int treeWidth = treeSprite.surfaceSize.width;
-    int treeHeight = treeSprite.surfaceSize.height;
+    int treeWidth = (int)treeSprite.surfaceSize.width;
+    int treeHeight = (int)treeSprite.surfaceSize.height;
 protected:
     Position frameReferencePosition;
     Position createDimensionedForest(int widthInTrees, int heightInTrees, const Position referencePosition) const;
@@ -25,7 +25,7 @@ protected:
     void createGenericTreeAtPosition(Position position) const;
 
 
-    void createStubTrees(int trees, Position position) const;
+    Position createStubTrees(int trees, Position position) const;
 
     static std::vector<std::string> splitText(std::string string) ;
 
@@ -33,9 +33,12 @@ protected:
 
     [[nodiscard]] std::string getStubTreeText() const;
 
-    Position createDimensionedUncutForest(int widthInTrees, int heightInTrees, const Position &referencePosition) const;
-
     Position getStartingRightPositionFromWidth(int forestWidthInTrees);
+
+private:
+    [[nodiscard]] Position createDimensionedUncutForest(int widthInTrees, int heightInTrees, const Position &referencePosition) const;
+
+    int getTreeCapacityFromPosition(Position position) const;
 
 };
 
