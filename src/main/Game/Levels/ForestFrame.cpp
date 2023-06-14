@@ -2,9 +2,9 @@
 #include "ForestFrame.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
-auto spriteForDimensions = TextComponent(TextGenerator::getTreeText());
-auto treeWidth = spriteForDimensions.surfaceSize.width;
-auto treeHeight = spriteForDimensions.surfaceSize.height;
+auto treeSprite = TextComponent(TextGenerator::getTreeText());
+auto treeWidth = treeSprite.surfaceSize.width;
+auto treeHeight = treeSprite.surfaceSize.height;
 
 ForestFrame::ForestFrame(Position referencePosition){
     spdlog::debug("Forest Frame created at: {}, {}", referencePosition.xPos, referencePosition.yPos);
@@ -23,17 +23,9 @@ void ForestFrame::createForests() {
 }
 
 void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referencePosition) const {
-    unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
+    createUncutTrees(forestWidthInTrees, referencePosition);
+    createStubTrees(forestWidthInTrees, referencePosition);
 
-    Position treePosition = referencePosition;
-    for (int heightIndex = 0; heightIndex < verticalCapacityForTrees; heightIndex++){
-        for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
-            createTreeAtPosition(treePosition);
-            treePosition.xPos += (float)treeWidth;
-        }
-        treePosition.xPos = referencePosition.xPos;
-        treePosition.yPos += (float)treeHeight;
-    }
 
     unsigned int forestHeightInTrees = (Window::windowHeight / treeHeight) + 1;
 
@@ -41,11 +33,24 @@ void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referenc
 //    for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
 //        for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
 //            createTreeAtPosition(treePosition);
-//            treePosition.yPos += (float)spriteForDimensions.surfaceSize.height;
+//            treePosition.yPos += (float)treeSprite.surfaceSize.height;
 //        }
 //        treePosition.yPos = 0;
-//        treePosition.xPos += (float)spriteForDimensions.surfaceSize.width;
+//        treePosition.xPos += (float)treeSprite.surfaceSize.width;
 //    }
+}
+
+void ForestFrame::createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const {
+    unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
+    Position treePosition = referencePosition;
+    for (int heightIndex = 0; heightIndex < verticalCapacityForTrees; heightIndex++){
+        for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
+            this->createTreeAtPosition(treePosition);
+            treePosition.xPos += (float)treeWidth;
+        }
+        treePosition.xPos = referencePosition.xPos;
+        treePosition.yPos += (float)treeHeight;
+    }
 }
 
 void ForestFrame::createTreeAtPosition(Position position) const {
@@ -56,4 +61,19 @@ void ForestFrame::createTreeAtPosition(Position position) const {
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
 }
 
+
+void ForestFrame::createStubTrees(int trees, Position position) const {
+    auto linesOfText = splitText(treeSprite.text);
+
+}
+
+std::vector<std::string> ForestFrame::splitText(std::string string) {
+    std::istringstream treeStream(string);
+    std::vector<std::string> lines;
+    std::string line;
+    while (std::getline(treeStream, line)) {
+        lines.push_back(line);
+    }
+    return lines;
+}
 

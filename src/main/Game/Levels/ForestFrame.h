@@ -22,6 +22,11 @@ private:
 
     void createTreeAtPosition(Position position) const;
 
+    void createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const;
+
+    void createStubTrees(int trees, Position position) const;
+
+    static std::vector<std::string> splitText(std::string string) ;
 };
 
 
