@@ -3,7 +3,7 @@
 #include "../../ECS/Components/MainPlayerComponent.h"
 #include "../../ECS/Components/TextComponents/TreeComponent.h"
 #include "../Game.h"
-#include "ForestFrame.h"
+#include "Forest/ForestFrame.h"
 #include "../GameSystems/Camera/Camera.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;

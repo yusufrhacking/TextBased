@@ -42,20 +42,6 @@ Position ForestFrame::createDimensionedUncutForest(int widthInTrees, int heightI
     return treePosition;
 }
 
-Position ForestFrame::createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const {
-    unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
-    Position treePosition = referencePosition;
-    for (int heightIndex = 0; heightIndex < verticalCapacityForTrees; heightIndex++){
-        for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
-            this->createGenericTreeAtPosition(treePosition);
-            treePosition.xPos += (float)treeWidth;
-        }
-        treePosition.xPos = referencePosition.xPos;
-        treePosition.yPos += (float)treeHeight;
-    }
-    return treePosition;
-}
-
 void ForestFrame::createGenericTreeAtPosition(Position position) const {
     Entity tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(tree, frameReferencePosition + position);

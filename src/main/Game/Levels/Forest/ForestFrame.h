@@ -1,14 +1,14 @@
 #ifndef TEXTBASED_FORESTFRAME_H
 #define TEXTBASED_FORESTFRAME_H
-#include "../../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
-#include "../TextGenerator.h"
-#include "../../ECS/Components/CollisionComponent.h"
-#include "../../Helpers/Objects/Position.h"
-#include "../../ECS/Design/Managers/ECSManager.h"
+#include "../../../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
+#include "../../TextGenerator.h"
+#include "../../../ECS/Components/CollisionComponent.h"
+#include "../../../Helpers/Objects/Position.h"
+#include "../../../ECS/Design/Managers/ECSManager.h"
 #include <memory>
-#include "../../ECS/Systems/UpdateSystems/CollisionCheckSystem.h"
-#include "../../Helpers/Objects/Position.h"
-#include "../Map/Frame/Frame.h"
+#include "../../../ECS/Systems/UpdateSystems/CollisionCheckSystem.h"
+#include "../../../Helpers/Objects/Position.h"
+#include "../../Map/Frame/Frame.h"
 
 class ForestFrame: public Frame {
 public:
@@ -22,7 +22,6 @@ private:
 
     void createGenericTreeAtPosition(Position position) const;
 
-    Position createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const;
 
     void createStubTrees(int trees, Position position) const;
 

@@ -1,5 +1,5 @@
 #include "FrameMap.h"
-#include "../../Levels/ForestFrame.h"
+#include "../../Levels/Forest/ForestFrame.h"
 
 FrameMap::FrameMap(Position startingPosition) {
     this->startingPosition = startingPosition;
