@@ -20,13 +20,17 @@ private:
 
     void createVerticalForest(int widthInTrees, Position referencePosition) const;
 
-    void createTreeAtPosition(Position position) const;
+    void createGenericTreeAtPosition(Position position) const;
 
-    void createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const;
+    Position createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const;
 
     void createStubTrees(int trees, Position position) const;
 
     static std::vector<std::string> splitText(std::string string) ;
+
+    void createStubTreeAtPosition(std::string stubTreeText, Position treePosition) const;
+
+    [[nodiscard]] std::string getStubTreeText() const;
 };
 
 

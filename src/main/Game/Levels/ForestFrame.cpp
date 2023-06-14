@@ -23,37 +23,26 @@ void ForestFrame::createForests() {
 }
 
 void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referencePosition) const {
-    createUncutTrees(forestWidthInTrees, referencePosition);
-    createStubTrees(forestWidthInTrees, referencePosition);
-
-
-    unsigned int forestHeightInTrees = (Window::windowHeight / treeHeight) + 1;
-
-//    Position treePosition = referencePosition;
-//    for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
-//        for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
-//            createTreeAtPosition(treePosition);
-//            treePosition.yPos += (float)treeSprite.surfaceSize.height;
-//        }
-//        treePosition.yPos = 0;
-//        treePosition.xPos += (float)treeSprite.surfaceSize.width;
-//    }
+    auto stubReferencePosition = createUncutTrees(forestWidthInTrees, referencePosition);
+    stubReferencePosition.xPos = referencePosition.xPos;
+    createStubTrees(forestWidthInTrees, stubReferencePosition);
 }
 
-void ForestFrame::createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const {
+Position ForestFrame::createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const {
     unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
     Position treePosition = referencePosition;
     for (int heightIndex = 0; heightIndex < verticalCapacityForTrees; heightIndex++){
         for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
-            this->createTreeAtPosition(treePosition);
+            this->createGenericTreeAtPosition(treePosition);
             treePosition.xPos += (float)treeWidth;
         }
         treePosition.xPos = referencePosition.xPos;
         treePosition.yPos += (float)treeHeight;
     }
+    return treePosition;
 }
 
-void ForestFrame::createTreeAtPosition(Position position) const {
+void ForestFrame::createGenericTreeAtPosition(Position position) const {
     Entity tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(tree, frameReferencePosition + position);
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
@@ -62,9 +51,32 @@ void ForestFrame::createTreeAtPosition(Position position) const {
 }
 
 
-void ForestFrame::createStubTrees(int trees, Position position) const {
+void ForestFrame::createStubTrees(int forestWidthInTrees, Position referencePosition) const {
+    std::string stubTreeText = getStubTreeText();
+
+    Position treePosition = referencePosition;
+    for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
+        this->createStubTreeAtPosition(stubTreeText, treePosition);
+        treePosition.xPos += (float)treeWidth;
+    }
+}
+
+std::string ForestFrame::getStubTreeText() const {
     auto linesOfText = splitText(treeSprite.text);
 
+    auto verticalCapacityForTrees = Window::windowHeight / treeHeight;
+    auto spaceUsed = verticalCapacityForTrees * treeHeight;
+    auto verticalRenderSpace = Window::windowHeight - spaceUsed;
+
+    std::string stubTreeText;
+    for (const auto & lineCounter : linesOfText){
+        if (verticalRenderSpace - HEIGHT_OF_A_LINE_OF_TEXT < 0){
+            break;
+        }
+        stubTreeText += lineCounter;
+        verticalRenderSpace -= HEIGHT_OF_A_LINE_OF_TEXT;
+    }
+    return stubTreeText;
 }
 
 std::vector<std::string> ForestFrame::splitText(std::string string) {
@@ -72,8 +84,16 @@ std::vector<std::string> ForestFrame::splitText(std::string string) {
     std::vector<std::string> lines;
     std::string line;
     while (std::getline(treeStream, line)) {
-        lines.push_back(line);
+        lines.push_back(line + "\n");
     }
     return lines;
+}
+
+void ForestFrame::createStubTreeAtPosition(std::string stubTreeText, Position treePosition) const {
+    Entity tree = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<PositionComponent>(tree, frameReferencePosition + treePosition);
+    ecsManager->addComponentToEntity<TextComponent>(tree, stubTreeText);
+    ecsManager->addComponentToEntity<StyleComponent>(tree);
+    ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
 }
 
