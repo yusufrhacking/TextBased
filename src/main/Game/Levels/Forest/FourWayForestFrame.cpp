@@ -4,16 +4,14 @@ FourWayForestFrame::FourWayForestFrame(Position referencePosition) : ForestFrame
     int forestWidthInTrees = 3;
     int forestHeightInTrees = 2;
     Position rightForestPosition = getStartingRightPositionFromWidth(forestWidthInTrees);
-    auto finishedPosition = createDimensionedForest(forestWidthInTrees,forestHeightInTrees, rightForestPosition);
+    auto finishedRightPosition = createDimensionedForest(forestWidthInTrees, forestHeightInTrees, rightForestPosition);
 
-    auto nextRightPosition = finishedPosition + Position(0, (finishedPosition.yPos-(finishedPosition.yPos/(float)forestHeightInTrees)));
+    auto nextRightPosition = finishedRightPosition + Position(0, (float)treeHeight);
     createDimensionedForest(forestWidthInTrees, forestHeightInTrees, nextRightPosition);
 
     Position leftForestPosition = {window->getTopLeftPosition()};
-    createDimensionedForest(forestWidthInTrees,forestHeightInTrees, leftForestPosition);
+    auto finishedLeftPosition = createDimensionedForest(forestWidthInTrees,forestHeightInTrees, leftForestPosition);
 
-//    Position leftForestPosition = {window->getTopLeftPosition()};
-//
-//    createVerticalForest(forestWidthInTrees, leftForestPosition);
-//    createDimensionedUncutForest(2, 2, referencePosition);
+    auto nextLeftPosition = finishedLeftPosition + Position(0, (float)treeHeight);
+    createDimensionedForest(forestWidthInTrees, forestHeightInTrees, nextLeftPosition);
 }
