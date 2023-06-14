@@ -34,6 +34,8 @@ protected:
     [[nodiscard]] std::string getStubTreeText() const;
 
     Position createDimensionedUncutForest(int heightInTrees, int widthInTrees, const Position &referencePosition) const;
+
+    Position getStartingRightPositionFromWidth(int forestWidthInTrees);
 };
 
 

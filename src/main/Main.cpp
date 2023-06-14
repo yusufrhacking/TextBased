@@ -11,7 +11,7 @@ int main() {
     ecsManager = std::make_unique<ECSManager>();
     eventBus = std::make_unique<EventBus>();
     camera = std::make_unique<Camera>(Game::startingTopLeftPosition);
-    spdlog::set_level(spdlog::level::debug);
+    spdlog::set_level(spdlog::level::info);
 
     Game* game = new Game();
 

@@ -20,7 +20,7 @@ void BasicSetup::createPlayer() {
     ecsManager->addComponentToEntity<PositionComponent>(witt, Game::startingTopLeftPosition + window->getMiddlePosition());
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
-//    ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
+    ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
 }
 
 

@@ -4,9 +4,7 @@
 
 class VerticalForestFrame: public ForestFrame {
 public:
-    VerticalForestFrame(Position referencePosition);
-private:
-    void createForests();
+    explicit VerticalForestFrame(Position referencePosition);
 };
 
 

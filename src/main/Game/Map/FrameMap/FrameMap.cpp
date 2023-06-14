@@ -1,13 +1,15 @@
+#include <spdlog/spdlog.h>
 #include "FrameMap.h"
 #include "../../Levels/Forest/ForestFrame.h"
 #include "../../Levels/Forest/VerticalForestFrame.h"
+#include "../../Levels/Forest/FourWayForestFrame.h"
 
 FrameMap::FrameMap(Position startingPosition) {
     this->startingPosition = startingPosition;
     frameMap = std::vector<std::vector<FrameCell>>(numRows, std::vector<FrameCell>(numCols));
     startingMapPosition = getMapPositionFromGamePosition(startingPosition);
-    auto startingCell = frameMap[startingMapPosition.xPos][startingMapPosition.yPos];//need to add adjustment to make the middle though
-    startingCell.frame = std::make_unique<VerticalForestFrame>(startingPosition);
+    auto& startingCell = frameMap[startingMapPosition.xPos][startingMapPosition.yPos];//need to add adjustment to make the middle though
+    startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
 }
 
@@ -28,6 +30,9 @@ void FrameMap::surroundLocation(Position playerPosition) {
             int neighborY = playerMapPosition.yPos + deltaY;
 
             if (neighborX >= 0 && neighborY >= 0) {
+                if (neighborX == 8 && neighborY == 11){
+                    spdlog::warn("FUCK");
+                }
                 auto& neighborCell = frameMap[neighborX][neighborY];
                 if (!neighborCell.isFilled) {
                     auto newPosition = Window::deriveRelativeTopLeft(playerPosition);

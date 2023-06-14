@@ -84,3 +84,7 @@ void ForestFrame::createStubTreeAtPosition(std::string stubTreeText, Position tr
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
 }
 
+Position ForestFrame::getStartingRightPositionFromWidth(int forestWidthInTrees){
+    return {Window::getTopRightPosition().xPos - (float)treeWidth * (float)forestWidthInTrees, Window::getTopRightPosition().yPos};
+}
+
