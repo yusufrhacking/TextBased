@@ -5,7 +5,6 @@
 #include "../../Components/TextComponents/TextComponent.h"
 #include "../../Design/Managers/ECSManager.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
-#include "../EventCreationSystems/EventProducerSystem.h"
 
 
 class CollisionCheckSystem: public UpdateSystem {

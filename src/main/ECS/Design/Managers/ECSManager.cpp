@@ -1,6 +1,5 @@
 #include <spdlog/spdlog.h>
 #include "ECSManager.h"
-#include "../../Systems/EventCreationSystems/EventProducerSystem.h"
 #include "../../Components/MainPlayerComponent.h"
 #include "../../Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../../Systems/SpecialSystems/CameraFollowSystem.h"
