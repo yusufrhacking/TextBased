@@ -2,66 +2,55 @@
 #include "ForestFrame.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+auto spriteForDimensions = TextComponent(TextGenerator::getTreeText());
+auto treeWidth = spriteForDimensions.surfaceSize.width;
+auto treeHeight = spriteForDimensions.surfaceSize.height;
 
 ForestFrame::ForestFrame(Position referencePosition){
     spdlog::debug("Forest Frame created at: {}, {}", referencePosition.xPos, referencePosition.yPos);
-    this->referencePosition = referencePosition;
-//    createJSON();
-//    createBobby();
+    this->frameReferencePosition = referencePosition;
     createForests();
 }
 
 void ForestFrame::createForests() {
-    auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
+    int forestWidthInTrees = 2;
+    Position rightForestPosition = {window->getTopRightPosition().xPos - (float)treeWidth * (float)forestWidthInTrees, window->getTopRightPosition().yPos};
 
-    int treeWidth = 2;
-    Position rightForestPosition = {window->getTopRightPosition().xPos - (float)spriteForDimensions->surfaceSize.width * (float)treeWidth, window->getTopRightPosition().yPos};
-
-    createForest(treeWidth, rightForestPosition);
-
+    createVerticalForest(forestWidthInTrees, rightForestPosition);
     Position leftForestPosition = {window->getTopLeftPosition()};
 
-    createForest(treeWidth, leftForestPosition);
+    createVerticalForest(forestWidthInTrees, leftForestPosition);
 }
 
-void ForestFrame::createForest(int widthInTrees, Position referencePosition) const {
-    auto spriteForDimensions = std::make_unique<TextComponent>(TextGenerator::getTreeText());
-
-    unsigned int forestWidthInTrees = widthInTrees;
-    unsigned int forestHeightInTrees = (Window::windowHeight / spriteForDimensions->surfaceSize.height) + 1;
+void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referencePosition) const {
+    unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
 
     Position treePosition = referencePosition;
-    for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
-        for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
+    for (int heightIndex = 0; heightIndex < verticalCapacityForTrees; heightIndex++){
+        for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
             createTreeAtPosition(treePosition);
-            treePosition.yPos += (float)spriteForDimensions->surfaceSize.height;
+            treePosition.xPos += (float)treeWidth;
         }
-        treePosition.yPos = 0;
-        treePosition.xPos += (float)spriteForDimensions->surfaceSize.width;
+        treePosition.xPos = referencePosition.xPos;
+        treePosition.yPos += (float)treeHeight;
     }
-}
 
-void ForestFrame::createJSON() const {
-    Entity json = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(json, referencePosition + Position(400, 300));
-    ecsManager->addComponentToEntity<MovementComponent>(json, std::make_shared<Velocity>(0, -18));
-    ecsManager->addComponentToEntity<TextComponent>(json, "Jaeson Martin");
-    ecsManager->addComponentToEntity<StyleComponent>(json);
-    ecsManager->addComponentToEntity<CollisionComponent>(json, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize); //.surfaceSize.widthCollisionRange, ecsManager->getComponentFromEntity<TextComponent>(json).surfaceSize.heightCollisionRange);
-}
+    unsigned int forestHeightInTrees = (Window::windowHeight / treeHeight) + 1;
 
-void ForestFrame::createBobby() const {
-    Entity tank = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tank, referencePosition + Position(50, 50));
-    ecsManager->addComponentToEntity<MovementComponent>(tank, std::make_shared<Velocity>(20, 0));
-    ecsManager->addComponentToEntity<TextComponent>(tank, "Robert C. Martin");
-    ecsManager->addComponentToEntity<StyleComponent>(tank);
-//    ecsManager->addComponentToEntity<CollisionComponent>(tank, ecsManager->getComponentFromEntity<TextComponent>(tank).surfaceSize);
+//    Position treePosition = referencePosition;
+//    for (int widthIndex = 0; widthIndex < forestWidthInTrees; widthIndex++){
+//        for (int heightIndex = 0; heightIndex < forestHeightInTrees; heightIndex++){
+//            createTreeAtPosition(treePosition);
+//            treePosition.yPos += (float)spriteForDimensions.surfaceSize.height;
+//        }
+//        treePosition.yPos = 0;
+//        treePosition.xPos += (float)spriteForDimensions.surfaceSize.width;
+//    }
 }
 
 void ForestFrame::createTreeAtPosition(Position position) const {
     Entity tree = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(tree, referencePosition + position);
+    ecsManager->addComponentToEntity<PositionComponent>(tree, frameReferencePosition + position);
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);

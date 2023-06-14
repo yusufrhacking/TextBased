@@ -14,15 +14,11 @@ class ForestFrame: public Frame {
 public:
     explicit ForestFrame(Position referencePosition);
 private:
-    Position referencePosition;
-
-    void createBobby() const;
-
-    void createJSON() const;
+    Position frameReferencePosition;
 
     void createForests();
 
-    void createForest(int widthInTrees, Position referencePosition) const;
+    void createVerticalForest(int widthInTrees, Position referencePosition) const;
 
     void createTreeAtPosition(Position position) const;
 
