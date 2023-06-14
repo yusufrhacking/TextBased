@@ -33,7 +33,7 @@ void CollisionCheckSystem::update(double deltaTime) {
             bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstCollider, secondPosition.getPosition(), secondCollider);
 
             if (isAABCollision){
-                spdlog::debug("COLLISION between entities {} and {}", first.getId(), second.getId());
+                spdlog::trace("COLLISION between entities {} and {}", first.getId(), second.getId());
                 eventBus->emitEvent<CollisionEvent>(first, second, deltaTime);
             }
 
@@ -53,6 +53,7 @@ bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, Coll
 
     return xOverlap && yOverlap;
 }
+
 
 
 

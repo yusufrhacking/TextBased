@@ -41,7 +41,7 @@ void CameraFollowSystem::update() {
     }
 
     camera->positionCamera(newCameraPosition);
-    spdlog::debug("Camera moved to position {}, {}", newCameraPosition.xPos, newCameraPosition.yPos);
+    spdlog::trace("Camera moved to position {}, {}", newCameraPosition.xPos, newCameraPosition.yPos);
 }
 
 bool CameraFollowSystem::isAboveScreen(float relativePlayerYPos, float playerHeight) const {
