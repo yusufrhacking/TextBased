@@ -2,24 +2,11 @@
 #include "ForestFrame.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
-auto treeSprite = TextComponent(TextGenerator::getTreeText());
-auto treeWidth = treeSprite.surfaceSize.width;
-auto treeHeight = treeSprite.surfaceSize.height;
+
 
 ForestFrame::ForestFrame(Position referencePosition){
     spdlog::debug("Forest Frame created at: {}, {}", referencePosition.xPos, referencePosition.yPos);
     this->frameReferencePosition = referencePosition;
-    createForests();
-}
-
-void ForestFrame::createForests() {
-    int forestWidthInTrees = 2;
-    Position rightForestPosition = {window->getTopRightPosition().xPos - (float)treeWidth * (float)forestWidthInTrees, window->getTopRightPosition().yPos};
-
-    createVerticalForest(forestWidthInTrees, rightForestPosition);
-    Position leftForestPosition = {window->getTopLeftPosition()};
-
-    createVerticalForest(forestWidthInTrees, leftForestPosition);
 }
 
 void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referencePosition) const {

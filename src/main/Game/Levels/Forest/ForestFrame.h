@@ -13,10 +13,12 @@
 class ForestFrame: public Frame {
 public:
     explicit ForestFrame(Position referencePosition);
-private:
-    Position frameReferencePosition;
 
-    void createForests();
+    TextComponent treeSprite = TextComponent(TextGenerator::getTreeText());
+    int treeWidth = treeSprite.surfaceSize.width;
+    int treeHeight = treeSprite.surfaceSize.height;
+protected:
+    Position frameReferencePosition;
 
     void createVerticalForest(int widthInTrees, Position referencePosition) const;
 
