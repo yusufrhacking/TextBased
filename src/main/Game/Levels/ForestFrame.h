@@ -31,6 +31,8 @@ private:
     void createStubTreeAtPosition(std::string stubTreeText, Position treePosition) const;
 
     [[nodiscard]] std::string getStubTreeText() const;
+
+    Position createDimensionedUncutForest(int heightInTrees, int widthInTrees, const Position &referencePosition) const;
 };
 
 

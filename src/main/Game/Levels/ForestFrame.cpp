@@ -23,9 +23,23 @@ void ForestFrame::createForests() {
 }
 
 void ForestFrame::createVerticalForest(int forestWidthInTrees, Position referencePosition) const {
-    auto stubReferencePosition = createUncutTrees(forestWidthInTrees, referencePosition);
+    unsigned int verticalCapacityForTrees = Window::windowHeight / treeHeight;
+    auto stubReferencePosition = createDimensionedUncutForest(forestWidthInTrees,(int)verticalCapacityForTrees, referencePosition);
     stubReferencePosition.xPos = referencePosition.xPos;
     createStubTrees(forestWidthInTrees, stubReferencePosition);
+}
+
+Position ForestFrame::createDimensionedUncutForest(int widthInTrees, int heightInTrees, const Position &referencePosition) const {
+    Position treePosition = referencePosition;
+    for (int heightIndex = 0; heightIndex < heightInTrees; heightIndex++){
+        for (int widthIndex = 0; widthIndex < widthInTrees; widthIndex++){
+            this->createGenericTreeAtPosition(treePosition);
+            treePosition.xPos += (float)treeWidth;
+        }
+        treePosition.xPos = referencePosition.xPos;
+        treePosition.yPos += (float)treeHeight;
+    }
+    return treePosition;
 }
 
 Position ForestFrame::createUncutTrees(int forestWidthInTrees, const Position &referencePosition) const {
