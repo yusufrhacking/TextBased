@@ -20,7 +20,6 @@ class FrameMap {
 private:
     static const int numRows = 10000;
     static const int numCols = 10000;
-    FrameCell startingFrame;
     std::vector<std::vector<FrameCell>> frameMap;
     Position startingPosition;
     MapPosition startingMapPosition;

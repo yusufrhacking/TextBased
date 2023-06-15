@@ -5,8 +5,7 @@
 #include "../../Levels/Forest/VerticalForestFrame.h"
 #include "../../Levels/Forest/FourWayForestFrame.h"
 
-FrameMap::FrameMap(Position startingPosition) {
-    this->startingPosition = startingPosition;
+FrameMap::FrameMap(Position startingPosition): startingPosition(startingPosition) {
     frameMap = std::vector<std::vector<FrameCell>>(numRows, std::vector<FrameCell>(numCols));
     startingMapPosition = getMapPositionFromGamePosition(startingPosition);
     auto& startingCell = frameMap[startingMapPosition.xPos][startingMapPosition.yPos];//need to add adjustment to make the middle though
@@ -27,12 +26,10 @@ void FrameMap::surroundLocation(Position playerPosition) {
             if (deltaX == 0 && deltaY == 0) {
                 continue;
             }
+            auto newMapPosition = playerMapPosition + MapPosition(deltaX, deltaY);
 
-            int neighborX = playerMapPosition.xPos + deltaX;
-            int neighborY = playerMapPosition.yPos + deltaY;
-
-            if (neighborX >= 0 && neighborY >= 0) {
-                auto& neighborCell = frameMap[neighborX][neighborY];
+            if (newMapPosition.xPos >= 0 && newMapPosition.yPos >= 0) {
+                auto& neighborCell = frameMap[newMapPosition.xPos][newMapPosition.yPos];
                 if (!neighborCell.isFilled) {
                     auto newPosition = Window::deriveRelativeTopLeft(playerPosition);
                     auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
