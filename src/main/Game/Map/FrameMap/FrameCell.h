@@ -4,7 +4,7 @@
 #include "../Frame/Frame.h"
 
 enum Biome{
-    FOREST
+    FOREST = 50
 };
 
 struct FrameCell {

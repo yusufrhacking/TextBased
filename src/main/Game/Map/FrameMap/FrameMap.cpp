@@ -12,7 +12,7 @@ FrameMap::FrameMap(Position startingPosition): startingPosition(startingPosition
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
     startingCell.biome = FOREST;
-    applyBiomeToRadius(FOREST, 10);
+//    applyBiomeToRadius(FOREST, 0);
 }
 
 Frame &FrameMap::getFrame(Position position) {
@@ -44,6 +44,7 @@ void FrameMap::surroundLocation(Position playerPosition) {
 
 void FrameMap::frameCellAtPosition(FrameCell &cell, Position position) {
     if (cell.biome == FOREST){
+        spdlog::warn("Biome == forest");
         cell.frame = std::make_unique<FourWayForestFrame>(position);
         cell.isFilled = true;
     }
@@ -71,9 +72,9 @@ Position FrameMap::getGamePositionFromMapPosition(MapPosition mapPosition) {
 void FrameMap::applyBiomeToRadius(Biome biome, int radius) {
     int halfRadius = radius/2;
     for (int deltaX = -halfRadius; deltaX < halfRadius; ++deltaX) {
-        for (int deltaY = -halfRadius; deltaY < 1; ++deltaY) {
+        for (int deltaY = -halfRadius; deltaY < halfRadius; ++deltaY) {
             auto mapPosition = startingMapPosition + MapPosition(deltaX, deltaY);
-            frameMap[mapPosition.xPos][mapPosition.yPos].biome = FOREST;
+            frameMap[mapPosition.xPos][mapPosition.yPos].biome = biome;
         }
     }
 }
