@@ -1,4 +1,5 @@
 #include <spdlog/spdlog.h>
+#include "FrameCell.h"
 #include "FrameMap.h"
 #include "../../Levels/Forest/ForestFrame.h"
 #include "../../Levels/Forest/VerticalForestFrame.h"
@@ -11,6 +12,7 @@ FrameMap::FrameMap(Position startingPosition) {
     auto& startingCell = frameMap[startingMapPosition.xPos][startingMapPosition.yPos];//need to add adjustment to make the middle though
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
+    startingCell.biome = FOREST;
 }
 
 Frame &FrameMap::getFrame(Position position) {
@@ -35,8 +37,9 @@ void FrameMap::surroundLocation(Position playerPosition) {
                     auto newPosition = Window::deriveRelativeTopLeft(playerPosition);
                     auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
                     newPosition += positionDirection;
-                    neighborCell.frame = std::make_unique<VerticalForestFrame>(newPosition);
+                    neighborCell.frame = std::make_unique<FourWayForestFrame>(newPosition);
                     neighborCell.isFilled = true;
+                    neighborCell.biome = FOREST;
                 }
             }
         }

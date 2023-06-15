@@ -4,7 +4,7 @@
 #include "TextComponent.h"
 #include "../../../Game/TextGenerator.h"
 
-struct TreeComponent: TextComponent{
+struct TreeComponent: public TextComponent{
     TreeComponent(){
         text = TextGenerator::getTreeText();
         surfaceSize = {static_cast<RenderedVal>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
