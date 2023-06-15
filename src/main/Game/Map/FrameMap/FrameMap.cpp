@@ -37,14 +37,18 @@ void FrameMap::surroundLocation(Position playerPosition) {
                     auto newPosition = Window::deriveRelativeTopLeft(playerPosition);
                     auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
                     newPosition += positionDirection;
-                    neighborCell.frame = std::make_unique<FourWayForestFrame>(newPosition);
-                    neighborCell.isFilled = true;
-                    neighborCell.biome = FOREST;
+                    frameCellAtPosition(neighborCell, newPosition);
                 }
             }
         }
     }
 }
+
+void FrameMap::frameCellAtPosition(FrameCell &cell, Position position) {
+    cell.frame = std::make_unique<FourWayForestFrame>(position);
+    cell.isFilled = true;
+}
+
 
 
 bool FrameMap::isFrameAtPositionFilled(Position position) {

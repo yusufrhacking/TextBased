@@ -28,6 +28,7 @@ private:
     int frameHeight = Window::windowHeight;
     MapPosition positionAdjustment;
 
+    void frameCellAtPosition(FrameCell& cell, Position position);
 
 
 public:
@@ -41,7 +42,6 @@ public:
     void surroundLocation(Position playerPosition);
 
     MapPosition getMapPositionFromGamePosition(Position playerPosition);
-
 
     //void surroundLocation(Position playerLocation); --> this is called in the MapGenerationSystem, like every frame
     //Will seed the 8 locations
