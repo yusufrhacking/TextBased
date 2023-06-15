@@ -2,6 +2,8 @@
 #define TEXTBASED_FRAMECELL_H
 #include <memory>
 #include "../Frame/Frame.h"
+#include <vector>
+
 
 enum Biome{
     FOREST = 50
@@ -12,9 +14,7 @@ struct FrameCell {
     bool isFilled;
     Biome biome;
 
-    FrameCell(){
-        isFilled = false;
-    }
+    FrameCell();
 
     FrameCell(const FrameCell& other) {
         isFilled = other.isFilled;

@@ -27,7 +27,7 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
 
-    std::shared_ptr<FrameMap> frameMap = std::make_shared<FrameMap>(Game::startingTopLeftPosition);
+    std::shared_ptr<MapManager> frameMap = std::make_shared<MapManager>(Game::startingTopLeftPosition);
     ecsManager->addSystem<MapGenerationSystem>(frameMap);
 }
 

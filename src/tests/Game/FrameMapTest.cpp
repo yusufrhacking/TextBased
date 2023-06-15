@@ -1,12 +1,12 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../../main/Game/Map/FrameMap/FrameMap.h"
+#include "../../main/Game/Map/FrameMap/MapManager.h"
 extern std::unique_ptr<Window> window;
 
-TEST_CASE("Frame Map Surround Location Test", "[FrameMap]"){
+TEST_CASE("Frame Map Surround Location Test", "[MapManager]"){
     window->windowWidth = 1000;
     window->windowHeight = 1000;
     Position startingPosition(1000, 1000);
-    FrameMap frameMap(startingPosition);
+    MapManager frameMap(startingPosition);
 
     frameMap.surroundLocation(startingPosition);
 

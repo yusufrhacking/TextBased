@@ -8,5 +8,7 @@ VerticalForestFrame::VerticalForestFrame(Position referencePosition) : ForestFra
     Position leftForestPosition = {window->getTopLeftPosition()};
 
     createVerticalForest(forestWidthInTrees, leftForestPosition);
+
+    openAt.openVertical();
 }
 

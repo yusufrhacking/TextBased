@@ -9,7 +9,7 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<Camera> camera;
 
-MapGenerationSystem::MapGenerationSystem(std::shared_ptr<FrameMap> frameMap) {
+MapGenerationSystem::MapGenerationSystem(std::shared_ptr<MapManager> frameMap) {
     this->frameMap = frameMap;
     requireComponent<PositionComponent>();
     requireComponent<MainPlayerComponent>();

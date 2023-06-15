@@ -14,4 +14,6 @@ FourWayForestFrame::FourWayForestFrame(Position referencePosition) : ForestFrame
 
     auto nextLeftPosition = finishedLeftPosition + Position(0, (float)treeHeight);
     createDimensionedForest(forestWidthInTrees, forestHeightInTrees, nextLeftPosition);
+
+    openAt.openEverywhere();
 }

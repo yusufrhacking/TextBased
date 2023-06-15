@@ -20,6 +20,10 @@ private:
     bool isRightOfScreen(float relativePlayerXPos, float playerWidth);
 
     bool isLeftOfScreen(float relativePlayerXPos, float playerWidth);
+
+    Position getNewCameraPositionByFrame(const Position &playerPosition, const Size &playerSizeOffset);
+
+    Position getNewCameraPositionByCentering(const Position &playerPosition, const Size &playerSizeOffset);
 };
 
 
