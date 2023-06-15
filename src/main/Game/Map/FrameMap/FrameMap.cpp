@@ -12,6 +12,7 @@ FrameMap::FrameMap(Position startingPosition): startingPosition(startingPosition
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
     startingCell.biome = FOREST;
+    applyBiomeToRadius(FOREST, 10);
 }
 
 Frame &FrameMap::getFrame(Position position) {
@@ -28,13 +29,13 @@ void FrameMap::surroundLocation(Position playerPosition) {
             }
             auto newMapPosition = playerMapPosition + MapPosition(deltaX, deltaY);
 
-            if (newMapPosition.xPos >= 0 && newMapPosition.yPos >= 0) {
-                auto& neighborCell = frameMap[newMapPosition.xPos][newMapPosition.yPos];
-                if (!neighborCell.isFilled) {
-                    auto newPosition = Window::deriveRelativeTopLeft(playerPosition);
+            if (newMapPosition.isPositionPositive()) {
+                auto& newCell = frameMap[newMapPosition.xPos][newMapPosition.yPos];
+                if (!newCell.isFilled) {
+                    auto newGamePosition = Window::deriveRelativeTopLeft(playerPosition);
                     auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
-                    newPosition += positionDirection;
-                    frameCellAtPosition(neighborCell, newPosition);
+                    newGamePosition += positionDirection;
+                    frameCellAtPosition(newCell, newGamePosition);
                 }
             }
         }
@@ -42,8 +43,10 @@ void FrameMap::surroundLocation(Position playerPosition) {
 }
 
 void FrameMap::frameCellAtPosition(FrameCell &cell, Position position) {
-    cell.frame = std::make_unique<FourWayForestFrame>(position);
-    cell.isFilled = true;
+    if (cell.biome == FOREST){
+        cell.frame = std::make_unique<FourWayForestFrame>(position);
+        cell.isFilled = true;
+    }
 }
 
 
@@ -63,4 +66,14 @@ Position FrameMap::getGamePositionFromMapPosition(MapPosition mapPosition) {
     int xPos = mapPosition.xPos * frameWidth;
     int yPos = (int)mapPosition.yPos * frameHeight;
     return {static_cast<float>(xPos), static_cast<float>(yPos)};
+}
+
+void FrameMap::applyBiomeToRadius(Biome biome, int radius) {
+    int halfRadius = radius/2;
+    for (int deltaX = -halfRadius; deltaX < halfRadius; ++deltaX) {
+        for (int deltaY = -halfRadius; deltaY < 1; ++deltaY) {
+            auto mapPosition = startingMapPosition + MapPosition(deltaX, deltaY);
+            frameMap[mapPosition.xPos][mapPosition.yPos].biome = FOREST;
+        }
+    }
 }

@@ -45,6 +45,8 @@ public:
     //void surroundLocation(Position playerLocation); --> this is called in the MapGenerationSystem, like every frame
     //Will seed the 8 locations
     Position getGamePositionFromMapPosition(MapPosition mapPosition);
+
+    void applyBiomeToRadius(Biome biome, int radius);
 };
 
 

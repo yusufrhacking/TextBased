@@ -16,6 +16,14 @@ struct MapPosition{
         this->yPos = yPos;
     }
 
+    [[nodiscard]] bool isPositionPositive() const{
+        return xPos > 0 && yPos > 0;
+    }
+
+    [[nodiscard]] int getDistanceFrom(MapPosition other) const{
+        return std::abs(xPos - other.xPos) + std::abs(yPos - other.yPos);
+    }
+
     MapPosition operator+(const MapPosition& other) const {
         return {this->xPos + other.xPos, this->yPos + other.yPos};
     }
