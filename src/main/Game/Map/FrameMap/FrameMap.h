@@ -7,8 +7,8 @@ class FrameMap {
 private:
     std::vector<std::vector<FrameCell>> map;
 public:
-    static const int numRows = 10000;
-    static const int numCols = 10000;
+    static const int numRows = 1000;
+    static const int numCols = 1000;
     FrameMap();
 
     FrameCell& operator()(std::size_t row, std::size_t col) {

@@ -4,24 +4,34 @@
 #include "../Frame/Frame.h"
 #include <vector>
 
+enum Direction {
+    NORTH = 0,
+    EAST = 1,
+    SOUTH = 2,
+    WEST = 3
+};
 
 enum Biome{
-    FOREST = 50
+    BLANK,
+    FOREST
 };
 
 struct FrameCell {
     std::unique_ptr<Frame> frame;
     bool isFilled;
     Biome biome;
+    std::vector<FrameCell*> neighbors;
 
     FrameCell();
 
-    FrameCell(const FrameCell& other) {
+    FrameCell(const FrameCell& other): neighbors(4) {
         isFilled = other.isFilled;
+        biome = BLANK;
         // Copy any other member variables here
     }
-};
 
+    void setNeighborFrame(Direction direction, FrameCell* neighbor);
+};
 
 
 #endif //TEXTBASED_FRAMECELL_H

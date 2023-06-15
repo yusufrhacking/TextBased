@@ -1,5 +1,10 @@
 #include "FrameCell.h"
 
-FrameCell::FrameCell(){
+FrameCell::FrameCell(): neighbors(4){
     isFilled = false;
+    biome = BLANK;
+}
+
+void FrameCell::setNeighborFrame(Direction direction, FrameCell* neighbor) {
+    neighbors[direction] = neighbor;
 }
