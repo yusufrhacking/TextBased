@@ -26,11 +26,14 @@ struct FrameCell {
 
     FrameCell(const FrameCell& other): neighbors(4) {
         isFilled = other.isFilled;
-        biome = BLANK;
+        biome = Biome::BLANK;
         // Copy any other member variables here
     }
 
     void setNeighborFrame(Direction direction, FrameCell* neighbor);
+
+
+    [[nodiscard]] bool isNeighborOpen(Direction direction) const;
 };
 
 

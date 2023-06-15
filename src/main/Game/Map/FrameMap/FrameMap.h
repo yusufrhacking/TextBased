@@ -2,6 +2,7 @@
 #define TEXTBASED_FRAMEMAP_H
 #include <vector>
 #include "FrameCell.h"
+#include "../../../Helpers/Objects/MapPosition.h"
 
 class FrameMap {
 private:
@@ -13,6 +14,10 @@ public:
 
     FrameCell& operator()(std::size_t row, std::size_t col) {
         return map[row][col];
+    }
+
+    FrameCell& operator[](MapPosition mapPosition){
+        return map[mapPosition.xPos][mapPosition.yPos];
     }
 };
 

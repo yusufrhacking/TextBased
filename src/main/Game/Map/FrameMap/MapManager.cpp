@@ -7,7 +7,7 @@
 
 MapManager::MapManager(Position startingPosition): startingPosition(startingPosition) {
     startingMapPosition = getMapPositionFromGamePosition(startingPosition);
-    auto& startingCell = frameMap(startingMapPosition.xPos, startingMapPosition.yPos);//need to add adjustment to make the middle though
+    auto& startingCell = frameMap[startingMapPosition];//need to add adjustment to make the middle though
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
     startingCell.biome = FOREST;
@@ -16,7 +16,7 @@ MapManager::MapManager(Position startingPosition): startingPosition(startingPosi
 
 Frame &MapManager::getFrame(Position position) {
     auto mapPosition = getMapPositionFromGamePosition(position);
-    return *frameMap(mapPosition.xPos, mapPosition.yPos).frame;
+    return *frameMap[mapPosition].frame;
 }
 
 void MapManager::surroundLocation(Position playerPosition) {
@@ -29,7 +29,7 @@ void MapManager::surroundLocation(Position playerPosition) {
             auto mapPosition = playerMapPosition + MapPosition(deltaX, deltaY);
 
             if (mapPosition.isPositionPositive()) {
-                auto& cell = frameMap(mapPosition.xPos, mapPosition.yPos);
+                auto& cell = frameMap[mapPosition];
                 if (!cell.isFilled) {
                     auto gamePosition = Window::deriveRelativeTopLeft(playerPosition);
                     auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
@@ -48,11 +48,22 @@ void MapManager::frameCellAtPosition(FrameCell &cell, Position position) {
     }
 }
 
+void MapManager::applyBiomeAcrossRadius(Biome biome, int radius) {
+    int halfRadius = radius/2;
+    for (int deltaX = -halfRadius; deltaX < halfRadius; ++deltaX) {
+        for (int deltaY = -halfRadius; deltaY < halfRadius; ++deltaY) {
+            auto mapPosition = startingMapPosition + MapPosition(deltaX, deltaY);
+            frameMap[mapPosition].biome = biome;
+        }
+    }
+}
+
+
 
 
 bool MapManager::isFrameAtPositionFilled(Position position) {
     auto mapPosition = getMapPositionFromGamePosition(position);
-    return frameMap(mapPosition.xPos, mapPosition.yPos).isFilled;
+    return frameMap[mapPosition].isFilled;
 }
 
 MapPosition MapManager::getMapPositionFromGamePosition(Position playerPosition) {
@@ -65,14 +76,4 @@ Position MapManager::getGamePositionFromMapPosition(MapPosition mapPosition) {
     int xPos = mapPosition.xPos * frameWidth;
     int yPos = (int)mapPosition.yPos * frameHeight;
     return {static_cast<float>(xPos), static_cast<float>(yPos)};
-}
-
-void MapManager::applyBiomeAcrossRadius(Biome biome, int radius) {
-    int halfRadius = radius/2;
-    for (int deltaX = -halfRadius; deltaX < halfRadius; ++deltaX) {
-        for (int deltaY = -halfRadius; deltaY < halfRadius; ++deltaY) {
-            auto mapPosition = startingMapPosition + MapPosition(deltaX, deltaY);
-            frameMap(mapPosition.xPos, mapPosition.yPos).biome = biome;
-        }
-    }
 }
