@@ -27,7 +27,7 @@ private:
     int frameHeight = Window::windowHeight;
     MapPosition positionAdjustment;
 
-    void frameCellAtPosition(FrameCell& cell, Position position);
+    void frameCellAtPosition(FrameCell& playerCell, FrameCell& newCell);
 
 
 public:

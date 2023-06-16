@@ -21,6 +21,7 @@ Frame &MapManager::getFrame(Position position) {
 
 void MapManager::surroundLocation(Position playerPosition) {
     auto playerMapPosition = getMapPositionFromGamePosition(playerPosition);
+    auto& playerCell = frameMap[playerMapPosition];
     for (int deltaX = -1; deltaX <= 1; ++deltaX) {
         for (int deltaY = -1; deltaY <= 1; ++deltaY) {
             if (deltaX == 0 && deltaY == 0) {
@@ -31,20 +32,21 @@ void MapManager::surroundLocation(Position playerPosition) {
             if (mapPosition.isPositionPositive()) {
                 auto& cell = frameMap[mapPosition];
                 if (!cell.isFilled) {
-                    auto gamePosition = Window::deriveRelativeTopLeft(playerPosition);
-                    auto positionDirection = Position((float)deltaX * (float)frameWidth, (float)deltaY * (float)frameHeight);
-                    gamePosition += positionDirection;
-                    frameCellAtPosition(cell, gamePosition);
+                    frameCellAtPosition(playerCell, cell);
                 }
             }
         }
     }
 }
 
-void MapManager::frameCellAtPosition(FrameCell &cell, Position position) {
-    if (cell.biome == Biome::FOREST){
-        cell.frame = std::make_unique<FourWayForestFrame>(cell.gameReferencePosition);
-        cell.isFilled = true;
+void MapManager::frameCellAtPosition(FrameCell& playerCell, FrameCell &newCell) {
+    if (newCell.biome == Biome::FOREST){
+        if (playerCell.frame->openAt.north && playerCell.frame->openAt.east){
+            newCell.frame = std::make_unique<VerticalForestFrame>(newCell.gameReferencePosition);
+        } else{
+            newCell.frame = std::make_unique<FourWayForestFrame>(newCell.gameReferencePosition);
+        }
+        newCell.isFilled = true;
     }
 }
 
