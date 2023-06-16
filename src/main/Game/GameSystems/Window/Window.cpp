@@ -43,22 +43,22 @@ Position Window::getTopLeftPosition() {
 }
 
 Position Window::getBottomLeftPosition() {
-    Position BOTTOM_LEFT_POSITION = {0, static_cast<float>(windowHeight)};
+    Position BOTTOM_LEFT_POSITION = {0, windowHeight};
     return BOTTOM_LEFT_POSITION;
 }
 
 Position Window::getTopRightPosition() {
-    Position TOP_RIGHT_POSITION = {static_cast<float>(windowWidth), 0};
+    Position TOP_RIGHT_POSITION = {(windowWidth), 0};
     return TOP_RIGHT_POSITION;
 }
 
 Position Window::getBottomRightPosition() {
-    Position BOTTOM_RIGHT_POSITION = {static_cast<float>(windowWidth), static_cast<float>(windowHeight)};
+    Position BOTTOM_RIGHT_POSITION = {(windowWidth), (windowHeight)};
     return BOTTOM_RIGHT_POSITION;
 }
 
 Position Window::getMiddlePosition() {
-    Position MIDDLE = {static_cast<float>(windowWidth)/2, static_cast<float>(windowHeight)/2};
+    Position MIDDLE = {(windowWidth)/2, (windowHeight)/2};
     return MIDDLE;
 }
 

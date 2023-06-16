@@ -1,14 +1,15 @@
 #include "FrameMap.h"
 #include "FrameCell.h"
+#include "../../GameSystems/Window/Window.h"
 
 FrameMap::FrameMap() {
     map = std::vector<std::vector<FrameCell>>(numRows, std::vector<FrameCell>(numCols));
 
-    for (std::size_t x = 0; x < numRows; ++x) {
-        for (std::size_t y = 0; y < numCols; ++y) {
-            map[x][y].frame = std::make_unique<Frame>();
-            map[x][y].isFilled = true;
-            map[x][y].biome = Biome::FOREST;
+    for (int x = 0; x < numRows; ++x) {
+        for (int y = 0; y < numCols; ++y) {
+            map[x][y].isFilled = false;
+            map[x][y].biome = Biome::BLANK;
+            map[x][y].gameReferencePosition = {x * Window::windowWidth, y * Window::windowHeight};
 
             if (x > 0) {
                 map[x][y].setNeighborFrame(Direction::NORTH, &map[x - 1][y]);

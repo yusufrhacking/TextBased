@@ -10,8 +10,8 @@ MapManager::MapManager(Position startingPosition): startingPosition(startingPosi
     auto& startingCell = frameMap[startingMapPosition];//need to add adjustment to make the middle though
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
-    startingCell.biome = FOREST;
-    applyBiomeAcrossRadius(FOREST, 4);
+    startingCell.biome = Biome::FOREST;
+    applyBiomeAcrossRadius(Biome::FOREST, 4);
 }
 
 Frame &MapManager::getFrame(Position position) {
@@ -42,7 +42,7 @@ void MapManager::surroundLocation(Position playerPosition) {
 }
 
 void MapManager::frameCellAtPosition(FrameCell &cell, Position position) {
-    if (cell.biome == FOREST){
+    if (cell.biome == Biome::FOREST){
         cell.frame = std::make_unique<FourWayForestFrame>(position);
         cell.isFilled = true;
     }
@@ -57,9 +57,6 @@ void MapManager::applyBiomeAcrossRadius(Biome biome, int radius) {
         }
     }
 }
-
-
-
 
 bool MapManager::isFrameAtPositionFilled(Position position) {
     auto mapPosition = getMapPositionFromGamePosition(position);

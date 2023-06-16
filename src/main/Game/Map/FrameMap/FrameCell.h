@@ -2,6 +2,7 @@
 #define TEXTBASED_FRAMECELL_H
 #include <memory>
 #include "../Frame/Frame.h"
+#include "../../../Helpers/Objects/Position.h"
 #include <vector>
 
 enum Direction {
@@ -21,6 +22,7 @@ struct FrameCell {
     bool isFilled;
     Biome biome;
     std::vector<FrameCell*> neighbors;
+    Position gameReferencePosition;
 
     FrameCell();
 

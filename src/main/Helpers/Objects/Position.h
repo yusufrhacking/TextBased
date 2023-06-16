@@ -11,6 +11,13 @@ struct Position {
         this->yPos = y;
     }
 
+    Position(int x, int y){
+        this->xPos = (float)x;
+        this->yPos = (float)y;
+    }
+
+
+
     Position(){
         this->xPos = 0;
         this->yPos = 0;
