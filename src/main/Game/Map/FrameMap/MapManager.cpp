@@ -43,7 +43,7 @@ void MapManager::surroundLocation(Position playerPosition) {
 
 void MapManager::frameCellAtPosition(FrameCell &cell, Position position) {
     if (cell.biome == Biome::FOREST){
-        cell.frame = std::make_unique<FourWayForestFrame>(position);
+        cell.frame = std::make_unique<FourWayForestFrame>(cell.gameReferencePosition);
         cell.isFilled = true;
     }
 }
