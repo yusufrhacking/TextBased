@@ -12,6 +12,7 @@ public:
 private:
     void frameCellAtPosition(FrameCell &newFrameCell);
 
+    std::bitset<4> getOpeningSignature(FrameCell &cell);
 };
 
 

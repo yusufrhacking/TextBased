@@ -6,23 +6,18 @@
 #include <vector>
 #include <bitset>
 
-enum Direction {
-    NORTH = 0,
-    EAST = 1,
-    SOUTH = 2,
-    WEST = 3
-};
-
 enum Biome{
     BLANK,
     FOREST
 };
 
 struct FrameCell {
+private:
+    std::vector<FrameCell*> neighbors;
+public:
     std::unique_ptr<Frame> frame;
     bool isFilled;
     Biome biome;
-    std::vector<FrameCell*> neighbors;
     Position gameReferencePosition;
 
     FrameCell();
@@ -33,12 +28,13 @@ struct FrameCell {
         // Copy any other member variables here
     }
 
+    std::vector<FrameCell*> getNeighbors() const;
+
     void setNeighborFrame(Direction direction, FrameCell* neighbor);
 
 
-    [[nodiscard]] bool isNeighborOpen(Direction direction) const;
+    static Direction getOppositeDirection(Direction direction);
 private:
-    [[nodiscard]] Direction getOppositeDirection(Direction direction) const;
 };
 
 
