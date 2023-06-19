@@ -1,6 +1,8 @@
 #include "FrameGenerator.h"
 #include "../../Levels/Forest/FourWayForestFrame.h"
 #include "../../Levels/Forest/VerticalForestFrame.h"
+#include <bitset>
+
 
 FrameGenerator::FrameGenerator(std::shared_ptr<FrameMap> frameMap) {
     this->frameMap = frameMap;

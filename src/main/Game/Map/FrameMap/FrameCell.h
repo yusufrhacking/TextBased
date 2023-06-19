@@ -4,6 +4,7 @@
 #include "../Frame/Frame.h"
 #include "../../../Helpers/Objects/Position.h"
 #include <vector>
+#include <bitset>
 
 enum Direction {
     NORTH = 0,
@@ -36,6 +37,8 @@ struct FrameCell {
 
 
     [[nodiscard]] bool isNeighborOpen(Direction direction) const;
+private:
+    [[nodiscard]] Direction getOppositeDirection(Direction direction) const;
 };
 
 
