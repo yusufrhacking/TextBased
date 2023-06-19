@@ -40,7 +40,9 @@ void MapManager::applyBiomeAcrossRadius(Biome biome, int radius) {
     for (int deltaX = -radius; deltaX < radius; ++deltaX) {
         for (int deltaY = -radius; deltaY < radius; ++deltaY) {
             auto mapPosition = startingMapPosition + MapPosition(deltaX, deltaY);
-            frameMap->get(mapPosition).biome = biome;
+            if (mapPosition.isPositionPositive()){
+                frameMap->get(mapPosition).biome = biome;
+            }
         }
     }
 }

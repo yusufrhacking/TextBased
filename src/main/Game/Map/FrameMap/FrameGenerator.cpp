@@ -17,7 +17,6 @@ void FrameGenerator::generateFrame(MapPosition nextFrameMapPosition) {
     }
 }
 
-
 void FrameGenerator::frameCellAtPosition(FrameCell &newFrameCell) {
     auto openPathsSignature = newFrameCell.getOpenPathsSignature();
     if (newFrameCell.biome == Biome::FOREST){
