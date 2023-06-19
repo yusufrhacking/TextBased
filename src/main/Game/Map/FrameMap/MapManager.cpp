@@ -11,7 +11,7 @@ MapManager::MapManager(Position startingPosition): startingPosition(startingPosi
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
     startingCell.biome = Biome::FOREST;
-    applyBiomeAcrossRadius(Biome::FOREST, 4);
+    applyBiomeAcrossRadius(Biome::FOREST, 2);
 }
 
 Frame &MapManager::getFrame(Position position) {
@@ -51,9 +51,8 @@ void MapManager::frameCellAtPosition(FrameCell& playerCell, FrameCell &newCell) 
 }
 
 void MapManager::applyBiomeAcrossRadius(Biome biome, int radius) {
-    int halfRadius = radius/2;
-    for (int deltaX = -halfRadius; deltaX < halfRadius; ++deltaX) {
-        for (int deltaY = -halfRadius; deltaY < halfRadius; ++deltaY) {
+    for (int deltaX = -radius; deltaX < radius; ++deltaX) {
+        for (int deltaY = -radius; deltaY < radius; ++deltaY) {
             auto mapPosition = startingMapPosition + MapPosition(deltaX, deltaY);
             frameMap[mapPosition].biome = biome;
         }
