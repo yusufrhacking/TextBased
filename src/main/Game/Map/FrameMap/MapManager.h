@@ -6,6 +6,7 @@
 #include "FrameCell.h"
 #include "../../../Helpers/Objects/MapPosition.h"
 #include "FrameMap.h"
+#include "FrameGenerator.h"
 #include <vector>
 
 class MapManager {
@@ -18,7 +19,8 @@ class MapManager {
     //requireComponent<MovementComponent> --> needs polymorphic components too
     //Check ALL entities at the beginning, and then require position/movement components so the update tracks those
 private:
-    FrameMap frameMap;
+    std::shared_ptr<FrameMap> frameMap;
+    FrameGenerator frameGenerator;
     MapPosition startingMapPosition;
     int frameWidth = Window::windowWidth;
     int frameHeight = Window::windowHeight;

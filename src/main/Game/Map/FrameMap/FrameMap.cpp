@@ -4,7 +4,6 @@
 
 FrameMap::FrameMap() {
     map = std::vector<std::vector<FrameCell>>(numRows, std::vector<FrameCell>(numCols));
-
     for (int x = 0; x < numRows; ++x) {
         for (int y = 0; y < numCols; ++y) {
             map[x][y].isFilled = false;

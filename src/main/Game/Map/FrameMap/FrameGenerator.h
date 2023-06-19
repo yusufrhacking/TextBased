@@ -1,0 +1,10 @@
+#ifndef TEXTBASED_FRAMEGENERATOR_H
+#define TEXTBASED_FRAMEGENERATOR_H
+
+
+class FrameGenerator {
+
+};
+
+
+#endif //TEXTBASED_FRAMEGENERATOR_H

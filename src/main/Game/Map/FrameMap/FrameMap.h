@@ -12,8 +12,16 @@ public:
     static const int numCols = 1000;
     FrameMap();
 
+    FrameCell& get(MapPosition mapPosition){
+        return map[mapPosition.xPos][mapPosition.yPos];
+    }
+
     FrameCell& operator()(std::size_t row, std::size_t col) {
         return map[row][col];
+    }
+
+    FrameCell& operator()(MapPosition mapPosition){
+        return map[mapPosition.xPos][mapPosition.yPos];
     }
 
     FrameCell& operator[](MapPosition mapPosition){
