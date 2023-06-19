@@ -1,5 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "FrameCell.h"
+#include "FrameGenerator.h"
 #include "MapManager.h"
 #include "../../Levels/Forest/ForestFrame.h"
 #include "../../Levels/Forest/VerticalForestFrame.h"
@@ -8,6 +9,7 @@
 MapManager::MapManager(Position startingPosition) {
     startingMapPosition = getMapPositionFromGamePosition(startingPosition);
     frameMap = std::make_shared<FrameMap>();
+    frameGenerator = std::make_unique<FrameGenerator>(frameMap);
     auto& startingCell = frameMap->get(startingMapPosition);
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
     startingCell.isFilled = true;
@@ -22,34 +24,17 @@ Frame &MapManager::getFrame(Position position) {
 
 void MapManager::surroundLocation(Position playerPosition) {
     auto playerMapPosition = getMapPositionFromGamePosition(playerPosition);
-    auto& playerCell = frameMap->get(playerMapPosition);
     for (int deltaX = -1; deltaX <= 1; ++deltaX) {
         for (int deltaY = -1; deltaY <= 1; ++deltaY) {
             if (deltaX == 0 && deltaY == 0) {
                 continue;
             }
             auto nextFrameMapPosition = playerMapPosition + MapPosition(deltaX, deltaY);
-            frameGenerator.generateFrame();
-            if (nextFrameMapPosition.isPositionPositive()) {
-                auto& cell = frameMap->get(nextFrameMapPosition);
-                if (!cell.isFilled) {
-                    frameCellAtPosition(playerCell, cell);
-                }
-            }
+            frameGenerator->generateFrame(playerMapPosition, nextFrameMapPosition);
         }
     }
 }
 
-void MapManager::frameCellAtPosition(FrameCell& playerCell, FrameCell &newCell) {
-    if (newCell.biome == Biome::FOREST){
-        if (playerCell.frame->openAt.north && playerCell.frame->openAt.east){
-            newCell.frame = std::make_unique<VerticalForestFrame>(newCell.gameReferencePosition);
-        } else{
-            newCell.frame = std::make_unique<FourWayForestFrame>(newCell.gameReferencePosition);
-        }
-        newCell.isFilled = true;
-    }
-}
 
 void MapManager::applyBiomeAcrossRadius(Biome biome, int radius) {
     for (int deltaX = -radius; deltaX < radius; ++deltaX) {

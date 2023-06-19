@@ -20,13 +20,11 @@ class MapManager {
     //Check ALL entities at the beginning, and then require position/movement components so the update tracks those
 private:
     std::shared_ptr<FrameMap> frameMap;
-    FrameGenerator frameGenerator;
+    std::unique_ptr<FrameGenerator> frameGenerator;
     MapPosition startingMapPosition;
     int frameWidth = Window::windowWidth;
     int frameHeight = Window::windowHeight;
     MapPosition positionAdjustment;
-
-    void frameCellAtPosition(FrameCell& playerCell, FrameCell& newCell);
 
 
 public:
