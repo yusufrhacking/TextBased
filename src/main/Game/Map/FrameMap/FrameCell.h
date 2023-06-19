@@ -35,6 +35,8 @@ public:
     bool isOpenAt(Direction direction) const;
 
     static Direction getOppositeDirection(Direction direction);
+
+    std::bitset<4> getOpenPathsSignature();
 };
 
 
