@@ -6,19 +6,18 @@ FrameGenerator::FrameGenerator(std::shared_ptr<FrameMap> frameMap) {
     this->frameMap = frameMap;
 }
 
-void FrameGenerator::generateFrame(MapPosition playerMapPosition, MapPosition nextFrameMapPosition) {
+void FrameGenerator::generateFrame(MapPosition nextFrameMapPosition) {
     if (nextFrameMapPosition.isPositionPositive()) {
-        auto& playerCell = frameMap->get(playerMapPosition);
         auto& newFrameCell = frameMap->get(nextFrameMapPosition);
         if (!newFrameCell.isFilled) {
-            frameCellAtPosition(playerCell, newFrameCell);
+            frameCellAtPosition(newFrameCell);
         }
     }
 }
 
-void FrameGenerator::frameCellAtPosition(FrameCell &playerCell, FrameCell &newFrameCell) {
+void FrameGenerator::frameCellAtPosition(FrameCell &newFrameCell) {
     if (newFrameCell.biome == Biome::FOREST){
-        if (playerCell.frame->openAt.north && playerCell.frame->openAt.east){
+        if (rand() % 2 == 0){
             newFrameCell.frame = std::make_unique<VerticalForestFrame>(newFrameCell.gameReferencePosition);
         } else{
             newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);

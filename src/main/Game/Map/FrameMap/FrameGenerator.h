@@ -8,9 +8,9 @@ class FrameGenerator {
 
 public:
     explicit FrameGenerator(std::shared_ptr<FrameMap> frameMap);
-    void generateFrame(MapPosition playerMapPosition, MapPosition nextFrameMapPosition);
+    void generateFrame(MapPosition nextFrameMapPosition);
 private:
-    void frameCellAtPosition(FrameCell &playerCell, FrameCell &newFrameCell);
+    void frameCellAtPosition(FrameCell &newFrameCell);
 
 };
 

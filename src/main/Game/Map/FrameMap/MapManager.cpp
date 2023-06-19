@@ -30,7 +30,7 @@ void MapManager::surroundLocation(Position playerPosition) {
                 continue;
             }
             auto nextFrameMapPosition = playerMapPosition + MapPosition(deltaX, deltaY);
-            frameGenerator->generateFrame(playerMapPosition, nextFrameMapPosition);
+            frameGenerator->generateFrame(nextFrameMapPosition);
         }
     }
 }
