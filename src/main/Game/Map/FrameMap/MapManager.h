@@ -18,10 +18,7 @@ class MapManager {
     //requireComponent<MovementComponent> --> needs polymorphic components too
     //Check ALL entities at the beginning, and then require position/movement components so the update tracks those
 private:
-    static const int numRows = 10000;
-    static const int numCols = 10000;
     FrameMap frameMap;
-    Position startingPosition;
     MapPosition startingMapPosition;
     int frameWidth = Window::windowWidth;
     int frameHeight = Window::windowHeight;

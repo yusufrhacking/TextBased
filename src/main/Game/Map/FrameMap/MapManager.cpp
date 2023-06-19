@@ -5,11 +5,11 @@
 #include "../../Levels/Forest/VerticalForestFrame.h"
 #include "../../Levels/Forest/FourWayForestFrame.h"
 
-MapManager::MapManager(Position startingPosition): startingPosition(startingPosition) {
+MapManager::MapManager(Position startingPosition) {
     startingMapPosition = getMapPositionFromGamePosition(startingPosition);
-    auto& startingCell = frameMap[startingMapPosition];//need to add adjustment to make the middle though
+    auto& startingCell = frameMap[startingMapPosition];
     startingCell.frame = std::make_unique<FourWayForestFrame>(startingPosition);
-    startingCell.isFilled = true;//THE CAMERA POSITIONS ARE TIED
+    startingCell.isFilled = true;
     startingCell.biome = Biome::FOREST;
     applyBiomeAcrossRadius(Biome::FOREST, 2);
 }
