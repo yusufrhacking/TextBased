@@ -32,9 +32,9 @@ public:
 
     void setNeighborFrame(Direction direction, FrameCell* neighbor);
 
+    bool isOpenAt(Direction direction) const;
 
     static Direction getOppositeDirection(Direction direction);
-private:
 };
 
 

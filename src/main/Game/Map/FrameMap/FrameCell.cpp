@@ -9,6 +9,15 @@ void FrameCell::setNeighborFrame(Direction direction, FrameCell* neighbor) {
     neighbors[direction] = neighbor;
 }
 
+bool FrameCell::isOpenAt(Direction direction) const{
+    switch (direction){
+        case NORTH: return frame->openAt.north;
+        case SOUTH: return frame->openAt.south;
+        case EAST: return frame->openAt.east;
+        case WEST: return frame->openAt.west;
+    }
+}
+
 
 Direction FrameCell::getOppositeDirection(Direction direction) {
     switch (direction){
