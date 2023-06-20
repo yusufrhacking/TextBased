@@ -11,8 +11,8 @@ public:
     void generateFrame(MapPosition nextFrameMapPosition);
 private:
     void frameCellAtPosition(FrameCell &newFrameCell);
-
-    std::bitset<4> getOpenPathsSignature(FrameCell cell);
+    std::bitset<4> getOpenPathsSignature(FrameCell& cell);
+    std::unique_ptr<Frame> frameFactory(std::bitset<4> openPathsSignature, Biome biome);
 };
 
 

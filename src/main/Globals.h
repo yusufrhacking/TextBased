@@ -6,7 +6,7 @@
 
 extern std::unique_ptr<Window> window;
 
-const unsigned int MAX_ENTITIES = 1000;
+const unsigned int MAX_ENTITIES = 10000;
 
 
 using RenderedVal = unsigned int;
