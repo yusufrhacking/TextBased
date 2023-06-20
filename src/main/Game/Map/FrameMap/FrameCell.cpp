@@ -13,6 +13,7 @@ std::bitset<4> FrameCell::getOpenPathsSignature(){
     auto openSidesSignature = std::bitset<4>();
     for (int x = 0; x < neighbors.size(); x++){//0 = N, 1 = E, 2 = S, 3 = W
         if (!neighbors[x]->isFilled){
+            openSidesSignature.set(x, true);
             continue;
         }
         auto neighborIsThisWay = static_cast<Direction>(x);
