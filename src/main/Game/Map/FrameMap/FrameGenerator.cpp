@@ -2,6 +2,7 @@
 #include "../../Levels/Forest/FourWayForestFrame.h"
 #include "../../Levels/Forest/VerticalForestFrame.h"
 #include "FrameCell.h"
+#include "OpenPathsSignature.h"
 #include <bitset>
 
 FrameGenerator::FrameGenerator(std::shared_ptr<FrameMap> frameMap) {
@@ -12,44 +13,36 @@ void FrameGenerator::generateFrame(MapPosition nextFrameMapPosition) {
     if (nextFrameMapPosition.isPositionPositive()) {
         auto& newFrameCell = frameMap->get(nextFrameMapPosition);
         if (!newFrameCell.isFilled) {
-            auto openPathsSignature = getOpenPathsSignature(newFrameCell);
-            if (openPathsSignature[NORTH] && openPathsSignature[SOUTH]){
-                newFrameCell.frame = std::make_unique<VerticalForestFrame>(newFrameCell.gameReferencePosition);
-            }
-            else {
-                newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
-            }
-            newFrameCell.isFilled = true;
+            createFrame(newFrameCell);
         }
     }
 }
 
-void FrameGenerator::frameCellAtPosition(FrameCell &newFrameCell) {
+void FrameGenerator::createFrame(FrameCell &newFrameCell) {
     auto openPathsSignature = getOpenPathsSignature(newFrameCell);
-    if (newFrameCell.biome == Biome::FOREST){
-        if (rand() % 2 == 0){
-            newFrameCell.frame = std::make_unique<VerticalForestFrame>(newFrameCell.gameReferencePosition);
-        } else{
-            newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
-        }
-        newFrameCell.isFilled = true;
+    if (openPathsSignature[NORTH] && openPathsSignature[SOUTH]){
+        newFrameCell.frame = std::make_unique<VerticalForestFrame>(newFrameCell.gameReferencePosition);
     }
+    else {
+        newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
+    }
+    newFrameCell.isFilled = true;
 }
 
 
-std::bitset<4> FrameGenerator::getOpenPathsSignature(FrameCell& cell){
+OpenPathsSignature FrameGenerator::getOpenPathsSignature(FrameCell& cell){
     auto neighbors = frameMap->getNeighborsOf(cell.mapPosition);
-    auto openSidesSignature = std::bitset<4>();
+    OpenPathsSignature openPathsSignature;
     for (int x = 0; x < neighbors.size(); x++){//0 = N, 1 = E, 2 = S, 3 = W
         if (!neighbors[x]->isFilled){
-            openSidesSignature.set(x, true);
+            openPathsSignature.set(x, true);
             continue;
         }
         auto neighborIsThisWay = static_cast<Direction>(x);
         auto relevantNeighborSide = FrameCell::getOppositeDirection(neighborIsThisWay);
         if (neighbors[x]->isOpenAt(relevantNeighborSide)){
-            openSidesSignature.set(x, true);
+            openPathsSignature.set(x, true);
         }
     }
-    return openSidesSignature;//TIME TO WRITE UNIT TESTS (SHOULD HAVE DONE THIS FIRST BUT I AM SLEEP DEPRIVED);
+    return openPathsSignature;//TIME TO WRITE UNIT TESTS (SHOULD HAVE DONE THIS FIRST BUT I AM SLEEP DEPRIVED);
 }
