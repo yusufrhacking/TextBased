@@ -3,6 +3,7 @@
 #include <memory>
 #include "../Frame/Frame.h"
 #include "../../../Helpers/Objects/Position.h"
+#include "../../../Helpers/Objects/MapPosition.h"
 #include <vector>
 #include <bitset>
 
@@ -12,25 +13,19 @@ enum Biome{
 };
 
 struct FrameCell {
-private:
-    std::vector<FrameCell*> neighbors;
-public:
     std::unique_ptr<Frame> frame;
     bool isFilled;
     Biome biome;
     Position gameReferencePosition;
+    MapPosition mapPosition;
 
     FrameCell();
 
-    FrameCell(const FrameCell& other): neighbors(4) {
+    FrameCell(const FrameCell& other){
         isFilled = other.isFilled;
         biome = Biome::BLANK;
         // Copy any other member variables here
     }
-
-    std::vector<FrameCell*> getNeighbors() const;
-
-    void setNeighborFrame(Direction direction, FrameCell* neighbor);
 
     bool isOpenAt(Direction direction) const;
 

@@ -18,7 +18,7 @@ void FrameGenerator::generateFrame(MapPosition nextFrameMapPosition) {
 }
 
 void FrameGenerator::frameCellAtPosition(FrameCell &newFrameCell) {
-    auto openPathsSignature = newFrameCell.getOpenPathsSignature();
+//    auto openPathsSignature = newFrameCell.getOpenPathsSignature();
     if (newFrameCell.biome == Biome::FOREST){
         if (rand() % 2 == 0){
             newFrameCell.frame = std::make_unique<VerticalForestFrame>(newFrameCell.gameReferencePosition);
