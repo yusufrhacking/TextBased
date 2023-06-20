@@ -12,6 +12,8 @@ public:
     static const int numCols = 1000;
     FrameMap();
 
+    std::vector<FrameCell*> getNeighborsOf(MapPosition mapPosition);
+
     FrameCell& get(MapPosition mapPosition){
         return map[mapPosition.xPos][mapPosition.yPos];
     }

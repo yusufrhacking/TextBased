@@ -13,3 +13,14 @@ FrameMap::FrameMap() {
         }
     }
 }
+
+std::vector<FrameCell*> FrameMap::getNeighborsOf(MapPosition mapPosition) {
+    auto neighbors = std::vector<FrameCell*>(4);
+
+    neighbors[NORTH] = &get(mapPosition + NORTH);
+    neighbors[EAST] = &get(mapPosition + EAST);
+    neighbors[SOUTH] = &get(mapPosition + SOUTH);
+    neighbors[WEST] = &get(mapPosition + WEST);
+
+    return neighbors;
+}
