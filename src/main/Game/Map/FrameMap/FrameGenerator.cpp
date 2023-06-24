@@ -7,8 +7,7 @@
 #include "../../Levels/Forest/SouthEastOpenForestFrame.h"
 #include <bitset>
 
-FrameGenerator::FrameGenerator(std::shared_ptr<FrameMap> frameMap) {
-    this->frameMap = frameMap;
+FrameGenerator::FrameGenerator(std::shared_ptr<FrameMap> frameMap): frameMap(frameMap), frameFactory(frameMap) {
 }
 
 void FrameGenerator::generateFrame(MapPosition nextFrameMapPosition) {
@@ -27,8 +26,9 @@ void FrameGenerator::createFrame(FrameCell &newFrameCell) {
 //    }
 //    else {
 //        newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
-//    }
-    newFrameCell.frame = std::make_unique<SouthEastOpenForestFrame>(newFrameCell.gameReferencePosition);
+//    }newFrameCell.biome, newFrameCell.gameReferencePosition
+    newFrameCell.frame = frameFactory.generateFrame(newFrameCell.biome, newFrameCell.gameReferencePosition);
+//    newFrameCell.frame = std::make_unique<SouthEastOpenForestFrame>(newFrameCell.gameReferencePosition);
     newFrameCell.isFilled = true;
 }
 

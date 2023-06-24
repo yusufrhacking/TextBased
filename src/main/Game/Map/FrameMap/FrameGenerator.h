@@ -3,9 +3,11 @@
 #include <memory>
 #include "FrameMap.h"
 #include "OpenPathsSignature.h"
+#include "FrameFactory.h"
 
 class FrameGenerator {
     std::shared_ptr<FrameMap> frameMap;
+    FrameFactory frameFactory;
 
 public:
     explicit FrameGenerator(std::shared_ptr<FrameMap> frameMap);
@@ -13,7 +15,6 @@ public:
 private:
     void createFrame(FrameCell &newFrameCell);
     OpenPathsSignature getOpenPathsSignature(FrameCell& cell);
-    std::unique_ptr<Frame> frameFactory(std::bitset<4> openPathsSignature, Biome biome);
 };
 
 
