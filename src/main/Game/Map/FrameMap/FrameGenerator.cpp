@@ -3,6 +3,7 @@
 #include "../../Levels/Forest/VerticalForestFrame.h"
 #include "FrameCell.h"
 #include "OpenPathsSignature.h"
+#include "../../Levels/Forest/SouthOpenForestFrame.h"
 #include <bitset>
 
 FrameGenerator::FrameGenerator(std::shared_ptr<FrameMap> frameMap) {
@@ -20,12 +21,13 @@ void FrameGenerator::generateFrame(MapPosition nextFrameMapPosition) {
 
 void FrameGenerator::createFrame(FrameCell &newFrameCell) {
     auto openPathsSignature = getOpenPathsSignature(newFrameCell);
-    if (openPathsSignature[NORTH] && openPathsSignature[SOUTH]){
-        newFrameCell.frame = std::make_unique<VerticalForestFrame>(newFrameCell.gameReferencePosition);
-    }
-    else {
-        newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
-    }
+//    if (openPathsSignature[NORTH] && openPathsSignature[SOUTH]){
+//        newFrameCell.frame = std::make_unique<VerticalForestFrame>(newFrameCell.gameReferencePosition);
+//    }
+//    else {
+//        newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
+//    }
+    newFrameCell.frame = std::make_unique<SouthOpenForestFrame>(newFrameCell.gameReferencePosition);
     newFrameCell.isFilled = true;
 }
 

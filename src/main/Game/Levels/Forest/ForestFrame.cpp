@@ -101,6 +101,6 @@ Position ForestFrame::getStartingRightPositionFromWidth(int forestWidthInTrees){
 }
 
 int ForestFrame::getTreeCapacityFromPosition(Position position) const {
-    return Window::windowHeight-(int)position.yPos / treeHeight;
+    return (Window::windowHeight-(int)position.yPos) / treeHeight;
 }
 
