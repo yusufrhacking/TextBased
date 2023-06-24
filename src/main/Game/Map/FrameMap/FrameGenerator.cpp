@@ -27,7 +27,9 @@ void FrameGenerator::createFrame(FrameCell &newFrameCell) {
 //    else {
 //        newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
 //    }newFrameCell.biome, newFrameCell.gameReferencePosition
-    newFrameCell.frame = frameFactory.generateFrame(newFrameCell.biome, newFrameCell.gameReferencePosition);
+
+    OpenAt frameConfiguration = {true, true, true, true};
+    newFrameCell.frame = frameFactory.generateFrame(frameConfiguration, newFrameCell.biome, newFrameCell.gameReferencePosition);
 //    newFrameCell.frame = std::make_unique<SouthEastOpenForestFrame>(newFrameCell.gameReferencePosition);
     newFrameCell.isFilled = true;
 }

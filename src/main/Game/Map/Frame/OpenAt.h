@@ -3,6 +3,9 @@
 
 struct OpenAt{
     bool north, east, south, west;
+    OpenAt(bool north, bool east, bool south, bool west): north(north), east(east), south(south), west(west) {
+
+    }
     OpenAt(){
         north = false;
         east = false;

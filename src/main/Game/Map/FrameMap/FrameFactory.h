@@ -8,8 +8,8 @@ class FrameFactory {
 private:
     std::shared_ptr<FrameMap> frameMap;
 public:
-    FrameFactory(std::shared_ptr<FrameMap> frameMap);
-    std::unique_ptr<Frame> generateFrame(Biome biome, Position gameReferencePosition);
+    explicit FrameFactory(std::shared_ptr<FrameMap> frameMap);
+    std::unique_ptr<Frame> generateFrame(OpenAt frameConfiguration, Biome biome, Position gameReferencePosition);
 };
 
 
