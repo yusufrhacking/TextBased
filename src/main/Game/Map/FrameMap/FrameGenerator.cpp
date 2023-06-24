@@ -4,6 +4,7 @@
 #include "FrameCell.h"
 #include "OpenPathsSignature.h"
 #include "../../Levels/Forest/SouthOpenForestFrame.h"
+#include "../../Levels/Forest/SouthEastOpenForestFrame.h"
 #include <bitset>
 
 FrameGenerator::FrameGenerator(std::shared_ptr<FrameMap> frameMap) {
@@ -27,7 +28,7 @@ void FrameGenerator::createFrame(FrameCell &newFrameCell) {
 //    else {
 //        newFrameCell.frame = std::make_unique<FourWayForestFrame>(newFrameCell.gameReferencePosition);
 //    }
-    newFrameCell.frame = std::make_unique<SouthOpenForestFrame>(newFrameCell.gameReferencePosition);
+    newFrameCell.frame = std::make_unique<SouthEastOpenForestFrame>(newFrameCell.gameReferencePosition);
     newFrameCell.isFilled = true;
 }
 

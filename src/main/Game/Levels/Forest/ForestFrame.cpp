@@ -104,3 +104,13 @@ int ForestFrame::getTreeCapacityFromPosition(Position position) const {
     return (Window::windowHeight-(int)position.yPos) / treeHeight;
 }
 
+Position ForestFrame::createNorthWall() {
+    Position positionToCenterTreeRow = {15, 0};
+    Position leftForestPosition = {window->getTopLeftPosition() + positionToCenterTreeRow};
+    return createDimensionedForest(northWallWidthInTrees, northWallHeightInTrees, leftForestPosition);
+}
+
+Position ForestFrame::createSideWallCluster(Position referencePosition) {
+    return createDimensionedForest(sideWallWidthInTrees, sideWallHeightInTrees, referencePosition);
+}
+

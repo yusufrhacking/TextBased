@@ -17,6 +17,12 @@ public:
     TextComponent treeSprite = TextComponent(TextGenerator::getTreeText());
     int treeWidth = (int)treeSprite.surfaceSize.width;
     int treeHeight = (int)treeSprite.surfaceSize.height;
+
+    int northWallWidthInTrees = 8;
+    int northWallHeightInTrees = 2;
+
+    int sideWallWidthInTrees = 2;
+    int sideWallHeightInTrees = 3;
 protected:
     Position frameReferencePosition;
     Position createDimensionedForest(int widthInTrees, int heightInTrees, const Position referencePosition) const;
@@ -24,6 +30,9 @@ protected:
 
     void createGenericTreeAtPosition(Position position) const;
 
+    Position createNorthWall();
+
+    Position createSideWallCluster(Position referencePosition);
 
     Position createStubTrees(int trees, Position position) const;
 
