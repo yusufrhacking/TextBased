@@ -23,7 +23,7 @@ void CameraFollowSystem::update() {
     auto playerSizeOffset = ecsManager->getComponentFromEntity<TextComponent>(entity).surfaceSize;
 
 
-    auto newCameraPosition = getNewCameraPositionByFrame(playerPosition, playerSizeOffset);
+    auto newCameraPosition = getNewCameraPositionByCentering(playerPosition, playerSizeOffset);
 
     camera->positionCamera(newCameraPosition);
     spdlog::trace("Camera moved to position {}, {}", newCameraPosition.xPos, newCameraPosition.yPos);

@@ -106,7 +106,7 @@ int ForestFrame::getTreeCapacityFromPosition(Position position) const {
 
 Position ForestFrame::createNorthWall() {
     Position positionToCenterTreeRow = {15, 0};
-    Position leftForestPosition = {window->getTopLeftPosition() + positionToCenterTreeRow};
+    Position leftForestPosition = {Window::getTopLeftPosition() + positionToCenterTreeRow};
     return createDimensionedForest(northWallWidthInTrees, northWallHeightInTrees, leftForestPosition);
 }
 

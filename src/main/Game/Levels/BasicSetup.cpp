@@ -16,8 +16,8 @@ void BasicSetup::setup() {
 void BasicSetup::createPlayer() {
     witt = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
-    auto startingPosition = Game::startingTopLeftPosition + window->getMiddlePosition();
-    ecsManager->addComponentToEntity<PositionComponent>(witt, Game::startingTopLeftPosition + window->getMiddlePosition());
+    auto startingPosition = Game::startingTopLeftPosition + Window::getMiddlePosition();
+    ecsManager->addComponentToEntity<PositionComponent>(witt, Game::startingTopLeftPosition + Window::getMiddlePosition());
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);

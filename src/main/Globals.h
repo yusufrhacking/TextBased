@@ -4,8 +4,6 @@
 #include "Helpers/Objects/Position.h"
 #include "Game/GameSystems/Window/Window.h"
 
-extern std::unique_ptr<Window> window;
-
 const unsigned int MAX_ENTITIES = 10000;
 
 

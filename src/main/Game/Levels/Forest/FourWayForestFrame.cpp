@@ -9,7 +9,7 @@ FourWayForestFrame::FourWayForestFrame(Position referencePosition) : ForestFrame
     auto nextRightPosition = finishedRightPosition + Position(0, treeHeight);
     createDimensionedForest(forestWidthInTrees, forestHeightInTrees, nextRightPosition);
 
-    Position leftForestPosition = {window->getTopLeftPosition()};
+    Position leftForestPosition = {Window::getTopLeftPosition()};
     auto finishedLeftPosition = createDimensionedForest(forestWidthInTrees,forestHeightInTrees, leftForestPosition);
 
     auto nextLeftPosition = finishedLeftPosition + Position(0, treeHeight);
