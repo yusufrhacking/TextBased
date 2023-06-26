@@ -17,7 +17,7 @@ class MapManager {
     //Data structure should be like a matrix, let's say 10k x 10k, and then if it goes beyond that, 2x that dimension
     //Frames will track what entities are inside them, this will need a system to keep track of this too
     //requireComponent<MovementComponent> --> needs polymorphic components too
-    //Check ALL entities at the beginning, and then require position/movement components so the update tracks those
+    //Check ALL entities at the beginning, and then require position/movement components so the updateCameraPosition tracks those
 private:
     std::shared_ptr<FrameMap> frameMap;
     std::unique_ptr<FrameGenerator> frameGenerator;
@@ -28,7 +28,7 @@ private:
 
 
 public:
-    //Will create the initial frame, and perhaps surrounding frames (or leave this to what is called in the update)
+    //Will create the initial frame, and perhaps surrounding frames (or leave this to what is called in the updateCameraPosition)
     explicit MapManager(Position startingPosition);
 
     bool isFrameAtPositionFilled(Position position);

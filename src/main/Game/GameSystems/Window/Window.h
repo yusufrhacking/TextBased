@@ -2,6 +2,7 @@
 #define TEXTBASED_WINDOW_H
 #include <SDL.h>
 #include "../../../Helpers/Objects/Position.h"
+#include <memory>
 
 class Window {
 

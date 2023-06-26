@@ -4,6 +4,7 @@
 #include "../../Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../../Systems/SpecialSystems/CameraFollowSystem.h"
 #include "../../Systems/SpecialSystems/MapGenerationSystem.h"
+#include "../../../Game/Game.h"
 
 int GenericComponent::nextId = 0;
 
@@ -14,7 +15,7 @@ void ECSManager::update(double deltaTime){
     removeDeadEntities();
     systemManager->getSystem<UnprocessedKeyboardMovementSystem>().processMovement();
     runTimedSystems(deltaTime);
-    systemManager->getSystem<CameraFollowSystem>().update();
+    currentCamera = systemManager->getSystem<CameraFollowSystem>().updateCameraPosition(Game::startingTopLeftPosition);
     systemManager->getSystem<MapGenerationSystem>().update();
 }
 
@@ -54,7 +55,7 @@ void ECSManager::runTimedSystems(double deltaTime) const {
 
 void ECSManager::render(std::shared_ptr<Renderer> renderer){
     for (const auto& system : systemManager->getSystemsOfType<RenderSystem>()){
-        system->render(renderer);
+        system->render(renderer, currentCamera);
     }
 }
 

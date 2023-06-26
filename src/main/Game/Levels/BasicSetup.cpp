@@ -7,7 +7,6 @@
 #include "../GameSystems/Camera/Camera.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
-extern std::unique_ptr<Camera> camera;
 
 void BasicSetup::setup() {
     createPlayer();

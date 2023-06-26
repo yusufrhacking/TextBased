@@ -16,6 +16,7 @@
 #include "../../Systems/RenderSystem.h"
 #include "../../Systems/UpdateSystems/UpdateSystem.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
+#include "../../../Game/GameSystems/Camera/Camera.h"
 
 
 class ECSManager {
@@ -23,6 +24,7 @@ class ECSManager {
         std::shared_ptr<EntityManager> entityManager;
         std::shared_ptr<ComponentManager> componentManager;
         std::shared_ptr<SystemManager> systemManager;
+        Camera currentCamera = Camera(Position());;
         void removeDeadEntities();
         void addNewEntities();
         void runTimedSystems(double deltaTime) const;

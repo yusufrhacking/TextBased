@@ -30,7 +30,7 @@ TEST_CASE("Movement System Testing", "[System][AutonomousMovementSystem]") {
 
 using Catch::Matchers::WithinAbs;
 
-TEST_CASE("AutonomousMovementSystem update function moves entities correctly", "[System][MovementSystemUpdate][UpdateMethod]") {
+TEST_CASE("AutonomousMovementSystem updateCameraPosition function moves entities correctly", "[System][MovementSystemUpdate][UpdateMethod]") {
     ecsManager = std::make_unique<ECSManager>();
 
 

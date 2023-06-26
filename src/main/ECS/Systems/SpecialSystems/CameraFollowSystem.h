@@ -5,13 +5,14 @@
 #include "../../Components/MainPlayerComponent.h"
 #include "../../Components/PositionComponent.h"
 #include "../UpdateSystems/UpdateSystem.h"
+#include "../../../Game/GameSystems/Camera/Camera.h"
 
 
 class CameraFollowSystem: public System {
 public:
     explicit CameraFollowSystem();
 
-    void update();
+    Camera updateCameraPosition(Position previousCameraPosition);
 private:
     bool isAboveScreen(float relativePlayerYPos, float playerHeight) const;
 
@@ -21,9 +22,9 @@ private:
 
     bool isLeftOfScreen(float relativePlayerXPos, float playerWidth);
 
-    Position getNewCameraPositionByFrame(const Position &playerPosition, const Size &playerSizeOffset);
+    Position getNewCameraPositionByFrame(Position previousCameraPosition, const Position &playerPosition, const Size &playerSizeOffset);
 
-    Position getNewCameraPositionByCentering(const Position &playerPosition, const Size &playerSizeOffset);
+    Position getNewCameraPositionByCentering(Position previousCameraPosition, const Position &playerPosition, const Size &playerSizeOffset);
 };
 
 

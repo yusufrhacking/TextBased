@@ -9,13 +9,13 @@ RenderSystem::RenderSystem() {
     requireComponent<StyleComponent>();
 }
 
-void RenderSystem::render(const std::shared_ptr<Renderer>& renderer){
+void RenderSystem::render(const std::shared_ptr<Renderer>& renderer, Camera camera){
     for (auto entity : getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto spriteComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
         const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
 
-        renderer->renderText(positionComponent.getPosition(), spriteComponent, styleComponent);
+        renderer->renderText(camera, positionComponent.getPosition(), spriteComponent, styleComponent);
     }
 
     renderer->renderFrame();

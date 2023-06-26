@@ -22,7 +22,7 @@ class SDLRenderer: public Renderer {
 public:
     explicit SDLRenderer(SDL_Window* sdlWindow);
     ~SDLRenderer() override;
-    void renderText(Position position, const TextComponent& sprite, const StyleComponent& style) override;
+    void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
     void renderFrame() override;
 
 private:

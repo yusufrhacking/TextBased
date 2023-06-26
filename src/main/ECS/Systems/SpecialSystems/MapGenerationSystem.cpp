@@ -7,7 +7,6 @@
 #include "../../../Game/Levels/Forest/ForestFrame.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
-extern std::unique_ptr<Camera> camera;
 
 MapGenerationSystem::MapGenerationSystem(std::shared_ptr<MapManager> frameMap) {
     this->frameMap = frameMap;

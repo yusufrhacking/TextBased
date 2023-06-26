@@ -5,18 +5,19 @@
 
 #include "../../../ECS/Components/TextComponents/TextComponent.h"
 #include "../../../ECS/Components/StyleComponent.h"
+#include "../Camera/Camera.h"
 
 class Renderer {
     public:
         virtual ~Renderer() = default;
-        virtual void renderText(Position position, const TextComponent& sprite, const StyleComponent& style) = 0;
+        virtual void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) = 0;
         virtual void renderFrame() = 0;
 
 };
 
 class MockRenderer : public Renderer {
 public:
-    MOCK_METHOD(void, renderText, (Position position, const TextComponent& sprite, const StyleComponent& style), (override));
+    MOCK_METHOD(void, renderText, (Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style), (override));
     MOCK_METHOD(void, renderFrame, (), (override));
 };
 
