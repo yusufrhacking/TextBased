@@ -3,7 +3,6 @@
 #include "../../Components/MainPlayerComponent.h"
 #include "../../Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "../../Systems/SpecialSystems/CameraFollowSystem.h"
-#include "../../Systems/SpecialSystems/MapGenerationSystem.h"
 #include "../../../Game/Game.h"
 
 int GenericComponent::nextId = 0;
@@ -16,7 +15,6 @@ void ECSManager::update(double deltaTime){
     systemManager->getSystem<UnprocessedKeyboardMovementSystem>().processMovement();
     runTimedSystems(deltaTime);
     currentCamera = systemManager->getSystem<CameraFollowSystem>().updateCameraPosition(Game::startingTopLeftPosition);
-    systemManager->getSystem<MapGenerationSystem>().update();
 }
 
 void ECSManager::addNewEntities() {
