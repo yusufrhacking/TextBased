@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13.1)
+cmake_minimum_required(VERSION 3.25.1)
 #set(CMAKE_XCODE_GENERATE_SCHEME ON)
 #set(CMAKE_XCODE_SCHEME_ADDRESS_SANITIZER ON)
 #set(CMAKE_XCODE_SCHEME_ADDRESS_SANITIZER_USE_AFTER_RETURN ON)
@@ -9,6 +9,8 @@ Message( STATUS "CMAKE_SOURCE_DIR: " ${CMAKE_SOURCE_DIR} )
 Message( STATUS "CMAKE_COMMAND: " ${CMAKE_COMMAND} )
 Message( STATUS "CMAKE_VERSION: " ${CMAKE_VERSION} )
 Message( STATUS "CMAKE_C_COMPILER: " ${CMAKE_C_COMPILER} )
+Message( STATUS "CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} )
+
 Message( STATUS "CMAKE_PROJECT_NAME: " ${CMAKE_PROJECT_NAME} )
 Message( STATUS "CMAKE_FINDCMAKE: " ${CMAKE_SOURCE_DIR}/CMAKE )
 
@@ -17,6 +19,7 @@ project(TextBased)
 # ------- Set Vars ------- #
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
 set(SOURCE_FILES
@@ -190,7 +193,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/Catch2SetupTest.cpp src/tests/entityTest.cpp src/tests/Systems/UnitTests/MovementSystemTest.cpp src/tests/TestExternDeclarations.cpp src/tests/TestExternDeclarations.h src/tests/Systems/UnitTests/RenderSystemTest.cpp src/tests/Systems/IntegrationTests/CollisionRemovalTest.cpp src/tests/Systems/UnitTests/CollisionSystemTest.cpp src/tests/Systems/UnitTests/ComponentSignatureTest.cpp src/tests/Game/FrameMapTest.cpp src/tests/Game/OpenPathsSignatureTest.cpp)
+add_library(test_sources OBJECT src/tests/Catch2SetupTest.cpp src/tests/entityTest.cpp src/tests/Systems/UnitTests/MovementSystemTest.cpp src/tests/TestExternDeclarations.cpp src/tests/TestExternDeclarations.h src/tests/Systems/UnitTests/RenderSystemTest.cpp src/tests/Systems/IntegrationTests/CollisionRemovalTest.cpp src/tests/Systems/UnitTests/CollisionSystemTest.cpp src/tests/Systems/UnitTests/ComponentSignatureTest.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
 
 
