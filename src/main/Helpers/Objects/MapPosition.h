@@ -21,21 +21,21 @@ struct MapPosition{
     }
 
     [[nodiscard]] int getDistanceFrom(MapPosition other) const{
-        return std::abs(xPos - other.xPos) + std::abs(yPos - other.yPos);
+        return abs(xPos - other.xPos) + abs(yPos - other.yPos);
     }
 
     MapPosition operator+(const MapPosition& other) const {
         return {this->xPos + other.xPos, this->yPos + other.yPos};
     }
 
-    MapPosition operator+(Direction direction) const {
-        switch(direction){
-            case NORTH: return {this->xPos, this->yPos + 1};
-            case EAST: return {this->xPos - 1, this->yPos};
-            case SOUTH: return {this->xPos, this->yPos - 1};
-            case WEST: return {this->xPos + 1, this->yPos};
-        }
-    }
+//    MapPosition operator+(Direction direction) const {
+//        switch(direction){
+//            case NORTH: return {this->xPos, this->yPos + 1};
+//            case EAST: return {this->xPos - 1, this->yPos};
+//            case SOUTH: return {this->xPos, this->yPos - 1};
+//            case WEST: return {this->xPos + 1, this->yPos};
+//        }
+//    }
 
     MapPosition operator-(const MapPosition& other) const {
         return {this->xPos - other.xPos, this->yPos - other.yPos};

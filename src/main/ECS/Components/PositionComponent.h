@@ -10,36 +10,31 @@ extern int currFrame;
 
 struct PositionComponent {
 private:
-    std::shared_ptr<Position> position;
+    Position position;
     Position previousPosition;
     int frameLastMoved = -1;
 public:
 
-    explicit PositionComponent(std::shared_ptr<Position> position) {
-        this->position = std::move(position);
-        this->previousPosition = *this->position;
-    }
-
     explicit PositionComponent(Position position) {
-        this->position = std::make_shared<Position>(position.xPos, position.yPos);
-        this->previousPosition = Position(position.xPos, position.yPos);
+        this->position = position;
+        this->previousPosition = this->position;
     }
 
     PositionComponent() {
-        this->position = std::make_shared<Position>(0, 0);
+        this->position = Position(0, 0);
         this->previousPosition = Position(0, 0);
     }
 
 
     void changePosition(double xChange, double yChange){
-        previousPosition = *position;
+        previousPosition = position;
         frameLastMoved = currFrame;
-        position->xPos += (float)xChange;
-        position->yPos += (float)yChange;
+        position.xPos += (float)xChange;
+        position.yPos += (float)yChange;
     }
 
     [[nodiscard]] Position getPosition() const{
-        return *position;
+        return position;
     }
 
     [[nodiscard]] Position getPreviousPosition() const{
@@ -51,7 +46,7 @@ public:
     }
 
     void revertPosition(){
-        *position = previousPosition;
+        position = previousPosition;
     }
 
 };
