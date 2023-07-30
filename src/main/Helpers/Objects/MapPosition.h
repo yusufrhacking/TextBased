@@ -24,6 +24,10 @@ struct MapPosition{
         return abs(xPos - other.xPos) + abs(yPos - other.yPos);
     }
 
+    bool operator==(const MapPosition& other) const {
+        return this->xPos == other.xPos && this->yPos == other.yPos;
+    }
+
     MapPosition operator+(const MapPosition& other) const {
         return {this->xPos + other.xPos, this->yPos + other.yPos};
     }

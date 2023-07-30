@@ -12,7 +12,7 @@ TEST_CASE("Render System", "[System][RenderSystem]") {
 
     ecsManager->addSystem<RenderSystem>();
     Entity entity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(entity, std::make_shared<Position>(0, 0));
+    ecsManager->addComponentToEntity<PositionComponent>(entity, Position(0, 0));
     ecsManager->addComponentToEntity<TextComponent>(entity, "text");
     ecsManager->addComponentToEntity<StyleComponent>(entity);
     SECTION("Adding and Removing Components") {

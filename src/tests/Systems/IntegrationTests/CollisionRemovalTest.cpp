@@ -16,12 +16,12 @@ extern std::unique_ptr<EventBus> eventBus;
 
 static void addComponentsToEntities(Entity staticEntity, Entity movingEntity){
     ecsManager->addComponentToEntity<PositionComponent>(
-            staticEntity, std::make_shared<Position>(X_POINT_OF_COLLISION, Y_POINT_OF_COLLISION));
+            staticEntity, Position(X_POINT_OF_COLLISION, Y_POINT_OF_COLLISION));
     ecsManager->addComponentToEntity<TextComponent>(staticEntity, "Static Entity");
     Size staticEntitySize = ecsManager->getComponentFromEntity<TextComponent>(staticEntity).surfaceSize;
     ecsManager->addComponentToEntity<CollisionComponent>(staticEntity, staticEntitySize);
 
-    ecsManager->addComponentToEntity<PositionComponent>(movingEntity, std::make_shared<Position>(0, 0));
+    ecsManager->addComponentToEntity<PositionComponent>(movingEntity, Position(0, 0));
     ecsManager->addComponentToEntity<TextComponent>(movingEntity, "Moving Entity");
     Size movingEntitySize = ecsManager->getComponentFromEntity<TextComponent>(movingEntity).surfaceSize;
     ecsManager->addComponentToEntity<CollisionComponent>(movingEntity, movingEntitySize);

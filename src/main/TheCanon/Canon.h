@@ -7,6 +7,8 @@
 
 class Canon {
     std::unordered_map<MapPosition, Page> map;
+public:
+    static MapPosition getMapPosition(Position position);
 };
 
 

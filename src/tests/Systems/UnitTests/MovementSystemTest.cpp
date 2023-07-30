@@ -10,7 +10,7 @@ TEST_CASE("Movement System Testing", "[System][AutonomousMovementSystem]") {
     ecsManager = std::make_unique<ECSManager>();
     ecsManager->addSystem<AutonomousMovementSystem>();
     Entity movedEntity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(movedEntity, std::make_shared<Position>(0, 0));
+    ecsManager->addComponentToEntity<PositionComponent>(movedEntity, Position(0, 0));
     ecsManager->addComponentToEntity<MovementComponent>(movedEntity, std::make_shared<Velocity>(20, 20));
 
     SECTION("Test if in Movement System") {

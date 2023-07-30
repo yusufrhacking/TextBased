@@ -9,7 +9,7 @@ TEST_CASE("Collision System", "[System][Collision]") {
 
     ecsManager->addSystem<CollisionCheckSystem>();
     Entity entity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<PositionComponent>(entity, std::make_shared<Position>(0, 0));
+    ecsManager->addComponentToEntity<PositionComponent>(entity, Position(0, 0));
     ecsManager->addComponentToEntity<TextComponent>(entity, "text");
     Size size = ecsManager->getComponentFromEntity<TextComponent>(entity).surfaceSize;
     ecsManager->addComponentToEntity<CollisionComponent>(entity, size);
