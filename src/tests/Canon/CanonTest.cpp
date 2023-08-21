@@ -7,7 +7,8 @@ TEST_CASE("Correct Map Position", "[MapPosition][PositionComponent]"){
     SECTION("PositionComponent creates correct MapPosition"){
         Position position(230430, 12020);
         PositionComponent positionComponent(position);
-        MapPosition expectedMapPosition = {230430/1470, 12020/956};
+
+        MapPosition expectedMapPosition = {230430/1470, 12020/956}; //156, 12
         REQUIRE(positionComponent.getMapPosition() == expectedMapPosition);
     }
 }
