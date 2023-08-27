@@ -16,7 +16,11 @@ void ECSManager::update(double deltaTime){
         system->run();
     }
     runTimedSystems(deltaTime);
-    currentCamera = systemManager->getSystem<CameraFollowSystem>().updateCameraPosition(Game::startingTopLeftPosition);
+    auto cameraSystem = &systemManager->getSystem<CameraFollowSystem>();
+    if (cameraSystem != nullptr) {
+        currentCamera = cameraSystem->updateCameraPosition(Game::startingTopLeftPosition);
+    }
+
 }
 
 void ECSManager::addNewEntities() {
