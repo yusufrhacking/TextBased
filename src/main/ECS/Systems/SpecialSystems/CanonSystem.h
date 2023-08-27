@@ -7,6 +7,8 @@ class CanonSystem: public System {
     Canon canon;
 public:
     CanonSystem(Canon &canon);
+
+    void placeAllEntities();
 };
 
 

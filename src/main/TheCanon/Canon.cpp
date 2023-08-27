@@ -6,7 +6,8 @@ Canon::Canon(Position position){
 }
 
 void Canon::placeEntity(Entity entity, MapPosition mapPosition){
-    map.at(mapPosition).entities.insert(entity);
+    auto& page = map.at(mapPosition);
+    page.entities.insert(entity);
 }
 
 std::set<Entity> Canon::getEntitiesAtPage(Position position){

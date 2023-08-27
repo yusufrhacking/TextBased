@@ -21,19 +21,21 @@ TEST_CASE("Correct Map Position", "[MapPosition][PositionComponent]"){
 
 TEST_CASE("Canon System", "[Canon]"){
     ecsManager = std::make_unique<ECSManager>();
+
     Page::pageWidth = 1470;
     Page::pageHeight = 956;
 
     auto startingPosition = Position(1000, 1000);
-
-    Entity test{};
-    ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
-    ecsManager->update(0.0);
-
     Canon canon{startingPosition};
-    CanonSystem system{canon};
+    ecsManager->addSystem<CanonSystem>(canon);
+
+    auto test = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
+
+    ecsManager->addNewEntities();
 
     SECTION("Testing Retrieval of position"){
+        ecsManager->getSystem<CanonSystem>().placeAllEntities();
         auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
         REQUIRE(entitiesAtPage.contains(test));
     }
