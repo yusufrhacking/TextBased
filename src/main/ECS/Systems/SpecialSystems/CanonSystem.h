@@ -4,7 +4,7 @@
 #include "../../../TheCanon/Canon.h"
 
 class CanonSystem: public System {
-    Canon canon;
+    Canon& canon;
 public:
     CanonSystem(Canon &canon);
 
