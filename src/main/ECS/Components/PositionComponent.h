@@ -33,14 +33,10 @@ public:
 
     void changePosition(double xChange, double yChange){
         previousPosition = position;
-//        auto prevMapPosition = Canon::getMapPosition(position);
         frameLastMoved = currFrame;
         position.xPos += (float)xChange;
         position.yPos += (float)yChange;
         mapPosition = Canon::getMapPosition(position);
-//        if (prevMapPosition != mapPosition){
-//
-//        }
     }
 
     [[nodiscard]] Position getPosition() const{

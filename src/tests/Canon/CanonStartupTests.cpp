@@ -19,6 +19,7 @@ TEST_CASE("Correct Map Position", "[MapPosition][PositionComponent]"){
     }
 }
 
+
 TEST_CASE("Canon System Places Player", "[Canon]"){
     ecsManager = std::make_unique<ECSManager>();
 
@@ -43,5 +44,10 @@ TEST_CASE("Canon System Places Player", "[Canon]"){
         ecsManager->getSystem<CanonSystem>().placeEntity(test);
         auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
         REQUIRE(entitiesAtPage.contains(test));
+    }
+
+
+    SECTION("Position Component Spawns in Canon"){
+
     }
 }
