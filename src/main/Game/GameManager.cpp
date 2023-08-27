@@ -28,7 +28,6 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
     Canon canon{Game::startingTopLeftPosition};
     ecsManager->addSystem<CanonSystem>(canon);
-
 }
 
 #pragma clang diagnostic pop
