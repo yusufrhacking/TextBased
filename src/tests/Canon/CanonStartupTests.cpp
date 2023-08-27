@@ -45,9 +45,21 @@ TEST_CASE("Canon System Places Player", "[Canon]"){
         auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
         REQUIRE(entitiesAtPage.contains(test));
     }
+}
 
+TEST_CASE("Position Component Places Player", "[Canon]"){
+    ecsManager = std::make_unique<ECSManager>();
 
-    SECTION("Position Component Spawns in Canon"){
+    Page::pageWidth = 1470;
+    Page::pageHeight = 956;
 
-    }
+    auto startingPosition = Position(1000, 1000);
+    Canon canon{startingPosition};
+    ecsManager->addSystem<CanonSystem>(canon);
+
+    auto test = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
+    ecsManager->addNewEntities();
+    auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
+    REQUIRE(entitiesAtPage.contains(test));
 }
