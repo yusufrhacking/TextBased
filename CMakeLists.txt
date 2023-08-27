@@ -193,7 +193,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 
 
 find_package(Catch2 3 REQUIRED)
-add_library(test_sources OBJECT src/tests/Catch2SetupTest.cpp src/tests/entityTest.cpp src/tests/Systems/UnitTests/MovementSystemTest.cpp src/tests/TestExternDeclarations.cpp src/tests/TestExternDeclarations.h src/tests/Systems/UnitTests/RenderSystemTest.cpp src/tests/Systems/IntegrationTests/CollisionRemovalTest.cpp src/tests/Systems/UnitTests/CollisionSystemTest.cpp src/tests/Systems/UnitTests/ComponentSignatureTest.cpp src/tests/Canon/CanonTest.cpp)
+add_library(test_sources OBJECT src/tests/Catch2SetupTest.cpp src/tests/entityTest.cpp src/tests/Systems/UnitTests/MovementSystemTest.cpp src/tests/TestExternDeclarations.cpp src/tests/TestExternDeclarations.h src/tests/Systems/UnitTests/RenderSystemTest.cpp src/tests/Systems/IntegrationTests/CollisionRemovalTest.cpp src/tests/Systems/UnitTests/CollisionSystemTest.cpp src/tests/Systems/UnitTests/ComponentSignatureTest.cpp src/tests/Canon/CanonStartupTests.cpp src/tests/Canon/CanonMovementTests.cpp)
 target_link_libraries(test_sources Catch2::Catch2)
 
 
