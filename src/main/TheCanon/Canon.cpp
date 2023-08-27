@@ -1,5 +1,9 @@
 #include "Canon.h"
 
+void Canon::addPage(MapPosition mapPosition){
+    map[mapPosition] = Page();
+}
+
 std::vector<Entity> Canon::getEntitiesAtPage(Position position){
     return map[getMapPosition(position)].entities;
 }
