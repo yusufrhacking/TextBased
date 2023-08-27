@@ -12,7 +12,9 @@ extern std::unique_ptr<EventBus> eventBus;
 void ECSManager::update(double deltaTime){
     addNewEntities();
     removeDeadEntities();
-    systemManager->getSystem<UnprocessedKeyboardMovementSystem>().processMovement();
+    for (const auto& system : systemManager->getSystemsOfType<FirstSystem>()){
+        system->run();
+    }
     runTimedSystems(deltaTime);
     currentCamera = systemManager->getSystem<CameraFollowSystem>().updateCameraPosition(Game::startingTopLeftPosition);
 }

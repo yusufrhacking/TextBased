@@ -11,7 +11,7 @@ void UnprocessedKeyboardMovementSystem::queueMovement(UnprocessedMovement moveme
     unprocessedMovements->push_back(movement);
 }
 
-void UnprocessedKeyboardMovementSystem::processMovement() {
+void UnprocessedKeyboardMovementSystem::run() {
     for (auto unprocessedMovement : *unprocessedMovements) {
         int entity = unprocessedMovement.entity.getId();
         if (totalChangeForEntities.count(entity) > 0) {

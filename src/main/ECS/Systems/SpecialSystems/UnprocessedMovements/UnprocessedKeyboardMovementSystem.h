@@ -4,10 +4,11 @@
 #include "UnprocessedMovement.h"
 #include "../../../Design/Objects/System.h"
 #include "../../../Design/Managers/ECSManager.h"
+#include "../FirstSystem.h"
 #include <tuple>
 
 
-class UnprocessedKeyboardMovementSystem: public System {
+class UnprocessedKeyboardMovementSystem: public FirstSystem {
     std::unique_ptr<std::vector<UnprocessedMovement>> unprocessedMovements;
     std::unordered_map<int, Velocity> totalChangeForEntities;
 
@@ -16,7 +17,7 @@ public:
 
     void queueMovement(UnprocessedMovement movement);
 
-    void processMovement();
+    void run() override;
 
 };
 
