@@ -9,6 +9,8 @@ public:
     CanonSystem(Canon &canon);
 
     void placeAllEntities();
+
+    void placeEntity(Entity entity);
 };
 
 

@@ -19,7 +19,7 @@ TEST_CASE("Correct Map Position", "[MapPosition][PositionComponent]"){
     }
 }
 
-TEST_CASE("Canon System", "[Canon]"){
+TEST_CASE("Canon System Places Player", "[Canon]"){
     ecsManager = std::make_unique<ECSManager>();
 
     Page::pageWidth = 1470;
@@ -34,8 +34,13 @@ TEST_CASE("Canon System", "[Canon]"){
 
     ecsManager->addNewEntities();
 
-    SECTION("Testing Retrieval of position"){
+    SECTION("Canon System Places All Entities"){
         ecsManager->getSystem<CanonSystem>().placeAllEntities();
+        auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
+        REQUIRE(entitiesAtPage.contains(test));
+    }
+    SECTION("Canon System Specific Entity"){
+        ecsManager->getSystem<CanonSystem>().placeEntity(test);
         auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
         REQUIRE(entitiesAtPage.contains(test));
     }
