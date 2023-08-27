@@ -21,9 +21,11 @@ public:
 
     Canon(Position position);
 
-    std::vector<Entity> getEntitiesAtPage(Position position);
+    void placeEntity(Entity entity, MapPosition mapPosition);
 
-    std::vector<Entity> getEntitiesAtPage(MapPosition mapPosition);
+    std::set<Entity> getEntitiesAtPage(Position position);
+
+    std::set<Entity> getEntitiesAtPage(MapPosition mapPosition);
 
     static MapPosition getMapPosition(Position position);
 };

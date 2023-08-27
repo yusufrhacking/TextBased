@@ -5,11 +5,15 @@ Canon::Canon(Position position){
     map.insert({mapPosition, Page()});
 }
 
-std::vector<Entity> Canon::getEntitiesAtPage(Position position){
+void Canon::placeEntity(Entity entity, MapPosition mapPosition){
+    map.at(mapPosition).entities.insert(entity);
+}
+
+std::set<Entity> Canon::getEntitiesAtPage(Position position){
     return map[getMapPosition(position)].entities;
 }
 
-std::vector<Entity> Canon::getEntitiesAtPage(MapPosition mapPosition){
+std::set<Entity> Canon::getEntitiesAtPage(MapPosition mapPosition){
     return map[mapPosition].entities;
 }
 

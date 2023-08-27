@@ -10,6 +10,8 @@
 
 extern int currFrame;
 
+extern std::unique_ptr<Canon> canon;
+
 struct PositionComponent {
 private:
     Position position;
@@ -22,6 +24,7 @@ public:
         this->position = position;
         this->previousPosition = this->position;
         mapPosition = Canon::getMapPosition(position);
+        canon.
     }
 
     PositionComponent() {
@@ -33,10 +36,14 @@ public:
 
     void changePosition(double xChange, double yChange){
         previousPosition = position;
+//        auto prevMapPosition = Canon::getMapPosition(position);
         frameLastMoved = currFrame;
         position.xPos += (float)xChange;
         position.yPos += (float)yChange;
         mapPosition = Canon::getMapPosition(position);
+//        if (prevMapPosition != mapPosition){
+//
+//        }
     }
 
     [[nodiscard]] Position getPosition() const{

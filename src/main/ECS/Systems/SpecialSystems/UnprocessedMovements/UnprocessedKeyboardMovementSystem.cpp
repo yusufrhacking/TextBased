@@ -25,6 +25,7 @@ void UnprocessedKeyboardMovementSystem::processMovement() {
             totalChangeForEntities[entity] = velocity;
         }
     }
+
     spdlog::trace("Unprocessed Movements Tallied");
     for (const auto& changes : totalChangeForEntities) {
         int entityID = changes.first;

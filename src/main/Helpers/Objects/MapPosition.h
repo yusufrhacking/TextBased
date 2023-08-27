@@ -28,6 +28,10 @@ struct MapPosition{
         return this->xPos == other.xPos && this->yPos == other.yPos;
     }
 
+    bool operator!=(const MapPosition& other) const {
+        return !(*this == other);
+    }
+
     MapPosition operator+(const MapPosition& other) const {
         return {this->xPos + other.xPos, this->yPos + other.yPos};
     }
