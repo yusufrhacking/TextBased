@@ -6,9 +6,12 @@
 #include "../Game/GameSystems/Window/Window.h"
 
 struct Page {
-    std::vector<Entity> entities{};
     static int pageWidth;
     static int pageHeight;
+
+    std::vector<Entity> entities{};
+
+    Page();
 };
 
 
