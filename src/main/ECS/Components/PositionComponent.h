@@ -10,8 +10,6 @@
 
 extern int currFrame;
 
-extern std::unique_ptr<Canon> canon;
-
 struct PositionComponent {
 private:
     Position position;
@@ -24,7 +22,6 @@ public:
         this->position = position;
         this->previousPosition = this->position;
         mapPosition = Canon::getMapPosition(position);
-        canon.
     }
 
     PositionComponent() {

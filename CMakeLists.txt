@@ -65,7 +65,7 @@ set(SOURCE_FILES
         src/main/ECS/Design/Objects/ComponentSignature.cpp src/main/ECS/Design/Objects/ComponentSignature.h
         src/main/Game/GameSystems/Camera/Camera.cpp src/main/Game/GameSystems/Camera/Camera.h
         src/main/Helpers/Objects/MapPosition.h
-        src/main/TheCanon/Canon.cpp src/main/TheCanon/Canon.h src/main/TheCanon/Page.cpp src/main/TheCanon/Page.h src/main/ECS/Systems/UpdateSystems/MapGenerationSystem.cpp src/main/ECS/Systems/UpdateSystems/MapGenerationSystem.h)
+        src/main/TheCanon/Canon.cpp src/main/TheCanon/Canon.h src/main/TheCanon/Page.cpp src/main/TheCanon/Page.h src/main/ECS/Systems/SpecialSystems/CanonSystem.cpp src/main/ECS/Systems/SpecialSystems/CanonSystem.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

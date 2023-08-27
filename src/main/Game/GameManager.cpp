@@ -10,10 +10,10 @@
 #include "../ECS/Systems/SpecialSystems/CameraFollowSystem.h"
 #include "../ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "Game.h"
+#include "../ECS/Systems/SpecialSystems/CanonSystem.h"
 
 void GameManager::setup() {
     setupSystems();
-    Canon canon{Game::startingTopLeftPosition};
     BasicSetup level1{};
     level1.setup();
 }
@@ -26,6 +26,8 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
+    Canon canon{Game::startingTopLeftPosition};
+    ecsManager->addSystem<CanonSystem>(canon);
 
 }
 
