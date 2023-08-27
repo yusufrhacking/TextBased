@@ -9,20 +9,6 @@ int GenericComponent::nextId = 0;
 
 extern std::unique_ptr<EventBus> eventBus;
 
-void ECSManager::update(double deltaTime){
-    addNewEntities();
-    removeDeadEntities();
-    for (const auto& system : systemManager->getSystemsOfType<FirstSystem>()){
-        system->run();
-    }
-    runTimedSystems(deltaTime);
-    auto cameraSystem = &systemManager->getSystem<CameraFollowSystem>();
-    if (cameraSystem != nullptr) {
-        currentCamera = cameraSystem->updateCameraPosition(Game::startingTopLeftPosition);
-    }
-
-}
-
 void ECSManager::addNewEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeAdded()){
         auto signature = entityManager->getSignature(entity);
@@ -70,6 +56,16 @@ Entity ECSManager::createEntity() {
 void ECSManager::killEntity(Entity entity) {
     if (!hasComponent<MainPlayerComponent>(entity))
         entityManager->killEntity(entity);
+}
+
+void ECSManager::runFirstSystems() const {
+    for (const auto& system : systemManager->getSystemsOfType<FirstSystem>()){
+        system->run();
+    }
+}
+
+void ECSManager::runCameraSystem() {
+    currentCamera = systemManager->getSystem<CameraFollowSystem>().updateCameraPosition(Game::startingTopLeftPosition);
 }
 
 

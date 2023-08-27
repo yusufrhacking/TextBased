@@ -19,26 +19,22 @@ TEST_CASE("Correct Map Position", "[MapPosition][PositionComponent]"){
     }
 }
 
-//TEST_CASE("Canon System", "[Canon]"){
-//    ecsManager = std::make_unique<ECSManager>();
-//    Page::pageWidth = 1470;
-//    Page::pageHeight = 956;
-//
-//    auto startingPosition = Position(1000, 1000);
-//
-//    Entity test{};
-//    ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
-//    ecsManager->addSystem<CameraFollowSystem>();
-//    ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
-//    ecsManager->update(0.0);
-//
-//
-//
-//    Canon canon{startingPosition};
-//    CanonSystem system{canon};
-//
-//    SECTION("Testing Retrieval of position"){
-//        auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
-//        REQUIRE(entitiesAtPage.contains(test));
-//    }
-//}
+TEST_CASE("Canon System", "[Canon]"){
+    ecsManager = std::make_unique<ECSManager>();
+    Page::pageWidth = 1470;
+    Page::pageHeight = 956;
+
+    auto startingPosition = Position(1000, 1000);
+
+    Entity test{};
+    ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
+    ecsManager->update(0.0);
+
+    Canon canon{startingPosition};
+    CanonSystem system{canon};
+
+    SECTION("Testing Retrieval of position"){
+        auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
+        REQUIRE(entitiesAtPage.contains(test));
+    }
+}

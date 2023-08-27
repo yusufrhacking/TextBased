@@ -24,10 +24,7 @@ class ECSManager {
         std::shared_ptr<EntityManager> entityManager;
         std::shared_ptr<ComponentManager> componentManager;
         std::shared_ptr<SystemManager> systemManager;
-        Camera currentCamera = Camera(Position());;
-        void removeDeadEntities();
-        void addNewEntities();
-        void runTimedSystems(double deltaTime) const;
+        Camera currentCamera = Camera(Position());
 
 public:
         ECSManager() {
@@ -41,7 +38,13 @@ public:
         Entity createEntity();
         void killEntity(Entity entity);
 
-        void update(double deltaTime);
+
+        void removeDeadEntities();
+        void addNewEntities();
+
+        void runFirstSystems() const;
+        void runTimedSystems(double deltaTime) const;
+        void runCameraSystem();
 
         void render(std::shared_ptr<Renderer> renderer);
 

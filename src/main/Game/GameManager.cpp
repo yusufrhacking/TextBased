@@ -30,4 +30,12 @@ void GameManager::setupSystems() const {
 //    ecsManager->addSystem<CanonSystem>(canon);
 }
 
+void GameManager::update(double deltaTime) {
+    ecsManager->addNewEntities();
+    ecsManager->removeDeadEntities();
+    ecsManager->runFirstSystems();
+    ecsManager->runTimedSystems(deltaTime);
+    ecsManager->runCameraSystem();
+}
+
 #pragma clang diagnostic pop

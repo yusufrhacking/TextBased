@@ -11,6 +11,7 @@ private:
     void setupSystems() const;
 public:
     void setup();
+    void update(double deltaTime);
 
 
 };
