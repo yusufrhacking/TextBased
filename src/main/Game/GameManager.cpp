@@ -13,6 +13,7 @@
 
 void GameManager::setup() {
     setupSystems();
+    Canon canon{Game::startingTopLeftPosition};
     BasicSetup level1{};
     level1.setup();
 }

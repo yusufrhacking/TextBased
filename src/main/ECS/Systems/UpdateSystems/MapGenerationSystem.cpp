@@ -1,11 +1,11 @@
-#include "MapPositionUpdateSystem.h"
+#include "MapGenerationSystem.h"
 
-MapPositionUpdateSystem::MapPositionUpdateSystem() {
+MapGenerationSystem::MapGenerationSystem() {
     requireComponent<PositionComponent>();
     //TODO: Require generic movement component
 }
 
-void MapPositionUpdateSystem::update(double deltaTime) {
+void MapGenerationSystem::update(double deltaTime) {
     for (Entity entity: getRelevantEntities()){
 
     }
