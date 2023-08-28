@@ -2,7 +2,7 @@
 #include <mach/mach_types.h>
 #include <spdlog/spdlog.h>
 #include "../../Design/Managers/ECSManager.h"
-#include "../../../Helpers/EventSystem/Events/PreMovementEvent.h"
+#include "../../../Helpers/EventSystem/Events/PostMovementEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -11,9 +11,9 @@ CanonMovementHandleSystem::CanonMovementHandleSystem(Canon& canon): canon(canon)
     listenToEvents();
 }
 void CanonMovementHandleSystem::listenToEvents(){
-    eventBus->listenToEvent<PreMovementEvent>(this, &CanonMovementHandleSystem::onMovement);
+    eventBus->listenToEvent<PostMovementEvent>(this, &CanonMovementHandleSystem::onMovement);
 }
-void CanonMovementHandleSystem::onMovement(PreMovementEvent& event){
+void CanonMovementHandleSystem::onMovement(PostMovementEvent& event){
     auto& change = event.change;
     auto entity = event.entity;
     auto futurePosition = ecsManager->getComponentFromEntity<PositionComponent>(entity);
@@ -23,5 +23,4 @@ void CanonMovementHandleSystem::onMovement(PreMovementEvent& event){
         canon.removeEntityFromPage(entity, oldMapPosition);
         canon.placeEntity(entity, futurePosition.getMapPosition());
     }
-    eventBus->emitEvent<ReadyToMoveEvent>(event);
 }

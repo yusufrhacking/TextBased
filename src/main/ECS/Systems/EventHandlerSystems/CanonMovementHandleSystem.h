@@ -5,14 +5,14 @@
 #include "EventConsumerSystem.h"
 #include "../../../TheCanon/Canon.h"
 #include "../../../Helpers/EventSystem/Events/ReadyToMoveEvent.h"
-#include "../../../Helpers/EventSystem/Events/PreMovementEvent.h"
+#include "../../../Helpers/EventSystem/Events/PostMovementEvent.h"
 
 class CanonMovementHandleSystem: public EventConsumerSystem {
     Canon& canon;
 public:
     CanonMovementHandleSystem(Canon& canon);
     void listenToEvents();
-    void onMovement(PreMovementEvent& event);
+    void onMovement(PostMovementEvent& event);
 
 };
 
