@@ -27,11 +27,7 @@ class ECSManager {
         Camera currentCamera = Camera(Position());
 
 public:
-        ECSManager() {
-            entityManager = std::make_shared<EntityManager>();
-            componentManager = std::make_shared<ComponentManager>();
-            systemManager = std::make_shared<SystemManager>();
-        }
+        ECSManager();
 
         ~ECSManager() = default;
 

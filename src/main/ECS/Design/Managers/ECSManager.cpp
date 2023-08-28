@@ -9,6 +9,13 @@ int GenericComponent::nextId = 0;
 
 extern std::unique_ptr<EventBus> eventBus;
 
+ECSManager::ECSManager() {
+    entityManager = std::make_shared<EntityManager>();
+    componentManager = std::make_shared<ComponentManager>();
+    systemManager = std::make_shared<SystemManager>();
+    currentCamera.positionCamera(Game::startingTopLeftPosition);
+}
+
 std::vector<Entity> ECSManager::addNewEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeAdded()){
         auto signature = entityManager->getSignature(entity);
@@ -68,7 +75,7 @@ void ECSManager::runFirstSystems() const {
 
 void ECSManager::runCameraSystem() {
     for (const auto& system : systemManager->getSystemsOfType<CameraFollowSystem>()){
-        system->updateCameraPosition(Game::startingTopLeftPosition);
+        currentCamera = system->updateCameraPosition(currentCamera.getCameraPosition());
     }
 }
 
