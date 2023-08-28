@@ -1,6 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "UnprocessedKeyboardMovementSystem.h"
-#include "../../../../Helpers/EventSystem/Events/MovementEvent.h"
+#include "../../../../Helpers/EventSystem/Events/ReadyToMoveEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -34,7 +34,7 @@ void UnprocessedKeyboardMovementSystem::run() {
     for (const auto& changes : totalChangeForEntities) {
         int entityID = changes.first;
         const Velocity& velocity = changes.second;
-        eventBus->emitEvent<MovementEvent>(Entity(entityID), velocity);
+        eventBus->emitEvent<ReadyToMoveEvent>(Entity(entityID), velocity);
     }
     unprocessedMovements->clear();
     totalChangeForEntities.clear();

@@ -5,21 +5,17 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
-MovementHandleSystem::MovementHandleSystem(Canon& canon): canon(canon){
+MovementHandleSystem::MovementHandleSystem(){
     listenToEvents();
 }
 void MovementHandleSystem::listenToEvents(){
-    eventBus->listenToEvent<MovementEvent>(this, &MovementHandleSystem::onMovement);
+    eventBus->listenToEvent<ReadyToMoveEvent>(this, &MovementHandleSystem::onMovement);
 }
-void MovementHandleSystem::onMovement(MovementEvent& event){
+void MovementHandleSystem::onMovement(ReadyToMoveEvent& event){
     auto& change = event.change;
     auto entity = event.entity;
     auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     auto oldMapPosition = position.getMapPosition();
-    position.changePosition(change.xVelocity, change.yVelocity);
-    if (position.getMapPosition() != oldMapPosition){
-        canon.removeEntityFromPage(entity, oldMapPosition);
-        canon.placeEntity(entity, position.getMapPosition());
-    }
+    position.shiftPosition(change.xVelocity, change.yVelocity);
     spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), change.xVelocity, change.yVelocity, position.getPosition().xPos, position.getPosition().yPos);
 }

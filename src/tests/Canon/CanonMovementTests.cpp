@@ -25,7 +25,7 @@ TEST_CASE("Entity moving is updated in Canon", "[MapPosition][PositionComponent]
     auto& canonSystem = ecsManager->getSystem<CanonSystem>();
     canonSystem.update();
 
-    positionComp.changePosition(1000, 1000);
+    positionComp.shiftPosition(1000, 1000);
     canonSystem.update();
 
     auto expectedMapPosition = Canon::getMapPosition(positionComp.getPosition());

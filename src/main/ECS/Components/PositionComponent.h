@@ -31,7 +31,7 @@ public:
     }
 
 
-    void changePosition(double xChange, double yChange){
+    void shiftPosition(double xChange, double yChange){
         previousPosition = position;
         frameLastMoved = currFrame;
         position.xPos += (float)xChange;
