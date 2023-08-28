@@ -23,6 +23,9 @@ void CanonSystem::placeEntity(Entity entity){
 void CanonSystem::update() {
     for (auto entity : getRelevantEntities()){
         auto mapPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getMapPosition();
+
+        canon.removeEntity(entity);
+
         canon.ensurePageExists(mapPosition);
         canon.placeEntity(entity, mapPosition);
     }

@@ -10,6 +10,18 @@ void Canon::placeEntity(Entity entity, MapPosition mapPosition){
     page.entities.insert(entity);
 }
 
+void Canon::removeEntity(Entity entity){
+    for (auto& pair : map) {
+        const auto& position = pair.first;
+        auto& entitiesSet = pair.second.entities;
+
+        if (entitiesSet.contains(entity)) {
+            entitiesSet.erase(entity);
+        }
+    }
+
+}
+
 void Canon::ensurePageExists(MapPosition mapPosition){
     if (map.find(mapPosition) == map.end()) {
         map.insert({mapPosition, Page()});

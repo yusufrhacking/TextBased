@@ -33,6 +33,6 @@ TEST_CASE("Entity moving is updated in Canon", "[MapPosition][PositionComponent]
 
     REQUIRE(entitiesAtNewPage.contains(entity));
 
-    auto entitiesAtOldPage = canon.getEntitiesAtPage(positionComp.getPosition());
+    auto entitiesAtOldPage = canon.getEntitiesAtPage(startingPosition);
     REQUIRE(!entitiesAtOldPage.contains(entity));
 }

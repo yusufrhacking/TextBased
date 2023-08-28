@@ -20,6 +20,8 @@ class Canon {
 public:
     Canon(Position position);
 
+    void removeEntity(Entity entity);
+
     void ensurePageExists(MapPosition mapPosition);
 
     void placeEntity(Entity entity, MapPosition mapPosition);
