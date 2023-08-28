@@ -17,6 +17,8 @@ public:
 private:
     void createPlayer();
     Entity witt;
+
+    void createTree();
 };
 
 

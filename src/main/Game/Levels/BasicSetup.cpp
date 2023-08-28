@@ -9,6 +9,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 void BasicSetup::setup() {
     createPlayer();
+    createTree();
 }
 
 void BasicSetup::createPlayer() {
@@ -19,6 +20,14 @@ void BasicSetup::createPlayer() {
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
+}
+
+void BasicSetup::createTree() {
+    auto tree = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(tree, "Tree");
+    ecsManager->addComponentToEntity<PositionComponent>(tree, Game::startingTopLeftPosition);
+    ecsManager->addComponentToEntity<StyleComponent>(tree);
+
 }
 
 
