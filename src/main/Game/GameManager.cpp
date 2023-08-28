@@ -12,7 +12,7 @@
 #include "Game.h"
 #include "../ECS/Systems/SpecialSystems/CanonSystem.h"
 
-GameManager::GameManager(): canon(Game::startingTopLeftPosition) {
+GameManager::GameManager(Position position): canon(Position position) {
 
 }
 

@@ -11,7 +11,7 @@ private:
     void setupSystems();
     Canon canon;
 public:
-    GameManager();
+    GameManager(Position position);
     void setup();
     void update(double deltaTime);
 
