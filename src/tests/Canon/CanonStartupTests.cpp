@@ -60,6 +60,10 @@ TEST_CASE("Position Component Places Player", "[Canon]"){
     auto test = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
     ecsManager->addNewEntities();
+    ecsManager->getSystem<CanonSystem>().update();
+
+
     auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
+
     REQUIRE(entitiesAtPage.contains(test));
 }

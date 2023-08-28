@@ -19,3 +19,7 @@ void CanonSystem::placeEntity(Entity entity){
     auto mapPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getMapPosition();
     canon.placeEntity(entity, mapPosition);
 }
+
+void CanonSystem::update() {
+    placeAllEntities();
+}

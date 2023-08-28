@@ -6,11 +6,13 @@
 class CanonSystem: public System {
     Canon& canon;
 public:
-    CanonSystem(Canon &canon);
+    explicit CanonSystem(Canon &canon);
 
     void placeAllEntities();
 
     void placeEntity(Entity entity);
+
+    void update();
 };
 
 
