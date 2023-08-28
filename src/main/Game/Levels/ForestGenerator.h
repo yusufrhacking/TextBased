@@ -1,0 +1,10 @@
+#ifndef TEXTBASED_FORESTGENERATOR_H
+#define TEXTBASED_FORESTGENERATOR_H
+
+
+class ForestGenerator {
+
+};
+
+
+#endif //TEXTBASED_FORESTGENERATOR_H
