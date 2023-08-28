@@ -35,9 +35,6 @@ void UnprocessedKeyboardMovementSystem::run() {
         int entityID = changes.first;
         const Velocity& velocity = changes.second;
         eventBus->emitEvent<MovementEvent>(Entity(entityID), velocity);
-        auto& position = ecsManager->getComponentFromEntity<PositionComponent>(Entity(entityID));
-        position.changePosition(velocity.xVelocity, velocity.yVelocity);
-        spdlog::trace("Entity {} moved {}, {} to {}, {}", entityID, velocity.xVelocity, velocity.yVelocity, position.getPosition().xPos, position.getPosition().yPos);
     }
     unprocessedMovements->clear();
     totalChangeForEntities.clear();
