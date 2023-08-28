@@ -1,7 +1,10 @@
 #include <spdlog/spdlog.h>
 #include "UnprocessedKeyboardMovementSystem.h"
+#include "../../../../Helpers/EventSystem/Events/MovementEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<EventBus> eventBus;
+
 
 UnprocessedKeyboardMovementSystem::UnprocessedKeyboardMovementSystem() {
     unprocessedMovements = std::make_unique<std::vector<UnprocessedMovement>>();
@@ -26,8 +29,13 @@ void UnprocessedKeyboardMovementSystem::run() {
         }
     }
 
+
     spdlog::trace("Unprocessed Movements Tallied");
     for (const auto& changes : totalChangeForEntities) {
+        eventBus->emitEvent<MovementEvent>();
+
+
+
         int entityID = changes.first;
         const Velocity& velocity = changes.second;
         auto& position = ecsManager->getComponentFromEntity<PositionComponent>(Entity(entityID));
