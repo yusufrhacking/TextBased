@@ -8,6 +8,7 @@ Position Game::startingTopLeftPosition = {11760, 10516}; //Multiple of the frame
 int currFrame;
 
 Game::Game(){
+    kirk = std::make_unique<GameManager>();
 }
 
 void Game::initialize() {

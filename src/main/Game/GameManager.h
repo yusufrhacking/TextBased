@@ -8,8 +8,10 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 class GameManager {
 private:
-    void setupSystems() const;
+    void setupSystems();
+    Canon canon;
 public:
+    GameManager();
     void setup();
     void update(double deltaTime);
 

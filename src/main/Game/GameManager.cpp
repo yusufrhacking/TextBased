@@ -12,13 +12,17 @@
 #include "Game.h"
 #include "../ECS/Systems/SpecialSystems/CanonSystem.h"
 
+GameManager::GameManager(): canon(Game::startingTopLeftPosition) {
+
+}
+
 void GameManager::setup() {
     setupSystems();
     BasicSetup level1{};
     level1.setup();
 }
 
-void GameManager::setupSystems() const {
+void GameManager::setupSystems() {
     ecsManager->addSystem<AutonomousMovementSystem>();
     ecsManager->addSystem<RenderSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
@@ -26,7 +30,6 @@ void GameManager::setupSystems() const {
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
-    Canon canon{Game::startingTopLeftPosition};
     ecsManager->addSystem<CanonSystem>(canon);
 }
 

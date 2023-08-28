@@ -32,6 +32,8 @@ void CanonSystem::update() {
 
 void CanonSystem::placeEntities(std::vector<Entity> entities) {
     for (auto entity : entities){
+        auto mapPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getMapPosition();
+        canon.ensurePageExists(mapPosition);
         placeEntity(entity);
     }
 }
