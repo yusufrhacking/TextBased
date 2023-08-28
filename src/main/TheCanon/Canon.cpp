@@ -10,14 +10,14 @@ void Canon::placeEntity(Entity entity, MapPosition mapPosition){
     ensurePageExists(mapPosition);
     auto& page = map.at(mapPosition);
     page.entities.insert(entity);
-    spdlog::debug("Inserted entity {} at Page {}, {}", entity.getId(), mapPosition.xPos, mapPosition.yPos);
+    spdlog::trace("Inserted entity {} at Page {}, {}", entity.getId(), mapPosition.xPos, mapPosition.yPos);
 }
 
 
 void Canon::removeEntityFromPage(Entity entity, MapPosition mapPosition) {
     auto& page = map.at(mapPosition);
     page.entities.erase(entity);
-    spdlog::debug("Removed entity {} at Page {}, {}", entity.getId(), mapPosition.xPos, mapPosition.yPos);
+    spdlog::trace("Removed entity {} at Page {}, {}", entity.getId(), mapPosition.xPos, mapPosition.yPos);
 }
 
 void Canon::removeEntity(Entity entity){
