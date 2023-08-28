@@ -13,6 +13,8 @@ public:
     void placeEntity(Entity entity);
 
     void update();
+
+    void placeEntities(std::vector<Entity> vector1);
 };
 
 

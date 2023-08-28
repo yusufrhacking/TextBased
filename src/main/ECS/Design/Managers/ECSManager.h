@@ -40,7 +40,7 @@ public:
 
 
         void removeDeadEntities();
-        void addNewEntities();
+        std::vector<Entity> addNewEntities();
 
         void runFirstSystems() const;
         void runTimedSystems(double deltaTime) const;

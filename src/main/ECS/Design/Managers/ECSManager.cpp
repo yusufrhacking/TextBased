@@ -9,13 +9,15 @@ int GenericComponent::nextId = 0;
 
 extern std::unique_ptr<EventBus> eventBus;
 
-void ECSManager::addNewEntities() {
+std::vector<Entity> ECSManager::addNewEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeAdded()){
         auto signature = entityManager->getSignature(entity);
         spdlog::debug("Entity {} added to ECS manager", entity.getId());
         systemManager->addNewEntityToSystem(entity, signature);
     }
+    auto recentlyAdded = entityManager->getEntitiesToBeAdded();
     entityManager->clearEntitiesToBeAdded();
+    return recentlyAdded;
 }
 
 
