@@ -22,7 +22,11 @@ TEST_CASE("Entity moving is updated in Canon", "[MapPosition][PositionComponent]
     ecsManager->addNewEntities();
 
     auto& positionComp = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    auto& canonSystem = ecsManager->getSystem<CanonSystem>();
+    canonSystem.update();
+
     positionComp.changePosition(1000, 1000);
+    canonSystem.update();
 
     auto expectedMapPosition = Canon::getMapPosition(positionComp.getPosition());
     auto entitiesAtPage = canon.getEntitiesAtPage(expectedMapPosition);
