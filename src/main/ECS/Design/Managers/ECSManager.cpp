@@ -67,7 +67,9 @@ void ECSManager::runFirstSystems() const {
 }
 
 void ECSManager::runCameraSystem() {
-    currentCamera = systemManager->getSystem<CameraFollowSystem>().updateCameraPosition(Game::startingTopLeftPosition);
+    for (const auto& system : systemManager->getSystemsOfType<CameraFollowSystem>()){
+        system->updateCameraPosition(Game::startingTopLeftPosition);
+    }
 }
 
 

@@ -4,8 +4,9 @@
 #include "../../../TheCanon/Canon.h"
 
 class CanonSystem: public System {
-    Canon& canon;
 public:
+    Canon& canon;
+
     explicit CanonSystem(Canon &canon);
 
     void placeAllEntities();
