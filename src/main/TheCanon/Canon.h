@@ -31,6 +31,8 @@ public:
     std::set<Entity> getEntitiesAtPage(MapPosition mapPosition);
 
     static MapPosition getMapPosition(Position position);
+
+    void removeEntityFromPage(Entity entity, MapPosition mapPosition);
 };
 
 #endif //TEXTBASED_CANON_H

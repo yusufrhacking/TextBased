@@ -32,7 +32,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
     ecsManager->addSystem<CanonSystem>(canon);
-    ecsManager->addSystem<MovementHandleSystem>();
+    ecsManager->addSystem<MovementHandleSystem>(canon);
 }
 
 void GameManager::update(double deltaTime) {

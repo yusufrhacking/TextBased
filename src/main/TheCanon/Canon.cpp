@@ -6,8 +6,15 @@ Canon::Canon(Position position){
 }
 
 void Canon::placeEntity(Entity entity, MapPosition mapPosition){
+    ensurePageExists(mapPosition);
     auto& page = map.at(mapPosition);
     page.entities.insert(entity);
+}
+
+
+void Canon::removeEntityFromPage(Entity entity, MapPosition mapPosition) {
+    auto& page = map.at(mapPosition);
+    page.entities.erase(entity);
 }
 
 void Canon::removeEntity(Entity entity){
@@ -19,7 +26,6 @@ void Canon::removeEntity(Entity entity){
             entitiesSet.erase(entity);
         }
     }
-
 }
 
 void Canon::ensurePageExists(MapPosition mapPosition){
@@ -41,3 +47,4 @@ MapPosition Canon::getMapPosition(Position position) {
     int mapY = (int)position.yPos/Page::pageHeight;
     return {mapX, mapY};
 }
+

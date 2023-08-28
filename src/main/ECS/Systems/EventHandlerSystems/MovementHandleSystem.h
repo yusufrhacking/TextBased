@@ -4,10 +4,12 @@
 
 #include "EventConsumerSystem.h"
 #include "../../../Helpers/EventSystem/Events/MovementEvent.h"
+#include "../../../TheCanon/Canon.h"
 
 class MovementHandleSystem: public EventConsumerSystem {
+    Canon& canon;
 public:
-    MovementHandleSystem();
+    MovementHandleSystem(Canon& canon);
     void listenToEvents();
     void onMovement(MovementEvent& event);
 
