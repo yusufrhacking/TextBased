@@ -21,5 +21,9 @@ void CanonSystem::placeEntity(Entity entity){
 }
 
 void CanonSystem::update() {
-    placeAllEntities();
+    for (auto entity : getRelevantEntities()){
+        auto mapPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getMapPosition();
+        canon.ensurePageExists(mapPosition);
+        canon.placeEntity(entity, mapPosition);
+    }
 }

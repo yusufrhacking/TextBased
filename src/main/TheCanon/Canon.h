@@ -18,8 +18,9 @@ class Canon {
     std::unordered_map<MapPosition, Page, std::hash<MapPosition>> map;
 
 public:
-
     Canon(Position position);
+
+    void ensurePageExists(MapPosition mapPosition);
 
     void placeEntity(Entity entity, MapPosition mapPosition);
 

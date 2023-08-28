@@ -10,6 +10,12 @@ void Canon::placeEntity(Entity entity, MapPosition mapPosition){
     page.entities.insert(entity);
 }
 
+void Canon::ensurePageExists(MapPosition mapPosition){
+    if (map.find(mapPosition) == map.end()) {
+        map.insert({mapPosition, Page()});
+    }
+}
+
 std::set<Entity> Canon::getEntitiesAtPage(Position position){
     return map[getMapPosition(position)].entities;
 }
