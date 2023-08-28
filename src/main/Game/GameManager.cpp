@@ -11,6 +11,7 @@
 #include "../ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "Game.h"
 #include "../ECS/Systems/SpecialSystems/CanonSystem.h"
+#include "../ECS/Systems/EventHandlerSystems/MovementHandleSystem.h"
 
 GameManager::GameManager(Position position): canon(position) {
 
@@ -31,6 +32,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
     ecsManager->addSystem<CanonSystem>(canon);
+    ecsManager->addSystem<MovementHandleSystem>();
 }
 
 void GameManager::update(double deltaTime) {
