@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_SANDBOXPAGECREATOR_H
-#define TEXTBASED_SANDBOXPAGECREATOR_H
+#ifndef TEXTBASED_FIRSTLEVEL_H
+#define TEXTBASED_FIRSTLEVEL_H
 #include "../../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../TextGenerator.h"
 #include "../../ECS/Components/CollisionComponent.h"
@@ -10,9 +10,9 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-class SandboxPageCreator {
+class FirstLevel {
 public:
-    SandboxPageCreator(Position startingPosition);
+    FirstLevel(Position startingPosition);
 
 private:
     Position startingPosition;
@@ -23,4 +23,4 @@ private:
 };
 
 
-#endif //TEXTBASED_SANDBOXPAGECREATOR_H
+#endif //TEXTBASED_FIRSTLEVEL_H

@@ -4,7 +4,7 @@
 #include "../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "TextGenerator.h"
 #include "../ECS/Components/CollisionComponent.h"
-#include "Levels/SandboxPageCreator.h"
+#include "Levels/FirstLevel.h"
 #include "../ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h"
 #include "../ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h"
 #include "../ECS/Systems/SpecialSystems/CameraFollowSystem.h"
@@ -19,7 +19,7 @@ GameManager::GameManager(Position position): canon(position) {
 
 void GameManager::setup() {
     setupSystems();
-    SandboxPageCreator level1{Game::startingTopLeftPosition + Window::getMiddlePosition()};
+    FirstLevel level1{Game::startingTopLeftPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {
