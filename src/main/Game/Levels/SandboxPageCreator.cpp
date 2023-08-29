@@ -1,4 +1,4 @@
-#include "BasicSetup.h"
+#include "SandboxPageCreator.h"
 #include "../GameManager.h"
 #include "../../ECS/Components/MainPlayerComponent.h"
 #include "../../ECS/Components/TextComponents/TreeComponent.h"
@@ -7,12 +7,12 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-void BasicSetup::setup() {
+void SandboxPageCreator::setup() {
     createPlayer();
     createTree();
 }
 
-void BasicSetup::createPlayer() {
+void SandboxPageCreator::createPlayer() {
     witt = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     auto startingPosition = Game::startingTopLeftPosition + Window::getMiddlePosition();
@@ -22,12 +22,11 @@ void BasicSetup::createPlayer() {
     ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
 }
 
-void BasicSetup::createTree() {
+void SandboxPageCreator::createTree() {
     auto tree = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(tree, "Tree");
+    ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<PositionComponent>(tree, Game::startingTopLeftPosition);
     ecsManager->addComponentToEntity<StyleComponent>(tree);
-
 }
 
 

@@ -47,7 +47,7 @@ set(SOURCE_FILES
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/CollisionComponent.h
         src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.cpp src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.h
         src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Levels/BasicSetup.cpp src/main/Game/Levels/BasicSetup.h
+        src/main/Game/Levels/SandboxPageCreator.cpp src/main/Game/Levels/SandboxPageCreator.h
         src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h
         src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h
         src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h
@@ -76,7 +76,6 @@ Message("")
 # ------- Executable ----- #
 
 add_library(TextBasedLib OBJECT ${SOURCE_FILES})
-ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib> src/main/Main.cpp)
 
 #ADD_EXECUTABLE(TextBased ${SOURCE_FILES})
 
@@ -178,7 +177,12 @@ FetchContent_MakeAvailable(spdlog)
 
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
 TARGET_LINK_LIBRARIES(TextBasedLib ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY} gmock spdlog::spdlog)
+
+ADD_EXECUTABLE(TextBased $<TARGET_OBJECTS:TextBasedLib> src/main/Main.cpp)
+ADD_EXECUTABLE(SandboxBased $<TARGET_OBJECTS:TextBasedLib> src/main/Sandbox.cpp)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
+TARGET_LINK_LIBRARIES(SandboxBased TextBasedLib)
+
 #
 #if(CMAKE_BUILD_TYPE MATCHES "Debug")
 #    set(
@@ -189,7 +193,6 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME} TextBasedLib)
 #            BEFORE PUBLIC -fsanitize=undefined PUBLIC -fsanitize=address
 #            )
 #endif()
-
 
 
 find_package(Catch2 3 REQUIRED)

@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_BASICSETUP_H
-#define TEXTBASED_BASICSETUP_H
+#ifndef TEXTBASED_SANDBOXPAGECREATOR_H
+#define TEXTBASED_SANDBOXPAGECREATOR_H
 #include "../../ECS/Systems/UpdateSystems/AutonomousMovementSystem.h"
 #include "../TextGenerator.h"
 #include "../../ECS/Components/CollisionComponent.h"
@@ -10,7 +10,7 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-class BasicSetup {
+class SandboxPageCreator {
 public:
     void setup();
 
@@ -22,4 +22,4 @@ private:
 };
 
 
-#endif //TEXTBASED_BASICSETUP_H
+#endif //TEXTBASED_SANDBOXPAGECREATOR_H
