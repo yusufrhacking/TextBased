@@ -15,13 +15,11 @@
 #include "../ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.h"
 
 GameManager::GameManager(Position position): canon(position) {
-
 }
 
 void GameManager::setup() {
     setupSystems();
-    SandboxPageCreator level1{};
-    level1.setup();
+    SandboxPageCreator level1{Game::startingTopLeftPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {

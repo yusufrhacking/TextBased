@@ -7,7 +7,7 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-void SandboxPageCreator::setup() {
+SandboxPageCreator::SandboxPageCreator(Position startingPosition): startingPosition(startingPosition) {
     createPlayer();
     createTree();
 }
@@ -15,8 +15,7 @@ void SandboxPageCreator::setup() {
 void SandboxPageCreator::createPlayer() {
     witt = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
-    auto startingPosition = Game::startingTopLeftPosition + Window::getMiddlePosition();
-    ecsManager->addComponentToEntity<PositionComponent>(witt, Game::startingTopLeftPosition + Window::getMiddlePosition());
+    ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);

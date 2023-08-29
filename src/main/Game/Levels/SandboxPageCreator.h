@@ -12,9 +12,10 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 class SandboxPageCreator {
 public:
-    void setup();
+    SandboxPageCreator(Position startingPosition);
 
 private:
+    Position startingPosition;
     void createPlayer();
     Entity witt;
 
