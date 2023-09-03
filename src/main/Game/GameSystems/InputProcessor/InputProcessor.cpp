@@ -44,5 +44,10 @@ bool InputProcessor::readInput(SDL_KeyCode key){
         spdlog::trace("D key noted");
         eventBus->emitEvent<KeyEvent>(KeyEvent(D_KEY));
     }
+    if (keyboard_state_array[SDL_SCANCODE_SPACE]){
+        spdlog::trace("SPACE key noted");
+        eventBus->emitEvent<KeyEvent>(KeyEvent(SPACE_KEY));
+    }
+
     return true;
 }

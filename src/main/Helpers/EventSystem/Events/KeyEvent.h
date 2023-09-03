@@ -7,7 +7,8 @@ enum KEY_TYPE{
     W_KEY,
     A_KEY,
     S_KEY,
-    D_KEY
+    D_KEY,
+    SPACE_KEY
 };
 
 
