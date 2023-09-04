@@ -1,10 +1,10 @@
 #include "KeyEvent.h"
 
-KeyEvent::KeyEvent(SDL_Keycode keycode) : keyType(ConvertFromSDL(keycode)) {
+KeyEvent::KeyEvent(SDL_Keycode keycode) : keyType(convertFromKeyCode(keycode)) {
 
 }
 
-GameKey KeyEvent::ConvertFromSDL(SDL_Keycode keycode) {
+GameKey KeyEvent::convertFromKeyCode(SDL_Keycode keycode) {
     switch (keycode) {
         case SDLK_w: return GameKey::MOVE_UP;
         case SDLK_a: return GameKey::MOVE_LEFT;

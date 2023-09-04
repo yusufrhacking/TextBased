@@ -8,7 +8,7 @@ enum class GameKey {
     MOVE_LEFT,
     MOVE_DOWN,
     MOVE_RIGHT,
-    UNKNOWN // Used for unmapped keys
+    UNKNOWN //Unmapped
 };
 
 class KeyEvent : public Event {
@@ -19,7 +19,7 @@ public:
 
 private:
     GameKey keyType;
-    static GameKey ConvertFromSDL(SDL_Keycode keycode);
+    static GameKey convertFromKeyCode(SDL_Keycode keycode);
 };
 
 #endif
