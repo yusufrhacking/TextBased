@@ -10,11 +10,12 @@ extern std::unique_ptr<EventBus> eventBus;
 static int counter=0;
 
 std::map<SDL_Scancode, GameKey> keyMappings = {
-        { SDL_SCANCODE_W, GameKey::MOVE_UP },
-        { SDL_SCANCODE_A, GameKey::MOVE_LEFT },
-        { SDL_SCANCODE_S, GameKey::MOVE_DOWN },
-        { SDL_SCANCODE_D, GameKey::MOVE_RIGHT }
+        { SDL_SCANCODE_UP, GameKey::MOVE_UP },
+        { SDL_SCANCODE_LEFT, GameKey::MOVE_LEFT },
+        { SDL_SCANCODE_DOWN, GameKey::MOVE_DOWN },
+        { SDL_SCANCODE_RIGHT, GameKey::MOVE_RIGHT }
 };
+
 
 
 
@@ -37,10 +38,10 @@ bool InputProcessor::readInput(SDL_KeyCode key){
         return false;
     }
 
-    for(const auto& pair : keyMappings) {
-        if(keyboard_state_array[pair.first]) {
-            spdlog::trace("{} key noted", SDL_GetScancodeName(pair.first));
-            eventBus->emitEvent<KeyEvent>(KeyEvent(pair.second));
+    for(const auto& scanCodeGameKeyPair : keyMappings) {
+        if(keyboard_state_array[scanCodeGameKeyPair.first]) {
+            spdlog::trace("{} key noted", SDL_GetScancodeName(scanCodeGameKeyPair.first));
+            eventBus->emitEvent<KeyEvent>(KeyEvent(scanCodeGameKeyPair.second));
         }
     }
     return true;
