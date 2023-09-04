@@ -1,13 +1,13 @@
-#ifndef TEXTBASED_CANONSYSTEM_H
-#define TEXTBASED_CANONSYSTEM_H
+#ifndef TEXTBASED_CANONREGISTERINGSYSTEM_H
+#define TEXTBASED_CANONREGISTERINGSYSTEM_H
 #include "../../Design/Objects/System.h"
 #include "../../../TheCanon/Canon.h"
 
-class CanonSystem: public System {
+class CanonRegisteringSystem: public System {
 public:
     Canon& canon;
 
-    explicit CanonSystem(Canon &canon);
+    explicit CanonRegisteringSystem(Canon &canon);
 
     void placeAllEntities();
 
@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif //TEXTBASED_CANONSYSTEM_H
+#endif //TEXTBASED_CANONREGISTERINGSYSTEM_H
