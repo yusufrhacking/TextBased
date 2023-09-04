@@ -30,19 +30,20 @@ bool InputProcessor::readInput(SDL_KeyCode key){
     }
     if (keyboard_state_array[SDL_SCANCODE_W]){
         spdlog::trace("W key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(W_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_w));
     }
     if (keyboard_state_array[SDL_SCANCODE_A]){
         spdlog::trace("A key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(A_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_a));
     }
     if (keyboard_state_array[SDL_SCANCODE_S]){
         spdlog::trace("S key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(S_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_s));
     }
     if (keyboard_state_array[SDL_SCANCODE_D]){
         spdlog::trace("D key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(D_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_d));
     }
     return true;
+
 }
