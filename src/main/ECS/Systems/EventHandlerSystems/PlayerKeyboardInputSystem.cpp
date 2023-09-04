@@ -21,14 +21,14 @@ void PlayerKeyboardInputSystem::onKeyPressed(KeyEvent& event) {
         double xChange = 0;
         double yChange = 0;
 
-        switch (event.keyType){
-            case W_KEY:
+        switch (event.character){
+            case 'w':
                 yChange += -1*playerVelocity->yVelocity; break;
-            case A_KEY:
+            case 'a':
                 xChange += -1*playerVelocity->xVelocity; break;
-            case S_KEY:
+            case 's':
                 yChange += playerVelocity->yVelocity; break;
-            case D_KEY:
+            case 'd':
                 xChange += playerVelocity->xVelocity; break;
         }
 

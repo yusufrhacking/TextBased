@@ -2,7 +2,7 @@
 #include "../../main/ECS/Components/PositionComponent.h"
 #include "../../main/ECS/Design/Managers/ECSManager.h"
 #include "../../main/ECS/Systems/SpecialSystems/CameraFollowSystem.h"
-#include "../../main/ECS/Systems/SpecialSystems/CanonSystem.h"
+#include "../../main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -14,7 +14,7 @@ TEST_CASE("Entity moving is updated in Canon", "[MapPosition][PositionComponent]
 
     auto startingPosition = Position(1000, 1000);
     Canon canon{startingPosition};
-    ecsManager->addSystem<CanonSystem>(canon);
+    ecsManager->addSystem<CanonRegisteringSystem>(canon);
 
     auto entity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(entity, startingPosition);
@@ -22,7 +22,7 @@ TEST_CASE("Entity moving is updated in Canon", "[MapPosition][PositionComponent]
     ecsManager->addNewEntities();
 
     auto& positionComp = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    auto& canonSystem = ecsManager->getSystem<CanonSystem>();
+    auto& canonSystem = ecsManager->getSystem<CanonRegisteringSystem>();
     canonSystem.update();
 
     positionComp.shiftPosition(1000, 1000);

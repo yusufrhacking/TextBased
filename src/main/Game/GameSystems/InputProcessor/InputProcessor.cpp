@@ -8,8 +8,6 @@ extern std::unique_ptr<EventBus> eventBus;
 
 static int counter=0;
 
-
-
 bool InputProcessor::processInput(SDL_Event event) {
     unsigned int eventType = event.type;
     if(eventType == SDL_QUIT){
@@ -30,23 +28,23 @@ bool InputProcessor::readInput(SDL_KeyCode key){
 
     if (keyboard_state_array[SDL_SCANCODE_W]){
         spdlog::trace("W key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(W_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent('w'));
     }
     if (keyboard_state_array[SDL_SCANCODE_A]){
         spdlog::trace("A key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(A_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent('a'));
     }
     if (keyboard_state_array[SDL_SCANCODE_S]){
         spdlog::trace("S key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(S_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent('s'));
     }
     if (keyboard_state_array[SDL_SCANCODE_D]){
         spdlog::trace("D key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(D_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent('d'));
     }
     if (keyboard_state_array[SDL_SCANCODE_SPACE]){
         spdlog::trace("SPACE key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(SPACE_KEY));
+        eventBus->emitEvent<KeyEvent>(KeyEvent(' '));
     }
 
     return true;

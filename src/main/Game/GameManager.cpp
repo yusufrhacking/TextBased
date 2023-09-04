@@ -10,9 +10,10 @@
 #include "../ECS/Systems/SpecialSystems/CameraFollowSystem.h"
 #include "../ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 #include "Game.h"
-#include "../ECS/Systems/SpecialSystems/CanonSystem.h"
+#include "../ECS/Systems/SpecialSystems/CanonRegisteringSystem.h"
 #include "../ECS/Systems/EventHandlerSystems/MovementHandleSystem.h"
 #include "../ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.h"
+#include "../ECS/Systems/EventHandlerSystems/WordComprehensionSystem.h"
 
 GameManager::GameManager(Position position): canon(position) {
 }
@@ -30,14 +31,15 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
     ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
-    ecsManager->addSystem<CanonSystem>(canon);
+    ecsManager->addSystem<CanonRegisteringSystem>(canon);
     ecsManager->addSystem<MovementHandleSystem>();
     ecsManager->addSystem<CanonMovementHandleSystem>(canon);
+    ecsManager->addSystem<WordComprehensionSystem>();
 }
 
 void GameManager::update(double deltaTime) {
     auto recentlyAddedEntities = ecsManager->addNewEntities();
-    ecsManager->getSystem<CanonSystem>().placeEntities(recentlyAddedEntities);
+    ecsManager->getSystem<CanonRegisteringSystem>().placeEntities(recentlyAddedEntities);
     ecsManager->removeDeadEntities();
     ecsManager->runFirstSystems();
     ecsManager->runTimedSystems(deltaTime);

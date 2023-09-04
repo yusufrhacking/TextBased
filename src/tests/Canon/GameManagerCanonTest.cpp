@@ -2,7 +2,7 @@
 #include "../../main/ECS/Components/PositionComponent.h"
 #include "../../main/ECS/Design/Managers/ECSManager.h"
 #include "../../main/ECS/Systems/SpecialSystems/CameraFollowSystem.h"
-#include "../../main/ECS/Systems/SpecialSystems/CanonSystem.h"
+#include "../../main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.h"
 #include "../../main/Game/GameManager.h"
 
 
@@ -20,11 +20,11 @@ TEST_CASE("Game Manager Adding to Canon Works", "[GameManager][Canon]"){
     ecsManager->addComponentToEntity<PositionComponent>(entity, startingPosition);
 
     Canon canon{startingPosition};
-    ecsManager->addSystem<CanonSystem>(canon);
+    ecsManager->addSystem<CanonRegisteringSystem>(canon);
     kirk.update(0.0);
 
     auto& positionComp = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    auto& canonSystem = ecsManager->getSystem<CanonSystem>();
+    auto& canonSystem = ecsManager->getSystem<CanonRegisteringSystem>();
 
     auto expectedMapPosition = Canon::getMapPosition(positionComp.getPosition());
     auto entitiesAtNewPage = canonSystem.canon.getEntitiesAtPage(expectedMapPosition);

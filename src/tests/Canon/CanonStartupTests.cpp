@@ -1,7 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include "../../main/ECS/Components/PositionComponent.h"
 #include "../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../main/ECS/Systems/SpecialSystems/CanonSystem.h"
+#include "../../main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.h"
 #include "../../main/ECS/Systems/SpecialSystems/CameraFollowSystem.h"
 #include "../../main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 
@@ -28,7 +28,7 @@ TEST_CASE("Canon System Places Player", "[Canon]"){
 
     auto startingPosition = Position(1000, 1000);
     Canon canon{startingPosition};
-    ecsManager->addSystem<CanonSystem>(canon);
+    ecsManager->addSystem<CanonRegisteringSystem>(canon);
 
     auto test = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
@@ -36,12 +36,12 @@ TEST_CASE("Canon System Places Player", "[Canon]"){
     ecsManager->addNewEntities();
 
     SECTION("Canon System Places All Entities"){
-        ecsManager->getSystem<CanonSystem>().placeAllEntities();
+        ecsManager->getSystem<CanonRegisteringSystem>().placeAllEntities();
         auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
         REQUIRE(entitiesAtPage.contains(test));
     }
     SECTION("Canon System Specific Entity"){
-        ecsManager->getSystem<CanonSystem>().placeEntity(test);
+        ecsManager->getSystem<CanonRegisteringSystem>().placeEntity(test);
         auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
         REQUIRE(entitiesAtPage.contains(test));
     }
@@ -55,12 +55,12 @@ TEST_CASE("Position Component Places Player", "[Canon]"){
 
     auto startingPosition = Position(1000, 1000);
     Canon canon{startingPosition};
-    ecsManager->addSystem<CanonSystem>(canon);
+    ecsManager->addSystem<CanonRegisteringSystem>(canon);
 
     auto test = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(test, startingPosition);
     ecsManager->addNewEntities();
-    ecsManager->getSystem<CanonSystem>().update();
+    ecsManager->getSystem<CanonRegisteringSystem>().update();
 
 
     auto entitiesAtPage = canon.getEntitiesAtPage(startingPosition);
