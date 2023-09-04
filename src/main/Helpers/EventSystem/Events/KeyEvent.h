@@ -10,16 +10,14 @@ enum class GameKey {
     MOVE_RIGHT,
     UNKNOWN //Unmapped
 };
-
 class KeyEvent : public Event {
 public:
-    explicit KeyEvent(SDL_Keycode keycode);
+    explicit KeyEvent(GameKey key);
 
-    GameKey getKey() const { return keyType; }
+    [[nodiscard]] GameKey getKey() const { return gameKey; }
 
 private:
-    GameKey keyType;
-    static GameKey convertFromKeyCode(SDL_Keycode keycode);
+    GameKey gameKey;
 };
 
 #endif

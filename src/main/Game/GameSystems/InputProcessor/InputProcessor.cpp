@@ -9,6 +9,14 @@ extern std::unique_ptr<EventBus> eventBus;
 
 static int counter=0;
 
+std::map<SDL_Scancode, GameKey> keyMappings = {
+        { SDL_SCANCODE_W, GameKey::MOVE_UP },
+        { SDL_SCANCODE_A, GameKey::MOVE_LEFT },
+        { SDL_SCANCODE_S, GameKey::MOVE_DOWN },
+        { SDL_SCANCODE_D, GameKey::MOVE_RIGHT }
+};
+
+
 
 
 bool InputProcessor::processInput(SDL_Event event) {
@@ -28,21 +36,12 @@ bool InputProcessor::readInput(SDL_KeyCode key){
         spdlog::trace("Escape key pressed");
         return false;
     }
-    if (keyboard_state_array[SDL_SCANCODE_W]){
-        spdlog::trace("W key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_w));
-    }
-    if (keyboard_state_array[SDL_SCANCODE_A]){
-        spdlog::trace("A key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_a));
-    }
-    if (keyboard_state_array[SDL_SCANCODE_S]){
-        spdlog::trace("S key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_s));
-    }
-    if (keyboard_state_array[SDL_SCANCODE_D]){
-        spdlog::trace("D key noted");
-        eventBus->emitEvent<KeyEvent>(KeyEvent(SDLK_d));
+
+    for(const auto& pair : keyMappings) {
+        if(keyboard_state_array[pair.first]) {
+            spdlog::trace("{} key noted", SDL_GetScancodeName(pair.first));
+            eventBus->emitEvent<KeyEvent>(KeyEvent(pair.second));
+        }
     }
     return true;
 
