@@ -1,5 +1,5 @@
 #include "PlayerKeyboardInputSystem.h"
-#include "../../../Helpers/EventSystem/Events/KeyEvent.h"
+#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
 #include "../UpdateSystems/AutonomousMovementSystem.h"
 #include "../SpecialSystems//UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
 
@@ -11,10 +11,10 @@ PlayerKeyboardInputSystem::PlayerKeyboardInputSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
     requireComponent<MainPlayerComponent>();
-    eventBus->listenToEvent<KeyEvent>(this, &PlayerKeyboardInputSystem::onKeyPressed);
+    eventBus->listenToEvent<GameKeyEvent>(this, &PlayerKeyboardInputSystem::onKeyPressed);
 }
 
-void PlayerKeyboardInputSystem::onKeyPressed(KeyEvent& event) {
+void PlayerKeyboardInputSystem::onKeyPressed(GameKeyEvent& event) {
     for (auto entity: getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         auto playerVelocity = ecsManager->getComponentFromEntity<MainPlayerComponent>(entity).movementSpeed;

@@ -3,7 +3,7 @@
 
 
 #include "../../Design/Objects/System.h"
-#include "../../../Helpers/EventSystem/Events/KeyEvent.h"
+#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
 
 class WordComprehensionSystem: public System {
 public:
@@ -13,7 +13,7 @@ private:
     std::string text;
     bool listening_to_letters;
     void listenToEvents();
-    void onText(KeyEvent& event);
+    void onText(GameKeyEvent& event);
 };
 
 

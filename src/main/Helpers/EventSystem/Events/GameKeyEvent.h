@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_KEYEVENT_H
-#define TEXTBASED_KEYEVENT_H
+#ifndef TEXTBASED_GAMEKEYEVENT_H
+#define TEXTBASED_GAMEKEYEVENT_H
 #include "Event.h"
 #include <SDL.h>
 
@@ -10,9 +10,9 @@ enum class GameKey {
     MOVE_RIGHT,
     UNKNOWN //Unmapped
 };
-class KeyEvent : public Event {
+class GameKeyEvent : public Event {
 public:
-    explicit KeyEvent(GameKey key);
+    explicit GameKeyEvent(GameKey key);
 
     [[nodiscard]] GameKey getKey() const { return gameKey; }
 

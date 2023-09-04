@@ -5,12 +5,12 @@
 #include "../../Components/PositionComponent.h"
 #include "../../Design/Managers/ECSManager.h"
 #include "EventConsumerSystem.h"
-#include "../../../Helpers/EventSystem/Events/KeyEvent.h"
+#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
 
 
 class PlayerKeyboardInputSystem: public EventConsumerSystem {
 private:
-    void onKeyPressed(KeyEvent& event);
+    void onKeyPressed(GameKeyEvent& event);
 public:
     explicit PlayerKeyboardInputSystem();
 

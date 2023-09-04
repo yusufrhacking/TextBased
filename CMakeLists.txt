@@ -55,7 +55,7 @@ set(SOURCE_FILES
         src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h
         src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h
         src/main/Helpers/EventSystem/Events/CollisionEvent.h
-        src/main/Helpers/EventSystem/Events/KeyEvent.h
+        src/main/Helpers/EventSystem/Events/GameKeyEvent.h
         src/main/ECS/Components/MainPlayerComponent.h
         src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.cpp src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h
         src/main/ECS/Components/TextComponents/TreeComponent.h
@@ -65,7 +65,7 @@ set(SOURCE_FILES
         src/main/ECS/Design/Objects/ComponentSignature.cpp src/main/ECS/Design/Objects/ComponentSignature.h
         src/main/Game/GameSystems/Camera/Camera.cpp src/main/Game/GameSystems/Camera/Camera.h
         src/main/Helpers/Objects/MapPosition.h
-        src/main/TheCanon/Canon.cpp src/main/TheCanon/Canon.h src/main/TheCanon/Page.cpp src/main/TheCanon/Page.h src/main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.cpp src/main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.h src/main/ECS/Systems/SpecialSystems/FirstSystem.h src/main/Helpers/EventSystem/Events/ReadyToMoveEvent.h src/main/ECS/Systems/EventHandlerSystems/MovementHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/MovementHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.h src/main/Helpers/EventSystem/Events/PostMovementEvent.h src/main/Game/Levels/ForestGenerator.cpp src/main/Game/Levels/ForestGenerator.h src/main/Helpers/EventSystem/Events/KeyEvent.cpp src/main/ECS/Systems/EventHandlerSystems/WordComprehensionSystem.cpp)
+        src/main/TheCanon/Canon.cpp src/main/TheCanon/Canon.h src/main/TheCanon/Page.cpp src/main/TheCanon/Page.h src/main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.cpp src/main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.h src/main/ECS/Systems/SpecialSystems/FirstSystem.h src/main/Helpers/EventSystem/Events/ReadyToMoveEvent.h src/main/ECS/Systems/EventHandlerSystems/MovementHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/MovementHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.h src/main/Helpers/EventSystem/Events/PostMovementEvent.h src/main/Game/Levels/ForestGenerator.cpp src/main/Game/Levels/ForestGenerator.h src/main/Helpers/EventSystem/Events/GameKeyEvent.cpp src/main/ECS/Systems/EventHandlerSystems/WordComprehensionSystem.cpp)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )

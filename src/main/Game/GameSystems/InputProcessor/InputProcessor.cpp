@@ -1,13 +1,11 @@
 #include "InputProcessor.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 #include "SDL_keycode.h"
-#include "../../../Helpers/EventSystem/Events/KeyEvent.h"
+#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
 #include <SDL.h>
 #include <spdlog/spdlog.h>
 
 extern std::unique_ptr<EventBus> eventBus;
-
-static int counter=0;
 
 std::map<SDL_Scancode, GameKey> keyMappings = {
         { SDL_SCANCODE_UP, GameKey::MOVE_UP },
@@ -15,10 +13,6 @@ std::map<SDL_Scancode, GameKey> keyMappings = {
         { SDL_SCANCODE_DOWN, GameKey::MOVE_DOWN },
         { SDL_SCANCODE_RIGHT, GameKey::MOVE_RIGHT }
 };
-
-
-
-
 
 bool InputProcessor::processInput(SDL_Event event) {
     unsigned int eventType = event.type;
@@ -41,7 +35,7 @@ bool InputProcessor::readInput(SDL_KeyCode key){
     for(const auto& scanCodeGameKeyPair : keyMappings) {
         if(keyboard_state_array[scanCodeGameKeyPair.first]) {
             spdlog::trace("{} key noted", SDL_GetScancodeName(scanCodeGameKeyPair.first));
-            eventBus->emitEvent<KeyEvent>(KeyEvent(scanCodeGameKeyPair.second));
+            eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(scanCodeGameKeyPair.second));
         }
     }
     return true;

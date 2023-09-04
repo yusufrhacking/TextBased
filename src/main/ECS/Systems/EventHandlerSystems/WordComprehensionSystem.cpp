@@ -10,9 +10,9 @@ WordComprehensionSystem::WordComprehensionSystem() {
 }
 
 void WordComprehensionSystem::listenToEvents(){
-    eventBus->listenToEvent<KeyEvent>(this, &WordComprehensionSystem::onText);
+    eventBus->listenToEvent<GameKeyEvent>(this, &WordComprehensionSystem::onText);
 }
-void WordComprehensionSystem::onText(KeyEvent& event){
+void WordComprehensionSystem::onText(GameKeyEvent& event){
     if (listening_to_letters){
 
     }

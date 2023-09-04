@@ -2,7 +2,7 @@
 #define TEXTBASED_INPUTPROCESSOR_H
 #include <SDL.h>
 #include <set>
-#include "../../../Helpers/EventSystem/Events/KeyEvent.h"
+#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
 
 class InputProcessor {
     public:
