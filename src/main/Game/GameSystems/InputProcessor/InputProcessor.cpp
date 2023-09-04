@@ -1,7 +1,6 @@
 #include "InputProcessor.h"
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 #include "SDL_keycode.h"
-#include "../../../Helpers/EventSystem/Events/KeyEvent.h"
 #include <SDL.h>
 #include <spdlog/spdlog.h>
 
@@ -28,6 +27,7 @@ bool InputProcessor::readInput(SDL_KeyCode key){
         spdlog::trace("Escape key pressed");
         return false;
     }
+
     if (keyboard_state_array[SDL_SCANCODE_W]){
         spdlog::trace("W key noted");
         eventBus->emitEvent<KeyEvent>(KeyEvent(W_KEY));
