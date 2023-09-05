@@ -1,8 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../../main/ECS/Components/PositionComponent.h"
-#include "../../main/ECS/Design/Managers/ECSManager.h"
-#include "../../main/ECS/Systems/SpecialSystems/CameraFollowSystem.h"
-#include "../../main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.h"
+#include "../../main/Positioning/PositionComponent.h"
+#include "../../main/HighLevel/ECSManager.h"
+#include "../../main/Camera/CameraFollowSystem.h"
+#include "../../main/TheCanon/CanonRegisteringSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

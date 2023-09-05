@@ -2,7 +2,7 @@
 #define TEXTBASED_CANON_H
 
 #include <unordered_map>
-#include "../Helpers/Objects/MapPosition.h"
+#include "MapPosition.h"
 #include "Page.h"
 
 namespace std {

@@ -3,7 +3,7 @@
 
 #include <set>
 #include "../ECS/Design/Objects/Entity.h"
-#include "../Game/GameSystems/Window/Window.h"
+#include "../Rendering/Window.h"
 
 struct Page {
     static int pageWidth;

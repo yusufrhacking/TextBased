@@ -23,49 +23,49 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
 set(SOURCE_FILES
-        src/main/Game/Game.cpp src/main/Game/Game.h
-        src/main/Game/GameSystems/Renderer/Renderer.cpp src/main/Game/GameSystems/Renderer/Renderer.h
-        src/main/Game/GameSystems/Window/Window.cpp src/main/Game/GameSystems/Window/Window.h
-        src/main/Game/GameSystems/InputProcessor/InputProcessor.cpp src/main/Game/GameSystems/InputProcessor/InputProcessor.h
-        src/main/ECS/Components/PositionComponent.h
-        src/main/Helpers/Objects/Position.h src/main/Helpers/Objects/Velocity.h
-        src/main/ECS/Systems/UpdateSystems/AutonomousMovementSystem.cpp src/main/ECS/Systems/UpdateSystems/AutonomousMovementSystem.h
-        "src/main/ECS/Design/Objects/Entity.cpp" "src/main/ECS/Design/Objects/Entity.h"
-        "src/main/ECS/Design/Objects/Component.cpp" "src/main/ECS/Design/Objects/Component.h"
-        "src/main/ECS/Design/Objects/System.cpp" "src/main/ECS/Design/Objects/System.h"
-        "src/main/ECS/Design/Managers/ECSManager.cpp" "src/main/ECS/Design/Managers/ECSManager.h"
-        src/main/ECS/Design/Objects/Pool.cpp src/main/ECS/Design/Objects/Pool.h
-        src/main/ECS/Components/MovementComponent.h
-        src/main/ECS/Design/Managers/SystemManager.cpp src/main/ECS/Design/Managers/SystemManager.h
-        src/main/ECS/Design/Managers/ComponentManager.cpp src/main/ECS/Design/Managers/ComponentManager.h
-        src/main/ECS/Design/Managers/EntityManager.cpp src/main/ECS/Design/Managers/EntityManager.h
-        src/main/Globals.h
-        src/main/ECS/Systems/RenderSystem.cpp src/main/ECS/Systems/RenderSystem.h
-        src/main/ECS/Components/TextComponents/TextComponent.h src/main/ECS/Systems/UpdateSystems/UpdateSystem.h
-        src/main/Helpers/Objects/Size.h
-        src/main/Game/TextGenerator.cpp src/main/Game/TextGenerator.h src/main/Game/GameManager.cpp src/main/Game/GameManager.h
-        resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/ECS/Components/CollisionComponent.h
-        src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.cpp src/main/ECS/Systems/UpdateSystems/CollisionCheckSystem.h
-        src/main/ECS/Components/StyleComponent.h src/main/Exceptions/NoStyleException.h
-        src/main/Game/Levels/FirstLevel.cpp src/main/Game/Levels/FirstLevel.h
-        src/main/Game/GameSystems/Renderer/SDLRenderer.cpp src/main/Game/GameSystems/Renderer/SDLRenderer.h
-        src/main/Helpers/EventSystem/EventBus/EventBus.cpp src/main/Helpers/EventSystem/EventBus/EventBus.h
-        src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.cpp src/main/Helpers/EventSystem/EventCallback/EventFunctionWrapper.h
-        src/main/Helpers/EventSystem/Events/Event.h
-        src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CollisionHandleSystem.h
-        src/main/ECS/Systems/EventHandlerSystems/EventConsumerSystem.h
-        src/main/Helpers/EventSystem/Events/CollisionEvent.h
-        src/main/Helpers/EventSystem/Events/GameKeyEvent.h
-        src/main/ECS/Components/MainPlayerComponent.h
-        src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.cpp src/main/ECS/Systems/EventHandlerSystems/PlayerKeyboardInputSystem.h
-        src/main/ECS/Components/TextComponents/TreeComponent.h
-        "src/main/ECS/Systems/SpecialSystems/CameraFollowSystem.cpp" "src/main/ECS/Systems/SpecialSystems/CameraFollowSystem.h"
-        "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedMovement.cpp" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedMovement.h"
-        "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.cpp" "src/main/ECS/Systems/SpecialSystems/UnprocessedMovements/UnprocessedKeyboardMovementSystem.h"
-        src/main/ECS/Design/Objects/ComponentSignature.cpp src/main/ECS/Design/Objects/ComponentSignature.h
-        src/main/Game/GameSystems/Camera/Camera.cpp src/main/Game/GameSystems/Camera/Camera.h
-        src/main/Helpers/Objects/MapPosition.h
-        src/main/TheCanon/Canon.cpp src/main/TheCanon/Canon.h src/main/TheCanon/Page.cpp src/main/TheCanon/Page.h src/main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.cpp src/main/ECS/Systems/SpecialSystems/CanonRegisteringSystem.h src/main/ECS/Systems/SpecialSystems/FirstSystem.h src/main/Helpers/EventSystem/Events/ReadyToMoveEvent.h src/main/ECS/Systems/EventHandlerSystems/MovementHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/MovementHandleSystem.h src/main/ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.cpp src/main/ECS/Systems/EventHandlerSystems/CanonMovementHandleSystem.h src/main/Helpers/EventSystem/Events/PostMovementEvent.h src/main/Game/Levels/ForestGenerator.cpp src/main/Game/Levels/ForestGenerator.h src/main/Helpers/EventSystem/Events/GameKeyEvent.cpp src/main/ECS/Systems/EventHandlerSystems/WordComprehensionSystem.cpp src/main/Helpers/EventSystem/Events/TextInputEvent.h src/main/Helpers/EventSystem/Events/ProcessedTextEvent.h)
+        src/main/HighLevel/Game.cpp src/main/HighLevel/Game.h
+        src/main/Rendering/Renderer.cpp src/main/Rendering/Renderer.h
+        src/main/Rendering/Window.cpp src/main/Rendering/Window.h
+        src/main/TextInput/InputProcessor.cpp src/main/TextInput/InputProcessor.h
+        src/main/PositionsAndMovement/PositionComponent.h
+        src/main/PositionsAndMovement/Position.h src/main/PositionsAndMovement/Velocity.h
+        src/main/PositionsAndMovement/AutonomousMovementSystem.cpp src/main/PositionsAndMovement/AutonomousMovementSystem.h
+        "src/main/ECSObjects/Entity.cpp" "src/main/ECSObjects/Entity.h"
+        "src/main/ECSObjects/Component.cpp" "src/main/ECSObjects/Component.h"
+        "src/main/ECSObjects/System.cpp" "src/main/ECSObjects/System.h"
+        "src/main/HighLevel/ECSManager.cpp" "src/main/HighLevel/ECSManager.h"
+        src/main/ECSObjects/Pool.cpp src/main/ECSObjects/Pool.h
+        src/main/PositionsAndMovement/MovementComponent.h
+        src/main/ECSManagers/SystemManager.cpp src/main/ECSManagers/SystemManager.h
+        src/main/ECSManagers/ComponentManager.cpp src/main/ECSManagers/ComponentManager.h
+        src/main/ECSManagers/EntityManager.cpp src/main/ECSManagers/EntityManager.h
+        src/main/HighLevel/Globals.h
+        src/main/Rendering/RenderSystem.cpp src/main/Rendering/RenderSystem.h
+        src/main/Text/TextComponent.h src/main/ECSObjects/UpdateSystem.h
+        src/main/PositionsAndMovement/Size.h
+        src/main/Text/TextGenerator.cpp src/main/Text/TextGenerator.h src/main/HighLevel/GameManager.cpp src/main/HighLevel/GameManager.h
+        resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/PositionsAndMovement/CollisionComponent.h
+        src/main/PositionsAndMovement/CollisionCheckSystem.cpp src/main/PositionsAndMovement/CollisionCheckSystem.h
+        src/main/Rendering/StyleComponent.h src/main/Rendering/NoStyleException.h
+        src/main/Levels/FirstLevel.cpp src/main/Levels/FirstLevel.h
+        src/main/Rendering/SDLRenderer.cpp src/main/Rendering/SDLRenderer.h
+        src/main/EventSystem/EventBus.cpp src/main/EventSystem/EventBus.h
+        src/main/EventSystem/EventFunctionWrapper.cpp src/main/EventSystem/EventFunctionWrapper.h
+        src/main/EventSystem/Event.h
+        src/main/PositionsAndMovement/CollisionHandleSystem.cpp src/main/PositionsAndMovement/CollisionHandleSystem.h
+        src/main/ECSObjects/EventConsumerSystem.h
+        src/main/PositionsAndMovement/CollisionEvent.h
+        src/main/TextInput/GameKeyEvent.h
+        src/main/MainPlayer/MainPlayerComponent.h
+        src/main/MainPlayer/PlayerKeyboardInputSystem.cpp src/main/MainPlayer/PlayerKeyboardInputSystem.h
+        src/main/Text/TreeComponent.h
+        "src/main/Camera/CameraFollowSystem.cpp" "src/main/Camera/CameraFollowSystem.h"
+        "src/main/MainPlayer/UnprocessedMovement.cpp" "src/main/MainPlayer/UnprocessedMovement.h"
+        "src/main/MainPlayer/UnprocessedKeyboardMovementSystem.cpp" "src/main/MainPlayer/UnprocessedKeyboardMovementSystem.h"
+        src/main/ECSObjects/ComponentSignature.cpp src/main/ECSObjects/ComponentSignature.h
+        src/main/Camera/Camera.cpp src/main/Camera/Camera.h
+        src/main/TheCanon/MapPosition.h
+        src/main/TheCanon/Canon.cpp src/main/TheCanon/Canon.h src/main/TheCanon/Page.cpp src/main/TheCanon/Page.h src/main/TheCanon/CanonRegisteringSystem.cpp src/main/TheCanon/CanonRegisteringSystem.h src/main/ECSObjects/FirstSystem.h src/main/PositionsAndMovement/ReadyToMoveEvent.h src/main/MainPlayer/MovementHandleSystem.cpp src/main/MainPlayer/MovementHandleSystem.h src/main/TheCanon/CanonMovementHandleSystem.cpp src/main/TheCanon/CanonMovementHandleSystem.h src/main/PositionsAndMovement/PostMovementEvent.h src/main/Levels/ForestGenerator.cpp src/main/Levels/ForestGenerator.h src/main/TextInput/GameKeyEvent.cpp src/main/TextInput/WordComprehensionSystem.cpp src/main/TextInput/TextInputEvent.h src/main/TextInput/ProcessedTextEvent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
