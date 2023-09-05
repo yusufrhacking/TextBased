@@ -7,11 +7,15 @@
 
 extern std::unique_ptr<EventBus> eventBus;
 
-std::map<SDL_Scancode, GameKey> keyMappings = {
+std::map<SDL_Scancode, GameKey> keyStateMappings = {
         { SDL_SCANCODE_UP, GameKey::MOVE_UP },
         { SDL_SCANCODE_LEFT, GameKey::MOVE_LEFT },
         { SDL_SCANCODE_DOWN, GameKey::MOVE_DOWN },
         { SDL_SCANCODE_RIGHT, GameKey::MOVE_RIGHT }
+};
+
+std::map<SDL_Scancode, GameKey> keyPressMappings = {
+        {SDL_SCANCODE_SPACE, GameKey::TEXT_FLIP}
 };
 
 bool InputProcessor::processInput(SDL_Event event) {
@@ -32,7 +36,7 @@ bool InputProcessor::readInput(SDL_KeyCode key){
         return false;
     }
 
-    for(const auto& scanCodeGameKeyPair : keyMappings) {
+    for(const auto& scanCodeGameKeyPair : keyStateMappings) {
         if(keyboard_state_array[scanCodeGameKeyPair.first]) {
             spdlog::trace("{} key noted", SDL_GetScancodeName(scanCodeGameKeyPair.first));
             eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(scanCodeGameKeyPair.second));

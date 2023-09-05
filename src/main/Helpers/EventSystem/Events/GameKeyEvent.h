@@ -8,7 +8,8 @@ enum class GameKey {
     MOVE_LEFT,
     MOVE_DOWN,
     MOVE_RIGHT,
-    UNKNOWN //Unmapped
+    TEXT_FLIP,
+    UNKNOWN
 };
 class GameKeyEvent : public Event {
 public:
