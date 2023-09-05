@@ -50,7 +50,7 @@ void ECSManager::runTimedSystems(double deltaTime) const {
 
 
 void ECSManager::render(std::shared_ptr<Renderer> renderer){
-    for (const auto& system : systemManager->getSystemsOfType<RenderSystem>()){
+    for (const auto& system : systemManager->getSystemsOfType<EntityRenderSystem>()){
         system->render(renderer, currentCamera);
     }
 }

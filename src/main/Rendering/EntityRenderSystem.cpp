@@ -1,16 +1,16 @@
-#include "RenderSystem.h"
+#include "EntityRenderSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-RenderSystem::RenderSystem() {
+EntityRenderSystem::EntityRenderSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
     requireComponent<StyleComponent>();
 }
 
-void RenderSystem::render(const std::shared_ptr<Renderer>& renderer, Camera camera){
+void EntityRenderSystem::render(const std::shared_ptr<Renderer>& renderer, Camera camera){
     for (auto entity : getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto spriteComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);

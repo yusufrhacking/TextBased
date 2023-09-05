@@ -16,7 +16,7 @@ void GameManager::setup() {
 
 void GameManager::setupSystems() {
     ecsManager->addSystem<AutonomousMovementSystem>();
-    ecsManager->addSystem<RenderSystem>();
+    ecsManager->addSystem<EntityRenderSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerKeyboardInputSystem>();

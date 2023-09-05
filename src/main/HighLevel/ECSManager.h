@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <typeindex>
 #include "../Rendering/Renderer.h"
-#include "../Rendering/RenderSystem.h"
+#include "../Rendering/EntityRenderSystem.h"
 #include "../ECSObjects/UpdateSystem.h"
 #include "../ECSManagers/SystemManager.h"
 #include "../Camera/Camera.h"

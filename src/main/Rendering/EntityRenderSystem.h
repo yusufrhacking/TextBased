@@ -1,13 +1,13 @@
-#ifndef TEXTBASED_RENDERSYSTEM_H
-#define TEXTBASED_RENDERSYSTEM_H
+#ifndef TEXTBASED_ENTITYRENDERSYSTEM_H
+#define TEXTBASED_ENTITYRENDERSYSTEM_H
 #include "Renderer.h"
 #include "../Text/TextComponent.h"
 #include "StyleComponent.h"
 #include "../ECSObjects/System.h"
 
-class RenderSystem: public System {
+class EntityRenderSystem: public System {
     public:
-        explicit RenderSystem();
+        explicit EntityRenderSystem();
 
         void render(const std::shared_ptr<Renderer>& renderer, Camera camera);
 
@@ -15,4 +15,4 @@ class RenderSystem: public System {
 };
 
 
-#endif //TEXTBASED_RENDERSYSTEM_H
+#endif //TEXTBASED_ENTITYRENDERSYSTEM_H

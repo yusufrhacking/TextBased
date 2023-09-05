@@ -40,7 +40,7 @@ set(SOURCE_FILES
         src/main/ECSManagers/ComponentManager.cpp src/main/ECSManagers/ComponentManager.h
         src/main/ECSManagers/EntityManager.cpp src/main/ECSManagers/EntityManager.h
         src/main/HighLevel/Globals.h
-        src/main/Rendering/RenderSystem.cpp src/main/Rendering/RenderSystem.h
+        src/main/Rendering/EntityRenderSystem.cpp src/main/Rendering/EntityRenderSystem.h
         src/main/Text/TextComponent.h src/main/ECSObjects/UpdateSystem.h
         src/main/PositionsAndMovement/Size.h
         src/main/Text/TextGenerator.cpp src/main/Text/TextGenerator.h src/main/HighLevel/GameManager.cpp src/main/HighLevel/GameManager.h
