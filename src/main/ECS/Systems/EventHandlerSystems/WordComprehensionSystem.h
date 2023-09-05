@@ -8,7 +8,6 @@
 class WordComprehensionSystem: public System {
 public:
     WordComprehensionSystem();
-    std::string pop_text();
 private:
     std::string text;
     bool listening_to_letters;

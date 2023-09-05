@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "WordComprehensionSystem.h"
 #include "../../Design/Managers/ECSManager.h"
 
@@ -13,11 +14,8 @@ void WordComprehensionSystem::listenToEvents(){
     eventBus->listenToEvent<GameKeyEvent>(this, &WordComprehensionSystem::onText);
 }
 void WordComprehensionSystem::onText(GameKeyEvent& event){
-    if (listening_to_letters){
-
+    if (event.getKey() == GameKey::TEXT_FLIP){
+        spdlog::debug("TEXT FLIPPING");
     }
 }
 
-std::string WordComprehensionSystem::pop_text() {
-    return std::string();
-}

@@ -14,8 +14,8 @@ std::map<SDL_Scancode, GameKey> keyStateMappings = {
         { SDL_SCANCODE_RIGHT, GameKey::MOVE_RIGHT }
 };
 
-std::map<SDL_Scancode, GameKey> keyPressMappings = {
-        {SDL_SCANCODE_SPACE, GameKey::TEXT_FLIP}
+std::map<SDL_KeyCode, GameKey> keyPressMappings = {
+        {SDLK_SPACE, GameKey::TEXT_FLIP}
 };
 
 bool InputProcessor::processInput(SDL_Event event) {
@@ -24,10 +24,17 @@ bool InputProcessor::processInput(SDL_Event event) {
         spdlog::critical("SDL QUIT Executed");
         return false;
     }
-    return readInput(static_cast<SDL_KeyCode>(event.key.keysym.sym));
+    return readInput(event);
 }
 
-bool InputProcessor::readInput(SDL_KeyCode key){
+bool InputProcessor::readInput(SDL_Event event){
+    auto key = static_cast<SDL_KeyCode>(event.key.keysym.sym);
+    if (event.type == SDL_KEYDOWN){
+        auto it = keyPressMappings.find(key);
+        if (it != keyPressMappings.end()) {
+            eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(it->second));
+        }
+    }
     SDL_PumpEvents();
     const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
 
@@ -42,6 +49,8 @@ bool InputProcessor::readInput(SDL_KeyCode key){
             eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(scanCodeGameKeyPair.second));
         }
     }
-    return true;
 
+
+
+    return true;
 }
