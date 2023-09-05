@@ -38,15 +38,15 @@ void SDLRenderer::renderClear() {
 
 
 void SDLRenderer::renderRect() {
-    SDL_Color color = {255, 0, 0, 255}; // Example red color
+    SDL_Color color = {255, 255, 255, 255}; // Example red color
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
     SDL_Rect rect;
     rect.x = 50;
     rect.y = 50;
     rect.w = 100;
     rect.h = 50;
-    SDL_RenderFillRect(renderer, &rect);
-    SDL_SetRenderDrawColor(renderer, 0, color.g, color.b, color.a);
+    SDL_RenderDrawRect(renderer, &rect);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 }
 
