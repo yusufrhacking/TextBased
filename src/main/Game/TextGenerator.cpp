@@ -28,6 +28,12 @@ std::string TextGenerator::getMountainText() {
     return text;
 }
 
+std::string TextGenerator::getWelcomeText() {
+    std::string text;
+    text.append("          WELCOME TO BABYLON\n");
+    text.append("PROCEED FORWARDS TO BEGIN YOUR JOURNEY\n");
+}
+
 std::string TextGenerator::getXOffCenterOffset(int diff, std::string centerOffset){
     std::string newOffset;
     for (int space=0; space < centerOffset.size() - diff; space++){
