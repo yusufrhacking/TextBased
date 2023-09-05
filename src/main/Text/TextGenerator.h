@@ -1,6 +1,5 @@
 #ifndef TEXTBASED_TEXTGENERATOR_H
 #define TEXTBASED_TEXTGENERATOR_H
-
 #include <string>
 
 class TextGenerator {

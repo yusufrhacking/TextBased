@@ -1,7 +1,6 @@
 #ifndef TEXTBASED_FIRSTSYSTEM_H
 #define TEXTBASED_FIRSTSYSTEM_H
-
-#include "../../Design/Objects/System.h"
+#include "System.h"
 
 class FirstSystem: public System{
 public:

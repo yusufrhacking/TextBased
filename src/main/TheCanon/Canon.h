@@ -1,9 +1,10 @@
 #ifndef TEXTBASED_CANON_H
 #define TEXTBASED_CANON_H
-
 #include <unordered_map>
 #include "MapPosition.h"
 #include "Page.h"
+#include "../PositionsAndMovement/Position.h"
+#include "../ECSObjects/Entity.h"
 
 namespace std {
     template <>

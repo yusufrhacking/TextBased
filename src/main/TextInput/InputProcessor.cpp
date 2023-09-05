@@ -1,8 +1,8 @@
 #include "InputProcessor.h"
-#include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 #include "SDL_keycode.h"
-#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
-#include "../../../Helpers/EventSystem/Events/TextInputEvent.h"
+#include "../EventSystem/EventBus.h"
+#include "GameKeyEvent.h"
+#include "TextInputEvent.h"
 #include <SDL.h>
 #include <spdlog/spdlog.h>
 

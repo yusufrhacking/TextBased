@@ -1,11 +1,9 @@
 #ifndef TEXTBASED_CAMERAFOLLOWSYSTEM_H
 #define TEXTBASED_CAMERAFOLLOWSYSTEM_H
-
-
 #include "../MainPlayer/MainPlayerComponent.h"
-#include "../Positioning/PositionComponent.h"
 #include "../ECSObjects/UpdateSystem.h"
-#include "../../../Game/GameSystems/Camera/Camera.h"
+#include "../ECSObjects/System.h"
+#include "Camera.h"
 
 
 class CameraFollowSystem: public System {

@@ -2,7 +2,7 @@
 #define TEXTBASED_EVENTCONSUMERSYSTEM_H
 
 
-#include "../../Design/Objects/System.h"
+#include "System.h"
 
 class EventConsumerSystem: public System{
 

@@ -1,12 +1,10 @@
 #ifndef TEXTBASED_COMPONENTMANAGER_H
 #define TEXTBASED_COMPONENTMANAGER_H
 
-
-#include "../ECS/Design/Objects/Entity.h"
-#include "../ECS/Design/Objects/Component.h"
-#include "../ECS/Design/Objects/Pool.h"
 #include "../HighLevel/Globals.h"
-#include "../ECS/Design/Objects/ComponentSignature.h"
+#include "../ECSObjects/Pool.h"
+#include "../ECSObjects/ComponentSignature.h"
+#include "../ECSObjects/Entity.h"
 #include <bitset>
 #include <stdexcept>
 

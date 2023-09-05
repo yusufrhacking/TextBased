@@ -1,9 +1,7 @@
 #ifndef TEXTBASED_READYTOMOVEEVENT_H
 #define TEXTBASED_READYTOMOVEEVENT_H
-
 #include "../EventSystem/Event.h"
 #include "Velocity.h"
-#include "../ECS/Design/Objects/Entity.h"
 
 class ReadyToMoveEvent: public Event{
 public:

@@ -5,6 +5,7 @@
 
 #include "../Text/TextComponent.h"
 #include "StyleComponent.h"
+#include "../Camera/Camera.h"
 
 class Renderer {
     public:

@@ -1,9 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "ECSManager.h"
-#include "../MainPlayer/MainPlayerComponent.h"
-#include "../MainPlayer/UnprocessedKeyboardMovementSystem.h"
-#include "../Camera/CameraFollowSystem.h"
-#include "Game.h"
+
 
 int GenericComponent::nextId = 0;
 

@@ -3,9 +3,9 @@
 #include <queue>
 #include <vector>
 #include <array>
-#include "../ECS/Design/Objects/Entity.h"
 #include "../HighLevel/Globals.h"
-#include "../ECS/Design/Objects/ComponentSignature.h"
+#include "../ECSObjects/Entity.h"
+#include "../ECSObjects/ComponentSignature.h"
 
 
 class EntityManager {

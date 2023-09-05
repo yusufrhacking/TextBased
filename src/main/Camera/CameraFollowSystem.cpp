@@ -1,8 +1,8 @@
 #include <spdlog/spdlog.h>
 #include "CameraFollowSystem.h"
 #include "../HighLevel/ECSManager.h"
-#include "../../../Game/GameSystems/Camera/Camera.h"
 #include "../HighLevel/Game.h"
+#include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

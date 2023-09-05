@@ -2,7 +2,7 @@
 #define TEXTBASED_TREECOMPONENT_H
 
 #include "TextComponent.h"
-#include "../../../Art/TextGenerator.h"
+#include "TextGenerator.h"
 
 struct TreeComponent: public TextComponent{
     TreeComponent(){

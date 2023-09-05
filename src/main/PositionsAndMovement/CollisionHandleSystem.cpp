@@ -1,7 +1,7 @@
 #include "CollisionHandleSystem.h"
 #include "../HighLevel/ECSManager.h"
-#include "../MainPlayer/MainPlayerComponent.h"
-#include "../../../Positioning/MovementComponent.h"
+#include "CollisionComponent.h"
+#include "PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

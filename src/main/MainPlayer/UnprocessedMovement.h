@@ -1,8 +1,7 @@
 #ifndef TEXTBASED_UNPROCESSEDMOVEMENT_H
 #define TEXTBASED_UNPROCESSEDMOVEMENT_H
 
-
-#include "../../../Design/Objects/Entity.h"
+#include "../ECSObjects/Entity.h"
 
 struct UnprocessedMovement {
     Entity entity;

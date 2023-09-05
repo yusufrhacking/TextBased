@@ -2,8 +2,7 @@
 #define TEXTBASED_COLLISIONHANDLESYSTEM_H
 
 #include "../ECSObjects/EventConsumerSystem.h"
-#include "../../../Positioning/CollisionComponent.h"
-#include "../../../Helpers/EventSystem/Events/CollisionEvent.h"
+#include "CollisionEvent.h"
 
 class CollisionHandleSystem: public EventConsumerSystem {
 public:

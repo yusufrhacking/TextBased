@@ -1,6 +1,5 @@
 #ifndef TEXTBASED_MAPPOSITION_H
 #define TEXTBASED_MAPPOSITION_H
-#include "../Positioning/Position.h"
 
 struct MapPosition{
     int xPos;

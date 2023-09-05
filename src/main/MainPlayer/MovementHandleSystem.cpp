@@ -1,7 +1,7 @@
 #include <spdlog/spdlog.h>
 #include "MovementHandleSystem.h"
 #include "../HighLevel/ECSManager.h"
-#include "../../../Helpers/EventSystem/Events/PostMovementEvent.h"
+#include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

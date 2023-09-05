@@ -6,4 +6,4 @@ public:
     Event() = default;
 };
 
-#endif //TEXTBASED_EVENT_H
+#endif

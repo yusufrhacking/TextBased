@@ -4,8 +4,9 @@
 #include <typeindex>
 #include <unordered_map>
 #include <vector>
-#include "../ECS/Design/Objects/Entity.h"
-#include "../ECS/Design/Objects/System.h"
+#include "../ECSObjects/Entity.h"
+#include "../ECSObjects/ComponentSignature.h"
+#include "../ECSObjects/System.h"
 
 using SystemsMap = std::unordered_map<std::type_index, std::shared_ptr<System>>;
 

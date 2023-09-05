@@ -1,12 +1,9 @@
 #ifndef TEXTBASED_FIRSTLEVEL_H
 #define TEXTBASED_FIRSTLEVEL_H
-#include "../Positioning/AutonomousMovementSystem.h"
-#include "../Art/TextGenerator.h"
-#include "../Positioning/CollisionComponent.h"
-#include "../Positioning/Position.h"
 #include "../HighLevel/ECSManager.h"
 #include <memory>
-#include "../Positioning/CollisionCheckSystem.h"
+#include "../Text/TreeComponent.h"
+
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

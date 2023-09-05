@@ -1,6 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "CollisionCheckSystem.h"
-#include "../../../Helpers/EventSystem/Events/CollisionEvent.h"
+#include "PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

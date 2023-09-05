@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_CANONREGISTERINGSYSTEM_H
 #define TEXTBASED_CANONREGISTERINGSYSTEM_H
-#include "../ECS/Design/Objects/System.h"
 #include "Canon.h"
+#include "../ECSObjects/System.h"
 
 class CanonRegisteringSystem: public System {
 public:

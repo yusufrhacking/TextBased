@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_MAINPLAYERCOMPONENT_H
 #define TEXTBASED_MAINPLAYERCOMPONENT_H
 #include <memory>
-#include "../Positioning/Velocity.h"
+#include "../PositionsAndMovement/Velocity.h"
 
 struct MainPlayerComponent{
     std::shared_ptr<Velocity> movementSpeed;

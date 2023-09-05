@@ -2,7 +2,6 @@
 #define TEXTBASED_COLLISIONEVENT_H
 
 #include "../EventSystem/Event.h"
-#include "../ECS/Design/Objects/Entity.h"
 
 class CollisionEvent: public Event{
 public:

@@ -4,19 +4,20 @@
 #include <vector>
 #include <bitset>
 #include <set>
-#include "../ECS/Design/Objects/Pool.h"
-#include "../ECS/Design/Objects/System.h"
 #include <unordered_map>
 #include <typeindex>
-#include "../ECS/Design/Objects/Entity.h"
-#include "../ECS/Design/Managers/EntityManager.h"
-#include "../ECS/Design/Managers/ComponentManager.h"
-#include "../ECS/Design/Managers/SystemManager.h"
 #include "../Rendering/Renderer.h"
 #include "../Rendering/RenderSystem.h"
 #include "../ECSObjects/UpdateSystem.h"
-#include "../../../Helpers/EventSystem/EventBus/EventBus.h"
-#include "../../../Game/GameSystems/Camera/Camera.h"
+#include "../ECSManagers/SystemManager.h"
+#include "../Camera/Camera.h"
+#include "../MainPlayer/MainPlayerComponent.h"
+#include "../ECSObjects/FirstSystem.h"
+#include "../Camera/CameraFollowSystem.h"
+#include "../EventSystem/EventBus.h"
+#include "Game.h"
+#include "../ECSManagers/EntityManager.h"
+#include "../ECSManagers/ComponentManager.h"
 
 
 class ECSManager {

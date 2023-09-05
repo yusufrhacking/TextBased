@@ -1,10 +1,10 @@
 #ifndef TEXTBASED_WORDCOMPREHENSIONSYSTEM_H
 #define TEXTBASED_WORDCOMPREHENSIONSYSTEM_H
-
-
-#include "../../Design/Objects/System.h"
-#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
-#include "../../../Helpers/EventSystem/Events/TextInputEvent.h"
+#include "../HighLevel/ECSManager.h"
+#include "ProcessedTextEvent.h"
+#include "GameKeyEvent.h"
+#include "TextInputEvent.h"
+#include "../ECSObjects/System.h"
 
 class WordComprehensionSystem: public System {
 public:

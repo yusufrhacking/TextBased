@@ -1,7 +1,6 @@
 #include "PlayerKeyboardInputSystem.h"
-#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
-#include "../../../Positioning/AutonomousMovementSystem.h"
 #include "UnprocessedKeyboardMovementSystem.h"
+#include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

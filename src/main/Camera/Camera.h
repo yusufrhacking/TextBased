@@ -1,9 +1,7 @@
 #ifndef TEXTBASED_CAMERA_H
 #define TEXTBASED_CAMERA_H
-
-
 #include <SDL_rect.h>
-#include "../Positioning/Position.h"
+#include "../PositionsAndMovement/Position.h"
 
 class Camera {
 private:

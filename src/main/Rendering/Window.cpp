@@ -1,9 +1,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 #include "Window.h"
-#include "../TheCanon/Page.h"
-#include <SDL.h>
-#include <stdexcept>
+
 
 int Window::windowWidth = 0;
 int Window::windowHeight = 0;

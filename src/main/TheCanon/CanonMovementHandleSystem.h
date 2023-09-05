@@ -1,11 +1,8 @@
 #ifndef TEXTBASED_CANONMOVEMENTHANDLESYSTEM_H
 #define TEXTBASED_CANONMOVEMENTHANDLESYSTEM_H
-
-
 #include "../ECSObjects/EventConsumerSystem.h"
 #include "Canon.h"
-#include "../../../Helpers/EventSystem/Events/ReadyToMoveEvent.h"
-#include "../../../Helpers/EventSystem/Events/PostMovementEvent.h"
+#include "../PositionsAndMovement/PostMovementEvent.h"
 
 class CanonMovementHandleSystem: public EventConsumerSystem {
     Canon& canon;

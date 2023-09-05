@@ -1,19 +1,9 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #include "GameManager.h"
-#include "../Positioning/AutonomousMovementSystem.h"
-#include "../Art/TextGenerator.h"
-#include "../Positioning/CollisionComponent.h"
-#include "../Game/Levels/FirstLevel.h"
-#include "../PositionsAndMovement/CollisionHandleSystem.h"
-#include "../MainPlayer/PlayerKeyboardInputSystem.h"
-#include "../Camera/CameraFollowSystem.h"
-#include "../MainPlayer/UnprocessedKeyboardMovementSystem.h"
-#include "Game.h"
-#include "../TheCanon/CanonRegisteringSystem.h"
-#include "../MainPlayer/MovementHandleSystem.h"
-#include "../TheCanon/CanonMovementHandleSystem.h"
-#include "../TextInput/WordComprehensionSystem.h"
+#include "../Levels/FirstLevel.h"
+#include "../PositionsAndMovement/AutonomousMovementSystem.h"
+#include "../PositionsAndMovement/CollisionCheckSystem.h"
 
 GameManager::GameManager(Position position): canon(position) {
 }

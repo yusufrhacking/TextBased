@@ -1,9 +1,6 @@
 #include "FirstLevel.h"
-#include "../HighLevel/GameManager.h"
-#include "../MainPlayer/MainPlayerComponent.h"
-#include "../Text/TreeComponent.h"
-#include "../HighLevel/Game.h"
-#include "../GameSystems/Camera/Camera.h"
+#include "../PositionsAndMovement/PositionComponent.h"
+#include "../PositionsAndMovement/CollisionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

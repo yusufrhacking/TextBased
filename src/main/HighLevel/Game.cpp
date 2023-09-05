@@ -1,11 +1,9 @@
 #include "Game.h"
-#include "../Rendering/SDLRenderer.h"
-#include "../Art/TextGenerator.h"
-#include <stdexcept>
-#include "spdlog/spdlog.h"
 
 Position Game::startingTopLeftPosition = {11760, 10516}; //Multiple of the frame height/width
 int currFrame;
+
+extern std::unique_ptr<ECSManager> ecsManager;
 
 Game::Game(){
     kirk = std::make_unique<GameManager>(Game::startingTopLeftPosition);
@@ -16,7 +14,7 @@ void Game::initialize() {
         throw std::runtime_error("SDL Init Failed");
     }
     window = std::make_unique<Window>();
-    renderer = std::make_shared<SDLRenderer>(window->getWindow());
+    renderer = std::make_shared<SDLRenderer>((window->getWindow()));
     inputProcessor = std::make_unique<InputProcessor>();
     SDL_StartTextInput();
 

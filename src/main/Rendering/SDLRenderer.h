@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include "Window.h"
 #include <SDL_ttf.h>
-#include "../Positioning/Position.h"
 #include "../Text/TextComponent.h"
 #include "../../../resources/SDL_FontCache.h"
 #include "../Text/TextComponent.h"

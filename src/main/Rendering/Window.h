@@ -1,8 +1,10 @@
 #ifndef TEXTBASED_WINDOW_H
 #define TEXTBASED_WINDOW_H
 #include <SDL.h>
-#include "../Positioning/Position.h"
+#include "../PositionsAndMovement/Position.h"
 #include <memory>
+#include "../TheCanon/Page.h"
+#include <stdexcept>
 
 class Window {
 

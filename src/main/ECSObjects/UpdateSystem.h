@@ -1,7 +1,6 @@
 #ifndef TEXTBASED_UPDATESYSTEM_H
 #define TEXTBASED_UPDATESYSTEM_H
-
-#include "../../Design/Objects/System.h"
+#include "System.h"
 
 class UpdateSystem: public System {
     public:

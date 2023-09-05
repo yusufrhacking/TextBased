@@ -31,10 +31,10 @@ set(SOURCE_FILES
         src/main/PositionsAndMovement/Position.h src/main/PositionsAndMovement/Velocity.h
         src/main/PositionsAndMovement/AutonomousMovementSystem.cpp src/main/PositionsAndMovement/AutonomousMovementSystem.h
         "src/main/ECSObjects/Entity.cpp" "src/main/ECSObjects/Entity.h"
-        "src/main/ECSObjects/Component.cpp" "src/main/ECSObjects/Component.h"
+        "src/main/ECSObjects/Component.h"
         "src/main/ECSObjects/System.cpp" "src/main/ECSObjects/System.h"
         "src/main/HighLevel/ECSManager.cpp" "src/main/HighLevel/ECSManager.h"
-        src/main/ECSObjects/Pool.cpp src/main/ECSObjects/Pool.h
+        src/main/ECSObjects/Pool.h
         src/main/PositionsAndMovement/MovementComponent.h
         src/main/ECSManagers/SystemManager.cpp src/main/ECSManagers/SystemManager.h
         src/main/ECSManagers/ComponentManager.cpp src/main/ECSManagers/ComponentManager.h

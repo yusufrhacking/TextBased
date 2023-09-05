@@ -2,7 +2,6 @@
 #define TEXTBASED_STYLECOMPONENT_H
 #include <string>
 #include <sstream>
-#include "../Positioning/Size.h"
 
 struct StyleComponent{
 private:

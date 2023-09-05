@@ -1,8 +1,7 @@
 #include <spdlog/spdlog.h>
+#include "GameKeyEvent.h"
 #include "WordComprehensionSystem.h"
-#include "../HighLevel/ECSManager.h"
-#include "../../../Helpers/EventSystem/Events/TextInputEvent.h"
-#include "../../../Helpers/EventSystem/Events/ProcessedTextEvent.h"
+
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

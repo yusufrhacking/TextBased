@@ -1,6 +1,6 @@
 #include "CanonRegisteringSystem.h"
-#include "../Positioning/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

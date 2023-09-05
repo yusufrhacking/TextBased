@@ -3,7 +3,7 @@
 #include <string>
 #include <utility>
 #include "../HighLevel/Globals.h"
-#include "../Positioning/Size.h"
+#include "../PositionsAndMovement/Size.h"
 #include <sstream>
 
 struct TextComponent {

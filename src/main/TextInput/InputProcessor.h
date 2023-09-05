@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <set>
 #include <string>
-#include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
 
 class InputProcessor {
     public:
