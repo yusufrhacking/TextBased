@@ -2,6 +2,7 @@
 #include "WordComprehensionSystem.h"
 #include "../../Design/Managers/ECSManager.h"
 #include "../../../Helpers/EventSystem/Events/TextInputEvent.h"
+#include "../../../Helpers/EventSystem/Events/ProcessedTextEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -23,7 +24,7 @@ void WordComprehensionSystem::onGameKey(GameKeyEvent& event){
     else if (event.getKey() == GameKey::END_OF_TEXT){
         listening_to_letters = false;
         spdlog::debug("TEXT ENDING AT: {}", text);
-
+        eventBus->emitEvent<ProcessedTextEvent>(ProcessedTextEvent(text));
         text = "";
     }
 }
