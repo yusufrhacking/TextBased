@@ -4,6 +4,7 @@
 #include "../Levels/FirstLevel.h"
 #include "../PositionsAndMovement/AutonomousMovementSystem.h"
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
+#include "../TextCommands/TextCommandSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
 }
@@ -25,6 +26,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<MovementHandleSystem>();
     ecsManager->addSystem<CanonMovementHandleSystem>(canon);
     ecsManager->addSystem<WordComprehensionSystem>();
+    ecsManager->addSystem<TextCommandSystem>();
 }
 
 void GameManager::update(double deltaTime) {
