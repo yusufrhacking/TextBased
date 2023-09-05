@@ -6,10 +6,10 @@
 #include "../TextInput/InputProcessor.h"
 #include "../Rendering/Renderer.h"
 #include "../Rendering/SDLRenderer.h"
-#include "GameManager.h"
 #include <memory>
 #include <stdexcept>
 #include "spdlog/spdlog.h"
+#include "GameManager.h"
 
 const size_t FPS = 60;
 const size_t MILLISECS_PER_FRAME = 1000 / FPS;

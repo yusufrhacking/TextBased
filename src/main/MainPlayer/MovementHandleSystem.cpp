@@ -2,6 +2,7 @@
 #include "MovementHandleSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../PositionsAndMovement/PositionComponent.h"
+#include "../PositionsAndMovement/PostMovementEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

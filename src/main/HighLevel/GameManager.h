@@ -6,7 +6,6 @@
 #include "../MainPlayer/PlayerKeyboardInputSystem.h"
 #include "../Camera/CameraFollowSystem.h"
 #include "../MainPlayer/UnprocessedKeyboardMovementSystem.h"
-#include "Game.h"
 #include "../TheCanon/CanonRegisteringSystem.h"
 #include "../MainPlayer/MovementHandleSystem.h"
 #include "../TheCanon/CanonMovementHandleSystem.h"
@@ -16,6 +15,7 @@ class GameManager {
 private:
     void setupSystems();
     Canon canon;
+    Position startingPosition;
 public:
     explicit GameManager(Position position);
     void setup();

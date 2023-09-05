@@ -5,12 +5,12 @@
 #include "../PositionsAndMovement/AutonomousMovementSystem.h"
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 
-GameManager::GameManager(Position position): canon(position) {
+GameManager::GameManager(Position position): canon(position), startingPosition(position) {
 }
 
 void GameManager::setup() {
     setupSystems();
-    FirstLevel level1{Game::startingTopLeftPosition + Window::getMiddlePosition()};
+    FirstLevel level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {

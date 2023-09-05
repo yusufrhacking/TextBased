@@ -15,7 +15,6 @@
 #include "../ECSObjects/FirstSystem.h"
 #include "../Camera/CameraFollowSystem.h"
 #include "../EventSystem/EventBus.h"
-#include "Game.h"
 #include "../ECSManagers/EntityManager.h"
 #include "../ECSManagers/ComponentManager.h"
 
@@ -28,7 +27,7 @@ class ECSManager {
         Camera currentCamera = Camera(Position());
 
 public:
-        ECSManager();
+        ECSManager(Position startingPosition);
 
         ~ECSManager() = default;
 

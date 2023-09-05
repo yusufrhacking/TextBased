@@ -1,5 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "UnprocessedKeyboardMovementSystem.h"
+#include "../PositionsAndMovement/ReadyToMoveEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
