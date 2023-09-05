@@ -25,6 +25,7 @@ public:
     void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
     void renderPresent() override;
     void renderClear() override;
+    void renderRect() override;
 
 private:
     bool isImproperlyInitialized() const;
