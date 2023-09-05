@@ -23,6 +23,7 @@ void WordComprehensionSystem::onGameKey(GameKeyEvent& event){
     else if (event.getKey() == GameKey::END_OF_TEXT){
         listening_to_letters = false;
         spdlog::debug("TEXT ENDING AT: {}", text);
+
         text = "";
     }
 }
