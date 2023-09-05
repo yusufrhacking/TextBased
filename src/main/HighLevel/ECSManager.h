@@ -42,7 +42,7 @@ public:
         void runTimedSystems(double deltaTime) const;
         void runCameraSystem();
 
-        void render(std::shared_ptr<Renderer> renderer);
+        void render(const std::shared_ptr<Renderer>& renderer);
 
 
         template <typename TComponent>

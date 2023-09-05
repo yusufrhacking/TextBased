@@ -16,13 +16,15 @@
 
 class SDLRenderer: public Renderer {
     SDL_Renderer* renderer;
+    SDL_Rect r;
     FC_Font* genericMonacoFont;
 
 public:
     explicit SDLRenderer(SDL_Window* sdlWindow);
     ~SDLRenderer() override;
     void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
-    void renderFrame() override;
+    void renderPresent() override;
+    void renderClear() override;
 
 private:
     bool isImproperlyInitialized() const;

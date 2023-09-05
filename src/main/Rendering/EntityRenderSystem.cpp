@@ -18,7 +18,4 @@ void EntityRenderSystem::render(const std::shared_ptr<Renderer>& renderer, Camer
 
         renderer->renderText(camera, positionComponent.getPosition(), spriteComponent, styleComponent);
     }
-
-    renderer->renderFrame();
-
 }

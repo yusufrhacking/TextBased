@@ -11,14 +11,14 @@ class Renderer {
     public:
         virtual ~Renderer() = default;
         virtual void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) = 0;
-        virtual void renderFrame() = 0;
-
+        virtual void renderPresent() = 0;
+        virtual void renderClear() = 0;
 };
 
 class MockRenderer : public Renderer {
 public:
     MOCK_METHOD(void, renderText, (Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style), (override));
-    MOCK_METHOD(void, renderFrame, (), (override));
+    MOCK_METHOD(void, renderPresent, (), (override));
 };
 
 

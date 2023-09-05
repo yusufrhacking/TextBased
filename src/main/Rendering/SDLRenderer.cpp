@@ -17,6 +17,8 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     genericMonacoFont = FC_CreateFont();
     FC_LoadFont(genericMonacoFont, renderer, "../../resources/Monaco.ttf",
                 FONT_SIZE, FC_MakeColor(255,255,255,255), TTF_STYLE_NORMAL);
+
+    r = {50, 50, 50, 50};
 }
 
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
@@ -30,9 +32,12 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
     }
 }
 
-void SDLRenderer::renderFrame() {
-    SDL_RenderPresent(renderer);
+void SDLRenderer::renderClear() {
     SDL_RenderClear(renderer);
+}
+
+void SDLRenderer::renderPresent() {
+    SDL_RenderPresent(renderer);
 }
 
 SDLRenderer::~SDLRenderer() {
@@ -41,3 +46,5 @@ SDLRenderer::~SDLRenderer() {
 }
 
 bool SDLRenderer::isImproperlyInitialized() const { return TTF_Init() < 0; }
+
+

@@ -49,10 +49,12 @@ void ECSManager::runTimedSystems(double deltaTime) const {
 }
 
 
-void ECSManager::render(std::shared_ptr<Renderer> renderer){
+void ECSManager::render(const std::shared_ptr<Renderer>& renderer){
+    renderer->renderClear();
     for (const auto& system : systemManager->getSystemsOfType<EntityRenderSystem>()){
         system->render(renderer, currentCamera);
     }
+    renderer->renderPresent();
 }
 
 Entity ECSManager::createEntity() {
