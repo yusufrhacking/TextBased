@@ -18,6 +18,7 @@ void Game::initialize() {
     window = std::make_unique<Window>();
     renderer = std::make_shared<SDLRenderer>(window->getWindow());
     inputProcessor = std::make_unique<InputProcessor>();
+    SDL_StartTextInput();
 
     isRunning = true;
 }

@@ -15,7 +15,8 @@ void WordComprehensionSystem::listenToEvents(){
 }
 void WordComprehensionSystem::onText(GameKeyEvent& event){
     if (event.getKey() == GameKey::TEXT_FLIP){
-        spdlog::debug("TEXT FLIPPING");
+        listening_to_letters = !listening_to_letters;
+        spdlog::debug("TEXT FLIPPING to {}", listening_to_letters);
     }
 }
 

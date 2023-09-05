@@ -15,7 +15,8 @@ std::map<SDL_Scancode, GameKey> keyStateMappings = {
 };
 
 std::map<SDL_KeyCode, GameKey> keyPressMappings = {
-        {SDLK_SPACE, GameKey::TEXT_FLIP}
+        {SDLK_SPACE, GameKey::TEXT_FLIP},
+        {SDLK_ENTER, GameKey::END_OF_TEXT}
 };
 
 bool InputProcessor::processInput(SDL_Event event) {
@@ -34,6 +35,8 @@ bool InputProcessor::readInput(SDL_Event event){
         if (it != keyPressMappings.end()) {
             eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(it->second));
         }
+    } else if(event.type == SDL_TEXTINPUT){
+
     }
     SDL_PumpEvents();
     const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
