@@ -2,6 +2,7 @@
 #define TEXTBASED_INPUTPROCESSOR_H
 #include <SDL.h>
 #include <set>
+#include <string>
 #include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
 
 class InputProcessor {
@@ -11,6 +12,7 @@ class InputProcessor {
         bool processInput(SDL_Event event);
 
     private:
+        std::string text;
         bool readInput(SDL_Event event);
 };
 

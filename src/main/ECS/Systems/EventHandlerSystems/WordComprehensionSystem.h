@@ -4,6 +4,7 @@
 
 #include "../../Design/Objects/System.h"
 #include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
+#include "../../../Helpers/EventSystem/Events/TextInputEvent.h"
 
 class WordComprehensionSystem: public System {
 public:
@@ -12,7 +13,8 @@ private:
     std::string text;
     bool listening_to_letters;
     void listenToEvents();
-    void onText(GameKeyEvent& event);
+    void onGameKey(GameKeyEvent& event);
+    void onText(TextInputEvent& event);
 };
 
 

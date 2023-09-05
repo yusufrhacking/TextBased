@@ -2,6 +2,7 @@
 #include "../../../Helpers/EventSystem/EventBus/EventBus.h"
 #include "SDL_keycode.h"
 #include "../../../Helpers/EventSystem/Events/GameKeyEvent.h"
+#include "../../../Helpers/EventSystem/Events/TextInputEvent.h"
 #include <SDL.h>
 #include <spdlog/spdlog.h>
 
@@ -36,7 +37,7 @@ bool InputProcessor::readInput(SDL_Event event){
             eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(it->second));
         }
     } else if(event.type == SDL_TEXTINPUT){
-        //https://lazyfoo.net/tutorials/SDL/32_text_input_and_clipboard_handling/index.php WORK FROM HERE
+        eventBus->emitEvent<TextInputEvent>(TextInputEvent(event.text));
     }
     SDL_PumpEvents();
     const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
