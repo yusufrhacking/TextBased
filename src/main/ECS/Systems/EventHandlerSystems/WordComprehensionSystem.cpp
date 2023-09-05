@@ -18,5 +18,9 @@ void WordComprehensionSystem::onText(GameKeyEvent& event){
         listening_to_letters = !listening_to_letters;
         spdlog::debug("TEXT FLIPPING to {}", listening_to_letters);
     }
+    else if (event.getKey() == GameKey::END_OF_TEXT){
+        listening_to_letters = false;
+        spdlog::debug("TEXT ENDING");
+    }
 }
 
