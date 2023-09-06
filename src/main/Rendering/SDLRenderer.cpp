@@ -53,7 +53,7 @@ void SDLRenderer::renderTerminalText(std::string text) {
 }
 
 void SDLRenderer::renderFlashingUnderscore(std::string text) {
-    float textXLength = (float)text.size() * UI_TEXT_WIDTH_SCALER;
+    float textXLength = (float)text.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
     if (showUnderscore > 30){
         FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET + textXLength,
                 TERMINAL_Y_START + UNDERSCORE_Y_OFFSET, "_");

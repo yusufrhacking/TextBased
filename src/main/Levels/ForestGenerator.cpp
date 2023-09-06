@@ -62,11 +62,11 @@ std::string ForestFrame::getStubTreeText() const {
 
     std::string stubTreeText;
     for (const auto & lineCounter : linesOfText){
-        if (HEIGHT_OF_A_LINE_OF_TEXT > verticalRenderSpace){
+        if (MONACO_HEIGHT_OF_A_LINE_OF_TEXT > verticalRenderSpace){
             break;
         }
         stubTreeText += lineCounter;
-        verticalRenderSpace -= HEIGHT_OF_A_LINE_OF_TEXT;
+        verticalRenderSpace -= MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
     }
     return stubTreeText;
 }

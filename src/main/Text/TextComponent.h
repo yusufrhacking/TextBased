@@ -12,12 +12,12 @@ struct TextComponent {
 
     explicit TextComponent(std::string text){
         this->text = text;
-        surfaceSize = {static_cast<RenderedVal>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
+        surfaceSize = {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
     TextComponent() {
         this->text = "Robert C. Martin";
-        surfaceSize = {static_cast<RenderedVal>(getTextWidth() * RENDERED_TEXT_WIDTH_SCALER), HEIGHT_OF_A_LINE_OF_TEXT};
+        surfaceSize = {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT};
     }
 
 
