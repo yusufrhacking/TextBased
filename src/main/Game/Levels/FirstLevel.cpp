@@ -10,6 +10,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosition) {
     createPlayer();
     createTree();
+    createWelcomeText();
 }
 
 void FirstLevel::createPlayer() {
