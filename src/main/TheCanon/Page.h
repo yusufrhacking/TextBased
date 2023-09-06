@@ -2,8 +2,8 @@
 #define TEXTBASED_PAGE_H
 
 #include <set>
-#include "../ECS/Design/Objects/Entity.h"
-#include "../Game/GameSystems/Window/Window.h"
+#include "../Rendering/Window.h"
+#include "../ECSObjects/Entity.h"
 
 struct Page {
     static int pageWidth;

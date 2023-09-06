@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../main/ECS/Design/Managers/ECSManager.h"
+#include "../main/HighLevel/ECSManager.h"
 
 TEST_CASE("Entity Testing"){
     std::unique_ptr<ECSManager> manager = std::make_unique<ECSManager>();

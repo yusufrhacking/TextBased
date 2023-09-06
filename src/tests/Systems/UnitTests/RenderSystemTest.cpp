@@ -2,7 +2,7 @@
 #include "gmock/gmock.h"
 #include <memory>
 #include "../../MockScopeGuard.h"
-#include "../../../main/ECS/Design/Managers/ECSManager.h"
+#include "../../../main/HighLevel/ECSManager.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 TEST_CASE("Render System", "[System][RenderSystem]") {
