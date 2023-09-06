@@ -18,6 +18,13 @@ class SDLRenderer: public Renderer {
     SDL_Renderer* renderer;
     SDL_Rect r;
     FC_Font* genericMonacoFont;
+    FC_Font* terminalFont;
+    SDL_Color white = {255, 255, 255, 255};
+    SDL_Color black = {0, 0, 0, 255};
+    const float TERMINAL_X_START = 30;
+    const float TERMINAL_Y_START = Window::windowHeight - 110;
+
+
 
 public:
     explicit SDLRenderer(SDL_Window* sdlWindow);
@@ -25,10 +32,12 @@ public:
     void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
     void renderPresent() override;
     void renderClear() override;
-    void renderRect() override;
+    void renderTerminal() override;
 
 private:
     bool isImproperlyInitialized() const;
+
+    void renderTerminalStart();
 };
 
 

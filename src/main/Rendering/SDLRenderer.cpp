@@ -16,7 +16,10 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 
     genericMonacoFont = FC_CreateFont();
     FC_LoadFont(genericMonacoFont, renderer, "../../resources/Monaco.ttf",
-                FONT_SIZE, FC_MakeColor(255,255,255,255), TTF_STYLE_NORMAL);
+                TEXT_C_FONT_SIZE, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+    terminalFont = FC_CreateFont();
+    FC_LoadFont(terminalFont, renderer, "../../resources/Monaco.ttf",
+                TERMINAL_FONT_SIZE, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
 
     r = {50, 50, 50, 50};
 }
@@ -36,18 +39,14 @@ void SDLRenderer::renderClear() {
     SDL_RenderClear(renderer);
 }
 
+void SDLRenderer::renderTerminal() {
+    SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
+    renderTerminalStart();
+    SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
+}
 
-void SDLRenderer::renderRect() {
-    SDL_Color color = {255, 255, 255, 255}; // Example red color
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_Rect rect;
-    rect.x = 50;
-    rect.y = 50;
-    rect.w = 100;
-    rect.h = 50;
-    SDL_RenderDrawRect(renderer, &rect);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
+void SDLRenderer::renderTerminalStart() {
+    FC_Draw(terminalFont, renderer, TERMINAL_X_START, TERMINAL_Y_START, ">");
 }
 
 void SDLRenderer::renderPresent() {
