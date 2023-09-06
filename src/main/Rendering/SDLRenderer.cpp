@@ -41,12 +41,21 @@ void SDLRenderer::renderClear() {
 
 void SDLRenderer::renderTerminal() {
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
-    renderTerminalStart();
+    renderTerminalLine();
+    renderFlashingUnderscore();
     SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
 }
 
-void SDLRenderer::renderTerminalStart() {
+void SDLRenderer::renderTerminalLine() {
     FC_Draw(terminalFont, renderer, TERMINAL_X_START, TERMINAL_Y_START, ">");
+}
+
+void SDLRenderer::renderFlashingUnderscore() {
+    if (showUnderscore > 20){
+        FC_Draw(terminalFont, renderer, TERMINAL_X_START + 35, TERMINAL_Y_START + 3, "_");
+    }
+    showUnderscore += 1;
+    showUnderscore = showUnderscore % 45;
 }
 
 void SDLRenderer::renderPresent() {

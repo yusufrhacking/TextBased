@@ -22,7 +22,8 @@ class SDLRenderer: public Renderer {
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color black = {0, 0, 0, 255};
     const float TERMINAL_X_START = 30;
-    const float TERMINAL_Y_START = Window::windowHeight - 110;
+    const float TERMINAL_Y_START = (float)Window::windowHeight - 110;
+    int showUnderscore = 0;
 
 
 
@@ -37,7 +38,9 @@ public:
 private:
     bool isImproperlyInitialized() const;
 
-    void renderTerminalStart();
+    void renderTerminalLine();
+
+    void renderFlashingUnderscore();
 };
 
 
