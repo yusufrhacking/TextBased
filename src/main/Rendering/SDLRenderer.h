@@ -22,7 +22,7 @@ class SDLRenderer: public Renderer {
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color black = {0, 0, 0, 255};
     const float TERMINAL_X_START = 30;
-    const float TERMINAL_Y_START = (float)Window::windowHeight - 110;
+    const float TERMINAL_Y_START = (float)Window::windowHeight - (110-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);
     int showUnderscore = 0;
     const float TERMINAL_INIT_X_OFFSET = 35;
     const float UNDERSCORE_Y_OFFSET = 3;
