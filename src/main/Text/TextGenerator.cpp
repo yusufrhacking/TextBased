@@ -32,6 +32,7 @@ std::string TextGenerator::getWelcomeText() {
     std::string text;
     text.append("          WELCOME TO BABYLON\n");
     text.append("PROCEED FORWARDS TO BEGIN YOUR JOURNEY\n");
+    return text;
 }
 
 std::string TextGenerator::getXOffCenterOffset(int diff, std::string centerOffset){
