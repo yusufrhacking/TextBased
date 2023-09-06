@@ -28,7 +28,7 @@ void FirstLevel::createTree() {
 
 void FirstLevel::createWelcomeText() {
     auto text = ecsManager->createEntity();
-    Position position {Window::windowWidth, 0};
+    Position position {-750, 0};
     ecsManager->addComponentToEntity<TextComponent>(text, TextGenerator::getWelcomeText());
     ecsManager->addComponentToEntity<PositionComponent>(text, startingPosition + position);
     ecsManager->addComponentToEntity<StyleComponent>(text);
