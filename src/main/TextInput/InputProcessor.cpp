@@ -16,7 +16,7 @@ std::map<SDL_Scancode, GameKey> keyStateMappings = {
 };
 
 std::map<SDL_KeyCode, GameKey> keyPressMappings = {
-        {SDLK_SPACE, GameKey::TEXT_FLIP},
+        {SDLK_BACKQUOTE, GameKey::TEXT_FLIP},
         {SDLK_RETURN, GameKey::END_OF_TEXT}
 };
 
