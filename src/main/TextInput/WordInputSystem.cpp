@@ -19,8 +19,15 @@ void WordInputSystem::onGameKey(GameKeyEvent& event){
     if (event.getKey() == GameKey::TEXT_FLIP){
         listening_to_letters = !listening_to_letters;
         spdlog::debug("TEXT FLIPPING to {} with {}", listening_to_letters, text);
-        eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(text));
+        if (!text.empty()){
+            eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(text));
+        }
         text = "";
+    }
+    if (event.getKey() == GameKey::BACKSPACE){
+        if (!text.empty()){
+            text.pop_back();
+        }
     }
 }
 

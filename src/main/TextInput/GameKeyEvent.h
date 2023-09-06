@@ -9,7 +9,8 @@ enum class GameKey {
     MOVE_DOWN,
     MOVE_RIGHT,
     TEXT_FLIP,
-    END_OF_TEXT
+    END_OF_TEXT,
+    BACKSPACE
 };
 class GameKeyEvent : public Event {
 public:
