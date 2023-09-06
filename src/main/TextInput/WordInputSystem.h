@@ -1,14 +1,14 @@
-#ifndef TEXTBASED_WORDCOMPREHENSIONSYSTEM_H
-#define TEXTBASED_WORDCOMPREHENSIONSYSTEM_H
+#ifndef TEXTBASED_WORDINPUTSYSTEM_H
+#define TEXTBASED_WORDINPUTSYSTEM_H
 #include "../HighLevel/ECSManager.h"
 #include "TextCommandEvent.h"
 #include "GameKeyEvent.h"
 #include "TextInputEvent.h"
 #include "../ECSObjects/System.h"
 
-class WordComprehensionSystem: public EntityRenderSystem {
+class WordInputSystem: public EntityRenderSystem {
 public:
-    WordComprehensionSystem();
+    WordInputSystem();
     void render(const std::shared_ptr<Renderer> &renderer, Camera camera) override;
 private:
     std::string text;
@@ -19,4 +19,4 @@ private:
 };
 
 
-#endif //TEXTBASED_WORDCOMPREHENSIONSYSTEM_H
+#endif //TEXTBASED_WORDINPUTSYSTEM_H

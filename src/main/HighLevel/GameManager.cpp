@@ -28,7 +28,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<CanonRegisteringSystem>(canon);
     ecsManager->addSystem<MovementHandleSystem>();
     ecsManager->addSystem<CanonMovementHandleSystem>(canon);
-    ecsManager->addSystem<WordComprehensionSystem>();
+    ecsManager->addSystem<WordInputSystem>();
     ecsManager->addSystem<TextCommandSystem>();
 }
 

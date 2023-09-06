@@ -9,7 +9,7 @@
 #include "../TheCanon/CanonRegisteringSystem.h"
 #include "../MainPlayer/MovementHandleSystem.h"
 #include "../TheCanon/CanonMovementHandleSystem.h"
-#include "../TextInput/WordComprehensionSystem.h"
+#include "../TextInput/WordInputSystem.h"
 
 class GameManager {
 private:
