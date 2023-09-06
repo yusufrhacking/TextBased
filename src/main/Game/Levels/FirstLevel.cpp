@@ -28,4 +28,10 @@ void FirstLevel::createTree() {
     ecsManager->addComponentToEntity<StyleComponent>(tree);
 }
 
+void FirstLevel::createWelcomeText() {
+    auto text = ecsManager->createEntity();
+
+
+};
+
 

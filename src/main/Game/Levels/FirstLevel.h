@@ -20,6 +20,8 @@ private:
     Entity witt;
 
     void createTree();
+
+    void createWelcomeText();
 };
 
 
