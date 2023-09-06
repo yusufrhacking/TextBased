@@ -9,7 +9,7 @@
 class WordComprehensionSystem: public EntityRenderSystem {
 public:
     WordComprehensionSystem();
-    void render(std::shared_ptr<Renderer> &renderer);
+    void render(const std::shared_ptr<Renderer> &renderer, Camera camera) override;
 private:
     std::string text;
     bool listening_to_letters;

@@ -33,11 +33,10 @@ void WordComprehensionSystem::onText(TextInputEvent &event) {
         auto newText = std::string(event.textEvent.text);
         spdlog::debug("Event text: {}", newText);
         text += newText;
-        eventBus->emitEvent<TextQueuedEvent>(TextQueuedEvent("WORD"));
     }
 }
 
-void WordComprehensionSystem::render(std::shared_ptr<Renderer> &renderer) {
+void WordComprehensionSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     renderer->renderTerminal(text);
 }
 
