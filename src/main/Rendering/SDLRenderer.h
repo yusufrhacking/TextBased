@@ -24,6 +24,8 @@ class SDLRenderer: public Renderer {
     const float TERMINAL_X_START = 30;
     const float TERMINAL_Y_START = (float)Window::windowHeight - 110;
     int showUnderscore = 0;
+    const float TERMINAL_INIT_X_OFFSET = 35;
+    const float TERMINAL_INIT_Y_OFFSET = 3;
 
 
 

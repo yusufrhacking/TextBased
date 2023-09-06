@@ -52,7 +52,8 @@ void SDLRenderer::renderTerminalLine() {
 
 void SDLRenderer::renderFlashingUnderscore() {
     if (showUnderscore > 30){
-        FC_Draw(terminalFont, renderer, TERMINAL_X_START + 35, TERMINAL_Y_START + 3, "_");
+        FC_Draw(terminalFont, renderer, TERMINAL_X_START + TERMINAL_INIT_X_OFFSET,
+                TERMINAL_Y_START + TERMINAL_INIT_Y_OFFSET, "_");
     }
     showUnderscore += 1;
     showUnderscore = showUnderscore % 60;
