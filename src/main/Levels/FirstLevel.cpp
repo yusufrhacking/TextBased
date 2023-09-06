@@ -24,6 +24,8 @@ void FirstLevel::createTree() {
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition);
     ecsManager->addComponentToEntity<StyleComponent>(tree);
+    auto component = ecsManager->getComponentFromEntity<TextComponent>(tree);
+    ecsManager->addComponentToEntity<CollisionComponent>(tree, component.surfaceSize);  //THIS IS A WIP
 }
 
 void FirstLevel::createWelcomeText() {
