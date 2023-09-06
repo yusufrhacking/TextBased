@@ -6,15 +6,13 @@ int currFrame;
 extern std::unique_ptr<ECSManager> ecsManager;
 
 Game::Game(){
-    kirk = std::make_unique<GameManager>(Game::startingTopLeftPosition);
 }
 
 void Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         throw std::runtime_error("SDL Init Failed");
     }
-    window = std::make_unique<Window>();
-    renderer = std::make_shared<SDLRenderer>((window->getWindow()));
+    kirk = std::make_unique<GameManager>(Game::startingTopLeftPosition);
     inputProcessor = std::make_unique<InputProcessor>();
     SDL_StartTextInput();
 
@@ -50,7 +48,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    ecsManager->render(renderer);
+    kirk->render();
 }
 
 double Game::waitForDeltaTime() {

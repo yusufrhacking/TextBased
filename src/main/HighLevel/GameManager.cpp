@@ -6,8 +6,11 @@
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../TextCommands/TextCommandSystem.h"
 #include "../Rendering/UIRenderSystem.h"
+#include "../Rendering/SDLRenderer.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
+    window = std::make_unique<Window>();
+    renderer = std::make_shared<SDLRenderer>((window->getWindow()));
 }
 
 void GameManager::setup() {
@@ -38,6 +41,10 @@ void GameManager::update(double deltaTime) {
     ecsManager->runFirstSystems();
     ecsManager->runTimedSystems(deltaTime);
     ecsManager->runCameraSystem();
+}
+
+void GameManager::render() {
+    ecsManager->render(renderer);
 }
 
 #pragma clang diagnostic pop

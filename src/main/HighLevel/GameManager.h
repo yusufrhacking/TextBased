@@ -16,10 +16,14 @@ private:
     void setupSystems();
     Canon canon;
     Position startingPosition;
+    std::shared_ptr<Renderer> renderer;
+    std::unique_ptr<Window> window;
+
 public:
     explicit GameManager(Position position);
     void setup();
     void update(double deltaTime);
+    void render();
 
 };
 

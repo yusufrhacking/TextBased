@@ -19,10 +19,8 @@ class Game{
 
 private:
         bool isRunning;
-        std::shared_ptr<Renderer> renderer;
         std::unique_ptr<InputProcessor> inputProcessor;
         std::unique_ptr<GameManager> kirk;
-        std::unique_ptr<Window> window;
         size_t millisecsPreviousFrame = 0;
 
         double waitForDeltaTime();

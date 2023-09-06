@@ -9,7 +9,7 @@ class EntityRenderSystem: public System {
     public:
         explicit EntityRenderSystem();
 
-        void render(const std::shared_ptr<Renderer>& renderer, Camera camera);
+        virtual void render(const std::shared_ptr<Renderer>& renderer, Camera camera);
 
     private:
 };
