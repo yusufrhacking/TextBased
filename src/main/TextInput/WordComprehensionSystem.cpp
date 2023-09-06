@@ -1,7 +1,7 @@
 #include <spdlog/spdlog.h>
 #include "GameKeyEvent.h"
 #include "WordComprehensionSystem.h"
-#include "../TerminalUI/TextQueuedEvent.h"
+#include "TextQueuedEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

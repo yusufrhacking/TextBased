@@ -17,6 +17,4 @@ void EntityRenderSystem::render(const std::shared_ptr<Renderer>& renderer, Camer
         const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
         renderer->renderText(camera, positionComponent.getPosition(), spriteComponent, styleComponent);
     }
-    renderer->renderTerminal("Word");
-
 }

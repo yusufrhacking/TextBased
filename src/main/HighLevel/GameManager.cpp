@@ -5,6 +5,7 @@
 #include "../PositionsAndMovement/AutonomousMovementSystem.h"
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../TextCommands/TextCommandSystem.h"
+#include "../Rendering/UIRenderSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
 }
@@ -26,6 +27,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<MovementHandleSystem>();
     ecsManager->addSystem<CanonMovementHandleSystem>(canon);
     ecsManager->addSystem<WordComprehensionSystem>();
+    ecsManager->addSystem<UIRenderSystem>(renderer);
     ecsManager->addSystem<TextCommandSystem>();
 }
 
