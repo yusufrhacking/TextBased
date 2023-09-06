@@ -1,7 +1,7 @@
 #include <spdlog/spdlog.h>
 #include "GameKeyEvent.h"
 #include "WordComprehensionSystem.h"
-
+#include "../TerminalUI/TextQueuedEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -23,15 +23,17 @@ void WordComprehensionSystem::onGameKey(GameKeyEvent& event){
     else if (event.getKey() == GameKey::END_OF_TEXT){
         listening_to_letters = false;
         spdlog::debug("TEXT ENDING AT: {}", text);
-        eventBus->emitEvent<ProcessedTextEvent>(ProcessedTextEvent(text));
+        eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(text));
         text = "";
     }
 }
+
 void WordComprehensionSystem::onText(TextInputEvent &event) {
     if (listening_to_letters){
         auto newText = std::string(event.textEvent.text);
         spdlog::debug("Event text: {}", newText);
         text += newText;
+        eventBus->emitEvent<TextQueuedEvent>(TextQueuedEvent(text));
     }
 }
 

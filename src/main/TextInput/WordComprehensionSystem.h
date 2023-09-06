@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_WORDCOMPREHENSIONSYSTEM_H
 #define TEXTBASED_WORDCOMPREHENSIONSYSTEM_H
 #include "../HighLevel/ECSManager.h"
-#include "ProcessedTextEvent.h"
+#include "TextCommandEvent.h"
 #include "GameKeyEvent.h"
 #include "TextInputEvent.h"
 #include "../ECSObjects/System.h"

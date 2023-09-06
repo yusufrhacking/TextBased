@@ -1,14 +1,14 @@
 #ifndef TEXTBASED_TEXTCOMMANDSYSTEM_H
 #define TEXTBASED_TEXTCOMMANDSYSTEM_H
 #include "../ECSObjects/System.h"
-#include "../TextInput/ProcessedTextEvent.h"
+#include "../TextInput/TextCommandEvent.h"
 
 class TextCommandSystem: public System {
 public:
     TextCommandSystem();
 private:
     void listenToEvents();
-    void onCommand(ProcessedTextEvent& event);
+    void onCommand(TextCommandEvent& event);
 };
 
 

@@ -11,9 +11,9 @@ TextCommandSystem::TextCommandSystem() {
 }
 
 void TextCommandSystem::listenToEvents() {
-    eventBus->listenToEvent<ProcessedTextEvent>(this, &TextCommandSystem::onCommand);
+    eventBus->listenToEvent<TextCommandEvent>(this, &TextCommandSystem::onCommand);
 }
 
-void TextCommandSystem::onCommand(ProcessedTextEvent &event) {
+void TextCommandSystem::onCommand(TextCommandEvent &event) {
     spdlog::debug("Processed text event: {}", event.processedText);
 }

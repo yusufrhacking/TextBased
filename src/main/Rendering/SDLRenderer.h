@@ -26,6 +26,7 @@ class SDLRenderer: public Renderer {
     int showUnderscore = 0;
     const float TERMINAL_INIT_X_OFFSET = 35;
     const float TERMINAL_INIT_Y_OFFSET = 3;
+    const float TEXT_OFFSET = 30;
 
 
 
@@ -35,14 +36,16 @@ public:
     void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
     void renderPresent() override;
     void renderClear() override;
-    void renderTerminal() override;
+    void renderTerminal(std::string text) override;
 
 private:
     bool isImproperlyInitialized() const;
 
-    void renderTerminalLine();
+    void renderTerminalLineStart();
 
-    void renderFlashingUnderscore();
+    void renderFlashingUnderscore(std::string text);
+
+    void renderTerminalText(std::string text);
 };
 
 

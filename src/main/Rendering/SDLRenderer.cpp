@@ -35,28 +35,33 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
     }
 }
 
-void SDLRenderer::renderClear() {
-    SDL_RenderClear(renderer);
-}
-
-void SDLRenderer::renderTerminal() {
+void SDLRenderer::renderTerminal(std::string text) {
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
-    renderTerminalLine();
-    renderFlashingUnderscore();
+    renderTerminalLineStart();
+    renderTerminalText(text);
     SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
 }
 
-void SDLRenderer::renderTerminalLine() {
+void SDLRenderer::renderTerminalLineStart() {
     FC_Draw(terminalFont, renderer, TERMINAL_X_START, TERMINAL_Y_START, ">");
 }
 
-void SDLRenderer::renderFlashingUnderscore() {
+
+void SDLRenderer::renderTerminalText(std::string text) {
+    FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START, text.c_str());
+}
+
+void SDLRenderer::renderFlashingUnderscore(std::string text) {
     if (showUnderscore > 30){
         FC_Draw(terminalFont, renderer, TERMINAL_X_START + TERMINAL_INIT_X_OFFSET,
                 TERMINAL_Y_START + TERMINAL_INIT_Y_OFFSET, "_");
     }
     showUnderscore += 1;
     showUnderscore = showUnderscore % 60;
+}
+
+void SDLRenderer::renderClear() {
+    SDL_RenderClear(renderer);
 }
 
 void SDLRenderer::renderPresent() {
@@ -69,5 +74,6 @@ SDLRenderer::~SDLRenderer() {
 }
 
 bool SDLRenderer::isImproperlyInitialized() const { return TTF_Init() < 0; }
+
 
 
