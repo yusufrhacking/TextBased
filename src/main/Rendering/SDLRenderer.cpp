@@ -39,6 +39,7 @@ void SDLRenderer::renderTerminal(std::string text) {
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
     renderTerminalLineStart();
     renderTerminalText(text);
+    renderFlashingUnderscore(text);
     SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
 }
 
@@ -52,9 +53,10 @@ void SDLRenderer::renderTerminalText(std::string text) {
 }
 
 void SDLRenderer::renderFlashingUnderscore(std::string text) {
+    float textXLength = (float)text.size() * UI_TEXT_WIDTH_SCALER;
     if (showUnderscore > 30){
-        FC_Draw(terminalFont, renderer, TERMINAL_X_START + TERMINAL_INIT_X_OFFSET,
-                TERMINAL_Y_START + TERMINAL_INIT_Y_OFFSET, "_");
+        FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET + textXLength,
+                TERMINAL_Y_START + UNDERSCORE_Y_OFFSET, "_");
     }
     showUnderscore += 1;
     showUnderscore = showUnderscore % 60;
