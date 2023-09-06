@@ -30,10 +30,10 @@ void UnprocessedKeyboardMovementSystem::run() {
     }
 
 
-    spdlog::trace("Unprocessed Movements Tallied");
     for (const auto& changes : totalChangeForEntities) {
         int entityID = changes.first;
         const Velocity& velocity = changes.second;
+        spdlog::trace("Emitting event for entity {} to velocity {}, {}", entityID, velocity.xVelocity, velocity.yVelocity);
         eventBus->emitEvent<ReadyToMoveEvent>(Entity(entityID), velocity);
     }
     unprocessedMovements->clear();

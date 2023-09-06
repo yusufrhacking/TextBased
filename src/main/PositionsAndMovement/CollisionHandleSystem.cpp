@@ -12,10 +12,10 @@ CollisionHandleSystem::CollisionHandleSystem() {
 }
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(event.a);
+    auto& aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(event.a);
     auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
 
-    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(event.b);
+    auto& bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(event.b);
     auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
 
     if (aLastFrameMoved > bLastFrameMoved){

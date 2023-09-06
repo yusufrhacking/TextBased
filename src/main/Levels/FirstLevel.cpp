@@ -21,8 +21,9 @@ void FirstLevel::createPlayer() {
 void FirstLevel::createTree() {
     auto tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
-    ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition);
+    ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition + Position(100, 200));
     ecsManager->addComponentToEntity<StyleComponent>(tree);
+    ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
 }
 
 

@@ -7,6 +7,7 @@
 #include "../TheCanon/Canon.h"
 #include <memory>
 #include <utility>
+#include <spdlog/spdlog.h>
 
 extern int currFrame;
 

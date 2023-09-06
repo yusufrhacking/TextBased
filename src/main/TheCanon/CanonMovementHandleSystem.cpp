@@ -16,11 +16,14 @@ void CanonMovementHandleSystem::listenToEvents(){
 void CanonMovementHandleSystem::onMovement(PostMovementEvent& event){
     auto& change = event.change;
     auto entity = event.entity;
-    auto futurePosition = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    auto oldMapPosition = futurePosition.getMapPosition();
-    futurePosition.shiftPosition(change.xVelocity, change.yVelocity);//See where it will be
-    if (futurePosition.getMapPosition() != oldMapPosition){
+    auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    auto oldMapPosition = positionComponent.getMapPosition();
+    auto currPosition = positionComponent.getPosition();
+    currPosition.xPos += (float)change.xVelocity;
+    currPosition.yPos += (float)change.yVelocity;
+    auto futureMapPosition = Canon::getMapPosition(currPosition);
+    if (futureMapPosition != oldMapPosition){
         canon.removeEntityFromPage(entity, oldMapPosition);
-        canon.placeEntity(entity, futurePosition.getMapPosition());
+        canon.placeEntity(entity, futureMapPosition);
     }
 }
