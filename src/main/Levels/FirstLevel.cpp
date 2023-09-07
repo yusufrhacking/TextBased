@@ -19,7 +19,7 @@ void FirstLevel::createPlayer() {
     ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
 }
 
-void FirstLevel::createTree() {
+void FirstLevel::createTree(Position position) {
     auto tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition);

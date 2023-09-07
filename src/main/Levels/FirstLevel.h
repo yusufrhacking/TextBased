@@ -16,7 +16,7 @@ private:
     void createPlayer();
     Entity witt;
 
-    void createTree();
+    void createTree(Position position);
 
     void createWelcomeText();
 };
