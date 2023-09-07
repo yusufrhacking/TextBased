@@ -6,7 +6,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosition) {
     createPlayer();
-    createTree();
+    createTree(startingPosition);
     createWelcomeText();
 }
 
@@ -22,7 +22,7 @@ void FirstLevel::createPlayer() {
 void FirstLevel::createTree(Position position) {
     auto tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
-    ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition);
+    ecsManager->addComponentToEntity<PositionComponent>(tree, position);
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     auto component = ecsManager->getComponentFromEntity<TextComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree, component.surfaceSize);  //THIS IS A WIP
