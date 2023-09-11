@@ -2,7 +2,7 @@
 #include "TextCommandSystem.h"
 #include "../EventSystem/EventBus.h"
 #include "../HighLevel/ECSManager.h"
-#include "../Levels/ChopEvent.h"
+#include "../Woodworking/ChopEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

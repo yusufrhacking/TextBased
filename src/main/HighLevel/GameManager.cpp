@@ -6,7 +6,7 @@
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../TextCommands/TextCommandSystem.h"
 #include "../Rendering/SDLRenderer.h"
-#include "../Levels/ChoppingSystem.h"
+#include "../Woodworking/ChoppingSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();

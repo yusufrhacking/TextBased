@@ -1,8 +1,8 @@
 #ifndef TEXTBASED_TREECOMPONENT_H
 #define TEXTBASED_TREECOMPONENT_H
 
-#include "TextComponent.h"
-#include "TextGenerator.h"
+#include "../Text/TextComponent.h"
+#include "../Text/TextGenerator.h"
 
 struct TreeComponent{
     TreeComponent() = default;

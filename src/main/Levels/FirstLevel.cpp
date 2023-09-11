@@ -2,7 +2,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
-#include "AxeComponent.h"
+#include "../Woodworking/AxeComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -29,6 +29,7 @@ void FirstLevel::createTree() {
     ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition + Position(100, 200));
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).surfaceSize);
+    ecsManager->addComponentToEntity<TreeComponent>(tree);
 }
 
 void FirstLevel::createAxe() {

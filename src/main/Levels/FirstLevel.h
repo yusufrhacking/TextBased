@@ -2,7 +2,7 @@
 #define TEXTBASED_FIRSTLEVEL_H
 #include "../HighLevel/ECSManager.h"
 #include <memory>
-#include "../Text/TreeComponent.h"
+#include "../Woodworking/TreeComponent.h"
 
 
 extern std::unique_ptr<ECSManager> ecsManager;
