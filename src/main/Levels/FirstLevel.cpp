@@ -1,22 +1,25 @@
 #include "FirstLevel.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
+#include "../MainPlayer/TiedChildComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosition) {
-    createPlayer();
+    witt = ecsManager->createEntity();
+    axe = ecsManager->createEntity();
     createTree();
     createAxe();
+    createPlayer();
 }
 
 void FirstLevel::createPlayer() {
-    witt = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).surfaceSize);
+    ecsManager->addComponentToEntity<TiedChildComponent>(witt, axe);
 }
 
 void FirstLevel::createTree() {
@@ -28,7 +31,6 @@ void FirstLevel::createTree() {
 }
 
 void FirstLevel::createAxe() {
-    auto axe = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(axe, "exAxe\n  x\n  e");
     ecsManager->addComponentToEntity<PositionComponent>(axe, startingPosition + Position(15, -45));
     ecsManager->addComponentToEntity<StyleComponent>(axe);

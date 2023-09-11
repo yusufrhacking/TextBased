@@ -1,4 +1,5 @@
 #include <spdlog/spdlog.h>
+#include "TiedChildComponent.h"
 #include "MovementHandleSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../PositionsAndMovement/PositionComponent.h"
@@ -18,6 +19,13 @@ void MovementHandleSystem::onMovement(ReadyToMoveEvent& event){
     auto entity = event.entity;
     auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     position.shiftPosition(change.xVelocity, change.yVelocity);
+
+    auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(entity).entities;
+    for (auto child : children){
+        auto& childPosition = ecsManager->getComponentFromEntity<PositionComponent>(child);
+        childPosition.shiftPosition(change.xVelocity, change.yVelocity);
+    }
+
     spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), change.xVelocity, change.yVelocity, position.getPosition().xPos, position.getPosition().yPos);
     eventBus->emitEvent<PostMovementEvent>(entity, change);
 }
