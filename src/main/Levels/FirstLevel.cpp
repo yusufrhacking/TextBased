@@ -2,6 +2,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
+#include "AxeComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -34,6 +35,7 @@ void FirstLevel::createAxe() {
     ecsManager->addComponentToEntity<TextComponent>(axe, "exAxe\n  x\n  e");
     ecsManager->addComponentToEntity<PositionComponent>(axe, startingPosition + Position(15, -45));
     ecsManager->addComponentToEntity<StyleComponent>(axe);
+    ecsManager->addComponentToEntity<AxeComponent>(axe);
 }
 
 
