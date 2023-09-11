@@ -9,6 +9,10 @@ public:
 private:
     void listenToEvents();
     void onChop(ChopEvent& event);
+
+    Position getAxePosition(Entity mainPlayer);
+
+    bool isInChoppingRange(Position axePosition, Position treePosition, float allowedDistance);
 };
 
 
