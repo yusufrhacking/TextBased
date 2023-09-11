@@ -30,7 +30,7 @@ void FirstLevel::createTree() {
 void FirstLevel::createAxe() {
     auto axe = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(axe, "exAxe\n  x\n  e");
-    ecsManager->addComponentToEntity<PositionComponent>(axe, startingPosition + Position(-200, 200));
+    ecsManager->addComponentToEntity<PositionComponent>(axe, startingPosition + Position(15, -45));
     ecsManager->addComponentToEntity<StyleComponent>(axe);
     ecsManager->addComponentToEntity<CollisionComponent>(axe, ecsManager->getComponentFromEntity<TextComponent>(axe).surfaceSize);
 }
