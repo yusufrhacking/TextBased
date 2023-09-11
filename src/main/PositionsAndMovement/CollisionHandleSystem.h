@@ -13,12 +13,9 @@ public:
     void onCollision(CollisionEvent &event);
 
 private:
-    Entity findOffender(Entity a, Entity b);
+    std::vector<Entity> getChildEntities(const Entity &entity);
 
-    Entity findDefender(Entity a, Entity b);
-
-    float getMovementTotal(Entity entity);
-
+    void revertPosition(const Entity &entity, const std::vector<Entity> &childEntities);
 };
 
 #endif //TEXTBASED_COLLISIONHANDLESYSTEM_H

@@ -2,6 +2,8 @@
 #include "../HighLevel/ECSManager.h"
 #include "CollisionComponent.h"
 #include "PositionComponent.h"
+#include "../MainPlayer/TiedChildComponent.h"
+#include <stdexcept>
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -12,59 +14,44 @@ CollisionHandleSystem::CollisionHandleSystem() {
 }
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
-    auto& aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(event.a);
-    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
+    auto entityA = event.a;
+    auto entityB = event.b;
+    auto& aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entityA);
+    auto& bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entityB);
 
-    auto& bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(event.b);
+    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
     auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
 
-    if (aLastFrameMoved > bLastFrameMoved){
-        aPositionComponent.revertPosition();
-    } else if (aLastFrameMoved == bLastFrameMoved){
-        aPositionComponent.revertPosition();
-        bPositionComponent.revertPosition();
-    } else{
-        bPositionComponent.revertPosition();
+    auto aEntities = getChildEntities(entityA);
+    auto bEntities = getChildEntities(entityB);
+
+    if (aLastFrameMoved > bLastFrameMoved) {
+        revertPosition(entityA, aEntities);
+    } else if (aLastFrameMoved == bLastFrameMoved) {
+        revertPosition(entityA, aEntities);
+        revertPosition(entityB, bEntities);
+    } else {
+        revertPosition(entityB, bEntities);
     }
 }
 
-
-Entity CollisionHandleSystem::findOffender(Entity a, Entity b) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
-    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
-
-    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
-    auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
-
-    if (aLastFrameMoved > bLastFrameMoved){
-        return a;
-    }else{
-        return b;
+std::vector<Entity> CollisionHandleSystem::getChildEntities(const Entity& entity) {
+    try {
+        auto& childrenComponent = ecsManager->getComponentFromEntity<TiedChildComponent>(entity);
+        return childrenComponent.entities;
+    } catch (...) {
+        return {};
     }
 }
 
-Entity CollisionHandleSystem::findDefender(Entity a, Entity b) {
-    auto aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(a);
-    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
+void CollisionHandleSystem::revertPosition(const Entity& entity, const std::vector<Entity>& childEntities) {
+    auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    positionComponent.revertPosition();
 
-    auto bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(b);
-    auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
-
-    if (aLastFrameMoved < bLastFrameMoved){
-        return a;
-    } else{
-        return b;
+    for (const auto& child : childEntities) {
+        auto& childPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(child);
+        childPositionComponent.revertPosition();
     }
-}
-
-float CollisionHandleSystem::getMovementTotal(Entity entity) {
-    auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    auto currentPos = positionComponent.getPosition();
-    auto previousPos = positionComponent.getPreviousPosition();
-
-    float xChange = currentPos.xPos - previousPos.xPos;
-    float yChange = currentPos.yPos - previousPos.yPos;
-    return abs(xChange)+abs(yChange);
 }
 
 void CollisionHandleSystem::listenToEvents() {
