@@ -2,6 +2,7 @@
 #include "TextCommandSystem.h"
 #include "../EventSystem/EventBus.h"
 #include "../HighLevel/ECSManager.h"
+#include "../Levels/ChopEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -15,5 +16,8 @@ void TextCommandSystem::listenToEvents() {
 }
 
 void TextCommandSystem::onCommand(TextCommandEvent &event) {
-    spdlog::debug("Processed text event: {}", event.processedText);
+    if (event.processedText == "chop"){
+        eventBus->emitEvent<ChopEvent>(ChopEvent());
+    }
+//    spdlog::debug("Processed text event: {}", event.processedText);
 }

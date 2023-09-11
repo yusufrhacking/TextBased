@@ -6,6 +6,7 @@
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../TextCommands/TextCommandSystem.h"
 #include "../Rendering/SDLRenderer.h"
+#include "../Levels/ChoppingSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -30,6 +31,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<CanonMovementHandleSystem>(canon);
     ecsManager->addSystem<WordInputSystem>();
     ecsManager->addSystem<TextCommandSystem>();
+    ecsManager->addSystem<ChoppingSystem>();
 }
 
 void GameManager::update(double deltaTime) {
