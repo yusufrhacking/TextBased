@@ -17,6 +17,8 @@ private:
     Entity witt;
 
     void createTree();
+
+    void createAxe();
 };
 
 
