@@ -19,13 +19,14 @@ void TextCommandSystem::listenToEvents() {
 void TextCommandSystem::onCommand(TextCommandEvent &event) {
     auto words = getWords(event.processedText);
     bool addNext = false;
-    for (auto word: words){
+    for (const auto& word: words){
         if (addNext){
             if (word == "axe"){
                 eventBus->emitEvent<CreateItemEvent>(Item::AXE);
             }
+            addNext = false;
         }
-        if (word == "add"){
+        if (word == "create"){
             addNext = true;
         }
     }
