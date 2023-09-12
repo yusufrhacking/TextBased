@@ -31,7 +31,7 @@ void CollisionCheckSystem::update(double deltaTime) {
             auto& secondPosition = ecsManager->getComponentFromEntity<PositionComponent>(second);
             auto& secondCollider = ecsManager->getComponentFromEntity<CollisionComponent>(second);
 
-            bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstCollider, secondPosition.getPosition(), secondCollider);
+            bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstCollider.collisionRange, secondPosition.getPosition(), secondCollider.collisionRange);
 
             if (isAABCollision){
                 spdlog::trace("COLLISION between entities {} and {}", first.getId(), second.getId());
@@ -42,14 +42,14 @@ void CollisionCheckSystem::update(double deltaTime) {
     }
 }
 
-bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, CollisionComponent firstCollider,
-                                              const Position secondPosition, CollisionComponent secondCollider) {
-    bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.widthCollisionRange);
-    bool secondXOverlap = (firstPosition.xPos + firstCollider.widthCollisionRange) > secondPosition.xPos;
+bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, Size firstCollider,
+                                              const Position secondPosition, Size secondCollider) {
+    bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
+    bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
     bool xOverlap = firstXOverlap && secondXOverlap;
 
-    bool firstYOverlap = firstPosition.yPos < secondPosition.yPos + secondCollider.heightCollisionRange;
-    bool secondYOverlap = firstPosition.yPos + firstCollider.heightCollisionRange > secondPosition.yPos;
+    bool firstYOverlap = firstPosition.yPos < secondPosition.yPos + secondCollider.height;
+    bool secondYOverlap = firstPosition.yPos + firstCollider.height > secondPosition.yPos;
     bool yOverlap = firstYOverlap && secondYOverlap;
 
     return xOverlap && yOverlap;

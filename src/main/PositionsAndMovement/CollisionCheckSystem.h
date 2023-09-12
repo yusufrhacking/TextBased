@@ -12,8 +12,8 @@ class CollisionCheckSystem: public UpdateSystem {
 
         void update(double deltaTime) override;
 
-    static bool checkAABBCollision(Position firstPosition, CollisionComponent firstCollider,
-                                   Position secondPosition, CollisionComponent secondCollider);
+    static bool checkAABBCollision(Position firstPosition, Size firstCollider,
+                                   Position secondPosition, Size secondCollider);
 
 };
 
