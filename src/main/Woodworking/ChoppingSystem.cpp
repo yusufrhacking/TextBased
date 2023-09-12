@@ -40,8 +40,8 @@ void ChoppingSystem::onChop(ChopEvent &event) {
 
     for(auto tree: trees){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
-        if (isInChoppingRange(axePosition, treePosition, 100)){
-            auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
+        auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
+        if (isInChoppingRange(axePosition, treePosition, treeTextComponent, 100)){
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
             spdlog::debug("CHOPPED");
         }
@@ -59,26 +59,39 @@ Position ChoppingSystem::getAxePosition(Entity mainPlayer) {
     return {-1, -1};
 }
 
-bool ChoppingSystem::isInChoppingRange(Position axePosition, Position treePosition, float allowedDistance) {
-    float distanceSquared = std::pow(treePosition.xPos - axePosition.xPos, 2) +
-                            std::pow(treePosition.yPos - axePosition.yPos, 2);
+bool ChoppingSystem::isInChoppingRange(Position axePosition, Position treePosition, const TextComponent& treeTextComponent, float allowedDistance) {
+    if (isWithinTreeBounds(axePosition, treePosition, treeTextComponent)) {
+        return true;
+    }
+    Position closestPartOfTree = getClosestPartOfTree(axePosition, treePosition, treeTextComponent);
+    return isWithinAllowedDistance(axePosition, closestPartOfTree, allowedDistance);
+}
 
+bool ChoppingSystem::isWithinTreeBounds(Position axePosition, Position treePosition, const TextComponent& treeTextComponent) {
+    auto treeSize = treeTextComponent.getSurfaceSize();
+
+    bool isWithinHorizontalBounds = axePosition.xPos >= treePosition.xPos && axePosition.xPos <= treePosition.xPos + treeSize.width;
+    bool isWithinVerticalBounds = axePosition.yPos >= treePosition.yPos && axePosition.yPos <= treePosition.yPos + treeSize.height;
+
+    return isWithinHorizontalBounds && isWithinVerticalBounds;
+}
+
+Position ChoppingSystem::getClosestPartOfTree(Position axePosition, Position treePosition, const TextComponent& treeTextComponent) {
+    auto treeSize = treeTextComponent.getSurfaceSize();
+
+    float closestX = std::clamp(axePosition.xPos, treePosition.xPos, treePosition.xPos + treeSize.width);
+    float closestY = std::clamp(axePosition.yPos, treePosition.yPos, treePosition.yPos + treeSize.height);
+
+    return {closestX, closestY};
+}
+
+bool ChoppingSystem::isWithinAllowedDistance(Position axePosition, Position point, float allowedDistance) {
+    float distanceSquared = std::pow(point.xPos - axePosition.xPos, 2) + std::pow(point.yPos - axePosition.yPos, 2);
     return distanceSquared <= std::pow(allowedDistance, 2);
 }
 
-std::string ChoppingSystem::chopTreeText(std::string treeText) {
+
+std::string ChoppingSystem::chopTreeText(const std::string& treeText) {
     auto lastNewlinePos = treeText.find_last_of('\n');
     return treeText.substr(0, lastNewlinePos);
-//
-//    if (lastNewlinePos == std::string::npos) {
-//        return treeText;
-//    }
-//
-//    auto secondLastNewlinePos = treeText.find_last_of('\n', lastNewlinePos - 1);
-//
-//    if (secondLastNewlinePos == std::string::npos) {
-//        return "";
-//    }
-//
-//    return treeText.substr(0, secondLastNewlinePos);
 }

@@ -12,9 +12,16 @@ private:
 
     Position getAxePosition(Entity mainPlayer);
 
-    bool isInChoppingRange(Position axePosition, Position treePosition, float allowedDistance);
+    bool isInChoppingRange(Position axePosition, Position treePosition, const TextComponent& treeTextComponent, float allowedDistance);
 
-    std::string chopTreeText(std::string treeText);
+    std::string chopTreeText(const std::string& treeText);
+
+    bool isWithinTreeBounds(Position axePosition, Position treePosition, const TextComponent &treeTextComponent);
+
+    Position
+    getClosestPartOfTree(Position axePosition, Position treePosition, const TextComponent &treeTextComponent);
+
+    bool isWithinAllowedDistance(Position axePosition, Position point, float allowedDistance);
 };
 
 
