@@ -9,6 +9,7 @@ public:
 private:
     void listenToEvents();
     void onCreate(CreateItemEvent& event);
+    void createAxe();
 };
 
 

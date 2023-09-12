@@ -109,7 +109,7 @@ TComponent& ComponentManager::getComponent(Entity entity) const {
     bool isComponentPresent = entityComponentSignatures[entityId].test(componentId);
 
     if (!isComponentPresent){
-        throw std::runtime_error("Entity does not have requested component to remove");
+        throw std::runtime_error("Entity does not have requested component");
     }
 
     return componentPool->get(entityId);

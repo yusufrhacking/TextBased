@@ -20,10 +20,14 @@ void MovementHandleSystem::onMovement(ReadyToMoveEvent& event){
     auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     position.shiftPosition(change.xVelocity, change.yVelocity);
 
-    auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(entity).entities;
-    for (auto child : children){
-        auto& childPosition = ecsManager->getComponentFromEntity<PositionComponent>(child);
-        childPosition.shiftPosition(change.xVelocity, change.yVelocity);
+    try{
+        auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(entity).entities;
+        for (auto child : children){
+            auto& childPosition = ecsManager->getComponentFromEntity<PositionComponent>(child);
+            childPosition.shiftPosition(change.xVelocity, change.yVelocity);
+        }
+    } catch (...){
+
     }
 
     spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), change.xVelocity, change.yVelocity, position.getPosition().xPos, position.getPosition().yPos);

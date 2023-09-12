@@ -15,11 +15,9 @@ private:
     Position startingPosition;
     void createPlayer();
     Entity witt;
-    Entity axe;
 
     void createTree();
 
-    void createAxe();
 };
 
 
