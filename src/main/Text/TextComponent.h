@@ -7,21 +7,21 @@
 #include <sstream>
 
 struct TextComponent {
-    Size surfaceSize;
     std::string text;
 
     explicit TextComponent(std::string text){
         this->text = std::move(text);
-        surfaceSize = {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
     TextComponent() {
         this->text = "Robert C. Martin";
-        surfaceSize = {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT};
+    }
+
+    Size getSurfaceSize() const {
+        return {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
 
-public:
     static int getTextHeight(const std::string& text) {
         int height = 0;
         std::istringstream textStream(text);

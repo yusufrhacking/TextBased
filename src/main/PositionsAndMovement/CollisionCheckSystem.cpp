@@ -19,7 +19,7 @@ void CollisionCheckSystem::update(double deltaTime) {
     for (auto firstIterator = relevantEntities.begin(); firstIterator != relevantEntities.end(); firstIterator++){
         Entity first = *firstIterator;
         auto& firstPosition = ecsManager->getComponentFromEntity<PositionComponent>(first);
-        auto& firstCollider = ecsManager->getComponentFromEntity<CollisionComponent>(first);
+        auto& firstText = ecsManager->getComponentFromEntity<TextComponent>(first);
 
         for (auto secondIterator = firstIterator; secondIterator != relevantEntities.end(); secondIterator++){
             Entity second = *secondIterator;
@@ -29,9 +29,10 @@ void CollisionCheckSystem::update(double deltaTime) {
             }
 
             auto& secondPosition = ecsManager->getComponentFromEntity<PositionComponent>(second);
-            auto& secondCollider = ecsManager->getComponentFromEntity<CollisionComponent>(second);
+            auto& secondText = ecsManager->getComponentFromEntity<TextComponent>(second);
 
-            bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstCollider.collisionRange, secondPosition.getPosition(), secondCollider.collisionRange);
+            bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstText.getSurfaceSize(),
+                                                     secondPosition.getPosition(), secondText.getSurfaceSize());
 
             if (isAABCollision){
                 spdlog::trace("COLLISION between entities {} and {}", first.getId(), second.getId());
