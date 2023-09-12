@@ -16,18 +16,11 @@ void WordInputSystem::listenToEvents(){
     eventBus->listenToEvent<TextInputEvent>(this, &WordInputSystem::onText);
 }
 void WordInputSystem::onGameKey(GameKeyEvent& event){
-    if (event.getKey() == GameKey::TEXT_FLIP){
-        listening_to_letters = !listening_to_letters;
-        spdlog::debug("TEXT FLIPPING to {} with {}", listening_to_letters, text);
-        if (!text.empty()){
-            eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(text));
-        }
-        text = "";
-    }
-    if (event.getKey() == GameKey::BACKSPACE){
-        if (!text.empty()){
-            text.pop_back();
-        }
+    switch (event.getKey()){
+        case GameKey::TEXT_FLIP: handleTextFlip(); break;
+        case GameKey::BACKSPACE: handleBackSpace(); break;
+        case GameKey::REPEAT_COMMAND: handleRepeatCommand(); break;
+        default: break;
     }
 }
 
@@ -41,5 +34,27 @@ void WordInputSystem::onText(TextInputEvent &event) {
 
 void WordInputSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     renderer->renderTerminal(text);
+}
+
+void WordInputSystem::handleTextFlip() {
+    listening_to_letters = !listening_to_letters;
+    spdlog::debug("TEXT FLIPPING to {} with {}", listening_to_letters, text);
+    if (!text.empty()){
+        eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(text));
+        lastCommand = text;
+    }
+    text = "";
+}
+
+void WordInputSystem::handleBackSpace() {
+    if (!text.empty()){
+        text.pop_back();
+    }
+}
+
+void WordInputSystem::handleRepeatCommand() {
+    if (!lastCommand.empty()){
+        eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(lastCommand));
+    }
 }
 

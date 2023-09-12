@@ -19,7 +19,7 @@ void FirstLevel::createPlayer() {
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
-    ecsManager->addComponentToEntity<CollisionComponent>(witt, ecsManager->getComponentFromEntity<TextComponent>(witt).getSurfaceSize());
+    ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<TiedChildComponent>(witt, axe);
 }
 
@@ -28,7 +28,7 @@ void FirstLevel::createTree() {
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition + Position(100, 200));
     ecsManager->addComponentToEntity<StyleComponent>(tree);
-    ecsManager->addComponentToEntity<CollisionComponent>(tree, ecsManager->getComponentFromEntity<TextComponent>(tree).getSurfaceSize());
+    ecsManager->addComponentToEntity<CollisionComponent>(tree);
     ecsManager->addComponentToEntity<TreeComponent>(tree);
 }
 

@@ -17,7 +17,8 @@ std::map<SDL_Scancode, GameKey> keyStateMappings = {
 
 std::map<SDL_KeyCode, GameKey> keyPressMappings = {
         {SDLK_RETURN, GameKey::TEXT_FLIP},
-        {SDLK_BACKSPACE, GameKey::BACKSPACE}
+        {SDLK_BACKSPACE, GameKey::BACKSPACE},
+        {SDLK_SPACE, GameKey::REPEAT_COMMAND}
 };
 
 bool InputProcessor::processInput(SDL_Event event) {
