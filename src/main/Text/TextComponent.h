@@ -11,7 +11,7 @@ struct TextComponent {
     std::string text;
 
     explicit TextComponent(std::string text){
-        this->text = text;
+        this->text = std::move(text);
         surfaceSize = {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
@@ -21,7 +21,29 @@ struct TextComponent {
     }
 
 
-protected:
+public:
+    static int getTextHeight(const std::string& text) {
+        int height = 0;
+        std::istringstream textStream(text);
+        std::string token;
+        while(std::getline(textStream, token, '\n')) {
+            height++;
+        }
+        return height;
+    }
+
+    static unsigned int getTextWidth(const std::string& text) {
+        unsigned int longestWidth = 0;
+        std::istringstream textStream(text);
+        std::string token;
+        while(std::getline(textStream, token, '\n')) {
+            if (token.size() > longestWidth){
+                longestWidth = token.size();
+            }
+        }
+        return longestWidth;
+    }
+
     [[nodiscard]] int getTextHeight() const {
         int height = 0;
         std::istringstream textStream(text);
