@@ -13,6 +13,8 @@ private:
     Position getAxePosition(Entity mainPlayer);
 
     bool isInChoppingRange(Position axePosition, Position treePosition, float allowedDistance);
+
+    std::string chopTreeText(std::string treeText);
 };
 
 

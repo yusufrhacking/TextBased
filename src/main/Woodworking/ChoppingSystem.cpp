@@ -40,13 +40,12 @@ void ChoppingSystem::onChop(ChopEvent &event) {
 
     for(auto tree: trees){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
-        if (isInChoppingRange(axePosition, treePosition, 50)){
+        if (isInChoppingRange(axePosition, treePosition, 100)){
+            auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
+            treeTextComponent.text = chopTreeText(treeTextComponent.text);
             spdlog::debug("CHOPPED");
         }
     }
-
-
-
     spdlog::debug("Chop received");
 }
 
@@ -65,4 +64,21 @@ bool ChoppingSystem::isInChoppingRange(Position axePosition, Position treePositi
                             std::pow(treePosition.yPos - axePosition.yPos, 2);
 
     return distanceSquared <= std::pow(allowedDistance, 2);
+}
+
+std::string ChoppingSystem::chopTreeText(std::string treeText) {
+    auto lastNewlinePos = treeText.find_last_of('\n');
+    return treeText.substr(0, lastNewlinePos);
+//
+//    if (lastNewlinePos == std::string::npos) {
+//        return treeText;
+//    }
+//
+//    auto secondLastNewlinePos = treeText.find_last_of('\n', lastNewlinePos - 1);
+//
+//    if (secondLastNewlinePos == std::string::npos) {
+//        return "";
+//    }
+//
+//    return treeText.substr(0, secondLastNewlinePos);
 }
