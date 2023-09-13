@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_ITEMCOMPONENT_H
 #define TEXTBASED_ITEMCOMPONENT_H
 
-#include "CreateItemEvent.h"
+#include "CreateItemAtPositionEvent.h"
 
 struct ItemComponent{
     Item type;

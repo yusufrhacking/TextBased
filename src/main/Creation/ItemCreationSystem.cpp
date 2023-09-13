@@ -1,10 +1,11 @@
 #include "ItemCreationSystem.h"
 #include "../HighLevel/ECSManager.h"
-#include "CreateItemEvent.h"
+#include "CreateItemAtPositionEvent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../Woodworking/AxeComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Woodworking/WoodComponent.h"
+#include "CreateItemEvent.h"
 #include "ItemComponent.h"
 #include "../Inventory/PickupComponent.h"
 
@@ -16,12 +17,22 @@ ItemCreationSystem::ItemCreationSystem(){
     listenToEvents();
 }
 void ItemCreationSystem::listenToEvents(){
+    eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &ItemCreationSystem::onCreateAtPosition);
     eventBus->listenToEvent<CreateItemEvent>(this, &ItemCreationSystem::onCreate);
+
+
 }
-void ItemCreationSystem::onCreate(CreateItemEvent& event){
+void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
+    switch (event.item){
+        case Item::WOOD_PILE: createWoodPile(event.position); break;
+        default: break;
+    }
+}
+
+
+void ItemCreationSystem::onCreate(CreateItemEvent& event) {
     switch (event.item){
         case Item::AXE: createAxe(); break;
-        case Item::WOOD_PILE: createWoodPile(event.position); break;
         default: break;
     }
 }
@@ -49,3 +60,4 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD_PILE);
     ecsManager->addComponentToEntity<PickupComponent>(wood);
 }
+

@@ -7,7 +7,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "TreeComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
-#include "../Creation/CreateItemEvent.h"
+#include "../Creation/CreateItemAtPositionEvent.h"
 #include "../PositionsAndMovement/DistanceCalculator.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -44,11 +44,12 @@ void ChoppingSystem::onChop(ChopEvent &event) {
     for(auto tree: trees){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
-        if (DistanceCalculator::isInAllowedRange(axePosition, treePosition, axeTextComponent, treeTextComponent, 30)){
+        if (DistanceCalculator::isInAllowedRange(
+                axePosition, treePosition, axeTextComponent.getSurfaceSize(), treeTextComponent.getSurfaceSize(), 30)){
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
             if (treeTextComponent.text.empty()){
-                eventBus->emitEvent<CreateItemEvent>(
-                        CreateItemEvent(Item::WOOD_PILE, findTreeMiddle(treePosition)));
+                eventBus->emitEvent<CreateItemAtPositionEvent>(
+                        CreateItemAtPositionEvent(Item::WOOD_PILE, findTreeMiddle(treePosition)));
                 ecsManager->killEntity(tree);
             }
             spdlog::debug("CHOPPED");
@@ -76,11 +77,6 @@ TextComponent ChoppingSystem::getAxeTextComponent(Entity mainPlayer) {
         }
     }
     throw std::runtime_error("No Axe Found");
-}
-
-bool ChoppingSystem::isWithinAllowedDistance(Position axePosition, Position point, float allowedDistance) {
-    float distanceSquared = std::pow(point.xPos - axePosition.xPos, 2) + std::pow(point.yPos - axePosition.yPos, 2);
-    return distanceSquared <= std::pow(allowedDistance, 2);
 }
 
 Position ChoppingSystem::findTreeMiddle(Position treePosition) {

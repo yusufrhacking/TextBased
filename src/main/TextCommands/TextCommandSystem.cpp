@@ -3,8 +3,9 @@
 #include "../EventSystem/EventBus.h"
 #include "../HighLevel/ECSManager.h"
 #include "../Woodworking/ChopEvent.h"
+#include "../Creation/CreateItemAtPositionEvent.h"
+#include "../Inventory/PlayerPickUpEvent.h"
 #include "../Creation/CreateItemEvent.h"
-#include "../Inventory/PickupEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -31,7 +32,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
             addNext = true;
         }
         if (word == "pickup"){
-            eventBus->emitEvent<PickupEvent>();
+            eventBus->emitEvent<PlayerPickUpEvent>();
         }
     }
     if (event.processedText == "chop"){
