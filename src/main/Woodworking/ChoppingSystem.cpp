@@ -44,7 +44,7 @@ void ChoppingSystem::onChop(ChopEvent &event) {
     for(auto tree: trees){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
-        if (DistanceCalculator::isInAllowedRange(axePosition, treePosition, axeTextComponent, treeTextComponent, 100)){
+        if (DistanceCalculator::isInAllowedRange(axePosition, treePosition, axeTextComponent, treeTextComponent, 30)){
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
             if (treeTextComponent.text.empty()){
                 eventBus->emitEvent<CreateItemEvent>(
@@ -89,5 +89,13 @@ Position ChoppingSystem::findTreeMiddle(Position treePosition) {
     auto ySize = surface.height/2;
     spdlog::debug("Big difference {}, {}", xSize, ySize);
     return treePosition + Position((float)xSize, (float)ySize);
+}
+
+std::string ChoppingSystem::chopTreeText(const std::string& treeText) {
+    auto lastNewlinePos = treeText.find_last_of('\n');
+    if (lastNewlinePos == std::string::npos) {
+        return "";
+    }
+    return treeText.substr(0, lastNewlinePos);
 }
 
