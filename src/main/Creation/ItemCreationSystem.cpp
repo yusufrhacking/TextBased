@@ -6,6 +6,7 @@
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Woodworking/WoodComponent.h"
 #include "ItemComponent.h"
+#include "../Inventory/PickupComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -19,8 +20,8 @@ void ItemCreationSystem::listenToEvents(){
 }
 void ItemCreationSystem::onCreate(CreateItemEvent& event){
     switch (event.item){
-        case Item::AXE: createAxe();
-        case Item::WOOD_PILE: createWoodPile(event.position);
+        case Item::AXE: createAxe(); break;
+        case Item::WOOD_PILE: createWoodPile(event.position); break;
         default: break;
     }
 }
@@ -46,4 +47,5 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<StyleComponent>(wood);
     ecsManager->addComponentToEntity<WoodComponent>(wood);
     ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD_PILE);
+    ecsManager->addComponentToEntity<PickupComponent>(wood);
 }
