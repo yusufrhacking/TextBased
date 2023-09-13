@@ -83,3 +83,11 @@ bool ChoppingSystem::isWithinAllowedDistance(Position axePosition, Position poin
     return distanceSquared <= std::pow(allowedDistance, 2);
 }
 
+Position ChoppingSystem::findTreeMiddle(Position treePosition) {
+    auto surface = TextComponent::getSurfaceSize(TextGenerator::getTreeText());
+    auto xSize = surface.width/2;
+    auto ySize = surface.height/2;
+    spdlog::debug("Big difference {}, {}", xSize, ySize);
+    return treePosition + Position((float)xSize, (float)ySize);
+}
+
