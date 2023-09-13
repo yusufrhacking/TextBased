@@ -28,7 +28,7 @@ std::vector<Entity> ECSManager::addNewEntities() {
 void ECSManager::removeDeadEntities() {
     for (const Entity& entity : entityManager->getEntitiesToBeKilled()){
         removeEntity(entity);
-        spdlog::debug("Entity [] removed from ECS manager", entity.getId());
+        spdlog::debug("Entity {} removed from ECS manager", entity.getId());
     }
     entityManager->clearEntitiesToBeRemoved();
 }
