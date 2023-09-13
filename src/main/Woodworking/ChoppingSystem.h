@@ -22,6 +22,8 @@ private:
     getClosestPartOfTree(Position axePosition, Position treePosition, const TextComponent &treeTextComponent);
 
     bool isWithinAllowedDistance(Position axePosition, Position point, float allowedDistance);
+
+    Position findTreeMiddle(Position treePosition);
 };
 
 

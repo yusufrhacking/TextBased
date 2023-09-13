@@ -7,6 +7,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "TreeComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
+#include "../Creation/CreateItemEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -43,7 +44,9 @@ void ChoppingSystem::onChop(ChopEvent &event) {
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
         if (isInChoppingRange(axePosition, treePosition, treeTextComponent, 100)){
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
-            if (treeTextComponent.text == ""){
+            if (treeTextComponent.text.empty()){
+                eventBus->emitEvent<CreateItemEvent>(
+                        CreateItemEvent(Item::WOOD_PILE, findTreeMiddle(treePosition)));
                 ecsManager->killEntity(tree);
             }
             spdlog::debug("CHOPPED");
@@ -100,5 +103,13 @@ std::string ChoppingSystem::chopTreeText(const std::string& treeText) {
         return "";
     }
     return treeText.substr(0, lastNewlinePos);
+}
+
+Position ChoppingSystem::findTreeMiddle(Position treePosition) {
+    auto surface = TextComponent::getSurfaceSize(TextGenerator::getTreeText());
+    auto xSize = surface.width/2;
+    auto ySize = surface.height/2;
+    spdlog::debug("Big difference {}, {}", xSize, ySize);
+    return treePosition + Position((float)xSize, (float)ySize);
 }
 

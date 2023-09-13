@@ -14,6 +14,8 @@ private:
     void listenToEvents();
     void onCreate(CreateItemEvent& event);
     void createAxe();
+
+    void createWoodPile(Position position);
 };
 
 

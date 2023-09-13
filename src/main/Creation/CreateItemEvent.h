@@ -3,12 +3,18 @@
 #include "../EventSystem/Event.h"
 
 enum Item {
-    AXE
+    AXE,
+    WOOD_PILE
 };
 
 struct CreateItemEvent : public Event {
     Item item;
-    explicit CreateItemEvent(Item item): item(item){}
+    Position position;
+    explicit CreateItemEvent(Item item): item(item){
+        position = {0, 0};
+    }
+
+    CreateItemEvent(Item item, Position position): item(item), position(position){}
 };
 
 #endif //TEXTBASED_CREATEITEMEVENT_H
