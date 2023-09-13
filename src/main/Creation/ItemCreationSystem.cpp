@@ -31,7 +31,7 @@ void ItemCreationSystem::createAxe(){
 
     ecsManager->addComponentToEntity<TextComponent>(axe, "exAxe\n  x\n  e");
     ecsManager->addComponentToEntity<PositionComponent>(
-            axe, mainPlayerPosition + Position(AXE_X_OFFSET, AXE_Y_OFFSET));
+            axe, mainPlayerPosition + AxeComponent::AXE_POSITION_OFFSET);
     ecsManager->addComponentToEntity<StyleComponent>(axe);
     ecsManager->addComponentToEntity<AxeComponent>(axe);
 }

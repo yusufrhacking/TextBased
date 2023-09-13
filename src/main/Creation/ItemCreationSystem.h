@@ -3,9 +3,6 @@
 #include "../ECSObjects/System.h"
 #include "CreateItemEvent.h"
 
-static const int AXE_X_OFFSET = 15;
-
-static const int AXE_Y_OFFSET = -45;
 
 class ItemCreationSystem: public System {
 public:
