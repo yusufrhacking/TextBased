@@ -6,6 +6,7 @@
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../PositionsAndMovement/DistanceCalculator.h"
 #include "InventoryComponent.h"
+#include "../PositionsAndMovement/LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -29,6 +30,7 @@ void PlayerPickUpSystem::onPickup(PlayerPickUpEvent& event){
         if (DistanceCalculator::isInAllowedRange(playerPosition, pickupPosition, playerSize, pickupSize, PICKUP_RANGE)){
             auto& playerInventory = ecsManager->getComponentFromEntity<InventoryComponent>(player);
             playerInventory.items.push_back(pickupEntity);
+            ecsManager->removeComponentFromEntity<LiveComponent>(pickupEntity);
             spdlog::debug("Picking up Entity {}", pickupEntity.getId());
         }
     }
