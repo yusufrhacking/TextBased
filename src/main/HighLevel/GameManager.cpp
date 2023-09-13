@@ -8,6 +8,8 @@
 #include "../Rendering/SDLRenderer.h"
 #include "../Woodworking/ChoppingSystem.h"
 #include "../Creation/ItemCreationSystem.h"
+#include "../MainPlayer/MainPlayerAccessSystem.h"
+#include "../Inventory/PlayerPickUpSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -34,6 +36,8 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<TextCommandSystem>();
     ecsManager->addSystem<ChoppingSystem>();
     ecsManager->addSystem<ItemCreationSystem>();
+    ecsManager->addSystem<MainPlayerAccessSystem>();
+    ecsManager->addSystem<PlayerPickUpSystem>();
 }
 
 void GameManager::update(double deltaTime) {

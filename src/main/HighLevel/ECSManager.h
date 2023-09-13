@@ -69,7 +69,9 @@ public:
         template <typename TSystem>
         TSystem& getSystem() const;
 
+
     void removeEntity(const Entity &entity);
+
 };
 
 template<typename TComponent>
@@ -127,6 +129,7 @@ template<typename TSystem>
 TSystem& ECSManager::getSystem() const {
     return systemManager->getSystem<TSystem>();
 }
+
 
 
 #endif
