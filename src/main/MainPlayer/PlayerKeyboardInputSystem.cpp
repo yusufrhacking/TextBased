@@ -1,6 +1,7 @@
 #include "PlayerKeyboardInputSystem.h"
 #include "UnprocessedKeyboardMovementSystem.h"
 #include "../PositionsAndMovement/PositionComponent.h"
+#include "../PositionsAndMovement/LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -10,6 +11,7 @@ PlayerKeyboardInputSystem::PlayerKeyboardInputSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
     requireComponent<MainPlayerComponent>();
+    requireComponent<LiveComponent>();
     eventBus->listenToEvent<GameKeyEvent>(this, &PlayerKeyboardInputSystem::onKeyPressed);
 }
 

@@ -9,6 +9,7 @@
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Creation/CreateItemAtPositionEvent.h"
 #include "../PositionsAndMovement/DistanceCalculator.h"
+#include "../PositionsAndMovement/LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -16,6 +17,7 @@ extern std::unique_ptr<EventBus> eventBus;
 ChoppingSystem::ChoppingSystem() {
     requireComponent<TextComponent>();
     requireComponent<PositionComponent>();
+    requireComponent<LiveComponent>();
     listenToEvents();
 }
 

@@ -2,6 +2,7 @@
 #include "CollisionCheckSystem.h"
 #include "PositionComponent.h"
 #include "CollisionEvent.h"
+#include "LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -10,6 +11,8 @@ CollisionCheckSystem::CollisionCheckSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
     requireComponent<CollisionComponent>();
+    requireComponent<LiveComponent>();
+
 }
 
 

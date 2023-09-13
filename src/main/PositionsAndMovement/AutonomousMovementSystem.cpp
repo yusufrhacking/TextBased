@@ -1,12 +1,14 @@
 #include <spdlog/spdlog.h>
 #include "AutonomousMovementSystem.h"
 #include "CollisionCheckSystem.h"
+#include "LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 AutonomousMovementSystem::AutonomousMovementSystem(){
     requireComponent<PositionComponent>();
     requireComponent<MovementComponent>();
+    requireComponent<LiveComponent>();
 }
 
 void AutonomousMovementSystem::update(double deltaTime) {

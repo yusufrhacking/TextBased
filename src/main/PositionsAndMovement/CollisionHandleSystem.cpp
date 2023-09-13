@@ -3,6 +3,7 @@
 #include "CollisionComponent.h"
 #include "PositionComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
+#include "LiveComponent.h"
 #include <stdexcept>
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -10,6 +11,7 @@ extern std::unique_ptr<EventBus> eventBus;
 
 CollisionHandleSystem::CollisionHandleSystem() {
     requireComponent<CollisionComponent>();
+    requireComponent<LiveComponent>();
     listenToEvents();
 }
 

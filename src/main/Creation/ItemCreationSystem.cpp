@@ -8,6 +8,7 @@
 #include "CreatePlayerItemEvent.h"
 #include "ItemComponent.h"
 #include "../Inventory/PickupComponent.h"
+#include "../PositionsAndMovement/LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -49,6 +50,7 @@ void ItemCreationSystem::createAxe(){
     ecsManager->addComponentToEntity<StyleComponent>(axe);
     ecsManager->addComponentToEntity<AxeComponent>(axe);
     ecsManager->addComponentToEntity<ItemComponent>(axe, Item::AXE);
+    ecsManager->addComponentToEntity<LiveComponent>(axe);
 }
 
 void ItemCreationSystem::createWoodPile(Position position) {
@@ -59,5 +61,7 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<WoodComponent>(wood);
     ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD_PILE);
     ecsManager->addComponentToEntity<PickupComponent>(wood);
+    ecsManager->addComponentToEntity<LiveComponent>(wood);
+
 }
 
