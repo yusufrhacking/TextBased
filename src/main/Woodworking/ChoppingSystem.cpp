@@ -93,5 +93,11 @@ bool ChoppingSystem::isWithinAllowedDistance(Position axePosition, Position poin
 
 std::string ChoppingSystem::chopTreeText(const std::string& treeText) {
     auto lastNewlinePos = treeText.find_last_of('\n');
+    spdlog::debug("TreeText : {}", treeText);
+
+    if (lastNewlinePos == std::string::npos) {
+        return "";
+    }
     return treeText.substr(0, lastNewlinePos);
 }
+
