@@ -4,6 +4,8 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../Woodworking/AxeComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
+#include "../Woodworking/WoodComponent.h"
+#include "ItemComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -34,6 +36,7 @@ void ItemCreationSystem::createAxe(){
             axe, mainPlayerPosition + AxeComponent::AXE_POSITION_OFFSET);
     ecsManager->addComponentToEntity<StyleComponent>(axe);
     ecsManager->addComponentToEntity<AxeComponent>(axe);
+    ecsManager->addComponentToEntity<ItemComponent>(axe, Item::AXE);
 }
 
 void ItemCreationSystem::createWoodPile(Position position) {
@@ -41,4 +44,6 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<TextComponent>(wood, "Wood");
     ecsManager->addComponentToEntity<PositionComponent>(wood, position);
     ecsManager->addComponentToEntity<StyleComponent>(wood);
+    ecsManager->addComponentToEntity<WoodComponent>(wood);
+    ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD_PILE);
 }
