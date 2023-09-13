@@ -31,8 +31,3 @@ void PlayerPickUpSystem::onPickup(PlayerPickUpEvent& event){
     }
 
 }
-
-Position PlayerPickUpSystem::getMainPlayerPosition() {
-    auto mainPlayer = *getRelevantEntities().begin();
-    return ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
-}

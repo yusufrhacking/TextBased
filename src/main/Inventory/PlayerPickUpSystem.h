@@ -10,8 +10,6 @@ private:
     const float PICKUP_RANGE = 20;
     void listenToEvents();
     void onPickup(PlayerPickUpEvent& event);
-
-    Position getMainPlayerPosition();
 };
 
 
