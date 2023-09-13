@@ -5,7 +5,7 @@
 #include "../Woodworking/AxeComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Woodworking/WoodComponent.h"
-#include "CreateItemEvent.h"
+#include "CreatePlayerItemEvent.h"
 #include "ItemComponent.h"
 #include "../Inventory/PickupComponent.h"
 
@@ -18,7 +18,7 @@ ItemCreationSystem::ItemCreationSystem(){
 }
 void ItemCreationSystem::listenToEvents(){
     eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &ItemCreationSystem::onCreateAtPosition);
-    eventBus->listenToEvent<CreateItemEvent>(this, &ItemCreationSystem::onCreate);
+    eventBus->listenToEvent<CreatePlayerItemEvent>(this, &ItemCreationSystem::onCreate);
 
 
 }
@@ -30,7 +30,7 @@ void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
 }
 
 
-void ItemCreationSystem::onCreate(CreateItemEvent& event) {
+void ItemCreationSystem::onCreate(CreatePlayerItemEvent& event) {
     switch (event.item){
         case Item::AXE: createAxe(); break;
         default: break;

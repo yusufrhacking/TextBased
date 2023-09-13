@@ -5,7 +5,7 @@
 #include "../Woodworking/ChopEvent.h"
 #include "../Creation/CreateItemAtPositionEvent.h"
 #include "../Inventory/PlayerPickUpEvent.h"
-#include "../Creation/CreateItemEvent.h"
+#include "../Creation/CreatePlayerItemEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -24,7 +24,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     for (const auto& word: words){
         if (addNext){
             if (word == "axe"){
-                eventBus->emitEvent<CreateItemEvent>(Item::AXE);
+                eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
             }
             addNext = false;
         }

@@ -2,7 +2,7 @@
 #define TEXTBASED_ITEMCREATIONSYSTEM_H
 #include "../ECSObjects/System.h"
 #include "CreateItemAtPositionEvent.h"
-#include "CreateItemEvent.h"
+#include "CreatePlayerItemEvent.h"
 
 
 class ItemCreationSystem: public System {
@@ -11,7 +11,7 @@ public:
 private:
     void listenToEvents();
     void onCreateAtPosition(CreateItemAtPositionEvent& event);
-    void onCreate(CreateItemEvent &);
+    void onCreate(CreatePlayerItemEvent &);
     void createAxe();
 
     void createWoodPile(Position position);
