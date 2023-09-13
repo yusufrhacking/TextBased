@@ -4,6 +4,7 @@
 #include "../HighLevel/ECSManager.h"
 #include "../Woodworking/ChopEvent.h"
 #include "../Creation/CreateItemEvent.h"
+#include "../Inventory/PickupEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -28,6 +29,9 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
         }
         if (word == "create"){
             addNext = true;
+        }
+        if (word == "pickup"){
+            eventBus->emitEvent<PickupEvent>();
         }
     }
     if (event.processedText == "chop"){

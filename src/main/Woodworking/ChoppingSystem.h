@@ -24,6 +24,8 @@ private:
     bool isWithinAllowedDistance(Position axePosition, Position point, float allowedDistance);
 
     Position findTreeMiddle(Position treePosition);
+
+    TextComponent getAxeTextComponent(Entity mainPlayer);
 };
 
 
