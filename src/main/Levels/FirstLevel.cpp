@@ -3,6 +3,7 @@
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Woodworking/AxeComponent.h"
+#include "../Inventory/InventoryComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -18,6 +19,7 @@ void FirstLevel::createPlayer() {
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
+    ecsManager->addComponentToEntity<InventoryComponent>(witt);
 }
 
 void FirstLevel::createTree() {

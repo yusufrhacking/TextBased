@@ -5,6 +5,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../PositionsAndMovement/DistanceCalculator.h"
+#include "InventoryComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -17,16 +18,17 @@ void PlayerPickUpSystem::listenToEvents(){
     eventBus->listenToEvent<PlayerPickUpEvent>(this, &PlayerPickUpSystem::onPickup);
 }
 void PlayerPickUpSystem::onPickup(PlayerPickUpEvent& event){
-    auto mainPlayer = *ecsManager->getSystem<MainPlayerAccessSystem>().getRelevantEntities().begin();
-    auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
-    auto playerSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
+    auto player = event.picker;
+    auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(player).getPosition();
+    auto playerSize = ecsManager->getComponentFromEntity<TextComponent>(player).getSurfaceSize();
 
     for(auto pickupEntity: getRelevantEntities()){
         auto pickupPosition = ecsManager->getComponentFromEntity<PositionComponent>(pickupEntity).getPosition();
         auto pickupSize = ecsManager->getComponentFromEntity<TextComponent>(pickupEntity).getSurfaceSize();
 
         if (DistanceCalculator::isInAllowedRange(playerPosition, pickupPosition, playerSize, pickupSize, PICKUP_RANGE)){
-            spdlog::debug("Picking up the jawn");
+            auto& playerInventory = ecsManager->getComponentFromEntity<InventoryComponent>(player);
+            playerInventory.items.push_back(pickupEntity);
         }
     }
 

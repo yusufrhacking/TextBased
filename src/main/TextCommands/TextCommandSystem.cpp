@@ -6,6 +6,7 @@
 #include "../Creation/CreateItemAtPositionEvent.h"
 #include "../Inventory/PlayerPickUpEvent.h"
 #include "../Creation/CreatePlayerItemEvent.h"
+#include "../MainPlayer/MainPlayerAccessSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -32,7 +33,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
             addNext = true;
         }
         if (word == "pickup"){
-            eventBus->emitEvent<PlayerPickUpEvent>();
+            eventBus->emitEvent<PlayerPickUpEvent>(*ecsManager->getSystem<MainPlayerAccessSystem>().getRelevantEntities().begin());
         }
     }
     if (event.processedText == "chop"){
