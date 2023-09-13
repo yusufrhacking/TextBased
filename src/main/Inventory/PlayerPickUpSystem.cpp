@@ -29,6 +29,7 @@ void PlayerPickUpSystem::onPickup(PlayerPickUpEvent& event){
         if (DistanceCalculator::isInAllowedRange(playerPosition, pickupPosition, playerSize, pickupSize, PICKUP_RANGE)){
             auto& playerInventory = ecsManager->getComponentFromEntity<InventoryComponent>(player);
             playerInventory.items.push_back(pickupEntity);
+            spdlog::debug("Picking up Entity {}", pickupEntity.getId());
         }
     }
 

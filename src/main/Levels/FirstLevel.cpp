@@ -4,6 +4,7 @@
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Woodworking/AxeComponent.h"
 #include "../Inventory/InventoryComponent.h"
+#include "../PositionsAndMovement/LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -20,6 +21,7 @@ void FirstLevel::createPlayer() {
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
+    ecsManager->addComponentToEntity<LiveComponent>(witt);
 }
 
 void FirstLevel::createTree() {
@@ -29,6 +31,7 @@ void FirstLevel::createTree() {
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree);
     ecsManager->addComponentToEntity<TreeComponent>(tree);
+    ecsManager->addComponentToEntity<LiveComponent>(tree);
 }
 
 
