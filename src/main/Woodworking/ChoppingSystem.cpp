@@ -28,20 +28,6 @@ void ChoppingSystem::listenToEvents() {
 }
 
 void ChoppingSystem::onChop(ChopEvent &event) {
-//    auto trees = std::vector<Entity>{};
-//    Entity mainPlayer{-1};
-//    for(auto entity: getRelevantEntities()){
-//        if (ecsManager->hasComponent<TreeComponent>(entity)){
-//            trees.push_back(entity);
-//        }
-//        if (ecsManager->hasComponent<MainPlayerComponent>(entity)){
-//            mainPlayer = entity;
-//        }
-//    }
-//    if (mainPlayer.getId() == -1){
-//        throw std::runtime_error("No main player");
-//    }
-
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
 
     auto axePosition = getAxePosition(mainPlayer);
