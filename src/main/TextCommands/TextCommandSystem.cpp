@@ -7,6 +7,7 @@
 #include "../Inventory/PlayerPickUpEvent.h"
 #include "../Creation/CreatePlayerItemEvent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
+#include "../Inventory/PlaceEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -22,6 +23,7 @@ void TextCommandSystem::listenToEvents() {
 void TextCommandSystem::onCommand(TextCommandEvent &event) {
     auto words = getWords(event.processedText);
     bool addNext = false;
+    bool placeNext = false;
     for (const auto& word: words){
         if (addNext){
             if (word == "axe"){
@@ -29,8 +31,17 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
             }
             addNext = false;
         }
+        if (placeNext){
+            if (word == "wood"){
+                eventBus->emitEvent<PlaceEvent>(Item::WOOD);
+            }
+            placeNext = false;
+        }
         if (word == "create"){
             addNext = true;
+        }
+        if (word == "place"){
+            placeNext = true;
         }
         if (word == "pickup"){
             eventBus->emitEvent<PlayerPickUpEvent>(*ecsManager->getSystem<MainPlayerAccessSystem>().getRelevantEntities().begin());

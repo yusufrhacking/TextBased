@@ -3,7 +3,7 @@
 
 enum Item {
     AXE,
-    WOOD_PILE
+    WOOD
 };
 
 #endif //TEXTBASED_ITEM_H

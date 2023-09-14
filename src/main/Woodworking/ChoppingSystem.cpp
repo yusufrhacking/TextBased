@@ -51,7 +51,7 @@ void ChoppingSystem::onChop(ChopEvent &event) {
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
             if (treeTextComponent.text.empty()){
                 eventBus->emitEvent<CreateItemAtPositionEvent>(
-                        CreateItemAtPositionEvent(Item::WOOD_PILE, findTreeMiddle(treePosition)));
+                        CreateItemAtPositionEvent(Item::WOOD, findTreeMiddle(treePosition)));
                 ecsManager->killEntity(tree);
             }
             spdlog::debug("CHOPPED");

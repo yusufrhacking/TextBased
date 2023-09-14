@@ -22,12 +22,10 @@ ItemCreationSystem::ItemCreationSystem(){
 void ItemCreationSystem::listenToEvents(){
     eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &ItemCreationSystem::onCreateAtPosition);
     eventBus->listenToEvent<CreatePlayerItemEvent>(this, &ItemCreationSystem::onCreate);
-
-
 }
 void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
     switch (event.item){
-        case Item::WOOD_PILE: createWoodPile(event.position); break;
+        case Item::WOOD: createWoodPile(event.position); break;
         default: break;
     }
 }
@@ -54,7 +52,6 @@ void ItemCreationSystem::createAxe(){
     ecsManager->addComponentToEntity<AxeComponent>(axe);
     ecsManager->addComponentToEntity<ItemComponent>(axe, Item::AXE);
     ecsManager->addComponentToEntity<LiveComponent>(axe);
-
 }
 
 void ItemCreationSystem::createWoodPile(Position position) {
@@ -63,7 +60,7 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<PositionComponent>(wood, position);
     ecsManager->addComponentToEntity<StyleComponent>(wood);
     ecsManager->addComponentToEntity<WoodComponent>(wood);
-    ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD_PILE);
+    ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD);
     ecsManager->addComponentToEntity<PickupComponent>(wood);
     ecsManager->addComponentToEntity<LiveComponent>(wood);
 

@@ -10,6 +10,7 @@
 #include "../Creation/ItemCreationSystem.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/PlayerPickUpSystem.h"
+#include "../Inventory/PlaceSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -38,6 +39,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<ItemCreationSystem>();
     ecsManager->addSystem<MainPlayerAccessSystem>();
     ecsManager->addSystem<PlayerPickUpSystem>();
+    ecsManager->addSystem<PlaceSystem>();
 }
 
 void GameManager::update(double deltaTime) {

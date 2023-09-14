@@ -6,6 +6,8 @@
 class MainPlayerAccessSystem: public System {
 public:
     MainPlayerAccessSystem();
+
+    Entity getMainPlayer();
 };
 
 
