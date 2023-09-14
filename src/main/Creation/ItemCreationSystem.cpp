@@ -23,7 +23,6 @@ ItemCreationSystem::ItemCreationSystem(){
 void ItemCreationSystem::listenToEvents(){
     eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &ItemCreationSystem::onCreateAtPosition);
     eventBus->listenToEvent<CreatePlayerItemEvent>(this, &ItemCreationSystem::onCreate);
-    eventBus->listenToEvent<StashPlayerItemEvent>(this, &ItemCreationSystem::onStash);
 }
 void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
     switch (event.item){
@@ -32,21 +31,6 @@ void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
     }
 }
 
-void ItemCreationSystem::onStash(StashPlayerItemEvent& event) {
-    switch (event.item) {
-        case Item::AXE: stashAxe(); break;
-        default: break;
-    }
-}
-
-void ItemCreationSystem::stashAxe() {
-    auto mainPlayer = *getRelevantEntities().begin();
-    auto tiedChild = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer);
-    //Basically need to find a way to get the axe entity seperately so that I can remove the text component from it... Or we can stash it once we have it
-//    auto axe = ecsManager->getComponentFromEntity<AxeComponent>(tiedChild);
-//    ecsManager->removeComponentFromEntity<TextComponent>(axe); //Need to figure out how to get the text component of the axe from player
-
-}
 
 void ItemCreationSystem::onCreate(CreatePlayerItemEvent& event) {
     switch (event.item){

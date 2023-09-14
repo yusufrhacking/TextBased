@@ -45,7 +45,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
             placeNext = true;
         }
         if (word == "pickup"){
-            eventBus->emitEvent<PlayerPickUpEvent>(*ecsManager->getSystem<MainPlayerAccessSystem>().getRelevantEntities().begin());
+            eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
         }
     }
     if (event.processedText == "chop") {
@@ -53,11 +53,8 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     }
 
     if (event.processedText == "stash axe") {
-//        std:: cout << "hello";
         eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
     }
-
-//    spdlog::debug("Processed text event: {}", event.processedText);
 }
 
 std::vector<std::string> TextCommandSystem::getWords(std::string processedText) {
