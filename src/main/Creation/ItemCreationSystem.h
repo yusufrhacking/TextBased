@@ -18,6 +18,7 @@ private:
 
     void createWoodPile(Position position);
 
+    void stashAxe();
 };
 
 

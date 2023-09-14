@@ -33,6 +33,13 @@ void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
 }
 
 void ItemCreationSystem::onStash(StashPlayerItemEvent& event) {
+    switch (event.item) {
+        case Item::AXE: stashAxe(); break;
+        default: break;
+    }
+}
+
+void ItemCreationSystem::stashAxe() {
 
 }
 
