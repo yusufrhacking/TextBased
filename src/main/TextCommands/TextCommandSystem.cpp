@@ -52,7 +52,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     }
 
     if (event.processedText == "stash axe") {
-
+        std:: cout << "hello";
     }
 
 //    spdlog::debug("Processed text event: {}", event.processedText);
