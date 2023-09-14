@@ -10,6 +10,7 @@
 #include "../Creation/CreateItemAtPositionEvent.h"
 #include "../PositionsAndMovement/DistanceCalculator.h"
 #include "../PositionsAndMovement/LiveComponent.h"
+#include "../MainPlayer/MainPlayerAccessSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -18,6 +19,7 @@ ChoppingSystem::ChoppingSystem() {
     requireComponent<TextComponent>();
     requireComponent<PositionComponent>();
     requireComponent<LiveComponent>();
+    requireComponent<TreeComponent>();
     listenToEvents();
 }
 
@@ -26,24 +28,26 @@ void ChoppingSystem::listenToEvents() {
 }
 
 void ChoppingSystem::onChop(ChopEvent &event) {
-    auto trees = std::vector<Entity>{};
-    Entity mainPlayer{-1};
-    for(auto entity: getRelevantEntities()){
-        if (ecsManager->hasComponent<TreeComponent>(entity)){
-            trees.push_back(entity);
-        }
-        if (ecsManager->hasComponent<MainPlayerComponent>(entity)){
-            mainPlayer = entity;
-        }
-    }
-    if (mainPlayer.getId() == -1){
-        throw std::runtime_error("No main player");
-    }
+//    auto trees = std::vector<Entity>{};
+//    Entity mainPlayer{-1};
+//    for(auto entity: getRelevantEntities()){
+//        if (ecsManager->hasComponent<TreeComponent>(entity)){
+//            trees.push_back(entity);
+//        }
+//        if (ecsManager->hasComponent<MainPlayerComponent>(entity)){
+//            mainPlayer = entity;
+//        }
+//    }
+//    if (mainPlayer.getId() == -1){
+//        throw std::runtime_error("No main player");
+//    }
+
+    auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
 
     auto axePosition = getAxePosition(mainPlayer);
     auto axeTextComponent = getAxeTextComponent(mainPlayer);
 
-    for(auto tree: trees){
+    for(auto tree: getRelevantEntities()){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
         if (DistanceCalculator::isInAllowedRange(

@@ -8,6 +8,7 @@
 #include "../Creation/CreatePlayerItemEvent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/PlaceEvent.h"
+#include "../Creation/StashPlayerItemEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -53,7 +54,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
 
     if (event.processedText == "stash axe") {
 //        std:: cout << "hello";
-        eventBus->emitEvent<StashPlayerItemEvent>(Item: AXE);
+        eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
     }
 
 //    spdlog::debug("Processed text event: {}", event.processedText);

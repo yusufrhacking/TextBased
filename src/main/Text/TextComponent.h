@@ -17,7 +17,7 @@ struct TextComponent {
         this->text = "Robert C. Martin";
     }
 
-    Size getSurfaceSize() const {
+    [[nodiscard]] Size getSurfaceSize() const {
         return {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
