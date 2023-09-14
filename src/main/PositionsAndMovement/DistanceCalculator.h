@@ -8,13 +8,33 @@
 class DistanceCalculator {
 public:
     static bool isInAllowedRange(Position pos1, Position pos2, const Size& size1, const Size& size2, float allowedDistance) {
-        if (isWithinBounds(pos1, pos2, size1) || isWithinBounds(pos2, pos1, size2)) {
-            return true;
+        auto endpointLeftBound = pos2.xPos;
+        auto endpointRightBound = pos2.xPos + size2.width;
+        auto endpointTopBound = pos2.yPos;
+        auto endpointBottomBound = pos2.yPos + size2.height;
+
+        auto startLeftBound = pos1.xPos;
+        auto startRightBound = pos1.xPos + size1.width;
+        auto startTopBound = pos1.yPos;
+        auto startBottomBound = pos1.yPos + size1.height;
+
+        float horizontalDistance = 0.0f;
+        if (startRightBound < endpointLeftBound) {
+            horizontalDistance = endpointLeftBound - startRightBound;
+        } else if (startLeftBound > endpointRightBound) {
+            horizontalDistance = startLeftBound - endpointRightBound;
         }
 
-        Position closestPoint1 = getClosestPart(pos1, pos2, size2);
-        Position closestPoint2 = getClosestPart(pos2, pos1, size1);
-        return isWithinAllowedDistance(pos1, closestPoint1, allowedDistance) || isWithinAllowedDistance(pos2, closestPoint2, allowedDistance);
+        float verticalDistance = 0.0f;
+        if (startBottomBound < endpointTopBound) {
+            verticalDistance = endpointTopBound - startBottomBound;
+        } else if (startTopBound > endpointBottomBound) {
+            verticalDistance = startTopBound - endpointBottomBound;
+        }
+
+        float shortestDistance = std::sqrt(horizontalDistance * horizontalDistance + verticalDistance * verticalDistance);
+
+        return shortestDistance <= allowedDistance;
     }
 
 private:

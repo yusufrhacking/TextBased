@@ -7,21 +7,13 @@ class ChoppingSystem: public System {
 public:
     ChoppingSystem();
 private:
+    const float CHOPPING_RANGE = 0;
     void listenToEvents();
     void onChop(ChopEvent& event);
 
     Position getAxePosition(Entity mainPlayer);
 
-    bool isInChoppingRange(Position axePosition, Position treePosition, const TextComponent& treeTextComponent, float allowedDistance);
-
     std::string chopTreeText(const std::string& treeText);
-
-    bool isWithinTreeBounds(Position axePosition, Position treePosition, const TextComponent &treeTextComponent);
-
-    Position
-    getClosestPartOfTree(Position axePosition, Position treePosition, const TextComponent &treeTextComponent);
-
-    bool isWithinAllowedDistance(Position axePosition, Position point, float allowedDistance);
 
     Position findTreeMiddle(Position treePosition);
 

@@ -12,7 +12,6 @@ CollisionCheckSystem::CollisionCheckSystem() {
     requireComponent<TextComponent>();
     requireComponent<CollisionComponent>();
     requireComponent<LiveComponent>();
-
 }
 
 

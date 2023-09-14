@@ -47,7 +47,8 @@ void ChoppingSystem::onChop(ChopEvent &event) {
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
         if (DistanceCalculator::isInAllowedRange(
-                axePosition, treePosition, axeTextComponent.getSurfaceSize(), treeTextComponent.getSurfaceSize(), 30)){
+                axePosition, treePosition, axeTextComponent.getSurfaceSize(),
+                treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
             if (treeTextComponent.text.empty()){
                 eventBus->emitEvent<CreateItemAtPositionEvent>(
@@ -55,6 +56,7 @@ void ChoppingSystem::onChop(ChopEvent &event) {
                 ecsManager->killEntity(tree);
             }
             spdlog::debug("CHOPPED");
+            break;
         }
     }
     spdlog::debug("Chop received");
