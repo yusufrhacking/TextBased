@@ -23,7 +23,7 @@ ItemCreationSystem::ItemCreationSystem(){
 void ItemCreationSystem::listenToEvents(){
     eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &ItemCreationSystem::onCreateAtPosition);
     eventBus->listenToEvent<CreatePlayerItemEvent>(this, &ItemCreationSystem::onCreate);
-    eventBus->listenToEvent<StashPlayerItemEvent>(this, &ItemCreationSystem::onStash)
+    eventBus->listenToEvent<StashPlayerItemEvent>(this, &ItemCreationSystem::onStash);
 }
 void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
     switch (event.item){
