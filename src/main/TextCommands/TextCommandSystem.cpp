@@ -24,7 +24,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     auto words = getWords(event.processedText);
     bool addNext = false;
     bool placeNext = false;
-    for (const auto& word: words){
+    for (const auto& word: words) {
         if (addNext){
             if (word == "axe"){
                 eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
@@ -47,7 +47,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
             eventBus->emitEvent<PlayerPickUpEvent>(*ecsManager->getSystem<MainPlayerAccessSystem>().getRelevantEntities().begin());
         }
     }
-    if (event.processedText == "chop"){
+    if (event.processedText == "chop") {
         eventBus->emitEvent<ChopEvent>(ChopEvent());
     }
 //    spdlog::debug("Processed text event: {}", event.processedText);
