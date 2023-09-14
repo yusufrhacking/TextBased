@@ -52,7 +52,8 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     }
 
     if (event.processedText == "stash axe") {
-        std:: cout << "hello";
+//        std:: cout << "hello";
+        eventBus->emitEvent<StashPlayerItemEvent>(Item: AXE);
     }
 
 //    spdlog::debug("Processed text event: {}", event.processedText);
