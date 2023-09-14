@@ -3,6 +3,7 @@
 #include "../ECSObjects/System.h"
 #include "CreateItemAtPositionEvent.h"
 #include "CreatePlayerItemEvent.h"
+#include "StashPlayerItemEvent.h"
 
 
 class ItemCreationSystem: public System {
@@ -12,6 +13,7 @@ private:
     void listenToEvents();
     void onCreateAtPosition(CreateItemAtPositionEvent& event);
     void onCreate(CreatePlayerItemEvent &);
+    void onStash(StashPlayerItemEvent &)
     void createAxe();
 
     void createWoodPile(Position position);

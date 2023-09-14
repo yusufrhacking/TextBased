@@ -11,6 +11,7 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/InventoryComponent.h"
+#include "StashPlayerItemEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -22,6 +23,7 @@ ItemCreationSystem::ItemCreationSystem(){
 void ItemCreationSystem::listenToEvents(){
     eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &ItemCreationSystem::onCreateAtPosition);
     eventBus->listenToEvent<CreatePlayerItemEvent>(this, &ItemCreationSystem::onCreate);
+    eventBus->listenToEvent<StashPlayerItemEvent>(this, &ItemCreationSystem::onCreate)
 }
 void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
     switch (event.item){
@@ -30,6 +32,9 @@ void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
     }
 }
 
+void ItemCreationSystem::onStash(StashPlayerItemEvent& event) {
+
+}
 
 void ItemCreationSystem::onCreate(CreatePlayerItemEvent& event) {
     switch (event.item){
