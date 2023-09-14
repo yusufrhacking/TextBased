@@ -4,7 +4,7 @@
 
 
 #include "../EventSystem/Event.h"
-#include "Item.h"
+#include "../Creation/Item.h"
 
 struct StashPlayerItemEvent : public Event {
     Item item;

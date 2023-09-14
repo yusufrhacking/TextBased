@@ -1,4 +1,4 @@
-#include "PlayerPickUpSystem.h"
+#include "InventorySystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "PickupComponent.h"
 #include "PlayerPickUpEvent.h"
@@ -7,22 +7,22 @@
 #include "../PositionsAndMovement/DistanceCalculator.h"
 #include "InventoryComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
-#include "../Creation/StashPlayerItemEvent.h"
+#include "StashPlayerItemEvent.h"
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Woodworking/AxeComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
-PlayerPickUpSystem::PlayerPickUpSystem(){
+InventorySystem::InventorySystem(){
     requireComponent<PickupComponent>();
     listenToEvents();
 }
-void PlayerPickUpSystem::listenToEvents(){
-    eventBus->listenToEvent<PlayerPickUpEvent>(this, &PlayerPickUpSystem::onPickup);
-    eventBus->listenToEvent<StashPlayerItemEvent>(this, &PlayerPickUpSystem::onStash);
+void InventorySystem::listenToEvents(){
+    eventBus->listenToEvent<PlayerPickUpEvent>(this, &InventorySystem::onPickup);
+    eventBus->listenToEvent<StashPlayerItemEvent>(this, &InventorySystem::onStash);
 }
-void PlayerPickUpSystem::onPickup(PlayerPickUpEvent& event){
+void InventorySystem::onPickup(PlayerPickUpEvent& event){
     auto player = event.picker;
     auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(player).getPosition();
     auto playerSize = ecsManager->getComponentFromEntity<TextComponent>(player).getSurfaceSize();
@@ -37,29 +37,29 @@ void PlayerPickUpSystem::onPickup(PlayerPickUpEvent& event){
     }
 }
 
-void PlayerPickUpSystem::onStash(StashPlayerItemEvent& event) {
+void InventorySystem::onStash(StashPlayerItemEvent& event) {
     switch (event.item) {
         case Item::AXE: stashAxe(); break;
         default: break;
     }
 }
 
-void PlayerPickUpSystem::stashAxe() {
+void InventorySystem::stashAxe() {
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
-    for (auto child: children){
-        if (ecsManager->hasComponent<AxeComponent>(child)){
-            pickupItemIntoPlayerInventory(mainPlayer, child);
+
+    for (auto it = children.begin(); it != children.end(); ) {
+        if (ecsManager->hasComponent<AxeComponent>(*it)) {
+            pickupItemIntoPlayerInventory(mainPlayer, *it);
+            children.erase(it);
             break;
+        } else {
+            ++it;
         }
     }
-    //Basically need to find a way to get the axe entity seperately so that I can remove the text component from it... Or we can stash it once we have it
-//    auto axe = ecsManager->getComponentFromEntity<AxeComponent>(tiedChild);
-//    ecsManager->removeComponentFromEntity<TextComponent>(axe); //Need to figure out how to get the text component of the axe from player
-
 }
 
-void PlayerPickUpSystem::pickupItemIntoPlayerInventory(Entity player, Entity pickedUpEntity) {
+void InventorySystem::pickupItemIntoPlayerInventory(Entity player, Entity pickedUpEntity) {
     auto& playerInventory = ecsManager->getComponentFromEntity<InventoryComponent>(player);
     playerInventory.items.push_back(pickedUpEntity);
     ecsManager->removeComponentFromEntity<LiveComponent>(pickedUpEntity);

@@ -1,13 +1,13 @@
-#ifndef TEXTBASED_PLAYERPICKUPSYSTEM_H
-#define TEXTBASED_PLAYERPICKUPSYSTEM_H
+#ifndef TEXTBASED_INVENTORYSYSTEM_H
+#define TEXTBASED_INVENTORYSYSTEM_H
 #include "PlayerPickUpEvent.h"
 #include "../ECSObjects/System.h"
-#include "../Creation/StashPlayerItemEvent.h"
+#include "StashPlayerItemEvent.h"
 #include "InventoryComponent.h"
 
-class PlayerPickUpSystem: public System {
+class InventorySystem: public System {
 public:
-    PlayerPickUpSystem();
+    InventorySystem();
 private:
     const float PICKUP_RANGE = 20;
     void listenToEvents();
@@ -21,4 +21,4 @@ private:
 };
 
 
-#endif //TEXTBASED_PLAYERPICKUPSYSTEM_H
+#endif //TEXTBASED_INVENTORYSYSTEM_H

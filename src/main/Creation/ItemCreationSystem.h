@@ -3,7 +3,7 @@
 #include "../ECSObjects/System.h"
 #include "CreateItemAtPositionEvent.h"
 #include "CreatePlayerItemEvent.h"
-#include "StashPlayerItemEvent.h"
+#include "../Inventory/StashPlayerItemEvent.h"
 
 
 class ItemCreationSystem: public System {

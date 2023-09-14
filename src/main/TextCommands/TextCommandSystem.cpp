@@ -8,7 +8,7 @@
 #include "../Creation/CreatePlayerItemEvent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/PlaceEvent.h"
-#include "../Creation/StashPlayerItemEvent.h"
+#include "../Inventory/StashPlayerItemEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

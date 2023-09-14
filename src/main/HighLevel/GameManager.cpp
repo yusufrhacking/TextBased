@@ -9,7 +9,7 @@
 #include "../Woodworking/ChoppingSystem.h"
 #include "../Creation/ItemCreationSystem.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
-#include "../Inventory/PlayerPickUpSystem.h"
+#include "../Inventory/InventorySystem.h"
 #include "../Inventory/PlaceSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
@@ -38,7 +38,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<ChoppingSystem>();
     ecsManager->addSystem<ItemCreationSystem>();
     ecsManager->addSystem<MainPlayerAccessSystem>();
-    ecsManager->addSystem<PlayerPickUpSystem>();
+    ecsManager->addSystem<InventorySystem>();
     ecsManager->addSystem<PlaceSystem>();
 }
 

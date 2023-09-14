@@ -11,7 +11,7 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/InventoryComponent.h"
-#include "StashPlayerItemEvent.h"
+#include "../Inventory/StashPlayerItemEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
