@@ -50,6 +50,11 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     if (event.processedText == "chop") {
         eventBus->emitEvent<ChopEvent>(ChopEvent());
     }
+
+    if (event.processedText == "stash axe") {
+
+    }
+
 //    spdlog::debug("Processed text event: {}", event.processedText);
 }
 
