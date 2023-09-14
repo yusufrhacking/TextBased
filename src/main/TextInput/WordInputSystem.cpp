@@ -54,7 +54,9 @@ void WordInputSystem::handleBackSpace() {
 
 void WordInputSystem::handleRepeatCommand() {
     if (!lastCommand.empty()){
-        eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(lastCommand));
+        if (text.empty()){
+            eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(lastCommand));
+        }
     }
 }
 
