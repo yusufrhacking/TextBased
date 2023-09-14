@@ -45,7 +45,7 @@ void PlayerPickUpSystem::onStash(StashPlayerItemEvent& event) {
 }
 
 void PlayerPickUpSystem::stashAxe() {
-    auto mainPlayer = *getRelevantEntities().begin();
+    auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
     for (auto child: children){
         if (ecsManager->hasComponent<AxeComponent>(child)){
