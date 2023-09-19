@@ -2,8 +2,8 @@
 #include "CharacterStorageSystem.h"
 #include "Alphabet.h"
 #include "../EventSystem/EventBus.h"
-#include "../TextCommands/ProcessedTextEvent.h"
-#include "../TextInput/TextCommandEvent.h"
+#include "../TextCommands/CharacterStorageEvent.h"
+#include "../TextInput/ProspectiveTextCommandEvent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -11,11 +11,11 @@ CharacterStorageSystem::CharacterStorageSystem() {
     listenToEvents();
 }
 
-void CharacterStorageSystem::onSpend(ProcessedTextEvent& event){
-    spdlog::debug("On Spend: {}", event.processedText);
-    bool result = tryToSpendText(event.processedText);
+void CharacterStorageSystem::onSpend(CharacterStorageEvent& event){
+    spdlog::debug("on spend");
+    bool result = tryToSpendText(event.subject);
     if (result){
-        eventBus->emitEvent<TextCommandEvent>(event.processedText);
+        eventBus->emitEvent<ProspectiveTextCommandEvent>(event.command, event.subject);
     }
 }
 
@@ -26,7 +26,6 @@ bool CharacterStorageSystem::tryToSpendText(const std::string& text) {
     }
     for (char c : text){
         if (c == ' ') continue;
-
         auto character = char_to_enum(c);
         alphabet.decrement(character);
     }
@@ -55,7 +54,7 @@ bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
 }
 
 void CharacterStorageSystem::listenToEvents() {
-    eventBus->listenToEvent<ProcessedTextEvent>(this, &CharacterStorageSystem::onSpend);
+    eventBus->listenToEvent<CharacterStorageEvent>(this, &CharacterStorageSystem::onSpend);
 }
 
 

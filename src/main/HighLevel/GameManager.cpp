@@ -42,6 +42,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<MainPlayerAccessSystem>();
     ecsManager->addSystem<InventorySystem>();
     ecsManager->addSystem<PlaceSystem>();
+    ecsManager->addSystem<GrammarSystem>();
     ecsManager->addSystem<CharacterStorageSystem>();
 }
 

@@ -15,32 +15,17 @@ extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 TextCommandSystem::TextCommandSystem() {
-    grammarSystem.addCommandKeyword("chop");
-    grammarSystem.addCommandKeyword("create");
-    grammarSystem.addCommandKeyword("stash");
-    grammarSystem.addCommandKeyword("place");
-    grammarSystem.addCommandKeyword("pickup");
-
-    grammarSystem.addSubjectKeyword("axe");
-    grammarSystem.addSubjectKeyword("wood");
     listenToEvents();
 }
 
 void TextCommandSystem::listenToEvents() {
-    eventBus->listenToEvent<TextCommandEvent>(this, &TextCommandSystem::onCommand);
+    eventBus->listenToEvent<ProspectiveTextCommandEvent>(this, &TextCommandSystem::onCommand);
 }
 
-void TextCommandSystem::onCommand(TextCommandEvent &event) {
-    auto words = Split::getWords(event.processedText);
-    auto [command, subject] = grammarSystem.splitCommandAndSubject(event.processedText);
-
-    if (!characterStorage.isLegalSpend(subject)) {
-        spdlog::debug("Cannot afford to execute command: {}", event.processedText);
-        return;
-    }
-
-    characterStorage.tryToSpendText(subject);
-
+void TextCommandSystem::onCommand(ProspectiveTextCommandEvent &event) {
+    spdlog::debug("On Command");
+    auto command = event.command;
+    auto subject = event.subject;
     if (command == "chop") {
         eventBus->emitEvent<ChopEvent>();
     } else if (command == "create") {

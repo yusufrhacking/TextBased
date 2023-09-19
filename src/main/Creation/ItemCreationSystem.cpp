@@ -40,7 +40,7 @@ void ItemCreationSystem::onCreate(CreatePlayerItemEvent& event) {
 }
 
 void ItemCreationSystem::createAxe(){
-    auto mainPlayer = *getRelevantEntities().begin();
+    auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
     auto axe = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TiedChildComponent>(mainPlayer, axe);
@@ -65,6 +65,5 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD);
     ecsManager->addComponentToEntity<PickupComponent>(wood);
     ecsManager->addComponentToEntity<LiveComponent>(wood);
-
 }
 

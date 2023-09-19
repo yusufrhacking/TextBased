@@ -1,9 +1,9 @@
 #include <spdlog/spdlog.h>
 #include "GameKeyEvent.h"
-#include "TextCommandEvent.h"
+#include "ProspectiveTextCommandEvent.h"
 #include "WordInputSystem.h"
 #include "TextQueuedEvent.h"
-#include "../TextCommands/ProcessedTextEvent.h"
+#include "../TextCommands/CharacterStorageEvent.h"
 #include "../Grammar/GrammarEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -43,7 +43,8 @@ void WordInputSystem::handleTextFlip() {
     listening_to_letters = !listening_to_letters;
     spdlog::trace("TEXT FLIPPING to {} with {}", listening_to_letters, text);
     if (!text.empty()){
-        eventBus->emitEvent<TextCommandEvent>(text);
+        spdlog::debug("Emitting grammar event");
+        eventBus->emitEvent<GrammarEvent>(text);
         lastCommand = text;
     }
     text = "";
@@ -58,7 +59,7 @@ void WordInputSystem::handleBackSpace() {
 void WordInputSystem::handleRepeatCommand() {
     if (!lastCommand.empty()){
         if (text.empty()){
-            eventBus->emitEvent<TextCommandEvent>(lastCommand);
+            eventBus->emitEvent<GrammarEvent>(lastCommand);
         }
     }
 }

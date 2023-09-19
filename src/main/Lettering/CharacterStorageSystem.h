@@ -2,7 +2,7 @@
 #define TEXTBASED_CHARACTERSTORAGESYSTEM_H
 #include <string>
 #include "Alphabet.h"
-#include "../TextCommands/ProcessedTextEvent.h"
+#include "../TextCommands/CharacterStorageEvent.h"
 #include "../ECSObjects/System.h"
 
 class CharacterStorageSystem: public System {
@@ -18,7 +18,7 @@ private:
 
     void listenToEvents();
 
-    void onSpend(ProcessedTextEvent &event);
+    void onSpend(CharacterStorageEvent &event);
 };
 
 

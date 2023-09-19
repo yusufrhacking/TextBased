@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_WORDINPUTSYSTEM_H
 #define TEXTBASED_WORDINPUTSYSTEM_H
 #include "../HighLevel/ECSManager.h"
-#include "TextCommandEvent.h"
+#include "ProspectiveTextCommandEvent.h"
 #include "GameKeyEvent.h"
 #include "TextInputEvent.h"
 #include "../ECSObjects/System.h"
