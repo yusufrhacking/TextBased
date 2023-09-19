@@ -38,10 +38,6 @@ const Alphabet &CharacterStorageSystem::getAlphabet() {
     return alphabet;
 }
 
-void CharacterStorageSystem::pickupCharacter(Letter c) {
-    alphabet.increment(c);
-}
-
 bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
     Alphabet dummyAlphabet = alphabet;
     for (char c: word) {
