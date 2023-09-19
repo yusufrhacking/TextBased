@@ -13,6 +13,7 @@
 #include "../Inventory/PlaceSystem.h"
 #include "../Lettering/CharacterStorageSystem.h"
 #include "../Grammar/GrammarSystem.h"
+#include "../Lettering/LetterPickupSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -44,6 +45,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<PlaceSystem>();
     ecsManager->addSystem<GrammarSystem>();
     ecsManager->addSystem<CharacterStorageSystem>();
+    ecsManager->addSystem<LetterPickupSystem>();
 }
 
 void GameManager::update(double deltaTime) {
