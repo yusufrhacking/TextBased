@@ -3,14 +3,9 @@
 
 CharacterStorageSystem::CharacterStorageSystem() = default;
 
-bool CharacterStorageSystem::spendWord(std::string word) {
-    Alphabet dummyAlphabet = alphabet;
-    for (char c : word){
-        auto character = char_to_enum(c);
-        if (dummyAlphabet.getCount(character) <= 0){
-            return false;
-        }
-        dummyAlphabet.decrement(character);
+bool CharacterStorageSystem::spendWord(const std::string& word) {
+    if (!isLegalSpend(word)){
+        return false;
     }
     for (char c : word){
         auto character = char_to_enum(c);
@@ -25,6 +20,18 @@ const Alphabet &CharacterStorageSystem::getAlphabet() {
 
 void CharacterStorageSystem::pickupCharacter(Character c) {
     alphabet.increment(c);
+}
+
+bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
+    Alphabet dummyAlphabet = alphabet;
+    for (char c : word){
+        auto character = char_to_enum(c);
+        if (dummyAlphabet.getCount(character) <= 0){
+            return false;
+        }
+        dummyAlphabet.decrement(character);
+    }
+    return true;
 }
 
 

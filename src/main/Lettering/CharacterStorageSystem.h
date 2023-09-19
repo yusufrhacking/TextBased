@@ -7,10 +7,12 @@ class CharacterStorageSystem {
 public:
     CharacterStorageSystem();
     void pickupCharacter(Character c);
-    bool spendWord(std::string word);
+    bool spendWord(const std::string& word);
     const Alphabet& getAlphabet();
 private:
     Alphabet alphabet{};
+
+    bool isLegalSpend(const std::string &word);
 };
 
 
