@@ -9,7 +9,7 @@ enum Item {
     WOOD
 };
 
-std::string ItemToString(const Item& item) {
+static std::string ItemToString(const Item& item) {
     switch (item) {
         case AXE:
             return "axe";
@@ -20,7 +20,7 @@ std::string ItemToString(const Item& item) {
     }
 }
 
-Item StringToItem(const std::string& str) {
+static Item StringToItem(const std::string& str) {
     if (str == "axe") {
         return AXE;
     } else if (str == "wood") {

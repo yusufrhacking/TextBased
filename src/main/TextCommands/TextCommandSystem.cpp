@@ -37,11 +37,11 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     if (command == "chop") {
         eventBus->emitEvent<ChopEvent>();
     } else if (command == "create") {
-        eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
+        eventBus->emitEvent<CreatePlayerItemEvent>(StringToItem(subject));
     } else if (command == "stash") {
-        eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
+        eventBus->emitEvent<StashPlayerItemEvent>(StringToItem(subject));
     } else if (command == "place") {
-        eventBus->emitEvent<PlaceEvent>(Item::WOOD);
+        eventBus->emitEvent<PlaceEvent>(StringToItem(subject));
     } else if (command == "pickup") {
         eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     }
