@@ -35,7 +35,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     auto [command, subject] = grammarSystem.splitCommandAndSubject(event.processedText);
 
     if (command == "chop") {
-        eventBus->emitEvent<ChopEvent>(ChopEvent());
+        eventBus->emitEvent<ChopEvent>();
     } else if (command == "create") {
         eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
     } else if (command == "stash") {
@@ -45,19 +45,4 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     } else if (command == "pickup") {
         eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     }
-//    if (event.processedText == "chop") {
-//        eventBus->emitEvent<ChopEvent>(ChopEvent());
-//    }
-//    if (event.processedText == "create axe"){
-//        eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
-//    }
-//    if (event.processedText == "stash axe"){
-//        eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
-//    }
-//    if (event.processedText == "place wood"){
-//        eventBus->emitEvent<PlaceEvent>(Item::WOOD);
-//    }
-//    if (event.processedText == "pickup"){
-//        eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
-//    }
 }

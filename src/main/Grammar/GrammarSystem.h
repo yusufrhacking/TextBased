@@ -35,10 +35,10 @@ public:
     }
 
     [[nodiscard]] std::pair<std::string, std::string> splitCommandAndSubject(const std::string& text) const {
-        auto words = Split::getWords(text);  // Assuming you have a getWords function
+        auto words = Split::getWords(text);
 
-        std::string command = "";
-        std::string subject = "";
+        std::string command;
+        std::string subject;
 
         if (!words.empty() && isCommandKeyword(words[0])) {
             command = words[0];
