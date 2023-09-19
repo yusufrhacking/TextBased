@@ -11,6 +11,7 @@
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/InventorySystem.h"
 #include "../Inventory/PlaceSystem.h"
+#include "../Lettering/CharacterStorageSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -40,6 +41,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<MainPlayerAccessSystem>();
     ecsManager->addSystem<InventorySystem>();
     ecsManager->addSystem<PlaceSystem>();
+    ecsManager->addSystem<CharacterStorageSystem>();
 }
 
 void GameManager::update(double deltaTime) {

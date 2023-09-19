@@ -3,6 +3,7 @@
 #include <string>
 #include "Alphabet.h"
 #include "../TextCommands/ProcessedTextEvent.h"
+#include "../ECSObjects/System.h"
 
 class CharacterStorageSystem: public System {
 public:
