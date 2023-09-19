@@ -1,7 +1,19 @@
 #include "CharacterStorageSystem.h"
 #include "Alphabet.h"
+#include "../EventSystem/EventBus.h"
+#include "../TextCommands/ProcessedTextEvent.h"
+#include "../TextInput/TextCommandEvent.h"
 
-CharacterStorageSystem::CharacterStorageSystem() = default;
+extern std::unique_ptr<EventBus> eventBus;
+
+
+CharacterStorageSystem::CharacterStorageSystem() {
+    listenToEvents();
+}
+
+void CharacterStorageSystem::onSpend(ProcessedTextEvent& event){
+    eventBus->emitEvent<TextCommandEvent>(event.processedText);
+}
 
 bool CharacterStorageSystem::spendWord(const std::string& word) {
     if (!isLegalSpend(word)){
@@ -32,6 +44,10 @@ bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
         dummyAlphabet.decrement(character);
     }
     return true;
+}
+
+void CharacterStorageSystem::listenToEvents() {
+    eventBus->listenToEvent<ProcessedTextEvent>(this, &CharacterStorageSystem::onSpend);
 }
 
 

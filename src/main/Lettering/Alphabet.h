@@ -11,6 +11,7 @@ private:
 
 public:
     Alphabet() : counts(ALPHABET_SIZE, 0) {}
+    explicit Alphabet(int count): counts(ALPHABET_SIZE, count) {}
 
     void increment(Character c) {
         counts[c]++;

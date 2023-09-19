@@ -26,38 +26,6 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     bool addNext = false;
     bool placeNext = false;
     bool stashNext = false;
-//    for (const auto& word: words) {
-//        if (addNext){
-//            if (word == "axe"){
-//                eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
-//            }
-//            addNext = false;
-//        }
-//        if (placeNext){
-//            if (word == "wood"){
-//                eventBus->emitEvent<PlaceEvent>(Item::WOOD);
-//            }
-//            placeNext = false;
-//        }
-//        if (stashNext){
-//            if (word == "axe"){
-//                eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
-//            }
-//            stashNext = false;
-//        }
-//        if (word == "create"){
-//            addNext = true;
-//        }
-//        if (word == "place"){
-//            placeNext = true;
-//        }
-//        if (word == "stash"){
-//            stashNext = true;
-//        }
-//        if (word == "pickup"){
-//            eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
-//        }
-//    }
     if (event.processedText == "chop") {
         eventBus->emitEvent<ChopEvent>(ChopEvent());
     }
@@ -73,10 +41,6 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     if (event.processedText == "pickup"){
         eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     }
-//
-//    if (event.processedText == "stash axe") {
-//        eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
-//    }
 }
 
 std::vector<std::string> TextCommandSystem::getWords(std::string processedText) {
