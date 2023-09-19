@@ -3,6 +3,11 @@
 #include <string>
 #include <sstream>
 
+enum Style{
+    WHITE_MONACO_GENERIC,
+    LETTER
+};
+
 struct StyleComponent{
 private:
     Style style;
@@ -10,6 +15,10 @@ private:
 public:
     StyleComponent(){
         style = WHITE_MONACO_GENERIC;
+    }
+
+    explicit StyleComponent(Style style): style(style){
+
     }
 
     [[nodiscard]] Style getStyle() const {

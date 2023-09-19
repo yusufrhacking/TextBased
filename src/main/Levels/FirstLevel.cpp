@@ -38,9 +38,9 @@ void FirstLevel::createTree() {
 
 void FirstLevel::createLetter() {
     auto letterA = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(letterA, "A");
+    ecsManager->addComponentToEntity<TextComponent>(letterA, "a");
     ecsManager->addComponentToEntity<PositionComponent>(letterA, startingPosition + Position(-100, 0));
-    ecsManager->addComponentToEntity<StyleComponent>(letterA);
+    ecsManager->addComponentToEntity<StyleComponent>(letterA, LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA);
 }
