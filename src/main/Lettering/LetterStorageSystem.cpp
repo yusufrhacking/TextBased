@@ -1,5 +1,9 @@
 #include "LetterStorageSystem.h"
 
+LetterStorageSystem::LetterStorageSystem() {
+
+}
+
 bool LetterStorageSystem::spendWord(std::string word) {
     return false;
 }
@@ -7,3 +11,5 @@ bool LetterStorageSystem::spendWord(std::string word) {
 const Alphabet &LetterStorageSystem::getLetterCounts() {
     return <#initializer#>;
 }
+
+
