@@ -15,6 +15,14 @@ extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 TextCommandSystem::TextCommandSystem() {
+    grammarSystem.addCommandKeyword("chop");
+    grammarSystem.addCommandKeyword("create");
+    grammarSystem.addCommandKeyword("stash");
+    grammarSystem.addCommandKeyword("place");
+    grammarSystem.addCommandKeyword("pickup");
+
+    grammarSystem.addSubjectKeyword("axe");
+    grammarSystem.addSubjectKeyword("wood");
     listenToEvents();
 }
 
@@ -24,19 +32,32 @@ void TextCommandSystem::listenToEvents() {
 
 void TextCommandSystem::onCommand(TextCommandEvent &event) {
     auto words = Split::getWords(event.processedText);
-    if (event.processedText == "chop") {
+    auto [command, subject] = grammarSystem.splitCommandAndSubject(event.processedText);
+
+    if (command == "chop") {
         eventBus->emitEvent<ChopEvent>(ChopEvent());
-    }
-    if (event.processedText == "create axe"){
+    } else if (command == "create") {
         eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
-    }
-    if (event.processedText == "stash axe"){
+    } else if (command == "stash") {
         eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
-    }
-    if (event.processedText == "place wood"){
+    } else if (command == "place") {
         eventBus->emitEvent<PlaceEvent>(Item::WOOD);
-    }
-    if (event.processedText == "pickup"){
+    } else if (command == "pickup") {
         eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     }
+//    if (event.processedText == "chop") {
+//        eventBus->emitEvent<ChopEvent>(ChopEvent());
+//    }
+//    if (event.processedText == "create axe"){
+//        eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
+//    }
+//    if (event.processedText == "stash axe"){
+//        eventBus->emitEvent<StashPlayerItemEvent>(Item::AXE);
+//    }
+//    if (event.processedText == "place wood"){
+//        eventBus->emitEvent<PlaceEvent>(Item::WOOD);
+//    }
+//    if (event.processedText == "pickup"){
+//        eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
+//    }
 }

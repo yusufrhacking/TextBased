@@ -43,7 +43,6 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<InventorySystem>();
     ecsManager->addSystem<PlaceSystem>();
     ecsManager->addSystem<CharacterStorageSystem>();
-    ecsManager->addSystem<GrammarSystem>();
 }
 
 void GameManager::update(double deltaTime) {
