@@ -5,6 +5,7 @@
 #include "../Woodworking/AxeComponent.h"
 #include "../Inventory/InventoryComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
+#include "../Lettering/LetterComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -12,6 +13,7 @@ FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosi
     witt = ecsManager->createEntity();
     createTree();
     createPlayer();
+    createLetter();
 }
 
 void FirstLevel::createPlayer() {
@@ -32,6 +34,15 @@ void FirstLevel::createTree() {
     ecsManager->addComponentToEntity<CollisionComponent>(tree);
     ecsManager->addComponentToEntity<TreeComponent>(tree);
     ecsManager->addComponentToEntity<LiveComponent>(tree);
+}
+
+void FirstLevel::createLetter() {
+    auto letterA = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(letterA, "A");
+    ecsManager->addComponentToEntity<PositionComponent>(letterA, startingPosition + Position(-100, 0));
+    ecsManager->addComponentToEntity<StyleComponent>(letterA);
+    ecsManager->addComponentToEntity<LiveComponent>(letterA);
+    ecsManager->addComponentToEntity<LetterComponent>(letterA);
 }
 
 

@@ -18,6 +18,7 @@ private:
 
     void createTree();
 
+    void createLetter();
 };
 
 
