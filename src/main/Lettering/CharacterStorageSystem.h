@@ -9,7 +9,7 @@ class CharacterStorageSystem: public System {
 public:
     CharacterStorageSystem();
     void pickupCharacter(Character c);
-    bool spendWord(const std::string& word);
+    bool tryToSpendText(const std::string& text);
     const Alphabet& getAlphabet();
 private:
     Alphabet alphabet{10};

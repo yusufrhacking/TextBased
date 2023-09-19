@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "CharacterStorageSystem.h"
 #include "Alphabet.h"
 #include "../EventSystem/EventBus.h"
@@ -12,14 +13,21 @@ CharacterStorageSystem::CharacterStorageSystem() {
 }
 
 void CharacterStorageSystem::onSpend(ProcessedTextEvent& event){
-    eventBus->emitEvent<TextCommandEvent>(event.processedText);
+    spdlog::debug("On Spend: {}", event.processedText);
+    bool result = tryToSpendText(event.processedText);
+    if (result){
+        eventBus->emitEvent<TextCommandEvent>(event.processedText);
+    }
 }
 
-bool CharacterStorageSystem::spendWord(const std::string& word) {
-    if (!isLegalSpend(word)){
+bool CharacterStorageSystem::tryToSpendText(const std::string& text) {
+    if (!isLegalSpend(text)){
+        spdlog::debug("Is not legal spend");
         return false;
     }
-    for (char c : word){
+    for (char c : text){
+        if (c == ' ') continue;
+
         auto character = char_to_enum(c);
         alphabet.decrement(character);
     }
@@ -37,6 +45,7 @@ void CharacterStorageSystem::pickupCharacter(Character c) {
 bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
     Alphabet dummyAlphabet = alphabet;
     for (char c : word){
+        if (c == ' ') continue;
         auto character = char_to_enum(c);
         if (dummyAlphabet.getCount(character) <= 0){
             return false;

@@ -2,6 +2,7 @@
 #include "GameKeyEvent.h"
 #include "WordInputSystem.h"
 #include "TextQueuedEvent.h"
+#include "../TextCommands/ProcessedTextEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -40,7 +41,7 @@ void WordInputSystem::handleTextFlip() {
     listening_to_letters = !listening_to_letters;
     spdlog::debug("TEXT FLIPPING to {} with {}", listening_to_letters, text);
     if (!text.empty()){
-        eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(text));
+        eventBus->emitEvent<ProcessedTextEvent>(ProcessedTextEvent(text));
         lastCommand = text;
     }
     text = "";
@@ -55,7 +56,7 @@ void WordInputSystem::handleBackSpace() {
 void WordInputSystem::handleRepeatCommand() {
     if (!lastCommand.empty()){
         if (text.empty()){
-            eventBus->emitEvent<TextCommandEvent>(TextCommandEvent(lastCommand));
+            eventBus->emitEvent<ProcessedTextEvent>(ProcessedTextEvent(lastCommand));
         }
     }
 }
