@@ -34,6 +34,13 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     auto words = Split::getWords(event.processedText);
     auto [command, subject] = grammarSystem.splitCommandAndSubject(event.processedText);
 
+    if (!characterStorage.isLegalSpend(subject)) {
+        spdlog::debug("Cannot afford to execute command: {}", event.processedText);
+        return;
+    }
+
+    characterStorage.tryToSpendText(subject);
+
     if (command == "chop") {
         eventBus->emitEvent<ChopEvent>();
     } else if (command == "create") {

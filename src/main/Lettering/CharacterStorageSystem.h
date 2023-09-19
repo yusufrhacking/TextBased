@@ -10,11 +10,11 @@ public:
     CharacterStorageSystem();
     void pickupCharacter(Character c);
     bool tryToSpendText(const std::string& text);
+    bool isLegalSpend(const std::string &word);
     const Alphabet& getAlphabet();
 private:
     Alphabet alphabet{10};
 
-    bool isLegalSpend(const std::string &word);
 
     void listenToEvents();
 
