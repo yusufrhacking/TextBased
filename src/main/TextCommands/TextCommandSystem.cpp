@@ -9,6 +9,7 @@
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/PlaceEvent.h"
 #include "../Inventory/StashPlayerItemEvent.h"
+#include "../Text/Split.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -22,10 +23,7 @@ void TextCommandSystem::listenToEvents() {
 }
 
 void TextCommandSystem::onCommand(TextCommandEvent &event) {
-    auto words = getWords(event.processedText);
-    bool addNext = false;
-    bool placeNext = false;
-    bool stashNext = false;
+    auto words = Split::getWords(event.processedText);
     if (event.processedText == "chop") {
         eventBus->emitEvent<ChopEvent>(ChopEvent());
     }
@@ -41,15 +39,4 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     if (event.processedText == "pickup"){
         eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     }
-}
-
-std::vector<std::string> TextCommandSystem::getWords(std::string processedText) {
-    std::istringstream iss(processedText);
-    std::string token;
-    std::vector<std::string> words;
-
-    while(std::getline(iss, token, ' ')) {
-        words.push_back(token);
-    }
-    return words;
 }

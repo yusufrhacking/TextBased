@@ -3,6 +3,10 @@
 #include "GrammarEvent.h"
 #include "../ECSObjects/System.h"
 
+enum Command{
+    CHOP, PICKUP,
+};
+
 class GrammarSystem: public System {
 public:
     GrammarSystem();

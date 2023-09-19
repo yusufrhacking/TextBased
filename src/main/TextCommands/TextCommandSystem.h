@@ -10,7 +10,6 @@ private:
     void listenToEvents();
     void onCommand(TextCommandEvent& event);
 
-    std::vector<std::string> getWords(std::string processedText);
 };
 
 
