@@ -20,6 +20,10 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     terminalFont = FC_CreateFont();
     FC_LoadFont(terminalFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+    letterFont = FC_CreateFont();
+    FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
+                TEXT_C_FONT_SIZE, FC_MakeColor(255, 0, 0, 255), TTF_STYLE_NORMAL);
+
 
     r = {50, 50, 50, 50};
 }
@@ -30,6 +34,10 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
         case WHITE_MONACO_GENERIC:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(genericMonacoFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
+            break;
+        case LETTER:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            FC_Draw(letterFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
             break;
         default: throw NoStyleException();
     }

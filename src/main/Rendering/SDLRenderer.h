@@ -19,6 +19,7 @@ class SDLRenderer: public Renderer {
     SDL_Rect r;
     FC_Font* genericMonacoFont;
     FC_Font* terminalFont;
+    FC_Font* letterFont;
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color black = {0, 0, 0, 255};
     const float TERMINAL_X_START = 30;
