@@ -2,7 +2,7 @@
 #define TEXTBASED_ALPHABET_H
 #include <vector>
 #include <stdexcept>
-#include "Character.h"
+#include "Letter.h"
 
 
 struct Alphabet {
@@ -13,18 +13,18 @@ public:
     Alphabet() : counts(ALPHABET_SIZE, 0) {}
     explicit Alphabet(int count): counts(ALPHABET_SIZE, count) {}
 
-    void increment(Character c) {
+    void increment(Letter c) {
         counts[c]++;
     }
 
-    void decrement(Character c) {
+    void decrement(Letter c) {
         if (counts[c] <= 0) {
             throw std::runtime_error("0 letters left for that character");
         }
         counts[c]--;
     }
 
-    [[nodiscard]] int getCount(Character c) const {
+    [[nodiscard]] int getCount(Letter c) const {
         return counts[c];
     }
 

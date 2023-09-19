@@ -1,6 +1,6 @@
 #include "InventorySystem.h"
 #include "../HighLevel/ECSManager.h"
-#include "PickupComponent.h"
+#include "InventoryPickupComponent.h"
 #include "PlayerPickUpEvent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
@@ -15,7 +15,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 InventorySystem::InventorySystem(){
-    requireComponent<PickupComponent>();
+    requireComponent<InventoryPickupComponent>();
     listenToEvents();
 }
 void InventorySystem::listenToEvents(){

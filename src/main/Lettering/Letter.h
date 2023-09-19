@@ -1,12 +1,12 @@
-#ifndef TEXTBASED_CHARACTER_H
-#define TEXTBASED_CHARACTER_H
+#ifndef TEXTBASED_LETTER_H
+#define TEXTBASED_LETTER_H
 
-enum Character {
+enum Letter {
     A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
     ALPHABET_SIZE
 };
 
-inline char enum_to_char(Character character_enum) {
+inline char enum_to_char(Letter character_enum) {
     if(character_enum < ALPHABET_SIZE) {
         return 'A' + static_cast<int>(character_enum);
     } else {
@@ -14,13 +14,13 @@ inline char enum_to_char(Character character_enum) {
     }
 }
 
-inline Character char_to_enum(char character) {
+inline Letter char_to_enum(char character) {
     if(character >= 'a' && character <= 'z') {
         character = character - 'a' + 'A';
     }
 
     if(character >= 'A' && character <= 'Z') {
-        return static_cast<Character>(character - 'A');
+        return static_cast<Letter>(character - 'A');
     } else {
         return ALPHABET_SIZE;
     }

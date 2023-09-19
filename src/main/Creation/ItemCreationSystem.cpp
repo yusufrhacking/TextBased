@@ -7,7 +7,7 @@
 #include "../Woodworking/WoodComponent.h"
 #include "CreatePlayerItemEvent.h"
 #include "ItemComponent.h"
-#include "../Inventory/PickupComponent.h"
+#include "../Inventory/InventoryPickupComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/InventoryComponent.h"
@@ -63,7 +63,7 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<StyleComponent>(wood);
     ecsManager->addComponentToEntity<WoodComponent>(wood);
     ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD);
-    ecsManager->addComponentToEntity<PickupComponent>(wood);
+    ecsManager->addComponentToEntity<InventoryPickupComponent>(wood);
     ecsManager->addComponentToEntity<LiveComponent>(wood);
 }
 

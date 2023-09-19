@@ -1,12 +1,15 @@
 #include "LetterPickupSystem.h"
+#include "CharacterDepositEvent.h"
 #include "LetterComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../HighLevel/ECSManager.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../PositionsAndMovement/DistanceCalculator.h"
+#include "../Inventory/InventoryPickupComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<EventBus> eventBus;
 
 LetterPickupSystem::LetterPickupSystem() {
     requireComponent<PositionComponent>();
@@ -24,8 +27,10 @@ void LetterPickupSystem::update(double deltaTime) {
         bool isInRange = DistanceCalculator::isInAllowedRange(mainPlayerPosition, letterPosition,
                                                               mainPlayerSurfaceSize, surfaceSize, 5);
         if (isInRange){
+            auto letter = ecsManager->getComponentFromEntity<LetterComponent>(entity).character;
             spdlog::debug("Pickupable Letter");
-            //PICKUP
+            eventBus->emitEvent<CharacterDepositEvent>(letter);
+            ecsManager->killEntity(entity);
         }
 
     }

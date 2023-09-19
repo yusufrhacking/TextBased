@@ -42,7 +42,7 @@ void FirstLevel::createLetter() {
     ecsManager->addComponentToEntity<PositionComponent>(letterA, startingPosition + Position(-100, 0));
     ecsManager->addComponentToEntity<StyleComponent>(letterA, LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
-    ecsManager->addComponentToEntity<LetterComponent>(letterA);
+    ecsManager->addComponentToEntity<LetterComponent>(letterA, Letter::A);
 }
 
 

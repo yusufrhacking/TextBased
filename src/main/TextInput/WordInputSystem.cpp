@@ -3,7 +3,7 @@
 #include "ProspectiveTextCommandEvent.h"
 #include "WordInputSystem.h"
 #include "TextQueuedEvent.h"
-#include "../TextCommands/CharacterStorageEvent.h"
+#include "../TextCommands/CharacterSpendEvent.h"
 #include "../Grammar/GrammarEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;

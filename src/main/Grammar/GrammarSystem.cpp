@@ -2,7 +2,7 @@
 #include "GrammarSystem.h"
 #include "../EventSystem/EventBus.h"
 #include "GrammarEvent.h"
-#include "../TextCommands/CharacterStorageEvent.h"
+#include "../TextCommands/CharacterSpendEvent.h"
 #include "../Text/Split.h"
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -40,7 +40,7 @@ std::pair<std::string, std::string> GrammarSystem::splitCommandAndSubject(const 
 void GrammarSystem::onGrammar(GrammarEvent &event) {
     spdlog::debug("Grammar Event");
     auto [command, subject] = splitCommandAndSubject(event.text);
-    eventBus->emitEvent<CharacterStorageEvent>(command, subject);
+    eventBus->emitEvent<CharacterSpendEvent>(command, subject);
 }
 
 bool GrammarSystem::isCommandKeyword(const std::string& keyword) const {

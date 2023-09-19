@@ -2,13 +2,14 @@
 #define TEXTBASED_CHARACTERSTORAGESYSTEM_H
 #include <string>
 #include "Alphabet.h"
-#include "../TextCommands/CharacterStorageEvent.h"
+#include "../TextCommands/CharacterSpendEvent.h"
 #include "../ECSObjects/System.h"
+#include "CharacterDepositEvent.h"
 
 class CharacterStorageSystem: public System {
 public:
     CharacterStorageSystem();
-    void pickupCharacter(Character c);
+    void pickupCharacter(Letter c);
     bool tryToSpendText(const std::string& text);
     bool isLegalSpend(const std::string &word);
     const Alphabet& getAlphabet();
@@ -18,7 +19,9 @@ private:
 
     void listenToEvents();
 
-    void onSpend(CharacterStorageEvent &event);
+    void onSpend(CharacterSpendEvent &event);
+
+    void onDeposit(CharacterDepositEvent &event);
 };
 
 

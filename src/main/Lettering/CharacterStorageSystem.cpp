@@ -2,8 +2,10 @@
 #include "CharacterStorageSystem.h"
 #include "Alphabet.h"
 #include "../EventSystem/EventBus.h"
-#include "../TextCommands/CharacterStorageEvent.h"
+#include "../TextCommands/CharacterSpendEvent.h"
 #include "../TextInput/ProspectiveTextCommandEvent.h"
+#include "CharacterDepositEvent.h"
+#include "Letter.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -11,20 +13,20 @@ CharacterStorageSystem::CharacterStorageSystem() {
     listenToEvents();
 }
 
-void CharacterStorageSystem::onSpend(CharacterStorageEvent& event){
+void CharacterStorageSystem::onSpend(CharacterSpendEvent &event) {
     spdlog::debug("on spend");
     bool result = tryToSpendText(event.subject);
-    if (result){
+    if (result) {
         eventBus->emitEvent<ProspectiveTextCommandEvent>(event.command, event.subject);
     }
 }
 
-bool CharacterStorageSystem::tryToSpendText(const std::string& text) {
-    if (!isLegalSpend(text)){
+bool CharacterStorageSystem::tryToSpendText(const std::string &text) {
+    if (!isLegalSpend(text)) {
         spdlog::debug("Is not legal spend");
         return false;
     }
-    for (char c : text){
+    for (char c: text) {
         if (c == ' ') continue;
         auto character = char_to_enum(c);
         alphabet.decrement(character);
@@ -36,16 +38,16 @@ const Alphabet &CharacterStorageSystem::getAlphabet() {
     return alphabet;
 }
 
-void CharacterStorageSystem::pickupCharacter(Character c) {
+void CharacterStorageSystem::pickupCharacter(Letter c) {
     alphabet.increment(c);
 }
 
 bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
     Alphabet dummyAlphabet = alphabet;
-    for (char c : word){
+    for (char c: word) {
         if (c == ' ') continue;
         auto character = char_to_enum(c);
-        if (dummyAlphabet.getCount(character) <= 0){
+        if (dummyAlphabet.getCount(character) <= 0) {
             return false;
         }
         dummyAlphabet.decrement(character);
@@ -53,8 +55,15 @@ bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
     return true;
 }
 
+
+void CharacterStorageSystem::onDeposit(CharacterDepositEvent &event) {
+    spdlog::debug("Found letter: {}", enum_to_char(event.character));
+    alphabet.increment(event.character);
+}
+
 void CharacterStorageSystem::listenToEvents() {
-    eventBus->listenToEvent<CharacterStorageEvent>(this, &CharacterStorageSystem::onSpend);
+    eventBus->listenToEvent<CharacterSpendEvent>(this, &CharacterStorageSystem::onSpend);
+    eventBus->listenToEvent<CharacterDepositEvent>(this, &CharacterStorageSystem::onDeposit);
 }
 
 
