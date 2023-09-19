@@ -7,7 +7,6 @@
 
 extern std::unique_ptr<EventBus> eventBus;
 
-
 CharacterStorageSystem::CharacterStorageSystem() {
     listenToEvents();
 }
