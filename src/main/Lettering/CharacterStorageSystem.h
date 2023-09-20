@@ -13,7 +13,7 @@ public:
     bool isLegalSpend(const std::string &word);
     const Alphabet& getAlphabet();
 private:
-    Alphabet alphabet{10};
+    Alphabet alphabet{};
 
 
     void listenToEvents();
