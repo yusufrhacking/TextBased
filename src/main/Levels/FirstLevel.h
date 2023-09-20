@@ -18,7 +18,7 @@ private:
 
     void createTree();
 
-    void createLetter();
+    void createLetter(char letter, Position position);
 };
 
 

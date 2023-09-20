@@ -13,7 +13,9 @@ FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosi
     witt = ecsManager->createEntity();
     createTree();
     createPlayer();
-    createLetter();
+    createLetter('a', startingPosition + Position(-100, 0));
+    createLetter('x', startingPosition + Position(100, 0));
+    createLetter('e', startingPosition + Position(0, -100));
 }
 
 void FirstLevel::createPlayer() {
@@ -36,10 +38,10 @@ void FirstLevel::createTree() {
     ecsManager->addComponentToEntity<LiveComponent>(tree);
 }
 
-void FirstLevel::createLetter() {
+void FirstLevel::createLetter(char letter, Position position) {
     auto letterA = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(letterA, "a");
-    ecsManager->addComponentToEntity<PositionComponent>(letterA, startingPosition + Position(-100, 0));
+    ecsManager->addComponentToEntity<TextComponent>(letterA, std::string(1, letter));
+    ecsManager->addComponentToEntity<PositionComponent>(letterA, position);
     ecsManager->addComponentToEntity<StyleComponent>(letterA, LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA, Letter::A);
