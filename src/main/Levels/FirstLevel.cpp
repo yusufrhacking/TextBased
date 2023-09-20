@@ -44,7 +44,7 @@ void FirstLevel::createLetter(char letter, Position position) {
     ecsManager->addComponentToEntity<PositionComponent>(letterA, position);
     ecsManager->addComponentToEntity<StyleComponent>(letterA, LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
-    ecsManager->addComponentToEntity<LetterComponent>(letterA, Letter::A);
+    ecsManager->addComponentToEntity<LetterComponent>(letterA, char_to_enum(letter));
 }
 
 
