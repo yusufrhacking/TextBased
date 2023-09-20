@@ -22,6 +22,7 @@ class SDLRenderer: public Renderer {
     FC_Font* letterFont;
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color black = {0, 0, 0, 255};
+    SDL_Color gray = {178, 190, 181, 255};
     const float TERMINAL_X_START = 30;
     const float BOTTOM_WINDOW_OFFSET = 110;
     const float TERMINAL_Y_START = (float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);

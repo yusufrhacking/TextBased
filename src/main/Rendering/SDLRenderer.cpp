@@ -16,13 +16,13 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 
     genericMonacoFont = FC_CreateFont();
     FC_LoadFont(genericMonacoFont, renderer, "../../resources/Monaco.ttf",
-                TEXT_C_FONT_SIZE, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+                TEXT_C_FONT_SIZE, white, TTF_STYLE_NORMAL);
     terminalFont = FC_CreateFont();
     FC_LoadFont(terminalFont, renderer, "../../resources/Monaco.ttf",
-                TERMINAL_FONT_SIZE, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+                TERMINAL_FONT_SIZE, white, TTF_STYLE_NORMAL);
     letterFont = FC_CreateFont();
     FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
-                TEXT_C_FONT_SIZE, FC_MakeColor(255, 0, 0, 255), TTF_STYLE_NORMAL);
+                TEXT_C_FONT_SIZE, gray, TTF_STYLE_NORMAL);
 
 
     r = {50, 50, 50, 50};
