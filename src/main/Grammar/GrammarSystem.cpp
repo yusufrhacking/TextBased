@@ -4,6 +4,7 @@
 #include "GrammarEvent.h"
 #include "../TextCommands/CharacterSpendEvent.h"
 #include "../Text/Split.h"
+#include "../TextInput/ProspectiveTextCommandEvent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -40,7 +41,11 @@ std::pair<std::string, std::string> GrammarSystem::splitCommandAndSubject(const 
 void GrammarSystem::onGrammar(GrammarEvent &event) {
     spdlog::debug("Grammar Event");
     auto [command, subject] = splitCommandAndSubject(event.text);
-    eventBus->emitEvent<CharacterSpendEvent>(command, subject);
+    if (command == "create"){
+        eventBus->emitEvent<CharacterSpendEvent>(command, subject);
+    } else{
+        eventBus->emitEvent<ProspectiveTextCommandEvent>(command, subject);
+    }
 }
 
 bool GrammarSystem::isCommandKeyword(const std::string& keyword) const {
