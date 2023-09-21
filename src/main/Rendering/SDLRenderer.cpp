@@ -22,10 +22,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 TERMINAL_FONT_SIZE, white, TTF_STYLE_NORMAL);
     letterFont = FC_CreateFont();
     FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
-                TEXT_C_FONT_SIZE, gray, TTF_STYLE_NORMAL);
-
-
-    r = {50, 50, 50, 50};
+                TEXT_C_FONT_SIZE, gray, TTF_STYLE_BOLD);
 }
 
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){

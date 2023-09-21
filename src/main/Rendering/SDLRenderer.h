@@ -16,7 +16,6 @@
 
 class SDLRenderer: public Renderer {
     SDL_Renderer* renderer;
-    SDL_Rect r;
     FC_Font* genericMonacoFont;
     FC_Font* terminalFont;
     FC_Font* letterFont;
