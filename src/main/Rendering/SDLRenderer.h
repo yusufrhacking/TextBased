@@ -53,11 +53,11 @@ private:
 
     void renderTerminalText(std::string text);
 
-    void renderLetterbank(std::string text);
+    void renderLetterbank(std::map<char, int> textmap);
 
     void renderLetterbankStart();
 
-    void renderLetterbankText(std::string text);
+    void renderLetterbankText(std::map<char, int> textmap);
 };
 
 
