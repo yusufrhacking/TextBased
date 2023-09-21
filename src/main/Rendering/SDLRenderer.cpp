@@ -24,7 +24,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
                 TEXT_C_FONT_SIZE, gray, TTF_STYLE_NORMAL);
     countFont = FC_CreateFont();
-    FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
+    FC_LoadFont(countFont, renderer, "../../resources/Monaco.ttf",
                 5, gray, TTF_STYLE_NORMAL);
 
 
