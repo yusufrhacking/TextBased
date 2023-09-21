@@ -13,6 +13,7 @@
 #include "NoStyleException.h"
 #include "gmock/gmock.h"
 #include "Renderer.h"
+#include "../Lettering/Alphabet.h"
 
 class SDLRenderer: public Renderer {
     SDL_Renderer* renderer;
@@ -53,11 +54,11 @@ private:
 
     void renderTerminalText(std::string text);
 
-    void renderLetterbank(std::map<char, int> textmap);
+    void renderLetterbank(Alphabet alphabet);
 
     void renderLetterbankStart();
 
-    void renderLetterbankText(std::map<char, int> textmap);
+    void renderLetterbankText(Alphabet alphabet);
 };
 
 

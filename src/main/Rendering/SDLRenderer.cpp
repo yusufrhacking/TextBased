@@ -46,17 +46,17 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
     }
 }
 
-void SDLRenderer::renderLetterbank(std::map<char, int> textmap) { //Actually we need this to work a little different because the letter count needs to be paired with the letters
+void SDLRenderer::renderLetterbank(Alphabet alphabet) { //Actually we need this to work a little different because the letter count needs to be paired with the letters
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
     renderLetterbankStart();
-    renderLetterbankText(textmap);
+    renderLetterbankText(alphabet);
 }
 
 void SDLRenderer::renderLetterbankStart() {
 
 }
 
-void SDLRenderer::renderLetterbankText(std::map<char, int> textmap) {
+void SDLRenderer::renderLetterbankText(Alphabet alphabet) {
 
 }
 
