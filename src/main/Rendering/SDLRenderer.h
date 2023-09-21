@@ -26,6 +26,8 @@ class SDLRenderer: public Renderer {
     const float TERMINAL_X_START = 30;
     const float BOTTOM_WINDOW_OFFSET = 110;
     const float TERMINAL_Y_START = (float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);
+    const float LETTERBANK_Y_START = (float) Window::windowHeight - (TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT); //Need to mess with this
+    const float LETTERBANK_X_START = 30;
     int showUnderscore = 0;
     const float TERMINAL_INIT_X_OFFSET = 35;
     const float UNDERSCORE_Y_OFFSET = 3;
