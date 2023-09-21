@@ -23,6 +23,9 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     letterFont = FC_CreateFont();
     FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
                 TEXT_C_FONT_SIZE, gray, TTF_STYLE_NORMAL);
+    countFont = FC_CreateFont();
+    FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
+                5, gray, TTF_STYLE_NORMAL);
 
 
     r = {50, 50, 50, 50};
@@ -42,6 +45,22 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
         default: throw NoStyleException();
     }
 }
+
+void SDLRenderer::renderLetterbank(std::string text) { //Actually we need this to work a little different because the letter count needs to be paired with the letters
+    SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
+    renderLetterbankStart();
+    renderLetterbankText(text);
+}
+
+void SDLRenderer::renderLetterbankStart() {
+
+}
+
+void SDLRenderer::renderLetterbankText(std::string text) {
+
+}
+
+
 
 void SDLRenderer::renderTerminal(std::string text) {
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);

@@ -20,6 +20,7 @@ class SDLRenderer: public Renderer {
     FC_Font* genericMonacoFont;
     FC_Font* terminalFont;
     FC_Font* letterFont;
+    FC_Font* countFont;
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color black = {0, 0, 0, 255};
     SDL_Color gray = {178, 190, 181, 255};
@@ -51,6 +52,12 @@ private:
     void renderFlashingUnderscore(std::string text);
 
     void renderTerminalText(std::string text);
+
+    void renderLetterbank(std::string text);
+
+    void renderLetterbankStart();
+
+    void renderLetterbankText(std::string text);
 };
 
 
