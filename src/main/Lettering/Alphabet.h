@@ -3,15 +3,20 @@
 #include <vector>
 #include <stdexcept>
 #include "Letter.h"
-
+#include <map>
 
 struct Alphabet {
 private:
-    std::vector<int> counts;
+    std::map<Letter, int> counts;
 
 public:
-    Alphabet() : counts(ALPHABET_SIZE, 0) {}
-    explicit Alphabet(int count): counts(ALPHABET_SIZE, count) {}
+    Alphabet() {}
+
+    explicit Alphabet(int count) {
+        for (int i = 0; i < ALPHABET_SIZE; ++i) {
+            counts[static_cast<Letter>(i)] = count;
+        }
+    }
 
     void increment(Letter c) {
         counts[c]++;
@@ -25,12 +30,16 @@ public:
     }
 
     [[nodiscard]] int getCount(Letter c) const {
-        return counts[c];
+        auto it = counts.find(c);
+        if (it != counts.end()) {
+            return it->second;
+        }
+        return 0; // Default value if not found
     }
 
     void reset() {
-        for (int &count : counts) {
-            count = 0;
+        for (auto &pair : counts) {
+            pair.second = 0;
         }
     }
 };
