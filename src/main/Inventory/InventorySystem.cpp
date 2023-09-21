@@ -59,7 +59,7 @@ void InventorySystem::stashAxe() {
     }
 }
 
-void InventorySystem::pickupItemIntoPlayerInventory(Entity player, Entity pickedUpEntity) {
+void InventorySystem::pickupItemIntoPlayerInventory(Entity player, Entity pickedUpEntity) { //This is probably where things need to be changed because of the vector change
     auto& playerInventory = ecsManager->getComponentFromEntity<InventoryComponent>(player);
     playerInventory.items.push_back(pickedUpEntity);
     ecsManager->removeComponentFromEntity<LiveComponent>(pickedUpEntity);
