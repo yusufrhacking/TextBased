@@ -36,7 +36,7 @@ void WordInputSystem::onText(TextInputEvent &event) {
 }
 
 void WordInputSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
-    renderer->renderTerminal(text);
+//    renderer->renderTerminal(text);
 }
 
 void WordInputSystem::handleTextFlip() {

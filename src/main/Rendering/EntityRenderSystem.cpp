@@ -15,8 +15,8 @@ EntityRenderSystem::EntityRenderSystem() {
 void EntityRenderSystem::render(const std::shared_ptr<Renderer>& renderer, Camera camera){
     for (auto entity : getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-        const auto spriteComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
+        const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
         const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
-        renderer->renderText(camera, positionComponent.getPosition(), spriteComponent, styleComponent);
+        renderer->renderText(camera, positionComponent.getPosition(), textComponent, styleComponent);
     }
 }

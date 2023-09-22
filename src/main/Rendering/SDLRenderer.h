@@ -45,9 +45,9 @@ private:
 
     void renderTerminalLineStart();
 
-    void renderFlashingUnderscore(std::string text);
+    void renderFlashingUnderscore(const std::string& text);
 
-    void renderTerminalText(std::string text);
+    void renderTerminalText(const std::string& text);
 };
 
 

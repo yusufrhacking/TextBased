@@ -36,6 +36,10 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(letterFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
             break;
+        case TERMINAL:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            FC_Draw(terminalFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+            break;
         default: throw NoStyleException();
     }
 }
@@ -53,11 +57,11 @@ void SDLRenderer::renderTerminalLineStart() {
 }
 
 
-void SDLRenderer::renderTerminalText(std::string text) {
+void SDLRenderer::renderTerminalText(const std::string& text) {
     FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START, text.c_str());
 }
 
-void SDLRenderer::renderFlashingUnderscore(std::string text) {
+void SDLRenderer::renderFlashingUnderscore(const std::string& text) {
     float textXLength = (float)text.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
     if (showUnderscore > 30){
         FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET + textXLength,

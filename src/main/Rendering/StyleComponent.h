@@ -5,7 +5,8 @@
 
 enum Style{
     WHITE_MONACO_GENERIC,
-    LETTER
+    LETTER,
+    TERMINAL
 };
 
 struct StyleComponent{
