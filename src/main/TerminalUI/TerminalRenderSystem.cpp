@@ -52,7 +52,7 @@ void TerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
 }
 
 void TerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
-    renderUnderscore = true;
+    renderUnderscore = !renderUnderscore;
 }
 
 /*
