@@ -8,6 +8,7 @@
 #include "../Lettering/LetterComponent.h"
 #include "../TerminalUI/FixedPositionComponent.h"
 #include "../TerminalUI/TerminalRenderSystem.h"
+#include "../TerminalUI/TerminalUnderscoreComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -51,12 +52,18 @@ void FirstLevel::createLetter(char letter, Position position) {
 }
 
 void FirstLevel::createTerminal() {
+    auto startingTerminalPosition = Position(TerminalRenderSystem::TERMINAL_X_START,
+                                             (float)Window::windowHeight - (TerminalRenderSystem::BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT));
     auto lineStart = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(lineStart, ">");
-    ecsManager->addComponentToEntity<FixedPositionComponent>(
-            lineStart,Position(TerminalRenderSystem::TERMINAL_X_START,
-                               (float)Window::windowHeight - (TerminalRenderSystem::BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT)));
+    ecsManager->addComponentToEntity<FixedPositionComponent>(lineStart,startingTerminalPosition);
     ecsManager->addComponentToEntity<StyleComponent>(lineStart, Style::TERMINAL);
+
+    auto underscore = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(underscore, "_");
+    ecsManager->addComponentToEntity<FixedPositionComponent>(underscore, startingTerminalPosition);
+    ecsManager->addComponentToEntity<StyleComponent>(underscore, Style::TERMINAL);
+    ecsManager->addComponentToEntity<TerminalUnderscoreComponent>(underscore);
 }
 
 

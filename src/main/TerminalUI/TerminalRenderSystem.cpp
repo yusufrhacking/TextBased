@@ -3,12 +3,12 @@
 #include "FixedPositionComponent.h"
 #include "../Rendering/StyleComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "TerminalUnderscoreComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 float TerminalRenderSystem::TERMINAL_X_START = 30;
 float TerminalRenderSystem::BOTTOM_WINDOW_OFFSET = 110;
-float TerminalRenderSystem::TERMINAL_Y_START = (float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);
 float TerminalRenderSystem::TERMINAL_INIT_X_OFFSET = 35;
 float TerminalRenderSystem::UNDERSCORE_Y_OFFSET = 3;
 float TerminalRenderSystem::TEXT_OFFSET = 30;
@@ -17,12 +17,6 @@ TerminalRenderSystem::TerminalRenderSystem() {
     requireComponent<FixedPositionComponent>();
     requireComponent<StyleComponent>();
     requireComponent<TextComponent>();
-    auto signature = getComponentSignature().getSignature();
-    for (std::size_t index = 0; index < signature.size(); ++index) {
-        if (signature[index]) spdlog::debug("Yes component {}", index);
-    }
-
-
 }
 
 void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
@@ -30,8 +24,19 @@ void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Cam
         auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
         const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
         const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
-        renderer->renderText(camera, positionComponent.position, textComponent, styleComponent);
+        if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)){
+            float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
+            if (showUnderscore > 30){
+                Position submittedPosition = positionComponent.position + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
+                renderer->renderText(camera, submittedPosition, textComponent, styleComponent);
+            }
+            showUnderscore += 1;
+            showUnderscore = showUnderscore % 60;
+        } else{
+            renderer->renderText(camera, positionComponent.position, textComponent, styleComponent);
+        }
     }
+//    handleUnderscore(const std::string& text);
 }
 
 /*

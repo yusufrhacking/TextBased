@@ -6,10 +6,12 @@
 #include "../Rendering/EntityRenderSystem.h"
 
 class TerminalRenderSystem: public RenderSystem {
+private:
+    std::string currentText;
 public:
     static float TERMINAL_X_START;
     static float BOTTOM_WINDOW_OFFSET;
-    static float TERMINAL_Y_START;
+    float TERMINAL_Y_START = (float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);;
     int showUnderscore = 0;
     static float TERMINAL_INIT_X_OFFSET;
     static float UNDERSCORE_Y_OFFSET;

@@ -1,0 +1,8 @@
+#ifndef TEXTBASED_TERMINALUNDERSCORECOMPONENT_H
+#define TEXTBASED_TERMINALUNDERSCORECOMPONENT_H
+
+struct TerminalUnderscoreComponent{
+    TerminalUnderscoreComponent() = default;
+};
+
+#endif //TEXTBASED_TERMINALUNDERSCORECOMPONENT_H
