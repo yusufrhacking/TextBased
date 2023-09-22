@@ -32,19 +32,19 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
     auto cameraPos = camera.getCameraPosition();
     switch (style.getStyle()){
-        case WHITE_MONACO_GENERIC:
+        case Style::WHITE_MONACO_GENERIC:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(genericMonacoFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
             break;
-        case LETTER:
+        case Style::LETTER:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(letterFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
             break;
-        case TERMINAL:
+        case Style::TERMINAL:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(terminalFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
             break;
-        case DIEGETIC_TERMINAL:
+        case Style::DIEGETIC_TERMINAL:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(diegeticFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
             break;

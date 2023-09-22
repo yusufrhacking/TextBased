@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-enum Style{
+enum class Style{
     WHITE_MONACO_GENERIC,
     LETTER,
     TERMINAL,
@@ -16,7 +16,7 @@ private:
 
 public:
     StyleComponent(){
-        style = WHITE_MONACO_GENERIC;
+        style = Style::WHITE_MONACO_GENERIC;
     }
 
     explicit StyleComponent(Style style): style(style){
