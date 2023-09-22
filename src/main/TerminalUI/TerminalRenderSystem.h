@@ -4,10 +4,13 @@
 #include "TerminalTextUpdateEvent.h"
 #include "../ECSObjects/System.h"
 #include "../Rendering/EntityRenderSystem.h"
+#include "TakingInputFlipEvent.h"
+
 
 class TerminalRenderSystem: public RenderSystem {
 private:
     std::string currentText;
+    bool renderUnderscore = false;
 public:
     static float TERMINAL_X_START;
     static float BOTTOM_WINDOW_OFFSET;
@@ -21,6 +24,8 @@ public:
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     void onTerminalRender(TerminalTextUpdateEvent& event);
+
+    void onTakingInputFlip(TakingInputFlipEvent& event);
 };
 
 

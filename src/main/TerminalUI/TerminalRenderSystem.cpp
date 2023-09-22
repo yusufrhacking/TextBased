@@ -20,6 +20,7 @@ TerminalRenderSystem::TerminalRenderSystem() {
     requireComponent<StyleComponent>();
     requireComponent<TextComponent>();
     eventBus->listenToEvent<TerminalTextUpdateEvent>(this, &TerminalRenderSystem::onTerminalRender);
+    eventBus->listenToEvent<TakingInputFlipEvent>(this, &TerminalRenderSystem::onTakingInputFlip);
 }
 
 void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
@@ -28,13 +29,15 @@ void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Cam
         const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
         const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
         if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)){
-            float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
-            if (showUnderscore > 30){
-                Position submittedPosition = positionComponent.position + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
-                renderer->renderText(camera, submittedPosition, textComponent, styleComponent);
+            if (renderUnderscore){
+                float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
+                if (showUnderscore > 30){
+                    Position submittedPosition = positionComponent.position + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
+                    renderer->renderText(camera, submittedPosition, textComponent, styleComponent);
+                }
+                showUnderscore += 1;
+                showUnderscore = showUnderscore % 60;
             }
-            showUnderscore += 1;
-            showUnderscore = showUnderscore % 60;
         } else{
             renderer->renderText(camera, positionComponent.position, textComponent, styleComponent);
         }
@@ -46,6 +49,10 @@ void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Cam
 
 void TerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
     currentText = event.text;
+}
+
+void TerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
+    renderUnderscore = true;
 }
 
 /*

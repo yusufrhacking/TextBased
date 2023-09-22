@@ -6,6 +6,7 @@
 #include "../TextCommands/CharacterSpendEvent.h"
 #include "../Grammar/GrammarEvent.h"
 #include "../TerminalUI/TerminalTextUpdateEvent.h"
+#include "../TerminalUI/TakingInputFlipEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -38,10 +39,10 @@ void WordInputSystem::onText(TextInputEvent &event) {
 }
 
 void WordInputSystem::handleTextFlip() {
+    eventBus->emitEvent<TakingInputFlipEvent>();
     listening_to_letters = !listening_to_letters;
     spdlog::trace("TEXT FLIPPING to {} with {}", listening_to_letters, text);
     if (!text.empty()){
-        spdlog::debug("Emitting grammar event");
         eventBus->emitEvent<GrammarEvent>(text);
         lastCommand = text;
     }

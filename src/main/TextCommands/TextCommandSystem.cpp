@@ -23,7 +23,6 @@ void TextCommandSystem::listenToEvents() {
 }
 
 void TextCommandSystem::onCommand(ProspectiveTextCommandEvent &event) {
-    spdlog::debug("On Command");
     auto command = event.command;
     auto subject = event.subject;
     if (command == "chop") {

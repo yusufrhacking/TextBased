@@ -39,7 +39,6 @@ std::pair<std::string, std::string> GrammarSystem::splitCommandAndSubject(const 
 }
 
 void GrammarSystem::onGrammar(GrammarEvent &event) {
-    spdlog::debug("Grammar Event");
     auto [command, subject] = splitCommandAndSubject(event.text);
     if (command == "create"){
         eventBus->emitEvent<CharacterSpendEvent>(command, subject);
