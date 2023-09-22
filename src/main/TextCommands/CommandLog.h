@@ -1,0 +1,10 @@
+#ifndef TEXTBASED_COMMANDLOG_H
+#define TEXTBASED_COMMANDLOG_H
+
+
+class CommandLog {
+
+};
+
+
+#endif //TEXTBASED_COMMANDLOG_H

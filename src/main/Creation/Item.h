@@ -4,16 +4,16 @@
 #include <string>
 #include <stdexcept>
 
-enum Item {
+enum class Item {
     AXE,
     WOOD
 };
 
 static std::string ItemToString(const Item& item) {
     switch (item) {
-        case AXE:
+        case Item::AXE:
             return "axe";
-        case WOOD:
+        case Item::WOOD:
             return "wood";
         default:
             throw std::invalid_argument("Invalid item value.");
@@ -22,9 +22,9 @@ static std::string ItemToString(const Item& item) {
 
 static Item StringToItem(const std::string& str) {
     if (str == "axe") {
-        return AXE;
+        return Item::AXE;
     } else if (str == "wood") {
-        return WOOD;
+        return Item::WOOD;
     } else {
         throw std::invalid_argument("Invalid string value for Item.");
     }

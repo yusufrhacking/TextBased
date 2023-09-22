@@ -36,7 +36,7 @@ void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Cam
     }
     auto terminalTextC = TextComponent(currentText);
     auto position = Position(TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START);
-    renderer->renderText(camera, position, terminalTextC, StyleComponent(DIEGETIC_TERMINAL));
+    renderer->renderText(camera, position, terminalTextC, StyleComponent(TERMINAL));
 }
 
 
