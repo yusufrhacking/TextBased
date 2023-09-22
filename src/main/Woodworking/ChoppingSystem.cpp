@@ -30,8 +30,16 @@ void ChoppingSystem::listenToEvents() {
 void ChoppingSystem::onChop(ChopEvent &event) {
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
 
-    auto axePosition = getAxePosition(mainPlayer);
-    auto axeTextComponent = getAxeTextComponent(mainPlayer);
+    Position axePosition;
+    TextComponent axeTextComponent;
+
+    try{
+        axePosition = getAxePosition(mainPlayer);
+        axeTextComponent = getAxeTextComponent(mainPlayer);
+    } catch (...){
+        return;
+    }
+
 
     for(auto tree: getRelevantEntities()){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
