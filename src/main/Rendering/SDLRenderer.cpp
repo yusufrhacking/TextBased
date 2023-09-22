@@ -46,30 +46,12 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
 
 void SDLRenderer::renderTerminal(std::string text) {
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
-    renderTerminalLineStart();
-    renderTerminalText(text);
-    renderFlashingUnderscore(text);
+//    renderTerminalLineStart();
+//    renderTerminalText(text);
+//    renderFlashingUnderscore(text);
     SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
 }
 
-void SDLRenderer::renderTerminalLineStart() {
-    FC_Draw(terminalFont, renderer, TERMINAL_X_START, TERMINAL_Y_START, ">");
-}
-
-
-void SDLRenderer::renderTerminalText(const std::string& text) {
-    FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START, text.c_str());
-}
-
-void SDLRenderer::renderFlashingUnderscore(const std::string& text) {
-    float textXLength = (float)text.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
-    if (showUnderscore > 30){
-        FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET + textXLength,
-                TERMINAL_Y_START + UNDERSCORE_Y_OFFSET, "_");
-    }
-    showUnderscore += 1;
-    showUnderscore = showUnderscore % 60;
-}
 
 void SDLRenderer::renderClear() {
     SDL_RenderClear(renderer);

@@ -6,6 +6,8 @@
 #include "../Inventory/InventoryComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../Lettering/LetterComponent.h"
+#include "../TerminalUI/FixedPositionComponent.h"
+#include "../TerminalUI/TerminalRenderSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -13,6 +15,7 @@ FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosi
     witt = ecsManager->createEntity();
     createTree();
     createPlayer();
+    createTerminal();
     createLetter('a', startingPosition + Position(-100, 0));
     createLetter('x', startingPosition + Position(100, 0));
     createLetter('e', startingPosition + Position(0, -100));
@@ -45,6 +48,15 @@ void FirstLevel::createLetter(char letter, Position position) {
     ecsManager->addComponentToEntity<StyleComponent>(letterA, LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA, char_to_enum(letter));
+}
+
+void FirstLevel::createTerminal() {
+    auto lineStart = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(lineStart, ">");
+    ecsManager->addComponentToEntity<FixedPositionComponent>(
+            lineStart,Position(TerminalRenderSystem::TERMINAL_X_START,
+                               (float)Window::windowHeight - (TerminalRenderSystem::BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT)));
+    ecsManager->addComponentToEntity<StyleComponent>(lineStart, Style::TERMINAL);
 }
 
 

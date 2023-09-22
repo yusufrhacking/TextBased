@@ -4,12 +4,13 @@
 #include "../Text/TextComponent.h"
 #include "StyleComponent.h"
 #include "../ECSObjects/System.h"
+#include "RenderSystem.h"
 
-class EntityRenderSystem: public System {
+class EntityRenderSystem: public RenderSystem {
     public:
         explicit EntityRenderSystem();
 
-        virtual void render(const std::shared_ptr<Renderer>& renderer, Camera camera);
+        void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     private:
 };
