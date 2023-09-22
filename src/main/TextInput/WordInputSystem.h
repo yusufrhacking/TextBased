@@ -6,10 +6,9 @@
 #include "TextInputEvent.h"
 #include "../ECSObjects/System.h"
 
-class WordInputSystem: public EntityRenderSystem {
+class WordInputSystem: public System {
 public:
     WordInputSystem();
-    void render(const std::shared_ptr<Renderer> &renderer, Camera camera) override;
 private:
     std::string text;
     std::string lastCommand;

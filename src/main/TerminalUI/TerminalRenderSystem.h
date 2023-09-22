@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_TERMINALRENDERSYSTEM_H
 #define TEXTBASED_TERMINALRENDERSYSTEM_H
 
-
+#include "TerminalTextUpdateEvent.h"
 #include "../ECSObjects/System.h"
 #include "../Rendering/EntityRenderSystem.h"
 
@@ -19,6 +19,8 @@ public:
 
     TerminalRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
+
+    void onTerminalRender(TerminalTextUpdateEvent& event);
 };
 
 

@@ -5,6 +5,7 @@
 #include "TextQueuedEvent.h"
 #include "../TextCommands/CharacterSpendEvent.h"
 #include "../Grammar/GrammarEvent.h"
+#include "../TerminalUI/TerminalTextUpdateEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -32,11 +33,8 @@ void WordInputSystem::onText(TextInputEvent &event) {
         auto newText = std::string(event.textEvent.text);
         spdlog::trace("Event text: {}", newText);
         text += newText;
+        eventBus->emitEvent<TerminalTextUpdateEvent>(text);
     }
-}
-
-void WordInputSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
-//    renderer->renderTerminal(text);
 }
 
 void WordInputSystem::handleTextFlip() {
@@ -48,11 +46,13 @@ void WordInputSystem::handleTextFlip() {
         lastCommand = text;
     }
     text = "";
+    eventBus->emitEvent<TerminalTextUpdateEvent>(text);
 }
 
 void WordInputSystem::handleBackSpace() {
     if (!text.empty()){
         text.pop_back();
+        eventBus->emitEvent<TerminalTextUpdateEvent>(text);
     }
 }
 

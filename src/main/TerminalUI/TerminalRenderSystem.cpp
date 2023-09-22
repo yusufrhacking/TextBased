@@ -1,4 +1,5 @@
 #include <spdlog/spdlog.h>
+#include "TerminalTextUpdateEvent.h"
 #include "TerminalRenderSystem.h"
 #include "FixedPositionComponent.h"
 #include "../Rendering/StyleComponent.h"
@@ -6,6 +7,7 @@
 #include "TerminalUnderscoreComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<EventBus> eventBus;
 
 float TerminalRenderSystem::TERMINAL_X_START = 30;
 float TerminalRenderSystem::BOTTOM_WINDOW_OFFSET = 110;
@@ -17,6 +19,7 @@ TerminalRenderSystem::TerminalRenderSystem() {
     requireComponent<FixedPositionComponent>();
     requireComponent<StyleComponent>();
     requireComponent<TextComponent>();
+    eventBus->listenToEvent<TerminalTextUpdateEvent>(this, &TerminalRenderSystem::onTerminalRender);
 }
 
 void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
@@ -36,7 +39,13 @@ void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Cam
             renderer->renderText(camera, positionComponent.position, textComponent, styleComponent);
         }
     }
-//    handleUnderscore(const std::string& text);
+    auto terminalTextC = TextComponent(currentText);
+    auto position = Position(TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START);
+    renderer->renderText(camera, position, terminalTextC, StyleComponent(TERMINAL));
+}
+
+void TerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
+    currentText = event.text;
 }
 
 /*
