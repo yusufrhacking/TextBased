@@ -1,5 +1,6 @@
 #include "SDLRenderer.h"
 #include "../Camera/Camera.h"
+#include "StyleComponent.h"
 
 const static SDL_Color textColor = {255, 255, 255};
 
@@ -37,6 +38,10 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
             FC_Draw(letterFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
             break;
         case TERMINAL:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            FC_Draw(terminalFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+            break;
+        case DIEGETIC_TERMINAL:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(terminalFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
             break;
