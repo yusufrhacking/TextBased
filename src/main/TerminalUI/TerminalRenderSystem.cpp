@@ -25,20 +25,12 @@ TerminalRenderSystem::TerminalRenderSystem() {
 
 void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     for (auto entity : getRelevantEntities()){
-        auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
-        const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-        const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
-        if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)){
-            if (renderUnderscore){
-                float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
-                if (showUnderscore > 30){
-                    Position submittedPosition = positionComponent.position + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
-                    renderer->renderText(camera, submittedPosition, textComponent, styleComponent);
-                }
-                showUnderscore += 1;
-                showUnderscore = showUnderscore % 60;
-            }
+        if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)) {
+            renderUnderscore(entity, renderer);
         } else{
+            auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
+            const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
+            const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
             renderer->renderText(camera, positionComponent.position, textComponent, styleComponent);
         }
     }
@@ -47,13 +39,34 @@ void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Cam
     renderer->renderText(camera, position, terminalTextC, StyleComponent(TERMINAL));
 }
 
+
+void TerminalRenderSystem::renderUnderscore(Entity entity, const std::shared_ptr<Renderer>& renderer) {
+    if (!isTerminalLive){
+        return;
+    }
+
+    auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
+    const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
+    const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
+
+    float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
+    if (showUnderscore > 30){
+        Position submittedPosition = positionComponent.position + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
+        auto unusedCamera = Camera(Position(0,0));
+        renderer->renderText(unusedCamera, submittedPosition, textComponent, styleComponent);
+    }
+    showUnderscore += 1;
+    showUnderscore = showUnderscore % 60;
+}
+
 void TerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
     currentText = event.text;
 }
 
 void TerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
-    renderUnderscore = !renderUnderscore;
+    isTerminalLive = !isTerminalLive;
 }
+
 
 /*
  *

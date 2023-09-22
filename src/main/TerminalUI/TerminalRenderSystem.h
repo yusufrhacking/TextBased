@@ -10,7 +10,7 @@
 class TerminalRenderSystem: public RenderSystem {
 private:
     std::string currentText;
-    bool renderUnderscore = false;
+    bool isTerminalLive = false;
 public:
     static float TERMINAL_X_START;
     static float BOTTOM_WINDOW_OFFSET;
@@ -26,6 +26,8 @@ public:
     void onTerminalRender(TerminalTextUpdateEvent& event);
 
     void onTakingInputFlip(TakingInputFlipEvent& event);
+
+    void renderUnderscore(Entity entity, const std::shared_ptr<Renderer> &sharedPtr);
 };
 
 
