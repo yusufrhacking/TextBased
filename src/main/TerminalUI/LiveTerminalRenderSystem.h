@@ -26,7 +26,7 @@ public:
     float TERMINAL_Y_LINE_SPACING = 3;
     float TERMINAL_LINE_VERTICAL_OFFSET = TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT + TERMINAL_Y_LINE_SPACING;
 
-    LiveTerminalRenderSystem();
+    LiveTerminalRenderSystem(Position startingTerminalPosition);
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     void onTerminalRender(TerminalTextUpdateEvent& event);

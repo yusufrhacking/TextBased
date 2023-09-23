@@ -28,6 +28,8 @@ void GameManager::setup() {
 }
 
 void GameManager::setupSystems() {
+    Position startingTerminalPosition = {LiveTerminalRenderSystem::TERMINAL_X_START,
+                                         (float)Window::windowHeight - (LiveTerminalRenderSystem::BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT)};
     ecsManager->addSystem<AutonomousMovementSystem>();
     ecsManager->addSystem<EntityRenderSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
@@ -48,7 +50,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<GrammarSystem>();
     ecsManager->addSystem<CharacterStorageSystem>();
     ecsManager->addSystem<LetterPickupSystem>();
-    ecsManager->addSystem<LiveTerminalRenderSystem>();
+    ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<CommandLogSystem>();
 }
 
