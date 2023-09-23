@@ -27,26 +27,51 @@ LiveTerminalRenderSystem::LiveTerminalRenderSystem() {
 }
 
 void LiveTerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
-//    renderHistoricLines(renderer);
     renderLiveLine(renderer);
 }
 
 void LiveTerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
+    renderPromptSymbol(renderer);
     renderUnderscore(renderer);
-    for (auto entity : getRelevantEntities()){
-        if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)) {
-            renderUnderscore(entity, renderer);
-        } else{
-            auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
-            const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-            const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
-            renderer->renderText(unusedCamera, positionComponent.position, textComponent, styleComponent);
-        }
-    }
+    renderLiveText(renderer);
+}
+
+void LiveTerminalRenderSystem::renderPromptSymbol(const std::shared_ptr<Renderer> &renderer) {
+    auto submittedPosition = startingTerminalPosition;
+    renderer->renderText(unusedCamera, submittedPosition, TextComponent(">"), StyleComponent(Style::TERMINAL));
+}
+
+void LiveTerminalRenderSystem::renderLiveText(const std::shared_ptr<Renderer> &renderer) {
     auto terminalTextC = TextComponent(currentText);
     auto position = Position(TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START);
     renderer->renderText(unusedCamera, position, terminalTextC, StyleComponent(Style::TERMINAL));
 }
+
+void LiveTerminalRenderSystem::renderUnderscore(const std::shared_ptr<Renderer>& renderer) {
+    if (!isTerminalLive){
+        return;
+    }
+
+    float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
+    auto submittedPosition = startingTerminalPosition + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
+
+    if (showUnderscore > 30){
+        renderer->renderText(unusedCamera, submittedPosition, TextComponent("_"), StyleComponent(Style::TERMINAL));
+    }
+    showUnderscore += 1;
+    showUnderscore = showUnderscore % 60;
+}
+
+
+
+void LiveTerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
+    currentText = event.text;
+}
+
+void LiveTerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
+    isTerminalLive = !isTerminalLive;
+}
+
 
 void LiveTerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &renderer) {
     if (!ecsManager->hasSystem<CommandLogSystem>()) {
@@ -64,6 +89,8 @@ void LiveTerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Rendere
         }
     }
 }
+
+
 
 void LiveTerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
                                                      AuthoredCommand authoredCommand) const {
@@ -89,26 +116,3 @@ void LiveTerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Rende
     }
 }
 
-
-void LiveTerminalRenderSystem::renderUnderscore(const std::shared_ptr<Renderer>& renderer) {
-    if (!isTerminalLive){
-        return;
-    }
-
-    float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
-    auto submittedPosition = startingTerminalPosition + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
-
-    if (showUnderscore > 30){
-        renderer->renderText(unusedCamera, submittedPosition, TextComponent("_"), StyleComponent(Style::TERMINAL));
-    }
-    showUnderscore += 1;
-    showUnderscore = showUnderscore % 60;
-}
-
-void LiveTerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
-    currentText = event.text;
-}
-
-void LiveTerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
-    isTerminalLive = !isTerminalLive;
-}

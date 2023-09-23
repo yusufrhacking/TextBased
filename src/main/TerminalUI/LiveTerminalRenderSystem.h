@@ -41,6 +41,10 @@ public:
 
     void renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
                                AuthoredCommand authoredCommand) const;
+
+    void renderPromptSymbol(const std::shared_ptr<Renderer> &renderer);
+
+    void renderLiveText(const std::shared_ptr<Renderer> &renderer);
 };
 
 
