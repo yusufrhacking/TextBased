@@ -11,10 +11,11 @@ class TerminalRenderSystem: public RenderSystem {
 private:
     std::string currentText;
     bool isTerminalLive = false;
+    Camera unusedCamera{Position{0,0}};
 public:
     static float TERMINAL_X_START;
     static float BOTTOM_WINDOW_OFFSET;
-    float TERMINAL_Y_START = (float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);;
+    float TERMINAL_Y_START = (float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);
     int showUnderscore = 0;
     static float TERMINAL_INIT_X_OFFSET;
     static float UNDERSCORE_Y_OFFSET;
@@ -28,6 +29,10 @@ public:
     void onTakingInputFlip(TakingInputFlipEvent& event);
 
     void renderUnderscore(Entity entity, const std::shared_ptr<Renderer> &sharedPtr);
+
+    void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
+
+    void renderHistoricLines(const std::shared_ptr<Renderer> &sharedPtr);
 };
 
 

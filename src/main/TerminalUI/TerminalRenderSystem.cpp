@@ -5,6 +5,7 @@
 #include "../Rendering/StyleComponent.h"
 #include "../HighLevel/ECSManager.h"
 #include "TerminalUnderscoreComponent.h"
+#include "../TextCommands/CommandLogSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -24,19 +25,34 @@ TerminalRenderSystem::TerminalRenderSystem() {
 }
 
 void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
-    for (auto entity : getRelevantEntities()){
+    renderHistoricLines(renderer);
+    renderLiveLine(renderer);
+}
+
+void TerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
+    for (auto entity : this->getRelevantEntities()){
         if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)) {
-            renderUnderscore(entity, renderer);
+            this->renderUnderscore(entity, renderer);
         } else{
             auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
             const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
             const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
-            renderer->renderText(camera, positionComponent.position, textComponent, styleComponent);
+            renderer->renderText(unusedCamera, positionComponent.position, textComponent, styleComponent);
         }
     }
-    auto terminalTextC = TextComponent(currentText);
-    auto position = Position(TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START);
-    renderer->renderText(camera, position, terminalTextC, StyleComponent(Style::TERMINAL));
+    auto terminalTextC = TextComponent(this->currentText);
+    auto position = Position(TERMINAL_X_START + TEXT_OFFSET, this->TERMINAL_Y_START);
+    renderer->renderText(unusedCamera, position, terminalTextC, StyleComponent(Style::TERMINAL));
+}
+
+void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &sharedPtr) {
+    if (!ecsManager->hasSystem<CommandLogSystem>()){
+        return;
+    }
+    auto commands = ecsManager->getSystem<CommandLogSystem>().getCommands();
+    for (auto command : commands){
+
+    }
 }
 
 
@@ -66,6 +82,8 @@ void TerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
 void TerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
     isTerminalLive = !isTerminalLive;
 }
+
+
 
 
 /*

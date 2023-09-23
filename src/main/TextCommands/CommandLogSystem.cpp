@@ -10,11 +10,11 @@ CommandLogSystem::CommandLogSystem() {
     listenToEvents();
 }
 
-void CommandLogSystem::addCommand(const Command& command) {
+void CommandLogSystem::addCommand(const AuthoredCommand& command) {
     commands.push_back(command);
 }
 
-std::vector<Command> CommandLogSystem::getCommands() const {
+std::vector<AuthoredCommand> CommandLogSystem::getCommands() const {
     return commands;
 }
 
@@ -23,9 +23,9 @@ void CommandLogSystem::listenToEvents() {
 }
 
 void CommandLogSystem::onCommand(ProspectiveTextCommandEvent &event) {
-    commands.emplace_back(Author::PLAYER, event.command + event.subject);
+    commands.emplace_back(Author::PLAYER, Command(event.command, event.subject));
 //    spdlog::debug("Commands in the list:");
 //    for (const auto& command : commands) {
-//        spdlog::debug("Author: {}, Command: {}", static_cast<int>(command.author), command.command);
+//        spdlog::debug("Author: {}, AuthoredCommand: {}", static_cast<int>(command.author), command.command);
 //    }
 }
