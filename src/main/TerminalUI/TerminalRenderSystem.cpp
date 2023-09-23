@@ -54,25 +54,38 @@ void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &
     auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
 
     float lineCount = 1;
-
     for (auto & authoredCommand : std::ranges::reverse_view(authoredCommands)){
-        auto authorText = AuthorCommands::authorToText(authoredCommand.author);
-        auto commandText = authoredCommand.command.getFullCommandText();
-        auto terminalTextC = TextComponent(commandText);
-
-        float xPosition = TERMINAL_X_START + TEXT_OFFSET;
-        float yPosition = TERMINAL_Y_START - (TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
-
-        auto position = Position(xPosition, yPosition);
-
-        if (authoredCommand.author == Author::PLAYER) {
-            renderer->renderText(unusedCamera, position, terminalTextC, StyleComponent(Style::OLD_TERMINAL_COMMAND));
-        }
+        renderAuthoredCommand(renderer, lineCount, authoredCommand);
 
         lineCount++;
+        if (lineCount > 6){
+            return;
+        }
     }
 }
 
+void TerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
+                                                 AuthoredCommand authoredCommand) const {
+    float xPosition = TERMINAL_X_START + TEXT_OFFSET;
+    float yPosition = this->TERMINAL_Y_START - (this->TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
+
+    auto position = Position(xPosition, yPosition);
+
+    auto authorText = AuthorCommands::authorToText(authoredCommand.author);
+    auto commandText = authoredCommand.command.getFullCommandText();
+    auto terminalTextC = TextComponent(commandText);
+    switch (authoredCommand.author){
+        case Author::PLAYER:
+            renderer->renderText(this->unusedCamera, position, terminalTextC,
+                                 StyleComponent(Style::OLD_TERMINAL_COMMAND));
+            break;
+        case Author::ENGINEER:
+            renderer->renderText(this->unusedCamera, position, terminalTextC,
+                                 StyleComponent(Style::ENGINEER_TERMINAL));
+            break;
+        case Author::BRICOLEUR: break;
+    }
+}
 
 
 void TerminalRenderSystem::renderUnderscore(Entity entity, const std::shared_ptr<Renderer>& renderer) {

@@ -5,6 +5,7 @@
 #include "../ECSObjects/System.h"
 #include "../Rendering/EntityRenderSystem.h"
 #include "TakingInputFlipEvent.h"
+#include "../TextCommands/AuthoredCommand.h"
 
 
 class TerminalRenderSystem: public RenderSystem {
@@ -35,6 +36,9 @@ public:
     void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
 
     void renderHistoricLines(const std::shared_ptr<Renderer> &renderer);
+
+    void renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
+                               AuthoredCommand authoredCommand) const;
 };
 
 
