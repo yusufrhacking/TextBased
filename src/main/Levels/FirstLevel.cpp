@@ -16,7 +16,6 @@ FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosi
     witt = ecsManager->createEntity();
     createTree();
     createPlayer();
-    createTerminal();
     createLetter('a', startingPosition + Position(-100, 0));
     createLetter('x', startingPosition + Position(100, 0));
     createLetter('e', startingPosition + Position(0, -100));
@@ -49,21 +48,6 @@ void FirstLevel::createLetter(char letter, Position position) {
     ecsManager->addComponentToEntity<StyleComponent>(letterA, Style::LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA, char_to_enum(letter));
-}
-
-void FirstLevel::createTerminal() {
-    auto startingTerminalPosition = Position(LiveTerminalRenderSystem::TERMINAL_X_START,
-                                             (float)Window::windowHeight - (LiveTerminalRenderSystem::BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT));
-    auto lineStart = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(lineStart, ">");
-    ecsManager->addComponentToEntity<FixedPositionComponent>(lineStart,startingTerminalPosition);
-    ecsManager->addComponentToEntity<StyleComponent>(lineStart, Style::TERMINAL);
-
-    auto underscore = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(underscore, "_");
-    ecsManager->addComponentToEntity<FixedPositionComponent>(underscore, startingTerminalPosition);
-    ecsManager->addComponentToEntity<StyleComponent>(underscore, Style::TERMINAL);
-    ecsManager->addComponentToEntity<TerminalUnderscoreComponent>(underscore);
 }
 
 

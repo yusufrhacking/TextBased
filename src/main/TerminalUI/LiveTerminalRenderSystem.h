@@ -13,6 +13,8 @@ private:
     std::string currentText;
     bool isTerminalLive = false;
     Camera unusedCamera{Position{0,0}};
+    Position startingTerminalPosition;
+
 public:
     static float TERMINAL_X_START;
     static float BOTTOM_WINDOW_OFFSET;
@@ -31,7 +33,7 @@ public:
 
     void onTakingInputFlip(TakingInputFlipEvent& event);
 
-    void renderUnderscore(Entity entity, const std::shared_ptr<Renderer> &sharedPtr);
+    void renderUnderscore(const std::shared_ptr<Renderer> &sharedPtr);
 
     void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
 

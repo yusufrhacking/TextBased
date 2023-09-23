@@ -19,19 +19,20 @@ float LiveTerminalRenderSystem::UNDERSCORE_Y_OFFSET = 3;
 float LiveTerminalRenderSystem::TEXT_OFFSET = 30;
 
 LiveTerminalRenderSystem::LiveTerminalRenderSystem() {
-    requireComponent<FixedPositionComponent>();
-    requireComponent<StyleComponent>();
-    requireComponent<TextComponent>();
     eventBus->listenToEvent<TerminalTextUpdateEvent>(this, &LiveTerminalRenderSystem::onTerminalRender);
     eventBus->listenToEvent<TakingInputFlipEvent>(this, &LiveTerminalRenderSystem::onTakingInputFlip);
+
+    startingTerminalPosition = Position(TERMINAL_X_START,
+                                                 (float)Window::windowHeight - (LiveTerminalRenderSystem::BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT));
 }
 
 void LiveTerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
-    renderHistoricLines(renderer);
+//    renderHistoricLines(renderer);
     renderLiveLine(renderer);
 }
 
 void LiveTerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
+    renderUnderscore(renderer);
     for (auto entity : getRelevantEntities()){
         if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)) {
             renderUnderscore(entity, renderer);
@@ -89,20 +90,16 @@ void LiveTerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Rende
 }
 
 
-void LiveTerminalRenderSystem::renderUnderscore(Entity entity, const std::shared_ptr<Renderer>& renderer) {
+void LiveTerminalRenderSystem::renderUnderscore(const std::shared_ptr<Renderer>& renderer) {
     if (!isTerminalLive){
         return;
     }
 
-    auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
-    const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-    const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
-
     float textXLength = (float)currentText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
+    auto submittedPosition = startingTerminalPosition + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
+
     if (showUnderscore > 30){
-        Position submittedPosition = positionComponent.position + Position(TEXT_OFFSET + textXLength, UNDERSCORE_Y_OFFSET);
-        auto unusedCamera = Camera(Position(0,0));
-        renderer->renderText(unusedCamera, submittedPosition, textComponent, styleComponent);
+        renderer->renderText(unusedCamera, submittedPosition, TextComponent("_"), StyleComponent(Style::TERMINAL));
     }
     showUnderscore += 1;
     showUnderscore = showUnderscore % 60;
