@@ -7,7 +7,7 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../Lettering/LetterComponent.h"
 #include "../TerminalUI/FixedPositionComponent.h"
-#include "../TerminalUI/TerminalRenderSystem.h"
+#include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include "../TerminalUI/TerminalUnderscoreComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -52,8 +52,8 @@ void FirstLevel::createLetter(char letter, Position position) {
 }
 
 void FirstLevel::createTerminal() {
-    auto startingTerminalPosition = Position(TerminalRenderSystem::TERMINAL_X_START,
-                                             (float)Window::windowHeight - (TerminalRenderSystem::BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT));
+    auto startingTerminalPosition = Position(LiveTerminalRenderSystem::TERMINAL_X_START,
+                                             (float)Window::windowHeight - (LiveTerminalRenderSystem::BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT));
     auto lineStart = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(lineStart, ">");
     ecsManager->addComponentToEntity<FixedPositionComponent>(lineStart,startingTerminalPosition);

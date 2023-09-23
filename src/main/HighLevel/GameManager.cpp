@@ -14,7 +14,7 @@
 #include "../Lettering/CharacterStorageSystem.h"
 #include "../Grammar/GrammarSystem.h"
 #include "../Lettering/LetterPickupSystem.h"
-#include "../TerminalUI/TerminalRenderSystem.h"
+#include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include "../TextCommands/CommandLogSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
@@ -48,7 +48,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<GrammarSystem>();
     ecsManager->addSystem<CharacterStorageSystem>();
     ecsManager->addSystem<LetterPickupSystem>();
-    ecsManager->addSystem<TerminalRenderSystem>();
+    ecsManager->addSystem<LiveTerminalRenderSystem>();
     ecsManager->addSystem<CommandLogSystem>();
 }
 

@@ -2,7 +2,7 @@
 
 #include <ranges>
 #include "TerminalTextUpdateEvent.h"
-#include "TerminalRenderSystem.h"
+#include "LiveTerminalRenderSystem.h"
 #include "FixedPositionComponent.h"
 #include "../Rendering/StyleComponent.h"
 #include "../HighLevel/ECSManager.h"
@@ -12,26 +12,26 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
-float TerminalRenderSystem::TERMINAL_X_START = 30;
-float TerminalRenderSystem::BOTTOM_WINDOW_OFFSET = 110;
-float TerminalRenderSystem::TERMINAL_INIT_X_OFFSET = 35;
-float TerminalRenderSystem::UNDERSCORE_Y_OFFSET = 3;
-float TerminalRenderSystem::TEXT_OFFSET = 30;
+float LiveTerminalRenderSystem::TERMINAL_X_START = 30;
+float LiveTerminalRenderSystem::BOTTOM_WINDOW_OFFSET = 110;
+float LiveTerminalRenderSystem::TERMINAL_INIT_X_OFFSET = 35;
+float LiveTerminalRenderSystem::UNDERSCORE_Y_OFFSET = 3;
+float LiveTerminalRenderSystem::TEXT_OFFSET = 30;
 
-TerminalRenderSystem::TerminalRenderSystem() {
+LiveTerminalRenderSystem::LiveTerminalRenderSystem() {
     requireComponent<FixedPositionComponent>();
     requireComponent<StyleComponent>();
     requireComponent<TextComponent>();
-    eventBus->listenToEvent<TerminalTextUpdateEvent>(this, &TerminalRenderSystem::onTerminalRender);
-    eventBus->listenToEvent<TakingInputFlipEvent>(this, &TerminalRenderSystem::onTakingInputFlip);
+    eventBus->listenToEvent<TerminalTextUpdateEvent>(this, &LiveTerminalRenderSystem::onTerminalRender);
+    eventBus->listenToEvent<TakingInputFlipEvent>(this, &LiveTerminalRenderSystem::onTakingInputFlip);
 }
 
-void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
+void LiveTerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     renderHistoricLines(renderer);
     renderLiveLine(renderer);
 }
 
-void TerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
+void LiveTerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
     for (auto entity : getRelevantEntities()){
         if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)) {
             renderUnderscore(entity, renderer);
@@ -47,7 +47,7 @@ void TerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &rende
     renderer->renderText(unusedCamera, position, terminalTextC, StyleComponent(Style::TERMINAL));
 }
 
-void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &renderer) {
+void LiveTerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &renderer) {
     if (!ecsManager->hasSystem<CommandLogSystem>()) {
         return;
     }
@@ -64,8 +64,8 @@ void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &
     }
 }
 
-void TerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
-                                                 AuthoredCommand authoredCommand) const {
+void LiveTerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
+                                                     AuthoredCommand authoredCommand) const {
     auto authorText = AuthorCommands::authorToText(authoredCommand.author);
     auto commandText = authoredCommand.command.getFullCommandText();
     auto terminalTextC = TextComponent(commandText);
@@ -89,7 +89,7 @@ void TerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer>
 }
 
 
-void TerminalRenderSystem::renderUnderscore(Entity entity, const std::shared_ptr<Renderer>& renderer) {
+void LiveTerminalRenderSystem::renderUnderscore(Entity entity, const std::shared_ptr<Renderer>& renderer) {
     if (!isTerminalLive){
         return;
     }
@@ -108,35 +108,10 @@ void TerminalRenderSystem::renderUnderscore(Entity entity, const std::shared_ptr
     showUnderscore = showUnderscore % 60;
 }
 
-void TerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
+void LiveTerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {
     currentText = event.text;
 }
 
-void TerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
+void LiveTerminalRenderSystem::onTakingInputFlip(TakingInputFlipEvent& event) {
     isTerminalLive = !isTerminalLive;
 }
-
-
-
-
-/*
- *
-void SDLRenderer::renderTerminalLineStart() {
-    FC_Draw(terminalFont, renderer, TERMINAL_X_START, TERMINAL_Y_START, ">");
-}
-
-
-void SDLRenderer::renderTerminalText(const std::string& text) {
-    FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START, text.c_str());
-}
-
-void SDLRenderer::renderFlashingUnderscore(const std::string& text) {
-    float textXLength = (float)text.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
-    if (showUnderscore > 30){
-        FC_Draw(terminalFont, renderer, TERMINAL_X_START + TEXT_OFFSET + textXLength,
-                TERMINAL_Y_START + UNDERSCORE_Y_OFFSET, "_");
-    }
-    showUnderscore += 1;
-    showUnderscore = showUnderscore % 60;
-}
- */

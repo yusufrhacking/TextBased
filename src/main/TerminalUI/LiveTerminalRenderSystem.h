@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_TERMINALRENDERSYSTEM_H
-#define TEXTBASED_TERMINALRENDERSYSTEM_H
+#ifndef TEXTBASED_LIVETERMINALRENDERSYSTEM_H
+#define TEXTBASED_LIVETERMINALRENDERSYSTEM_H
 
 #include "TerminalTextUpdateEvent.h"
 #include "../ECSObjects/System.h"
@@ -8,7 +8,7 @@
 #include "../TextCommands/AuthoredCommand.h"
 
 
-class TerminalRenderSystem: public RenderSystem {
+class LiveTerminalRenderSystem: public RenderSystem {
 private:
     std::string currentText;
     bool isTerminalLive = false;
@@ -24,7 +24,7 @@ public:
     float TERMINAL_Y_LINE_SPACING = 3;
     float TERMINAL_LINE_VERTICAL_OFFSET = TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT + TERMINAL_Y_LINE_SPACING;
 
-    TerminalRenderSystem();
+    LiveTerminalRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     void onTerminalRender(TerminalTextUpdateEvent& event);
@@ -42,4 +42,4 @@ public:
 };
 
 
-#endif //TEXTBASED_TERMINALRENDERSYSTEM_H
+#endif //TEXTBASED_LIVETERMINALRENDERSYSTEM_H
