@@ -20,6 +20,8 @@ public:
     static float TERMINAL_INIT_X_OFFSET;
     static float UNDERSCORE_Y_OFFSET;
     static float TEXT_OFFSET;
+    float TERMINAL_Y_LINE_SPACING = 3;
+    float TERMINAL_LINE_VERTICAL_OFFSET = TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT + TERMINAL_Y_LINE_SPACING;
 
     TerminalRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
@@ -32,7 +34,7 @@ public:
 
     void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
 
-    void renderHistoricLines(const std::shared_ptr<Renderer> &sharedPtr);
+    void renderHistoricLines(const std::shared_ptr<Renderer> &renderer);
 };
 
 

@@ -1,4 +1,6 @@
 #include <spdlog/spdlog.h>
+
+#include <ranges>
 #include "TerminalTextUpdateEvent.h"
 #include "TerminalRenderSystem.h"
 #include "FixedPositionComponent.h"
@@ -45,16 +47,32 @@ void TerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &rende
     renderer->renderText(unusedCamera, position, terminalTextC, StyleComponent(Style::TERMINAL));
 }
 
-void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &sharedPtr) {
-    if (!ecsManager->hasSystem<CommandLogSystem>()){
+void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &renderer) {
+    if (!ecsManager->hasSystem<CommandLogSystem>()) {
         return;
     }
     auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
-    for (auto& authoredCommand : authoredCommands){
+
+    float lineCount = 1;
+
+    for (auto & authoredCommand : std::ranges::reverse_view(authoredCommands)){
         auto authorText = AuthorCommands::authorToText(authoredCommand.author);
-        auto commandText = authoredCommand.command.commandStr + authoredCommand.command.subjectStr;
+        auto commandText = authoredCommand.command.getFullCommandText();
+        auto terminalTextC = TextComponent(commandText);
+
+        float xPosition = TERMINAL_X_START + TEXT_OFFSET;
+        float yPosition = TERMINAL_Y_START - (TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
+
+        auto position = Position(xPosition, yPosition);
+
+        if (authoredCommand.author == Author::PLAYER) {
+            renderer->renderText(unusedCamera, position, terminalTextC, StyleComponent(Style::OLD_TERMINAL_COMMAND));
+        }
+
+        lineCount++;
     }
 }
+
 
 
 void TerminalRenderSystem::renderUnderscore(Entity entity, const std::shared_ptr<Renderer>& renderer) {

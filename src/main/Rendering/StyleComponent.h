@@ -7,7 +7,8 @@ enum class Style{
     WHITE_MONACO_GENERIC,
     LETTER,
     TERMINAL,
-    DIEGETIC_TERMINAL
+    ENGINEER_TERMINAL,
+    OLD_TERMINAL_COMMAND
 };
 
 struct StyleComponent{
