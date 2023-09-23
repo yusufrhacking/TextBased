@@ -49,9 +49,10 @@ void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &
     if (!ecsManager->hasSystem<CommandLogSystem>()){
         return;
     }
-    auto commands = ecsManager->getSystem<CommandLogSystem>().getCommands();
-    for (auto command : commands){
-
+    auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
+    for (auto& authoredCommand : authoredCommands){
+        auto authorText = AuthorCommands::authorToText(authoredCommand.author);
+        auto commandText = authoredCommand.command.commandStr + authoredCommand.command.subjectStr;
     }
 }
 

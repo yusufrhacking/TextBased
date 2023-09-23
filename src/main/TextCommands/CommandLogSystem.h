@@ -14,7 +14,7 @@ public:
 
     void addCommand(const AuthoredCommand &command);
 
-    std::vector<AuthoredCommand> getCommands() const;
+    std::vector<AuthoredCommand> getAuthoredCommands() const;
 
     void onCommand(ProspectiveTextCommandEvent &event);
 };

@@ -10,6 +10,21 @@ enum class Author{
     ENGINEER,
     BRICOLEUR
 };
+namespace AuthorCommands{
+    static std::string authorToText(Author author) {
+        switch (author) {
+            case Author::PLAYER:
+                return "";
+            case Author::ENGINEER:
+                return "TheEngineer";
+            case Author::BRICOLEUR:
+                return "TheBricoleur";
+            default:
+                return ""; // Default case or you could throw an exception.
+        }
+    }
+}
+
 
 struct AuthoredCommand{
     Author author;

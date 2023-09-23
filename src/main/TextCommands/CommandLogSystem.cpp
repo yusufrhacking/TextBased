@@ -14,7 +14,7 @@ void CommandLogSystem::addCommand(const AuthoredCommand& command) {
     commands.push_back(command);
 }
 
-std::vector<AuthoredCommand> CommandLogSystem::getCommands() const {
+std::vector<AuthoredCommand> CommandLogSystem::getAuthoredCommands() const {
     return commands;
 }
 
