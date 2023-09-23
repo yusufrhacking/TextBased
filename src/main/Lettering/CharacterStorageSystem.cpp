@@ -14,7 +14,6 @@ CharacterStorageSystem::CharacterStorageSystem() {
 }
 
 void CharacterStorageSystem::onSpend(CharacterSpendEvent &event) {
-    spdlog::debug("on spend");
     bool result = tryToSpendText(event.subject);
     if (result) {
         eventBus->emitEvent<ProspectiveTextCommandEvent>(event.command, event.subject);

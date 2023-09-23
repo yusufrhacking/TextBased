@@ -28,7 +28,7 @@ void LetterPickupSystem::update(double deltaTime) {
                                                               mainPlayerSurfaceSize, surfaceSize, 5);
         if (isInRange){
             auto letter = ecsManager->getComponentFromEntity<LetterComponent>(entity).character;
-            spdlog::debug("Pickupable Letter");
+            spdlog::trace("Pickupable Letter");
             eventBus->emitEvent<CharacterDepositEvent>(letter);
             ecsManager->killEntity(entity);
         }
