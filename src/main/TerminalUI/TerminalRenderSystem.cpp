@@ -32,9 +32,9 @@ void TerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Cam
 }
 
 void TerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
-    for (auto entity : this->getRelevantEntities()){
+    for (auto entity : getRelevantEntities()){
         if (ecsManager->hasComponent<TerminalUnderscoreComponent>(entity)) {
-            this->renderUnderscore(entity, renderer);
+            renderUnderscore(entity, renderer);
         } else{
             auto& positionComponent = ecsManager->getComponentFromEntity<FixedPositionComponent>(entity);
             const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
@@ -42,8 +42,8 @@ void TerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &rende
             renderer->renderText(unusedCamera, positionComponent.position, textComponent, styleComponent);
         }
     }
-    auto terminalTextC = TextComponent(this->currentText);
-    auto position = Position(TERMINAL_X_START + TEXT_OFFSET, this->TERMINAL_Y_START);
+    auto terminalTextC = TextComponent(currentText);
+    auto position = Position(TERMINAL_X_START + TEXT_OFFSET, TERMINAL_Y_START);
     renderer->renderText(unusedCamera, position, terminalTextC, StyleComponent(Style::TERMINAL));
 }
 
@@ -66,21 +66,22 @@ void TerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &
 
 void TerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
                                                  AuthoredCommand authoredCommand) const {
-    float xPosition = TERMINAL_X_START + TEXT_OFFSET;
-    float yPosition = this->TERMINAL_Y_START - (this->TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
-
-    auto position = Position(xPosition, yPosition);
-
     auto authorText = AuthorCommands::authorToText(authoredCommand.author);
     auto commandText = authoredCommand.command.getFullCommandText();
     auto terminalTextC = TextComponent(commandText);
+
+    float xPosition = TERMINAL_X_START + TEXT_OFFSET + (float)authorText.size()*TERMINAL_MONACO_TEXT_WIDTH_SCALER;
+    float yPosition = TERMINAL_Y_START - (TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
+    auto position = Position(xPosition, yPosition);
+
+
     switch (authoredCommand.author){
         case Author::PLAYER:
-            renderer->renderText(this->unusedCamera, position, terminalTextC,
+            renderer->renderText(unusedCamera, position, terminalTextC,
                                  StyleComponent(Style::OLD_TERMINAL_COMMAND));
             break;
         case Author::ENGINEER:
-            renderer->renderText(this->unusedCamera, position, terminalTextC,
+            renderer->renderText(unusedCamera, position, terminalTextC,
                                  StyleComponent(Style::ENGINEER_TERMINAL));
             break;
         case Author::BRICOLEUR: break;
