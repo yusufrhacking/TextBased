@@ -3,12 +3,13 @@
 
 
 #include "../Lettering/CharacterDepositEvent.h"
+#include "../ECSObjects/System.h"
 
-class EngineerDialogueSystem {
+class EngineerDialogueSystem: public System {
 public:
     EngineerDialogueSystem();
 private:
-    bool isFirstLetter = false;
+    bool isFirstLetter = true;
     void listenToEvents();
     void onLetter(CharacterDepositEvent& event); //on deposit, check if first one, then send this message
 };

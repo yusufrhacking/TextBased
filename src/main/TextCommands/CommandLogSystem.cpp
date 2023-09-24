@@ -2,6 +2,7 @@
 #include "CommandLogSystem.h"
 #include "../EventSystem/EventBus.h"
 #include "../TextInput/TextCommandEvent.h"
+#include "../Diegesis/EngineerTerminalEvent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -20,6 +21,7 @@ std::vector<AuthoredCommand> CommandLogSystem::getAuthoredCommands() const {
 
 void CommandLogSystem::listenToEvents() {
     eventBus->listenToEvent<TextCommandEvent>(this, &CommandLogSystem::onCommand);
+    eventBus->listenToEvent<EngineerTerminalEvent>(this, &CommandLogSystem::onEngineerText);
 }
 
 void CommandLogSystem::onCommand(TextCommandEvent &event) {
@@ -28,4 +30,8 @@ void CommandLogSystem::onCommand(TextCommandEvent &event) {
 //    for (const auto& command : commands) {
 //        spdlog::debug("Author: {}, AuthoredCommand: {}", static_cast<int>(command.author), command.command);
 //    }
+}
+
+void CommandLogSystem::onEngineerText(EngineerTerminalEvent &event) {
+    commands.emplace_back(Author::ENGINEER, Command(event.text));
 }
