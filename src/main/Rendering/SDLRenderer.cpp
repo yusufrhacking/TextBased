@@ -29,7 +29,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 TEXT_C_FONT_SIZE, gray, TTF_STYLE_BOLD);
     diegeticFont = FC_CreateFont();
     FC_LoadFont(diegeticFont, renderer, "../../resources/Monaco.ttf",
-                TERMINAL_FONT_SIZE, faded_amber, TTF_STYLE_NORMAL);
+                TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
 }
 
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
