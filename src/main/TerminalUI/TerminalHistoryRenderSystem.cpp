@@ -30,7 +30,13 @@ void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Re
 
     startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, style);
     startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, style);
-    terminalRenderer.renderLiveText(renderer, startingPosition, authoredCommand.command.getFullCommandText(), style);
+
+    if (lineCount == 1 && style == Style::ENGINEER_TERMINAL){
+        renderTypedLine(renderer, startingPosition, authoredCommand.command.getFullCommandText(), style);
+    }
+    else{
+        terminalRenderer.renderText(renderer, startingPosition, authoredCommand.command.getFullCommandText(), style);
+    }
 }
 
 Style TerminalHistoryRenderSystem::getStyle(Author author) {
@@ -41,5 +47,14 @@ Style TerminalHistoryRenderSystem::getStyle(Author author) {
             return Style::ENGINEER_TERMINAL;
         case Author::BRICOLEUR:
             return Style::ENGINEER_TERMINAL;
+    }
+}
+
+void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer> &renderer, Position position,
+                                                  const std::string& commandText, Style style) {
+    std::string displayedText = commandText.substr(0, typedTextInd);
+    terminalRenderer.renderText(renderer, position, displayedText, style);
+    if (typedTextInd < commandText.size()-1){
+        typedTextInd++;
     }
 }

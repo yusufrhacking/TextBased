@@ -7,6 +7,7 @@
 class TerminalHistoryRenderSystem: public RenderSystem {
 private:
     int maxLinesShown = 6;
+    int typedTextInd = 0;
     TerminalRenderer terminalRenderer;
     Position startingTerminalPosition;
     void renderLines(const std::shared_ptr<Renderer>& renderer, const std::vector<AuthoredCommand>& authoredCommands);
@@ -16,6 +17,9 @@ public:
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     Style getStyle(Author author);
+
+    void
+    renderTypedLine(const std::shared_ptr<Renderer> &renderer, Position position, const std::string& commandText, Style style);
 };
 
 

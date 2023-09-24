@@ -12,14 +12,15 @@ Position TerminalRenderer::renderPromptSymbol(const std::shared_ptr<Renderer> &r
     return startingPosition + Position(TEXT_OFFSET, (float)0);
 }
 
-Position TerminalRenderer::renderLiveText(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                          const std::string& currText, Style style) {
+Position TerminalRenderer::renderText(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
+                                      const std::string& currText, Style style) {
     auto terminalTextC = TextComponent(currText);
     renderer->renderText(unusedCamera, startingPosition, terminalTextC, StyleComponent(style));
 
     float textXLength = (float)currText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
     return startingPosition + Position(textXLength, (float)0);
 }
+
 
 Position TerminalRenderer::renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
                                             const std::string& currText, bool isTerminalLive, Style style) {
@@ -36,3 +37,4 @@ Position TerminalRenderer::renderUnderscore(const std::shared_ptr<Renderer> &ren
     showUnderscore = showUnderscore % 60;
     return submittedPosition;
 }
+
