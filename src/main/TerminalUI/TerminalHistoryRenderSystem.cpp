@@ -52,9 +52,17 @@ Style TerminalHistoryRenderSystem::getStyle(Author author) {
 
 void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer> &renderer, Position position,
                                                   const std::string& commandText, Style style) {
-    std::string displayedText = commandText.substr(0, typedTextInd);
-    terminalRenderer.renderText(renderer, position, displayedText, style);
-    if (typedTextInd < commandText.size()-1){
-        typedTextInd++;
+    if (!prevLine.empty() && prevLine != commandText){
+        typedTextInd = 0;
+        typeNewCharacter = 0;
     }
+    if (typeNewCharacter < typeNewCharacterThreshold){
+        std::string displayedText = commandText.substr(0, typedTextInd);
+        terminalRenderer.renderText(renderer, position, displayedText, style);
+        if (typedTextInd < commandText.size()-1){
+            typedTextInd++;
+        }
+    }
+    typeNewCharacter++;
+    typeNewCharacter = typeNewCharacter % typeNewCharacterThreshold;
 }

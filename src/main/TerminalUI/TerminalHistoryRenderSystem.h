@@ -8,6 +8,9 @@ class TerminalHistoryRenderSystem: public RenderSystem {
 private:
     int maxLinesShown = 6;
     int typedTextInd = 0;
+    int typeNewCharacterThreshold = 60;
+    int typeNewCharacter = 0;
+    std::string prevLine;
     TerminalRenderer terminalRenderer;
     Position startingTerminalPosition;
     void renderLines(const std::shared_ptr<Renderer>& renderer, const std::vector<AuthoredCommand>& authoredCommands);
