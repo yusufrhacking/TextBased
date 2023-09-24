@@ -57,15 +57,15 @@ void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer
         typedTextInd = 0;
         typeNewCharacter = 0;
     }
-    if (typeNewCharacter < typeNewCharacterThreshold){
-        std::string displayedText = commandText.substr(0, typedTextInd);
-        terminalRenderer.renderText(renderer, position, displayedText, style);
+    if (typeNewCharacter > typeNewCharacterThreshold){
         if (typedTextInd < commandText.size()){
             typedTextInd++;
         }
     }
+    std::string displayedText = commandText.substr(0, typedTextInd);
+    terminalRenderer.renderText(renderer, position, displayedText, style);
     typeNewCharacter++;
-    typeNewCharacter = typeNewCharacter % typeNewCharacterThreshold;
+    typeNewCharacter = typeNewCharacter % typeNewCharacterThreshold*2;
     prevLine = commandText;
 }
 

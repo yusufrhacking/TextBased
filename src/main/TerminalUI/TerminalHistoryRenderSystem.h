@@ -8,7 +8,7 @@ class TerminalHistoryRenderSystem: public RenderSystem {
 private:
     int maxLinesShown = 6;
     int typedTextInd = 0;
-    int typeNewCharacterThreshold = 60;
+    int typeNewCharacterThreshold = 20;
     int typeNewCharacter = 0;
     std::string prevLine;
     TerminalRenderer terminalRenderer;
