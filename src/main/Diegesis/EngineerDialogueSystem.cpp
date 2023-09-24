@@ -20,7 +20,7 @@ void EngineerDialogueSystem::listenToEvents() {
 void EngineerDialogueSystem::onLetter(CharacterDepositEvent &event) {
     if (isFirstLetter){
         isFirstLetter = false;
-        eventBus->emitEvent<EngineerTerminalEvent>("Try Create Axe");
+        eventBus->emitEvent<EngineerTerminalEvent>("Try 'create axe'");
     }
 }
 
