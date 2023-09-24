@@ -2,11 +2,12 @@
 #define TEXTBASED_TERMINALHISTORYRENDERSYSTEM_H
 #include "../Rendering/RenderSystem.h"
 #include "../TextCommands/AuthoredCommand.h"
+#include "TerminalRenderer.h"
 
 class TerminalHistoryRenderSystem: public RenderSystem {
 private:
     int maxLinesShown = 6;
-    Camera unusedCamera{Position{0,0}};
+    TerminalRenderer terminalRenderer;
     Position startingTerminalPosition;
     void renderLines(const std::shared_ptr<Renderer>& renderer, const std::vector<AuthoredCommand>& authoredCommands);
     void renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, AuthoredCommand authoredCommand);

@@ -24,7 +24,7 @@ void LiveTerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &r
     auto startingPosition = terminalRenderer.renderAuthor(renderer, startingTerminalPosition, AuthorCommands::authorToText(Author::PLAYER));
     startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition);
     startingPosition = terminalRenderer.renderLiveText(renderer, startingPosition, currentText);
-    terminalRenderer.renderUnderscore(renderer, startingPosition, currentText);
+    terminalRenderer.renderUnderscore(renderer, startingPosition, currentText, isTerminalLive);
 }
 
 void LiveTerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {

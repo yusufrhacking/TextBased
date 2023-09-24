@@ -24,21 +24,23 @@ void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& r
 
 void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, AuthoredCommand authoredCommand) {
     auto authorText = AuthorCommands::authorToText(authoredCommand.author);
-    auto commandText = authoredCommand.command.getFullCommandText();
-    auto terminalTextC = TextComponent(commandText);
-
-    auto position = startingTerminalPosition + Position(TEXT_OFFSET, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount)*-1);
-
-
-    switch (authoredCommand.author){
-        case Author::PLAYER:
-            renderer->renderText(unusedCamera, position, terminalTextC,
-                                 StyleComponent(Style::OLD_TERMINAL_COMMAND));
-            break;
-        case Author::ENGINEER:
-            renderer->renderText(unusedCamera, position, terminalTextC,
-                                 StyleComponent(Style::ENGINEER_TERMINAL));
-            break;
-        case Author::BRICOLEUR: break;
-    }
+    auto startingPosition = startingTerminalPosition + Position((float)0, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount) * -1);
+    startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText);
+    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition);
+    terminalRenderer.renderLiveText(renderer, startingPosition, authoredCommand.command.getFullCommandText());
+//
+//    auto commandText = authoredCommand.command.getFullCommandText();
+//    auto terminalTextC = TextComponent(commandText);
+//
+//    switch (authoredCommand.author){
+//        case Author::PLAYER:
+//            renderer->renderText(unusedCamera, startingPosition, terminalTextC,
+//                                 StyleComponent(Style::OLD_TERMINAL_COMMAND));
+//            break;
+//        case Author::ENGINEER:
+//            renderer->renderText(unusedCamera, startingPosition, terminalTextC,
+//                                 StyleComponent(Style::ENGINEER_TERMINAL));
+//            break;
+//        case Author::BRICOLEUR: break;
+//    }
 }
