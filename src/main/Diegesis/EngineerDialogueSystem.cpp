@@ -20,23 +20,35 @@ void EngineerDialogueSystem::listenToEvents() {
 void EngineerDialogueSystem::onLetter(CharacterDepositEvent &event) {
     if (isFirstLetter){
         isFirstLetter = false;
-        eventBus->emitEvent<EngineerTerminalEvent>("Try 'create axe'");
+        lines.emplace_back("Try 'create axe'");
+//        eventBus->emitEvent<EngineerTerminalEvent>("Try 'create axe'");
     }
 }
 
 
 void EngineerDialogueSystem::onCreateAxe(CreatePlayerItemEvent &event) {
-    eventBus->emitEvent<EngineerTerminalEvent>("Try 'chop'");
+    lines.emplace_back("Try 'chop'");
+//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'chop'");
 }
 
 void EngineerDialogueSystem::onWoodSpawn(CreateItemAtPositionEvent &event) {
-    eventBus->emitEvent<EngineerTerminalEvent>("Try 'pickup'");
+    lines.emplace_back("Try 'pickup'");
+//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'pickup'");
 }
 
 void EngineerDialogueSystem::onPickup(PlayerPickUpEvent &event) {
-    eventBus->emitEvent<EngineerTerminalEvent>("Try 'place wood'");
+    lines.emplace_back("Try 'place wood'");
+//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'place wood'");
 }
 
 void EngineerDialogueSystem::onPlace(PlaceEvent &event) {
-    eventBus->emitEvent<EngineerTerminalEvent>("Try 'stash axe'");
+    lines.emplace_back("Try 'stash axe'");
+//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'stash axe'");
+}
+
+void EngineerDialogueSystem::update(double deltaTime) {
+    for (const auto& line: lines){
+        eventBus->emitEvent<EngineerTerminalEvent>(line);
+    }
+    lines.clear();
 }

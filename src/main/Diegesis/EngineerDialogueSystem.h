@@ -9,11 +9,14 @@
 #include "../Inventory/PlayerPickUpEvent.h"
 #include "../Inventory/StashPlayerItemEvent.h"
 #include "../Inventory/PlaceEvent.h"
+#include "../ECSObjects/UpdateSystem.h"
 
-class EngineerDialogueSystem: public System {
+class EngineerDialogueSystem: public UpdateSystem {
 public:
     EngineerDialogueSystem();
+    void update(double deltaTime) override;
 private:
+    std::vector<std::string> lines{};
     bool isFirstLetter = true;
     void listenToEvents();
     void onLetter(CharacterDepositEvent& event); //on deposit, check if first one, then send this message

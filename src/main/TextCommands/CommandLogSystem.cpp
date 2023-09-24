@@ -26,10 +26,6 @@ void CommandLogSystem::listenToEvents() {
 
 void CommandLogSystem::onCommand(TextCommandEvent &event) {
     commands.emplace_back(Author::PLAYER, Command(event.command, event.subject));
-//    spdlog::debug("Commands in the list:");
-//    for (const auto& command : commands) {
-//        spdlog::debug("Author: {}, AuthoredCommand: {}", static_cast<int>(command.author), command.command);
-//    }
 }
 
 void CommandLogSystem::onEngineerText(EngineerTerminalEvent &event) {
