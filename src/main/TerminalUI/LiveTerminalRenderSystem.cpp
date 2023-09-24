@@ -8,13 +8,6 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
-//float LiveTerminalRenderSystem::TERMINAL_X_START = 30;
-//float LiveTerminalRenderSystem::BOTTOM_WINDOW_OFFSET = 110;
-//float LiveTerminalRenderSystem::TERMINAL_INIT_X_OFFSET = 35;
-//float LiveTerminalRenderSystem::UNDERSCORE_Y_OFFSET = 3;
-//float LiveTerminalRenderSystem::TEXT_OFFSET = 30;
-//float LiveTerminalRenderSystem::TERMINAL_Y_LINE_SPACING = 3;
-//float LiveTerminalRenderSystem::TERMINAL_LINE_VERTICAL_OFFSET = TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT + TERMINAL_Y_LINE_SPACING;
 
 LiveTerminalRenderSystem::LiveTerminalRenderSystem(Position startingTerminalPosition) {
     eventBus->listenToEvent<TerminalTextUpdateEvent>(this, &LiveTerminalRenderSystem::onTerminalRender);
