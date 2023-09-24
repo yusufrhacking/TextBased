@@ -8,7 +8,8 @@ private:
     int maxLinesShown = 6;
     Camera unusedCamera{Position{0,0}};
     Position startingTerminalPosition;
-    void renderLines(std::vector<AuthoredCommand> commands);
+    void renderLines(const std::shared_ptr<Renderer>& renderer, const std::vector<AuthoredCommand>& authoredCommands);
+    void renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, AuthoredCommand authoredCommand);
 public:
     TerminalHistoryRenderSystem(Position startingTerminalPosition): startingTerminalPosition(startingTerminalPosition) {}
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;

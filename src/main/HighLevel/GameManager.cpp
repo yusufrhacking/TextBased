@@ -16,6 +16,7 @@
 #include "../Lettering/LetterPickupSystem.h"
 #include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include "../TextCommands/CommandLogSystem.h"
+#include "../TerminalUI/TerminalHistoryRenderSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -28,8 +29,7 @@ void GameManager::setup() {
 }
 
 void GameManager::setupSystems() {
-    Position startingTerminalPosition = {LiveTerminalRenderSystem::TERMINAL_X_START,
-                                         (float)Window::windowHeight - (LiveTerminalRenderSystem::BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT)};
+    Position startingTerminalPosition = {TERMINAL_X_START,(float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT)};
     ecsManager->addSystem<AutonomousMovementSystem>();
     ecsManager->addSystem<EntityRenderSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
@@ -50,8 +50,9 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<GrammarSystem>();
     ecsManager->addSystem<CharacterStorageSystem>();
     ecsManager->addSystem<LetterPickupSystem>();
-    ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<CommandLogSystem>();
+    ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
+    ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
 }
 
 void GameManager::update(double deltaTime) {

@@ -1,24 +1,20 @@
 #include "TerminalHistoryRenderSystem.h"
+#include "../TextCommands/CommandLogSystem.h"
+#include "../HighLevel/ECSManager.h"
+#include "LiveTerminalRenderSystem.h"
+#include <__ranges/reverse_view.h>
 
+extern std::unique_ptr<ECSManager> ecsManager;
 
 void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
-
-}
-
-void TerminalHistoryRenderSystem::renderLines(std::vector<AuthoredCommand> commands) {
-
-}
-
-void LiveTerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Renderer> &renderer) {
-    if (!ecsManager->hasSystem<CommandLogSystem>()) {
-        return;
-    }
     auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
+    renderLines(renderer, authoredCommands);
+}
 
+void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& renderer, const std::vector<AuthoredCommand>& authoredCommands) {
     float lineCount = 1;
     for (auto & authoredCommand : std::ranges::reverse_view(authoredCommands)){
         renderAuthoredCommand(renderer, lineCount, authoredCommand);
-
         lineCount++;
         if (lineCount > 6){
             return;
@@ -26,17 +22,12 @@ void LiveTerminalRenderSystem::renderHistoricLines(const std::shared_ptr<Rendere
     }
 }
 
-
-
-void LiveTerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer> &renderer, float lineCount,
-                                                     AuthoredCommand authoredCommand) const {
+void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, AuthoredCommand authoredCommand) {
     auto authorText = AuthorCommands::authorToText(authoredCommand.author);
     auto commandText = authoredCommand.command.getFullCommandText();
     auto terminalTextC = TextComponent(commandText);
 
-    float xPosition = TERMINAL_X_START + TEXT_OFFSET + (float)authorText.size()*TERMINAL_MONACO_TEXT_WIDTH_SCALER;
-    float yPosition = TERMINAL_Y_START - (TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
-    auto position = Position(xPosition, yPosition);
+    auto position = startingTerminalPosition + Position(TEXT_OFFSET, TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
 
 
     switch (authoredCommand.author){
@@ -51,4 +42,3 @@ void LiveTerminalRenderSystem::renderAuthoredCommand(const std::shared_ptr<Rende
         case Author::BRICOLEUR: break;
     }
 }
-
