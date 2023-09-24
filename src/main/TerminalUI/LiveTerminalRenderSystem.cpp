@@ -30,7 +30,7 @@ void LiveTerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &r
 Position LiveTerminalRenderSystem::renderPlayerName(const std::shared_ptr<Renderer> &renderer, Position startingPosition) {
     auto playerNameText = AuthorCommands::authorToText(Author::PLAYER);
     renderer->renderText(unusedCamera, startingPosition, TextComponent(playerNameText), StyleComponent(Style::TERMINAL));
-    return startingPosition + Position(playerNameText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER + 20, 0);
+    return startingPosition + Position(playerNameText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER + 10, 0);
 }
 
 Position LiveTerminalRenderSystem::renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition) {
