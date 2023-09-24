@@ -8,17 +8,18 @@
 class TerminalRenderer {
 private:
     Camera unusedCamera{Position{0,0}};
-    bool isTerminalLive = false;
     int showUnderscore = 0;
 
 public:
+    TerminalRenderer() = default;
     Position renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition, const std::string& authorStr);
 
     Position renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
 
     Position renderLiveText(const std::shared_ptr<Renderer> &renderer, Position startingPosition, const std::string& currText);
 
-    Position renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition, const std::string& currText);
+    Position renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
+                              const std::string& currText, bool isTerminalLive);
 };
 
 

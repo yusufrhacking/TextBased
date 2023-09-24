@@ -22,7 +22,7 @@ Position TerminalRenderer::renderLiveText(const std::shared_ptr<Renderer> &rende
 }
 
 Position TerminalRenderer::renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                            const std::string& currText) {
+                                            const std::string& currText, bool isTerminalLive) {
     if (!isTerminalLive){
         return {};
     }

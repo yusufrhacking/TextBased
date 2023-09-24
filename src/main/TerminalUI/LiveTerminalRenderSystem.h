@@ -6,35 +6,27 @@
 #include "../Rendering/EntityRenderSystem.h"
 #include "TakingInputFlipEvent.h"
 #include "../TextCommands/AuthoredCommand.h"
+#include "TerminalRenderer.h"
 
 
 class LiveTerminalRenderSystem: public RenderSystem {
 private:
     std::string currentText;
-    bool isTerminalLive = false;
-    Camera unusedCamera{Position{0,0}};
     Position startingTerminalPosition;
+    TerminalRenderer terminalRenderer{};
+    bool isTerminalLive;
 
 public:
-    float TERMINAL_Y_START = (float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET-TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT);
-    int showUnderscore = 0;
 
     LiveTerminalRenderSystem(Position startingTerminalPosition);
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
+
+    void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
 
     void onTerminalRender(TerminalTextUpdateEvent& event);
 
     void onTakingInputFlip(TakingInputFlipEvent& event);
 
-    Position renderUnderscore(const std::shared_ptr<Renderer> &sharedPtr, Position startingPosition);
-
-    void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
-
-    Position renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
-
-    Position renderLiveText(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
-
-    Position renderPlayerName(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
 };
 
 
