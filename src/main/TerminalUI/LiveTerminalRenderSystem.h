@@ -17,7 +17,6 @@ private:
     bool isTerminalLive;
 
 public:
-
     LiveTerminalRenderSystem(Position startingTerminalPosition);
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 

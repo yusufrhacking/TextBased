@@ -18,6 +18,7 @@
 #include "../TextCommands/CommandLogSystem.h"
 #include "../TerminalUI/TerminalHistoryRenderSystem.h"
 #include "../Diegesis/EngineerDialogueSystem.h"
+#include "../Lettering/LetterBankRenderSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -55,6 +56,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<EngineerDialogueSystem>();
+    ecsManager->addSystem<LetterBankRenderSystem>();
 }
 
 void GameManager::update(double deltaTime) {
