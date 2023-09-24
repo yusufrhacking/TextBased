@@ -16,7 +16,7 @@ void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& r
     for (auto & authoredCommand : std::ranges::reverse_view(authoredCommands)){
         renderAuthoredCommand(renderer, lineCount, authoredCommand);
         lineCount++;
-        if (lineCount > 6){
+        if (lineCount > maxLinesShown){
             return;
         }
     }
@@ -27,7 +27,7 @@ void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Re
     auto commandText = authoredCommand.command.getFullCommandText();
     auto terminalTextC = TextComponent(commandText);
 
-    auto position = startingTerminalPosition + Position(TEXT_OFFSET, TERMINAL_LINE_VERTICAL_OFFSET * lineCount);
+    auto position = startingTerminalPosition + Position(TEXT_OFFSET, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount)*-1);
 
 
     switch (authoredCommand.author){
