@@ -14,7 +14,7 @@ namespace AuthorCommands{
     static std::string authorToText(Author author) {
         switch (author) {
             case Author::PLAYER:
-                return "";
+                return "ThePlayer";
             case Author::ENGINEER:
                 return "TheEngineer";
             case Author::BRICOLEUR:

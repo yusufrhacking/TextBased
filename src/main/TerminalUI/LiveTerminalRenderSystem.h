@@ -26,13 +26,15 @@ public:
 
     void onTakingInputFlip(TakingInputFlipEvent& event);
 
-    void renderUnderscore(const std::shared_ptr<Renderer> &sharedPtr);
+    Position renderUnderscore(const std::shared_ptr<Renderer> &sharedPtr, Position startingPosition);
 
     void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
 
-    void renderPromptSymbol(const std::shared_ptr<Renderer> &renderer);
+    Position renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
 
-    void renderLiveText(const std::shared_ptr<Renderer> &renderer);
+    Position renderLiveText(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
+
+    Position renderPlayerName(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
 };
 
 
