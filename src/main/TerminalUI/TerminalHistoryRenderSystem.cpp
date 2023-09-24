@@ -23,24 +23,23 @@ void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& r
 }
 
 void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, AuthoredCommand authoredCommand) {
+    Style style = getStyle(authoredCommand.author);
+
     auto authorText = AuthorCommands::authorToText(authoredCommand.author);
     auto startingPosition = startingTerminalPosition + Position((float)0, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount) * -1);
-    startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText);
-    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition);
-    terminalRenderer.renderLiveText(renderer, startingPosition, authoredCommand.command.getFullCommandText());
-//
-//    auto commandText = authoredCommand.command.getFullCommandText();
-//    auto terminalTextC = TextComponent(commandText);
-//
-//    switch (authoredCommand.author){
-//        case Author::PLAYER:
-//            renderer->renderText(unusedCamera, startingPosition, terminalTextC,
-//                                 StyleComponent(Style::OLD_TERMINAL_COMMAND));
-//            break;
-//        case Author::ENGINEER:
-//            renderer->renderText(unusedCamera, startingPosition, terminalTextC,
-//                                 StyleComponent(Style::ENGINEER_TERMINAL));
-//            break;
-//        case Author::BRICOLEUR: break;
-//    }
+
+    startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, style);
+    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, style);
+    terminalRenderer.renderLiveText(renderer, startingPosition, authoredCommand.command.getFullCommandText(), style);
+}
+
+Style TerminalHistoryRenderSystem::getStyle(Author author) {
+    switch (author) {
+        case Author::PLAYER:
+            return Style::OLD_TERMINAL_COMMAND;
+        case Author::ENGINEER:
+            return Style::ENGINEER_TERMINAL;
+        case Author::BRICOLEUR:
+            return Style::ENGINEER_TERMINAL;
+    }
 }

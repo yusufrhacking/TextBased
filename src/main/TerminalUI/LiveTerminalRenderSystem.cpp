@@ -21,10 +21,11 @@ void LiveTerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer,
 }
 
 void LiveTerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
-    auto startingPosition = terminalRenderer.renderAuthor(renderer, startingTerminalPosition, AuthorCommands::authorToText(Author::PLAYER));
-    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition);
-    startingPosition = terminalRenderer.renderLiveText(renderer, startingPosition, currentText);
-    terminalRenderer.renderUnderscore(renderer, startingPosition, currentText, isTerminalLive);
+    Style style = Style::TERMINAL;
+    auto startingPosition = terminalRenderer.renderAuthor(renderer, startingTerminalPosition, AuthorCommands::authorToText(Author::PLAYER), style);
+    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, style);
+    startingPosition = terminalRenderer.renderLiveText(renderer, startingPosition, currentText, style);
+    terminalRenderer.renderUnderscore(renderer, startingPosition, currentText, isTerminalLive, style);
 }
 
 void LiveTerminalRenderSystem::onTerminalRender(TerminalTextUpdateEvent& event) {

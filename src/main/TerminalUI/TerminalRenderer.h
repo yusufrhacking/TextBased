@@ -12,14 +12,16 @@ private:
 
 public:
     TerminalRenderer() = default;
-    Position renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition, const std::string& authorStr);
+    Position renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
+                          const std::string& authorStr, Style style);
 
-    Position renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition);
+    Position renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition, Style style);
 
-    Position renderLiveText(const std::shared_ptr<Renderer> &renderer, Position startingPosition, const std::string& currText);
+    Position renderLiveText(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
+                            const std::string& currText, Style style);
 
     Position renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                              const std::string& currText, bool isTerminalLive);
+                              const std::string& currText, bool isTerminalLive, Style style);
 };
 
 

@@ -14,6 +14,8 @@ private:
 public:
     TerminalHistoryRenderSystem(Position startingTerminalPosition): startingTerminalPosition(startingTerminalPosition) {}
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
+
+    Style getStyle(Author author);
 };
 
 

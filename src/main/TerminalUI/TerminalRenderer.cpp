@@ -1,28 +1,28 @@
 #include "TerminalRenderer.h"
 
 Position TerminalRenderer::renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                        const std::string& authorStr) {
-    renderer->renderText(unusedCamera, startingPosition, TextComponent(authorStr), StyleComponent(Style::TERMINAL));
+                                        const std::string& authorStr, Style style) {
+    renderer->renderText(unusedCamera, startingPosition, TextComponent(authorStr), StyleComponent(style));
     return startingPosition + Position(authorStr.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER + 10, 0);
 }
 
-Position TerminalRenderer::renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition) {
+Position TerminalRenderer::renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition, Style style) {
     auto submittedPosition = startingPosition;
-    renderer->renderText(unusedCamera, submittedPosition, TextComponent(">"), StyleComponent(Style::TERMINAL));
+    renderer->renderText(unusedCamera, submittedPosition, TextComponent(">"), StyleComponent(style));
     return startingPosition + Position(TEXT_OFFSET, (float)0);
 }
 
 Position TerminalRenderer::renderLiveText(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                          const std::string& currText) {
+                                          const std::string& currText, Style style) {
     auto terminalTextC = TextComponent(currText);
-    renderer->renderText(unusedCamera, startingPosition, terminalTextC, StyleComponent(Style::TERMINAL));
+    renderer->renderText(unusedCamera, startingPosition, terminalTextC, StyleComponent(style));
 
     float textXLength = (float)currText.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER;
     return startingPosition + Position(textXLength, (float)0);
 }
 
 Position TerminalRenderer::renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                            const std::string& currText, bool isTerminalLive) {
+                                            const std::string& currText, bool isTerminalLive, Style style) {
     if (!isTerminalLive){
         return {};
     }
@@ -30,7 +30,7 @@ Position TerminalRenderer::renderUnderscore(const std::shared_ptr<Renderer> &ren
     auto submittedPosition = startingPosition + Position((float)0, UNDERSCORE_Y_OFFSET);
 
     if (showUnderscore > 30){
-        renderer->renderText(unusedCamera, submittedPosition, TextComponent("_"), StyleComponent(Style::TERMINAL));
+        renderer->renderText(unusedCamera, submittedPosition, TextComponent("_"), StyleComponent(style));
     }
     showUnderscore += 1;
     showUnderscore = showUnderscore % 60;
