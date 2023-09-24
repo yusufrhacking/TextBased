@@ -3,7 +3,7 @@
 
 #include "AuthoredCommand.h"
 #include "../ECSObjects/System.h"
-#include "../TextInput/ProspectiveTextCommandEvent.h"
+#include "../TextInput/TextCommandEvent.h"
 
 class CommandLogSystem: public System {
     std::vector<AuthoredCommand> commands;
@@ -16,7 +16,7 @@ public:
 
     std::vector<AuthoredCommand> getAuthoredCommands() const;
 
-    void onCommand(ProspectiveTextCommandEvent &event);
+    void onCommand(TextCommandEvent &event);
 };
 
 

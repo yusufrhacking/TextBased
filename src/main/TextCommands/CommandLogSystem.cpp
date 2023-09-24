@@ -1,7 +1,7 @@
 #include <spdlog/spdlog.h>
 #include "CommandLogSystem.h"
 #include "../EventSystem/EventBus.h"
-#include "../TextInput/ProspectiveTextCommandEvent.h"
+#include "../TextInput/TextCommandEvent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -19,10 +19,10 @@ std::vector<AuthoredCommand> CommandLogSystem::getAuthoredCommands() const {
 }
 
 void CommandLogSystem::listenToEvents() {
-    eventBus->listenToEvent<ProspectiveTextCommandEvent>(this, &CommandLogSystem::onCommand);
+    eventBus->listenToEvent<TextCommandEvent>(this, &CommandLogSystem::onCommand);
 }
 
-void CommandLogSystem::onCommand(ProspectiveTextCommandEvent &event) {
+void CommandLogSystem::onCommand(TextCommandEvent &event) {
     commands.emplace_back(Author::PLAYER, Command(event.command, event.subject));
 //    spdlog::debug("Commands in the list:");
 //    for (const auto& command : commands) {

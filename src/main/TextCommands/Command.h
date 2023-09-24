@@ -8,7 +8,11 @@ struct Command{
     Command(std::string command, std::string subject): commandStr(command), subjectStr(subject){}
 
     std::string getFullCommandText(){
-        return commandStr + " " +  subjectStr;
+        if (!subjectStr.empty()){
+            return commandStr + " " +  subjectStr;
+        } else{
+            return commandStr;
+        }
     }
 };
 

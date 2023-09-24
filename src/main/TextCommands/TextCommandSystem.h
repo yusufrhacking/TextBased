@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_TEXTCOMMANDSYSTEM_H
 #define TEXTBASED_TEXTCOMMANDSYSTEM_H
 #include "../ECSObjects/System.h"
-#include "../TextInput/ProspectiveTextCommandEvent.h"
+#include "../TextInput/TextCommandEvent.h"
 #include "../Grammar/GrammarSystem.h"
 #include "../Lettering/CharacterStorageSystem.h"
 
@@ -10,7 +10,7 @@ public:
     TextCommandSystem();
 private:
     void listenToEvents();
-    void onCommand(ProspectiveTextCommandEvent& event);
+    void onCommand(TextCommandEvent& event);
 
 };
 

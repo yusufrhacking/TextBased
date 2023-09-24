@@ -4,7 +4,7 @@
 #include "GrammarEvent.h"
 #include "../TextCommands/CharacterSpendEvent.h"
 #include "../Text/Split.h"
-#include "../TextInput/ProspectiveTextCommandEvent.h"
+#include "../TextInput/TextCommandEvent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -43,7 +43,7 @@ void GrammarSystem::onGrammar(GrammarEvent &event) {
     if (command == "create"){
         eventBus->emitEvent<CharacterSpendEvent>(command, subject);
     } else{
-        eventBus->emitEvent<ProspectiveTextCommandEvent>(command, subject);
+        eventBus->emitEvent<TextCommandEvent>(command, subject);
     }
 }
 

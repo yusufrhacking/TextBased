@@ -1,6 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "GameKeyEvent.h"
-#include "ProspectiveTextCommandEvent.h"
+#include "TextCommandEvent.h"
 #include "WordInputSystem.h"
 #include "TextQueuedEvent.h"
 #include "../TextCommands/CharacterSpendEvent.h"

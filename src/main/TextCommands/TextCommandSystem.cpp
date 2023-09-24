@@ -19,10 +19,10 @@ TextCommandSystem::TextCommandSystem() {
 }
 
 void TextCommandSystem::listenToEvents() {
-    eventBus->listenToEvent<ProspectiveTextCommandEvent>(this, &TextCommandSystem::onCommand);
+    eventBus->listenToEvent<TextCommandEvent>(this, &TextCommandSystem::onCommand);
 }
 
-void TextCommandSystem::onCommand(ProspectiveTextCommandEvent &event) {
+void TextCommandSystem::onCommand(TextCommandEvent &event) {
     auto command = event.command;
     auto subject = event.subject;
     if (command == "chop") {

@@ -16,7 +16,7 @@ void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& r
     for (auto & authoredCommand : std::ranges::reverse_view(authoredCommands)){
         renderAuthoredCommand(renderer, lineCount, authoredCommand);
         lineCount++;
-        if (lineCount > maxLinesShown){
+        if ((int)lineCount > maxLinesShown){
             return;
         }
     }

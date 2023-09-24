@@ -3,7 +3,7 @@
 #include "Alphabet.h"
 #include "../EventSystem/EventBus.h"
 #include "../TextCommands/CharacterSpendEvent.h"
-#include "../TextInput/ProspectiveTextCommandEvent.h"
+#include "../TextInput/TextCommandEvent.h"
 #include "CharacterDepositEvent.h"
 #include "Letter.h"
 
@@ -16,7 +16,7 @@ CharacterStorageSystem::CharacterStorageSystem() {
 void CharacterStorageSystem::onSpend(CharacterSpendEvent &event) {
     bool result = tryToSpendText(event.subject);
     if (result) {
-        eventBus->emitEvent<ProspectiveTextCommandEvent>(event.command, event.subject);
+        eventBus->emitEvent<TextCommandEvent>(event.command, event.subject);
     }
 }
 
