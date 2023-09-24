@@ -23,6 +23,8 @@ public:
 
     void
     renderTypedLine(const std::shared_ptr<Renderer> &renderer, Position position, const std::string& commandText, Style style);
+
+    bool isLowestLine(float lineCount);
 };
 
 

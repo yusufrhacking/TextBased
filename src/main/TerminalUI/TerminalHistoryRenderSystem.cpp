@@ -3,6 +3,7 @@
 #include "../HighLevel/ECSManager.h"
 #include "LiveTerminalRenderSystem.h"
 #include <__ranges/reverse_view.h>
+#include <spdlog/spdlog.h>
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -31,7 +32,7 @@ void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Re
     startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, style);
     startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, style);
 
-    if (lineCount == 1 && style == Style::ENGINEER_TERMINAL){
+    if (isLowestLine(lineCount) && style == Style::ENGINEER_TERMINAL){
         renderTypedLine(renderer, startingPosition, authoredCommand.command.getFullCommandText(), style);
     }
     else{
@@ -59,10 +60,15 @@ void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer
     if (typeNewCharacter < typeNewCharacterThreshold){
         std::string displayedText = commandText.substr(0, typedTextInd);
         terminalRenderer.renderText(renderer, position, displayedText, style);
-        if (typedTextInd < commandText.size()-1){
+        if (typedTextInd < commandText.size()){
             typedTextInd++;
         }
     }
     typeNewCharacter++;
     typeNewCharacter = typeNewCharacter % typeNewCharacterThreshold;
+    prevLine = commandText;
+}
+
+bool TerminalHistoryRenderSystem::isLowestLine(float lineCount) {
+    return lineCount == 1;
 }
