@@ -30,6 +30,9 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     diegeticFont = FC_CreateFont();
     FC_LoadFont(diegeticFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
+    tinyNumberFont = FC_CreateFont();
+    FC_LoadFont(tinyNumberFont, renderer, "../../resources/Monaco.ttf",
+                10, white, TTF_STYLE_NORMAL);
 }
 
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
@@ -54,6 +57,10 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
         case Style::ENGINEER_TERMINAL:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(diegeticFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+            break;
+        case Style::TINY_NUMBER:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            FC_Draw(tinyNumberFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
             break;
         default: throw NoStyleException();
     }

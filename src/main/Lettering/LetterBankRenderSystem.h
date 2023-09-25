@@ -23,6 +23,8 @@ public:
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     void renderLetterBox(const std::shared_ptr<Renderer> &renderer);
+
+    void renderLetters(const std::shared_ptr<Renderer> &renderer);
 };
 
 

@@ -8,7 +8,8 @@ enum class Style{
     LETTER,
     TERMINAL,
     ENGINEER_TERMINAL,
-    OLD_TERMINAL_COMMAND
+    OLD_TERMINAL_COMMAND,
+    TINY_NUMBER
 };
 
 struct StyleComponent{

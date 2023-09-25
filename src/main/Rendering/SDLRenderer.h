@@ -21,6 +21,7 @@ class SDLRenderer: public Renderer {
     FC_Font* fadedTerminalFont;
     FC_Font* letterFont;
     FC_Font* diegeticFont;
+    FC_Font* tinyNumberFont;
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color faded_white = {255, 255, 255, 180};
     SDL_Color black = {0, 0, 0, 255};
