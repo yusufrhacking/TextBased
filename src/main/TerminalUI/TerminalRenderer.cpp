@@ -1,19 +1,19 @@
 #include "TerminalRenderer.h"
 
 Position TerminalRenderer::renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                        const std::string& authorStr, Style style) {
+                                        const std::string& authorStr, StyleComponent style) {
     renderer->renderFixedText(startingPosition, TextComponent(authorStr), StyleComponent(style));
     return startingPosition + Position(authorStr.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER + 10, 0);
 }
 
-Position TerminalRenderer::renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition, Style style) {
+Position TerminalRenderer::renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition, StyleComponent style) {
     auto submittedPosition = startingPosition;
     renderer->renderFixedText(submittedPosition, TextComponent(">"), StyleComponent(style));
     return startingPosition + Position(TEXT_OFFSET, (float)0);
 }
 
 Position TerminalRenderer::renderText(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                      const std::string& currText, Style style) {
+                                      const std::string& currText, StyleComponent style) {
     auto terminalTextC = TextComponent(currText);
     renderer->renderFixedText(startingPosition, terminalTextC, StyleComponent(style));
 
@@ -23,7 +23,7 @@ Position TerminalRenderer::renderText(const std::shared_ptr<Renderer> &renderer,
 
 
 Position TerminalRenderer::renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                                            const std::string& currText, bool isTerminalLive, Style style) {
+                                            const std::string& currText, bool isTerminalLive, StyleComponent style) {
     if (!isTerminalLive){
         return {};
     }

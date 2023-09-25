@@ -28,36 +28,36 @@ void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& r
     }
 }
 
-void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, AuthoredCommand authoredCommand) {
-    Style style = getStyle(authoredCommand.author);
+void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, const AuthoredCommand& authoredCommand) {
+    auto type = getType(authoredCommand.author);
 
     auto authorText = AuthorCommands::authorToText(authoredCommand.author);
     auto startingPosition = startingTerminalPosition + Position((float)0, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount) * -1);
 
-    startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, style);
-    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, style);
+    startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, StyleComponent(type));
+    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, StyleComponent(type));
 
-    if (isLowestLine(lineCount) && style == Style::ENGINEER_TERMINAL){
-        renderTypedLine(renderer, startingPosition, authoredCommand.command.getFullCommandText(), style);
+    if (isLowestLine(lineCount) && type == Type::ENGINEER_TERMINAL_TEXT){
+        renderTypedLine(renderer, startingPosition, authoredCommand.command.getFullCommandText(), type);
     }
     else{
-        terminalRenderer.renderText(renderer, startingPosition, authoredCommand.command.getFullCommandText(), style);
+        terminalRenderer.renderText(renderer, startingPosition, authoredCommand.command.getFullCommandText(), StyleComponent(type));
     }
 }
 
-Style TerminalHistoryRenderSystem::getStyle(Author author) {
+Type TerminalHistoryRenderSystem::getType(Author author) {
     switch (author) {
         case Author::PLAYER:
-            return Style::OLD_TERMINAL_COMMAND;
+            return Type::PLAIN_TERMINAL_TEXT;
         case Author::ENGINEER:
-            return Style::ENGINEER_TERMINAL;
+            return Type::ENGINEER_TERMINAL_TEXT;
         case Author::BRICOLEUR:
-            return Style::ENGINEER_TERMINAL;
+            return Type::BRICOLEUR_TERMINAL_TEXT;
     }
 }
 
 void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer> &renderer, Position position,
-                                                  const std::string& commandText, Style style) {
+                                                  const std::string& commandText, Type type) {
     if (!prevLine.empty() && prevLine != commandText){
         typedTextInd = 0;
         typeNewCharacter = 0;
@@ -69,7 +69,7 @@ void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer
         typeNewCharacter = 0;
     }
     std::string displayedText = commandText.substr(0, typedTextInd);
-    terminalRenderer.renderText(renderer, position, displayedText, style);
+    terminalRenderer.renderText(renderer, position, displayedText, StyleComponent(type));
     typeNewCharacter++;
     prevLine = commandText;
 }

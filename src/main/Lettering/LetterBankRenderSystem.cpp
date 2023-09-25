@@ -13,7 +13,7 @@ void LetterBankRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
 
 void LetterBankRenderSystem::renderLetterBox(const std::shared_ptr<Renderer> &renderer) {
     renderer->renderFixedText(letterBoxPosition, TextComponent(letterBankText),
-                              StyleComponent(Style::WHITE_MONACO_GENERIC));
+                              StyleComponent(Type::LETTER_BANK_SHELL));
 }
 
 void LetterBankRenderSystem::renderLetters(const std::shared_ptr<Renderer> &renderer) {
@@ -32,16 +32,16 @@ void LetterBankRenderSystem::renderLetters(const std::shared_ptr<Renderer> &rend
 
         if (tinyNumber == 0){
             renderer->renderFixedText(submittedPosition,
-                                      TextComponent(letterStr), StyleComponent(Style::UNUSED_LETTER_BANK));
+                                      TextComponent(letterStr), StyleComponent(Type::LETTER_BANK_EMPTY_LETTER));
             renderer->renderFixedText(tinyNumberPosition,
                                       TextComponent(std::to_string(tinyNumber)),
-                                      StyleComponent(Style::UNUSED_TINY_NUMBER));
+                                      StyleComponent(Type::TINY_NUMBER_EMPTY));
         } else{
             renderer->renderFixedText(submittedPosition,
-                                      TextComponent(letterStr), StyleComponent(Style::USED_LETTER_BANK));
+                                      TextComponent(letterStr), StyleComponent(Type::LETTER_BANK_USED_LETTER));
             renderer->renderFixedText(tinyNumberPosition,
                                       TextComponent(std::to_string(tinyNumber)),
-                                      StyleComponent(Style::USED_TINY_NUMBER));
+                                      StyleComponent(Type::TINY_NUMBER_USED));
         }
 
         xCount++;
