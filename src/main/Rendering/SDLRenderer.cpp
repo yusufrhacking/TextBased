@@ -47,12 +47,10 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
     auto cameraPos = camera.getCameraPosition();
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
 }
 
 void SDLRenderer::renderFixedItem(Position position, const TextComponent& sprite, const StyleComponent& style){
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
 }
 
