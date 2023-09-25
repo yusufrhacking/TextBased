@@ -12,6 +12,11 @@ void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &render
     renderLines(renderer, authoredCommands);
 }
 
+void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &renderer,
+                                         const std::vector<AuthoredCommand>& authoredCommands) {
+    renderLines(renderer, authoredCommands);
+}
+
 void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& renderer, const std::vector<AuthoredCommand>& authoredCommands) {
     float lineCount = 1;
     for (auto & authoredCommand : std::ranges::reverse_view(authoredCommands)){
@@ -71,9 +76,4 @@ void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer
 
 bool TerminalHistoryRenderSystem::isLowestLine(float lineCount) {
     return lineCount == 1;
-}
-
-void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &renderer,
-                                         const std::vector<AuthoredCommand>& authoredCommands) {
-    renderLines(renderer, authoredCommands);
 }

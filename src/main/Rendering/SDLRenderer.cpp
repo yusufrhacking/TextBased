@@ -88,6 +88,10 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
     }
 }
 
+void renderFixedItem(Position position, const TextComponent& sprite, const StyleComponent& style){
+
+}
+
 void SDLRenderer::renderTerminal(std::string text) {
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
 //    renderTerminalLineStart();

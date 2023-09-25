@@ -11,6 +11,7 @@ class Renderer {
     public:
         virtual ~Renderer() = default;
         virtual void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) = 0;
+        virtual void renderFixedItem(Position position, const TextComponent& sprite, const StyleComponent& style) = 0;
         virtual void renderPresent() = 0;
         virtual void renderClear() = 0;
         virtual void renderTerminal(std::string text) = 0;
