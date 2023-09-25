@@ -47,56 +47,17 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
     auto cameraPos = camera.getCameraPosition();
-    switch (style.getStyle()){
-        case Style::WHITE_MONACO_GENERIC:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(genericMonacoFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
-            break;
-        case Style::LETTER:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(letterFont, renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
-            break;
-        case Style::TERMINAL:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(terminalFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
-            break;
-        case Style::OLD_TERMINAL_COMMAND:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(fadedTerminalFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
-            break;
-        case Style::ENGINEER_TERMINAL:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(diegeticFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
-            break;
-        case Style::UNUSED_LETTER_BANK:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(unusedLetterBankFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
-            break;
-        case Style::UNUSED_TINY_NUMBER:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(unusedTinyNumberFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
-            break;
-        case Style::USED_LETTER_BANK:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(usedLetterBankFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
-            break;
-        case Style::USED_TINY_NUMBER:
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(usedTinyNumberFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
-            break;
-        default: throw NoStyleException();
-    }
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
 }
 
-void renderFixedItem(Position position, const TextComponent& sprite, const StyleComponent& style){
-
+void SDLRenderer::renderFixedItem(Position position, const TextComponent& sprite, const StyleComponent& style){
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
 }
 
 void SDLRenderer::renderTerminal(std::string text) {
     SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a);
-//    renderTerminalLineStart();
-//    renderTerminalText(text);
-//    renderFlashingUnderscore(text);
     SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a);
 }
 
@@ -115,6 +76,32 @@ SDLRenderer::~SDLRenderer() {
 }
 
 bool SDLRenderer::isImproperlyInitialized() const { return TTF_Init() < 0; }
+
+FC_Font* SDLRenderer::styleToFont(Style style) {
+    switch (style) {
+        case Style::WHITE_MONACO_GENERIC:
+            return genericMonacoFont;
+        case Style::LETTER:
+            return letterFont;
+        case Style::TERMINAL:
+            return terminalFont;
+        case Style::OLD_TERMINAL_COMMAND:
+            return fadedTerminalFont;
+        case Style::ENGINEER_TERMINAL:
+            return diegeticFont;
+        case Style::UNUSED_LETTER_BANK:
+            return unusedLetterBankFont;
+        case Style::UNUSED_TINY_NUMBER:
+            return unusedTinyNumberFont;
+        case Style::USED_LETTER_BANK:
+            return usedLetterBankFont;
+        case Style::USED_TINY_NUMBER:
+            return usedTinyNumberFont;
+        default:
+            throw NoStyleException();
+    }
+}
+
 
 
 

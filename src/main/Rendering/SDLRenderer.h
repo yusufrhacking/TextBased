@@ -44,6 +44,7 @@ public:
     void renderTerminal(std::string text) override;
 
 private:
+    FC_Font* styleToFont(Style style);
     bool isImproperlyInitialized() const;
 
 };
