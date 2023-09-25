@@ -7,7 +7,7 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
+void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
     auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
     renderLines(renderer, authoredCommands);
 }

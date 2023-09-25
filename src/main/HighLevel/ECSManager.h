@@ -69,6 +69,9 @@ public:
         template <typename TSystem>
         TSystem& getSystem() const;
 
+        template <typename TSystem>
+        std::vector<std::shared_ptr<TSystem>> getSystemsOfType() const;
+
 
     void removeEntity(const Entity &entity);
 
@@ -128,6 +131,11 @@ bool ECSManager::hasSystem() const {
 template<typename TSystem>
 TSystem& ECSManager::getSystem() const {
     return systemManager->getSystem<TSystem>();
+}
+
+template <typename TSystem>
+std::vector<std::shared_ptr<TSystem>> ECSManager::getSystemsOfType() const{
+    return systemManager->getSystemsOfType<TSystem>();
 }
 
 

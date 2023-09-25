@@ -1,10 +1,11 @@
 #ifndef TEXTBASED_TERMINALHISTORYRENDERSYSTEM_H
 #define TEXTBASED_TERMINALHISTORYRENDERSYSTEM_H
-#include "../Rendering/RenderSystem.h"
+#include "../Rendering/DynamicRenderSystem.h"
 #include "../TextCommands/AuthoredCommand.h"
 #include "TerminalRenderer.h"
+#include "../Rendering/FixedRenderSystem.h"
 
-class TerminalHistoryRenderSystem: public RenderSystem {
+class TerminalHistoryRenderSystem: public FixedRenderSystem {
 private:
     int maxLinesShown = 6;
     int typedTextInd = 0;
@@ -17,7 +18,7 @@ private:
     void renderAuthoredCommand(const std::shared_ptr<Renderer>& renderer, float lineCount, AuthoredCommand authoredCommand);
 public:
     TerminalHistoryRenderSystem(Position startingTerminalPosition): startingTerminalPosition(startingTerminalPosition) {}
-    void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
+    void render(const std::shared_ptr<Renderer>& renderer) override;
 
     Style getStyle(Author author);
 

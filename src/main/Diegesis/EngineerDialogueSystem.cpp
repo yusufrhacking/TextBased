@@ -1,9 +1,14 @@
 #include "EngineerDialogueSystem.h"
 #include "../EventSystem/EventBus.h"
 #include "EngineerTerminalEvent.h"
+#include "../HighLevel/ECSManager.h"
+#include "../TerminalUI/TerminalHistoryRenderSystem.h"
+#include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include <memory>
 
 extern std::unique_ptr<EventBus> eventBus;
+extern std::unique_ptr<ECSManager> ecsManager;
+
 
 EngineerDialogueSystem::EngineerDialogueSystem() {
     listenToEvents();

@@ -40,7 +40,6 @@ void ChoppingSystem::onChop(ChopEvent &event) {
         return;
     }
 
-
     for(auto tree: getRelevantEntities()){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);

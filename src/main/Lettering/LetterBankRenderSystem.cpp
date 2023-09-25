@@ -6,7 +6,7 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-void LetterBankRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
+void LetterBankRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
     renderLetterBox(renderer);
     renderLetters(renderer);
 }

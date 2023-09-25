@@ -1,12 +1,12 @@
 #ifndef TEXTBASED_ENTITYRENDERSYSTEM_H
 #define TEXTBASED_ENTITYRENDERSYSTEM_H
+#include "DynamicRenderSystem.h"
 #include "Renderer.h"
 #include "../Text/TextComponent.h"
 #include "StyleComponent.h"
 #include "../ECSObjects/System.h"
-#include "RenderSystem.h"
 
-class EntityRenderSystem: public RenderSystem {
+class EntityRenderSystem: public DynamicRenderSystem {
     public:
         explicit EntityRenderSystem();
 

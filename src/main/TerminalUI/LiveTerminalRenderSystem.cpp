@@ -16,7 +16,7 @@ LiveTerminalRenderSystem::LiveTerminalRenderSystem(Position startingTerminalPosi
     this->startingTerminalPosition = startingTerminalPosition;
 }
 
-void LiveTerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
+void LiveTerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
     renderLiveLine(renderer);
 }
 

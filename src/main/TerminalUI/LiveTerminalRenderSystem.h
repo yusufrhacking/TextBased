@@ -7,9 +7,10 @@
 #include "TakingInputFlipEvent.h"
 #include "../TextCommands/AuthoredCommand.h"
 #include "TerminalRenderer.h"
+#include "../Rendering/FixedRenderSystem.h"
 
 
-class LiveTerminalRenderSystem: public RenderSystem {
+class LiveTerminalRenderSystem: public FixedRenderSystem {
 private:
     std::string currentText;
     Position startingTerminalPosition;
@@ -18,7 +19,7 @@ private:
 
 public:
     LiveTerminalRenderSystem(Position startingTerminalPosition);
-    void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
+    void render(const std::shared_ptr<Renderer>& renderer) override;
 
     void renderLiveLine(const std::shared_ptr<Renderer> &renderer);
 

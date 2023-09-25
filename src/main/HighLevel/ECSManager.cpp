@@ -1,5 +1,6 @@
 #include <spdlog/spdlog.h>
 #include "ECSManager.h"
+#include "../Rendering/RenderControllerSystem.h"
 
 
 int GenericComponent::nextId = 0;
@@ -51,7 +52,7 @@ void ECSManager::runTimedSystems(double deltaTime) const {
 
 void ECSManager::render(const std::shared_ptr<Renderer>& renderer){
     renderer->renderClear();
-    for (const auto& system : systemManager->getSystemsOfType<RenderSystem>()){
+    for (const auto& system : systemManager->getSystemsOfType<RenderControllerSystem>()){
         system->render(renderer, currentCamera);
     }
     renderer->renderPresent();

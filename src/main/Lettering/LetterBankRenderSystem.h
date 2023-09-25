@@ -1,8 +1,9 @@
 #ifndef TEXTBASED_LETTERBANKRENDERSYSTEM_H
 #define TEXTBASED_LETTERBANKRENDERSYSTEM_H
-#include "../Rendering/RenderSystem.h"
+#include "../Rendering/DynamicRenderSystem.h"
+#include "../Rendering/FixedRenderSystem.h"
 
-class LetterBankRenderSystem: public RenderSystem {
+class LetterBankRenderSystem: public FixedRenderSystem {
 private:
     Camera unusedCamera{Position(0, 0)};
     std::string letterBankText = "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"
@@ -20,7 +21,7 @@ private:
     float LETTER_Y_OFFSET = 25;
 public:
     LetterBankRenderSystem() = default;
-    void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
+    void render(const std::shared_ptr<Renderer>& renderer) override;
 
     void renderLetterBox(const std::shared_ptr<Renderer> &renderer);
 
