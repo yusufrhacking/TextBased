@@ -20,10 +20,7 @@ class Renderer {
 
 class MockRenderer : public Renderer {
 public:
-    MOCK_METHOD(void, renderDynamicText, (Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style), (override))
-    CameraPositionconst TextComponent &const StyleComponent &
-
-    ;
+    MOCK_METHOD(void, renderDynamicText, (Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style), (override));
     MOCK_METHOD(void, renderPresent, (), (override));
 };
 
