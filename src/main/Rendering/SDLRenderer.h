@@ -17,14 +17,15 @@
 class SDLRenderer: public Renderer {
     SDL_Renderer* renderer;
     FC_Font* genericMonacoFont;
-    FC_Font* terminalFont;
-    FC_Font* fadedTerminalFont;
-    FC_Font* letterFont;
-    FC_Font* unusedLetterBankFont;
-    FC_Font* usedLetterBankFont;
-    FC_Font* diegeticFont;
-    FC_Font* unusedTinyNumberFont;
-    FC_Font* usedTinyNumberFont;
+    FC_Font* whiteTerminalFont;
+    FC_Font* grayTerminalFont;
+    FC_Font* grayLetterFont;
+    FC_Font* whiteLetterBankFont;
+    FC_Font* greenLetterBankFont;
+    FC_Font* greenTerminalFont;
+    FC_Font* amberTerminalFont;
+    FC_Font* whiteNumberBankFont;
+    FC_Font* greenNumberBankFont;
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color faded_white = {255, 255, 255, 180};
     SDL_Color black = {0, 0, 0, 255};

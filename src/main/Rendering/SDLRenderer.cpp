@@ -18,29 +18,32 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     genericMonacoFont = FC_CreateFont();
     FC_LoadFont(genericMonacoFont, renderer, "../../resources/Monaco.ttf",
                 TEXT_C_FONT_SIZE, white, TTF_STYLE_NORMAL);
-    terminalFont = FC_CreateFont();
-    FC_LoadFont(terminalFont, renderer, "../../resources/Monaco.ttf",
+    whiteTerminalFont = FC_CreateFont();
+    FC_LoadFont(whiteTerminalFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, white, TTF_STYLE_NORMAL);
-    fadedTerminalFont = FC_CreateFont();
-    FC_LoadFont(fadedTerminalFont, renderer, "../../resources/Monaco.ttf",
+    grayTerminalFont = FC_CreateFont();
+    FC_LoadFont(grayTerminalFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, faded_white, TTF_STYLE_NORMAL);
-    letterFont = FC_CreateFont();
-    FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
+    grayLetterFont = FC_CreateFont();
+    FC_LoadFont(grayLetterFont, renderer, "../../resources/Monaco.ttf",
                 TEXT_C_FONT_SIZE, gray, TTF_STYLE_BOLD);
-    unusedLetterBankFont = FC_CreateFont();
-    FC_LoadFont(unusedLetterBankFont, renderer, "../../resources/Monaco.ttf",
+    whiteLetterBankFont = FC_CreateFont();
+    FC_LoadFont(whiteLetterBankFont, renderer, "../../resources/Monaco.ttf",
                 TEXT_C_FONT_SIZE, white, TTF_STYLE_BOLD);
-    usedLetterBankFont = FC_CreateFont();
-    FC_LoadFont(usedLetterBankFont, renderer, "../../resources/Monaco.ttf",
+    greenLetterBankFont = FC_CreateFont();
+    FC_LoadFont(greenLetterBankFont, renderer, "../../resources/Monaco.ttf",
                 TEXT_C_FONT_SIZE, matrix_green, TTF_STYLE_BOLD);
-    diegeticFont = FC_CreateFont();
-    FC_LoadFont(diegeticFont, renderer, "../../resources/Monaco.ttf",
+    greenTerminalFont = FC_CreateFont();
+    FC_LoadFont(greenTerminalFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
-    unusedTinyNumberFont = FC_CreateFont();
-    FC_LoadFont(unusedTinyNumberFont, renderer, "../../resources/Monaco.ttf",
+    amberTerminalFont = FC_CreateFont();
+    FC_LoadFont(greenTerminalFont, renderer, "../../resources/Monaco.ttf",
+                TERMINAL_FONT_SIZE, faded_amber, TTF_STYLE_NORMAL);
+    whiteNumberBankFont = FC_CreateFont();
+    FC_LoadFont(whiteNumberBankFont, renderer, "../../resources/Monaco.ttf",
                 10, white, TTF_STYLE_NORMAL);
-    usedTinyNumberFont = FC_CreateFont();
-    FC_LoadFont(usedTinyNumberFont, renderer, "../../resources/Monaco.ttf",
+    greenNumberBankFont = FC_CreateFont();
+    FC_LoadFont(greenNumberBankFont, renderer, "../../resources/Monaco.ttf",
                 10, matrix_green, TTF_STYLE_NORMAL);
 }
 
@@ -78,22 +81,24 @@ FC_Font* SDLRenderer::styleToFont(Style style) {
     switch (style) {
         case Style::WHITE_MONACO_GENERIC:
             return genericMonacoFont;
-        case Style::LETTER:
-            return letterFont;
-        case Style::TERMINAL:
-            return terminalFont;
-        case Style::OLD_TERMINAL_COMMAND:
-            return fadedTerminalFont;
-        case Style::ENGINEER_TERMINAL:
-            return diegeticFont;
-        case Style::UNUSED_LETTER_BANK:
-            return unusedLetterBankFont;
-        case Style::UNUSED_TINY_NUMBER:
-            return unusedTinyNumberFont;
-        case Style::USED_LETTER_BANK:
-            return usedLetterBankFont;
-        case Style::USED_TINY_NUMBER:
-            return usedTinyNumberFont;
+        case Style::GRAY_LETTER:
+            return grayLetterFont;
+        case Style::WHITE_TERMINAL:
+            return whiteTerminalFont;
+        case Style::GRAY_TERMINAL:
+            return grayTerminalFont;
+        case Style::GREEN_TERMINAL:
+            return greenTerminalFont;
+        case Style::AMBER_TERMINAL:
+            return amberTerminalFont;
+        case Style::WHITE_LETTER_IN_BANK:
+            return whiteLetterBankFont;
+        case Style::TINY_WHITE_NUMBER:
+            return whiteNumberBankFont;
+        case Style::GREEN_LETTER_IN_BANK:
+            return greenLetterBankFont;
+        case Style::TINY_GREEN_NUMBER:
+            return greenNumberBankFont;
         default:
             throw NoStyleException();
     }
