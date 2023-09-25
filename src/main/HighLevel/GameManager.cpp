@@ -56,7 +56,6 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<EngineerDialogueSystem>();
-    ecsManager->addSystem<LetterBankRenderSystem>();
 }
 
 void GameManager::update(double deltaTime) {

@@ -6,7 +6,10 @@
 #include "../TextInput/TextCommandEvent.h"
 #include "CharacterDepositEvent.h"
 #include "Letter.h"
+#include "LetterBankRenderSystem.h"
+#include "../HighLevel/ECSManager.h"
 
+extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 CharacterStorageSystem::CharacterStorageSystem() {
@@ -52,6 +55,9 @@ bool CharacterStorageSystem::isLegalSpend(const std::string &word) {
 
 
 void CharacterStorageSystem::onDeposit(CharacterDepositEvent &event) {
+    if (!ecsManager->hasSystem<LetterBankRenderSystem>()){
+        ecsManager->addSystem<LetterBankRenderSystem>();
+    }
     spdlog::debug("Found letter: {}", enum_to_char(event.character));
     alphabet.increment(event.character);
 }
