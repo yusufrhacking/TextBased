@@ -18,32 +18,28 @@ void EngineerDialogueSystem::listenToEvents() {
 }
 
 void EngineerDialogueSystem::onLetter(CharacterDepositEvent &event) {
-    if (isFirstLetter){
-        isFirstLetter = false;
+    isFirstLetter++;
+    if (isFirstLetter == 3){
+        isFirstLetter = 0;
         lines.emplace_back("Try 'create axe'");
-//        eventBus->emitEvent<EngineerTerminalEvent>("Try 'create axe'");
     }
 }
 
 
 void EngineerDialogueSystem::onCreateAxe(CreatePlayerItemEvent &event) {
     lines.emplace_back("Try 'chop'");
-//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'chop'");
 }
 
 void EngineerDialogueSystem::onWoodSpawn(CreateItemAtPositionEvent &event) {
     lines.emplace_back("Try 'pickup'");
-//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'pickup'");
 }
 
 void EngineerDialogueSystem::onPickup(PlayerPickUpEvent &event) {
     lines.emplace_back("Try 'place wood'");
-//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'place wood'");
 }
 
 void EngineerDialogueSystem::onPlace(PlaceEvent &event) {
     lines.emplace_back("Try 'stash axe'");
-//    eventBus->emitEvent<EngineerTerminalEvent>("Try 'stash axe'");
 }
 
 void EngineerDialogueSystem::update(double deltaTime) {

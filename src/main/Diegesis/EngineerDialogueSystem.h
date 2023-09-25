@@ -17,7 +17,7 @@ public:
     void update(double deltaTime) override;
 private:
     std::vector<std::string> lines{};
-    bool isFirstLetter = true;
+    int isFirstLetter = 0;
     void listenToEvents();
     void onLetter(CharacterDepositEvent& event); //on deposit, check if first one, then send this message
     void onWoodSpawn(CreateItemAtPositionEvent & event);
