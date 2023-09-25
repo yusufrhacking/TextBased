@@ -16,7 +16,7 @@ void LetterBankRenderSystem::render(const std::shared_ptr<Renderer> &renderer, C
         std::string letterStr;
         letterStr.push_back(enum_to_char(letter));
         renderer->renderText(unusedCamera, submittedPosition,
-                             TextComponent(letterStr), StyleComponent(Style::LETTER));
+                             TextComponent(letterStr), StyleComponent(Style::WHITE_MONACO_GENERIC));
         xCount++;
         if (xCount > rowReset){
             xCount = 1;

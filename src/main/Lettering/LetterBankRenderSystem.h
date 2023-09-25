@@ -16,8 +16,8 @@ private:
                                  "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$";
     Position letterBoxPosition = Window::getTopRightPosition() -
             Position(TextComponent::getTextWidth(letterBankText)*MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
-    float LETTER_X_OFFSET = 15;
-    float LETTER_Y_OFFSET = 15;
+    float LETTER_X_OFFSET = 40;
+    float LETTER_Y_OFFSET = 25;
 public:
     LetterBankRenderSystem() = default;
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
