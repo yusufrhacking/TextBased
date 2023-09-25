@@ -1,15 +1,24 @@
 #include "RenderControllerSystem.h"
 #include "../HighLevel/ECSManager.h"
+#include "EntityRenderSystem.h"
 #include "FixedRenderSystem.h"
 #include "DynamicRenderSystem.h"
+#include "../TerminalUI/LiveTerminalRenderSystem.h"
+#include "../TerminalUI/TerminalHistoryRenderSystem.h"
+#include "../Lettering/LetterBankRenderSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
-    for(const auto& system: ecsManager->getSystemsOfType<FixedRenderSystem>()){
-        system->render(renderer);
-    }
-    for(const auto& system: ecsManager->getSystemsOfType<DynamicRenderSystem>()){
-        system->render(renderer, camera);
-    }
+    ecsManager->getSystem<EntityRenderSystem>().render(renderer, camera);
+    ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer);
+    ecsManager->getSystem<LiveTerminalRenderSystem>().render(renderer);
+    if (ecsManager->hasSystem<LetterBankRenderSystem>()) ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
+}
+
+RenderControllerSystem::RenderControllerSystem() {
+    Position startingTerminalPosition = {TERMINAL_X_START,(float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT)};
+    ecsManager->addSystem<EntityRenderSystem>();
+    ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
+    ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
 }

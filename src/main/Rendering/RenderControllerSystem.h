@@ -7,7 +7,7 @@
 
 class RenderControllerSystem: public System {
 public:
-    RenderControllerSystem() = default;
+    RenderControllerSystem();
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera);
 };
 

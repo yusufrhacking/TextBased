@@ -32,9 +32,8 @@ void GameManager::setup() {
 }
 
 void GameManager::setupSystems() {
-    Position startingTerminalPosition = {TERMINAL_X_START,(float)Window::windowHeight - (BOTTOM_WINDOW_OFFSET - TERMINAL_MONACO_HEIGHT_LINE_OF_TEXT)};
+    ecsManager->addSystem<RenderControllerSystem>();
     ecsManager->addSystem<AutonomousMovementSystem>();
-    ecsManager->addSystem<EntityRenderSystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
@@ -54,10 +53,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<CharacterStorageSystem>();
     ecsManager->addSystem<LetterPickupSystem>();
     ecsManager->addSystem<CommandLogSystem>();
-    ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
-    ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<EngineerDialogueSystem>();
-    ecsManager->addSystem<RenderControllerSystem>();
 }
 
 void GameManager::update(double deltaTime) {
