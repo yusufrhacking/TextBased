@@ -36,7 +36,6 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     diegeticFont = FC_CreateFont();
     FC_LoadFont(diegeticFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
-
     unusedTinyNumberFont = FC_CreateFont();
     FC_LoadFont(unusedTinyNumberFont, renderer, "../../resources/Monaco.ttf",
                 10, white, TTF_STYLE_NORMAL);
@@ -45,12 +44,12 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 10, matrix_green, TTF_STYLE_NORMAL);
 }
 
-void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
+void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
     auto cameraPos = camera.getCameraPosition();
     FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
 }
 
-void SDLRenderer::renderFixedItem(Position position, const TextComponent& sprite, const StyleComponent& style){
+void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite, const StyleComponent& style){
     FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
 }
 

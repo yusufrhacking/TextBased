@@ -17,6 +17,6 @@ void EntityRenderSystem::render(const std::shared_ptr<Renderer>& renderer, Camer
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
         const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(entity);
-        renderer->renderText(camera, positionComponent.getPosition(), textComponent, styleComponent);
+        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, styleComponent);
     }
 }

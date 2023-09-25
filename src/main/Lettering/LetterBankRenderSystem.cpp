@@ -12,8 +12,8 @@ void LetterBankRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
 }
 
 void LetterBankRenderSystem::renderLetterBox(const std::shared_ptr<Renderer> &renderer) {
-    renderer->renderText(unusedCamera, letterBoxPosition, TextComponent(letterBankText),
-                         StyleComponent(Style::WHITE_MONACO_GENERIC));
+    renderer->renderFixedText(letterBoxPosition, TextComponent(letterBankText),
+                              StyleComponent(Style::WHITE_MONACO_GENERIC));
 }
 
 void LetterBankRenderSystem::renderLetters(const std::shared_ptr<Renderer> &renderer) {
@@ -31,15 +31,17 @@ void LetterBankRenderSystem::renderLetters(const std::shared_ptr<Renderer> &rend
         auto tinyNumberPosition = submittedPosition + Position(8, 8);
 
         if (tinyNumber == 0){
-            renderer->renderText(unusedCamera, submittedPosition,
-                                 TextComponent(letterStr), StyleComponent(Style::UNUSED_LETTER_BANK));
-            renderer->renderText(unusedCamera, tinyNumberPosition,
-                                 TextComponent(std::to_string(tinyNumber)), StyleComponent(Style::UNUSED_TINY_NUMBER));
+            renderer->renderFixedText(submittedPosition,
+                                      TextComponent(letterStr), StyleComponent(Style::UNUSED_LETTER_BANK));
+            renderer->renderFixedText(tinyNumberPosition,
+                                      TextComponent(std::to_string(tinyNumber)),
+                                      StyleComponent(Style::UNUSED_TINY_NUMBER));
         } else{
-            renderer->renderText(unusedCamera, submittedPosition,
-                                 TextComponent(letterStr), StyleComponent(Style::USED_LETTER_BANK));
-            renderer->renderText(unusedCamera, tinyNumberPosition,
-                                 TextComponent(std::to_string(tinyNumber)), StyleComponent(Style::USED_TINY_NUMBER));
+            renderer->renderFixedText(submittedPosition,
+                                      TextComponent(letterStr), StyleComponent(Style::USED_LETTER_BANK));
+            renderer->renderFixedText(tinyNumberPosition,
+                                      TextComponent(std::to_string(tinyNumber)),
+                                      StyleComponent(Style::USED_TINY_NUMBER));
         }
 
         xCount++;

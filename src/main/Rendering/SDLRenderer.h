@@ -37,8 +37,8 @@ class SDLRenderer: public Renderer {
 public:
     explicit SDLRenderer(SDL_Window* sdlWindow);
     ~SDLRenderer() override;
-    void renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
-    void renderFixedItem(Position position, const TextComponent& sprite, const StyleComponent& style) override;
+    void renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
+    void renderFixedText(Position position, const TextComponent& sprite, const StyleComponent& style) override;
     void renderPresent() override;
     void renderClear() override;
     void renderTerminal(std::string text) override;
