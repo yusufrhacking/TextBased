@@ -6,12 +6,15 @@
 #include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include "../TerminalUI/TerminalHistoryRenderSystem.h"
 #include "../Lettering/LetterBankRenderSystem.h"
+#include "../TextCommands/CommandLogSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     ecsManager->getSystem<EntityRenderSystem>().render(renderer, camera);
-    ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer);
+
+    auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
+    ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer, authoredCommands);
     ecsManager->getSystem<LiveTerminalRenderSystem>().render(renderer);
     if (ecsManager->hasSystem<LetterBankRenderSystem>()) ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
 }

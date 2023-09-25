@@ -72,3 +72,8 @@ void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer
 bool TerminalHistoryRenderSystem::isLowestLine(float lineCount) {
     return lineCount == 1;
 }
+
+void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &renderer,
+                                         const std::vector<AuthoredCommand>& authoredCommands) {
+    renderLines(renderer, authoredCommands);
+}
