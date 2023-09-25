@@ -32,7 +32,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 TEXT_C_FONT_SIZE, white, TTF_STYLE_BOLD);
     usedLetterBankFont = FC_CreateFont();
     FC_LoadFont(usedLetterBankFont, renderer, "../../resources/Monaco.ttf",
-                TEXT_C_FONT_SIZE, white, TTF_STYLE_BOLD);
+                TEXT_C_FONT_SIZE, matrix_green, TTF_STYLE_BOLD);
     diegeticFont = FC_CreateFont();
     FC_LoadFont(diegeticFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
