@@ -27,12 +27,22 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     letterFont = FC_CreateFont();
     FC_LoadFont(letterFont, renderer, "../../resources/Monaco.ttf",
                 TEXT_C_FONT_SIZE, gray, TTF_STYLE_BOLD);
+    unusedLetterBankFont = FC_CreateFont();
+    FC_LoadFont(unusedLetterBankFont, renderer, "../../resources/Monaco.ttf",
+                TEXT_C_FONT_SIZE, white, TTF_STYLE_BOLD);
+    usedLetterBankFont = FC_CreateFont();
+    FC_LoadFont(usedLetterBankFont, renderer, "../../resources/Monaco.ttf",
+                TEXT_C_FONT_SIZE, white, TTF_STYLE_BOLD);
     diegeticFont = FC_CreateFont();
     FC_LoadFont(diegeticFont, renderer, "../../resources/Monaco.ttf",
                 TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
-    tinyNumberFont = FC_CreateFont();
-    FC_LoadFont(tinyNumberFont, renderer, "../../resources/Monaco.ttf",
+
+    unusedTinyNumberFont = FC_CreateFont();
+    FC_LoadFont(unusedTinyNumberFont, renderer, "../../resources/Monaco.ttf",
                 10, white, TTF_STYLE_NORMAL);
+    usedTinyNumberFont = FC_CreateFont();
+    FC_LoadFont(usedTinyNumberFont, renderer, "../../resources/Monaco.ttf",
+                10, matrix_green, TTF_STYLE_NORMAL);
 }
 
 void SDLRenderer::renderText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
@@ -58,9 +68,21 @@ void SDLRenderer::renderText(Camera camera, Position position, const TextCompone
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             FC_Draw(diegeticFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
             break;
-        case Style::TINY_NUMBER:
+        case Style::UNUSED_LETTER_BANK:
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            FC_Draw(tinyNumberFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+            FC_Draw(unusedLetterBankFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+            break;
+        case Style::UNUSED_TINY_NUMBER:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            FC_Draw(unusedTinyNumberFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+            break;
+        case Style::USED_LETTER_BANK:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            FC_Draw(usedLetterBankFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+            break;
+        case Style::USED_TINY_NUMBER:
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            FC_Draw(usedTinyNumberFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
             break;
         default: throw NoStyleException();
     }

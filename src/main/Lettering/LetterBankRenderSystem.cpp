@@ -27,14 +27,20 @@ void LetterBankRenderSystem::renderLetters(const std::shared_ptr<Renderer> &rend
 
         std::string letterStr;
         letterStr.push_back(enum_to_char(letter));
-
-        renderer->renderText(unusedCamera, submittedPosition,
-                             TextComponent(letterStr), StyleComponent(Style::WHITE_MONACO_GENERIC));
         int tinyNumber = letterAllocations.getCount(letter);
         auto tinyNumberPosition = submittedPosition + Position(8, 8);
 
-        renderer->renderText(unusedCamera, tinyNumberPosition,
-                             TextComponent(std::to_string(tinyNumber)), StyleComponent(Style::TINY_NUMBER));
+        if (tinyNumber == 0){
+            renderer->renderText(unusedCamera, submittedPosition,
+                                 TextComponent(letterStr), StyleComponent(Style::UNUSED_LETTER_BANK));
+            renderer->renderText(unusedCamera, tinyNumberPosition,
+                                 TextComponent(std::to_string(tinyNumber)), StyleComponent(Style::UNUSED_TINY_NUMBER));
+        } else{
+            renderer->renderText(unusedCamera, submittedPosition,
+                                 TextComponent(letterStr), StyleComponent(Style::USED_LETTER_BANK));
+            renderer->renderText(unusedCamera, tinyNumberPosition,
+                                 TextComponent(std::to_string(tinyNumber)), StyleComponent(Style::USED_TINY_NUMBER));
+        }
 
         xCount++;
         if (xCount > rowReset){
