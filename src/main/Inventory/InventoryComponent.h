@@ -3,9 +3,10 @@
 
 #include <vector>
 #include "../ECSObjects/Entity.h"
+#include "Inventory.h"
 
 struct InventoryComponent{
-    std::vector<Entity> items;
+    Inventory inventory;
     InventoryComponent() = default;
 };
 

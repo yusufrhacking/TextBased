@@ -61,7 +61,7 @@ void InventorySystem::stashAxe() {
 
 void InventorySystem::pickupItemIntoPlayerInventory(Entity player, Entity pickedUpEntity) {
     auto& playerInventory = ecsManager->getComponentFromEntity<InventoryComponent>(player);
-    playerInventory.items.push_back(pickedUpEntity);
+    playerInventory.inventory.getItems().push_back(pickedUpEntity);
     ecsManager->removeComponentFromEntity<LiveComponent>(pickedUpEntity);
     spdlog::debug("Picking up Entity {}", pickedUpEntity.getId());
 }
