@@ -11,6 +11,13 @@ public:
     void addItem(Entity item){
         items.push_back(item);
     }
+
+    void removeItemAt(std::vector<Entity>::iterator position) {
+        if (position != items.end()) {
+            items.erase(position);
+        }
+    }
+
 };
 
 #endif //TEXTBASED_INVENTORY_H

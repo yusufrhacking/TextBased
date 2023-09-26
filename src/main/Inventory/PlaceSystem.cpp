@@ -19,7 +19,8 @@ void PlaceSystem::listenToEvents(){
 void PlaceSystem::onPlacement(PlaceEvent& event){
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto& inventoryComponent = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer);
-    auto& inventoryItems = inventoryComponent.inventory.getItems();
+    auto& inventory = inventoryComponent.inventory;
+    auto& inventoryItems = inventory.getItems();
 
     for (auto it = inventoryItems.begin(); it != inventoryItems.end(); ++it){
         auto item = *it;
@@ -28,7 +29,7 @@ void PlaceSystem::onPlacement(PlaceEvent& event){
             auto& itemPosition = ecsManager->getComponentFromEntity<PositionComponent>(item);
             itemPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer);
 
-            inventoryItems.erase(it);
+            inventory.removeItemAt(it);
             break;
         }
     }
