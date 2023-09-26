@@ -52,6 +52,7 @@ void ItemCreationSystem::createAxe(){
     ecsManager->addComponentToEntity<StyleComponent>(axe);
     ecsManager->addComponentToEntity<AxeComponent>(axe);
     ecsManager->addComponentToEntity<ItemComponent>(axe, Item::AXE);
+    ecsManager->addComponentToEntity<InventoryPickupComponent>(, axe, Item::AXE);
     ecsManager->addComponentToEntity<LiveComponent>(axe);
     spdlog::debug("Axe created and has component: {}", ecsManager->hasComponent<LiveComponent>(axe));
 }
@@ -63,7 +64,7 @@ void ItemCreationSystem::createWoodPile(Position position) {
     ecsManager->addComponentToEntity<StyleComponent>(wood);
     ecsManager->addComponentToEntity<WoodComponent>(wood);
     ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD);
-    ecsManager->addComponentToEntity<InventoryPickupComponent>(wood);
+    ecsManager->addComponentToEntity<InventoryPickupComponent>(wood, Item::WOOD);
     ecsManager->addComponentToEntity<LiveComponent>(wood);
 }
 

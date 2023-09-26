@@ -5,7 +5,7 @@ struct Inventory{
 private:
     std::vector<Entity> items;
 public:
-    [[nodiscard]] std::vector<Entity>& getItems(){
+    [[nodiscard]] std::vector<Entity> getItems() const&{
         return items;
     }
     void addItem(Entity item){
