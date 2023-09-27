@@ -8,6 +8,7 @@
 #include "Letter.h"
 #include "LetterBankRenderSystem.h"
 #include "../HighLevel/ECSManager.h"
+#include "WordDepositEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -58,13 +59,21 @@ void CharacterStorageSystem::onDeposit(CharacterDepositEvent &event) {
     if (!ecsManager->hasSystem<LetterBankRenderSystem>()){
         ecsManager->addSystem<LetterBankRenderSystem>();
     }
-    spdlog::debug("Found letter: {}", enum_to_char(event.character));
-    alphabet.increment(event.character);
+    spdlog::debug("Found letter: {}", enum_to_char(event.letter));
+    alphabet.increment(event.letter);
 }
 
 void CharacterStorageSystem::listenToEvents() {
     eventBus->listenToEvent<CharacterSpendEvent>(this, &CharacterStorageSystem::onSpend);
     eventBus->listenToEvent<CharacterDepositEvent>(this, &CharacterStorageSystem::onDeposit);
+    eventBus->listenToEvent<WordDepositEvent>(this, &CharacterStorageSystem::onWordDeposit);
+}
+
+void CharacterStorageSystem::onWordDeposit(WordDepositEvent &event) {
+    spdlog::trace("Word deposited");
+    for (auto letter: event.letters){
+        alphabet.increment(letter);
+    }
 }
 
 

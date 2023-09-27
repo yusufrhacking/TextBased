@@ -36,7 +36,7 @@ public:
 
     void decrement(Letter c) {
         if (counts[c] <= 0) {
-            throw std::runtime_error("0 letters left for that character");
+            throw std::runtime_error("0 letters left for that letter");
         }
         counts[c]--;
     }

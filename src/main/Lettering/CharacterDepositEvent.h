@@ -5,9 +5,9 @@
 #include "../EventSystem/Event.h"
 
 struct CharacterDepositEvent: public Event{
-    explicit CharacterDepositEvent(Letter character): character(character){}
+    explicit CharacterDepositEvent(Letter character): letter(character){}
 
-    Letter character;
+    Letter letter;
 };
 
 #endif //TEXTBASED_CHARACTERDEPOSITEVENT_H

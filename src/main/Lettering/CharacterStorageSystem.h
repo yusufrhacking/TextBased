@@ -5,6 +5,7 @@
 #include "../TextCommands/CharacterSpendEvent.h"
 #include "../ECSObjects/System.h"
 #include "CharacterDepositEvent.h"
+#include "WordDepositEvent.h"
 
 class CharacterStorageSystem: public System {
 public:
@@ -21,6 +22,8 @@ private:
     void onSpend(CharacterSpendEvent &event);
 
     void onDeposit(CharacterDepositEvent &event);
+
+    void onWordDeposit(WordDepositEvent &event);
 };
 
 
