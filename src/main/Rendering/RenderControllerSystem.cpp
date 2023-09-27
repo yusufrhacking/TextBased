@@ -7,6 +7,9 @@
 #include "../TerminalUI/TerminalHistoryRenderSystem.h"
 #include "../Lettering/LetterBankRenderSystem.h"
 #include "../TextCommands/CommandLogSystem.h"
+#include "../Inventory/InventoryRenderSystem.h"
+#include "../MainPlayer/MainPlayerAccessSystem.h"
+#include "../Inventory/InventoryComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -16,7 +19,15 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
     ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer, authoredCommands);
     ecsManager->getSystem<LiveTerminalRenderSystem>().render(renderer);
-    if (ecsManager->hasSystem<LetterBankRenderSystem>()) ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
+    if (ecsManager->hasSystem<LetterBankRenderSystem>()) {
+        ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
+    }
+
+    auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
+    auto inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
+    if (ecsManager->hasSystem<InventoryRenderSystem>()) {
+        ecsManager->getSystem<InventoryRenderSystem>().render(renderer, inventory);
+    }
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -24,4 +35,5 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<EntityRenderSystem>();
     ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
+    ecsManager->addSystem<InventoryRenderSystem>();
 }
