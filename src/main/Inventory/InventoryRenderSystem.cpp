@@ -14,6 +14,9 @@ void InventoryRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
 
 void InventoryRenderSystem::renderInventoryShell(const std::shared_ptr<Renderer> &renderer, const Inventory &inventory) {
     auto linesUsed = inventory.getUsedSize();
+    if (linesUsed == 0){
+        return;
+    }
 
     auto topBorderPosition = inventoryStartingPosition;
     auto bottomBorderPosition = inventoryStartingPosition + Position((float)0, Y_OFFSET * (linesUsed + (float)1));
