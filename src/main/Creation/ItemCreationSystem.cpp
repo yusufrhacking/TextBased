@@ -44,7 +44,6 @@ void ItemCreationSystem::createAxe(){
     auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
     auto axe = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TiedChildComponent>(mainPlayer, axe);
-    ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory.addItem(Item::AXE, axe);
 
     ecsManager->addComponentToEntity<TextComponent>(axe, "exAxe\n  x\n  e");
     ecsManager->addComponentToEntity<PositionComponent>(
