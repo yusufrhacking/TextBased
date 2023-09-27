@@ -9,7 +9,7 @@ const unsigned int MAX_ENTITIES = 10000;
 using RenderedVal = unsigned int;
 
 static const int TEXT_C_FONT_SIZE = 15; //Must be a multiple of 5 in current config
-static const int TERMINAL_FONT_SIZE = 20;
+static const int TERMINAL_FONT_SIZE = 15;
 
 const RenderedVal MONACO_RENDERED_TEXT_WIDTH_SCALER = TEXT_C_FONT_SIZE * .6;
 const RenderedVal TERMINAL_MONACO_TEXT_WIDTH_SCALER = TERMINAL_FONT_SIZE * .6;

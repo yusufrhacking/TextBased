@@ -10,6 +10,10 @@ private:
     std::unordered_map<Item, std::set<Entity>> inventory;
 public:
 
+    std::unordered_map<Item, std::set<Entity>> getInventory() const{
+        return inventory;
+    }
+
     void addItem(Item item, Entity entity){
         inventory[item].insert(entity);
     }
