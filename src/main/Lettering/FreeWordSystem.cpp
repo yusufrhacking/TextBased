@@ -5,6 +5,7 @@
 #include "FreeWordEvent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/InventoryComponent.h"
+#include "WordDepositEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -24,6 +25,6 @@ void FreeWordSystem::onFreeWord(FreeWordEvent &event) {
     if (inventory.hasItems(type)){
         auto entity = inventory.removeAnItem(type);
         ecsManager->killEntity(entity);
-        // DEPOSIT WORD ecsManager->getSystem<CharacterStorageSystem>()
+        eventBus->emitEvent<WordDepositEvent>(event.word);
     }
 }
