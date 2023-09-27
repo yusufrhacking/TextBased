@@ -10,6 +10,7 @@
 #include "../Inventory/PlaceEvent.h"
 #include "../Inventory/StashPlayerItemEvent.h"
 #include "../Text/Split.h"
+#include "../Lettering/FreeWordEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -35,5 +36,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
         eventBus->emitEvent<PlaceEvent>(StringToItem(subject));
     } else if (command == "pickup") {
         eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
+    } else if (command == "free") {
+        eventBus->emitEvent<FreeWordEvent>(subject);
     }
 }

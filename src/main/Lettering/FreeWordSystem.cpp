@@ -21,7 +21,7 @@ void FreeWordSystem::listenToEvents() {
 void FreeWordSystem::onFreeWord(FreeWordEvent &event) {
     Item type = event.type;
     Entity mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
-    Inventory inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
+    Inventory& inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
     if (inventory.hasItems(type)){
         auto entity = inventory.removeAnItem(type);
         ecsManager->killEntity(entity);
