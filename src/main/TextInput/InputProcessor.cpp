@@ -31,6 +31,9 @@ bool InputProcessor::processInput(SDL_Event event) {
 }
 
 bool InputProcessor::readInput(SDL_Event event){
+    if (event.type != SDL_KEYDOWN){
+        return true;
+    }
     auto key = static_cast<SDL_KeyCode>(event.key.keysym.sym);
     if (event.type == SDL_KEYDOWN){
         auto it = keyPressMappings.find(key);
@@ -44,7 +47,7 @@ bool InputProcessor::readInput(SDL_Event event){
     const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
 
     if(key == SDLK_ESCAPE){
-        spdlog::trace("Escape key pressed");
+        spdlog::critical("Escape key pressed");
         return false;
     }
 
