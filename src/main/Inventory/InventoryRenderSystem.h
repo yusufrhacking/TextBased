@@ -12,6 +12,10 @@ public:
     InventoryRenderSystem() = default;
     void render(const std::shared_ptr<Renderer>& renderer) override;
     void render(const std::shared_ptr<Renderer>& renderer, const Inventory& inventory);
+
+    void renderInventoryItems(const std::shared_ptr<Renderer> &renderer, const Inventory &inventory);
+
+    void renderInventoryShell(const std::shared_ptr<Renderer> &renderer, const Inventory &inventory);
 };
 
 

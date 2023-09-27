@@ -4,22 +4,27 @@
 #include "../Creation/Item.h"
 
 struct Inventory{
-    //Need Items, and I need Entities; the entities are the underlying thing
-    //Map of Items to vectors of entities?
 private:
     std::unordered_map<Item, std::set<Entity>> inventory;
+    int inventoryAvailableItemSize = 0;
 public:
 
-    std::unordered_map<Item, std::set<Entity>> getInventory() const{
+    [[nodiscard]] std::unordered_map<Item, std::set<Entity>> getInventory() const{
         return inventory;
     }
 
     void addItem(Item item, Entity entity){
+        if (inventory[item].empty()){
+            inventoryAvailableItemSize++;
+        }
         inventory[item].insert(entity);
     }
 
     void removeEntity(Item item, Entity entity){
         inventory[item].erase(entity);
+        if (inventory[item].empty()){
+            inventoryAvailableItemSize--;
+        }
     }
 
     bool hasItems(Item item) {
@@ -29,7 +34,14 @@ public:
     Entity removeAnItem(Item item) {
         auto entity = *inventory[item].begin();
         inventory[item].erase(entity);
+        if (inventory[item].empty()){
+            inventoryAvailableItemSize--;
+        }
         return entity;
+    }
+
+    int getUsedSize() const{
+        return inventoryAvailableItemSize;
     }
 };
 
