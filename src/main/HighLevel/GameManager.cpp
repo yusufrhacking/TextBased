@@ -20,6 +20,7 @@
 #include "../Diegesis/EngineerDialogueSystem.h"
 #include "../Lettering/LetterBankRenderSystem.h"
 #include "../Rendering/RenderControllerSystem.h"
+#include "../Lettering/FreeWordSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -54,6 +55,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<LetterPickupSystem>();
     ecsManager->addSystem<CommandLogSystem>();
     ecsManager->addSystem<EngineerDialogueSystem>();
+    ecsManager->addSystem<FreeWordSystem>();
 }
 
 void GameManager::update(double deltaTime) {
