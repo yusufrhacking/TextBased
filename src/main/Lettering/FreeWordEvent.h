@@ -7,8 +7,9 @@
 
 struct FreeWordEvent: public Event{
     Item type;
-    explicit FreeWordEvent(const std::string& word){
-        type = StringToItem(word);
+    std::string word;
+    explicit FreeWordEvent(std::string word): word(std::move(word)){
+        type = StringToItem(this->word);
     }
 };
 

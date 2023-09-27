@@ -5,6 +5,7 @@
 #include "../ECSObjects/System.h"
 #include "FreeWordEvent.h"
 
+
 class FreeWordSystem: public System {
 public:
     FreeWordSystem();
