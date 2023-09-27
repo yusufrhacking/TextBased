@@ -31,9 +31,9 @@ bool InputProcessor::processInput(SDL_Event event) {
 }
 
 bool InputProcessor::readInput(SDL_Event event){
-//    if (event.type != SDL_KEYDOWN){
-//        return true;
-//    }
+    if (event.type != SDL_KEYDOWN && event.type != SDL_TEXTINPUT){
+        return true;
+    }
     auto key = static_cast<SDL_KeyCode>(event.key.keysym.sym);
     if (event.type == SDL_KEYDOWN){
         auto it = keyPressMappings.find(key);
