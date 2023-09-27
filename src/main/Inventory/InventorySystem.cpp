@@ -10,12 +10,14 @@
 #include "StashPlayerItemEvent.h"
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Woodworking/AxeComponent.h"
+#include "../Creation/ItemComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 InventorySystem::InventorySystem(){
     requireComponent<InventoryPickupComponent>();
+    requireComponent<ItemComponent>();
     listenToEvents();
 }
 void InventorySystem::listenToEvents(){
@@ -61,7 +63,8 @@ void InventorySystem::stashAxe() {
 
 void InventorySystem::pickupItemIntoPlayerInventory(Entity player, Entity pickedUpEntity) {
     auto& playerInventory = ecsManager->getComponentFromEntity<InventoryComponent>(player);
-    playerInventory.inventory.addItem(pickedUpEntity);
+    auto entityType = ecsManager->getComponentFromEntity<ItemComponent>(pickedUpEntity);
+    playerInventory.inventory.addItem(entityType.type, pickedUpEntity);
     ecsManager->removeComponentFromEntity<LiveComponent>(pickedUpEntity);
     spdlog::debug("Picking up Entity {}", pickedUpEntity.getId());
 }

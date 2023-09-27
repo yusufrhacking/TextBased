@@ -5,7 +5,6 @@
 
 class LetterBankRenderSystem: public FixedRenderSystem {
 private:
-    Camera unusedCamera{Position(0, 0)};
     std::string letterBankText = "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"
                                  "$                                    $\n"
                                  "$                                    $\n"

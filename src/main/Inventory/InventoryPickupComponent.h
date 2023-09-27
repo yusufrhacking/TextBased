@@ -1,5 +1,6 @@
 #ifndef TEXTBASED_INVENTORYPICKUPCOMPONENT_H
 #define TEXTBASED_INVENTORYPICKUPCOMPONENT_H
+#include "../Creation/Item.h"
 
 struct InventoryPickupComponent{
     std::string name;

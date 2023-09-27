@@ -18,19 +18,12 @@ void PlaceSystem::listenToEvents(){
 }
 void PlaceSystem::onPlacement(PlaceEvent& event){
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
-    auto& inventoryComponent = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer);
-    auto& inventory = inventoryComponent.inventory;
-    auto& inventoryItems = inventory.getItems();
+    auto& inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
 
-    for (auto it = inventoryItems.begin(); it != inventoryItems.end(); ++it){
-        auto item = *it;
-        if (ecsManager->getComponentFromEntity<ItemComponent>(item).type == event.type){
-            ecsManager->addComponentToEntity<LiveComponent>(item);
-            auto& itemPosition = ecsManager->getComponentFromEntity<PositionComponent>(item);
-            itemPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer);
-
-            inventory.removeItemAt(it);
-            break;
-        }
+    if (inventory.hasItems(event.type)){
+        Entity item = inventory.removeAnItem(event.type);
+        ecsManager->addComponentToEntity<LiveComponent>(item);
+        auto& itemPosition = ecsManager->getComponentFromEntity<PositionComponent>(item);
+        itemPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer);
     }
 }

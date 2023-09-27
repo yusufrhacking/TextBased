@@ -44,7 +44,7 @@ void ItemCreationSystem::createAxe(){
     auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
     auto axe = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TiedChildComponent>(mainPlayer, axe);
-    ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).items.push_back(axe);
+    ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory.addItem(Item::AXE, axe);
 
     ecsManager->addComponentToEntity<TextComponent>(axe, "exAxe\n  x\n  e");
     ecsManager->addComponentToEntity<PositionComponent>(
@@ -52,7 +52,6 @@ void ItemCreationSystem::createAxe(){
     ecsManager->addComponentToEntity<StyleComponent>(axe);
     ecsManager->addComponentToEntity<AxeComponent>(axe);
     ecsManager->addComponentToEntity<ItemComponent>(axe, Item::AXE);
-    ecsManager->addComponentToEntity<InventoryPickupComponent>(, axe, Item::AXE);
     ecsManager->addComponentToEntity<LiveComponent>(axe);
     spdlog::debug("Axe created and has component: {}", ecsManager->hasComponent<LiveComponent>(axe));
 }
