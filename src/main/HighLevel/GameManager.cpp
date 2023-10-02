@@ -21,6 +21,8 @@
 #include "../Lettering/LetterBankRenderSystem.h"
 #include "../Rendering/RenderControllerSystem.h"
 #include "../Lettering/FreeWordSystem.h"
+#include "../Attacking/AttackAttemptSystem.h"
+#include "../Health/HealthSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -56,6 +58,8 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<CommandLogSystem>();
     ecsManager->addSystem<EngineerDialogueSystem>();
     ecsManager->addSystem<FreeWordSystem>();
+    ecsManager->addSystem<AttackAttemptSystem>();
+    ecsManager->addSystem<HealthSystem>();
 }
 
 void GameManager::update(double deltaTime) {

@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "HealthSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../Attacking/SuccessfulAttackEvent.h"
@@ -15,10 +16,11 @@ void HealthSystem::listenToEvents() {
 }
 
 void HealthSystem::onAttack(SuccessfulAttackEvent& event) {
-    auto victim = event.victim;
+    Entity victim = event.victim;
     if (ecsManager->hasComponent<HealthComponent>(victim)){
         auto& healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(victim);
         auto damage = Attacking::getDamageFromAttackType(event.attackType);
         healthComponent.health -= damage;
+        spdlog::debug("Lowered entity {}'s health by {}", victim.getId(), damage);
     }
 }
