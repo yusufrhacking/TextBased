@@ -9,6 +9,7 @@
 #include "../TerminalUI/FixedPositionComponent.h"
 #include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include "../TerminalUI/TerminalUnderscoreComponent.h"
+#include "../Abyz/AbyzComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -19,6 +20,7 @@ FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosi
     createLetter('a', startingPosition + Position(-100, 0));
     createLetter('x', startingPosition + Position(100, 0));
     createLetter('e', startingPosition + Position(0, -100));
+    createAbyz();
 }
 
 void FirstLevel::createPlayer() {
@@ -48,6 +50,15 @@ void FirstLevel::createLetter(char letter, Position position) {
     ecsManager->addComponentToEntity<StyleComponent>(letterA, Type::PLAIN_LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA, char_to_enum(letter));
+}
+
+void FirstLevel::createAbyz() {
+    auto abyz1 = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(abyz1, "Abyz");
+    ecsManager->addComponentToEntity<PositionComponent>(abyz1, startingPosition + Position(400, -150));
+    ecsManager->addComponentToEntity<StyleComponent>(abyz1, Type::PLAIN_TEXT);
+    ecsManager->addComponentToEntity<LiveComponent>(abyz1);
+    ecsManager->addComponentToEntity<AbyzComponent>(abyz1);
 }
 
 
