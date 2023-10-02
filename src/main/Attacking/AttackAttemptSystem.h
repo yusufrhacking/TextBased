@@ -3,8 +3,11 @@
 
 
 #include "AttemptedAttackEvent.h"
-class AttackAttemptSystem {
+#include "../ECSObjects/System.h"
+
+class AttackAttemptSystem: public System {
 private:
+    const float ATTACK_RANGE = 10;
     void listenToEvents();
     void onAttackAttempt(AttemptedAttackEvent& event);
 public:
