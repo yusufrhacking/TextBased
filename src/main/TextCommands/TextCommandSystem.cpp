@@ -11,6 +11,7 @@
 #include "../Inventory/StashPlayerItemEvent.h"
 #include "../Text/Split.h"
 #include "../Lettering/FreeWordEvent.h"
+#include "../Attacking/AttemptedAttackEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -38,5 +39,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
         eventBus->emitEvent<PlayerPickUpEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     } else if (command == "free") {
         eventBus->emitEvent<FreeWordEvent>(subject);
+    } else if (command == "attack") {
+        eventBus->emitEvent<AttemptedAttackEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     }
 }

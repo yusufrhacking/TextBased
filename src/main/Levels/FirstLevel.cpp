@@ -10,6 +10,8 @@
 #include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include "../TerminalUI/TerminalUnderscoreComponent.h"
 #include "../Abyz/AbyzComponent.h"
+#include "../Health/HealthComponent.h"
+#include "../Attacking/AttackableComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -59,6 +61,8 @@ void FirstLevel::createAbyz() {
     ecsManager->addComponentToEntity<StyleComponent>(abyz1, Type::PLAIN_TEXT);
     ecsManager->addComponentToEntity<LiveComponent>(abyz1);
     ecsManager->addComponentToEntity<AbyzComponent>(abyz1);
+    ecsManager->addComponentToEntity<HealthComponent>(abyz1, 5);
+    ecsManager->addComponentToEntity<AttackableComponent>(abyz1);
 }
 
 

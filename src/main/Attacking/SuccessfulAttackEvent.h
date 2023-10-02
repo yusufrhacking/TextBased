@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_SUCCESSFULATTACKEVENT_H
 #define TEXTBASED_SUCCESSFULATTACKEVENT_H
-
+#include "../ECSObjects/Entity.h"
 #include "../EventSystem/Event.h"
 #include "AttackType.h"
 

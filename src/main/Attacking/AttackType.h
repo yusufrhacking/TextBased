@@ -7,7 +7,7 @@ enum class AttackType{
 
 
 namespace Attacking{
-    int getDamageFromAttackType(AttackType type){
+    static int getDamageFromAttackType(AttackType type){
         switch(type){
             case AttackType::BASIC: return 1;
         }
