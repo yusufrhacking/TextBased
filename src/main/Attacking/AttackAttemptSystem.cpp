@@ -30,7 +30,7 @@ void AttackAttemptSystem::onAttackAttempt(AttemptedAttackEvent& event) {
         const auto& surface = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
         const auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
         if (DistanceCalculator::isInAllowedRange(attackerPosition, position, attackerSurface, surface, ATTACK_RANGE)){
-            eventBus->emitEvent<SuccessfulAttackEvent>();
+            eventBus->emitEvent<SuccessfulAttackEvent>(event.attacker, entity, AttackType::BASIC);
             return;
         }
     }
