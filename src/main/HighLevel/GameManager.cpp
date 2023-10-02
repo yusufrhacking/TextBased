@@ -23,6 +23,7 @@
 #include "../Lettering/FreeWordSystem.h"
 #include "../Attacking/AttackAttemptSystem.h"
 #include "../Health/HealthSystem.h"
+#include "../Health/PendingDeathSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -60,6 +61,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<FreeWordSystem>();
     ecsManager->addSystem<AttackAttemptSystem>();
     ecsManager->addSystem<HealthSystem>();
+    ecsManager->addSystem<PendingDeathSystem>();
 }
 
 void GameManager::update(double deltaTime) {

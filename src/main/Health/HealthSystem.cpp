@@ -3,6 +3,7 @@
 #include "../HighLevel/ECSManager.h"
 #include "../Attacking/SuccessfulAttackEvent.h"
 #include "HealthComponent.h"
+#include "PendingDeathComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -21,6 +22,9 @@ void HealthSystem::onAttack(SuccessfulAttackEvent& event) {
         auto& healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(victim);
         auto damage = Attacking::getDamageFromAttackType(event.attackType);
         healthComponent.health -= damage;
+        if (healthComponent.health <= 0){
+            ecsManager->addComponentToEntity<PendingDeathComponent>(victim);
+        }
         spdlog::debug("Lowered entity {}'s health by {}", victim.getId(), damage);
     }
 }
