@@ -4,6 +4,8 @@
 #include "CreateItemAtPositionEvent.h"
 #include "CreatePlayerItemEvent.h"
 #include "../Inventory/StashPlayerItemEvent.h"
+#include "CreateItemAtEntityEvent.h"
+#include "../Lettering/Letter.h"
 
 
 class ItemCreationSystem: public System {
@@ -13,12 +15,13 @@ private:
     void listenToEvents();
     void onCreateAtPosition(CreateItemAtPositionEvent& event);
     void onCreate(CreatePlayerItemEvent &);
-    void onStash(StashPlayerItemEvent &);
     void createAxe();
 
     void createWoodPile(Position position);
 
-    void stashAxe();
+    void onCreateItemAtEntity(CreateItemAtEntityEvent &);
+
+    void createLetter(Letter letter, Position position);
 };
 
 

@@ -68,7 +68,7 @@ void FirstLevel::createAbyz() {
     ecsManager->addComponentToEntity<HealthComponent>(abyz1, 5);
     ecsManager->addComponentToEntity<AttackableComponent>(abyz1);
     ecsManager->addComponentToEntity<OnDeathComponent>(abyz1, [this, abyz1]() {
-        eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
+        eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, abyz1);
     });
 }
 
