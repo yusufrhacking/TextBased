@@ -12,7 +12,8 @@ PendingDeathSystem::PendingDeathSystem() {
 void PendingDeathSystem::update(double deltaTime) {
     for (auto entity: getRelevantEntities()){
         if (ecsManager->hasComponent<OnDeathComponent>(entity)){
-            //emit the event
+            auto& onDeathComponent = ecsManager->getComponentFromEntity<OnDeathComponent>(entity);
+            onDeathComponent.emitEvent();
         }
         ecsManager->killEntity(entity);
     }

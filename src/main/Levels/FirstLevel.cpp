@@ -12,8 +12,12 @@
 #include "../Abyz/AbyzComponent.h"
 #include "../Health/HealthComponent.h"
 #include "../Attacking/AttackableComponent.h"
+#include "../Health/OnDeathComponent.h"
+#include "../Creation/ItemCreationSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<EventBus> eventBus;
+
 
 FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
@@ -63,6 +67,9 @@ void FirstLevel::createAbyz() {
     ecsManager->addComponentToEntity<AbyzComponent>(abyz1);
     ecsManager->addComponentToEntity<HealthComponent>(abyz1, 5);
     ecsManager->addComponentToEntity<AttackableComponent>(abyz1);
+    ecsManager->addComponentToEntity<OnDeathComponent>(abyz1, [this, abyz1]() {
+        eventBus->emitEvent<CreatePlayerItemEvent>(Item::AXE);
+    });
 }
 
 
