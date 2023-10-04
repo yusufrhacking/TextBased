@@ -11,6 +11,7 @@
 #include "../PositionsAndMovement/DistanceCalculator.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
+#include "../Health/PendingDeathComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -48,9 +49,10 @@ void ChoppingSystem::onChop(ChopEvent &event) {
                 treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
             if (treeTextComponent.text.empty()){
-                eventBus->emitEvent<CreateItemAtPositionEvent>(
-                        CreateItemAtPositionEvent(Item::WOOD, findTreeMiddle(treePosition)));
-                ecsManager->killEntity(tree);
+                ecsManager->addComponentToEntity<PendingDeathComponent>(tree);
+//                eventBus->emitEvent<CreateItemAtPositionEvent>(
+//                        CreateItemAtPositionEvent(Item::WOOD, findTreeMiddle(treePosition)));
+//                ecsManager->killEntity(tree);
             }
             spdlog::debug("CHOPPED");
             break;

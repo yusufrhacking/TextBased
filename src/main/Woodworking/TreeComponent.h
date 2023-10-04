@@ -6,6 +6,13 @@
 
 struct TreeComponent{
     TreeComponent() = default;
+
+    static Position findTreeMiddle(Position treePosition) {
+        auto surface = TextComponent::getSurfaceSize(TextGenerator::getTreeText());
+        auto xSize = surface.width/2;
+        auto ySize = surface.height/2;
+        return treePosition + Position((float)xSize, (float)ySize);
+    }
 };
 
 #endif

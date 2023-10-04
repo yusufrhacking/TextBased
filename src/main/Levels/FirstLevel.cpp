@@ -42,11 +42,15 @@ void FirstLevel::createPlayer() {
 void FirstLevel::createTree() {
     auto tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
-    ecsManager->addComponentToEntity<PositionComponent>(tree, startingPosition + Position(100, 200));
+    Position treePosition = startingPosition + Position(100, 200);
+    ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
     ecsManager->addComponentToEntity<StyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree);
     ecsManager->addComponentToEntity<TreeComponent>(tree);
     ecsManager->addComponentToEntity<LiveComponent>(tree);
+    ecsManager->addComponentToEntity<OnDeathComponent>(tree, [this, treePosition]() {
+        eventBus->emitEvent<CreateItemAtPositionEvent>(Item::WOOD, TreeComponent::findTreeMiddle(treePosition));
+    });
 }
 
 void FirstLevel::createLetter(char letter, Position position) {
