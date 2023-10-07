@@ -97,7 +97,7 @@ void AbyzControlSystem::tryToAttackPlayer(AbyzComponent& abyz, Entity abyzEntity
     if (abyz.attackCooldownRemaining <= 0) {
         abyz.attackCooldownRemaining = ATTACK_COOLDOWN;
         abyz.state = AbyzState::COOLDOWN;
-        eventBus->emitEvent<SuccessfulAttackEvent>(abyzEntity, mainPlayer, AttackType::ABYZ_TO_PLAYER);
+        eventBus->emitEvent<SuccessfulAttackEvent>(abyzEntity, mainPlayer, AttackType::ABYZ);
     }
 }
 

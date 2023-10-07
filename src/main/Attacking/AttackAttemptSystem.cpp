@@ -1,6 +1,8 @@
 #include "AttackAttemptSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../EventSystem/EventBus.h"
+#include "ActiveWeaponComponent.h"
+#include "AttackType.h"
 #include "AttackableComponent.h"
 #include "AttemptedAttackEvent.h"
 #include "SuccessfulAttackEvent.h"
@@ -23,28 +25,24 @@ void AttackAttemptSystem::listenToEvents() {
     eventBus->listenToEvent<AttemptedAttackEvent>(this, &AttackAttemptSystem::onAttackAttempt);
 }
 
-void AttackAttemptSystem::onAttackAttempt(AttemptedAttackEvent& event) {
-    const auto& attackerSurface = ecsManager->getComponentFromEntity<TextComponent>(event.attacker).getSurfaceSize();
-    const auto& attackerPosition = ecsManager->getComponentFromEntity<PositionComponent>(event.attacker).getPosition();
+void AttackAttemptSystem::onAttackAttempt(AttemptedAttackEvent &event) {
+    const auto &attackerSurface = ecsManager->getComponentFromEntity<TextComponent>(event.attacker).getSurfaceSize();
+    const auto &attackerPosition = ecsManager->getComponentFromEntity<PositionComponent>(event.attacker).getPosition();
 
-    for (auto entity: getRelevantEntities()){
-        if (entity == event.attacker){
+    for (auto entity: getRelevantEntities()) {
+        if (entity == event.attacker) {
             return;
         }
-        const auto& surface = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
-        const auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
+        const auto &surface = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
+        const auto &position = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
 
-        if (ecsManager->hasComponent<TiedChildComponent>(event.attacker)){
-            for (auto childEntity: ecsManager->getComponentFromEntity<TiedChildComponent>(event.attacker).entities){
-                if (ecsManager->hasComponent<AxeComponent>(childEntity)){
-
-                    if (DistanceCalculator::isInAllowedRange(attackerPosition, position, attackerSurface, surface, ATTACK_RANGE)){
-                        eventBus->emitEvent<SuccessfulAttackEvent>(event.attacker, entity, AttackType::BASIC);
-                        return;
-                    }
-                }
+        if (ecsManager->hasComponent<ActiveWeaponComponent>(event.attacker)) {
+            if (DistanceCalculator::isInAllowedRange(attackerPosition, position, attackerSurface, surface,
+                                                     ATTACK_RANGE)) {
+                Item attackingItem = ecsManager->getComponentFromEntity<ActiveWeaponComponent>(event.attacker).item;
+                eventBus->emitEvent<SuccessfulAttackEvent>(event.attacker, entity, Attacking::getAttackTypeFromItem(attackingItem));
+                return;
             }
-
         }
 
     }

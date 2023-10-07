@@ -15,6 +15,7 @@
 #include "CreateItemAtEntityEvent.h"
 #include "../Lettering/Letter.h"
 #include "../Lettering/LetterComponent.h"
+#include "../Attacking/ActiveWeaponComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -56,6 +57,10 @@ void ItemCreationSystem::createAxe(){
     ecsManager->addComponentToEntity<AxeComponent>(axe);
     ecsManager->addComponentToEntity<ItemComponent>(axe, Item::AXE);
     ecsManager->addComponentToEntity<LiveComponent>(axe);
+
+    if (!ecsManager->hasComponent<ActiveWeaponComponent>(mainPlayer)){
+        ecsManager->addComponentToEntity<ActiveWeaponComponent>(mainPlayer, axe, Item::AXE);
+    }
 }
 
 void ItemCreationSystem::createWoodPile(Position position) {
