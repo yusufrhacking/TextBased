@@ -24,6 +24,7 @@
 #include "../Attacking/AttackAttemptSystem.h"
 #include "../Health/HealthSystem.h"
 #include "../Health/PendingDeathSystem.h"
+#include "../Abyz/AbyzControlSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -62,6 +63,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AttackAttemptSystem>();
     ecsManager->addSystem<HealthSystem>();
     ecsManager->addSystem<PendingDeathSystem>();
+    ecsManager->addSystem<AbyzControlSystem>();
 }
 
 void GameManager::update(double deltaTime) {
