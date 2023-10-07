@@ -74,6 +74,8 @@ void FirstLevel::createAbyz() {
     ecsManager->addComponentToEntity<OnDeathComponent>(abyz1, [this, abyz1]() {
         eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, abyz1);
     });
+    ecsManager->addComponentToEntity<CollisionComponent>(abyz1);
+
 }
 
 
