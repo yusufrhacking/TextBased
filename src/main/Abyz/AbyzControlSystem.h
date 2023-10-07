@@ -4,6 +4,7 @@
 
 #include "../ECSObjects/UpdateSystem.h"
 #include "AbyzComponent.h"
+#include "../PositionsAndMovement/PositionComponent.h"
 
 
 class AbyzControlSystem: public UpdateSystem {
@@ -13,6 +14,8 @@ public:
     void update(double deltaTime) override;
 
     void chase(AbyzComponent &abyz, const Position &playerPosition, const Position &currentPosition);
+
+    void tryToAttackPlayer(AbyzComponent &abyz, Entity abyzEntity, Entity mainPlayer);
 };
 
 

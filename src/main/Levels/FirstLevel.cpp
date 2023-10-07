@@ -37,6 +37,7 @@ void FirstLevel::createPlayer() {
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
     ecsManager->addComponentToEntity<LiveComponent>(witt);
+    ecsManager->addComponentToEntity<HealthComponent>(witt, 1);
 }
 
 void FirstLevel::createTree() {

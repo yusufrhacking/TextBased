@@ -25,6 +25,6 @@ void HealthSystem::onAttack(SuccessfulAttackEvent& event) {
         if (healthComponent.health <= 0){
             ecsManager->addComponentToEntity<PendingDeathComponent>(victim);
         }
-        spdlog::debug("Lowered entity {}'s health by {}", victim.getId(), damage);
+        spdlog::debug("Lowered entity {}'s health by {} to {}", victim.getId(), damage, healthComponent.health);
     }
 }

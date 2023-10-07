@@ -2,7 +2,8 @@
 #define TEXTBASED_ATTACKTYPE_H
 
 enum class AttackType{
-    BASIC
+    BASIC,
+    ABYZ_TO_PLAYER
 };
 
 
