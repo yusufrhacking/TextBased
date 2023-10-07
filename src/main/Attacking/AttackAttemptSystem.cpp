@@ -27,6 +27,9 @@ void AttackAttemptSystem::onAttackAttempt(AttemptedAttackEvent& event) {
 
 
     for (auto entity: getRelevantEntities()){
+        if (entity == event.attacker){
+            return;
+        }
         const auto& surface = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
         const auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
         if (DistanceCalculator::isInAllowedRange(attackerPosition, position, attackerSurface, surface, ATTACK_RANGE)){

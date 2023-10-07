@@ -3,7 +3,7 @@
 
 
 #include "../ECSObjects/UpdateSystem.h"
-
+#include "AbyzComponent.h"
 
 
 class AbyzControlSystem: public UpdateSystem {
@@ -11,6 +11,8 @@ class AbyzControlSystem: public UpdateSystem {
 public:
     AbyzControlSystem();
     void update(double deltaTime) override;
+
+    void updateChaseDirection(AbyzComponent &abyz, const Position &playerPosition, const Position &currentPosition);
 };
 
 
