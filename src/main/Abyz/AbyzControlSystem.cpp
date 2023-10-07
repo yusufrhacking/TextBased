@@ -37,9 +37,9 @@ void AbyzControlSystem::update(double deltaTime) {
         bool isInDetectionRange = DistanceCalculator::isInAllowedRange(playerPosition, position, playerSize, size, DETECTION_RADIUS);
         bool isInAttackRange = DistanceCalculator::isInAllowedRange(playerPosition, position, playerSize, size, ATTACK_RADIUS);
 
-        abyz.attackCooldown -= (float)deltaTime;
-        if (abyz.attackCooldown < 0) {
-            abyz.attackCooldown = 0;
+        abyz.attackCooldownRemaining -= (float)deltaTime;
+        if (abyz.attackCooldownRemaining < 0) {
+            abyz.attackCooldownRemaining = 0;
         }
 
         switch (abyz.state) {
@@ -63,7 +63,7 @@ void AbyzControlSystem::update(double deltaTime) {
                 break;
 
             case AbyzState::ATTACK:
-                if (!isInAttackRange || abyz.attackCooldown > 0) {
+                if (!isInAttackRange || abyz.attackCooldownRemaining > 0) {
                     chase(abyz, playerPosition, position);
                 } else {
                     tryToAttackPlayer(abyz, entity, mainPlayer);
@@ -71,7 +71,7 @@ void AbyzControlSystem::update(double deltaTime) {
                 break;
 
             case AbyzState::COOLDOWN:
-                if (abyz.attackCooldown < RESUME_CHASE_AFTER_ATTACK){
+                if (abyz.attackCooldownRemaining < RESUME_CHASE_AFTER_ATTACK){
                     abyz.state = AbyzState::IDLE;
                 }
                 break;
@@ -94,8 +94,8 @@ void AbyzControlSystem::chase(AbyzComponent& abyz, const Position& playerPositio
 }
 
 void AbyzControlSystem::tryToAttackPlayer(AbyzComponent& abyz, Entity abyzEntity, Entity mainPlayer) {
-    if (abyz.attackCooldown <= 0) {
-        abyz.attackCooldown = ATTACK_COOLDOWN;
+    if (abyz.attackCooldownRemaining <= 0) {
+        abyz.attackCooldownRemaining = ATTACK_COOLDOWN;
         abyz.state = AbyzState::COOLDOWN;
         eventBus->emitEvent<SuccessfulAttackEvent>(abyzEntity, mainPlayer, AttackType::ABYZ_TO_PLAYER);
     }

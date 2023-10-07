@@ -66,7 +66,7 @@ void ECSManager::killEntity(Entity entity) {
     if (!hasComponent<MainPlayerComponent>(entity)){
         entityManager->killEntity(entity);
     } else{
-        spdlog::debug("Main Player Should Have Died!");
+//        spdlog::debug("Main Player Should Have Died!");
     }
 }
 

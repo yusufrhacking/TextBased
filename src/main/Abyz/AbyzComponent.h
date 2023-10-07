@@ -12,7 +12,7 @@ struct AbyzComponent {
     float directionX{0.0f};
     float directionY{0.0f};
     float speed{25.0f};
-    float attackCooldown = 0;
+    float attackCooldownRemaining = 0;
     AbyzState state{AbyzState::IDLE};
 
     AbyzComponent() = default;
