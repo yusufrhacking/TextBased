@@ -12,7 +12,7 @@ public:
     AbyzControlSystem();
     void update(double deltaTime) override;
 
-    void updateChaseDirection(AbyzComponent &abyz, const Position &playerPosition, const Position &currentPosition);
+    void chase(AbyzComponent &abyz, const Position &playerPosition, const Position &currentPosition);
 };
 
 
