@@ -7,7 +7,7 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-const int DIRECTION_CHANGE_FREQUENCY = 5;
+const int DIRECTION_CHANGE_FREQUENCY = 1;
 
 
 AbyzControlSystem::AbyzControlSystem() {

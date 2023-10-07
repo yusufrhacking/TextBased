@@ -4,7 +4,7 @@
 struct AbyzComponent {
     float directionX{0.0f};
     float directionY{0.0f};
-    float speed{1.0f};
+    float speed{25.0f};
 
     AbyzComponent() = default;
 
