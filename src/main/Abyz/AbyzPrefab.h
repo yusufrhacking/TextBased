@@ -27,8 +27,10 @@ struct AbyzPrefab{
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
         ecsManager->addComponentToEntity<HealthComponent>(abyz, 5);
         ecsManager->addComponentToEntity<AttackableComponent>(abyz);
-        ecsManager->addComponentToEntity<OnDeathComponent>(abyz, [this]() {
-            eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, abyz);
+
+        int id = abyz.getId();
+        ecsManager->addComponentToEntity<OnDeathComponent>(abyz, [this, id]() {
+            eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, Entity{id});
         });
         ecsManager->addComponentToEntity<CollisionComponent>(abyz);
     }
