@@ -18,6 +18,7 @@
 #include "../Woodworking/TreeComponent.h"
 #include "../MainPlayer/MainPlayerComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../Prefabs/Tree.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -25,7 +26,7 @@ extern std::unique_ptr<EventBus> eventBus;
 
 FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
-    createTree();
+    Tree tree{startingPosition + Position(100, 200)};
     createPlayer();
     createLetter('a', startingPosition + Position(-100, 0));
     createLetter('x', startingPosition + Position(100, 0));
