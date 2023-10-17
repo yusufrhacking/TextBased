@@ -1,10 +1,10 @@
-#ifndef TEXTBASED_TREE_H
-#define TEXTBASED_TREE_H
+#ifndef TEXTBASED_TREEPREFAB_H
+#define TEXTBASED_TREEPREFAB_H
 #include <memory>
 #include "../HighLevel/ECSManager.h"
 #include "../Creation/Item.h"
 #include "../Creation/CreateItemAtPositionEvent.h"
-#include "../Woodworking/TreeComponent.h"
+#include "TreeComponent.h"
 #include "../Health/OnDeathComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
@@ -13,9 +13,9 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
-struct Tree{
+struct TreePrefab{
     Entity tree;
-    explicit Tree(Position position){
+    explicit TreePrefab(Position position){
         tree = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
         Position treePosition = position;
@@ -30,4 +30,4 @@ struct Tree{
     }
 };
 
-#endif //TEXTBASED_TREE_H
+#endif //TEXTBASED_TREEPREFAB_H

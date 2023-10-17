@@ -18,7 +18,8 @@
 #include "../Woodworking/TreeComponent.h"
 #include "../MainPlayer/MainPlayerComponent.h"
 #include "../HighLevel/ECSManager.h"
-#include "../Prefabs/Tree.h"
+#include "../Woodworking/TreePrefab.h"
+#include "../Abyz/AbyzPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -26,12 +27,12 @@ extern std::unique_ptr<EventBus> eventBus;
 
 FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
-    Tree tree{startingPosition + Position(100, 200)};
+    TreePrefab tree{startingPosition + Position(100, 200)};
     createPlayer();
     createLetter('a', startingPosition + Position(-100, 0));
     createLetter('x', startingPosition + Position(100, 0));
     createLetter('e', startingPosition + Position(0, -100));
-    createAbyz();
+    AbyzPrefab abyz{startingPosition + Position(400, -150)};
 }
 
 void FullBasicLevel::createPlayer() {
