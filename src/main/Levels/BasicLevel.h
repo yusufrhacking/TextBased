@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_FIRSTLEVEL_H
-#define TEXTBASED_FIRSTLEVEL_H
+#ifndef TEXTBASED_BASICLEVEL_H
+#define TEXTBASED_BASICLEVEL_H
 #include "../HighLevel/ECSManager.h"
 #include <memory>
 #include "../Woodworking/TreeComponent.h"
@@ -7,9 +7,9 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-class FirstLevel {
+class BasicLevel {
 public:
-    FirstLevel(Position startingPosition);
+    BasicLevel(Position startingPosition);
 
 private:
     Position startingPosition;
@@ -24,4 +24,4 @@ private:
 };
 
 
-#endif //TEXTBASED_FIRSTLEVEL_H
+#endif //TEXTBASED_BASICLEVEL_H

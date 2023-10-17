@@ -1,4 +1,4 @@
-#include "FirstLevel.h"
+#include "BasicLevel.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
@@ -19,7 +19,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 
-FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosition) {
+BasicLevel::BasicLevel(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createTree();
     createPlayer();
@@ -29,7 +29,7 @@ FirstLevel::FirstLevel(Position startingPosition): startingPosition(startingPosi
     createAbyz();
 }
 
-void FirstLevel::createPlayer() {
+void BasicLevel::createPlayer() {
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
@@ -40,7 +40,7 @@ void FirstLevel::createPlayer() {
     ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
 }
 
-void FirstLevel::createTree() {
+void BasicLevel::createTree() {
     auto tree = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     Position treePosition = startingPosition + Position(100, 200);
@@ -54,7 +54,7 @@ void FirstLevel::createTree() {
     });
 }
 
-void FirstLevel::createLetter(char letter, Position position) {
+void BasicLevel::createLetter(char letter, Position position) {
     auto letterA = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(letterA, std::string(1, letter));
     ecsManager->addComponentToEntity<PositionComponent>(letterA, position);
@@ -63,7 +63,7 @@ void FirstLevel::createLetter(char letter, Position position) {
     ecsManager->addComponentToEntity<LetterComponent>(letterA, char_to_enum(letter));
 }
 
-void FirstLevel::createAbyz() {
+void BasicLevel::createAbyz() {
     auto abyz1 = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(abyz1, "Abyz");
     ecsManager->addComponentToEntity<PositionComponent>(abyz1, startingPosition + Position(400, -150));

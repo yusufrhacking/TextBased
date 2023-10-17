@@ -1,7 +1,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #include "GameManager.h"
-#include "../Levels/FirstLevel.h"
+#include "../Levels/BasicLevel.h"
 #include "../PositionsAndMovement/AutonomousMovementSystem.h"
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../TextCommands/TextCommandSystem.h"
@@ -25,6 +25,7 @@
 #include "../Health/HealthSystem.h"
 #include "../Health/PendingDeathSystem.h"
 #include "../Abyz/AbyzControlSystem.h"
+#include "../Levels/FullBasicLevel.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -33,7 +34,7 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    FirstLevel level1{startingPosition + Window::getMiddlePosition()};
+    FullBasicLevel level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {
