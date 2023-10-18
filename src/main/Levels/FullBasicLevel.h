@@ -13,12 +13,6 @@ private:
     Position startingPosition;
     void createPlayer();
     Entity witt;
-
-    void createTree();
-
-    void createLetter(char letter, Position position);
-
-    void createAbyz();
 };
 
 

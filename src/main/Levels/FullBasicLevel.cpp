@@ -21,6 +21,7 @@
 #include "../Woodworking/TreePrefab.h"
 #include "../Abyz/AbyzPrefab.h"
 #include "../Lettering/LetterPrefab.h"
+#include "../Woodworking/ForestPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -29,6 +30,7 @@ extern std::unique_ptr<EventBus> eventBus;
 FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
+    ForestPrefab forest{Window::deriveRelativeTopLeft(startingPosition), 2, 2};
     TreePrefab tree{startingPosition + Position(100, 200)};
     AbyzPrefab abyz{startingPosition + Position(400, -150)};
     LetterPrefab a{'a', startingPosition + Position(-100, 0)};
@@ -47,13 +49,5 @@ void FullBasicLevel::createPlayer() {
     ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
 }
 
-void FullBasicLevel::createLetter(char letter, Position position) {
-    auto letterA = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(letterA, std::string(1, letter));
-    ecsManager->addComponentToEntity<PositionComponent>(letterA, position);
-    ecsManager->addComponentToEntity<StyleComponent>(letterA, Type::PLAIN_LETTER);
-    ecsManager->addComponentToEntity<LiveComponent>(letterA);
-    ecsManager->addComponentToEntity<LetterComponent>(letterA, char_to_enum(letter));
-}
 
 
