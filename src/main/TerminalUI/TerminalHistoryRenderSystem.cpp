@@ -35,7 +35,7 @@ void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Re
     auto startingPosition = startingTerminalPosition + Position((float)0, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount) * -1);
 
     startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, StyleComponent(type));
-    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, StyleComponent(type));
+//    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, StyleComponent(type));
 
     if (isLowestLine(lineCount) && type == Type::ENGINEER_TERMINAL_TEXT){
         renderTypedLine(renderer, startingPosition, authoredCommand.command.getFullCommandText(), type);

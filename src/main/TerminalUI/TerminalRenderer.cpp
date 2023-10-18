@@ -2,8 +2,9 @@
 
 Position TerminalRenderer::renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
                                         const std::string& authorStr, StyleComponent style) {
-    renderer->renderFixedText(startingPosition, TextComponent(authorStr), StyleComponent(style));
-    return startingPosition + Position(authorStr.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER + 10, 0);
+    auto finalStr = authorStr + " >";
+    renderer->renderFixedText(startingPosition, TextComponent(finalStr), StyleComponent(style));
+    return startingPosition + Position(finalStr.size() * TERMINAL_MONACO_TEXT_WIDTH_SCALER + 10, 0);
 }
 
 Position TerminalRenderer::renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition, StyleComponent style) {
