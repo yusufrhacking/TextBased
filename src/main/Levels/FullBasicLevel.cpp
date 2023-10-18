@@ -30,7 +30,7 @@ extern std::unique_ptr<EventBus> eventBus;
 FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
-    ForestPrefab forest{Window::deriveRelativeTopLeft(startingPosition), 2, 2};
+    ForestPrefab forest{Window::deriveRelativeTopLeft(startingPosition), 2, 5};
     TreePrefab tree{startingPosition + Position(100, 200)};
     AbyzPrefab abyz{startingPosition + Position(400, -150)};
     LetterPrefab a{'a', startingPosition + Position(-100, 0)};

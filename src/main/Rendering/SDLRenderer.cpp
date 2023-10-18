@@ -54,6 +54,19 @@ void SDLRenderer::renderDynamicText(Camera camera, Position position, const Text
 }
 
 void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite, const StyleComponent& style){
+    auto textWidth = sprite.getSurfaceSize().width;
+    auto textHeight = sprite.getSurfaceSize().height;
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+    SDL_Rect backgroundRect;
+    backgroundRect.x = (int)position.xPos;
+    backgroundRect.y = (int)position.yPos;
+    backgroundRect.w = (int)textWidth;
+    backgroundRect.h = (int)textHeight;
+    SDL_RenderFillRect(renderer, &backgroundRect);
+
+
     FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
 }
 
