@@ -7,7 +7,6 @@
 class TextCommandEvent : public Event {
 public:
     TextCommandEvent(std::string command, std::string subject): command(command), subject(subject) {}
-
     std::string command, subject;
 };
 

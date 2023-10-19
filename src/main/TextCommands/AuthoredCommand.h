@@ -29,7 +29,7 @@ namespace AuthorCommands{
 struct AuthoredCommand{
     Author author;
     Command command;
-    AuthoredCommand(Author author, Command command): author(author), command(command){}
+    AuthoredCommand(Author author, Command command): author(author), command(std::move(command)){}
 };
 
 #endif
