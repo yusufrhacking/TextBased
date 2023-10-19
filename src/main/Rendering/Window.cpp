@@ -70,10 +70,12 @@ Position Window::deriveRelativeTopLeft(Position position){
 
 void Window::initializeWindowSize() {
     if (windowWidth == 0 || windowHeight == 0) {
-        SDL_DisplayMode displayMode;
-        SDL_GetCurrentDisplayMode(0, &displayMode);
-        windowWidth = displayMode.w;
-        windowHeight = displayMode.h;
+//        SDL_DisplayMode displayMode;
+//        SDL_GetCurrentDisplayMode(0, &displayMode);
+//        windowWidth = displayMode.w;
+//        windowHeight = displayMode.h;
+        windowWidth = 1470;
+        windowHeight = 956;
         Page::pageWidth = windowWidth;
         Page::pageHeight = windowHeight;
     }
