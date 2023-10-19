@@ -10,6 +10,7 @@
 #include "../Inventory/InventoryRenderSystem.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Inventory/InventoryComponent.h"
+#include "../PlayerDialogueSystem/PlayerSideTextSystem.h"
 #include "../Health/HealthBarRenderSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -34,6 +35,8 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
         auto healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(mainPlayer);
         ecsManager->getSystem<HealthBarRenderSystem>().render(renderer, healthComponent);
     }
+
+    ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -43,4 +46,5 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<InventoryRenderSystem>();
     ecsManager->addSystem<HealthBarRenderSystem>();
+    ecsManager->addSystem<PlayerSideTextSystem>();
 }
