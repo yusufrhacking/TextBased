@@ -25,7 +25,7 @@ void CommandLogSystem::listenToEvents() {
 }
 
 void CommandLogSystem::onCommand(TextCommandEvent &event) {
-    commands.emplace_back(Author::PLAYER, Command(event.command, event.subject));
+    commands.emplace_back(Author::PLAYER, event.command);
 }
 
 void CommandLogSystem::onEngineerText(EngineerTerminalEvent &event) {

@@ -24,8 +24,8 @@ void TextCommandSystem::listenToEvents() {
 }
 
 void TextCommandSystem::onCommand(TextCommandEvent &event) {
-    auto command = event.command;
-    auto subject = event.subject;
+    auto command = event.command.commandStr;
+    auto subject = event.command.subjectStr;
     if (command == "chop") {
         eventBus->emitEvent<ChopEvent>();
     } else if (command == "create") {
