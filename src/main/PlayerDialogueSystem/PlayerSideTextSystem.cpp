@@ -26,11 +26,9 @@ void PlayerSideTextSystem::onCommand(TextCommandEvent &event) {
 void PlayerSideTextSystem::render(const std::shared_ptr<Renderer>& renderer, Camera camera) {
     Entity player = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(player);
-    const auto styleComponent = ecsManager->getComponentFromEntity<StyleComponent>(player);
+    auto styleComponent = StyleComponent(Type::PLAYER_SIDE_TEXT);
     Position pos = Position(0, 25);
     renderer->renderDynamicText(camera, positionComponent.getPosition() + pos, textComponent, styleComponent);
-
-
 }
 
 

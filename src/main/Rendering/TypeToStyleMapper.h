@@ -14,7 +14,8 @@ enum class Type{
     LETTER_BANK_EMPTY_LETTER,
     LETTER_BANK_USED_LETTER,
     TINY_NUMBER_EMPTY,
-    TINY_NUMBER_USED
+    TINY_NUMBER_USED,
+    PLAYER_SIDE_TEXT
 };
 
 namespace Types {
@@ -31,6 +32,7 @@ namespace Types {
             case Type::LETTER_BANK_USED_LETTER: return Style::GREEN_LETTER_IN_BANK;
             case Type::TINY_NUMBER_EMPTY: return Style::TINY_WHITE_NUMBER;
             case Type::TINY_NUMBER_USED: return Style::TINY_GREEN_NUMBER;
+            case Type::PLAYER_SIDE_TEXT: return Style::TINY_GREEN_NUMBER;
             default: break;
         }
     }
