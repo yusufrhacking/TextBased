@@ -29,6 +29,7 @@ ChoppingSystem::ChoppingSystem() {
 
 void ChoppingSystem::listenToEvents() {
     eventBus->listenToEvent<ChopEvent>(this, &ChoppingSystem::onChop);
+    eventBus->listenToEvent<PunchEvent>(this, &ChoppingSystem::onPunch);
 }
 
 void ChoppingSystem::onChop(ChopEvent &event) {
@@ -36,9 +37,12 @@ void ChoppingSystem::onChop(ChopEvent &event) {
 
     if (hasAxe(mainPlayer)){
         chopWithAxe(getAxeEntity(mainPlayer));
-    } else{
-        chopWithPunch(mainPlayer);
     }
+}
+
+void ChoppingSystem::onPunch(PunchEvent &event) {
+    auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
+    chopWithPunch(mainPlayer);
 }
 
 
@@ -50,11 +54,10 @@ void ChoppingSystem::chopWithAxe(Entity axeEntity) {
     for(auto tree: getRelevantEntities()){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
-        auto& treeChopComponent = ecsManager->getComponentFromEntity<ChoppableComponent>(tree);
         if (DistanceCalculator::isInAllowedRange(
                 axePosition, treePosition, axeTextComponent.getSurfaceSize(),
                 treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
-            tryToChopTree(axeComponent.axeDamageToTree);
+            tryToChopTree(tree, axeComponent.axeDamageToTree);
             spdlog::debug("CHOPPED");
             break;
         }
@@ -62,7 +65,20 @@ void ChoppingSystem::chopWithAxe(Entity axeEntity) {
 }
 
 void ChoppingSystem::chopWithPunch(Entity mainPlayer) {
+    auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
+    auto mainPlayerTextComponent = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer);
 
+    for(auto tree: getRelevantEntities()){
+        auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
+        auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
+        if (DistanceCalculator::isInAllowedRange(
+                mainPlayerPosition, treePosition, mainPlayerTextComponent.getSurfaceSize(),
+                treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
+            tryToChopTree(tree, PUNCH_TREE_DAMAGE);
+            spdlog::debug("CHOPPED");
+            break;
+        }
+    }
 }
 
 Position ChoppingSystem::findTreeMiddle(Position treePosition) {
@@ -97,7 +113,6 @@ Entity ChoppingSystem::getAxeEntity(Entity mainPlayer) {
 }
 
 void ChoppingSystem::tryToChopTree(Entity tree, int damage) {
-    auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
     auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
     auto& treeChopComponent = ecsManager->getComponentFromEntity<ChoppableComponent>(tree);
 
