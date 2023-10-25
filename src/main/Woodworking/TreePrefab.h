@@ -10,6 +10,7 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "ChoppableComponent.h"
+#include "../Creation/CreateLetterAtPositionEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -26,7 +27,7 @@ struct TreePrefab{
         ecsManager->addComponentToEntity<TreeComponent>(tree);
         ecsManager->addComponentToEntity<LiveComponent>(tree);
         ecsManager->addComponentToEntity<OnDeathComponent>(tree, [this, treePosition]() {
-            eventBus->emitEvent<CreateItemAtPositionEvent>(Item::WOOD, TreeComponent::findTreeMiddle(treePosition));
+            eventBus->emitEvent<CreateLetterAtPositionEvent>(Letter::A, TreeComponent::findTreeMiddle(treePosition));
         });
         ecsManager->addComponentToEntity<ChoppableComponent>(tree, 3);
     }
