@@ -16,6 +16,7 @@ GrammarSystem::GrammarSystem() {
     commandKeywords.insert("pickup");
     commandKeywords.insert("free");
     commandKeywords.insert("attack");
+    commandKeywords.insert("punch");
 
     subjectKeywords.insert("axe");
     subjectKeywords.insert("wood");

@@ -41,5 +41,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
         eventBus->emitEvent<FreeWordEvent>(subject);
     } else if (command == "attack") {
         eventBus->emitEvent<AttemptedAttackEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
+    } else if (command == "punch") {
+        spdlog::debug("Punching!");
     }
 }
