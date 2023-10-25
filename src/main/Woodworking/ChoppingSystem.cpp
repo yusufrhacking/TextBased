@@ -39,43 +39,13 @@ void ChoppingSystem::onChop(ChopEvent &event) {
     } else{
         chopWithPunch(mainPlayer);
     }
-
-
-
-
-    Position axePosition;
-    TextComponent axeTextComponent;
-
-    try{
-        axePosition = getAxePosition(mainPlayer);
-        axeTextComponent = getAxeTextComponent(mainPlayer);
-    } catch (...){
-        return;
-    }
-
-    for(auto tree: getRelevantEntities()){
-        auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
-        auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
-        auto& treeChopComponent = ecsManager->getComponentFromEntity<ChoppableComponent>(tree);
-        if (DistanceCalculator::isInAllowedRange(
-                axePosition, treePosition, axeTextComponent.getSurfaceSize(),
-                treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
-            treeChopComponent.intermediateDamage = 0;
-            treeTextComponent.text = chopTreeText(treeTextComponent.text);
-            if (treeTextComponent.text.empty()){
-                ecsManager->addComponentToEntity<PendingDeathComponent>(tree);
-            }
-            spdlog::debug("CHOPPED");
-            break;
-        }
-    }
-    spdlog::debug("Chop received");
 }
 
 
 void ChoppingSystem::chopWithAxe(Entity axeEntity) {
     auto axePosition = ecsManager->getComponentFromEntity<PositionComponent>(axeEntity).getPosition();
     auto axeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(axeEntity);
+    auto axeComponent = ecsManager->getComponentFromEntity<AxeComponent>(axeEntity);
 
     for(auto tree: getRelevantEntities()){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
@@ -84,8 +54,11 @@ void ChoppingSystem::chopWithAxe(Entity axeEntity) {
         if (DistanceCalculator::isInAllowedRange(
                 axePosition, treePosition, axeTextComponent.getSurfaceSize(),
                 treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
-            treeChopComponent.intermediateDamage = 0;
-            treeTextComponent.text = chopTreeText(treeTextComponent.text);
+            treeChopComponent.intermediateDamage += axeComponent.axeDamageToTree;
+            if (treeChopComponent.isReadyToBreak()){
+                treeTextComponent.text = chopTreeText(treeTextComponent.text);
+                treeChopComponent.chop();
+            }
             if (treeTextComponent.text.empty()){
                 ecsManager->addComponentToEntity<PendingDeathComponent>(tree);
             }

@@ -18,6 +18,10 @@ struct ChoppableComponent{
         return intermediateDamage >= breakAt;
     }
 
+    void chop(){
+        intermediateDamage = 0;
+    }
+
 };
 
 #endif //TEXTBASED_CHOPPABLECOMPONENT_H
