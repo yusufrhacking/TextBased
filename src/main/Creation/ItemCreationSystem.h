@@ -6,6 +6,7 @@
 #include "../Inventory/StashPlayerItemEvent.h"
 #include "CreateItemAtEntityEvent.h"
 #include "../Lettering/Letter.h"
+#include "CreateLetterAtPositionEvent.h"
 
 
 class ItemCreationSystem: public System {
@@ -22,6 +23,8 @@ private:
     void onCreateItemAtEntity(CreateItemAtEntityEvent &);
 
     void createLetter(Letter letter, Position position);
+
+    void onCreateLetterAtPosition(CreateLetterAtPositionEvent &event);
 };
 
 

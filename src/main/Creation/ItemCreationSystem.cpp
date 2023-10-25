@@ -16,6 +16,7 @@
 #include "../Lettering/Letter.h"
 #include "../Lettering/LetterComponent.h"
 #include "../Attacking/ActiveWeaponComponent.h"
+#include "CreateLetterAtPositionEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -28,6 +29,7 @@ void ItemCreationSystem::listenToEvents(){
     eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &ItemCreationSystem::onCreateAtPosition);
     eventBus->listenToEvent<CreatePlayerItemEvent>(this, &ItemCreationSystem::onCreate);
     eventBus->listenToEvent<CreateItemAtEntityEvent>(this, &ItemCreationSystem::onCreateItemAtEntity);
+    eventBus->listenToEvent<CreateLetterAtPositionEvent>(this, &ItemCreationSystem::onCreateLetterAtPosition);
 }
 void ItemCreationSystem::onCreateAtPosition(CreateItemAtPositionEvent& event){
     switch (event.item){
@@ -90,5 +92,14 @@ void ItemCreationSystem::createLetter(Letter letter, Position position) {
     ecsManager->addComponentToEntity<StyleComponent>(letterA, Type::PLAIN_LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA, letter);
+}
+
+void ItemCreationSystem::onCreateLetterAtPosition(CreateLetterAtPositionEvent &event) {
+    auto letterEntity = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(letterEntity, std::string(1, enum_to_char(event.letter)));
+    ecsManager->addComponentToEntity<PositionComponent>(letterEntity, event.position);
+    ecsManager->addComponentToEntity<StyleComponent>(letterEntity, Type::PLAIN_LETTER);
+    ecsManager->addComponentToEntity<LiveComponent>(letterEntity);
+    ecsManager->addComponentToEntity<LetterComponent>(letterEntity, event.letter);
 }
 
