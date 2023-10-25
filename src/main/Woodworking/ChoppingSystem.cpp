@@ -68,6 +68,10 @@ void ChoppingSystem::chopWithAxe(Entity axeEntity) {
     }
 }
 
+void ChoppingSystem::chopWithPunch(Entity mainPlayer) {
+
+}
+
 Position ChoppingSystem::findTreeMiddle(Position treePosition) {
     auto surface = TextComponent::getSurfaceSize(TextGenerator::getTreeText());
     auto xSize = surface.width/2;
