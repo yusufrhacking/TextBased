@@ -26,6 +26,7 @@
 #include "../Health/PendingDeathSystem.h"
 #include "../Abyz/AbyzControlSystem.h"
 #include "../Levels/FullBasicLevel.h"
+#include "../Levels/IntroPac.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -34,7 +35,7 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    FullBasicLevel level1{startingPosition + Window::getMiddlePosition()};
+    IntroPac level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {
