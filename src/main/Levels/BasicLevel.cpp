@@ -14,6 +14,7 @@
 #include "../Attacking/AttackableComponent.h"
 #include "../Health/OnDeathComponent.h"
 #include "../Creation/ItemCreationSystem.h"
+#include "../Woodworking/ChoppableComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -52,6 +53,7 @@ void BasicLevel::createTree() {
     ecsManager->addComponentToEntity<OnDeathComponent>(tree, [this, treePosition]() {
         eventBus->emitEvent<CreateItemAtPositionEvent>(Item::WOOD, TreeComponent::findTreeMiddle(treePosition));
     });
+    ecsManager->addComponentToEntity<ChoppableComponent>(tree);
 }
 
 void BasicLevel::createLetter(char letter, Position position) {

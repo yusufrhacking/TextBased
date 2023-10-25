@@ -1,6 +1,7 @@
 #include <spdlog/spdlog.h>
 #include <stdexcept>
 #include "AxeComponent.h"
+#include "ChoppableComponent.h"
 #include "ChoppingSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "ChopEvent.h"
@@ -12,6 +13,7 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Health/PendingDeathComponent.h"
+#include "../Attacking/ActiveWeaponComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -21,6 +23,7 @@ ChoppingSystem::ChoppingSystem() {
     requireComponent<PositionComponent>();
     requireComponent<LiveComponent>();
     requireComponent<TreeComponent>();
+    requireComponent<ChoppableComponent>();
     listenToEvents();
 }
 
@@ -30,6 +33,15 @@ void ChoppingSystem::listenToEvents() {
 
 void ChoppingSystem::onChop(ChopEvent &event) {
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
+
+    if (hasAxe(mainPlayer)){
+        chopWithAxe(getAxeEntity(mainPlayer));
+    } else{
+        chopWithPunch(mainPlayer);
+    }
+
+
+
 
     Position axePosition;
     TextComponent axeTextComponent;
@@ -44,15 +56,14 @@ void ChoppingSystem::onChop(ChopEvent &event) {
     for(auto tree: getRelevantEntities()){
         auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
         auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
+        auto& treeChopComponent = ecsManager->getComponentFromEntity<ChoppableComponent>(tree);
         if (DistanceCalculator::isInAllowedRange(
                 axePosition, treePosition, axeTextComponent.getSurfaceSize(),
                 treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
+            treeChopComponent.intermediateDamage = 0;
             treeTextComponent.text = chopTreeText(treeTextComponent.text);
             if (treeTextComponent.text.empty()){
                 ecsManager->addComponentToEntity<PendingDeathComponent>(tree);
-//                eventBus->emitEvent<CreateItemAtPositionEvent>(
-//                        CreateItemAtPositionEvent(Item::WOOD, findTreeMiddle(treePosition)));
-//                ecsManager->killEntity(tree);
             }
             spdlog::debug("CHOPPED");
             break;
@@ -61,25 +72,27 @@ void ChoppingSystem::onChop(ChopEvent &event) {
     spdlog::debug("Chop received");
 }
 
-Position ChoppingSystem::getAxePosition(Entity mainPlayer) {
-    const auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
-    for (auto child: children){
-        if(ecsManager->hasComponent<AxeComponent>(child)){
-            return ecsManager->getComponentFromEntity<PositionComponent>(child).getPosition();
+
+void ChoppingSystem::chopWithAxe(Entity axeEntity) {
+    auto axePosition = ecsManager->getComponentFromEntity<PositionComponent>(axeEntity).getPosition();
+    auto axeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(axeEntity);
+
+    for(auto tree: getRelevantEntities()){
+        auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
+        auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
+        auto& treeChopComponent = ecsManager->getComponentFromEntity<ChoppableComponent>(tree);
+        if (DistanceCalculator::isInAllowedRange(
+                axePosition, treePosition, axeTextComponent.getSurfaceSize(),
+                treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
+            treeChopComponent.intermediateDamage = 0;
+            treeTextComponent.text = chopTreeText(treeTextComponent.text);
+            if (treeTextComponent.text.empty()){
+                ecsManager->addComponentToEntity<PendingDeathComponent>(tree);
+            }
+            spdlog::debug("CHOPPED");
+            break;
         }
     }
-    throw std::runtime_error("No Axe Found");
-}
-
-
-TextComponent ChoppingSystem::getAxeTextComponent(Entity mainPlayer) {
-    const auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
-    for (auto child: children){
-        if(ecsManager->hasComponent<AxeComponent>(child)){
-            return ecsManager->getComponentFromEntity<TextComponent>(child);
-        }
-    }
-    throw std::runtime_error("No Axe Found");
 }
 
 Position ChoppingSystem::findTreeMiddle(Position treePosition) {
@@ -97,4 +110,20 @@ std::string ChoppingSystem::chopTreeText(const std::string& treeText) {
     }
     return treeText.substr(0, lastNewlinePos);
 }
+
+bool ChoppingSystem::hasAxe(Entity mainPlayer) {
+    if (ecsManager->hasComponent<ActiveWeaponComponent>(mainPlayer)){
+        auto weaponEntity = ecsManager->getComponentFromEntity<ActiveWeaponComponent>(mainPlayer).entity;
+        return (ecsManager->hasComponent<AxeComponent>(weaponEntity));
+    }
+    return false;
+}
+
+Entity ChoppingSystem::getAxeEntity(Entity mainPlayer) {
+    if (ecsManager->hasComponent<ActiveWeaponComponent>(mainPlayer)){
+        return ecsManager->getComponentFromEntity<ActiveWeaponComponent>(mainPlayer).entity;
+    }
+    throw std::runtime_error("NO AXE");
+}
+
 

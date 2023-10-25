@@ -11,13 +11,20 @@ private:
     void listenToEvents();
     void onChop(ChopEvent& event);
 
-    Position getAxePosition(Entity mainPlayer);
+    void chopWithAxe(Entity axeEntity);
+
+    void chopWithPunch(Entity mainPlayer);
 
     std::string chopTreeText(const std::string& treeText);
 
     Position findTreeMiddle(Position treePosition);
 
     TextComponent getAxeTextComponent(Entity mainPlayer);
+
+    bool hasAxe(Entity mainPlayer);
+
+
+    Entity getAxeEntity(Entity mainPlayer);
 };
 
 
