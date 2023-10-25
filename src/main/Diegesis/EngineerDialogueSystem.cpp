@@ -4,6 +4,7 @@
 #include "../HighLevel/ECSManager.h"
 #include "../TerminalUI/TerminalHistoryRenderSystem.h"
 #include "../TerminalUI/LiveTerminalRenderSystem.h"
+#include "EngineerSpeakEvent.h"
 #include <memory>
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -15,11 +16,16 @@ EngineerDialogueSystem::EngineerDialogueSystem() {
 }
 
 void EngineerDialogueSystem::listenToEvents() {
+    eventBus->listenToEvent<EngineerSpeakEvent>(this, &EngineerDialogueSystem::onSpeak);
     eventBus->listenToEvent<CharacterDepositEvent>(this, &EngineerDialogueSystem::onLetter);
     eventBus->listenToEvent<CreatePlayerItemEvent>(this, &EngineerDialogueSystem::onCreateAxe);
     eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &EngineerDialogueSystem::onWoodSpawn);
     eventBus->listenToEvent<PlayerPickUpEvent>(this, &EngineerDialogueSystem::onPickup);
     eventBus->listenToEvent<PlaceEvent>(this, &EngineerDialogueSystem::onPlace);
+}
+
+void EngineerDialogueSystem::onSpeak(EngineerSpeakEvent &event) {
+    lines.emplace_back(event.text);
 }
 
 void EngineerDialogueSystem::onLetter(CharacterDepositEvent &event) {
@@ -53,3 +59,4 @@ void EngineerDialogueSystem::update(double deltaTime) {
     }
     lines.clear();
 }
+

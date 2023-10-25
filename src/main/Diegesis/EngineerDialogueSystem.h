@@ -10,6 +10,7 @@
 #include "../Inventory/StashPlayerItemEvent.h"
 #include "../Inventory/PlaceEvent.h"
 #include "../ECSObjects/UpdateSystem.h"
+#include "EngineerSpeakEvent.h"
 
 class EngineerDialogueSystem: public UpdateSystem {
 public:
@@ -27,6 +28,8 @@ private:
     void onPickup(PlayerPickUpEvent & event);
 
     void onPlace(PlaceEvent & event);
+
+    void onSpeak(EngineerSpeakEvent &event);
 };
 
 
