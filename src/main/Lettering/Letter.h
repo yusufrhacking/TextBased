@@ -9,7 +9,7 @@ enum class Letter {
 
 inline char enum_to_char(Letter character_enum) {
     if(character_enum < Letter::ALPHABET_SIZE) {
-        return 'A' + static_cast<int>(character_enum);
+        return 'a' + static_cast<int>(character_enum);
     } else {
         return '\0';
     }
