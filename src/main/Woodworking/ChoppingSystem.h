@@ -25,6 +25,8 @@ private:
 
 
     Entity getAxeEntity(Entity mainPlayer);
+
+    void tryToChopTree(Entity tree, int damage);
 };
 
 

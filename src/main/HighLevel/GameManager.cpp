@@ -35,7 +35,7 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    BasicLevel level1{startingPosition + Window::getMiddlePosition()};
+    IntroPac level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {

@@ -54,14 +54,7 @@ void ChoppingSystem::chopWithAxe(Entity axeEntity) {
         if (DistanceCalculator::isInAllowedRange(
                 axePosition, treePosition, axeTextComponent.getSurfaceSize(),
                 treeTextComponent.getSurfaceSize(), CHOPPING_RANGE)){
-            treeChopComponent.intermediateDamage += axeComponent.axeDamageToTree;
-            if (treeChopComponent.isReadyToBreak()){
-                treeTextComponent.text = chopTreeText(treeTextComponent.text);
-                treeChopComponent.chop();
-            }
-            if (treeTextComponent.text.empty()){
-                ecsManager->addComponentToEntity<PendingDeathComponent>(tree);
-            }
+            tryToChopTree(axeComponent.axeDamageToTree);
             spdlog::debug("CHOPPED");
             break;
         }
@@ -101,6 +94,21 @@ Entity ChoppingSystem::getAxeEntity(Entity mainPlayer) {
         return ecsManager->getComponentFromEntity<ActiveWeaponComponent>(mainPlayer).entity;
     }
     throw std::runtime_error("NO AXE");
+}
+
+void ChoppingSystem::tryToChopTree(Entity tree, int damage) {
+    auto treePosition = ecsManager->getComponentFromEntity<PositionComponent>(tree).getPosition();
+    auto& treeTextComponent = ecsManager->getComponentFromEntity<TextComponent>(tree);
+    auto& treeChopComponent = ecsManager->getComponentFromEntity<ChoppableComponent>(tree);
+
+    treeChopComponent.intermediateDamage += damage;
+    if (treeChopComponent.isReadyToBreak()){
+        treeTextComponent.text = chopTreeText(treeTextComponent.text);
+        treeChopComponent.chop();
+    }
+    if (treeTextComponent.text.empty()){
+        ecsManager->addComponentToEntity<PendingDeathComponent>(tree);
+    }
 }
 
 
