@@ -3,8 +3,14 @@
 
 struct ChoppableComponent{
     int intermediateDamage;
-    static const int breakAt = 3;
-    ChoppableComponent() {
+    int breakAt;
+
+    ChoppableComponent(){
+        intermediateDamage = 0;
+        breakAt = 1;
+    }
+
+    explicit ChoppableComponent(int breakAt): breakAt(breakAt) {
         intermediateDamage = 0;
     }
 

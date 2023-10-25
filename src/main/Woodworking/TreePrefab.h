@@ -28,7 +28,7 @@ struct TreePrefab{
         ecsManager->addComponentToEntity<OnDeathComponent>(tree, [this, treePosition]() {
             eventBus->emitEvent<CreateItemAtPositionEvent>(Item::WOOD, TreeComponent::findTreeMiddle(treePosition));
         });
-        ecsManager->addComponentToEntity<ChoppableComponent>(tree);
+        ecsManager->addComponentToEntity<ChoppableComponent>(tree, 3);
     }
 };
 
