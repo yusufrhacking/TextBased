@@ -14,7 +14,10 @@ extern std::unique_ptr<EventBus> eventBus;
 IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
-    TreePrefab tree{startingPosition + Position(100, -80)};
+    Position treePosition{startingPosition + Position(100, -80)};
+    TreePrefab tree{treePosition, [this, treePosition]() {
+        eventBus->emitEvent<CreateLetterAtPositionEvent>(Letter::C, TreeComponent::findTreeMiddle(treePosition));
+    }};
     eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
 }
 

@@ -15,6 +15,8 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
+using OnDeathFunction = std::function<void(void)>;
+
 struct TreePrefab{
     Entity tree;
     explicit TreePrefab(Position position){
@@ -31,6 +33,20 @@ struct TreePrefab{
         });
         ecsManager->addComponentToEntity<ChoppableComponent>(tree, 3);
     }
+
+    TreePrefab(Position position, const OnDeathFunction& onDeathFn) {
+        tree = ecsManager->createEntity();
+        ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
+        Position treePosition = position;
+        ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
+        ecsManager->addComponentToEntity<StyleComponent>(tree);
+        ecsManager->addComponentToEntity<CollisionComponent>(tree);
+        ecsManager->addComponentToEntity<TreeComponent>(tree);
+        ecsManager->addComponentToEntity<LiveComponent>(tree);
+        ecsManager->addComponentToEntity<OnDeathComponent>(tree, onDeathFn);
+        ecsManager->addComponentToEntity<ChoppableComponent>(tree, 3);
+    }
+
 };
 
 #endif //TEXTBASED_TREEPREFAB_H
