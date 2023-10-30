@@ -23,10 +23,11 @@ struct TextComponent {
 
 
     static Size getSurfaceSize(const std::string& text){
-        return {static_cast<RenderedVal>(getTextWidth(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight(text)};
+        return {static_cast<RenderedVal>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
+                                                                                                         getTextHeightInChars(text)};
     }
 
-    static int getTextHeight(const std::string& text) {
+    static int getTextHeightInChars(const std::string& text) {
         int height = 0;
         std::istringstream textStream(text);
         std::string token;
@@ -36,7 +37,7 @@ struct TextComponent {
         return height;
     }
 
-    static unsigned int getTextWidth(const std::string& text) {
+    static unsigned int getTextWidthInChars(const std::string& text) {
         unsigned int longestWidth = 0;
         std::istringstream textStream(text);
         std::string token;

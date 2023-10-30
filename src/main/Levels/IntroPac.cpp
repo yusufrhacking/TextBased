@@ -15,8 +15,17 @@ IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition
     witt = ecsManager->createEntity();
     createPlayer();
     Position treePosition{startingPosition + Position(100, -80)};
-    TreePrefab tree{treePosition, [this, treePosition]() {
-        eventBus->emitEvent<CreateLetterAtPositionEvent>(Letter::C, TreeComponent::findTreeMiddle(treePosition));
+//    int treeWidth = (int)TextComponent::getSurfaceSize(TextGenerator::getTreeText()).width;
+//    TreePrefab tree1{treePosition, [this, treePosition]() {
+//        eventBus->emitEvent<CreateLetterAtPositionEvent>(Letter::E, TreeComponent::findTreeMiddle(treePosition));
+//    }};
+//    treePosition = startingPosition + Position(-(treeWidth/2) + 15, -225);
+//    TreePrefab tree2{treePosition, [this, treePosition]() {
+//        eventBus->emitEvent<CreateLetterAtPositionEvent>(Letter::X, TreeComponent::findTreeMiddle(treePosition));
+//    }};
+    treePosition = startingPosition + Position(-250, -80);
+    TreePrefab tree3{treePosition, [this, treePosition]() {
+        eventBus->emitEvent<CreateLetterAtPositionEvent>(Letter::A, TreeComponent::findTreeMiddle(treePosition));
     }};
     eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
 }

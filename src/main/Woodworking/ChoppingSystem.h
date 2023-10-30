@@ -9,7 +9,7 @@ public:
     ChoppingSystem();
 private:
     const int PUNCH_TREE_DAMAGE = 1;
-    const float CHOPPING_RANGE = 5;
+    const float CHOPPING_RANGE = 10;
     void listenToEvents();
     void onChop(ChopEvent& event);
     void onPunch(PunchEvent& event);

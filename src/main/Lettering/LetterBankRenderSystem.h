@@ -15,7 +15,7 @@ private:
                                  "$                                    $\n"
                                  "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$";
     Position letterBoxPosition = Window::getTopRightPosition() -
-            Position(TextComponent::getTextWidth(letterBankText)*MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+            Position(TextComponent::getTextWidthInChars(letterBankText) * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
     float LETTER_X_OFFSET = 40;
     float LETTER_Y_OFFSET = 25;
 public:
