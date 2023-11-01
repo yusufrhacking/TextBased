@@ -12,6 +12,10 @@ private:
     Position startingPosition;
 
     void createPlayer();
+
+    void createTrees(Position position);
+
+    void createWalls();
 };
 
 
