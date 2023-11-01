@@ -8,6 +8,7 @@
 #include "../Woodworking/TreePrefab.h"
 #include "../Diegesis/EngineerSpeakEvent.h"
 #include "../Maze/WallPrefab.h"
+#include "../Maze/WallRowPrefab.h"
 #include <memory>
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -49,5 +50,5 @@ void IntroPac::createTrees(Position position) {
 }
 
 void IntroPac::createWalls() {
-    WallPrefab wall{startingPosition + Position(300, 150)};
+    WallRowPrefab wall{startingPosition + Position(300, 150), 5};
 }
