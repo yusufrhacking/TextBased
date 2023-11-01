@@ -36,4 +36,14 @@ std::string TextGenerator::getXOffCenterOffset(int diff, std::string centerOffse
     return newOffset;
 }
 
+std::string TextGenerator::getVerticalWallText() {
+    std::string verticalWallText = "w\na\nl\nl";
+    return verticalWallText;
+}
+
+std::string TextGenerator::getHorizontalWallText() {
+    std::string horizontalWallText = "wall";
+    return horizontalWallText;
+}
+
 

@@ -13,9 +13,6 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
-std::string horizontalWallText = "wall";
-std::string verticalWallText = "w\na\nl\nl";
-
 using OnDeathFunction = std::function<void(void)>;
 
 struct WallPrefab {
@@ -23,7 +20,7 @@ struct WallPrefab {
 
     explicit WallPrefab(Position position) {
         wall = ecsManager->createEntity();
-        ecsManager->addComponentToEntity<TextComponent>(wall, horizontalWallText);
+        ecsManager->addComponentToEntity<TextComponent>(wall, TextGenerator::getHorizontalWallText());
         ecsManager->addComponentToEntity<PositionComponent>(wall, position);
         ecsManager->addComponentToEntity<StyleComponent>(wall);
         ecsManager->addComponentToEntity<CollisionComponent>(wall);
