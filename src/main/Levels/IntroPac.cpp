@@ -17,8 +17,8 @@ extern std::unique_ptr<EventBus> eventBus;
 IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
-    createTrees(startingPosition);
-    eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
+//    createTrees(startingPosition);
+//    eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
     createWalls();
 }
 

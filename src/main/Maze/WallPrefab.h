@@ -11,9 +11,6 @@
 #include "../Creation/CreateLetterAtPositionEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
-extern std::unique_ptr<EventBus> eventBus;
-
-using OnDeathFunction = std::function<void(void)>;
 
 struct WallPrefab {
     Entity wall;
