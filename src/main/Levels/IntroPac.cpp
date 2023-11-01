@@ -7,7 +7,9 @@
 #include "../Health/HealthComponent.h"
 #include "../Woodworking/TreePrefab.h"
 #include "../Diegesis/EngineerSpeakEvent.h"
+#include "../Maze/WallPrefab.h"
 #include <memory>
+
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -47,10 +49,5 @@ void IntroPac::createTrees(Position position) {
 }
 
 void IntroPac::createWalls() {
-    auto wall = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(wall, "wall");
-    ecsManager->addComponentToEntity<PositionComponent>(wall, startingPosition + Position(300, 150));
-    ecsManager->addComponentToEntity<StyleComponent>(wall);
-    ecsManager->addComponentToEntity<CollisionComponent>(wall);
-    ecsManager->addComponentToEntity<LiveComponent>(wall);
+    WallPrefab wall{startingPosition + Position(300, 150)};
 }
