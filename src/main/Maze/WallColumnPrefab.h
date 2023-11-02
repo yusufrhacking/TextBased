@@ -10,6 +10,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../Creation/CreateLetterAtPositionEvent.h"
 #include "../Text/TextGenerator.h"
+#include "VerticalWallPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -18,12 +19,7 @@ struct WallColumnPrefab {
         auto wallSize = TextComponent(TextGenerator::getVerticalWallText()).getSurfaceSize();
         for(int y=0; y<length; y++){
             auto currPosition = position + Position((float)0, (float)(wallSize.height * y));
-            Entity wall = ecsManager->createEntity();
-            ecsManager->addComponentToEntity<TextComponent>(wall, TextGenerator::getVerticalWallText());
-            ecsManager->addComponentToEntity<PositionComponent>(wall, currPosition);
-            ecsManager->addComponentToEntity<StyleComponent>(wall);
-            ecsManager->addComponentToEntity<CollisionComponent>(wall);
-            ecsManager->addComponentToEntity<LiveComponent>(wall);
+            VerticalWallPrefab wall{currPosition};
         }
     }
 };

@@ -23,7 +23,6 @@ struct IntroMazePrefab {
 
         int horizontalLengthInWalls = 45;
         WallRowPrefab wallRow{wallStartPosition, horizontalLengthInWalls};
-        int horizontalWallSize = 10;
 
 
 
