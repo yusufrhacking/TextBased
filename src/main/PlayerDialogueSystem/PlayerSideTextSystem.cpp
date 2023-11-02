@@ -21,9 +21,23 @@ void PlayerSideTextSystem::listenToEvents() {
 void PlayerSideTextSystem::onCommand(TextCommandEvent &event) {
     commands.emplace_back(Author::PLAYER, event.command);
     textComponent.text = event.command.getFullCommandText();
+    isTextVisible = true;
+    frameCounter = 0;
 }
 
 void PlayerSideTextSystem::render(const std::shared_ptr<Renderer>& renderer, Camera camera) {
+    if (!isTextVisible) {
+        return;
+    }
+
+    frameCounter++;
+
+    if (frameCounter >= 180) {
+        isTextVisible = false;
+        textComponent.text = "";
+        return;
+    }
+
     Entity player = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(player);
     auto styleComponent = StyleComponent(Type::PLAYER_SIDE_TEXT);
@@ -40,6 +54,3 @@ void PlayerSideTextSystem::render(const std::shared_ptr<Renderer>& renderer, Cam
 //    return position;
 //}
 
-
-
-//..get main player access system ..do .get() gives you the entity .

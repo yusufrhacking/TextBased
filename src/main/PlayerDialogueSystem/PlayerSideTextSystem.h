@@ -20,6 +20,10 @@ public:
 
 //    Position getPlayerPosition();
 
+private:
+    int frameCounter = 0;
+    bool isTextVisible = false;
+
 };
 
 
