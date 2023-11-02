@@ -51,6 +51,8 @@ void IntroPac::createTrees(Position position) {
 }
 
 void IntroPac::createWalls() {
-    WallRowPrefab wallRow{startingPosition + Position(300, 150), 5};
-    WallColumnPrefab wallColumn{startingPosition + Position(300, 150), 5};
+    Position wallReferencePosition{-300, -150};
+    Position wallStartPosition{Window::deriveRelativeTopLeft(startingPosition)};
+    WallRowPrefab wallRow{wallStartPosition, 45};
+    WallColumnPrefab wallColumn{wallStartPosition, 15};
 }

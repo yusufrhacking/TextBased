@@ -45,6 +45,6 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<LiveTerminalRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<InventoryRenderSystem>();
-    ecsManager->addSystem<HealthBarRenderSystem>();
+//    ecsManager->addSystem<HealthBarRenderSystem>();
     ecsManager->addSystem<PlayerSideTextSystem>();
 }
