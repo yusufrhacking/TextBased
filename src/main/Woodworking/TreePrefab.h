@@ -19,6 +19,7 @@ using OnDeathFunction = std::function<void(void)>;
 
 struct TreePrefab{
     Entity tree;
+    int breakAt = 7;
     explicit TreePrefab(Position position){
         tree = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
@@ -31,7 +32,7 @@ struct TreePrefab{
         ecsManager->addComponentToEntity<OnDeathComponent>(tree, [this, treePosition]() {
             eventBus->emitEvent<CreateLetterAtPositionEvent>(Letter::A, TreeComponent::findTreeMiddle(treePosition));
         });
-        ecsManager->addComponentToEntity<ChoppableComponent>(tree, 3);
+        ecsManager->addComponentToEntity<ChoppableComponent>(tree, breakAt);
     }
 
     TreePrefab(Position position, const OnDeathFunction& onDeathFn) {
@@ -44,7 +45,7 @@ struct TreePrefab{
         ecsManager->addComponentToEntity<TreeComponent>(tree);
         ecsManager->addComponentToEntity<LiveComponent>(tree);
         ecsManager->addComponentToEntity<OnDeathComponent>(tree, onDeathFn);
-        ecsManager->addComponentToEntity<ChoppableComponent>(tree, 3);
+        ecsManager->addComponentToEntity<ChoppableComponent>(tree, breakAt);
     }
 
 };

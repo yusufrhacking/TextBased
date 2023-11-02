@@ -14,7 +14,6 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 struct HorizontalWallPrefab {
     Entity wall;
-
     explicit HorizontalWallPrefab(Position position) {
         wall = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(wall, TextGenerator::getHorizontalWallText());
@@ -22,6 +21,10 @@ struct HorizontalWallPrefab {
         ecsManager->addComponentToEntity<StyleComponent>(wall);
         ecsManager->addComponentToEntity<CollisionComponent>(wall);
         ecsManager->addComponentToEntity<LiveComponent>(wall);
+    }
+
+    static Size getSize(){
+        return TextComponent::getSurfaceSize(TextGenerator::getHorizontalWallText());
     }
 };
 

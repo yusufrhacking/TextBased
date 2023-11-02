@@ -25,7 +25,6 @@ struct IntroMazePrefab {
         WallRowPrefab wallRow{wallStartPosition, horizontalLengthInWalls};
 
 
-
         WallColumnPrefab wallColumn{wallStartPosition, 15};
     }
 };
