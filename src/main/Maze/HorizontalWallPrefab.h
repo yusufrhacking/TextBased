@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_WALLPREFAB_H
-#define TEXTBASED_WALLPREFAB_H
+#ifndef TEXTBASED_HORIZONTALWALLPREFAB_H
+#define TEXTBASED_HORIZONTALWALLPREFAB_H
 #include <memory>
 #include "../HighLevel/ECSManager.h"
 #include "../Creation/Item.h"
@@ -12,10 +12,10 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-struct WallPrefab {
+struct HorizontalWallPrefab {
     Entity wall;
 
-    explicit WallPrefab(Position position) {
+    explicit HorizontalWallPrefab(Position position) {
         wall = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(wall, TextGenerator::getHorizontalWallText());
         ecsManager->addComponentToEntity<PositionComponent>(wall, position);
@@ -25,4 +25,4 @@ struct WallPrefab {
     }
 };
 
-#endif //TEXTBASED_WALLPREFAB_H
+#endif //TEXTBASED_HORIZONTALWALLPREFAB_H

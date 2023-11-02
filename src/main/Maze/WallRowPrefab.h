@@ -11,6 +11,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../Creation/CreateLetterAtPositionEvent.h"
 #include "../Text/TextGenerator.h"
+#include "HorizontalWallPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -19,12 +20,7 @@ struct WallRowPrefab {
         auto wallSize = TextComponent(TextGenerator::getHorizontalWallText()).getSurfaceSize();
         for(int x=0; x<length; x++){
             auto currPosition = position + Position((float)(wallSize.width * x), (float)0);
-            Entity wall = ecsManager->createEntity();
-            ecsManager->addComponentToEntity<TextComponent>(wall, TextGenerator::getHorizontalWallText());
-            ecsManager->addComponentToEntity<PositionComponent>(wall, currPosition);
-            ecsManager->addComponentToEntity<StyleComponent>(wall);
-            ecsManager->addComponentToEntity<CollisionComponent>(wall);
-            ecsManager->addComponentToEntity<LiveComponent>(wall);
+            HorizontalWallPrefab{currPosition};
         }
     }
 };

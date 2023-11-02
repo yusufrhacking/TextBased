@@ -7,9 +7,10 @@
 #include "../Health/HealthComponent.h"
 #include "../Woodworking/TreePrefab.h"
 #include "../Diegesis/EngineerSpeakEvent.h"
-#include "../Maze/WallPrefab.h"
+#include "../Maze/HorizontalWallPrefab.h"
 #include "../Maze/WallRowPrefab.h"
 #include "../Maze/WallColumnPrefab.h"
+#include "../Maze/IntroMazePrefab.h"
 #include <memory>
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -51,8 +52,5 @@ void IntroPac::createTrees(Position position) {
 }
 
 void IntroPac::createWalls() {
-    Position wallReferencePosition{-300, -150};
-    Position wallStartPosition{Window::deriveRelativeTopLeft(startingPosition)};
-    WallRowPrefab wallRow{wallStartPosition, 45};
-    WallColumnPrefab wallColumn{wallStartPosition, 15};
+    IntroMazePrefab maze{startingPosition};
 }
