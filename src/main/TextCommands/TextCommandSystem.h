@@ -11,7 +11,6 @@ public:
 private:
     void listenToEvents();
     void onCommand(TextCommandEvent& event);
-
 };
 
 
