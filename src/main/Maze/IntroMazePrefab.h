@@ -21,11 +21,12 @@ struct IntroMazePrefab {
     explicit IntroMazePrefab(Position startingPosition) {
         Position wallStartPosition{Window::deriveRelativeTopLeft(startingPosition)};
 
-        int horizontalLengthInWalls = 45;
+        int horizontalLengthInWalls = 40;
         WallRowPrefab wallRow{wallStartPosition, horizontalLengthInWalls};
+        int verticalLengthInWalls = 14;
+        WallColumnPrefab wallColumn{wallStartPosition, verticalLengthInWalls};
 
 
-        WallColumnPrefab wallColumn{wallStartPosition, 15};
     }
 };
 

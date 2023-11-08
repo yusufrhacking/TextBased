@@ -16,18 +16,20 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
+int speed = 15;
+
 IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
-    createTrees(startingPosition);
-    eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
+//    createTrees(startingPosition);
+//    eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
     createWalls();
 }
 
 void IntroPac::createPlayer() {
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
+    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(speed, speed));
     ecsManager->addComponentToEntity<StyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
