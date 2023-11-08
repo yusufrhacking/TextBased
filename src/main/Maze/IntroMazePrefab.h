@@ -12,6 +12,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../Creation/CreateLetterAtPositionEvent.h"
 #include "../Text/TextGenerator.h"
+#include "HalfwayOpenWallColumnPrefab.h"
 #include "HalfwayOpenWallRowPrefab.h"
 #include "HorizontalWallPrefab.h"
 #include "VerticalWallPrefab.h"
@@ -32,7 +33,7 @@ private:
         int horizontalLengthInWalls = 40;
         HalfwayOpenWallRowPrefab topRow{wallStartPosition, horizontalLengthInWalls};
         int verticalLengthInWalls = 15;
-        SolidColumnPrefab leftColumn{wallStartPosition, verticalLengthInWalls};
+        HalfwayOpenWallColumnPrefab leftColumn{wallStartPosition, verticalLengthInWalls};
 
         Position bottomLeft{Window::deriveRelativeBottomLeft(startingPosition)};
         Position bottomWallVisibilityAdjustment{(float)VerticalWallPrefab::getSize().width, -1*(float)HorizontalWallPrefab::getSize().height};
@@ -42,7 +43,7 @@ private:
 
         Position topRight{Window::deriveRelativeTopRight(startingPosition)};
         Position rightWallVisibilityAdjustment{(float)(2*(VerticalWallPrefab::getSize().width)), 0.0};
-        SolidColumnPrefab rightColumn{topRight - rightWallVisibilityAdjustment, verticalLengthInWalls};
+        HalfwayOpenWallColumnPrefab rightColumn{topRight - rightWallVisibilityAdjustment, verticalLengthInWalls};
     }
 };
 
