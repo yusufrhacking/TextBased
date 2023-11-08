@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_WALLROWPREFAB_H
-#define TEXTBASED_WALLROWPREFAB_H
+#ifndef TEXTBASED_SOLIDWALLROWPREFAB_H
+#define TEXTBASED_SOLIDWALLROWPREFAB_H
 
 #include <memory>
 #include "../HighLevel/ECSManager.h"
@@ -15,8 +15,8 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-struct WallRowPrefab {
-    explicit WallRowPrefab(Position position, int length) {
+struct SolidWallRowPrefab {
+    explicit SolidWallRowPrefab(Position position, int length) {
         auto wallSize = TextComponent(TextGenerator::getHorizontalWallText()).getSurfaceSize();
         for(int x=0; x<length; x++){
             auto currPosition = position + Position((float)(wallSize.width * x), (float)0);
@@ -25,4 +25,4 @@ struct WallRowPrefab {
     }
 };
 
-#endif //TEXTBASED_WALLROWPREFAB_H
+#endif //TEXTBASED_SOLIDWALLROWPREFAB_H

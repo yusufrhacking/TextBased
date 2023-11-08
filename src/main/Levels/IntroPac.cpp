@@ -8,8 +8,8 @@
 #include "../Woodworking/TreePrefab.h"
 #include "../Diegesis/EngineerSpeakEvent.h"
 #include "../Maze/HorizontalWallPrefab.h"
-#include "../Maze/WallRowPrefab.h"
-#include "../Maze/WallColumnPrefab.h"
+#include "../Maze/SolidWallRowPrefab.h"
+#include "../Maze/SolidColumnPrefab.h"
 #include "../Maze/IntroMazePrefab.h"
 #include <memory>
 

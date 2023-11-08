@@ -14,30 +14,34 @@
 #include "../Text/TextGenerator.h"
 #include "HorizontalWallPrefab.h"
 #include "VerticalWallPrefab.h"
-#include "WallRowPrefab.h"
-#include "WallColumnPrefab.h"
+#include "SolidWallRowPrefab.h"
+#include "SolidColumnPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 struct IntroMazePrefab {
     explicit IntroMazePrefab(Position startingPosition) {
+        makeSkeleton(startingPosition);
+    }
+
+private:
+    void makeSkeleton(Position startingPosition){
         Position wallStartPosition{Window::deriveRelativeTopLeft(startingPosition)};
 
         int horizontalLengthInWalls = 40;
-        WallRowPrefab topRow{wallStartPosition, horizontalLengthInWalls};
+        SolidWallRowPrefab topRow{wallStartPosition, horizontalLengthInWalls};
         int verticalLengthInWalls = 16;
-        WallColumnPrefab leftColumn{wallStartPosition, verticalLengthInWalls};
+        SolidColumnPrefab leftColumn{wallStartPosition, verticalLengthInWalls};
 
         Position bottomLeft{Window::deriveRelativeBottomLeft(startingPosition)};
         Position bottomWallVisibilityAdjustment{(float)VerticalWallPrefab::getSize().width, -1*(float)HorizontalWallPrefab::getSize().height};
         Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
-        WallRowPrefab bottomRow{newBottomLeft, horizontalLengthInWalls};
+        SolidWallRowPrefab bottomRow{newBottomLeft, horizontalLengthInWalls};
 
 
         Position topRight{Window::deriveRelativeTopRight(startingPosition)};
         Position rightWallVisibilityAdjustment{(float)(2*(VerticalWallPrefab::getSize().width)), 0.0};
-        WallColumnPrefab rightColumn{topRight - rightWallVisibilityAdjustment, verticalLengthInWalls};
-
+        SolidColumnPrefab rightColumn{topRight - rightWallVisibilityAdjustment, verticalLengthInWalls};
     }
 };
 

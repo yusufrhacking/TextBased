@@ -1,5 +1,5 @@
-#ifndef TEXTBASED_WALLCOLUMNPREFAB_H
-#define TEXTBASED_WALLCOLUMNPREFAB_H
+#ifndef TEXTBASED_SOLIDCOLUMNPREFAB_H
+#define TEXTBASED_SOLIDCOLUMNPREFAB_H
 #include <memory>
 #include "../HighLevel/ECSManager.h"
 #include "../Creation/Item.h"
@@ -14,8 +14,8 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-struct WallColumnPrefab {
-    explicit WallColumnPrefab(Position position, int length) {
+struct SolidColumnPrefab {
+    explicit SolidColumnPrefab(Position position, int length) {
         auto wallSize = TextComponent(TextGenerator::getVerticalWallText()).getSurfaceSize();
         for(int y=0; y<length; y++){
             auto currPosition = position + Position((float)0, (float)(wallSize.height * y));
