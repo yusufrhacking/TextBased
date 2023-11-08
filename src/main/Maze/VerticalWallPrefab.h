@@ -25,6 +25,10 @@ struct VerticalWallPrefab {
         ecsManager->addComponentToEntity<CollisionComponent>(wall);
         ecsManager->addComponentToEntity<LiveComponent>(wall);
     }
+
+    static Size getSize(){
+        return TextComponent::getSurfaceSize(TextGenerator::getVerticalWallText());
+    }
 };
 
 #endif //TEXTBASED_VERTICALWALLPREFAB_H

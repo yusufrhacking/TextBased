@@ -13,6 +13,7 @@
 #include "../Creation/CreateLetterAtPositionEvent.h"
 #include "../Text/TextGenerator.h"
 #include "HorizontalWallPrefab.h"
+#include "VerticalWallPrefab.h"
 #include "WallRowPrefab.h"
 #include "WallColumnPrefab.h"
 
@@ -23,14 +24,19 @@ struct IntroMazePrefab {
         Position wallStartPosition{Window::deriveRelativeTopLeft(startingPosition)};
 
         int horizontalLengthInWalls = 40;
-        WallRowPrefab wallRow{wallStartPosition, horizontalLengthInWalls};
-        int verticalLengthInWalls = 14;
-        WallColumnPrefab wallColumn{wallStartPosition, verticalLengthInWalls};
+        WallRowPrefab topRow{wallStartPosition, horizontalLengthInWalls};
+        int verticalLengthInWalls = 16;
+        WallColumnPrefab leftColumn{wallStartPosition, verticalLengthInWalls};
 
         Position bottomLeft{Window::deriveRelativeBottomLeft(startingPosition)};
-        Position wallVisibilityAdjustment{0.0, -1*(float)HorizontalWallPrefab::getSize().height};
-        Position newBottomLeft = bottomLeft + wallVisibilityAdjustment;
+        Position bottomWallVisibilityAdjustment{(float)VerticalWallPrefab::getSize().width, -1*(float)HorizontalWallPrefab::getSize().height};
+        Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
         WallRowPrefab bottomRow{newBottomLeft, horizontalLengthInWalls};
+
+
+        Position topRight{Window::deriveRelativeTopRight(startingPosition)};
+        Position rightWallVisibilityAdjustment{(float)(2*(VerticalWallPrefab::getSize().width)), 0.0};
+        WallColumnPrefab rightColumn{topRight - rightWallVisibilityAdjustment, verticalLengthInWalls};
 
     }
 };
