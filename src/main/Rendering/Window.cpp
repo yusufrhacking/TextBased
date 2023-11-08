@@ -1,3 +1,5 @@
+#include <spdlog/spdlog.h>
+#include "SDL_video.h"
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 #include "Window.h"
@@ -16,15 +18,15 @@ Window::~Window() {
 
 
 void Window::createWindow() {
-    initializeWindowSize();
     window = SDL_CreateWindow(
             nullptr,
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
-            windowWidth,
-            windowHeight,
-            SDL_WINDOW_FULLSCREEN
+            0,
+            0,
+            SDL_WINDOW_FULLSCREEN_DESKTOP
     );
+    initializeWindowSize();
 
     if (window == nullptr){
         throw std::runtime_error(SDL_GetError());
@@ -91,6 +93,13 @@ void Window::initializeWindowSize() {
         windowHeight = displayMode.h;
 //        windowWidth = 1470;
 //        windowHeight = 956;
+        spdlog::info("Window Size: {}, {}", windowWidth, windowHeight);
+
+//
+//
+//        SDL_Rect r{};
+//
+//        spdlog::info("Rect Size: {}", SDL_GetDisplayUsableBounds(0, &r));
         Page::pageWidth = windowWidth;
         Page::pageHeight = windowHeight;
     }

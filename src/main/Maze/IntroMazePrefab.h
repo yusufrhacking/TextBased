@@ -36,10 +36,14 @@ private:
         HalfwayOpenWallColumnPrefab leftColumn{wallStartPosition, verticalLengthInWalls};
 
         Position bottomLeft{Window::deriveRelativeBottomLeft(startingPosition)};
-        Position bottomWallVisibilityAdjustment{(float)VerticalWallPrefab::getSize().width, -1*(float)HorizontalWallPrefab::getSize().height};
+        Position bottomWallVisibilityAdjustment{(float)VerticalWallPrefab::getSize().width, -3*(float)HorizontalWallPrefab::getSize().height};
+        spdlog::info("Height: {}", HorizontalWallPrefab::getSize().height);
         Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
         HalfwayOpenWallRowPrefab bottomRow{newBottomLeft, horizontalLengthInWalls};
 
+        spdlog::info("Window Size: {}, {}", Window::windowWidth, Window::windowHeight);
+        spdlog::info("BottomLeft: {}, {}", newBottomLeft.xPos, newBottomLeft.yPos);
+        spdlog::info("Mod: {}, {}", (int)newBottomLeft.xPos % Window::windowWidth, (int)newBottomLeft.yPos % Window::windowHeight);
 
         Position topRight{Window::deriveRelativeTopRight(startingPosition)};
         Position rightWallVisibilityAdjustment{(float)(2*(VerticalWallPrefab::getSize().width)), 0.0};
