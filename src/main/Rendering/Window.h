@@ -29,6 +29,13 @@ class Window {
 
         static Position deriveRelativeTopLeft(Position position);
 
+        static Position deriveRelativeTopRight(Position position);
+
+        static Position deriveRelativeBottomRight(Position position);
+
+        static Position deriveRelativeBottomLeft(Position position);
+
+
 
 private:
         SDL_Window* window;

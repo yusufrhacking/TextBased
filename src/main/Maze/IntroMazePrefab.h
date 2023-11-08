@@ -12,6 +12,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../Creation/CreateLetterAtPositionEvent.h"
 #include "../Text/TextGenerator.h"
+#include "HorizontalWallPrefab.h"
 #include "WallRowPrefab.h"
 #include "WallColumnPrefab.h"
 
@@ -26,6 +27,10 @@ struct IntroMazePrefab {
         int verticalLengthInWalls = 14;
         WallColumnPrefab wallColumn{wallStartPosition, verticalLengthInWalls};
 
+        Position bottomLeft{Window::deriveRelativeBottomLeft(startingPosition)};
+        Position wallVisibilityAdjustment{0.0, -1*(float)HorizontalWallPrefab::getSize().height};
+        Position newBottomLeft = bottomLeft + wallVisibilityAdjustment;
+        WallRowPrefab bottomRow{newBottomLeft, horizontalLengthInWalls};
 
     }
 };

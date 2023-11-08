@@ -23,7 +23,7 @@ void Window::createWindow() {
             SDL_WINDOWPOS_CENTERED,
             windowWidth,
             windowHeight,
-            0
+            SDL_WINDOW_FULLSCREEN
     );
 
     if (window == nullptr){
@@ -68,14 +68,29 @@ Position Window::deriveRelativeTopLeft(Position position){
     return topLeft;
 }
 
+Position Window::deriveRelativeTopRight(Position position){
+    Position topRight = deriveRelativeTopLeft(position) + Window::getTopRightPosition();
+    return topRight;
+}
+
+Position Window::deriveRelativeBottomRight(Position position){
+    Position bottomRight = deriveRelativeTopLeft(position) + Window::getBottomRightPosition();
+    return bottomRight;
+}
+
+Position Window::deriveRelativeBottomLeft(Position position){
+    Position bottomLeft = deriveRelativeTopLeft(position) + Window::getBottomLeftPosition();
+    return bottomLeft;
+}
+
 void Window::initializeWindowSize() {
     if (windowWidth == 0 || windowHeight == 0) {
-//        SDL_DisplayMode displayMode;
-//        SDL_GetCurrentDisplayMode(0, &displayMode);
-//        windowWidth = displayMode.w;
-//        windowHeight = displayMode.h;
-        windowWidth = 1470;
-        windowHeight = 956;
+        SDL_DisplayMode displayMode;
+        SDL_GetCurrentDisplayMode(0, &displayMode);
+        windowWidth = displayMode.w;
+        windowHeight = displayMode.h;
+//        windowWidth = 1470;
+//        windowHeight = 956;
         Page::pageWidth = windowWidth;
         Page::pageHeight = windowHeight;
     }
