@@ -26,25 +26,33 @@ struct IntroMazePrefab {
     HalfwayOpenWallColumnPrefab leftColumn;
     HalfwayOpenWallRowPrefab bottomRow;
     HalfwayOpenWallColumnPrefab rightColumn;
+    HalfwayOpenWallRowPrefab middleRow;
+    SolidColumnPrefab leftMiddleColumn;
+    SolidColumnPrefab rightMiddleColumn;
+
+    static int verticalLengthInWalls;
+    static int horizontalLengthInWalls;
 
     explicit IntroMazePrefab(Position startingPosition)
             : topRow(calculateTopRow(startingPosition)),
               leftColumn(calculateLeftColumn(startingPosition)),
               bottomRow(calculateBottomRow(startingPosition)),
-              rightColumn(calculateRightColumn(startingPosition))
+              rightColumn(calculateRightColumn(startingPosition)),
+              middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
+              leftMiddleColumn(topRow.positionOfIncision, 4),
+              rightMiddleColumn(topRow.positionOfIncision, 1)
     {
+
     }
 
 private:
     static HalfwayOpenWallRowPrefab calculateTopRow(Position startingPosition) {
         Position wallStartPosition = Window::deriveRelativeTopLeft(startingPosition);
-        int horizontalLengthInWalls = 40;
         return HalfwayOpenWallRowPrefab{wallStartPosition, horizontalLengthInWalls};
     }
 
     static HalfwayOpenWallColumnPrefab calculateLeftColumn(Position startingPosition) {
         Position wallStartPosition = Window::deriveRelativeTopLeft(startingPosition);
-        int verticalLengthInWalls = 15;
         return HalfwayOpenWallColumnPrefab{wallStartPosition, verticalLengthInWalls};
     }
 
@@ -55,7 +63,6 @@ private:
                 -3 * (float)HorizontalWallPrefab::getSize().height
         };
         Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
-        int horizontalLengthInWalls = 40;
         return HalfwayOpenWallRowPrefab{newBottomLeft, horizontalLengthInWalls};
     }
 
@@ -65,8 +72,11 @@ private:
                 (float)(2 * VerticalWallPrefab::getSize().width), 0.0
         };
         Position newTopRight = topRight - rightWallVisibilityAdjustment;
-        int verticalLengthInWalls = 15;
         return HalfwayOpenWallColumnPrefab{newTopRight, verticalLengthInWalls};
+    }
+
+    static HalfwayOpenWallRowPrefab calculateIncisionRow(Position incisionPosition) {
+        return HalfwayOpenWallRowPrefab{incisionPosition, horizontalLengthInWalls};
     }
 };
 
