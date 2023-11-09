@@ -22,34 +22,54 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 struct IntroMazePrefab {
-    explicit IntroMazePrefab(Position startingPosition) {
-        makeSkeleton(startingPosition);
+    HalfwayOpenWallRowPrefab topRow;
+    HalfwayOpenWallColumnPrefab leftColumn;
+    HalfwayOpenWallRowPrefab bottomRow;
+    HalfwayOpenWallColumnPrefab rightColumn;
+
+    explicit IntroMazePrefab(Position startingPosition)
+            : topRow(calculateTopRow(startingPosition)),
+              leftColumn(calculateLeftColumn(startingPosition)),
+              bottomRow(calculateBottomRow(startingPosition)),
+              rightColumn(calculateRightColumn(startingPosition))
+    {
     }
 
 private:
-    void makeSkeleton(Position startingPosition){
-        Position wallStartPosition{Window::deriveRelativeTopLeft(startingPosition)};
-
+    static HalfwayOpenWallRowPrefab calculateTopRow(Position startingPosition) {
+        Position wallStartPosition = Window::deriveRelativeTopLeft(startingPosition);
         int horizontalLengthInWalls = 40;
-        HalfwayOpenWallRowPrefab topRow{wallStartPosition, horizontalLengthInWalls};
+        return HalfwayOpenWallRowPrefab{wallStartPosition, horizontalLengthInWalls};
+    }
+
+    static HalfwayOpenWallColumnPrefab calculateLeftColumn(Position startingPosition) {
+        Position wallStartPosition = Window::deriveRelativeTopLeft(startingPosition);
         int verticalLengthInWalls = 15;
-        HalfwayOpenWallColumnPrefab leftColumn{wallStartPosition, verticalLengthInWalls};
+        return HalfwayOpenWallColumnPrefab{wallStartPosition, verticalLengthInWalls};
+    }
 
-        Position bottomLeft{Window::deriveRelativeBottomLeft(startingPosition)};
-        Position bottomWallVisibilityAdjustment{(float)VerticalWallPrefab::getSize().width, -3*(float)HorizontalWallPrefab::getSize().height};
-        spdlog::info("Height: {}", HorizontalWallPrefab::getSize().height);
+    static HalfwayOpenWallRowPrefab calculateBottomRow(Position startingPosition) {
+        Position bottomLeft = Window::deriveRelativeBottomLeft(startingPosition);
+        Position bottomWallVisibilityAdjustment = {
+                (float)VerticalWallPrefab::getSize().width,
+                -3 * (float)HorizontalWallPrefab::getSize().height
+        };
         Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
-        HalfwayOpenWallRowPrefab bottomRow{newBottomLeft, horizontalLengthInWalls};
+        int horizontalLengthInWalls = 40;
+        return HalfwayOpenWallRowPrefab{newBottomLeft, horizontalLengthInWalls};
+    }
 
-        spdlog::info("Window Size: {}, {}", Window::windowWidth, Window::windowHeight);
-        spdlog::info("BottomLeft: {}, {}", newBottomLeft.xPos, newBottomLeft.yPos);
-        spdlog::info("Mod: {}, {}", (int)newBottomLeft.xPos % Window::windowWidth, (int)newBottomLeft.yPos % Window::windowHeight);
-
-        Position topRight{Window::deriveRelativeTopRight(startingPosition)};
-        Position rightWallVisibilityAdjustment{(float)(2*(VerticalWallPrefab::getSize().width)), 0.0};
-        HalfwayOpenWallColumnPrefab rightColumn{topRight - rightWallVisibilityAdjustment, verticalLengthInWalls};
+    static HalfwayOpenWallColumnPrefab calculateRightColumn(Position startingPosition) {
+        Position topRight = Window::deriveRelativeTopRight(startingPosition);
+        Position rightWallVisibilityAdjustment = {
+                (float)(2 * VerticalWallPrefab::getSize().width), 0.0
+        };
+        Position newTopRight = topRight - rightWallVisibilityAdjustment;
+        int verticalLengthInWalls = 15;
+        return HalfwayOpenWallColumnPrefab{newTopRight, verticalLengthInWalls};
     }
 };
+
 
 
 #endif //TEXTBASED_INTROMAZEPREFAB_H

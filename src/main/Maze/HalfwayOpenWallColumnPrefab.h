@@ -16,11 +16,13 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 struct HalfwayOpenWallColumnPrefab {
+    Position positionOfIncision{};
     explicit HalfwayOpenWallColumnPrefab(Position position, int length) {
         auto wallSize = TextComponent(TextGenerator::getVerticalWallText()).getSurfaceSize();
         for(int y=0; y<length; y++){
             auto currPosition = position + Position((float)0, (float)(wallSize.height * y));
             if (y == length / 2) {
+                positionOfIncision = currPosition;
                 continue;
             }
             VerticalWallPrefab wall{currPosition};
