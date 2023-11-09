@@ -94,12 +94,6 @@ void Window::initializeWindowSize() {
 //        windowWidth = 1470;
 //        windowHeight = 956;
         spdlog::info("Window Size: {}, {}", windowWidth, windowHeight);
-
-//
-//
-//        SDL_Rect r{};
-//
-//        spdlog::info("Rect Size: {}", SDL_GetDisplayUsableBounds(0, &r));
         Page::pageWidth = windowWidth;
         Page::pageHeight = windowHeight;
     }
