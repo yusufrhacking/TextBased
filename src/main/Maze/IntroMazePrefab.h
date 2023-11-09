@@ -27,10 +27,10 @@ struct IntroMazePrefab {
     HalfwayOpenWallRowPrefab bottomRow;
     HalfwayOpenWallColumnPrefab rightColumn;
     HalfwayOpenWallRowPrefab middleRow;
-    SolidColumnPrefab leftTopMiddleColumn;
-    SolidColumnPrefab rightTopMiddleColumn;
-    SolidColumnPrefab leftBottomMiddleColumn;
-    SolidColumnPrefab rightBottomMiddleColumn;
+    HalfwayOpenWallColumnPrefab leftTopMiddleColumn;
+    HalfwayOpenWallColumnPrefab rightTopMiddleColumn;
+    HalfwayOpenWallColumnPrefab leftBottomMiddleColumn;
+    HalfwayOpenWallColumnPrefab rightBottomMiddleColumn;
 
     static int verticalLengthInWalls;
     static int horizontalLengthInWalls;
@@ -43,8 +43,8 @@ struct IntroMazePrefab {
               middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
               leftTopMiddleColumn(topRow.startOfIncision, 7),
               rightTopMiddleColumn(topRow.endOfIncision, 7),
-              leftBottomMiddleColumn(topRow.startOfIncision, 7),
-              rightBottomMiddleColumn(topRow.endOfIncision, 7)
+              leftBottomMiddleColumn(middleRow.startOfIncision, 7),
+              rightBottomMiddleColumn(middleRow.endOfIncision, 7)
     {
 
     }
