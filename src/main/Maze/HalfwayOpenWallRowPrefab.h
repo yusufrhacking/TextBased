@@ -15,15 +15,19 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 struct HalfwayOpenWallRowPrefab {
-    Position positionOfIncision{-1, -1};
+    Position startOfIncision{-1, -1};
+    Position endOfIncision{-1, -1};
     explicit HalfwayOpenWallRowPrefab(Position position, int length) {
         auto wallSize = TextComponent(TextGenerator::getHorizontalWallText()).getSurfaceSize();
+        auto currPosition = position;
         for (int x = 0; x < length; x++) {
-            auto currPosition = position + Position((float)(wallSize.width * x), (float)0);
+            Position wallAdjustment{(float)(wallSize.width), (float)0};
+            currPosition = currPosition + wallAdjustment;
             if (x == length / 2 || x == (length / 2) - 1 || x == (length / 2) + 1) {
-                if (positionOfIncision.xPos == -1){
-                    positionOfIncision = currPosition;
+                if (startOfIncision.xPos == -1){
+                    startOfIncision = currPosition;
                 }
+                endOfIncision = currPosition + wallAdjustment;
                 continue;
             }
             HorizontalWallPrefab{currPosition};

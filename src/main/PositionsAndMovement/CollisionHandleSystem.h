@@ -16,6 +16,8 @@ private:
     std::vector<Entity> getChildEntities(const Entity &entity);
 
     void revertPosition(const Entity &entity, const std::vector<Entity> &childEntities);
+
+    void updateChildPositions(const std::vector<Entity> &childEntities, float overlap, bool movePositive);
 };
 
 #endif //TEXTBASED_COLLISIONHANDLESYSTEM_H

@@ -27,8 +27,10 @@ struct IntroMazePrefab {
     HalfwayOpenWallRowPrefab bottomRow;
     HalfwayOpenWallColumnPrefab rightColumn;
     HalfwayOpenWallRowPrefab middleRow;
-    SolidColumnPrefab leftMiddleColumn;
-    SolidColumnPrefab rightMiddleColumn;
+    SolidColumnPrefab leftTopMiddleColumn;
+    SolidColumnPrefab rightTopMiddleColumn;
+    SolidColumnPrefab leftBottomMiddleColumn;
+    SolidColumnPrefab rightBottomMiddleColumn;
 
     static int verticalLengthInWalls;
     static int horizontalLengthInWalls;
@@ -39,8 +41,10 @@ struct IntroMazePrefab {
               bottomRow(calculateBottomRow(startingPosition)),
               rightColumn(calculateRightColumn(startingPosition)),
               middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
-              leftMiddleColumn(topRow.positionOfIncision, 4),
-              rightMiddleColumn(topRow.positionOfIncision, 1)
+              leftTopMiddleColumn(topRow.startOfIncision, 7),
+              rightTopMiddleColumn(topRow.endOfIncision, 7),
+              leftBottomMiddleColumn(topRow.startOfIncision, 7),
+              rightBottomMiddleColumn(topRow.endOfIncision, 7)
     {
 
     }
@@ -73,10 +77,6 @@ private:
         };
         Position newTopRight = topRight - rightWallVisibilityAdjustment;
         return HalfwayOpenWallColumnPrefab{newTopRight, verticalLengthInWalls};
-    }
-
-    static HalfwayOpenWallRowPrefab calculateIncisionRow(Position incisionPosition) {
-        return HalfwayOpenWallRowPrefab{incisionPosition, horizontalLengthInWalls};
     }
 };
 
