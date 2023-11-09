@@ -13,6 +13,7 @@
 #include "../Lettering/FreeWordEvent.h"
 #include "../Attacking/AttemptedAttackEvent.h"
 #include "../Woodworking/PunchEvent.h"
+#include "../MainPlayer/RotateEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -44,5 +45,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
         eventBus->emitEvent<AttemptedAttackEvent>(ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer());
     } else if (command == "punch") {
         eventBus->emitEvent<PunchEvent>();
+    } else if (command == "rotate") {
+        eventBus->emitEvent<RotateEvent>();
     }
 }

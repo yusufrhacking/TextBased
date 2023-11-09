@@ -27,6 +27,7 @@
 #include "../Abyz/AbyzControlSystem.h"
 #include "../Levels/FullBasicLevel.h"
 #include "../Levels/IntroPac.h"
+#include "../MainPlayer/PlayerRotateSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -66,6 +67,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<HealthSystem>();
     ecsManager->addSystem<PendingDeathSystem>();
     ecsManager->addSystem<AbyzControlSystem>();
+    ecsManager->addSystem<PlayerRotateSystem>();
 }
 
 void GameManager::update(double deltaTime) {

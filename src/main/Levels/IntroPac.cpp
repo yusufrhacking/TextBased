@@ -11,6 +11,7 @@
 #include "../Maze/SolidWallRowPrefab.h"
 #include "../Maze/SolidColumnPrefab.h"
 #include "../Maze/IntroMazePrefab.h"
+#include "../MainPlayer/RotateComponent.h"
 #include <memory>
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -35,6 +36,7 @@ void IntroPac::createPlayer() {
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
     ecsManager->addComponentToEntity<LiveComponent>(witt);
     ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
+    ecsManager->addComponentToEntity<RotationComponent>(witt);
 }
 
 void IntroPac::createTrees(Position position) {
