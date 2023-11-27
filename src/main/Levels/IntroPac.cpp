@@ -24,7 +24,8 @@ int speed = 15;
 IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
-    LetterMazePrefab{startingPosition + Position(50, 0)};
+    Position letterStartPosition = startingPosition + Position(50, 0);
+    LetterMazePrefab{letterStartPosition, 5, 30};
 //    createTrees(startingPosition);
 //    eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
     // createWalls();
