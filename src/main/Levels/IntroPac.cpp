@@ -14,6 +14,8 @@
 #include "../MainPlayer/RotateComponent.h"
 #include <memory>
 
+#include "../LetterMaze/LetterMazePrefab.h"
+
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -22,9 +24,10 @@ int speed = 15;
 IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
+    LetterMazePrefab{startingPosition + Position(50, 0)};
 //    createTrees(startingPosition);
 //    eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
-    createWalls();
+    // createWalls();
 }
 
 void IntroPac::createPlayer() {

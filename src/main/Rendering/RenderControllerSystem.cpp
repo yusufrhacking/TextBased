@@ -36,7 +36,9 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
         ecsManager->getSystem<HealthBarRenderSystem>().render(renderer, healthComponent);
     }
 
-    ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);
+    if (ecsManager->hasSystem<PlayerSideTextSystem>()){
+        ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);
+    }
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -46,5 +48,5 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<InventoryRenderSystem>();
 //    ecsManager->addSystem<HealthBarRenderSystem>();
-    ecsManager->addSystem<PlayerSideTextSystem>();
+//    ecsManager->addSystem<PlayerSideTextSystem>();
 }
