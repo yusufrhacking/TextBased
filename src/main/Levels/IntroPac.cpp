@@ -24,8 +24,16 @@ int speed = 15;
 IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition) {
     witt = ecsManager->createEntity();
     createPlayer();
-    Position letterStartPosition = startingPosition + Position(50, 0);
-    LetterMazePrefab{letterStartPosition, 5, 30};
+    const Position letterStartPosition = startingPosition + Position(70, 0);
+    Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position((float)50, Window::getMiddlePosition().yPos + 25);
+    HalfwayOpenWallRowPrefab{leftWallStartPosition, 36};
+    leftWallStartPosition += Position(0, -50);
+    HalfwayOpenWallRowPrefab{leftWallStartPosition, 36};
+    // SolidWallRowPrefab{letterStartPosition + Position(0, -25), 15};
+    LetterMazePrefab{letterStartPosition, 0, 33};
+    // SolidWallRowPrefab{letterStartPosition + Position(0, 25), 15};
+    LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
+
 //    createTrees(startingPosition);
 //    eventBus->emitEvent<EngineerSpeakEvent>("try `punch`");
     // createWalls();
