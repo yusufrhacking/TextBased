@@ -51,9 +51,9 @@ struct IntroMazePrefab {
     {
         const Position letterStartPosition = startingPosition + Position(70, 0);
         Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position((float)50, Window::getMiddlePosition().yPos + 25);
-        HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, 36};
+        HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, horizontalLengthInWalls};
         leftWallStartPosition += Position(0, -50);
-        HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, 36};
+        HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, horizontalLengthInWalls};
         LetterMazePrefab{letterStartPosition, 0, 32};
         LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
 
@@ -65,9 +65,6 @@ struct IntroMazePrefab {
         HalfwayOpenWallColumnPrefab leftBottomMiddleCol{Position((topMiddleRow.startOfIncision.xPos), bottomMiddleRow.startOfIncision.yPos), 7};
         VerticalLetterMazePrefab{startingPosition + Position(10, 25), 0, 15};
         HalfwayOpenWallColumnPrefab rightBottomMiddleCol{Position((topMiddleRow.endOfIncision.xPos), bottomMiddleRow.endOfIncision.yPos), 7};
-
-
-
 
     }
 
