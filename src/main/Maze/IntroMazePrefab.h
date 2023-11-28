@@ -18,35 +18,42 @@
 #include "VerticalWallPrefab.h"
 #include "SolidWallRowPrefab.h"
 #include "SolidColumnPrefab.h"
+#include "../LetterMaze/LetterMazePrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 struct IntroMazePrefab {
-    HalfwayOpenWallRowPrefab topRow;
-    HalfwayOpenWallColumnPrefab leftColumn;
-    HalfwayOpenWallRowPrefab bottomRow;
-    HalfwayOpenWallColumnPrefab rightColumn;
-    HalfwayOpenWallRowPrefab middleRow;
-    HalfwayOpenWallColumnPrefab leftTopMiddleColumn;
-    HalfwayOpenWallColumnPrefab rightTopMiddleColumn;
-    HalfwayOpenWallColumnPrefab leftBottomMiddleColumn;
-    HalfwayOpenWallColumnPrefab rightBottomMiddleColumn;
+    // HalfwayOpenWallRowPrefab topRow;
+    // HalfwayOpenWallColumnPrefab leftColumn;
+    // HalfwayOpenWallRowPrefab bottomRow;
+    // HalfwayOpenWallColumnPrefab rightColumn;
+    // HalfwayOpenWallRowPrefab middleRow;
+    // HalfwayOpenWallColumnPrefab leftTopMiddleColumn;
+    // HalfwayOpenWallColumnPrefab rightTopMiddleColumn;
+    // HalfwayOpenWallColumnPrefab leftBottomMiddleColumn;
+    // HalfwayOpenWallColumnPrefab rightBottomMiddleColumn;
 
     static int verticalLengthInWalls;
     static int horizontalLengthInWalls;
 
     explicit IntroMazePrefab(Position startingPosition)
-            : topRow(calculateTopRow(startingPosition)),
-              leftColumn(calculateLeftColumn(startingPosition)),
-              bottomRow(calculateBottomRow(startingPosition)),
-              rightColumn(calculateRightColumn(startingPosition)),
-              middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
-              leftTopMiddleColumn(topRow.startOfIncision, 7),
-              rightTopMiddleColumn(topRow.endOfIncision, 7),
-              leftBottomMiddleColumn(middleRow.startOfIncision, 7),
-              rightBottomMiddleColumn(middleRow.endOfIncision, 7)
+            // : topRow(calculateTopRow(startingPosition)),
+            //   leftColumn(calculateLeftColumn(startingPosition)),
+            //   bottomRow(calculateBottomRow(startingPosition)),
+            //   rightColumn(calculateRightColumn(startingPosition)),
+            //   middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
+            //   leftTopMiddleColumn(topRow.startOfIncision, 7),
+            //   rightTopMiddleColumn(topRow.endOfIncision, 7),
+            //   leftBottomMiddleColumn(middleRow.startOfIncision, 7),
+            //   rightBottomMiddleColumn(middleRow.endOfIncision, 7)
     {
-
+        const Position letterStartPosition = startingPosition + Position(70, 0);
+        Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position((float)50, Window::getMiddlePosition().yPos + 25);
+        HalfwayOpenWallRowPrefab{leftWallStartPosition, 36};
+        leftWallStartPosition += Position(0, -50);
+        HalfwayOpenWallRowPrefab{leftWallStartPosition, 36};
+        LetterMazePrefab{letterStartPosition, 0, 33};
+        LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
     }
 
 private:
