@@ -21,6 +21,9 @@ void LetterPickupSystem::update(double deltaTime) {
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
     auto mainPlayerSurfaceSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
+
+
+
     for (auto entity: getRelevantEntities()){
         auto letterPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
         auto surfaceSize = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
@@ -28,9 +31,14 @@ void LetterPickupSystem::update(double deltaTime) {
                                                               mainPlayerSurfaceSize, surfaceSize, 5);
         if (isInRange){
             auto letter = ecsManager->getComponentFromEntity<LetterComponent>(entity).character;
+            spdlog::info("Entity with letter {}", enum_to_char(ecsManager->getComponentFromEntity<LetterComponent>(entity).character));
             spdlog::trace("Pickupable Letter");
             eventBus->emitEvent<CharacterDepositEvent>(letter);
             ecsManager->killEntity(entity);
+            // spdlog::critical("NEW PRINTS");
+            // for (auto entity: getRelevantEntities()) {
+            //     spdlog::info("Entity with letter {}", enum_to_char(ecsManager->getComponentFromEntity<LetterComponent>(entity).character));
+            // }
         }
 
     }

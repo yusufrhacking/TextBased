@@ -3,7 +3,7 @@
 #include <bitset>
 #include "../Rendering/Window.h"
 
-const unsigned int MAX_ENTITIES = 10000;
+const unsigned int MAX_ENTITIES = 100000;
 
 
 using RenderedVal = unsigned int;

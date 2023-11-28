@@ -1,6 +1,7 @@
 #ifndef TEXTBASED_LETTER_H
 #define TEXTBASED_LETTER_H
 #include <random>
+#include "spdlog/spdlog.h"
 
 enum class Letter {
     A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
@@ -21,7 +22,9 @@ inline Letter char_to_enum(char character) {
     }
 
     if(character >= 'A' && character <= 'Z') {
-        return static_cast<Letter>(character - 'A');
+        auto result = static_cast<Letter>(character - 'A');
+        // spdlog::info("Result: {}", (int)result);
+        return result;
     } else {
         return Letter::ALPHABET_SIZE;
     }

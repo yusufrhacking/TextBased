@@ -8,6 +8,8 @@
 #include <bitset>
 #include <stdexcept>
 
+#include "../../../cmake-build-debug/_deps/spdlog-src/include/spdlog/spdlog.h"
+
 using ComponentPoolsArr = std::vector<std::shared_ptr<GenericPool>>;
 
 class ComponentManager {

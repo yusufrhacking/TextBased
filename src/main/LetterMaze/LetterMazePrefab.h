@@ -12,8 +12,8 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 struct LetterMazePrefab {
-    explicit LetterMazePrefab(const Position center, int startIndex, int length) {
-        Position currPosition = center;
+    explicit LetterMazePrefab(const Position position, int startIndex, int length) {
+        Position currPosition = position;
         const TextComponent dummyLetter = TextComponent("a");
         const Size letterSize = dummyLetter.getSurfaceSize();
 

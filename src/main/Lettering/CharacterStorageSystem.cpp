@@ -59,7 +59,7 @@ void CharacterStorageSystem::onDeposit(CharacterDepositEvent &event) {
     if (!ecsManager->hasSystem<LetterBankRenderSystem>()){
         ecsManager->addSystem<LetterBankRenderSystem>();
     }
-    spdlog::debug("Found letter: {}", enum_to_char(event.letter));
+    spdlog::info("Found letter: {}", enum_to_char(event.letter));
     alphabet.increment(event.letter);
 }
 

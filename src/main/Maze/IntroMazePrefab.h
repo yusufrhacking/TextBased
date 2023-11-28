@@ -18,7 +18,9 @@
 #include "VerticalWallPrefab.h"
 #include "SolidWallRowPrefab.h"
 #include "SolidColumnPrefab.h"
+#include "../Lettering/LetterPickupSystem.h"
 #include "../LetterMaze/LetterMazePrefab.h"
+#include "../LetterMaze/VerticalLetterMazePrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -52,14 +54,21 @@ struct IntroMazePrefab {
         HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, 36};
         leftWallStartPosition += Position(0, -50);
         HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, 36};
-        LetterMazePrefab{letterStartPosition, 0, 33};
+        LetterMazePrefab{letterStartPosition, 0, 32};
         LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
 
         HalfwayOpenWallColumnPrefab leftTopMiddleCol{Position(static_cast<int>(topMiddleRow.startOfIncision.xPos), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.yPos))), 7};
+        VerticalLetterMazePrefab{Position(startingPosition.xPos + 10, static_cast<float>(Window::getTopYPosition(startingPosition.yPos))), 0, 15};
+
         HalfwayOpenWallColumnPrefab rightTopMiddleCol{Position(static_cast<int>(topMiddleRow.endOfIncision.xPos), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.yPos))), 7};
 
         HalfwayOpenWallColumnPrefab leftBottomMiddleCol{Position((topMiddleRow.startOfIncision.xPos), bottomMiddleRow.startOfIncision.yPos), 7};
+        VerticalLetterMazePrefab{startingPosition + Position(10, 25), 0, 15};
         HalfwayOpenWallColumnPrefab rightBottomMiddleCol{Position((topMiddleRow.endOfIncision.xPos), bottomMiddleRow.endOfIncision.yPos), 7};
+
+
+
+
     }
 
 private:

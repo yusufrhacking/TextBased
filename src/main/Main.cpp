@@ -7,7 +7,7 @@ std::unique_ptr<EventBus> eventBus;
 int main() {
     ecsManager = std::make_unique<ECSManager>(Game::startingTopLeftPosition);
     eventBus = std::make_unique<EventBus>();
-    spdlog::set_level(spdlog::level::info);
+    spdlog::set_level(spdlog::level::critical);
 
     Game* game = new Game();
 

@@ -14,7 +14,7 @@ class Pool: public GenericPool {
         std::vector<T> elements;
 
     public:
-        explicit Pool(int size = 100){
+        explicit Pool(int size = 1000){
             elements.resize(size);
         }
 
