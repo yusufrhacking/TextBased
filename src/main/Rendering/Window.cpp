@@ -85,6 +85,15 @@ Position Window::deriveRelativeBottomLeft(Position position){
     return bottomLeft;
 }
 
+int Window::getLeftXPosition(const int x) {
+    return x - (x%windowWidth);
+}
+
+int Window::getTopYPosition(int y) {
+    return y - (y%windowHeight);
+}
+
+
 void Window::initializeWindowSize() {
     if (windowWidth == 0 || windowHeight == 0) {
         SDL_DisplayMode displayMode;

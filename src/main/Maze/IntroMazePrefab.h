@@ -49,11 +49,17 @@ struct IntroMazePrefab {
     {
         const Position letterStartPosition = startingPosition + Position(70, 0);
         Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position((float)50, Window::getMiddlePosition().yPos + 25);
-        HalfwayOpenWallRowPrefab{leftWallStartPosition, 36};
+        HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, 36};
         leftWallStartPosition += Position(0, -50);
-        HalfwayOpenWallRowPrefab{leftWallStartPosition, 36};
+        HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, 36};
         LetterMazePrefab{letterStartPosition, 0, 33};
         LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
+
+        HalfwayOpenWallColumnPrefab leftTopMiddleCol{Position(static_cast<int>(topMiddleRow.startOfIncision.xPos), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.yPos))), 7};
+        HalfwayOpenWallColumnPrefab rightTopMiddleCol{Position(static_cast<int>(topMiddleRow.endOfIncision.xPos), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.yPos))), 7};
+
+        HalfwayOpenWallColumnPrefab leftBottomMiddleCol{Position((topMiddleRow.startOfIncision.xPos), bottomMiddleRow.startOfIncision.yPos), 7};
+        HalfwayOpenWallColumnPrefab rightBottomMiddleCol{Position((topMiddleRow.endOfIncision.xPos), bottomMiddleRow.endOfIncision.yPos), 7};
     }
 
 private:
