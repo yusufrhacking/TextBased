@@ -18,12 +18,6 @@ struct VerticalLetterMazePrefab {
         const Size letterSize = dummyLetter.getSurfaceSize();
 
         for(int x = 0; x < length; x++) {
-            if (x==13) {
-                spdlog::critical("NEW PRINTS");
-                for (auto entity: ecsManager->getSystem<LetterPickupSystem>().getRelevantEntities()) {
-                    spdlog::critical("Entity with letter {}", enum_to_char(ecsManager->getComponentFromEntity<LetterComponent>(entity).character));
-                }
-            }
             char letter = 'a' + ((startIndex + x) % 26);
             spdlog::info("Letter {}", letter);
             LetterPrefab{letter, currPosition};
