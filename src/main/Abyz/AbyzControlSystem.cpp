@@ -32,10 +32,12 @@ void AbyzControlSystem::update(double deltaTime) {
         auto position = positionComponent.getPosition();
         auto size = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
         auto& abyz = ecsManager->getComponentFromEntity<AbyzComponent>(entity);
+
+
         auto& healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(entity);
-        if (healthComponent.health < healthComponent.initialHealth/2) {
-            ecsManager->getComponentFromEntity<TextComponent>(entity).text = "Ab";
-        }
+        float healthQuarter = healthComponent.initialHealth / 4.0f;
+        int quartersLeft = 4 - static_cast<int>(static_cast<float>(healthComponent.initialHealth - healthComponent.health) / healthQuarter);
+        ecsManager->getComponentFromEntity<TextComponent>(entity).text = ecsManager->getComponentFromEntity<TextComponent>(entity).text.substr(0, quartersLeft);
 
         bool isInDetectionRange = DistanceCalculator::isInAllowedRange(playerPosition, position, playerSize, size, DETECTION_RADIUS);
         bool isInAttackRange = DistanceCalculator::isInAllowedRange(playerPosition, position, playerSize, size, ATTACK_RADIUS);
