@@ -31,6 +31,9 @@ struct AbyzPrefab{
         int id = abyz.getId();
         ecsManager->addComponentToEntity<OnDeathComponent>(abyz, [this, id]() {
             eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, Entity{id});
+            eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, Entity{id});
+            eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, Entity{id});
+            eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, Entity{id});
         });
         ecsManager->addComponentToEntity<CollisionComponent>(abyz);
     }

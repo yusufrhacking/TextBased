@@ -33,7 +33,6 @@ void AbyzControlSystem::update(double deltaTime) {
         auto size = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
         auto& abyz = ecsManager->getComponentFromEntity<AbyzComponent>(entity);
 
-
         auto& healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(entity);
         float healthQuarter = healthComponent.initialHealth / 4.0f;
         int quartersLeft = 4 - static_cast<int>(static_cast<float>(healthComponent.initialHealth - healthComponent.health) / healthQuarter);
