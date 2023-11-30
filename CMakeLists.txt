@@ -72,7 +72,9 @@ set(SOURCE_FILES
         src/main/UIShow/HideUIEvent.h
         src/main/UIShow/UIControllerSystem.cpp
         src/main/UIShow/UIControllerSystem.h
-        src/main/UIShow/HideLetterBankEvent.h)
+        src/main/UIShow/HideLetterBankEvent.h
+        src/main/UIShow/ShowUIEvent.h
+        src/main/UIShow/ShowLetterBankEvent.h)
 
 
 Message("")

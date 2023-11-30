@@ -19,6 +19,8 @@ GrammarSystem::GrammarSystem() {
     commandKeywords.insert("punch");
     commandKeywords.insert("rotate");
     commandKeywords.insert("hide");
+    commandKeywords.insert("show");
+
 
     subjectKeywords.insert("axe");
     subjectKeywords.insert("wood");

@@ -4,12 +4,19 @@
 #include "CharacterStorageSystem.h"
 #include <string>
 
+#include "../UIShow/ShowLetterBankEvent.h"
+
 extern std::unique_ptr<ECSManager> ecsManager;
 
 extern std::unique_ptr<EventBus> eventBus;
 
 LetterBankRenderSystem::LetterBankRenderSystem() {
     eventBus->listenToEvent<HideLetterBankEvent>(this, &LetterBankRenderSystem::onHide);
+    eventBus->listenToEvent<ShowLetterBankEvent>(this, &LetterBankRenderSystem::onShow);
+}
+
+void LetterBankRenderSystem::onShow(ShowLetterBankEvent& event) {
+    toRender = true;
 }
 
 void LetterBankRenderSystem::onHide(HideLetterBankEvent& event) {

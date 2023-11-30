@@ -8,6 +8,8 @@
 #include "../TextCommands/CharacterSpendEvent.h"
 #include "../TextInput/TextCommandEvent.h"
 #include "HideUIEvent.h"
+#include "ShowLetterBankEvent.h"
+#include "ShowUIEvent.h"
 #include "../HighLevel/ECSManager.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -18,10 +20,17 @@ UIControllerSystem::UIControllerSystem() {
 }
 
 void UIControllerSystem::listenToEvents() {
-    eventBus->listenToEvent<HideUIEvent>(this, &UIControllerSystem::onUIEvent);
+    eventBus->listenToEvent<HideUIEvent>(this, &UIControllerSystem::onHideEvent);
+    eventBus->listenToEvent<ShowUIEvent>(this, &UIControllerSystem::onShowEvent);
 }
 
-void UIControllerSystem::onUIEvent(HideUIEvent& event) {
+void UIControllerSystem::onShowEvent(ShowUIEvent& event) {
+    if(event.toShow == "letterbank") {
+        eventBus->emitEvent<ShowLetterBankEvent>();
+    }
+}
+
+void UIControllerSystem::onHideEvent(HideUIEvent& event) {
     if(event.toHide == "letterbank") {
         eventBus->emitEvent<HideLetterBankEvent>();
     }

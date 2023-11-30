@@ -1,6 +1,7 @@
 #ifndef UICONTROLLERSYSTEM_H
 #define UICONTROLLERSYSTEM_H
 #include "HideUIEvent.h"
+#include "ShowUIEvent.h"
 #include "../ECSObjects/System.h"
 
 
@@ -9,7 +10,8 @@ public:
     UIControllerSystem();
 private:
     void listenToEvents();
-    void onUIEvent(HideUIEvent& event);
+    void onHideEvent(HideUIEvent& event);
+    void onShowEvent(ShowUIEvent& event);
 };
 
 

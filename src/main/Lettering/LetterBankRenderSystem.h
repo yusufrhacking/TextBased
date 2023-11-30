@@ -3,8 +3,8 @@
 #include "../Rendering/DynamicRenderSystem.h"
 #include "../Rendering/FixedRenderSystem.h"
 #include "../UIShow/HideLetterBankEvent.h"
+#include "../UIShow/ShowLetterBankEvent.h"
 
-struct HideUIEvent;
 
 class LetterBankRenderSystem: public FixedRenderSystem {
 private:
@@ -24,6 +24,8 @@ private:
     bool toRender = true;
 
     void onHide(HideLetterBankEvent& event);
+    void onShow(ShowLetterBankEvent& event);
+
 public:
     LetterBankRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer) override;
