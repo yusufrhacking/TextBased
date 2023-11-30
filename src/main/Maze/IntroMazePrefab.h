@@ -21,6 +21,7 @@
 #include "../Lettering/LetterPickupSystem.h"
 #include "../LetterMaze/LetterMazePrefab.h"
 #include "../LetterMaze/VerticalLetterMazePrefab.h"
+#include "../Woodworking/TreePrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -37,6 +38,11 @@ struct IntroMazePrefab {
     static float horizontalRowStartOffset;
     static float BOTTOM_SPACING_MULTIPLIER;
 
+    // static Position relativeTreeCenterSpacing;
+
+    Position relativeTreeCenterSpacing = {static_cast<float>(Window::windowWidth/5.5),  static_cast<float>(Window::windowHeight/6.0)};
+
+
 
     explicit IntroMazePrefab(Position startingPosition)
             : topRow(placeTopRow(startingPosition)),
@@ -45,6 +51,8 @@ struct IntroMazePrefab {
               rightColumn(placeRightColumn(startingPosition)){
         createSkeleton(startingPosition);
 
+        // Position topLeftTreePosition = Window::deriveRelativeTopLeft(startingPosition) / Window::deriveRelativeMiddle(startingPosition);
+        TreePrefab{Window::deriveRelativeTopLeft(startingPosition) + relativeTreeCenterSpacing};
     }
 
     void createSkeleton(Position startingPosition) {

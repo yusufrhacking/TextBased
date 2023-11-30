@@ -35,6 +35,8 @@ class Window {
 
         static Position deriveRelativeBottomLeft(Position position);
 
+        static Position deriveRelativeMiddle(Position position);
+
         static int getLeftXPosition(const int x);
 
         static int getTopYPosition(int y);

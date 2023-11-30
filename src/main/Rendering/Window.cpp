@@ -85,6 +85,11 @@ Position Window::deriveRelativeBottomLeft(Position position){
     return bottomLeft;
 }
 
+Position Window::deriveRelativeMiddle(Position position){
+    Position bottomLeft = deriveRelativeTopLeft(position) / deriveRelativeBottomRight(position);
+    return bottomLeft;
+}
+
 int Window::getLeftXPosition(const int x) {
     return x - (x%windowWidth);
 }
