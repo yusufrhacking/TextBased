@@ -2,6 +2,7 @@
 #define TEXTBASED_INTROMAZEPREFAB_H
 #include <memory>
 
+#include "CentralLetterStreamPrefab.h"
 #include "FourTreePrefab.h"
 #include "../HighLevel/ECSManager.h"
 #include "../Creation/Item.h"
@@ -54,15 +55,7 @@ struct IntroMazePrefab {
 
     void createSkeleton(Position startingPosition) {
         createWalls(startingPosition);
-        createLetters(startingPosition);
-    }
-
-    void createLetters(Position startingPosition) {
-        const Position letterStartPosition = startingPosition + Position(70, 0);
-        LetterStreamPrefab{letterStartPosition, 0, 32};
-        LetterStreamPrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35, true};
-        VerticalLetterStreamPrefab{Position(startingPosition.xPos + 10, static_cast<float>(Window::getTopYPosition(startingPosition.yPos))), 0, 15, true};
-        VerticalLetterStreamPrefab{startingPosition + Position(10, 25), 0, 15};
+        CentralLetterStreamPrefab{startingPosition};
     }
 
     void createWalls(Position startingPosition) {

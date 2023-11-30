@@ -80,7 +80,8 @@ set(SOURCE_FILES
         src/main/Woodworking/AxeFlipSystem.h
         src/main/UIShow/HideHealthBarEvent.h
         src/main/UIShow/ShowHealthBarEvent.h
-        src/main/Maze/FourTreePrefab.h)
+        src/main/Maze/FourTreePrefab.h
+        src/main/Maze/CentralLetterStreamPrefab.h)
 
 
 Message("")
