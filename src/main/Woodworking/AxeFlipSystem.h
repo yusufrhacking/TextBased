@@ -1,13 +1,13 @@
 #ifndef AXEFLIPSYSTEM_H
 #define AXEFLIPSYSTEM_H
-#include "AxeFlipEvent.h"
+#include "FlipEvent.h"
 #include "../ECSObjects/System.h"
 
 
 class AxeFlipSystem: public System {
 private:
     void listenToEvents();
-    void onAxeFlip(AxeFlipEvent& event);
+    void onAxeFlip(FlipEvent& event);
 public:
     AxeFlipSystem();
 };

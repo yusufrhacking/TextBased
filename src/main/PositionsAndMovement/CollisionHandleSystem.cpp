@@ -37,7 +37,7 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
     }
 }
 
-std::vector<Entity> CollisionHandleSystem::getChildEntities(const Entity& entity) {
+std::set<Entity> CollisionHandleSystem::getChildEntities(const Entity& entity) {
     try {
         auto& childrenComponent = ecsManager->getComponentFromEntity<TiedChildComponent>(entity);
         return childrenComponent.entities;
@@ -46,7 +46,7 @@ std::vector<Entity> CollisionHandleSystem::getChildEntities(const Entity& entity
     }
 }
 
-void CollisionHandleSystem::revertPosition(const Entity& entity, const std::vector<Entity>& childEntities) {
+void CollisionHandleSystem::revertPosition(const Entity& entity, const std::set<Entity>& childEntities) {
     auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     positionComponent.revertPosition();
 

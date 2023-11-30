@@ -16,7 +16,7 @@
 #include "../MainPlayer/RotateEvent.h"
 #include "../UIShow/HideUIEvent.h"
 #include "../UIShow/ShowUIEvent.h"
-#include "..\Woodworking\AxeFlipEvent.h"
+#include "../Woodworking/FlipEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -55,6 +55,6 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
     } else if (command == "show") {
         eventBus->emitEvent<ShowUIEvent>(subject);
     } else if (command == "flip") {
-        eventBus->emitEvent<AxeFlipEvent>(subject);
+        eventBus->emitEvent<FlipEvent>(subject);
     }
 }

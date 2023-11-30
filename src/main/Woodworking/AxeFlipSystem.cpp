@@ -4,6 +4,7 @@
 #include "../MainPlayer/TiedChildComponent.h"
 #include "../Maze/HalfwayOpenWallColumnPrefab.h"
 
+
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -13,10 +14,13 @@ AxeFlipSystem::AxeFlipSystem() {
 }
 
 void AxeFlipSystem::listenToEvents() {
-    eventBus->listenToEvent<AxeFlipEvent>(this, &AxeFlipSystem::onAxeFlip);
+    eventBus->listenToEvent<FlipEvent>(this, &AxeFlipSystem::onAxeFlip);
 }
 
-void AxeFlipSystem::onAxeFlip(AxeFlipEvent& event) {
+void AxeFlipSystem::onAxeFlip(FlipEvent& event) {
+    if (event.flipped != "axe") {
+        return;
+    }
     Entity mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto tiedChildren = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
 

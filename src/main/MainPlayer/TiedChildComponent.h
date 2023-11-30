@@ -2,14 +2,15 @@
 #define TEXTBASED_TIEDCHILDCOMPONENT_H
 #include "../ECSObjects/Entity.h"
 #include <vector>
+#include <set>
 
 struct TiedChildComponent{
-    std::vector<Entity> entities{};
+    std::set<Entity> entities{};
 
     TiedChildComponent() = default;
 
     explicit TiedChildComponent(Entity e){
-        entities.push_back(e);
+        entities.insert(e);
     }
 
 };
