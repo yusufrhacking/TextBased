@@ -40,6 +40,10 @@ struct Position {
         this->yPos += other.yPos;
         return *this;
     }
+
+    Position operator/(const Position& other) const{
+        return {(xPos + other.xPos) / 2, (yPos + other.yPos) / 2};
+    }
 };
 
 
