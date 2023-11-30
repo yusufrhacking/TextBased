@@ -11,6 +11,7 @@ enum class AxeConfig {
 struct AxeComponent{
     static Position AXE_POSITION_OFFSET;
     int axeDamageToTree = 3;
+    AxeConfig config = AxeConfig::RIGHT;
     AxeComponent() = default;
 };
 

@@ -29,6 +29,7 @@
 #include "../Levels/IntroPac.h"
 #include "../MainPlayer/PlayerRotateSystem.h"
 #include "../UIShow/UIControllerSystem.h"
+#include "../Woodworking/AxeFlipSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -70,6 +71,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AbyzControlSystem>();
     ecsManager->addSystem<PlayerRotateSystem>();
     ecsManager->addSystem<UIControllerSystem>();
+    ecsManager->addSystem<AxeFlipSystem>();
 }
 
 void GameManager::update(double deltaTime) {

@@ -1,4 +1,6 @@
 #include "AxeFlipSystem.h"
+
+#include "AxeComponent.h"
 #include "../EventSystem/EventBus.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../MainPlayer/TiedChildComponent.h"
@@ -22,7 +24,22 @@ void AxeFlipSystem::onAxeFlip(FlipEvent& event) {
         return;
     }
     Entity mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
-    auto tiedChildren = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
+    Size mainPlayerSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
+    auto const& tiedChildren = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
+    for (const Entity child : tiedChildren) {
+        if(ecsManager->hasComponent<AxeComponent>(child)) {
+            auto& axeComponent = ecsManager->getComponentFromEntity<AxeComponent>(child);
+            AxeConfig config = axeComponent.config;
+            if (config == AxeConfig::RIGHT) {
+                ecsManager->getComponentFromEntity<PositionComponent>(child).shiftPosition(-1*((int)mainPlayerSize.width), 0);
+                axeComponent.config = AxeConfig::LEFT;
+            }
+            else if (config == AxeConfig::LEFT) {
+                ecsManager->getComponentFromEntity<PositionComponent>(child).shiftPosition((mainPlayerSize.width), 0);
+                axeComponent.config = AxeConfig::RIGHT;
+            }
+        }
+    }
 
 }
 
