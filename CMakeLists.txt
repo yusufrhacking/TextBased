@@ -77,7 +77,9 @@ set(SOURCE_FILES
         src/main/UIShow/ShowLetterBankEvent.h
         src/main/Woodworking/FlipEvent.h
         src/main/Woodworking/AxeFlipSystem.cpp
-        src/main/Woodworking/AxeFlipSystem.h)
+        src/main/Woodworking/AxeFlipSystem.h
+        src/main/UIShow/HideHealthBarEvent.h
+        src/main/UIShow/ShowHealthBarEvent.h)
 
 
 Message("")

@@ -3,6 +3,7 @@
 
 #include <spdlog/spdlog.h>
 
+#include "HideHealthBarEvent.h"
 #include "HideLetterBankEvent.h"
 #include "../EventSystem/EventBus.h"
 #include "../TextCommands/CharacterSpendEvent.h"
@@ -11,6 +12,7 @@
 #include "ShowLetterBankEvent.h"
 #include "ShowUIEvent.h"
 #include "../HighLevel/ECSManager.h"
+#include "ShowHealthBarEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -27,12 +29,16 @@ void UIControllerSystem::listenToEvents() {
 void UIControllerSystem::onShowEvent(ShowUIEvent& event) {
     if(event.toShow == "letterbank") {
         eventBus->emitEvent<ShowLetterBankEvent>();
+    } else if (event.toShow == "healthbar") {
+        eventBus->emitEvent<ShowHealthBarEvent>();
     }
 }
 
 void UIControllerSystem::onHideEvent(HideUIEvent& event) {
     if(event.toHide == "letterbank") {
         eventBus->emitEvent<HideLetterBankEvent>();
+    } else if (event.toHide == "healthbar") {
+        eventBus->emitEvent<HideHealthBarEvent>();
     }
 }
 
