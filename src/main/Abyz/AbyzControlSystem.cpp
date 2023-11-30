@@ -10,7 +10,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 const float ATTACK_RADIUS = 10;
-const float DETECTION_MULTIPLIER = 10;
+const float DETECTION_MULTIPLIER = 50;
 const float DETECTION_RADIUS = ATTACK_RADIUS * DETECTION_MULTIPLIER;
 const float ATTACK_COOLDOWN = 5.0f;
 const float RESUME_CHASE_AFTER_ATTACK = 2.0f;

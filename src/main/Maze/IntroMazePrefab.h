@@ -1,7 +1,5 @@
 #ifndef TEXTBASED_INTROMAZEPREFAB_H
 #define TEXTBASED_INTROMAZEPREFAB_H
-
-
 #include <memory>
 #include "../HighLevel/ECSManager.h"
 #include "../Creation/Item.h"
@@ -22,6 +20,7 @@
 #include "../LetterMaze/LetterStreamPrefab.h"
 #include "../LetterMaze/VerticalLetterStreamPrefab.h"
 #include "../Woodworking/TreePrefab.h"
+#include "../Abyz/AbyzPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -48,12 +47,23 @@ struct IntroMazePrefab {
         Size treeSize = dummyTree.getSurfaceSize();
         Position topLeftTreePosition = Window::deriveRelativeTopLeft(startingPosition) + relativeTreeCenterSpacing;
         TreePrefab topLeftTree{topLeftTreePosition};
+        Position topLeftAbyzPosition = Window::deriveRelativeTopLeft(startingPosition) / topLeftTreePosition;
+        AbyzPrefab{topLeftAbyzPosition};
+
         Position bottomLeftTreePosition = topLeftTreePosition + Position(0, Window::windowHeight/2);
         TreePrefab bottomLeftTree{bottomLeftTreePosition};
+        Position bottomleftAbyzPosition = Window::deriveRelativeBottomLeft(startingPosition) / bottomLeftTreePosition;
+        AbyzPrefab{bottomleftAbyzPosition};
+
         Position topRightTreePosition = topLeftTreePosition + Position(Window::windowWidth/2 + treeSize.width/2, 0);
         TreePrefab topRightTree{topRightTreePosition};
+        Position topRightAbyzPosition = Window::deriveRelativeTopRight(startingPosition) / topRightTreePosition;
+        AbyzPrefab{topRightAbyzPosition};
+
         Position bottomRightTreePosition = topRightTreePosition + Position(0, Window::windowHeight/2);
         TreePrefab bottomRightTree{bottomRightTreePosition};
+        Position bottomRightAbyzPosition = Window::deriveRelativeBottomRight(startingPosition) / bottomRightTreePosition;
+        AbyzPrefab{bottomRightAbyzPosition};
     }
 
     explicit IntroMazePrefab(Position startingPosition)
@@ -63,7 +73,6 @@ struct IntroMazePrefab {
               rightColumn(placeRightColumn(startingPosition)){
         createSkeleton(startingPosition);
         createTrees(startingPosition);
-
     }
 
     void createSkeleton(Position startingPosition) {
