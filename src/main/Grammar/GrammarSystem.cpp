@@ -20,6 +20,7 @@ GrammarSystem::GrammarSystem() {
     commandKeywords.insert("rotate");
     commandKeywords.insert("hide");
     commandKeywords.insert("show");
+    commandKeywords.insert("flip");
 
 
     subjectKeywords.insert("axe");

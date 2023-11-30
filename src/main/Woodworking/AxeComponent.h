@@ -3,6 +3,11 @@
 
 #include "../PositionsAndMovement/Position.h"
 
+enum class AxeConfig {
+    RIGHT,
+    LEFT
+};
+
 struct AxeComponent{
     static Position AXE_POSITION_OFFSET;
     int axeDamageToTree = 3;
