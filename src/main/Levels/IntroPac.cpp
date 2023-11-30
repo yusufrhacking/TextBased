@@ -25,6 +25,10 @@ IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition
     witt = ecsManager->createEntity();
     createPlayer();
     IntroMazePrefab{startingPosition};
+    // IntroMazePrefab{startingPosition + Position(0, Window::windowHeight)};
+    // IntroMazePrefab{startingPosition + Position(Window::windowWidth, 0)};
+    // IntroMazePrefab{startingPosition + Position(0, -Window::windowHeight)};
+    // IntroMazePrefab{startingPosition + Position(-Window::windowWidth, 0)};
     // const Position letterStartPosition = startingPosition + Position(70, 0);
     // Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position((float)50, Window::getMiddlePosition().yPos + 25);
     // HalfwayOpenWallRowPrefab{leftWallStartPosition, 36};
