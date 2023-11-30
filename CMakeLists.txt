@@ -79,7 +79,8 @@ set(SOURCE_FILES
         src/main/Woodworking/AxeFlipSystem.cpp
         src/main/Woodworking/AxeFlipSystem.h
         src/main/UIShow/HideHealthBarEvent.h
-        src/main/UIShow/ShowHealthBarEvent.h)
+        src/main/UIShow/ShowHealthBarEvent.h
+        src/main/Maze/FourTreePrefab.h)
 
 
 Message("")
