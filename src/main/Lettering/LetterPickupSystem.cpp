@@ -31,14 +31,9 @@ void LetterPickupSystem::update(double deltaTime) {
                                                               mainPlayerSurfaceSize, surfaceSize, 5);
         if (isInRange){
             auto letter = ecsManager->getComponentFromEntity<LetterComponent>(entity).character;
-            spdlog::info("Entity with letter {}", enum_to_char(ecsManager->getComponentFromEntity<LetterComponent>(entity).character));
-            spdlog::trace("Pickupable Letter");
+            spdlog::trace("Entity with let ter {} was picked up", enum_to_char(ecsManager->getComponentFromEntity<LetterComponent>(entity).character));
             eventBus->emitEvent<CharacterDepositEvent>(letter);
             ecsManager->killEntity(entity);
-            // spdlog::critical("NEW PRINTS");
-            // for (auto entity: getRelevantEntities()) {
-            //     spdlog::info("Entity with letter {}", enum_to_char(ecsManager->getComponentFromEntity<LetterComponent>(entity).character));
-            // }
         }
 
     }

@@ -20,19 +20,36 @@ struct HalfwayOpenWallRowPrefab {
     explicit HalfwayOpenWallRowPrefab(Position position, int length) {
         auto wallSize = TextComponent(TextGenerator::getHorizontalWallText()).getSurfaceSize();
         auto currPosition = position;
-        for (int x = 0; x < length; x++) {
-            Position wallAdjustment{(float)(wallSize.width), (float)0};
-            currPosition = currPosition + wallAdjustment;
-            if (x == length / 2 || x == (length / 2) - 1 || x == (length / 2) + 1) {
+        Position wallAdjustment{(float)(wallSize.width), (float)0};
+        for (int x=0; x<length; x++) {
+            if (x == (length / 2) || x == (length / 2) - 1 || x == (length / 2) + 1) {
                 if (startOfIncision.xPos == -1){
                     startOfIncision = currPosition;
                 }
-                endOfIncision = currPosition + wallAdjustment;
+                currPosition = currPosition + wallAdjustment;
+                endOfIncision = currPosition;
                 continue;
             }
             HorizontalWallPrefab{currPosition};
+            currPosition = currPosition + wallAdjustment;
         }
     }
+    // explicit HalfwayOpenWallRowPrefab(Position position, int length) {
+    //     auto wallSize = TextComponent(TextGenerator::getHorizontalWallText()).getSurfaceSize();
+    //     auto currPosition = position;
+    //     for (int x = 0; x < length; x++) {
+    //         Position wallAdjustment{(float)(wallSize.width), (float)0};
+    //         currPosition = currPosition + wallAdjustment;
+    //         if (x == length / 2 || x == (length / 2) - 1 || x == (length / 2) + 1) {
+    //             if (startOfIncision.xPos == -1){
+    //                 startOfIncision = currPosition;
+    //             }
+    //             endOfIncision = currPosition + wallAdjustment;
+    //             continue;
+    //         }
+    //         HorizontalWallPrefab{currPosition};
+    //     }
+    // }
 
 
 };

@@ -19,7 +19,6 @@ struct VerticalLetterMazePrefab {
 
         for(int x = 0; x < length; x++) {
             char letter = 'a' + ((startIndex + x) % 26);
-            spdlog::info("Letter {}", letter);
             LetterPrefab{letter, currPosition};
             currPosition += {static_cast<float>(0), static_cast<float>(letterSize.height) * 2};
         }

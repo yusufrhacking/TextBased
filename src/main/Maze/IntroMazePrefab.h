@@ -25,10 +25,10 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 struct IntroMazePrefab {
-    // HalfwayOpenWallRowPrefab topRow;
-    // HalfwayOpenWallColumnPrefab leftColumn;
-    // HalfwayOpenWallRowPrefab bottomRow;
-    // HalfwayOpenWallColumnPrefab rightColumn;
+    HalfwayOpenWallRowPrefab topRow;
+    HalfwayOpenWallColumnPrefab leftColumn;
+    HalfwayOpenWallRowPrefab bottomRow;
+    HalfwayOpenWallColumnPrefab rightColumn;
     // HalfwayOpenWallRowPrefab middleRow;
     // HalfwayOpenWallColumnPrefab leftTopMiddleColumn;
     // HalfwayOpenWallColumnPrefab rightTopMiddleColumn;
@@ -36,24 +36,28 @@ struct IntroMazePrefab {
     // HalfwayOpenWallColumnPrefab rightBottomMiddleColumn;
 
     static int verticalLengthInWalls;
-    static int horizontalLengthInWalls;
+    static int outerHorizontalLengthInWalls;
+    static int innerHorizontalLengthInWalls;
+
+    static float horizontalRowStartOffset;
+
 
     explicit IntroMazePrefab(Position startingPosition)
-            // : topRow(calculateTopRow(startingPosition)),
-            //   leftColumn(calculateLeftColumn(startingPosition)),
-            //   bottomRow(calculateBottomRow(startingPosition)),
-            //   rightColumn(calculateRightColumn(startingPosition)),
-            //   middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
-            //   leftTopMiddleColumn(topRow.startOfIncision, 7),
-            //   rightTopMiddleColumn(topRow.endOfIncision, 7),
-            //   leftBottomMiddleColumn(middleRow.startOfIncision, 7),
-            //   rightBottomMiddleColumn(middleRow.endOfIncision, 7)
+            : topRow(calculateTopRow(startingPosition)),
+              leftColumn(calculateLeftColumn(startingPosition)),
+              bottomRow(calculateBottomRow(startingPosition)),
+              rightColumn(calculateRightColumn(startingPosition))
+              // middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
+              // leftTopMiddleColumn(topRow.startOfIncision, 7),
+              // rightTopMiddleColumn(topRow.endOfIncision, 7),
+              // leftBottomMiddleColumn(middleRow.startOfIncision, 7),
+              // rightBottomMiddleColumn(middleRow.endOfIncision, 7)
     {
         const Position letterStartPosition = startingPosition + Position(70, 0);
-        Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position((float)50, Window::getMiddlePosition().yPos + 25);
-        HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, horizontalLengthInWalls};
+        Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position(horizontalRowStartOffset, Window::getMiddlePosition().yPos + 25);
+        HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, innerHorizontalLengthInWalls};
         leftWallStartPosition += Position(0, -50);
-        HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, horizontalLengthInWalls};
+        HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, innerHorizontalLengthInWalls};
         LetterMazePrefab{letterStartPosition, 0, 32};
         LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
 
@@ -70,8 +74,8 @@ struct IntroMazePrefab {
 
 private:
     static HalfwayOpenWallRowPrefab calculateTopRow(Position startingPosition) {
-        Position wallStartPosition = Window::deriveRelativeTopLeft(startingPosition);
-        return HalfwayOpenWallRowPrefab{wallStartPosition, horizontalLengthInWalls};
+        Position wallStartPosition = {Window::deriveRelativeTopLeft(startingPosition).xPos + horizontalRowStartOffset, Window::deriveRelativeTopLeft(startingPosition).yPos};
+        return HalfwayOpenWallRowPrefab{wallStartPosition, outerHorizontalLengthInWalls};
     }
 
     static HalfwayOpenWallColumnPrefab calculateLeftColumn(Position startingPosition) {
@@ -82,11 +86,12 @@ private:
     static HalfwayOpenWallRowPrefab calculateBottomRow(Position startingPosition) {
         Position bottomLeft = Window::deriveRelativeBottomLeft(startingPosition);
         Position bottomWallVisibilityAdjustment = {
-                (float)VerticalWallPrefab::getSize().width,
+                (float)VerticalWallPrefab::getSize().width + horizontalRowStartOffset,
                 -3 * (float)HorizontalWallPrefab::getSize().height
         };
         Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
-        return HalfwayOpenWallRowPrefab{newBottomLeft, horizontalLengthInWalls};
+        spdlog::info("new bottom left x: {}", bottomLeft.xPos);
+        return HalfwayOpenWallRowPrefab{newBottomLeft, outerHorizontalLengthInWalls};
     }
 
     static HalfwayOpenWallColumnPrefab calculateRightColumn(Position startingPosition) {

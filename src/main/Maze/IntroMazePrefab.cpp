@@ -1,4 +1,6 @@
 #include "IntroMazePrefab.h"
 
 int IntroMazePrefab::verticalLengthInWalls = 15;
-int IntroMazePrefab::horizontalLengthInWalls = 36;
+int IntroMazePrefab::outerHorizontalLengthInWalls = 40;
+int IntroMazePrefab::innerHorizontalLengthInWalls = 40;
+float IntroMazePrefab::horizontalRowStartOffset = 15.0;
