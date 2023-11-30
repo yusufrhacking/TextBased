@@ -43,6 +43,18 @@ struct IntroMazePrefab {
     Position relativeTreeCenterSpacing = {static_cast<float>(Window::windowWidth/5.5),  static_cast<float>(Window::windowHeight/6.0)};
 
 
+    void createTrees(Position startingPosition) {
+        TextComponent dummyTree{TextGenerator::getTreeText()};
+        Size treeSize = dummyTree.getSurfaceSize();
+        Position topLeftTreePosition = Window::deriveRelativeTopLeft(startingPosition) + relativeTreeCenterSpacing;
+        TreePrefab topLeftTree{topLeftTreePosition};
+        Position bottomLeftTreePosition = topLeftTreePosition + Position(0, Window::windowHeight/2);
+        TreePrefab bottomLeftTree{bottomLeftTreePosition};
+        Position topRightTreePosition = topLeftTreePosition + Position(Window::windowWidth/2 + treeSize.width/2, 0);
+        TreePrefab topRightTree{topRightTreePosition};
+        Position bottomRightTreePosition = topRightTreePosition + Position(0, Window::windowHeight/2);
+        TreePrefab bottomRightTree{bottomRightTreePosition};
+    }
 
     explicit IntroMazePrefab(Position startingPosition)
             : topRow(placeTopRow(startingPosition)),
@@ -50,15 +62,7 @@ struct IntroMazePrefab {
               bottomRow(placeBottomRow(startingPosition)),
               rightColumn(placeRightColumn(startingPosition)){
         createSkeleton(startingPosition);
-
-        TextComponent dummyTree{TextGenerator::getTreeText()};
-        Size treeSize = dummyTree.getSurfaceSize();
-        Position topLeftTreePosition = Window::deriveRelativeTopLeft(startingPosition) + relativeTreeCenterSpacing;
-        TreePrefab topLeftTree{topLeftTreePosition};
-        Position topRightTreePosition = topLeftTreePosition + Position(Window::windowWidth/2 + treeSize.width/2, 0);
-        TreePrefab topRightTree{topRightTreePosition};
-        Position bottomRightTreePosition = topRightTreePosition + Position(0, Window::windowHeight/2);
-
+        createTrees(startingPosition);
 
     }
 
