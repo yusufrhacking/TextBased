@@ -28,6 +28,7 @@
 #include "../Levels/FullBasicLevel.h"
 #include "../Levels/IntroPac.h"
 #include "../MainPlayer/PlayerRotateSystem.h"
+#include "../UIShow/UIControllerSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -68,6 +69,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<PendingDeathSystem>();
     ecsManager->addSystem<AbyzControlSystem>();
     ecsManager->addSystem<PlayerRotateSystem>();
+    ecsManager->addSystem<UIControllerSystem>();
 }
 
 void GameManager::update(double deltaTime) {

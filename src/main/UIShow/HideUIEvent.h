@@ -5,11 +5,10 @@
 
 #include "../EventSystem/Event.h"
 
-struct HideUIEvent: Event {
+class HideUIEvent: public Event {
+public:
     std::string toHide;
-    explicit HideUIEvent(std::string toHide): toHide(std::move(toHide)) {
-
-    }
+    explicit HideUIEvent(std::string toHide): toHide(std::move(toHide)){}
 };
 
 #endif //HIDEUIEVENT_H

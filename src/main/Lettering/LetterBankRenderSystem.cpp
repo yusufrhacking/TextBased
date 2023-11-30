@@ -6,7 +6,18 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
+extern std::unique_ptr<EventBus> eventBus;
+
+LetterBankRenderSystem::LetterBankRenderSystem() {
+    eventBus->listenToEvent<HideLetterBankEvent>(this, &LetterBankRenderSystem::onHide);
+}
+
+void LetterBankRenderSystem::onHide(HideLetterBankEvent& event) {
+    toRender = false;
+}
+
 void LetterBankRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
+    if (!toRender) return;
     renderLetterBox(renderer);
     renderLetters(renderer);
 }

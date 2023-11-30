@@ -2,6 +2,9 @@
 #define TEXTBASED_LETTERBANKRENDERSYSTEM_H
 #include "../Rendering/DynamicRenderSystem.h"
 #include "../Rendering/FixedRenderSystem.h"
+#include "../UIShow/HideLetterBankEvent.h"
+
+struct HideUIEvent;
 
 class LetterBankRenderSystem: public FixedRenderSystem {
 private:
@@ -18,8 +21,11 @@ private:
             Position(TextComponent::getTextWidthInChars(letterBankText) * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
     float LETTER_X_OFFSET = 40;
     float LETTER_Y_OFFSET = 25;
+    bool toRender = true;
+
+    void onHide(HideLetterBankEvent& event);
 public:
-    LetterBankRenderSystem() = default;
+    LetterBankRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer) override;
 
     void renderLetterBox(const std::shared_ptr<Renderer> &renderer);

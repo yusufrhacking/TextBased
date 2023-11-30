@@ -14,8 +14,8 @@
 #include "../Attacking/AttemptedAttackEvent.h"
 #include "../Woodworking/PunchEvent.h"
 #include "../MainPlayer/RotateEvent.h"
+#include "../UIShow/HideUIEvent.h"
 
-struct HideUIEvent;
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 

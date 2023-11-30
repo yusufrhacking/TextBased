@@ -18,9 +18,14 @@ GrammarSystem::GrammarSystem() {
     commandKeywords.insert("attack");
     commandKeywords.insert("punch");
     commandKeywords.insert("rotate");
+    commandKeywords.insert("hide");
 
     subjectKeywords.insert("axe");
     subjectKeywords.insert("wood");
+    subjectKeywords.insert("terminal");
+    subjectKeywords.insert("letterbank");
+    subjectKeywords.insert("inventory");
+    subjectKeywords.insert("healthbar");
     listenToEvents();
 }
 
