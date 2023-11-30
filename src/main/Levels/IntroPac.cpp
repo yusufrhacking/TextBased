@@ -14,7 +14,7 @@
 #include "../MainPlayer/RotateComponent.h"
 #include <memory>
 
-#include "../LetterMaze/LetterMazePrefab.h"
+#include "../LetterMaze/LetterStreamPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
