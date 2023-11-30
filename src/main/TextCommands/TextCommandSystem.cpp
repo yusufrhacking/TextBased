@@ -15,6 +15,7 @@
 #include "../Woodworking/PunchEvent.h"
 #include "../MainPlayer/RotateEvent.h"
 
+struct HideUIEvent;
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -47,5 +48,7 @@ void TextCommandSystem::onCommand(TextCommandEvent &event) {
         eventBus->emitEvent<PunchEvent>();
     } else if (command == "rotate") {
         eventBus->emitEvent<RotateEvent>();
+    } else if (command == "hide") {
+        eventBus->emitEvent<HideUIEvent>(subject);
     }
 }
