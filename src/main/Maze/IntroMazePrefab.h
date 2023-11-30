@@ -51,8 +51,15 @@ struct IntroMazePrefab {
               rightColumn(placeRightColumn(startingPosition)){
         createSkeleton(startingPosition);
 
-        // Position topLeftTreePosition = Window::deriveRelativeTopLeft(startingPosition) / Window::deriveRelativeMiddle(startingPosition);
-        TreePrefab{Window::deriveRelativeTopLeft(startingPosition) + relativeTreeCenterSpacing};
+        TextComponent dummyTree{TextGenerator::getTreeText()};
+        Size treeSize = dummyTree.getSurfaceSize();
+        Position topLeftTreePosition = Window::deriveRelativeTopLeft(startingPosition) + relativeTreeCenterSpacing;
+        TreePrefab topLeftTree{topLeftTreePosition};
+        Position topRightTreePosition = topLeftTreePosition + Position(Window::windowWidth/2 + treeSize.width/2, 0);
+        TreePrefab topRightTree{topRightTreePosition};
+        Position bottomRightTreePosition = topRightTreePosition + Position(0, Window::windowHeight/2);
+
+
     }
 
     void createSkeleton(Position startingPosition) {
