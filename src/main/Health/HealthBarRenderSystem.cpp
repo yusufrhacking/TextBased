@@ -5,7 +5,6 @@
 
 extern std::unique_ptr<EventBus> eventBus;
 
-
 void HealthBarRenderSystem::render(const std::shared_ptr<Renderer> &renderer, const HealthComponent &playerHealth) {
     if (!toRender) {
         return;
@@ -14,7 +13,7 @@ void HealthBarRenderSystem::render(const std::shared_ptr<Renderer> &renderer, co
     for(int x=0; x<playerHealth.health; x++){
         renderedText += heart;
     }
-    renderer->renderFixedText(healthBarStartingPosition, TextComponent(renderedText), StyleComponent(Type::PLAIN_TEXT));
+    renderer->renderFixedText(healthBarStartingPosition, TextComponent(renderedText), StyleComponent(Type::BRICOLEUR_TERMINAL_TEXT));
 }
 
 HealthBarRenderSystem::HealthBarRenderSystem() {

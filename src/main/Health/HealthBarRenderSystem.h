@@ -9,7 +9,7 @@
 
 class HealthBarRenderSystem: public FixedRenderSystem {
 private:
-    Position healthBarStartingPosition{600, 0};
+    Position healthBarStartingPosition{650, 0};
     std::string heart = "<3";
     bool toRender = false;
     void onHide(HideHealthBarEvent& event);
