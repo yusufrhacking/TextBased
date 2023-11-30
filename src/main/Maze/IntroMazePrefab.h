@@ -29,37 +29,28 @@ struct IntroMazePrefab {
     HalfwayOpenWallColumnPrefab leftColumn;
     HalfwayOpenWallRowPrefab bottomRow;
     HalfwayOpenWallColumnPrefab rightColumn;
-    // HalfwayOpenWallRowPrefab middleRow;
-    // HalfwayOpenWallColumnPrefab leftTopMiddleColumn;
-    // HalfwayOpenWallColumnPrefab rightTopMiddleColumn;
-    // HalfwayOpenWallColumnPrefab leftBottomMiddleColumn;
-    // HalfwayOpenWallColumnPrefab rightBottomMiddleColumn;
 
     static int verticalLengthInWalls;
     static int outerHorizontalLengthInWalls;
     static int innerHorizontalLengthInWalls;
 
     static float horizontalRowStartOffset;
+    static float BOTTOM_SPACING_MULTIPLIER;
 
 
-    explicit IntroMazePrefab(Position startingPosition)
-            : topRow(calculateTopRow(startingPosition)),
-              leftColumn(calculateLeftColumn(startingPosition)),
-              bottomRow(calculateBottomRow(startingPosition)),
-              rightColumn(calculateRightColumn(startingPosition))
-              // middleRow(leftColumn.positionOfIncision, horizontalLengthInWalls),
-              // leftTopMiddleColumn(topRow.startOfIncision, 7),
-              // rightTopMiddleColumn(topRow.endOfIncision, 7),
-              // leftBottomMiddleColumn(middleRow.startOfIncision, 7),
-              // rightBottomMiddleColumn(middleRow.endOfIncision, 7)
-    {
+    void createLetters(Position startingPosition) {
         const Position letterStartPosition = startingPosition + Position(70, 0);
+        LetterMazePrefab{letterStartPosition, 0, 32};
+        LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
+    }
+
+    void createSkeleton(Position startingPosition) {
         Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position(horizontalRowStartOffset, Window::getMiddlePosition().yPos + 25);
         HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, innerHorizontalLengthInWalls};
         leftWallStartPosition += Position(0, -50);
         HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, innerHorizontalLengthInWalls};
-        LetterMazePrefab{letterStartPosition, 0, 32};
-        LetterMazePrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35};
+
+        createLetters(startingPosition);
 
         HalfwayOpenWallColumnPrefab leftTopMiddleCol{Position(static_cast<int>(topMiddleRow.startOfIncision.xPos), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.yPos))), 7};
         VerticalLetterMazePrefab{Position(startingPosition.xPos + 10, static_cast<float>(Window::getTopYPosition(startingPosition.yPos))), 0, 15};
@@ -69,32 +60,40 @@ struct IntroMazePrefab {
         HalfwayOpenWallColumnPrefab leftBottomMiddleCol{Position((topMiddleRow.startOfIncision.xPos), bottomMiddleRow.startOfIncision.yPos), 7};
         VerticalLetterMazePrefab{startingPosition + Position(10, 25), 0, 15};
         HalfwayOpenWallColumnPrefab rightBottomMiddleCol{Position((topMiddleRow.endOfIncision.xPos), bottomMiddleRow.endOfIncision.yPos), 7};
+    }
 
+    explicit IntroMazePrefab(Position startingPosition)
+            : topRow(placeTopRow(startingPosition)),
+              leftColumn(placeLeftColumn(startingPosition)),
+              bottomRow(placeBottomRow(startingPosition)),
+              rightColumn(placeRightColumn(startingPosition)){
+        createSkeleton(startingPosition);
     }
 
 private:
-    static HalfwayOpenWallRowPrefab calculateTopRow(Position startingPosition) {
+    static HalfwayOpenWallRowPrefab placeTopRow(Position startingPosition) {
         Position wallStartPosition = {Window::deriveRelativeTopLeft(startingPosition).xPos + horizontalRowStartOffset, Window::deriveRelativeTopLeft(startingPosition).yPos};
         return HalfwayOpenWallRowPrefab{wallStartPosition, outerHorizontalLengthInWalls};
     }
 
-    static HalfwayOpenWallColumnPrefab calculateLeftColumn(Position startingPosition) {
+    static HalfwayOpenWallColumnPrefab placeLeftColumn(Position startingPosition) {
         Position wallStartPosition = Window::deriveRelativeTopLeft(startingPosition);
         return HalfwayOpenWallColumnPrefab{wallStartPosition, verticalLengthInWalls};
     }
 
-    static HalfwayOpenWallRowPrefab calculateBottomRow(Position startingPosition) {
+    static HalfwayOpenWallRowPrefab placeBottomRow(Position startingPosition) {
         Position bottomLeft = Window::deriveRelativeBottomLeft(startingPosition);
+        BOTTOM_SPACING_MULTIPLIER = -3;
         Position bottomWallVisibilityAdjustment = {
                 (float)VerticalWallPrefab::getSize().width + horizontalRowStartOffset,
-                -3 * (float)HorizontalWallPrefab::getSize().height
+                BOTTOM_SPACING_MULTIPLIER * (float)HorizontalWallPrefab::getSize().height
         };
         Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
         spdlog::info("new bottom left x: {}", bottomLeft.xPos);
         return HalfwayOpenWallRowPrefab{newBottomLeft, outerHorizontalLengthInWalls};
     }
 
-    static HalfwayOpenWallColumnPrefab calculateRightColumn(Position startingPosition) {
+    static HalfwayOpenWallColumnPrefab placeRightColumn(Position startingPosition) {
         Position topRight = Window::deriveRelativeTopRight(startingPosition);
         Position rightWallVisibilityAdjustment = {
                 (float)(2 * VerticalWallPrefab::getSize().width), 0.0
