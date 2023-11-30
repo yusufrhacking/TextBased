@@ -7,7 +7,7 @@
 
 class AttackAttemptSystem: public System {
 private:
-    const float ATTACK_RANGE = 10;
+    const float ATTACK_RANGE = 5;
     void listenToEvents();
     void onAttackAttempt(AttemptedAttackEvent& event);
 public:

@@ -28,6 +28,11 @@ std::string TextGenerator::getMountainText() {
     return text;
 }
 
+std::string TextGenerator::getPickAxeText() {
+    std::string text = " e \naxe\n a \n k \n c \n i \n p";
+    return text;
+}
+
 std::string TextGenerator::getXOffCenterOffset(int diff, std::string centerOffset){
     std::string newOffset;
     for (int space=0; space < centerOffset.size() - diff; space++){

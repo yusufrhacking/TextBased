@@ -29,6 +29,8 @@ void AttackAttemptSystem::onAttackAttempt(AttemptedAttackEvent &event) {
     const auto &attackerSurface = ecsManager->getComponentFromEntity<TextComponent>(event.attacker).getSurfaceSize();
     const auto &attackerPosition = ecsManager->getComponentFromEntity<PositionComponent>(event.attacker).getPosition();
 
+
+
     for (auto entity: getRelevantEntities()) {
         if (entity == event.attacker) {
             return;
@@ -37,7 +39,12 @@ void AttackAttemptSystem::onAttackAttempt(AttemptedAttackEvent &event) {
         const auto &position = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
 
         if (ecsManager->hasComponent<ActiveWeaponComponent>(event.attacker)) {
-            if (DistanceCalculator::isInAllowedRange(attackerPosition, position, attackerSurface, surface,
+            const auto activeWeapon = ecsManager->getComponentFromEntity<ActiveWeaponComponent>(event.attacker).entity;
+            const auto &weaponSurface = ecsManager->getComponentFromEntity<TextComponent>(activeWeapon).getSurfaceSize();
+            const auto &weaponPosition = ecsManager->getComponentFromEntity<PositionComponent>(activeWeapon).getPosition();
+
+
+            if (DistanceCalculator::isInAllowedRange(weaponPosition, position, weaponSurface, surface,
                                                      ATTACK_RANGE)) {
                 Item attackingItem = ecsManager->getComponentFromEntity<ActiveWeaponComponent>(event.attacker).item;
                 eventBus->emitEvent<SuccessfulAttackEvent>(event.attacker, entity, Attacking::getAttackTypeFromItem(attackingItem));

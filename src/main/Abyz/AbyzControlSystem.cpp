@@ -5,6 +5,7 @@
 #include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../PositionsAndMovement/DistanceCalculator.h"
 #include "../Attacking/SuccessfulAttackEvent.h"
+#include "../Health/HealthComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -27,12 +28,14 @@ void AbyzControlSystem::update(double deltaTime) {
     Size playerSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
 
     for (Entity entity : getRelevantEntities()) {
-
-
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         auto position = positionComponent.getPosition();
         auto size = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
         auto& abyz = ecsManager->getComponentFromEntity<AbyzComponent>(entity);
+        auto& healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(entity);
+        if (healthComponent.health < healthComponent.initialHealth/2) {
+            ecsManager->getComponentFromEntity<TextComponent>(entity).text = "Ab";
+        }
 
         bool isInDetectionRange = DistanceCalculator::isInAllowedRange(playerPosition, position, playerSize, size, DETECTION_RADIUS);
         bool isInAttackRange = DistanceCalculator::isInAllowedRange(playerPosition, position, playerSize, size, ATTACK_RADIUS);
