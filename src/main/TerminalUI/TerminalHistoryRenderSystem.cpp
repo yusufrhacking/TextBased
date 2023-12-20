@@ -2,7 +2,6 @@
 #include "../TextCommands/CommandLogSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "LiveTerminalRenderSystem.h"
-#include <__ranges/reverse_view.h>
 #include <spdlog/spdlog.h>
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -18,13 +17,12 @@ void TerminalHistoryRenderSystem::render(const std::shared_ptr<Renderer> &render
 }
 
 void TerminalHistoryRenderSystem::renderLines(const std::shared_ptr<Renderer>& renderer, const std::vector<AuthoredCommand>& authoredCommands) {
-    float lineCount = 1;
-    for (auto & authoredCommand : std::ranges::reverse_view(authoredCommands)){
-        renderAuthoredCommand(renderer, lineCount, authoredCommand);
-        lineCount++;
-        if ((int)lineCount > maxLinesShown){
-            return;
-        }
+    size_t totalCommands = authoredCommands.size();
+    size_t start = totalCommands > maxLinesShown ? totalCommands - maxLinesShown : 0;
+
+    for (size_t i = start; i < totalCommands; ++i) {
+        const auto& authoredCommand = authoredCommands[i];
+        renderAuthoredCommand(renderer, static_cast<float>(totalCommands - i), authoredCommand);
     }
 }
 
@@ -35,7 +33,6 @@ void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Re
     auto startingPosition = startingTerminalPosition + Position((float)0, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount) * -1);
 
     startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, StyleComponent(type));
-//    startingPosition = terminalRenderer.renderPromptSymbol(renderer, startingPosition, StyleComponent(type));
 
     if (isLowestLine(lineCount) && type == Type::ENGINEER_TERMINAL_TEXT){
         renderTypedLine(renderer, startingPosition, authoredCommand.command.getFullCommandText(), type);
