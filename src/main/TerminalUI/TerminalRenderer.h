@@ -10,9 +10,15 @@ private:
     Camera unusedCamera{Position{0,0}};
     int showUnderscore = 0;
     int typedTextInd = 0;
+    std::chrono::steady_clock::time_point lastUnderscoreToggleTime;
+    int underscoreToggleDelayMilliseconds;
+    bool underscoreVisible;
 
 public:
-    TerminalRenderer() = default;
+    TerminalRenderer(): underscoreToggleDelayMilliseconds(500), underscoreVisible(true) {
+        lastUnderscoreToggleTime = std::chrono::steady_clock::now();
+    }
+
     Position renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
                           const std::string& authorStr, StyleComponent style);
 

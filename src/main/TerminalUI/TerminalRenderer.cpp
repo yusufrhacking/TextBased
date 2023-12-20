@@ -29,13 +29,20 @@ Position TerminalRenderer::renderUnderscore(const std::shared_ptr<Renderer> &ren
         return {};
     }
 
+    auto currentTime = std::chrono::steady_clock::now();
+    auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUnderscoreToggleTime);
+
+    if (timeDiff.count() >= underscoreToggleDelayMilliseconds) {
+        underscoreVisible = !underscoreVisible;
+        lastUnderscoreToggleTime = currentTime;
+    }
+
     auto submittedPosition = startingPosition + Position((float)0, UNDERSCORE_Y_OFFSET);
 
-    if (showUnderscore > 30){
+    if (underscoreVisible) {
         renderer->renderFixedText(submittedPosition, TextComponent("_"), StyleComponent(style));
     }
-    showUnderscore += 1;
-    showUnderscore = showUnderscore % 60;
+
     return submittedPosition;
 }
 
