@@ -64,14 +64,14 @@ void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer
     if (!prevLine.empty() && prevLine != commandText){
         typedTextInd = 0;
         typeNewCharacter = 0;
-        lastUpdateTime = currentTime; // Reset timing
+        lastUpdateTime = currentTime;
     }
 
     if (timeDiff.count() >= typingDelayMilliseconds) {
         if (typedTextInd < commandText.size()){
             typedTextInd++;
         }
-        lastUpdateTime = currentTime; // Update last update time
+        lastUpdateTime = currentTime;
     }
 
     std::string displayedText = commandText.substr(0, typedTextInd);
