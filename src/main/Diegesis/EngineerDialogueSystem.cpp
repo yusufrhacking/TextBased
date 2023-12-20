@@ -17,11 +17,11 @@ EngineerDialogueSystem::EngineerDialogueSystem() {
 
 void EngineerDialogueSystem::listenToEvents() {
     eventBus->listenToEvent<EngineerSpeakEvent>(this, &EngineerDialogueSystem::onSpeak);
-    eventBus->listenToEvent<CharacterDepositEvent>(this, &EngineerDialogueSystem::onLetter);
-    eventBus->listenToEvent<CreatePlayerItemEvent>(this, &EngineerDialogueSystem::onCreateAxe);
-    eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &EngineerDialogueSystem::onWoodSpawn);
-    eventBus->listenToEvent<PlayerPickUpEvent>(this, &EngineerDialogueSystem::onPickup);
-    eventBus->listenToEvent<PlaceEvent>(this, &EngineerDialogueSystem::onPlace);
+//    eventBus->listenToEvent<CharacterDepositEvent>(this, &EngineerDialogueSystem::onLetter);
+//    eventBus->listenToEvent<CreatePlayerItemEvent>(this, &EngineerDialogueSystem::onCreateAxe);
+//    eventBus->listenToEvent<CreateItemAtPositionEvent>(this, &EngineerDialogueSystem::onWoodSpawn);
+//    eventBus->listenToEvent<PlayerPickUpEvent>(this, &EngineerDialogueSystem::onPickup);
+//    eventBus->listenToEvent<PlaceEvent>(this, &EngineerDialogueSystem::onPlace);
 }
 
 void EngineerDialogueSystem::onSpeak(EngineerSpeakEvent &event) {
