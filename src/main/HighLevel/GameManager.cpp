@@ -30,6 +30,7 @@
 #include "../MainPlayer/PlayerRotateSystem.h"
 #include "../UIShow/UIControllerSystem.h"
 #include "../Woodworking/AxeFlipSystem.h"
+#include "../Middlemarch/MiddlemarchStart.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -38,7 +39,7 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    IntroPac level1{startingPosition + Window::getMiddlePosition()};
+    MiddlemarchStart level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {

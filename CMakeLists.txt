@@ -81,7 +81,9 @@ set(SOURCE_FILES
         src/main/UIShow/HideHealthBarEvent.h
         src/main/UIShow/ShowHealthBarEvent.h
         src/main/Maze/FourTreePrefab.h
-        src/main/Maze/CentralLetterStreamPrefab.h)
+        src/main/Maze/CentralLetterStreamPrefab.h
+        src/main/Middlemarch/MiddlemarchStart.cpp
+        src/main/Middlemarch/MiddlemarchStart.h)
 
 
 Message("")
