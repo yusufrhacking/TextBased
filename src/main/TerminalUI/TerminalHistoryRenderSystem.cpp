@@ -58,19 +58,24 @@ Type TerminalHistoryRenderSystem::getType(Author author) {
 
 void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer> &renderer, Position position,
                                                   const std::string& commandText, Type type) {
+    auto currentTime = std::chrono::steady_clock::now();
+    auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
+
     if (!prevLine.empty() && prevLine != commandText){
         typedTextInd = 0;
         typeNewCharacter = 0;
+        lastUpdateTime = currentTime; // Reset timing
     }
-    if (typeNewCharacter > typedFramePerNewCharacter){
+
+    if (timeDiff.count() >= typingDelayMilliseconds) {
         if (typedTextInd < commandText.size()){
             typedTextInd++;
         }
-        typeNewCharacter = 0;
+        lastUpdateTime = currentTime; // Update last update time
     }
+
     std::string displayedText = commandText.substr(0, typedTextInd);
     terminalRenderer.renderText(renderer, position, displayedText, StyleComponent(type));
-    typeNewCharacter++;
     prevLine = commandText;
 }
 
