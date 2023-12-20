@@ -25,6 +25,14 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
         ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
     }
 
+    if (ecsManager->hasSystem<PlayerSideTextSystem>()){
+        ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);
+    }
+
+    if (!ecsManager->getSystem<MainPlayerAccessSystem>().hasMainPlayer()){
+        return;
+    }
+
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
     if (ecsManager->hasSystem<InventoryRenderSystem>()) {
@@ -34,10 +42,6 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     if (ecsManager->hasSystem<HealthBarRenderSystem>()){
         auto healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(mainPlayer);
         ecsManager->getSystem<HealthBarRenderSystem>().render(renderer, healthComponent);
-    }
-
-    if (ecsManager->hasSystem<PlayerSideTextSystem>()){
-        ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);
     }
 }
 

@@ -18,6 +18,9 @@ LetterPickupSystem::LetterPickupSystem() {
 }
 
 void LetterPickupSystem::update(double deltaTime) {
+    if (!ecsManager->getSystem<MainPlayerAccessSystem>().hasMainPlayer()){
+        return;
+    }
     auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
     auto mainPlayerSurfaceSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
