@@ -5,6 +5,7 @@
 #include "../ECSObjects/System.h"
 #include "../TextInput/TextCommandEvent.h"
 #include "../Diegesis/EngineerTerminalEvent.h"
+#include "../Grammar/GrammarEvent.h"
 
 class CommandLogSystem: public System {
     std::vector<AuthoredCommand> commands;
@@ -17,7 +18,7 @@ public:
 
     std::vector<AuthoredCommand> getAuthoredCommands() const;
 
-    void onCommand(TextCommandEvent &event);
+    void onCommand(GrammarEvent &event);
 
     void onEngineerText(EngineerTerminalEvent &event);
 };

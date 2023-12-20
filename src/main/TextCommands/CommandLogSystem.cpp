@@ -3,6 +3,7 @@
 #include "../EventSystem/EventBus.h"
 #include "../TextInput/TextCommandEvent.h"
 #include "../Diegesis/EngineerTerminalEvent.h"
+#include "../Grammar/GrammarEvent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
@@ -20,12 +21,12 @@ std::vector<AuthoredCommand> CommandLogSystem::getAuthoredCommands() const {
 }
 
 void CommandLogSystem::listenToEvents() {
-    eventBus->listenToEvent<TextCommandEvent>(this, &CommandLogSystem::onCommand);
+    eventBus->listenToEvent<GrammarEvent>(this, &CommandLogSystem::onCommand);
     eventBus->listenToEvent<EngineerTerminalEvent>(this, &CommandLogSystem::onEngineerText);
 }
 
-void CommandLogSystem::onCommand(TextCommandEvent &event) {
-    commands.emplace_back(Author::PLAYER, event.command);
+void CommandLogSystem::onCommand(GrammarEvent &event) {
+    commands.emplace_back(Author::PLAYER, Command(event.text));
 }
 
 void CommandLogSystem::onEngineerText(EngineerTerminalEvent &event) {
