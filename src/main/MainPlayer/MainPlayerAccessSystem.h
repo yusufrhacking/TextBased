@@ -6,7 +6,7 @@
 class MainPlayerAccessSystem: public System {
 public:
     MainPlayerAccessSystem();
-
+    bool hasMainPlayer();
     Entity getMainPlayer();
 };
 

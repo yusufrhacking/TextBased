@@ -23,6 +23,9 @@ AbyzControlSystem::AbyzControlSystem() {
 }
 
 void AbyzControlSystem::update(double deltaTime) {
+    if (!ecsManager->getSystem<MainPlayerAccessSystem>().hasMainPlayer()){
+        return;
+    }
     Entity mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
     Position playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
     Size playerSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
