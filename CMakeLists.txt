@@ -83,7 +83,8 @@ set(SOURCE_FILES
         src/main/Maze/FourTreePrefab.h
         src/main/Maze/CentralLetterStreamPrefab.h
         src/main/Middlemarch/MiddlemarchStart.cpp
-        src/main/Middlemarch/MiddlemarchStart.h)
+        src/main/Middlemarch/MiddlemarchStart.h
+        src/main/Middlemarch/PreludeText.h)
 
 
 Message("")

@@ -1,6 +1,7 @@
 #include "MiddlemarchStart.h"
 #include "../Diegesis/EngineerSpeakEvent.h"
 #include "../EventSystem/EventBus.h"
+#include "PreludeText.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 
