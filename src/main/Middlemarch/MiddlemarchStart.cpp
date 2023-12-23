@@ -7,17 +7,33 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "NovelTextComponent.h"
+#include "../PositionsAndMovement/CollisionComponent.h"
+#include "../Health/HealthComponent.h"
+#include "../MainPlayer/RotateComponent.h"
+#include "../Inventory/InventoryComponent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
 
 MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(startingPosition) {
     speakEngineer();
+
+    // Entity witt = ecsManager->createEntity();
+    // ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
+    // ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
+    // ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
+    // ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
+    // ecsManager->addComponentToEntity<CollisionComponent>(witt);
+    // ecsManager->addComponentToEntity<InventoryComponent>(witt);
+    // ecsManager->addComponentToEntity<LiveComponent>(witt);
+    // ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
+    // ecsManager->addComponentToEntity<RotationComponent>(witt);
 }
 
 void MiddlemarchStart::speakEngineer() const {
     eventBus->emitEvent<EngineerSpeakEvent>("Middlemarch");
     eventBus->emitEvent<EngineerSpeakEvent>("by George Eliot");
+
 
     Entity preludeTextEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);

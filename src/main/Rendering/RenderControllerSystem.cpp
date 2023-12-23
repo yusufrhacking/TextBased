@@ -20,11 +20,11 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     ecsManager->getSystem<EntityRenderSystem>().render(renderer, camera);
 
     auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
-    ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer, authoredCommands);
-    ecsManager->getSystem<LiveTerminalRenderSystem>().render(renderer);
-    if (ecsManager->hasSystem<LetterBankRenderSystem>()) {
-        ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
-    }
+    // ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer, authoredCommands);
+    // ecsManager->getSystem<LiveTerminalRenderSystem>().render(renderer);
+    // if (ecsManager->hasSystem<LetterBankRenderSystem>()) {
+    //     ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
+    // }
 
     if (ecsManager->hasSystem<PlayerSideTextSystem>()){
         ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);

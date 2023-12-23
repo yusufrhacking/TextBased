@@ -11,29 +11,38 @@ NovelTextRenderSystem::NovelTextRenderSystem() {
 }
 
 void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
-    for(auto entity: getRelevantEntities()){
+    for (auto entity : getRelevantEntities()) {
         auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
         auto novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
 
-        int lineLength = Window::windowWidth;
-        const std::string& text = textComponent.text;
-        std::string finalText;
-        for(size_t i = 0; i < text.size(); i++){
-            lineLength -= MONACO_RENDERED_TEXT_WIDTH_SCALER;
-            if(lineLength <= 0){
-                finalText += "\n";
-                lineLength = Window::windowWidth;
-            }
-            finalText += text[i];
-        }
 
-        textComponent.text = finalText;
+        std::string linedUpText = getLinedUpText(textComponent);
+        textComponent.text = linedUpText;
         renderer->renderNovelText(positionComponent.getPosition(), textComponent, novelTextComponent);
-
-        //Need to figure out when it gets to the side of the page
-        //Need to somehow make it seem like reading
     }
 }
+
+std::string NovelTextRenderSystem::getLinedUpText(const TextComponent& textComponent){
+    const int maxLineWidth = Window::windowWidth;
+    std::string finalText;
+    std::stringstream wordStream(textComponent.text);
+    std::string word;
+    int currentLineWidth = 0;
+
+    while (wordStream >> word) {
+        int wordWidth = word.length() * MONACO_RENDERED_TEXT_WIDTH_SCALER;
+
+        if (currentLineWidth + wordWidth > maxLineWidth) {
+            finalText += "\n";
+            currentLineWidth = 0;
+        }
+
+        finalText += word + " ";
+        currentLineWidth += wordWidth + MONACO_RENDERED_TEXT_WIDTH_SCALER;
+    }
+    return finalText;
+}
+
 
 
