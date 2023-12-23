@@ -84,7 +84,6 @@ void SDLRenderer::renderNovelText(Position position, const TextComponent& sprite
     backgroundRect.h = (int)textHeight;
     SDL_RenderFillRect(renderer, &backgroundRect);
 
-
     FC_Draw(genericMonacoFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
 }
 
