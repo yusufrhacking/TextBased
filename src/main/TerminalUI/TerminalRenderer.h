@@ -20,15 +20,15 @@ public:
     }
 
     Position renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                          const std::string& authorStr, StyleComponent style);
+                          const std::string& authorStr, GenericStyleComponent style);
 
-    Position renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition, StyleComponent style);
+    Position renderPromptSymbol(const std::shared_ptr<Renderer> &renderer, Position startingPosition, GenericStyleComponent style);
 
     Position renderText(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                        const std::string& currText, StyleComponent style);
+                        const std::string& currText, GenericStyleComponent style);
 
     Position renderUnderscore(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
-                              const std::string& currText, bool isTerminalLive, StyleComponent style);
+                              const std::string& currText, bool isTerminalLive, GenericStyleComponent style);
 };
 
 

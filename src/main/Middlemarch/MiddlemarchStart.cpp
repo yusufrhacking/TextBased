@@ -22,7 +22,7 @@ void MiddlemarchStart::speakEngineer() const {
     ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);
     ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Window::deriveRelativeTopLeft(startPosition));
     ecsManager->addComponentToEntity<LiveComponent>(preludeTextEntity);
-    ecsManager->addComponentToEntity<StyleComponent>(preludeTextEntity);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(preludeTextEntity);
 
     //Create text component for it
     //No collision component

@@ -8,7 +8,7 @@
 #include "../Text/TextComponent.h"
 #include <iostream>
 #include "../../../resources/SDL_FontCache.h"
-#include "StyleComponent.h"
+#include "GenericStyleComponent.h"
 #include <stdexcept>
 #include "NoStyleException.h"
 #include "gmock/gmock.h"
@@ -38,8 +38,8 @@ class SDLRenderer: public Renderer {
 public:
     explicit SDLRenderer(SDL_Window* sdlWindow);
     ~SDLRenderer() override;
-    void renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style) override;
-    void renderFixedText(Position position, const TextComponent& sprite, const StyleComponent& style) override;
+    void renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const GenericStyleComponent& style) override;
+    void renderFixedText(Position position, const TextComponent& sprite, const GenericStyleComponent& style) override;
     void renderPresent() override;
     void renderClear() override;
     void renderTerminal(std::string text) override;

@@ -1,6 +1,6 @@
 #include "SDLRenderer.h"
 #include "../Camera/Camera.h"
-#include "StyleComponent.h"
+#include "GenericStyleComponent.h"
 
 const static SDL_Color textColor = {255, 255, 255};
 
@@ -48,12 +48,12 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 10, matrix_green, TTF_STYLE_NORMAL);
 }
 
-void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const StyleComponent& style){
+void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const GenericStyleComponent& style){
     auto cameraPos = camera.getCameraPosition();
     FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
 }
 
-void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite, const StyleComponent& style){
+void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite, const GenericStyleComponent& style){
     auto textWidth = sprite.getSurfaceSize().width;
     auto textHeight = sprite.getSurfaceSize().height;
 

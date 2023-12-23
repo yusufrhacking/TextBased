@@ -18,7 +18,7 @@ struct HorizontalWallPrefab {
         wall = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(wall, TextGenerator::getHorizontalWallText());
         ecsManager->addComponentToEntity<PositionComponent>(wall, position);
-        ecsManager->addComponentToEntity<StyleComponent>(wall);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(wall);
         ecsManager->addComponentToEntity<CollisionComponent>(wall);
         ecsManager->addComponentToEntity<LiveComponent>(wall);
     }

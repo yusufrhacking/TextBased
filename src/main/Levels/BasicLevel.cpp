@@ -34,7 +34,7 @@ void BasicLevel::createPlayer() {
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
     ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
-    ecsManager->addComponentToEntity<StyleComponent>(witt);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
     ecsManager->addComponentToEntity<LiveComponent>(witt);
@@ -46,7 +46,7 @@ void BasicLevel::createTree() {
     ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
     Position treePosition = startingPosition + Position(100, 200);
     ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
-    ecsManager->addComponentToEntity<StyleComponent>(tree);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(tree);
     ecsManager->addComponentToEntity<CollisionComponent>(tree);
     ecsManager->addComponentToEntity<TreeComponent>(tree);
     ecsManager->addComponentToEntity<LiveComponent>(tree);
@@ -60,7 +60,7 @@ void BasicLevel::createLetter(char letter, Position position) {
     auto letterA = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(letterA, std::string(1, letter));
     ecsManager->addComponentToEntity<PositionComponent>(letterA, position);
-    ecsManager->addComponentToEntity<StyleComponent>(letterA, Type::PLAIN_LETTER);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(letterA, Type::PLAIN_LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA, char_to_enum(letter));
 }
@@ -69,7 +69,7 @@ void BasicLevel::createAbyz() {
     auto abyz1 = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(abyz1, "Abyz");
     ecsManager->addComponentToEntity<PositionComponent>(abyz1, startingPosition + Position(400, -150));
-    ecsManager->addComponentToEntity<StyleComponent>(abyz1, Type::PLAIN_TEXT);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(abyz1, Type::PLAIN_TEXT);
     ecsManager->addComponentToEntity<LiveComponent>(abyz1);
     ecsManager->addComponentToEntity<AbyzComponent>(abyz1);
     ecsManager->addComponentToEntity<HealthComponent>(abyz1, 5);

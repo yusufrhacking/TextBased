@@ -55,7 +55,7 @@ void ItemCreationSystem::createAxe(){
     ecsManager->addComponentToEntity<TextComponent>(axe, "exAxe\n  x\n  e");
     ecsManager->addComponentToEntity<PositionComponent>(
             axe, mainPlayerPosition + AxeComponent::AXE_POSITION_OFFSET);
-    ecsManager->addComponentToEntity<StyleComponent>(axe);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(axe);
     ecsManager->addComponentToEntity<AxeComponent>(axe);
     ecsManager->addComponentToEntity<ItemComponent>(axe, Item::AXE);
     ecsManager->addComponentToEntity<LiveComponent>(axe);
@@ -69,7 +69,7 @@ void ItemCreationSystem::createWoodPile(Position position) {
     auto wood = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(wood, "Wood");
     ecsManager->addComponentToEntity<PositionComponent>(wood, position);
-    ecsManager->addComponentToEntity<StyleComponent>(wood);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(wood);
     ecsManager->addComponentToEntity<WoodComponent>(wood);
     ecsManager->addComponentToEntity<ItemComponent>(wood, Item::WOOD);
     ecsManager->addComponentToEntity<InventoryPickupComponent>(wood, Item::WOOD);
@@ -89,7 +89,7 @@ void ItemCreationSystem::createLetter(Letter letter, Position position) {
     auto letterA = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(letterA, std::string(1, enum_to_char(letter)));
     ecsManager->addComponentToEntity<PositionComponent>(letterA, position);
-    ecsManager->addComponentToEntity<StyleComponent>(letterA, Type::PLAIN_LETTER);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(letterA, Type::PLAIN_LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterA);
     ecsManager->addComponentToEntity<LetterComponent>(letterA, letter);
 }
@@ -98,7 +98,7 @@ void ItemCreationSystem::onCreateLetterAtPosition(CreateLetterAtPositionEvent &e
     auto letterEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(letterEntity, std::string(1, enum_to_char(event.letter)));
     ecsManager->addComponentToEntity<PositionComponent>(letterEntity, event.position);
-    ecsManager->addComponentToEntity<StyleComponent>(letterEntity, Type::PLAIN_LETTER);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(letterEntity, Type::PLAIN_LETTER);
     ecsManager->addComponentToEntity<LiveComponent>(letterEntity);
     ecsManager->addComponentToEntity<LetterComponent>(letterEntity, event.letter);
 }

@@ -46,7 +46,7 @@ set(SOURCE_FILES
         src/main/Text/TextGenerator.cpp src/main/Text/TextGenerator.h src/main/HighLevel/GameManager.cpp src/main/HighLevel/GameManager.h
         resources/SDL_FontCache.c resources/SDL_FontCache.h src/main/PositionsAndMovement/CollisionComponent.h
         src/main/PositionsAndMovement/CollisionCheckSystem.cpp src/main/PositionsAndMovement/CollisionCheckSystem.h
-        src/main/Rendering/StyleComponent.h src/main/Rendering/NoStyleException.h
+        src/main/Rendering/GenericStyleComponent.h src/main/Rendering/NoStyleException.h
         src/main/Levels/BasicLevel.cpp src/main/Levels/BasicLevel.h
         src/main/Rendering/SDLRenderer.cpp src/main/Rendering/SDLRenderer.h
         src/main/EventSystem/EventBus.cpp src/main/EventSystem/EventBus.h

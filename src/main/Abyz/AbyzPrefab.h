@@ -22,7 +22,7 @@ struct AbyzPrefab{
         abyz = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
         ecsManager->addComponentToEntity<PositionComponent>(abyz, position);
-        ecsManager->addComponentToEntity<StyleComponent>(abyz, Type::PLAIN_TEXT);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(abyz, Type::PLAIN_TEXT);
         ecsManager->addComponentToEntity<LiveComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
         ecsManager->addComponentToEntity<HealthComponent>(abyz, 5);

@@ -25,7 +25,7 @@ struct TreePrefab{
         ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
         Position treePosition = position;
         ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
-        ecsManager->addComponentToEntity<StyleComponent>(tree);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(tree);
         ecsManager->addComponentToEntity<CollisionComponent>(tree);
         ecsManager->addComponentToEntity<TreeComponent>(tree);
         ecsManager->addComponentToEntity<LiveComponent>(tree);
@@ -41,7 +41,7 @@ struct TreePrefab{
         ecsManager->addComponentToEntity<TextComponent>(tree, TextGenerator::getTreeText());
         Position treePosition = position;
         ecsManager->addComponentToEntity<PositionComponent>(tree, treePosition);
-        ecsManager->addComponentToEntity<StyleComponent>(tree);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(tree);
         ecsManager->addComponentToEntity<CollisionComponent>(tree);
         ecsManager->addComponentToEntity<TreeComponent>(tree);
         ecsManager->addComponentToEntity<LiveComponent>(tree);

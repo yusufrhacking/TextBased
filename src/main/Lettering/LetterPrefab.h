@@ -24,7 +24,7 @@ struct LetterPrefab{
         // spdlog::info("Letter is : {}", letter);
         ecsManager->addComponentToEntity<TextComponent>(entity, std::string(1, letter));
         ecsManager->addComponentToEntity<PositionComponent>(entity, position);
-        ecsManager->addComponentToEntity<StyleComponent>(entity, Type::PLAIN_LETTER);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(entity, Type::PLAIN_LETTER);
         ecsManager->addComponentToEntity<LiveComponent>(entity);
         ecsManager->addComponentToEntity<LetterComponent>(entity, char_to_enum(letter));
         // spdlog::info("Entity with letter {}", enum_to_char(ecsManager->getComponentFromEntity<LetterComponent>(entity).character));

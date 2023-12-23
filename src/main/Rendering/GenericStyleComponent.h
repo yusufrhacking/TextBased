@@ -1,23 +1,23 @@
-#ifndef TEXTBASED_STYLECOMPONENT_H
-#define TEXTBASED_STYLECOMPONENT_H
+#ifndef TEXTBASED_GENERICSTYLECOMPONENT_H
+#define TEXTBASED_GENERICSTYLECOMPONENT_H
 #include <string>
 #include <sstream>
 #include "Style.h"
 #include "TypeToStyleMapper.h"
 
 
-struct StyleComponent {
+struct GenericStyleComponent {
 private:
     Style style;
 
 public:
-    StyleComponent() {
+    GenericStyleComponent() {
         style = Style::WHITE_MONACO_GENERIC;
     }
 
 //    explicit StyleComponent(Style style) : style(style) {}
 
-    explicit StyleComponent(Type type) {
+    explicit GenericStyleComponent(Type type) {
         style = Types::typeToStyle(type);
     }
 

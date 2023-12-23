@@ -5,15 +5,15 @@ TEST_CASE("Entity Testing"){
     std::unique_ptr<ECSManager> manager = std::make_unique<ECSManager>();
     Entity testEntity = manager->createEntity();
     SECTION("Add and retrieve component"){
-        manager->addComponentToEntity<StyleComponent>(testEntity);
-        REQUIRE(typeid(manager->getComponentFromEntity<StyleComponent>(testEntity)) == typeid(StyleComponent));
+        manager->addComponentToEntity<GenericStyleComponent>(testEntity);
+        REQUIRE(typeid(manager->getComponentFromEntity<GenericStyleComponent>(testEntity)) == typeid(GenericStyleComponent));
     }
     SECTION("Add and remove component"){
-        manager->addComponentToEntity<StyleComponent>(testEntity);
+        manager->addComponentToEntity<GenericStyleComponent>(testEntity);
 
-        manager->removeComponentFromEntity<StyleComponent>(testEntity);
+        manager->removeComponentFromEntity<GenericStyleComponent>(testEntity);
 
-        REQUIRE_THROWS(manager->getComponentFromEntity<StyleComponent>(testEntity));
+        REQUIRE_THROWS(manager->getComponentFromEntity<GenericStyleComponent>(testEntity));
     }
 
 }

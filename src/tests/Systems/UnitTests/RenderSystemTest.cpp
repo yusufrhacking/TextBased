@@ -14,7 +14,7 @@ TEST_CASE("Render System", "[System][EntityRenderSystem]") {
     Entity entity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<PositionComponent>(entity, Position(0, 0));
     ecsManager->addComponentToEntity<TextComponent>(entity, "text");
-    ecsManager->addComponentToEntity<StyleComponent>(entity);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(entity);
     SECTION("Adding and Removing Components") {
         SECTION("Test if in Render System") {
             EntityRenderSystem system = ecsManager->getSystem<EntityRenderSystem>();
@@ -30,8 +30,8 @@ TEST_CASE("Render System", "[System][EntityRenderSystem]") {
             EntityRenderSystem system = ecsManager->getSystem<EntityRenderSystem>();
             REQUIRE(!system.getRelevantEntities().contains(entity));
         }
-        SECTION("Test removing StyleComponent removes entity from Render System") {
-            ecsManager->removeComponentFromEntity<StyleComponent>(entity);
+        SECTION("Test removing GenericStyleComponent removes entity from Render System") {
+            ecsManager->removeComponentFromEntity<GenericStyleComponent>(entity);
             EntityRenderSystem system = ecsManager->getSystem<EntityRenderSystem>();
             REQUIRE(!system.getRelevantEntities().contains(entity));
         }

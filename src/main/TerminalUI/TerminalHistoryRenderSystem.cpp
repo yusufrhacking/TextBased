@@ -32,13 +32,13 @@ void TerminalHistoryRenderSystem::renderAuthoredCommand(const std::shared_ptr<Re
     auto authorText = AuthorCommands::authorToText(authoredCommand.author);
     auto startingPosition = startingTerminalPosition + Position((float)0, (TERMINAL_LINE_VERTICAL_OFFSET * lineCount) * -1);
 
-    startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, StyleComponent(type));
+    startingPosition = terminalRenderer.renderAuthor(renderer, startingPosition, authorText, GenericStyleComponent(type));
 
     if (isLowestLine(lineCount) && type == Type::ENGINEER_TERMINAL_TEXT){
         renderTypedLine(renderer, startingPosition, authoredCommand.command.getFullCommandText(), type);
     }
     else{
-        terminalRenderer.renderText(renderer, startingPosition, authoredCommand.command.getFullCommandText(), StyleComponent(type));
+        terminalRenderer.renderText(renderer, startingPosition, authoredCommand.command.getFullCommandText(), GenericStyleComponent(type));
     }
 }
 
@@ -72,7 +72,7 @@ void TerminalHistoryRenderSystem::renderTypedLine(const std::shared_ptr<Renderer
     }
 
     std::string displayedText = commandText.substr(0, typedTextInd);
-    terminalRenderer.renderText(renderer, position, displayedText, StyleComponent(type));
+    terminalRenderer.renderText(renderer, position, displayedText, GenericStyleComponent(type));
     prevLine = commandText;
 }
 

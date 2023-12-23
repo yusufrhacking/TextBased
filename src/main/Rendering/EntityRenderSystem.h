@@ -3,7 +3,7 @@
 #include "DynamicRenderSystem.h"
 #include "Renderer.h"
 #include "../Text/TextComponent.h"
-#include "StyleComponent.h"
+#include "GenericStyleComponent.h"
 #include "../ECSObjects/System.h"
 
 class EntityRenderSystem: public DynamicRenderSystem {

@@ -21,13 +21,13 @@ void InventoryRenderSystem::renderInventoryShell(const std::shared_ptr<Renderer>
     auto topBorderPosition = inventoryStartingPosition;
     auto bottomBorderPosition = inventoryStartingPosition + Position((float)0, Y_OFFSET * (linesUsed + (float)1));
 
-    renderer->renderFixedText(topBorderPosition, TextComponent(std::string(15, '-')), StyleComponent(Type::PLAIN_TEXT));
-    renderer->renderFixedText(bottomBorderPosition, TextComponent(std::string(15, '-')), StyleComponent(Type::PLAIN_TEXT));
+    renderer->renderFixedText(topBorderPosition, TextComponent(std::string(15, '-')), GenericStyleComponent(Type::PLAIN_TEXT));
+    renderer->renderFixedText(bottomBorderPosition, TextComponent(std::string(15, '-')), GenericStyleComponent(Type::PLAIN_TEXT));
 
     for(int i = 1; i <= linesUsed; i++) {
         auto sidePosition = inventoryStartingPosition + Position((float)0, Y_OFFSET * (float)i);
-        renderer->renderFixedText(sidePosition, TextComponent("|"), StyleComponent(Type::PLAIN_TEXT));
-        renderer->renderFixedText(sidePosition + Position(15*TERMINAL_MONACO_TEXT_WIDTH_SCALER, 0), TextComponent("|"), StyleComponent(Type::PLAIN_TEXT));
+        renderer->renderFixedText(sidePosition, TextComponent("|"), GenericStyleComponent(Type::PLAIN_TEXT));
+        renderer->renderFixedText(sidePosition + Position(15*TERMINAL_MONACO_TEXT_WIDTH_SCALER, 0), TextComponent("|"), GenericStyleComponent(Type::PLAIN_TEXT));
     }
 }
 
@@ -48,7 +48,7 @@ void InventoryRenderSystem::renderInventoryItems(const std::shared_ptr<Renderer>
         auto submittedPosition = baseSubmittedPosition + Position((float) 0, Y_OFFSET * count);
 
         renderer->renderFixedText(submittedPosition, TextComponent(name + " x" + std::to_string(itemCount)),
-                                  StyleComponent(Type::PLAIN_TEXT));
+                                  GenericStyleComponent(Type::PLAIN_TEXT));
 
         count++;
     }
