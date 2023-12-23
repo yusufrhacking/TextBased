@@ -84,7 +84,10 @@ set(SOURCE_FILES
         src/main/Maze/CentralLetterStreamPrefab.h
         src/main/Middlemarch/MiddlemarchStart.cpp
         src/main/Middlemarch/MiddlemarchStart.h
-        src/main/Middlemarch/PreludeText.h)
+        src/main/Middlemarch/PreludeText.h
+        src/main/Middlemarch/NovelTextComponent.h
+        src/main/Middlemarch/NovelTextRenderSystem.cpp
+        src/main/Middlemarch/NovelTextRenderSystem.h)
 
 
 Message("")

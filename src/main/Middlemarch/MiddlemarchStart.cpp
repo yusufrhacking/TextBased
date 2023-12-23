@@ -6,6 +6,7 @@
 #include "../HighLevel/ECSManager.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
+#include "NovelTextComponent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -22,7 +23,7 @@ void MiddlemarchStart::speakEngineer() const {
     ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);
     ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Window::deriveRelativeTopLeft(startPosition));
     ecsManager->addComponentToEntity<LiveComponent>(preludeTextEntity);
-    ecsManager->addComponentToEntity<GenericStyleComponent>(preludeTextEntity);
+    ecsManager->addComponentToEntity<NovelTextComponent>(preludeTextEntity);
 
     //Create text component for it
     //No collision component

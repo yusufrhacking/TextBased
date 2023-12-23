@@ -13,6 +13,7 @@
 #include "NoStyleException.h"
 #include "gmock/gmock.h"
 #include "Renderer.h"
+#include "../Middlemarch/NovelTextComponent.h"
 
 class SDLRenderer: public Renderer {
     SDL_Renderer* renderer;
@@ -43,6 +44,7 @@ public:
     void renderPresent() override;
     void renderClear() override;
     void renderTerminal(std::string text) override;
+    void renderNovelText(Position position, const TextComponent &sprite, const NovelTextComponent &style) override;
 
 private:
     FC_Font* styleToFont(Style style);
