@@ -5,8 +5,12 @@
 #include "../PositionsAndMovement/Position.h"
 
 class MiddlemarchStart {
+private:
+    Position startPosition;
 public:
     explicit MiddlemarchStart(Position startingPosition);
+
+    void speakEngineer() const;
 };
 
 
