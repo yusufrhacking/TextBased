@@ -23,33 +23,42 @@ void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
     }
 }
 
-std::string NovelTextRenderSystem::getLinedUpText(const TextComponent& textComponent){
-    const int maxLineWidth = Window::windowWidth;
-    std::string finalText;
-    std::istringstream charStream(textComponent.text);
-    std::string word;
-    int currentLineWidth = 0;
-    char ch;
+std::string NovelTextRenderSystem::getLinedUpText(const TextComponent& textComponent) {
+    double characterLength = MONACO_RENDERED_TEXT_WIDTH_SCALER;
+    double lineCapacity = Window::windowWidth / characterLength;
+    const std::string& text = textComponent.text;
 
-    while (charStream.get(ch)) {
-        if (ch != ' ') {
-            word += ch;
-        }
+    std::stringstream finalTextStream;
+    std::stringstream wordStream;
+    double currentLength = 0;
 
-        if (ch == ' ' || charStream.peek() == EOF) {
-            int wordWidth = word.length() * MONACO_RENDERED_TEXT_WIDTH_SCALER;
+    for (char ch : text) {
+        if (ch == ' ' || ch == '\n') {
+            std::string word = wordStream.str();
+            double wordLength = word.length();
 
-            if (currentLineWidth + wordWidth > maxLineWidth) {
-                finalText += "\n";
-                currentLineWidth = 0;
+            if (currentLength + wordLength > lineCapacity) {
+                finalTextStream << "\n";
+                currentLength = 0;
             }
 
-            finalText += word + (ch == ' ' ? " " : "");
-            currentLineWidth += wordWidth + (ch == ' ' ? MONACO_RENDERED_TEXT_WIDTH_SCALER : 0);
-            word.clear();
+            finalTextStream << word << (ch == ' ' ? " " : "\n");
+            wordStream.str("");
+            wordStream.clear();
+            currentLength += wordLength + 1;
+        } else {
+            wordStream << ch;
         }
     }
-    return finalText;
+
+    if (!wordStream.str().empty()) {
+        if (currentLength + wordStream.str().length() > lineCapacity) {
+            finalTextStream << "\n";
+        }
+        finalTextStream << wordStream.str();
+    }
+
+    return finalTextStream.str();
 }
 
 
