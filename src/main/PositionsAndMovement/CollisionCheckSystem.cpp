@@ -45,8 +45,8 @@ void CollisionCheckSystem::update(double deltaTime) {
     }
 }
 
-bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, Size firstCollider,
-                                              const Position secondPosition, Size secondCollider) {
+bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, EntitySize firstCollider,
+                                              const Position secondPosition, EntitySize secondCollider) {
     bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
     bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
     bool xOverlap = firstXOverlap && secondXOverlap;

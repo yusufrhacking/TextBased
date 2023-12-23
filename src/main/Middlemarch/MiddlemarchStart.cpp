@@ -21,7 +21,7 @@ void MiddlemarchStart::speakEngineer() const {
 
     Entity preludeTextEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);
-    ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Window::deriveRelativeTopLeft(startPosition));
+    ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Position(0,0));
     ecsManager->addComponentToEntity<LiveComponent>(preludeTextEntity);
     ecsManager->addComponentToEntity<NovelTextComponent>(preludeTextEntity);
 

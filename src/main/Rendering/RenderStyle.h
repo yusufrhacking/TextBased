@@ -1,8 +1,8 @@
-#ifndef TEXTBASED_STYLE_H
-#define TEXTBASED_STYLE_H
+#ifndef TEXTBASED_RENDERSTYLE_H
+#define TEXTBASED_RENDERSTYLE_H
 
 
-enum class Style{
+enum class RenderStyle{
     WHITE_MONACO_GENERIC,
     WHITE_TERMINAL,
     GRAY_TERMINAL,
@@ -23,4 +23,4 @@ enum class Style{
 //    USED_LETTER_BANK
 };
 
-#endif //TEXTBASED_STYLE_H
+#endif //TEXTBASED_RENDERSTYLE_H

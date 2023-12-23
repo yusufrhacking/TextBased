@@ -3,16 +3,16 @@
 
 #include "../HighLevel/Globals.h"
 
-struct Size {
+struct EntitySize {
     RenderedVal width;
     RenderedVal height;
 
-    Size(RenderedVal x, RenderedVal y){
+    EntitySize(RenderedVal x, RenderedVal y){
         this->width = x;
         this->height = y;
     }
 
-    Size(){
+    EntitySize(){
         this->width = 0;
         this->height = 0;
     }

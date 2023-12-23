@@ -5,7 +5,7 @@
 
 struct NoStyleException : public std::exception {
     const char* what(){
-        return "No Valid Style Given for this Component";
+        return "No Valid RenderStyle Given for this Component";
     }
 };
 

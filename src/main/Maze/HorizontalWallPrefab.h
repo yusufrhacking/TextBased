@@ -23,7 +23,7 @@ struct HorizontalWallPrefab {
         ecsManager->addComponentToEntity<LiveComponent>(wall);
     }
 
-    static Size getSize(){
+    static EntitySize getSize(){
         return TextComponent::getSurfaceSize(TextGenerator::getHorizontalWallText());
     }
 };

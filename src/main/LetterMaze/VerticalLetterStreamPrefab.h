@@ -15,7 +15,7 @@ struct VerticalLetterStreamPrefab {
     explicit VerticalLetterStreamPrefab(const Position position, int startIndex, int length) {
         Position currPosition = position;
         const TextComponent dummyLetter = TextComponent("a");
-        const Size letterSize = dummyLetter.getSurfaceSize();
+        const EntitySize letterSize = dummyLetter.getSurfaceSize();
 
         for(int x = 0; x < length; x++) {
             char letter = 'a' + ((startIndex + x) % 26);
@@ -26,7 +26,7 @@ struct VerticalLetterStreamPrefab {
     explicit VerticalLetterStreamPrefab(const Position position, int startIndex, int length, bool flip) {
         Position currPosition = position;
         const TextComponent dummyLetter = TextComponent("a");
-        const Size letterSize = dummyLetter.getSurfaceSize();
+        const EntitySize letterSize = dummyLetter.getSurfaceSize();
 
         for(int x = 0; x < length; x++) {
             char letter;

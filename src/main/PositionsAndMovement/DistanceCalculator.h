@@ -7,7 +7,7 @@
 
 class DistanceCalculator {
 public:
-    static bool isInAllowedRange(Position pos1, Position pos2, const Size& size1, const Size& size2, float allowedDistance) {
+    static bool isInAllowedRange(Position pos1, Position pos2, const EntitySize& size1, const EntitySize& size2, float allowedDistance) {
         float horizontalDistance = calculateSideDistance(pos1.xPos, pos1.xPos + size1.width, pos2.xPos, pos2.xPos + size2.width);
         float verticalDistance = calculateSideDistance(pos1.yPos, pos1.yPos + size1.height, pos2.yPos, pos2.yPos + size2.height);
 

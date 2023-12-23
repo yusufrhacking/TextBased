@@ -47,7 +47,7 @@ public:
     void renderNovelText(Position position, const TextComponent &sprite, const NovelTextComponent &style) override;
 
 private:
-    FC_Font* styleToFont(Style style);
+    FC_Font* styleToFont(RenderStyle style);
     bool isImproperlyInitialized() const;
 
 };

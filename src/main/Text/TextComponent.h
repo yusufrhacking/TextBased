@@ -17,12 +17,12 @@ struct TextComponent {
         this->text = "Robert C. Martin";
     }
 
-    [[nodiscard]] Size getSurfaceSize() const {
+    [[nodiscard]] EntitySize getSurfaceSize() const {
         return {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
 
-    static Size getSurfaceSize(const std::string& text){
+    static EntitySize getSurfaceSize(const std::string& text){
         return {static_cast<RenderedVal>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
                                                                                                          getTextHeightInChars(text)};
     }

@@ -2,17 +2,17 @@
 #define TEXTBASED_GENERICSTYLECOMPONENT_H
 #include <string>
 #include <sstream>
-#include "Style.h"
+#include "RenderStyle.h"
 #include "TypeToStyleMapper.h"
 
 
 struct GenericStyleComponent {
 private:
-    Style style;
+    RenderStyle style;
 
 public:
     GenericStyleComponent() {
-        style = Style::WHITE_MONACO_GENERIC;
+        style = RenderStyle::WHITE_MONACO_GENERIC;
     }
 
 //    explicit StyleComponent(Style style) : style(style) {}
@@ -21,7 +21,7 @@ public:
         style = Types::typeToStyle(type);
     }
 
-    [[nodiscard]] Style getStyle() const {
+    [[nodiscard]] RenderStyle getStyle() const {
         return style;
     }
     //Maybe style stuff here, eventually

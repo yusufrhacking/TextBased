@@ -12,6 +12,7 @@
 #include "../Inventory/InventoryComponent.h"
 #include "../PlayerDialogueSystem/PlayerSideTextSystem.h"
 #include "../Health/HealthBarRenderSystem.h"
+#include "../Middlemarch/NovelTextRenderSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -29,19 +30,21 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
         ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);
     }
 
-    if (!ecsManager->getSystem<MainPlayerAccessSystem>().hasMainPlayer()){
-        return;
+    if (ecsManager->getSystem<MainPlayerAccessSystem>().hasMainPlayer()){
+        auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
+        auto inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
+        if (ecsManager->hasSystem<InventoryRenderSystem>()) {
+            ecsManager->getSystem<InventoryRenderSystem>().render(renderer, inventory);
+        }
+
+        if (ecsManager->hasSystem<HealthBarRenderSystem>()){
+            auto healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(mainPlayer);
+            ecsManager->getSystem<HealthBarRenderSystem>().render(renderer, healthComponent);
+        }
     }
 
-    auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
-    auto inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
-    if (ecsManager->hasSystem<InventoryRenderSystem>()) {
-        ecsManager->getSystem<InventoryRenderSystem>().render(renderer, inventory);
-    }
-
-    if (ecsManager->hasSystem<HealthBarRenderSystem>()){
-        auto healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(mainPlayer);
-        ecsManager->getSystem<HealthBarRenderSystem>().render(renderer, healthComponent);
+    if (ecsManager->hasSystem<NovelTextRenderSystem>()){
+        ecsManager->getSystem<NovelTextRenderSystem>().render(renderer);
     }
 }
 
@@ -52,5 +55,6 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<TerminalHistoryRenderSystem>(startingTerminalPosition);
     ecsManager->addSystem<InventoryRenderSystem>();
     ecsManager->addSystem<HealthBarRenderSystem>();
+    ecsManager->addSystem<NovelTextRenderSystem>();
     // ecsManager->addSystem<PlayerSideTextSystem>();
 }

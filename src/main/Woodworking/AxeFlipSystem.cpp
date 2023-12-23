@@ -24,7 +24,7 @@ void AxeFlipSystem::onAxeFlip(FlipEvent& event) {
         return;
     }
     Entity mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
-    Size mainPlayerSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
+    EntitySize mainPlayerSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
     auto const& tiedChildren = ecsManager->getComponentFromEntity<TiedChildComponent>(mainPlayer).entities;
     for (const Entity child : tiedChildren) {
         if(ecsManager->hasComponent<AxeComponent>(child)) {

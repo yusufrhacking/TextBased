@@ -85,7 +85,7 @@ void SDLRenderer::renderNovelText(Position position, const TextComponent& sprite
     SDL_RenderFillRect(renderer, &backgroundRect);
 
 
-    FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
+    FC_Draw(genericMonacoFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
 }
 
 void SDLRenderer::renderTerminal(std::string text) {
@@ -109,27 +109,27 @@ SDLRenderer::~SDLRenderer() {
 
 bool SDLRenderer::isImproperlyInitialized() const { return TTF_Init() < 0; }
 
-FC_Font* SDLRenderer::styleToFont(Style style) {
+FC_Font* SDLRenderer::styleToFont(RenderStyle style) {
     switch (style) {
-        case Style::WHITE_MONACO_GENERIC:
+        case RenderStyle::WHITE_MONACO_GENERIC:
             return genericMonacoFont;
-        case Style::GRAY_LETTER:
+        case RenderStyle::GRAY_LETTER:
             return grayLetterFont;
-        case Style::WHITE_TERMINAL:
+        case RenderStyle::WHITE_TERMINAL:
             return whiteTerminalFont;
-        case Style::GRAY_TERMINAL:
+        case RenderStyle::GRAY_TERMINAL:
             return grayTerminalFont;
-        case Style::GREEN_TERMINAL:
+        case RenderStyle::GREEN_TERMINAL:
             return greenTerminalFont;
-        case Style::AMBER_TERMINAL:
+        case RenderStyle::AMBER_TERMINAL:
             return greenTerminalFont;
-        case Style::WHITE_LETTER_IN_BANK:
+        case RenderStyle::WHITE_LETTER_IN_BANK:
             return whiteLetterBankFont;
-        case Style::TINY_WHITE_NUMBER:
+        case RenderStyle::TINY_WHITE_NUMBER:
             return whiteNumberBankFont;
-        case Style::GREEN_LETTER_IN_BANK:
+        case RenderStyle::GREEN_LETTER_IN_BANK:
             return greenLetterBankFont;
-        case Style::TINY_GREEN_NUMBER:
+        case RenderStyle::TINY_GREEN_NUMBER:
             return greenNumberBankFont;
         default:
             throw NoStyleException();

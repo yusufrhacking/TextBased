@@ -13,7 +13,7 @@ struct FourTreePrefab {
 
     FourTreePrefab(Position startingPosition) {
         TextComponent dummyTree{TextGenerator::getTreeText()};
-        Size treeSize = dummyTree.getSurfaceSize();
+        EntitySize treeSize = dummyTree.getSurfaceSize();
         Position topLeftTreePosition = Window::deriveRelativeTopLeft(startingPosition) + relativeTreeCenterSpacing;
         TreePrefab topLeftTree{topLeftTreePosition};
         Position topLeftAbyzPosition = Window::deriveRelativeTopLeft(startingPosition) / topLeftTreePosition;

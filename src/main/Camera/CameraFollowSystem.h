@@ -20,9 +20,9 @@ private:
 
     bool isLeftOfScreen(float relativePlayerXPos, float playerWidth);
 
-    Position getNewCameraPositionByFrame(Position previousCameraPosition, const Position &playerPosition, const Size &playerSizeOffset);
+    Position getNewCameraPositionByFrame(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
 
-    Position getNewCameraPositionByCentering(Position previousCameraPosition, const Position &playerPosition, const Size &playerSizeOffset);
+    Position getNewCameraPositionByCentering(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
 };
 
 
