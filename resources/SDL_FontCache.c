@@ -159,7 +159,7 @@ static unsigned int fc_tab_width = 4;
 
 // Shared buffer for variadic text
 static char* fc_buffer = NULL;
-static unsigned int fc_buffer_size = 4096;
+static unsigned int fc_buffer_size = 4096; //I CHANGED THIS FROM 1024
 
 static Uint8 fc_has_render_target_support = 0;
 

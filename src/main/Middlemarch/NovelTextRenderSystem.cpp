@@ -26,23 +26,32 @@ void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
 std::string NovelTextRenderSystem::getLinedUpText(const TextComponent& textComponent){
     const int maxLineWidth = Window::windowWidth;
     std::string finalText;
-    std::stringstream wordStream(textComponent.text);
+    std::istringstream charStream(textComponent.text);
     std::string word;
     int currentLineWidth = 0;
+    char ch;
 
-    while (wordStream >> word) {
-        int wordWidth = word.length() * MONACO_RENDERED_TEXT_WIDTH_SCALER;
-
-        if (currentLineWidth + wordWidth > maxLineWidth) {
-            finalText += "\n";
-            currentLineWidth = 0;
+    while (charStream.get(ch)) {
+        if (ch != ' ') {
+            word += ch;
         }
 
-        finalText += word + " ";
-        currentLineWidth += wordWidth + MONACO_RENDERED_TEXT_WIDTH_SCALER;
+        if (ch == ' ' || charStream.peek() == EOF) {
+            int wordWidth = word.length() * MONACO_RENDERED_TEXT_WIDTH_SCALER;
+
+            if (currentLineWidth + wordWidth > maxLineWidth) {
+                finalText += "\n";
+                currentLineWidth = 0;
+            }
+
+            finalText += word + (ch == ' ' ? " " : "");
+            currentLineWidth += wordWidth + (ch == ' ' ? MONACO_RENDERED_TEXT_WIDTH_SCALER : 0);
+            word.clear();
+        }
     }
     return finalText;
 }
+
 
 
 
