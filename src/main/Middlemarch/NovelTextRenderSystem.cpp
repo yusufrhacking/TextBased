@@ -17,23 +17,24 @@ void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
         auto novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
 
 
-        std::string linedUpText = getLinedUpText(textComponent);
+        std::string linedUpText = getLinedUpText(textComponent.text);
         textComponent.text = linedUpText;
         renderer->renderNovelText(positionComponent.getPosition(), textComponent, novelTextComponent);
     }
 }
 
-std::string NovelTextRenderSystem::getLinedUpText(const TextComponent& textComponent) {
+std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {
     double characterLength = MONACO_RENDERED_TEXT_WIDTH_SCALER;
     double lineCapacity = Window::windowWidth / characterLength;
-    const std::string& text = textComponent.text;
 
     std::stringstream finalTextStream;
     std::stringstream wordStream;
     double currentLength = 0;
 
     for (char ch : text) {
-        if (ch == ' ' || ch == '\n') {
+        if (!(ch == ' ' || ch == '\n')) {
+            wordStream << ch;
+        } else {
             std::string word = wordStream.str();
             double wordLength = word.length();
 
@@ -46,8 +47,6 @@ std::string NovelTextRenderSystem::getLinedUpText(const TextComponent& textCompo
             wordStream.str("");
             wordStream.clear();
             currentLength += wordLength + 1;
-        } else {
-            wordStream << ch;
         }
     }
 

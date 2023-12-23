@@ -9,7 +9,7 @@
 
 class NovelTextRenderSystem: public FixedRenderSystem {
 private:
-    std::string getLinedUpText(const TextComponent& textComponent);
+    std::string getLinedUpText(const std::string& text);
 
 public:
     NovelTextRenderSystem();
