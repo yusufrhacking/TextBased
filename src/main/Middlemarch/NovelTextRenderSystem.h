@@ -14,7 +14,7 @@ private:
     int currentWaitingTime = standardTypingDelayMilliseconds;
     int COMMA_MULTIPLIER = 7;
     size_t subjectInd = 0;
-    size_t startSubjectInd = 0;
+    size_t startIndOfSubject = 0;
 
 
 

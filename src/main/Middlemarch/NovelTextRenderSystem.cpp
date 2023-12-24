@@ -70,7 +70,7 @@ bool NovelTextRenderSystem::isRoomInText(TextComponent& textComponent, NovelText
 void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent, char newChar) {
     if (newChar == novelTextComponent.subject[subjectInd]) {
         if (subjectInd == 0) {
-            startSubjectInd = novelTextComponent.readIndex-1;
+            startIndOfSubject = novelTextComponent.readIndex-1;
         }
         subjectInd++;
         if (subjectInd == novelTextComponent.subject.size()-1) {
