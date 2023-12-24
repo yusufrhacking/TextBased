@@ -23,6 +23,14 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     createPreludeText();
 
     // createWitt(startingPosition);
+
+    //Make Theresa standout in the text
+    //Abyz show up at the bottom and chew through it, quickly
+    //Theresa turns into entity, has to fight the Abyz
+    //Pull out concepts from the prelude to make gamic
+    // 
+
+
 }
 
 void MiddlemarchStart::createPreludeText() const {

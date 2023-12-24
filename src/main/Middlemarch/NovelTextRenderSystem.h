@@ -11,7 +11,7 @@ class NovelTextRenderSystem: public FixedRenderSystem {
 private:
     std::string getLinedUpText(const std::string& text);
     std::chrono::steady_clock::time_point lastUpdateTime;
-    int typingDelayMilliseconds = 1;
+    int typingDelayMilliseconds = 50;
 
 public:
     NovelTextRenderSystem();
