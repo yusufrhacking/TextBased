@@ -25,11 +25,13 @@ public:
     NovelTextRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer) override;
 
+    void delayOnComma(char newChar);
+
     void ensureTextIsLined(TextComponent&textComponent);
 
     void skipReadingIfInstant(TextComponent&textComponent, NovelTextComponent&novelTextComponent);
 
-    auto isTimePassed(__resharper_unknown_type timeDiff);
+    bool isTimePassed(std::chrono::milliseconds timeDiff);
 
     bool isRoomInText(TextComponent&textComponent, NovelTextComponent&novelTextComponent);
 

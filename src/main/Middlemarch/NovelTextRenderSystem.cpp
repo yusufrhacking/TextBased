@@ -28,12 +28,8 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     ensureTextIsLined(textComponent);
     skipReadingIfInstant(textComponent, novelTextComponent);
 
-    //Check if comma, and pause for longer
-    //Set endpoints in NovelTextComponent
-    //Set mainplayer in NovelTextComponent
-
     auto currentTime = std::chrono::steady_clock::now();
-    auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
+    std::chrono::milliseconds timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
 
     char newChar = textComponent.text[novelTextComponent.readIndex-1];
 
@@ -43,11 +39,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
         trackSubject(novelTextComponent, newChar);
     }
 
-    if (newChar == ',') {
-        currentWaitingTime = standardTypingDelayMilliseconds * COMMA_MULTIPLIER;
-    } else {
-        currentWaitingTime = standardTypingDelayMilliseconds;
-    }
+    delayOnComma(newChar);
 
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
     renderer->renderNovelText(positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
@@ -67,7 +59,7 @@ void NovelTextRenderSystem::skipReadingIfInstant(TextComponent& textComponent, N
     }
 }
 
-auto NovelTextRenderSystem::isTimePassed(__resharper_unknown_type timeDiff) {
+bool NovelTextRenderSystem::isTimePassed(std::chrono::milliseconds timeDiff) {
     return timeDiff.count() >= currentWaitingTime;
 }
 
@@ -87,6 +79,14 @@ void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent,
         }
     } else {
         subjectInd = 0;
+    }
+}
+
+void NovelTextRenderSystem::delayOnComma(char newChar) {
+    if (newChar == ',') {
+        currentWaitingTime = standardTypingDelayMilliseconds * COMMA_MULTIPLIER;
+    } else {
+        currentWaitingTime = standardTypingDelayMilliseconds;
     }
 }
 
