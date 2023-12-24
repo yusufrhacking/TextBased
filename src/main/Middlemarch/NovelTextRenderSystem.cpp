@@ -8,17 +8,28 @@ NovelTextRenderSystem::NovelTextRenderSystem() {
     requireComponent<TextComponent>();
     requireComponent<NovelTextComponent>();
     requireComponent<PositionComponent>();
+
+    lastUpdateTime = std::chrono::steady_clock::now();
 }
 
 void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
+    //Need to make it render character by character now!
+    //Store the character position in the novel text component
     for (auto entity : getRelevantEntities()) {
         auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-        auto novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
-
+        auto& novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
 
         std::string linedUpText = getLinedUpText(textComponent.text);
-        textComponent.text = linedUpText;
+
+        auto currentTime = std::chrono::steady_clock::now();
+        auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
+
+        if (timeDiff.count() >= typingDelayMilliseconds && novelTextComponent.readIndex < linedUpText.size()) {
+            novelTextComponent.readIndex++;
+            lastUpdateTime = currentTime;
+        }
+        textComponent.text = linedUpText.substr(0, novelTextComponent.readIndex);
         renderer->renderNovelText(positionComponent.getPosition(), textComponent, novelTextComponent);
     }
 }
