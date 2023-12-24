@@ -35,10 +35,10 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
 
 void MiddlemarchStart::createPreludeText() const {
     Entity preludeTextEntity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);
+    ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeStart);
     ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Position(0,0));
     ecsManager->addComponentToEntity<LiveComponent>(preludeTextEntity);
-    ecsManager->addComponentToEntity<NovelTextComponent>(preludeTextEntity);
+    ecsManager->addComponentToEntity<NovelTextComponent>(preludeTextEntity, "Saint Theresa");
 }
 
 void MiddlemarchStart::speakEngineer() const {

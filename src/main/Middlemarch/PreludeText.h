@@ -4,9 +4,13 @@
 #include <string>
 
 const std::string tab = "   ";
+const std::string preludeStart = tab + "Who that cares much to know the history of man, and how the mysterious mixture "
+                                      "behaves under the varying experiments of Time, has not dwelt, at least briefly, "
+                                      "on the life of Saint Theresa";
 const std::string preludeText = tab + "Who that cares much to know the history of man, and how the mysterious mixture "
                                       "behaves under the varying experiments of Time, has not dwelt, at least briefly, "
-                                      "on the life of Saint Theresa, has not smiled with some gentleness at the thought "
+                                      "on the life of Saint Theresa"
+                                      ", has not smiled with some gentleness at the thought "
                                       "of the little girl walking forth one morning hand-in-hand with her still smaller "
                                       "brother, to go and seek martyrdom in the country of the Moors? Out they toddled "
                                       "from rugged Avila, wide-eyed and helpless-looking as two fawns, but with human "

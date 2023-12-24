@@ -14,6 +14,7 @@ private:
     int standardTypingDelayMilliseconds = 50;
     int currentWaitingTime = standardTypingDelayMilliseconds;
     int COMMA_MULTIPLIER = 7;
+    int subjectInd = 0;
 
     void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer);
 

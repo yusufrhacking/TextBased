@@ -41,12 +41,25 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     auto currentTime = std::chrono::steady_clock::now();
     auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
 
+    char newChar = textComponent.text[novelTextComponent.readIndex-1];
+
     if (timeDiff.count() >= currentWaitingTime && novelTextComponent.readIndex < textComponent.text.size()) {
         novelTextComponent.readIndex++;
         lastUpdateTime = currentTime;
+
+        if (newChar == novelTextComponent.subject[subjectInd]) {
+            subjectInd++;
+            spdlog::info("Subject Ind: {}", subjectInd);
+            spdlog::info("Size: {}", novelTextComponent.subject.size());
+            if (subjectInd == novelTextComponent.subject.size()) {
+                spdlog::info("Mother Teresa!");
+                //activate mother teresa
+            }
+        } else {
+            subjectInd = 0;
+        }
     }
 
-    char newChar = textComponent.text[novelTextComponent.readIndex-1];
     if (newChar == ',') {
         currentWaitingTime = standardTypingDelayMilliseconds * COMMA_MULTIPLIER;
     } else {
