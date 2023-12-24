@@ -16,30 +16,35 @@ void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
     //Need to make it render character by character now!
     //Store the character position in the novel text component
     for (auto entity : getRelevantEntities()) {
-        auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-        auto& textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-        auto& novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
-
-        if (!textComponent.isLined) {
-            textComponent.text = getLinedUpText(textComponent.text);
-            textComponent.isLined = true;
-        }
-
-        if (typingDelayMilliseconds == 0) {
-            novelTextComponent.readIndex = textComponent.text.size();
-        }
-
-        auto currentTime = std::chrono::steady_clock::now();
-        auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
-
-        if (timeDiff.count() >= typingDelayMilliseconds && novelTextComponent.readIndex < textComponent.text.size()) {
-            novelTextComponent.readIndex++;
-            lastUpdateTime = currentTime;
-        }
-
-        std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
-        renderer->renderNovelText(positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
+        readTheText(entity, renderer);
     }
+}
+
+void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer) {
+    auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    auto& textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
+    auto& novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
+
+    if (!textComponent.isLined) {
+        textComponent.text = getLinedUpText(textComponent.text);
+        textComponent.isLined = true;
+    }
+
+    if (typingDelayMilliseconds == 0) {
+        novelTextComponent.readIndex = textComponent.text.size();
+    }
+
+    auto currentTime = std::chrono::steady_clock::now();
+    auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
+
+    if (timeDiff.count() >= typingDelayMilliseconds && novelTextComponent.readIndex < textComponent.text.size()) {
+        novelTextComponent.readIndex++;
+        lastUpdateTime = currentTime;
+    }
+
+    std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
+    renderer->renderNovelText(positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
+
 }
 
 std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {

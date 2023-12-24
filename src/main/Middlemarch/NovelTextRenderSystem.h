@@ -12,6 +12,8 @@ private:
     std::string getLinedUpText(const std::string& text);
     std::chrono::steady_clock::time_point lastUpdateTime;
     int typingDelayMilliseconds = 50;
+    void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer);
+
 
 public:
     NovelTextRenderSystem();
