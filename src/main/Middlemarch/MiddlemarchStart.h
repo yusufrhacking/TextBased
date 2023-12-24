@@ -8,7 +8,11 @@ class MiddlemarchStart {
 private:
     Position startPosition;
 public:
+    void createWitt(Position startingPosition);
+
     explicit MiddlemarchStart(Position startingPosition);
+
+    void createPreludeText() const;
 
     void speakEngineer() const;
 };

@@ -1,4 +1,7 @@
 #include "MiddlemarchStart.h"
+
+#include <thread>
+
 #include "../Diegesis/EngineerSpeakEvent.h"
 #include "../EventSystem/EventBus.h"
 #include "PreludeText.h"
@@ -17,32 +20,32 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(startingPosition) {
     speakEngineer();
+    createPreludeText();
 
-    // Entity witt = ecsManager->createEntity();
-    // ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
-    // ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    // ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
-    // ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
-    // ecsManager->addComponentToEntity<CollisionComponent>(witt);
-    // ecsManager->addComponentToEntity<InventoryComponent>(witt);
-    // ecsManager->addComponentToEntity<LiveComponent>(witt);
-    // ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
-    // ecsManager->addComponentToEntity<RotationComponent>(witt);
+    // createWitt(startingPosition);
 }
 
-void MiddlemarchStart::speakEngineer() const {
-    eventBus->emitEvent<EngineerSpeakEvent>("Middlemarch");
-    eventBus->emitEvent<EngineerSpeakEvent>("by George Eliot");
-
-
+void MiddlemarchStart::createPreludeText() const {
     Entity preludeTextEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);
     ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Position(0,0));
     ecsManager->addComponentToEntity<LiveComponent>(preludeTextEntity);
     ecsManager->addComponentToEntity<NovelTextComponent>(preludeTextEntity);
+}
 
-    //Create text component for it
-    //No collision component
-    //I can either manually put in line breaks or I can set up the more complex stylizer with this
-    //the stylizer will check for like NovelText component and will know to wrap it
+void MiddlemarchStart::speakEngineer() const {
+    eventBus->emitEvent<EngineerSpeakEvent>("Middlemarch by George Eliot");
+}
+
+void MiddlemarchStart::createWitt(Position startingPosition) {
+    Entity witt = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
+    ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
+    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
+    ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
+    ecsManager->addComponentToEntity<CollisionComponent>(witt);
+    ecsManager->addComponentToEntity<InventoryComponent>(witt);
+    ecsManager->addComponentToEntity<LiveComponent>(witt);
+    ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
+    ecsManager->addComponentToEntity<RotationComponent>(witt);
 }

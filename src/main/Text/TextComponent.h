@@ -8,6 +8,7 @@
 
 struct TextComponent {
     std::string text;
+    bool isLined = false;
 
     explicit TextComponent(std::string text){
         this->text = std::move(text);
