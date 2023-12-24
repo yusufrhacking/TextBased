@@ -49,10 +49,8 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
 
         if (newChar == novelTextComponent.subject[subjectInd]) {
             subjectInd++;
-            spdlog::info("Subject Ind: {}", subjectInd);
-            spdlog::info("Size: {}", novelTextComponent.subject.size());
-            if (subjectInd == novelTextComponent.subject.size()) {
-                spdlog::info("Mother Teresa!");
+            if (subjectInd == novelTextComponent.subject.size()-1) {
+                spdlog::info("Saint Teresa!");
                 //activate mother teresa
             }
         } else {
