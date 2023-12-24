@@ -1,7 +1,6 @@
 #ifndef TEXTBASED_NOVELTEXTRENDERSYSTEM_H
 #define TEXTBASED_NOVELTEXTRENDERSYSTEM_H
 
-#include <MacTypes.h>
 #include "../ECSObjects/System.h"
 #include "../Rendering/Renderer.h"
 #include "NovelTextComponent.h"
@@ -14,7 +13,10 @@ private:
     int standardTypingDelayMilliseconds = 40;
     int currentWaitingTime = standardTypingDelayMilliseconds;
     int COMMA_MULTIPLIER = 7;
-    int subjectInd = 0;
+    size_t subjectInd = 0;
+    size_t startSubjectInd = 0;
+
+
 
     void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer);
 
@@ -23,6 +25,15 @@ public:
     NovelTextRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer) override;
 
+    void ensureTextIsLined(TextComponent&textComponent);
+
+    void skipReadingIfInstant(TextComponent&textComponent, NovelTextComponent&novelTextComponent);
+
+    auto isTimePassed(__resharper_unknown_type timeDiff);
+
+    bool isRoomInText(TextComponent&textComponent, NovelTextComponent&novelTextComponent);
+
+    void trackSubject(NovelTextComponent&novelTextComponent, char newChar);
 };
 
 

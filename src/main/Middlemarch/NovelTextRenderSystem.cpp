@@ -25,14 +25,8 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     auto& textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
     auto& novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
 
-    if (!textComponent.isLined) {
-        textComponent.text = getLinedUpText(textComponent.text);
-        textComponent.isLined = true;
-    }
-
-    if (standardTypingDelayMilliseconds == 0) {
-        novelTextComponent.readIndex = textComponent.text.size();
-    }
+    ensureTextIsLined(textComponent);
+    skipReadingIfInstant(textComponent, novelTextComponent);
 
     //Check if comma, and pause for longer
     //Set endpoints in NovelTextComponent
@@ -43,19 +37,10 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
 
     char newChar = textComponent.text[novelTextComponent.readIndex-1];
 
-    if (timeDiff.count() >= currentWaitingTime && novelTextComponent.readIndex < textComponent.text.size()) {
+    if (isTimePassed(timeDiff) && isRoomInText(textComponent, novelTextComponent)) {
         novelTextComponent.readIndex++;
         lastUpdateTime = currentTime;
-
-        if (newChar == novelTextComponent.subject[subjectInd]) {
-            subjectInd++;
-            if (subjectInd == novelTextComponent.subject.size()-1) {
-                spdlog::info("Saint Teresa!");
-                //activate mother teresa
-            }
-        } else {
-            subjectInd = 0;
-        }
+        trackSubject(novelTextComponent, newChar);
     }
 
     if (newChar == ',') {
@@ -66,7 +51,43 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
 
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
     renderer->renderNovelText(positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
+}
 
+
+void NovelTextRenderSystem::ensureTextIsLined(TextComponent& textComponent) {
+    if (!textComponent.isLined) {
+        textComponent.text = getLinedUpText(textComponent.text);
+        textComponent.isLined = true;
+    }
+}
+
+void NovelTextRenderSystem::skipReadingIfInstant(TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
+    if (standardTypingDelayMilliseconds == 0) {
+        novelTextComponent.readIndex = textComponent.text.size();
+    }
+}
+
+auto NovelTextRenderSystem::isTimePassed(__resharper_unknown_type timeDiff) {
+    return timeDiff.count() >= currentWaitingTime;
+}
+
+bool NovelTextRenderSystem::isRoomInText(TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
+    return novelTextComponent.readIndex < textComponent.text.size();
+}
+
+void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent, char newChar) {
+    if (newChar == novelTextComponent.subject[subjectInd]) {
+        if (subjectInd == 0) {
+            startSubjectInd = novelTextComponent.readIndex-1;
+        }
+        subjectInd++;
+        if (subjectInd == novelTextComponent.subject.size()-1) {
+            spdlog::info("Saint Teresa!");
+            //activate mother teresa
+        }
+    } else {
+        subjectInd = 0;
+    }
 }
 
 std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {

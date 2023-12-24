@@ -8,7 +8,9 @@ struct NovelTextComponent {
     std::string subject;
 
     NovelTextComponent() = default;
-    explicit NovelTextComponent(std::string subject): subject(std::move(subject)) {}
+    explicit NovelTextComponent(std::string subject): subject(std::move(subject)) {
+
+    }
 };
 
 #endif
