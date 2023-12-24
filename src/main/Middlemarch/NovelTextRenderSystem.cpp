@@ -30,16 +30,27 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
         textComponent.isLined = true;
     }
 
-    if (typingDelayMilliseconds == 0) {
+    if (standardTypingDelayMilliseconds == 0) {
         novelTextComponent.readIndex = textComponent.text.size();
     }
+
+    //Check if comma, and pause for longer
+    //Set endpoints in NovelTextComponent
+    //Set mainplayer in NovelTextComponent
 
     auto currentTime = std::chrono::steady_clock::now();
     auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
 
-    if (timeDiff.count() >= typingDelayMilliseconds && novelTextComponent.readIndex < textComponent.text.size()) {
+    if (timeDiff.count() >= currentWaitingTime && novelTextComponent.readIndex < textComponent.text.size()) {
         novelTextComponent.readIndex++;
         lastUpdateTime = currentTime;
+    }
+
+    char newChar = textComponent.text[novelTextComponent.readIndex-1];
+    if (newChar == ',') {
+        currentWaitingTime = standardTypingDelayMilliseconds * COMMA_MULTIPLIER;
+    } else {
+        currentWaitingTime = standardTypingDelayMilliseconds;
     }
 
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);

@@ -4,6 +4,7 @@
 
 struct NovelTextComponent {
     size_t readIndex = 0;
+    std::string subject = "Saint Theresa";
 
 };
 
