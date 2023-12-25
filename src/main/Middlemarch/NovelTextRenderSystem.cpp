@@ -74,12 +74,15 @@ void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent,
         }
         subjectInd++;
         if (subjectInd == novelTextComponent.subject.size()-1) {
-            spdlog::info("Saint Teresa!");
-            //activate mother teresa
+            handleSubject();
         }
     } else {
         subjectInd = 0;
     }
+}
+
+void NovelTextRenderSystem::handleSubject() {
+    spdlog::info("Saint Teresa!");
 }
 
 void NovelTextRenderSystem::delayOnComma(char newChar) {
