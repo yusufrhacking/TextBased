@@ -74,14 +74,15 @@ void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent,
         }
         subjectInd++;
         if (subjectInd == novelTextComponent.subject.size()-1) {
-            handleSubject();
+            handleSubject(novelTextComponent);
         }
     } else {
         subjectInd = 0;
     }
 }
 
-void NovelTextRenderSystem::handleSubject() {
+void NovelTextRenderSystem::handleSubject(NovelTextComponent& novelTextComponent) {
+    novelTextComponent.readIndex -= novelTextComponent.subject.size();
     spdlog::info("Saint Teresa!");
 }
 

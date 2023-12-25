@@ -35,7 +35,7 @@ public:
 
     bool isRoomInText(TextComponent&textComponent, NovelTextComponent&novelTextComponent);
 
-    void handleSubject();
+    void handleSubject(NovelTextComponent& novelTextComponent);
 
     void trackSubject(NovelTextComponent&novelTextComponent, char newChar);
 };
