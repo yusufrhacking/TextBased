@@ -34,6 +34,8 @@ private:
 
     size_t findSubjectWordInd(std::vector<std::string> words, const std::string& subject);
 
+    bool isAtEndOfReading(const NovelTextComponent& novelTextComponent, const TextComponent&textComponent);
+
     void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera);
     void convertTextToEntities(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent);
 

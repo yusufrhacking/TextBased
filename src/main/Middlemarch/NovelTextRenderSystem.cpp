@@ -44,25 +44,32 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
     renderer->renderDynamicText(camera, positionComponent.getPosition(), TextComponent(textToRender), GenericStyleComponent());
 
-    convertTextToEntities(entity, positionComponent, textComponent, novelTextComponent);
+    if (isAtEndOfReading(novelTextComponent, textComponent)) {
+        convertTextToEntities(entity, positionComponent, textComponent, novelTextComponent);
+    }
 }
+
 void NovelTextRenderSystem::ensureTextIsLined(TextComponent& textComponent) {
     if (!textComponent.isLined) {
         textComponent.text = getLinedUpText(textComponent.text);
         textComponent.isLined = true;
     }
 }
+
 void NovelTextRenderSystem::skipReadingIfInstant(TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
     if (standardTypingDelayMilliseconds == 0) {
         novelTextComponent.readIndex = textComponent.text.size();
     }
 }
+
 bool NovelTextRenderSystem::isTimePassed(std::chrono::milliseconds timeDiff) {
     return timeDiff.count() >= currentWaitingTime;
 }
+
 bool NovelTextRenderSystem::isRoomInText(TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
     return novelTextComponent.readIndex < textComponent.text.size();
 }
+
 void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent, char newChar) {
     if (newChar == novelTextComponent.subject[subjectCharInd]) {
         if (subjectCharInd == 0) {
@@ -76,9 +83,9 @@ void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent,
         subjectCharInd = 0;
     }
 }
+
 void NovelTextRenderSystem::handleSubject(NovelTextComponent& novelTextComponent) {
     novelTextComponent.readIndex -= novelTextComponent.subject.size();
-    // spdlog::info("Saint Theresa!");
 }
 
 void NovelTextRenderSystem::delayOnComma(char newChar) {
@@ -90,39 +97,38 @@ void NovelTextRenderSystem::delayOnComma(char newChar) {
 }
 
 void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
-    if (novelTextComponent.readIndex == textComponent.text.size()-1) {
-        std::string subject = novelTextComponent.subject;
-        auto words = Split::getWords(textComponent.text);
-        size_t subjectWordInd = findSubjectWordInd(words, subject);
-        Position currPosition = positionComponent.getPosition();
-        for (size_t i = 0; i < words.size(); i++) {
-            std::string word = words[i];
-            if (word.find('\n') != std::string::npos) {
-                currPosition.xPos = positionComponent.getPosition().xPos;
-                currPosition.yPos += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
-                word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
-                    return c == '\n';}), word.end());
-            }
-
-            Entity wordEntity = ecsManager->createEntity();
-            ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
-            ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
-            ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
-            ecsManager->addComponentToEntity<LiveComponent>(wordEntity);
-
-            if(i == subjectWordInd) {
-                ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
-                ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
-                i += Split::getWords(subject).size();
-            }
-
-            currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+    std::string subject = novelTextComponent.subject;
+    auto words = Split::getWords(textComponent.text);
+    size_t subjectWordInd = findSubjectWordInd(words, subject);
+    Position currPosition = positionComponent.getPosition();
+    for (size_t i = 0; i < words.size(); i++) {
+        std::string word = words[i];
+        if (word.find('\n') != std::string::npos) {
+            currPosition.xPos = positionComponent.getPosition().xPos;
+            currPosition.yPos += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+            word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
+                return c == '\n';}), word.end());
         }
 
-        ecsManager->killEntity(entity);
+        Entity wordEntity = ecsManager->createEntity();
+        ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
+        ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
+        ecsManager->addComponentToEntity<LiveComponent>(wordEntity);
 
-        spdlog::info("Hit max!");
+        if(i == subjectWordInd) {
+            ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
+            ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
+            i += Split::getWords(subject).size();
+        }
+
+        currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
     }
+
+    ecsManager->killEntity(entity);
+
+    spdlog::info("Hit max!");
+
 }
 
 std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {
@@ -185,6 +191,10 @@ size_t NovelTextRenderSystem::findSubjectWordInd(std::vector<std::string> words,
     }
 
     return std::string::npos;
+}
+
+bool NovelTextRenderSystem::isAtEndOfReading(const NovelTextComponent& novelTextComponent, const TextComponent&textComponent) {
+    return novelTextComponent.readIndex == textComponent.text.size()-1;
 }
 
 
