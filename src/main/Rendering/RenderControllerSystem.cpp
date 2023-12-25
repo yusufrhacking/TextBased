@@ -32,10 +32,14 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
 
     if (ecsManager->getSystem<MainPlayerAccessSystem>().hasMainPlayer()){
         auto mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
-        auto inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
-        if (ecsManager->hasSystem<InventoryRenderSystem>()) {
-            ecsManager->getSystem<InventoryRenderSystem>().render(renderer, inventory);
+
+        if (ecsManager->hasComponent<InventoryComponent>(mainPlayer)) {
+            auto inventory = ecsManager->getComponentFromEntity<InventoryComponent>(mainPlayer).inventory;
+            if (ecsManager->hasSystem<InventoryRenderSystem>()) {
+                ecsManager->getSystem<InventoryRenderSystem>().render(renderer, inventory);
+            }
         }
+
 
         if (ecsManager->hasSystem<HealthBarRenderSystem>()){
             auto healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(mainPlayer);
