@@ -22,7 +22,8 @@ const std::string preludeText = tab + "Who that cares much to know the history o
                                       "from within, soared after some illimitable satisfaction, some object which would "
                                       "never justify weariness, which would reconcile self-despair with the rapturous "
                                       "consciousness of life beyond self. She found her epos in the reform of a religious "
-                                      "order. \n\tThat Spanish woman who lived three hundred years ago, was certainly not the "
+                                      "order. \n" + tab +
+                                      "That Spanish woman who lived three hundred years ago, was certainly not the "
                                       "last of her kind. Many Theresas have been born who found for themselves no epic "
                                       "life wherein there was a constant unfolding of far-resonant action; perhaps only "
                                       "a life of mistakes, the offspring of a certain spiritual grandeur ill-matched with "
@@ -33,7 +34,8 @@ const std::string preludeText = tab + "Who that cares much to know the history o
                                       "Theresas were helped by no coherent social faith and order which could perform the "
                                       "function of knowledge for the ardently willing soul. Their ardor alternated between "
                                       "a vague ideal and the common yearning of womanhood; so that the one was disapproved "
-                                      "as extravagance, and the other condemned as a lapse. \n\tSome have felt that these "
+                                      "as extravagance, and the other condemned as a lapse. \n" + tab +
+                                      "Some have felt that these "
                                       "blundering lives are due to the inconvenient indefiniteness with which the Supreme "
                                       "Power has fashioned the natures of women: if there were one level of feminine "
                                       "incompetence as strict as the ability to count three and no more, the social lot of "
