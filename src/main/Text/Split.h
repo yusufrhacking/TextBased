@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 namespace Split{
+    static std::set punctuationMarks = {',', '.', '!', '?'};
+
     static std::vector<std::string> getWords(const std::string& processedText) {
         std::istringstream iss(processedText);
         std::string token;
@@ -19,7 +21,7 @@ namespace Split{
         std::string token;
 
         for (char ch : processedText) {
-            if (ch == ' ' || ch == ',' || ch == '.' || ch == '!' || ch == '?') {
+            if (punctuationMarks.find(ch) != punctuationMarks.end() || ch == ' ') {
                 if (!token.empty()) {
                     tokens.push_back(token);
                     token.clear();

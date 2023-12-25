@@ -103,6 +103,7 @@ void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionCompone
     Position currPosition = positionComponent.getPosition();
     for (size_t i = 0; i < words.size(); i++) {
         std::string word = words[i];
+
         if (word.find('\n') != std::string::npos) {
             currPosition.xPos = positionComponent.getPosition().xPos;
             currPosition.yPos += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
@@ -122,7 +123,14 @@ void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionCompone
             i += Split::getWordsAndPunctuation(subject).size();
         }
 
-        currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+        if (i < words.size()-2) {
+            if (Split::punctuationMarks.contains(words[i+1][0])) {
+                currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+            } else {
+                currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+            }
+        }
+
     }
 
     ecsManager->killEntity(entity);
