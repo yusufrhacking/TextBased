@@ -3,6 +3,8 @@
 #include "../HighLevel/ECSManager.h"
 #include "LiveTerminalRenderSystem.h"
 #include <spdlog/spdlog.h>
+#include "../HighLevel/TerminalGlobals.h"
+
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

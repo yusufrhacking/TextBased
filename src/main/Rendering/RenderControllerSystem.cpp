@@ -13,6 +13,8 @@
 #include "../PlayerDialogueSystem/PlayerSideTextSystem.h"
 #include "../Health/HealthBarRenderSystem.h"
 #include "../Middlemarch/NovelTextRenderSystem.h"
+#include "../HighLevel/TerminalGlobals.h"
+#include "../HighLevel/FontGlobals.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

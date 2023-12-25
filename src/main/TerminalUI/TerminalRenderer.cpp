@@ -1,4 +1,6 @@
 #include "TerminalRenderer.h"
+#include "../HighLevel/TerminalGlobals.h"
+#include "../HighLevel/FontGlobals.h"
 
 Position TerminalRenderer::renderAuthor(const std::shared_ptr<Renderer> &renderer, Position startingPosition,
                                         const std::string& authorStr, GenericStyleComponent style) {
