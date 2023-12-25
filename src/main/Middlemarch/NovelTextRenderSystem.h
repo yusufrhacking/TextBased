@@ -5,6 +5,7 @@
 #include "../Rendering/Renderer.h"
 #include "NovelTextComponent.h"
 #include "../Rendering/FixedRenderSystem.h"
+#include "../PositionsAndMovement/PositionComponent.h"
 
 class NovelTextRenderSystem: public DynamicRenderSystem {
 private:
@@ -16,16 +17,6 @@ private:
     size_t subjectCharInd = 0;
     size_t startWordIndOfSubject = 0;
     size_t startCharIndOfSubject = 0;
-
-
-    size_t findSubjectWordInd(std::vector<std::string> words, const std::string& subject);
-
-    void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera);
-
-
-public:
-    NovelTextRenderSystem();
-    void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     void delayOnComma(char newChar);
 
@@ -40,6 +31,18 @@ public:
     void handleSubject(NovelTextComponent& novelTextComponent);
 
     void trackSubject(NovelTextComponent&novelTextComponent, char newChar);
+
+    size_t findSubjectWordInd(std::vector<std::string> words, const std::string& subject);
+
+    void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera);
+    void convertTextToEntities(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent);
+
+
+
+public:
+    NovelTextRenderSystem();
+    void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
+
 };
 
 
