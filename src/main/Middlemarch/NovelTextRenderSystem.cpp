@@ -44,7 +44,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     delayOnComma(newChar);
 
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
-    renderer->renderNovelText(camera, positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
+    renderer->renderDynamicText(camera, positionComponent.getPosition(), TextComponent(textToRender), GenericStyleComponent());
 
     if (novelTextComponent.readIndex == textComponent.text.size()-1) {
         auto words = Split::getWords(textComponent.text);
