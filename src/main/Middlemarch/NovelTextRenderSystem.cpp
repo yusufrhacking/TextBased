@@ -43,6 +43,12 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
 
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
     renderer->renderNovelText(positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
+
+    if (novelTextComponent.readIndex == textComponent.text.size()-1) {
+        ecsManager->killEntity(entity);
+
+        spdlog::info("Hit max!");
+    }
 }
 
 
@@ -83,7 +89,7 @@ void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent,
 
 void NovelTextRenderSystem::handleSubject(NovelTextComponent& novelTextComponent) {
     novelTextComponent.readIndex -= novelTextComponent.subject.size();
-    spdlog::info("Saint Teresa!");
+    // spdlog::info("Saint Theresa!");
 }
 
 void NovelTextRenderSystem::delayOnComma(char newChar) {
