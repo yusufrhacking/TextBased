@@ -50,8 +50,8 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
         auto words = Split::getWords(textComponent.text);
         Position currPosition = positionComponent.getPosition();
         for (auto word: words) {
-            word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
-            return c == ',' || c == '.';}), word.end());
+            // word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
+            // return c == ',' || c == '.';}), word.end());
 
             Entity wordEntity = ecsManager->createEntity();
             ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
