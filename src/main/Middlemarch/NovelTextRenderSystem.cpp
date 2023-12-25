@@ -121,6 +121,7 @@ void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionCompone
             ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
             ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
             i += Split::getWordsAndPunctuation(subject).size();
+            word = subject;
         }
 
         if (i < words.size()-2) {
