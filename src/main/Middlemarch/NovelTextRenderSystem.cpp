@@ -59,7 +59,14 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
             ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
             ecsManager->addComponentToEntity<LiveComponent>(wordEntity);
 
-            currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+            if (word.find('\n') != std::string::npos) {
+                currPosition.xPos = currPosition.xPos - (currPosition.xPos - Window::windowWidth);
+                currPosition.yPos -= MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+                spdlog::info("New Line!");
+            } else {
+                currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+            }
+
         }
 
         ecsManager->killEntity(entity);
