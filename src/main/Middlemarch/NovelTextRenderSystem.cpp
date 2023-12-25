@@ -53,19 +53,24 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
             // word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
             // return c == ',' || c == '.';}), word.end());
 
+            if (word.find('\n') != std::string::npos) {
+                currPosition.xPos = positionComponent.getPosition().xPos;
+                currPosition.yPos += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+                word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
+                return c == '\n';}), word.end());
+                spdlog::info("New Line!");
+            }
+
             Entity wordEntity = ecsManager->createEntity();
             ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
             ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
             ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
             ecsManager->addComponentToEntity<LiveComponent>(wordEntity);
 
-            if (word.find('\n') != std::string::npos) {
-                currPosition.xPos = currPosition.xPos - (currPosition.xPos - Window::windowWidth);
-                currPosition.yPos -= MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
-                spdlog::info("New Line!");
-            } else {
-                currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
-            }
+            currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+
+            spdlog::info("Word {}", word);
+            spdlog::info("Curr Position {}, {}", currPosition.xPos, currPosition.yPos);
 
         }
 
