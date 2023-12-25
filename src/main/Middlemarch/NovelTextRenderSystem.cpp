@@ -77,7 +77,7 @@ void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent,
         }
         subjectCharInd++;
         if (subjectCharInd == novelTextComponent.subject.size()-1) {
-            handleSubject(novelTextComponent);
+            // handleSubject(novelTextComponent);
         }
     } else {
         subjectCharInd = 0;
@@ -98,7 +98,7 @@ void NovelTextRenderSystem::delayOnComma(char newChar) {
 
 void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
     std::string subject = novelTextComponent.subject;
-    auto words = Split::getWords(textComponent.text);
+    auto words = Split::getWordsAndPunctuation(textComponent.text);
     size_t subjectWordInd = findSubjectWordInd(words, subject);
     Position currPosition = positionComponent.getPosition();
     for (size_t i = 0; i < words.size(); i++) {
@@ -119,7 +119,7 @@ void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionCompone
         if(i == subjectWordInd) {
             ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
             ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
-            i += Split::getWords(subject).size();
+            i += Split::getWordsAndPunctuation(subject).size();
         }
 
         currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
@@ -169,11 +169,7 @@ std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {
 }
 
 size_t NovelTextRenderSystem::findSubjectWordInd(std::vector<std::string> words, const std::string& subject) {
-    std::vector<std::string> subjectWords;
-    std::istringstream iss(subject);
-    for (std::string s; iss >> s; ) {
-        subjectWords.push_back(s);
-    }
+    std::vector<std::string> subjectWords = Split::getWords(subject);
 
     for (size_t i = 0; i < words.size(); ++i) {
         if (words[i] == subjectWords[0]) {
@@ -194,7 +190,7 @@ size_t NovelTextRenderSystem::findSubjectWordInd(std::vector<std::string> words,
 }
 
 bool NovelTextRenderSystem::isAtEndOfReading(const NovelTextComponent& novelTextComponent, const TextComponent&textComponent) {
-    return novelTextComponent.readIndex == textComponent.text.size()-1;
+    return novelTextComponent.readIndex >= textComponent.text.size()-1;
 }
 
 

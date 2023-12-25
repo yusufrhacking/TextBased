@@ -14,6 +14,30 @@ namespace Split{
         }
         return words;
     }
+    static std::vector<std::string> getWordsAndPunctuation(const std::string& processedText) {
+        std::vector<std::string> tokens;
+        std::string token;
+
+        for (char ch : processedText) {
+            if (ch == ' ' || ch == ',' || ch == '.' || ch == '!' || ch == '?') {
+                if (!token.empty()) {
+                    tokens.push_back(token);
+                    token.clear();
+                }
+                if (ch != ' ') {
+                    tokens.push_back(std::string(1, ch));
+                }
+            } else {
+                token += ch;
+            }
+        }
+
+        if (!token.empty()) {
+            tokens.push_back(token);
+        }
+
+        return tokens;
+    }
 
 }
 
