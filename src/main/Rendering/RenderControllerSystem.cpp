@@ -44,7 +44,7 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     }
 
     if (ecsManager->hasSystem<NovelTextRenderSystem>()){
-        ecsManager->getSystem<NovelTextRenderSystem>().render(renderer);
+        ecsManager->getSystem<NovelTextRenderSystem>().render(renderer, camera);
     }
 }
 

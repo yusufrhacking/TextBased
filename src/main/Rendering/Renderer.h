@@ -16,7 +16,7 @@ class Renderer {
         virtual void renderPresent() = 0;
         virtual void renderClear() = 0;
         virtual void renderTerminal(std::string text) = 0;
-        virtual void renderNovelText(Position position, const TextComponent &sprite, const NovelTextComponent &style) = 0;
+        virtual void renderNovelText(Camera camera, Position position, const TextComponent &sprite, const NovelTextComponent &style) = 0;
 
 
 };

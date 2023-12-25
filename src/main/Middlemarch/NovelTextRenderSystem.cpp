@@ -1,6 +1,8 @@
 #include "NovelTextRenderSystem.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../PositionsAndMovement/LiveComponent.h"
+#include "../Text/Split.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -12,15 +14,15 @@ NovelTextRenderSystem::NovelTextRenderSystem() {
     lastUpdateTime = std::chrono::steady_clock::now();
 }
 
-void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer) {
+void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     //Need to make it render character by character now!
     //Store the character position in the novel text component
     for (auto entity : getRelevantEntities()) {
-        readTheText(entity, renderer);
+        readTheText(entity, renderer, camera);
     }
 }
 
-void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer) {
+void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera) {
     auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     auto& textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
     auto& novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
@@ -42,9 +44,24 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     delayOnComma(newChar);
 
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
-    renderer->renderNovelText(positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
+    renderer->renderNovelText(camera, positionComponent.getPosition(), TextComponent(textToRender), novelTextComponent);
 
     if (novelTextComponent.readIndex == textComponent.text.size()-1) {
+        auto words = Split::getWords(textComponent.text);
+        Position currPosition = positionComponent.getPosition();
+        for (auto word: words) {
+            word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
+            return c == ',' || c == '.';}), word.end());
+
+            Entity wordEntity = ecsManager->createEntity();
+            ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
+            ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
+            ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
+            ecsManager->addComponentToEntity<LiveComponent>(wordEntity);
+
+            currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
+        }
+
         ecsManager->killEntity(entity);
 
         spdlog::info("Hit max!");

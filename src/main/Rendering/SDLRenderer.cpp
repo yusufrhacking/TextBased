@@ -71,7 +71,7 @@ void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite
     FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
 }
 
-void SDLRenderer::renderNovelText(Position position, const TextComponent& sprite, const NovelTextComponent& novelStyle){
+void SDLRenderer::renderNovelText(Camera camera, Position position, const TextComponent& sprite, const NovelTextComponent& novelStyle){
     auto textWidth = sprite.getSurfaceSize().width;
     auto textHeight = sprite.getSurfaceSize().height;
 
@@ -84,7 +84,7 @@ void SDLRenderer::renderNovelText(Position position, const TextComponent& sprite
     backgroundRect.h = (int)textHeight;
     SDL_RenderFillRect(renderer, &backgroundRect);
 
-    FC_Draw(genericMonacoFont, renderer, position.xPos, position.yPos, sprite.text.c_str());
+    FC_Draw(genericMonacoFont, renderer, position.xPos - camera.getCameraPosition().xPos, position.yPos - camera.getCameraPosition().yPos, sprite.text.c_str());
 }
 
 void SDLRenderer::renderTerminal(std::string text) {

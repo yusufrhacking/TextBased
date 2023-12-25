@@ -6,11 +6,11 @@
 #include "NovelTextComponent.h"
 #include "../Rendering/FixedRenderSystem.h"
 
-class NovelTextRenderSystem: public FixedRenderSystem {
+class NovelTextRenderSystem: public DynamicRenderSystem {
 private:
     std::string getLinedUpText(const std::string& text);
     std::chrono::steady_clock::time_point lastUpdateTime;
-    int standardTypingDelayMilliseconds = 40;
+    int standardTypingDelayMilliseconds = 1;
     int currentWaitingTime = standardTypingDelayMilliseconds;
     int COMMA_MULTIPLIER = 7;
     size_t subjectInd = 0;
@@ -18,12 +18,12 @@ private:
 
 
 
-    void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer);
+    void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera);
 
 
 public:
     NovelTextRenderSystem();
-    void render(const std::shared_ptr<Renderer>& renderer) override;
+    void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
     void delayOnComma(char newChar);
 
