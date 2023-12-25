@@ -67,7 +67,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
 
             if(i == subjectWordInd) {
                 ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
-                ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity);
+                ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
                 i += Split::getWords(subject).size();
             }
 

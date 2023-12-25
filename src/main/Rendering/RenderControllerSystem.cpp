@@ -42,8 +42,11 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
 
 
         if (ecsManager->hasSystem<HealthBarRenderSystem>()){
-            auto healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(mainPlayer);
-            ecsManager->getSystem<HealthBarRenderSystem>().render(renderer, healthComponent);
+            if (ecsManager->hasComponent<HealthComponent>(mainPlayer)) {
+                auto healthComponent = ecsManager->getComponentFromEntity<HealthComponent>(mainPlayer);
+                ecsManager->getSystem<HealthBarRenderSystem>().render(renderer, healthComponent);
+            }
+
         }
     }
 
