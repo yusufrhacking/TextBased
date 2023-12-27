@@ -90,7 +90,9 @@ set(SOURCE_FILES
         src/main/Middlemarch/NovelTextRenderSystem.h
         src/main/HighLevel/FontGlobals.h
         src/main/HighLevel/TerminalGlobals.h
-        src/main/Middlemarch/SubjectComponent.h)
+        src/main/Middlemarch/SubjectComponent.h
+        src/main/Middlemarch/SubjectRenderSystem.cpp
+        src/main/Middlemarch/SubjectRenderSystem.h)
 
 
 Message("")
