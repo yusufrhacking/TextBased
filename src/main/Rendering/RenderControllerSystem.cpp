@@ -15,6 +15,7 @@
 #include "../Middlemarch/NovelTextRenderSystem.h"
 #include "../HighLevel/TerminalGlobals.h"
 #include "../HighLevel/FontGlobals.h"
+#include "../Middlemarch/SubjectRenderSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -55,6 +56,9 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     if (ecsManager->hasSystem<NovelTextRenderSystem>()){
         ecsManager->getSystem<NovelTextRenderSystem>().render(renderer, camera);
     }
+    if (ecsManager->hasSystem<SubjectRenderSystem>()){
+        ecsManager->getSystem<SubjectRenderSystem>().render(renderer, camera);
+    }
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -65,5 +69,6 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<InventoryRenderSystem>();
     ecsManager->addSystem<HealthBarRenderSystem>();
     ecsManager->addSystem<NovelTextRenderSystem>();
+    ecsManager->addSystem<SubjectRenderSystem>();
     // ecsManager->addSystem<PlayerSideTextSystem>();
 }

@@ -19,7 +19,6 @@ void SubjectRenderSystem::render(const std::shared_ptr<Renderer>& renderer, Came
     for (auto entity : getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-        const auto styleComponent = ecsManager->getComponentFromEntity<GenericStyleComponent>(entity);
-        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, styleComponent);
+        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, GenericStyleComponent());
     }
 }

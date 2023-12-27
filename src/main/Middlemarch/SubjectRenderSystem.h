@@ -3,7 +3,7 @@
 #include "../Rendering/DynamicRenderSystem.h"
 
 
-class SubjectRenderSystem: DynamicRenderSystem {
+class SubjectRenderSystem: public DynamicRenderSystem {
 public:
     explicit SubjectRenderSystem();
 
