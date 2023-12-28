@@ -3,6 +3,7 @@
 #include "SubjectComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../PositionsAndMovement/CollisionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../Text/Split.h"
 
@@ -129,7 +130,7 @@ void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionCompone
         }
 
         if (i < words.size()-2) {
-            if (Split::punctuationMarks.contains(words[i+1][0])) {
+            if (Split::punctuationMarks.contains(words[i+1][0])) {//If the next word is a punctuation mark
                 currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
             } else {
                 currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);

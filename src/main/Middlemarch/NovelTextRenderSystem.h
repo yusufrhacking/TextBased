@@ -17,6 +17,7 @@ private:
     size_t subjectCharInd = 0;
     size_t startWordIndOfSubject = 0;
     size_t startCharIndOfSubject = 0;
+;
 
     void delayOnComma(char newChar);
 
