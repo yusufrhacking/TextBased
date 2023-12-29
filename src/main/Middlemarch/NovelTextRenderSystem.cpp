@@ -44,7 +44,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
             //Break up the text component
 
             // Calculate end of jit
-            size_t finalNewIndex = startCharIndOfSubjectFIRST + novelTextComponent.subject.size();
+            size_t finalNewIndex = startCharIndOfSubjectFIRST + novelTextComponent.subject.size()-1;
             std::string textToBecomeEntities = textComponent.text.substr(0, finalNewIndex);
             TextComponent newTextComponent{textToBecomeEntities};
 
@@ -55,18 +55,16 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
             // Add dummy spacing from the left that corresponds to what the line has already shown
             size_t lines = 0;
             size_t spacesNeededForCurrLine = 0;
-            for (size_t i = 0; i < textComponent.text.size(); i++) {
-                if (i == startCharIndOfSubjectFIRST) {//Done with the searching b/c we found the subject
-                    spacesNeededForCurrLine += novelTextComponent.subject.size();
-                    break;
-                }
-
+            for (size_t i = 0; i < startCharIndOfSubjectFIRST; i++) {
                 if (textComponent.text[i] == '\n') {
                     lines++;
                     spacesNeededForCurrLine = 0;
                 }
                 spacesNeededForCurrLine++;
             }
+
+            spacesNeededForCurrLine += novelTextComponent.subject.size();
+
 
             std::string newText(spacesNeededForCurrLine, ' ');
             newText += textComponent.text.substr(finalNewIndex);
