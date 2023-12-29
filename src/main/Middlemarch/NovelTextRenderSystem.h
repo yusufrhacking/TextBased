@@ -45,6 +45,8 @@ public:
     NovelTextRenderSystem();
     void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 
+    void handleSubject(Entity entity, PositionComponent&positionComponent, TextComponent&textComponent,
+                       NovelTextComponent&novelTextComponent);
 };
 
 

@@ -9,6 +9,8 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
+//FIX END OF LINE JUMPING TOO EARLY
+
 NovelTextRenderSystem::NovelTextRenderSystem() {
     requireComponent<TextComponent>();
     requireComponent<NovelTextComponent>();
@@ -22,6 +24,8 @@ void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Ca
         readTheText(entity, renderer, camera);
     }
 }
+
+
 
 void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera) {
     auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
@@ -41,40 +45,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
         lastUpdateTime = currentTime;
         bool isSubjectFound = trackSubject(novelTextComponent, newChar);
         if (isSubjectFound) {
-            //Break up the text component
-
-            // Calculate end of jit
-            size_t finalNewIndex = startCharIndOfSubjectFIRST + novelTextComponent.subject.size()-1;
-            std::string textToBecomeEntities = textComponent.text.substr(0, finalNewIndex);
-            TextComponent newTextComponent{textToBecomeEntities};
-
-            // Turn this section into entities
-            createEntitiesFromText(entity, positionComponent, newTextComponent, novelTextComponent);
-
-            // Move text down the line + shift position as needed
-            // Add dummy spacing from the left that corresponds to what the line has already shown
-            size_t lines = 0;
-            size_t spacesNeededForCurrLine = 0;
-            for (size_t i = 0; i < startCharIndOfSubjectFIRST; i++) {
-                if (textComponent.text[i] == '\n') {
-                    lines++;
-                    spacesNeededForCurrLine = 0;
-                } else {
-                    spacesNeededForCurrLine++;
-                }
-            }
-
-            spacesNeededForCurrLine += novelTextComponent.subject.size()-1;
-
-
-            std::string newText(spacesNeededForCurrLine, ' ');
-            newText += textComponent.text.substr(finalNewIndex);
-
-            textComponent.text = newText;
-            novelTextComponent.readIndex = 0;
-
-            // Move the position down the corresponding lines!
-            positionComponent.shiftPosition(0, lines * MONACO_HEIGHT_OF_A_LINE_OF_TEXT);
+            handleSubject(entity, positionComponent, textComponent, novelTextComponent);
         }
     }
 
@@ -251,4 +222,40 @@ bool NovelTextRenderSystem::isAtEndOfReading(const NovelTextComponent& novelText
     return novelTextComponent.readIndex >= textComponent.text.size()-1;
 }
 
+void NovelTextRenderSystem::handleSubject(Entity entity, PositionComponent& positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
+    //Break up the text component
+
+    // Calculate end of jit
+    size_t finalNewIndex = startCharIndOfSubjectFIRST + novelTextComponent.subject.size()-1;
+    std::string textToBecomeEntities = textComponent.text.substr(0, finalNewIndex);
+    TextComponent newTextComponent{textToBecomeEntities};
+
+    // Turn this section into entities
+    createEntitiesFromText(entity, positionComponent, newTextComponent, novelTextComponent);
+
+    // Move text down the line + shift position as needed
+    // Add dummy spacing from the left that corresponds to what the line has already shown
+    size_t lines = 0;
+    size_t spacesNeededForCurrLine = 0;
+    for (size_t i = 0; i < startCharIndOfSubjectFIRST; i++) {
+        if (textComponent.text[i] == '\n') {
+            lines++;
+            spacesNeededForCurrLine = 0;
+        } else {
+            spacesNeededForCurrLine++;
+        }
+    }
+
+    spacesNeededForCurrLine += novelTextComponent.subject.size()-1;
+
+
+    std::string newText(spacesNeededForCurrLine, ' ');
+    newText += textComponent.text.substr(finalNewIndex);
+
+    textComponent.text = newText;
+    novelTextComponent.readIndex = 0;
+
+    // Move the position down the corresponding lines!
+    positionComponent.shiftPosition(0, lines * MONACO_HEIGHT_OF_A_LINE_OF_TEXT);
+}
 
