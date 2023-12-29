@@ -7,6 +7,7 @@ struct NovelTextComponent {
     size_t readIndex = 0;
     std::string subject;
     bool pauseAtInitialSubject;
+    bool subjectFound = false;
 
     NovelTextComponent() = default;
     explicit NovelTextComponent(std::string subject): subject(std::move(subject)) {

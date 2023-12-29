@@ -93,7 +93,8 @@ set(SOURCE_FILES
         src/main/Middlemarch/SubjectComponent.h
         src/main/Middlemarch/SubjectRenderSystem.cpp
         src/main/Middlemarch/SubjectRenderSystem.h
-        src/main/Rendering/TextStyles.h)
+        src/main/Rendering/TextStyles.h
+        src/main/Middlemarch/PunctuationMarks.h)
 
 
 Message("")

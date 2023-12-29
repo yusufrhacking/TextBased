@@ -3,9 +3,8 @@
 
 #include <string>
 #include <sstream>
+#include "../Middlemarch/PunctuationMarks.h"
 namespace Split{
-    static std::set punctuationMarks = {',', '.', '!', '?', ':'};
-
     static std::vector<std::string> getWords(const std::string& processedText) {
         std::istringstream iss(processedText);
         std::string token;
@@ -21,7 +20,7 @@ namespace Split{
         std::string token;
 
         for (char ch : processedText) {
-            if (punctuationMarks.find(ch) != punctuationMarks.end() || ch == ' ') {
+            if (Punctuation::punctuationMarks.find(ch) != Punctuation::punctuationMarks.end() || ch == ' ') {
                 if (!token.empty()) {
                     tokens.push_back(token);
                     token.clear();

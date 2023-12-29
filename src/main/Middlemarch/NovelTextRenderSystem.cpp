@@ -80,12 +80,16 @@ bool NovelTextRenderSystem::isRoomInText(TextComponent& textComponent, NovelText
 }
 
 bool NovelTextRenderSystem::trackSubject(NovelTextComponent&novelTextComponent, char newChar) {
+    if (novelTextComponent.subjectFound) { //Can remove this to get double subjects
+        return false;
+    }
     if (newChar == novelTextComponent.subject[subjectCharInd]) {
         if (subjectCharInd == 0) {
             startCharIndOfSubjectFIRST = novelTextComponent.readIndex-1;
         }
         subjectCharInd++;
         if (subjectCharInd == novelTextComponent.subject.size()-1) {
+            novelTextComponent.subjectFound = true;
             return true;
         }
     } else {
@@ -95,7 +99,7 @@ bool NovelTextRenderSystem::trackSubject(NovelTextComponent&novelTextComponent, 
 }
 
 void NovelTextRenderSystem::delayOnPunctiation(char newChar) {
-    if (Split::punctuationMarks.contains(newChar)) {
+    if (Punctuation::punctuationMarks.contains(newChar)) {
         currentWaitingTime = standardTypingDelayMilliseconds * PUNCTUATION_DELAY_MULTIPLIER;
     } else {
         currentWaitingTime = standardTypingDelayMilliseconds;
@@ -146,7 +150,7 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         }
 
         if (i < words.size()-2) {
-            if (Split::punctuationMarks.contains(words[i+1][0])) {//If the next word is a punctuation mark
+            if (Punctuation::punctuationMarks.contains(words[i+1][0])) {//If the next word is a punctuation mark
                 currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
             } else {
                 currPosition += Position(word.size() * MONACO_RENDERED_TEXT_WIDTH_SCALER + MONACO_RENDERED_TEXT_WIDTH_SCALER, 0);
