@@ -69,7 +69,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AttackAttemptSystem>();
     ecsManager->addSystem<HealthSystem>();
     ecsManager->addSystem<PendingDeathSystem>();
-    ecsManager->addSystem<AbyzControlSystem>();
+    // ecsManager->addSystem<AbyzControlSystem>();
     ecsManager->addSystem<PlayerRotateSystem>();
     ecsManager->addSystem<UIControllerSystem>();
     ecsManager->addSystem<AxeFlipSystem>();

@@ -1,5 +1,7 @@
 #include "NovelTextRenderSystem.h"
 
+#include "EndOfReadingEvent.h"
+#include "NovelWordComponent.h"
 #include "SubjectComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
@@ -8,6 +10,8 @@
 #include "../Text/Split.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
+extern std::unique_ptr<EventBus> eventBus;
+
 
 NovelTextRenderSystem::NovelTextRenderSystem() {
     requireComponent<TextComponent>();
@@ -55,6 +59,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     if (isAtEndOfReading(novelTextComponent, textComponent)) {
         createEntitiesFromText(entity, positionComponent, textComponent, novelTextComponent);
         ecsManager->killEntity(entity);
+        eventBus->emitEvent<EndOfReadingEvent>();
     }
 }
 
@@ -107,7 +112,6 @@ void NovelTextRenderSystem::delayOnPunctiation(char newChar) {
 }
 
 void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
-
     std::string subject = novelTextComponent.subject;
     auto words = Split::getWordsAndPunctuation(textComponent.text);
     size_t subjectWordInd = findSubjectWordInd(words, subject);
