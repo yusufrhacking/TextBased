@@ -135,6 +135,7 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         }
 
         Entity wordEntity = ecsManager->createEntity();
+        ecsManager->addComponentToEntity<NovelWordComponent>(wordEntity);
         ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
         ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
         ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
