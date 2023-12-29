@@ -11,12 +11,12 @@ class NovelTextRenderSystem: public DynamicRenderSystem {
 private:
     std::string getLinedUpText(const std::string& text);
     std::chrono::steady_clock::time_point lastUpdateTime;
-    int standardTypingDelayMilliseconds = 0;
+    int standardTypingDelayMilliseconds = 40;
     int currentWaitingTime = standardTypingDelayMilliseconds;
     int COMMA_MULTIPLIER = 7;
     size_t subjectCharInd = 0;
     size_t startWordIndOfSubject = 0;
-    size_t startCharIndOfSubject = 0;
+    size_t startCharIndOfSubjectFIRST = 0;
 ;
 
     void delayOnComma(char newChar);
@@ -29,9 +29,8 @@ private:
 
     bool isRoomInText(TextComponent&textComponent, NovelTextComponent&novelTextComponent);
 
-    void handleSubject(NovelTextComponent& novelTextComponent);
 
-    void trackSubject(NovelTextComponent&novelTextComponent, char newChar);
+    bool trackSubject(NovelTextComponent&novelTextComponent, char newChar);
 
     size_t findSubjectWordInd(std::vector<std::string> words, const std::string& subject);
 

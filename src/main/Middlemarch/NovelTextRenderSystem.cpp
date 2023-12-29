@@ -73,22 +73,18 @@ bool NovelTextRenderSystem::isRoomInText(TextComponent& textComponent, NovelText
     return novelTextComponent.readIndex < textComponent.text.size();
 }
 
-void NovelTextRenderSystem::trackSubject(NovelTextComponent& novelTextComponent, char newChar) {
+bool NovelTextRenderSystem::trackSubject(NovelTextComponent&novelTextComponent, char newChar) {
     if (newChar == novelTextComponent.subject[subjectCharInd]) {
         if (subjectCharInd == 0) {
-            startCharIndOfSubject = novelTextComponent.readIndex-1;
+            startCharIndOfSubjectFIRST = novelTextComponent.readIndex-1;
         }
         subjectCharInd++;
         if (subjectCharInd == novelTextComponent.subject.size()-1) {
-            // handleSubject(novelTextComponent);
+            return true;
         }
     } else {
         subjectCharInd = 0;
     }
-}
-
-void NovelTextRenderSystem::handleSubject(NovelTextComponent& novelTextComponent) {
-    novelTextComponent.readIndex -= novelTextComponent.subject.size();
 }
 
 void NovelTextRenderSystem::delayOnComma(char newChar) {
