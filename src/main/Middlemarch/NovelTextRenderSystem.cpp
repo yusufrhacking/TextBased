@@ -39,7 +39,10 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     if (isTimePassed(timeDiff) && isRoomInText(textComponent, novelTextComponent)) {
         novelTextComponent.readIndex++;
         lastUpdateTime = currentTime;
-        trackSubject(novelTextComponent, newChar);
+        bool isSubjectFound = trackSubject(novelTextComponent, newChar);
+        if (isSubjectFound) {
+            convertTextToEntities(entity, positionComponent, textComponent, novelTextComponent);
+        }
     }
 
     delayOnComma(newChar);
@@ -85,6 +88,7 @@ bool NovelTextRenderSystem::trackSubject(NovelTextComponent&novelTextComponent, 
     } else {
         subjectCharInd = 0;
     }
+    return false;
 }
 
 void NovelTextRenderSystem::delayOnComma(char newChar) {
