@@ -173,6 +173,9 @@ std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {
             wordStream << ch;
         } else {
             std::string word = wordStream.str();
+            if (word == "Some") {
+                spdlog::info("SOME!");
+            }
             double wordLength = word.length();
 
             if (currentLength + wordLength > lineCapacity) {
@@ -181,6 +184,9 @@ std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {
             }
 
             finalTextStream << word << (ch == ' ' ? " " : "\n");
+            if (ch == '\n') {
+                currentLength = 0;
+            }
             wordStream.str("");
             wordStream.clear();
             currentLength += wordLength + 1;
