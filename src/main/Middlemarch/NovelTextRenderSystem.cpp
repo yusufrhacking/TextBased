@@ -9,8 +9,6 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-//FIX END OF LINE JUMPING TOO EARLY
-
 NovelTextRenderSystem::NovelTextRenderSystem() {
     requireComponent<TextComponent>();
     requireComponent<NovelTextComponent>();
@@ -97,8 +95,8 @@ bool NovelTextRenderSystem::trackSubject(NovelTextComponent&novelTextComponent, 
 }
 
 void NovelTextRenderSystem::delayOnComma(char newChar) {
-    if (newChar == ',') {
-        currentWaitingTime = standardTypingDelayMilliseconds * COMMA_MULTIPLIER;
+    if (Split::punctuationMarks.contains(newChar)) {
+        currentWaitingTime = standardTypingDelayMilliseconds * PUNCTUATION_DELAY_MULTIPLIER;
     } else {
         currentWaitingTime = standardTypingDelayMilliseconds;
     }
