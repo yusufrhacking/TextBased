@@ -47,7 +47,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
         }
     }
 
-    delayOnComma(newChar);
+    delayOnPunctiation(newChar);
 
     std::string textToRender = textComponent.text.substr(0, novelTextComponent.readIndex);
     renderer->renderDynamicText(camera, positionComponent.getPosition(), TextComponent(textToRender), GenericStyleComponent());
@@ -94,7 +94,7 @@ bool NovelTextRenderSystem::trackSubject(NovelTextComponent&novelTextComponent, 
     return false;
 }
 
-void NovelTextRenderSystem::delayOnComma(char newChar) {
+void NovelTextRenderSystem::delayOnPunctiation(char newChar) {
     if (Split::punctuationMarks.contains(newChar)) {
         currentWaitingTime = standardTypingDelayMilliseconds * PUNCTUATION_DELAY_MULTIPLIER;
     } else {
@@ -154,7 +154,6 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         }
 
     }
-    spdlog::info("Hit max!");
 
 }
 

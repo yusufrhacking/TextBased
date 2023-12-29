@@ -11,7 +11,7 @@ class NovelTextRenderSystem: public DynamicRenderSystem {
 private:
     std::string getLinedUpText(const std::string& text);
     std::chrono::steady_clock::time_point lastUpdateTime;
-    int standardTypingDelayMilliseconds = 40;
+    int standardTypingDelayMilliseconds = 0;
     int currentWaitingTime = standardTypingDelayMilliseconds;
     int PUNCTUATION_DELAY_MULTIPLIER = 7;
     size_t subjectCharInd = 0;
@@ -19,7 +19,7 @@ private:
     size_t startCharIndOfSubjectFIRST = 0;
 ;
 
-    void delayOnComma(char newChar);
+    void delayOnPunctiation(char newChar);
 
     void ensureTextIsLined(TextComponent&textComponent);
 

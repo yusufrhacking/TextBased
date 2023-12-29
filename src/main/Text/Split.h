@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 namespace Split{
-    static std::set punctuationMarks = {',', '.', '!', '?'};
+    static std::set punctuationMarks = {',', '.', '!', '?', ':'};
 
     static std::vector<std::string> getWords(const std::string& processedText) {
         std::istringstream iss(processedText);
