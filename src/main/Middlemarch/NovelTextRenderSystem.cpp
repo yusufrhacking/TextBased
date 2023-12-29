@@ -72,7 +72,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
             newText += textComponent.text.substr(finalNewIndex);
 
             textComponent.text = newText;
-            // novelTextComponent.readIndex = 0;
+            novelTextComponent.readIndex = 0;
 
             // Move the position down the corresponding lines!
             positionComponent.shiftPosition(0, lines * MONACO_HEIGHT_OF_A_LINE_OF_TEXT);
@@ -135,10 +135,23 @@ void NovelTextRenderSystem::delayOnComma(char newChar) {
 }
 
 void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
+
     std::string subject = novelTextComponent.subject;
     auto words = Split::getWordsAndPunctuation(textComponent.text);
     size_t subjectWordInd = findSubjectWordInd(words, subject);
     Position currPosition = positionComponent.getPosition();
+
+    size_t leadingWhitespaceCount = 0;
+    for (char c : textComponent.text) {
+        if (std::isspace(static_cast<unsigned char>(c))) {
+            leadingWhitespaceCount++;
+        } else {
+            break;
+        }
+    }
+    currPosition.xPos += leadingWhitespaceCount * MONACO_RENDERED_TEXT_WIDTH_SCALER;
+
+
     for (size_t i = 0; i < words.size(); i++) {
         std::string word = words[i];
 
