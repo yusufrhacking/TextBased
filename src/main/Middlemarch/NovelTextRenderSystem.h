@@ -11,7 +11,7 @@ class NovelTextRenderSystem: public DynamicRenderSystem {
 private:
     std::string getLinedUpText(const std::string& text);
     std::chrono::steady_clock::time_point lastUpdateTime;
-    int standardTypingDelayMilliseconds = 40;
+    int standardTypingDelayMilliseconds = 1;
     int currentWaitingTime = standardTypingDelayMilliseconds;
     int COMMA_MULTIPLIER = 7;
     size_t subjectCharInd = 0;
@@ -37,7 +37,7 @@ private:
     bool isAtEndOfReading(const NovelTextComponent& novelTextComponent, const TextComponent&textComponent);
 
     void readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera);
-    void convertTextToEntities(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent);
+    void createEntitiesFromText(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent);
 
 
 

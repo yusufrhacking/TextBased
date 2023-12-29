@@ -24,7 +24,7 @@ void NovelTextRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Ca
 }
 
 void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Renderer> &renderer, Camera camera) {
-    auto positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     auto& textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
     auto& novelTextComponent = ecsManager->getComponentFromEntity<NovelTextComponent>(entity);
 
@@ -41,7 +41,41 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
         lastUpdateTime = currentTime;
         bool isSubjectFound = trackSubject(novelTextComponent, newChar);
         if (isSubjectFound) {
-            convertTextToEntities(entity, positionComponent, textComponent, novelTextComponent);
+            //Break up the text component
+
+            // Calculate end of jit
+            size_t finalNewIndex = startCharIndOfSubjectFIRST + novelTextComponent.subject.size();
+            std::string textToBecomeEntities = textComponent.text.substr(0, finalNewIndex);
+            TextComponent newTextComponent{textToBecomeEntities};
+
+            // Turn this section into entities
+            createEntitiesFromText(entity, positionComponent, newTextComponent, novelTextComponent);
+
+            // Move text down the line + shift position as needed
+            // Add dummy spacing from the left that corresponds to what the line has already shown
+            size_t lines = 0;
+            size_t spacesNeededForCurrLine = 0;
+            for (size_t i = 0; i < textComponent.text.size(); i++) {
+                if (i == startCharIndOfSubjectFIRST) {//Done with the searching b/c we found the subject
+                    spacesNeededForCurrLine += novelTextComponent.subject.size();
+                    break;
+                }
+
+                if (textComponent.text[i] == '\n') {
+                    lines++;
+                    spacesNeededForCurrLine = 0;
+                }
+                spacesNeededForCurrLine++;
+            }
+
+            std::string newText(spacesNeededForCurrLine, ' ');
+            newText += textComponent.text.substr(finalNewIndex);
+
+            textComponent.text = newText;
+            // novelTextComponent.readIndex = 0;
+
+            // Move the position down the corresponding lines!
+            positionComponent.shiftPosition(0, lines * MONACO_HEIGHT_OF_A_LINE_OF_TEXT);
         }
     }
 
@@ -51,7 +85,8 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
     renderer->renderDynamicText(camera, positionComponent.getPosition(), TextComponent(textToRender), GenericStyleComponent());
 
     if (isAtEndOfReading(novelTextComponent, textComponent)) {
-        convertTextToEntities(entity, positionComponent, textComponent, novelTextComponent);
+        createEntitiesFromText(entity, positionComponent, textComponent, novelTextComponent);
+        ecsManager->killEntity(entity);
     }
 }
 
@@ -99,7 +134,7 @@ void NovelTextRenderSystem::delayOnComma(char newChar) {
     }
 }
 
-void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
+void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
     std::string subject = novelTextComponent.subject;
     auto words = Split::getWordsAndPunctuation(textComponent.text);
     size_t subjectWordInd = findSubjectWordInd(words, subject);
@@ -138,9 +173,6 @@ void NovelTextRenderSystem::convertTextToEntities(Entity entity, PositionCompone
         }
 
     }
-
-    ecsManager->killEntity(entity);
-
     spdlog::info("Hit max!");
 
 }
