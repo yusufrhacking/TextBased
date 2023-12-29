@@ -59,11 +59,12 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
                 if (textComponent.text[i] == '\n') {
                     lines++;
                     spacesNeededForCurrLine = 0;
+                } else {
+                    spacesNeededForCurrLine++;
                 }
-                spacesNeededForCurrLine++;
             }
 
-            spacesNeededForCurrLine += novelTextComponent.subject.size();
+            spacesNeededForCurrLine += novelTextComponent.subject.size()-1;
 
 
             std::string newText(spacesNeededForCurrLine, ' ');
