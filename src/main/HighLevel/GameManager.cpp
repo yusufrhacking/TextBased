@@ -1,6 +1,8 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #include "GameManager.h"
+
+#include "SystemAddSystem.h"
 #include "../Levels/BasicLevel.h"
 #include "../PositionsAndMovement/AutonomousMovementSystem.h"
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
@@ -73,6 +75,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<PlayerRotateSystem>();
     ecsManager->addSystem<UIControllerSystem>();
     ecsManager->addSystem<AxeFlipSystem>();
+    ecsManager->addSystem<SystemAddSystem>();
 }
 
 void GameManager::update(double deltaTime) {
