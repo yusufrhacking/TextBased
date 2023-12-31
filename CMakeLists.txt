@@ -105,7 +105,8 @@ set(SOURCE_FILES
         src/main/Abyz/AbyzRunningSystem.cpp
         src/main/Abyz/AbyzRunningSystem.h
         src/main/Abyz/AbyzRenderingSystem.cpp
-        src/main/Abyz/AbyzRenderingSystem.h)
+        src/main/Abyz/AbyzRenderingSystem.h
+        src/main/Abyz/AbyzTargetingComponent.h)
 
 
 Message("")
