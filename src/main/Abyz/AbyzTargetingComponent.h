@@ -6,6 +6,8 @@
 struct AbyzTargetingComponent {
     Entity target;
     Position targetPosiiton;
+
+    AbyzTargetingComponent(Entity target, Position targetPosition): target(target), targetPosiiton(targetPosition) {}
 };
 
 #endif

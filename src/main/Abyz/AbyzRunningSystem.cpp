@@ -1,6 +1,7 @@
 #include "AbyzRunningSystem.h"
 
 #include "AbyzPrefab.h"
+#include "AbyzTargetingComponent.h"
 #include "TargetForAbyzComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
@@ -15,18 +16,18 @@ AbyzRunningSystem::AbyzRunningSystem() {
 }
 
 void AbyzRunningSystem::update(double deltaTime) {
-    for(auto entity: getRelevantEntities()) {
-        auto position = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
+    for(auto target: getRelevantEntities()) {
+        auto targetPosition = ecsManager->getComponentFromEntity<PositionComponent>(target).getPosition();
 
 
         Entity abyz = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
-        ecsManager->addComponentToEntity<PositionComponent>(abyz, position + Position(0, 400));
+        ecsManager->addComponentToEntity<PositionComponent>(abyz, targetPosition + Position(0, 400));
         ecsManager->addComponentToEntity<GenericStyleComponent>(abyz, Type::PLAIN_TEXT);
         ecsManager->addComponentToEntity<LiveComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
+        ecsManager->addComponentToEntity<AbyzTargetingComponent>(target, targetPosition);
 
-
-        ecsManager->removeComponentFromEntity<TargetForAbyzComponent>(entity);
+        ecsManager->removeComponentFromEntity<TargetForAbyzComponent>(target);
     }
 }
