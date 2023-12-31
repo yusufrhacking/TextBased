@@ -5,9 +5,11 @@
 
 struct AbyzTargetingComponent {
     Entity target;
-    Position targetPosiiton;
+    Position targetPosition;
 
-    AbyzTargetingComponent(Entity target, Position targetPosition): target(target), targetPosiiton(targetPosition) {}
+    AbyzTargetingComponent() = default;
+
+    AbyzTargetingComponent(Entity target, Position targetPosition): target(target), targetPosition(targetPosition) {}
 };
 
 #endif

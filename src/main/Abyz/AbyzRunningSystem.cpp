@@ -23,10 +23,9 @@ void AbyzRunningSystem::update(double deltaTime) {
         Entity abyz = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
         ecsManager->addComponentToEntity<PositionComponent>(abyz, targetPosition + Position(0, 400));
-        ecsManager->addComponentToEntity<GenericStyleComponent>(abyz, Type::PLAIN_TEXT);
         ecsManager->addComponentToEntity<LiveComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
-        ecsManager->addComponentToEntity<AbyzTargetingComponent>(target, targetPosition);
+        ecsManager->addComponentToEntity<AbyzTargetingComponent>(abyz, AbyzTargetingComponent(target, targetPosition));
 
         ecsManager->removeComponentFromEntity<TargetForAbyzComponent>(target);
     }
