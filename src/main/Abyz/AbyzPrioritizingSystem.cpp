@@ -1,5 +1,8 @@
 #include "AbyzPrioritizingSystem.h"
 
+#include <ranges>
+
+#include "AbyzTargetComponent.h"
 #include "../Health/PendingDeathComponent.h"
 #include "../Maze/HalfwayOpenWallColumnPrefab.h"
 #include "../Middlemarch/WordRelicComponent.h"
@@ -17,7 +20,7 @@ AbyzPrioritizingSystem::AbyzPrioritizingSystem() {
 }
 
 void AbyzPrioritizingSystem::update(double deltaTime) {
-    for(auto entity: getRelevantEntities()) {
+    for(auto entity : std::ranges::reverse_view(getRelevantEntities())) {
         auto& relic = ecsManager->getComponentFromEntity<WordRelicComponent>(entity);
         if (relic.isCaptured) {
             continue;
@@ -27,7 +30,8 @@ void AbyzPrioritizingSystem::update(double deltaTime) {
         std::chrono::milliseconds timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
         if (timeDiff.count() > workDelayMilliseconds) {
             lastUpdateTime = currentTime;
-            ecsManager->killEntity(entity);
+            ecsManager->addComponentToEntity<AbyzTargetComponent>(entity);
+            // ecsManager->killEntity(entity);
         }
     }
 }
