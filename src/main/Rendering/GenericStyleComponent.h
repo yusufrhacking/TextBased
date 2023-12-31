@@ -21,6 +21,8 @@ public:
         style = Types::typeToStyle(type);
     }
 
+    explicit GenericStyleComponent(RenderStyle style): style(style){}
+
     [[nodiscard]] RenderStyle getStyle() const {
         return style;
     }

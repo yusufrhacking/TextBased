@@ -47,6 +47,10 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     greenNumberBankFont = FC_CreateFont();
     FC_LoadFont(greenNumberBankFont, renderer, "../../resources/Monaco.ttf",
                 10, matrix_green, TTF_STYLE_NORMAL);
+
+    redFont = FC_CreateFont();
+    FC_LoadFont(redFont, renderer, "../../resources/Monaco.ttf",
+        TEXT_C_FONT_SIZE, red, TTF_STYLE_NORMAL);
 }
 
 void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const GenericStyleComponent& style){
@@ -130,6 +134,8 @@ FC_Font* SDLRenderer::styleToFont(RenderStyle style) {
             return greenLetterBankFont;
         case RenderStyle::TINY_GREEN_NUMBER:
             return greenNumberBankFont;
+        case RenderStyle::RED:
+            return redFont;
         default:
             throw NoStyleException();
     }
