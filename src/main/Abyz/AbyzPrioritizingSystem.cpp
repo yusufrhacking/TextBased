@@ -31,6 +31,7 @@ void AbyzPrioritizingSystem::update(double deltaTime) {
         if (timeDiff.count() > workDelayMilliseconds) {
             lastUpdateTime = currentTime;
             ecsManager->addComponentToEntity<AbyzTargetComponent>(entity);
+            ecsManager->removeComponentFromEntity<WordRelicComponent>(entity);
             // ecsManager->killEntity(entity);
         }
     }
