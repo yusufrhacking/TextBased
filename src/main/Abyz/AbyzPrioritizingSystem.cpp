@@ -9,6 +9,8 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 
+extern std::unique_ptr<ECSManager> ecsManager;
+
 AbyzPrioritizingSystem::AbyzPrioritizingSystem() {
     requireComponent<WordRelicComponent>();
     requireComponent<PositionComponent>();

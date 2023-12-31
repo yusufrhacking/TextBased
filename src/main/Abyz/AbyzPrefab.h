@@ -35,7 +35,7 @@ struct AbyzPrefab{
             eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, Entity{id});
             eventBus->emitEvent<CreateItemAtEntityEvent>(Item::LETTER, Entity{id});
         });
-        ecsManager->addComponentToEntity<CollisionComponent>(abyz);
+        // ecsManager->addComponentToEntity<CollisionComponent>(abyz);
     }
 };
 

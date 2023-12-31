@@ -5,6 +5,7 @@
 #include "../HighLevel/Globals.h"
 #include "../PositionsAndMovement/Size.h"
 #include <sstream>
+#include <spdlog/spdlog.h>
 
 struct TextComponent {
     std::string text;
