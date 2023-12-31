@@ -1,10 +1,12 @@
 #ifndef ABYZRENDERINGSYSTEM_H
 #define ABYZRENDERINGSYSTEM_H
+#include "../Rendering/DynamicRenderSystem.h"
 
 
-
-class AbyzRenderingSystem {
-
+class AbyzRenderingSystem: public DynamicRenderSystem {
+public:
+    AbyzRenderingSystem();
+    void render(const std::shared_ptr<Renderer>& renderer, Camera camera) override;
 };
 
 
