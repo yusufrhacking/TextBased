@@ -8,6 +8,7 @@
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../Text/Split.h"
+#include "../Health/PendingDeathComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -58,7 +59,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
 
     if (isAtEndOfReading(novelTextComponent, textComponent)) {
         createEntitiesFromText(entity, positionComponent, textComponent, novelTextComponent);
-        ecsManager->killEntity(entity);
+        ecsManager->addComponentToEntity<PendingDeathComponent>(entity);
         eventBus->emitEvent<EndOfReadingEvent>();
     }
 }
@@ -139,19 +140,19 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         }
 
         Entity wordEntity = ecsManager->createEntity();
-        ecsManager->addComponentToEntity<WordRelicComponent>(wordEntity);
+        ecsManager->addComponentToEntity<LiveComponent>(wordEntity);
         ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
         ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
-        ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
-        ecsManager->addComponentToEntity<LiveComponent>(wordEntity);
 
         if(i == subjectWordInd) {
             ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
             ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
             ecsManager->addComponentToEntity<SubjectComponent>(wordEntity);
-            ecsManager->removeComponentFromEntity<GenericStyleComponent>(wordEntity);
             i += Split::getWordsAndPunctuation(subject).size();
             word = subject;
+        } else {
+            ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
+            ecsManager->addComponentToEntity<WordRelicComponent>(wordEntity);
         }
 
         if (i < words.size()-2) {
