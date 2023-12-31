@@ -3,6 +3,7 @@
 #include "EntityRenderSystem.h"
 #include "FixedRenderSystem.h"
 #include "DynamicRenderSystem.h"
+#include "../Abyz/AbyzRenderingSystem.h"
 #include "../TerminalUI/LiveTerminalRenderSystem.h"
 #include "../TerminalUI/TerminalHistoryRenderSystem.h"
 #include "../Lettering/LetterBankRenderSystem.h"
@@ -59,6 +60,9 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     if (ecsManager->hasSystem<SubjectRenderSystem>()){
         ecsManager->getSystem<SubjectRenderSystem>().render(renderer, camera);
     }
+    if (ecsManager->hasSystem<AbyzRenderingSystem>()) {
+        ecsManager->getSystem<AbyzRenderingSystem>().render(renderer, camera);
+    }
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -70,5 +74,6 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<HealthBarRenderSystem>();
     ecsManager->addSystem<NovelTextRenderSystem>();
     ecsManager->addSystem<SubjectRenderSystem>();
+    ecsManager->addSystem<AbyzRenderingSystem>();
     // ecsManager->addSystem<PlayerSideTextSystem>();
 }
