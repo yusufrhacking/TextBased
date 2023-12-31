@@ -59,7 +59,7 @@ void NovelTextRenderSystem::readTheText(Entity entity, const std::shared_ptr<Ren
 
     if (isAtEndOfReading(novelTextComponent, textComponent)) {
         createEntitiesFromText(entity, positionComponent, textComponent, novelTextComponent);
-        ecsManager->addComponentToEntity<PendingDeathComponent>(entity);
+        ecsManager->killEntity(entity);
         eventBus->emitEvent<EndOfReadingEvent>();
     }
 }
@@ -113,6 +113,7 @@ void NovelTextRenderSystem::delayOnPunctiation(char newChar) {
 }
 
 void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionComponent positionComponent, TextComponent& textComponent, NovelTextComponent& novelTextComponent) {
+    spdlog::info("Creating entities!");
     std::string subject = novelTextComponent.subject;
     auto words = Split::getWordsAndPunctuation(textComponent.text);
     size_t subjectWordInd = findSubjectWordInd(words, subject);
@@ -180,9 +181,6 @@ std::string NovelTextRenderSystem::getLinedUpText(const std::string& text) {
             wordStream << ch;
         } else {
             std::string word = wordStream.str();
-            if (word == "Some") {
-                spdlog::info("SOME!");
-            }
             double wordLength = word.length();
 
             if (currentLength + wordLength > lineCapacity) {
