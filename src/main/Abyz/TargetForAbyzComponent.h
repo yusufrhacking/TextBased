@@ -1,7 +1,7 @@
 #ifndef ABYZTARGETCOMPONENT_H
 #define ABYZTARGETCOMPONENT_H
 
-struct AbyzTargetComponent {
+struct TargetForAbyzComponent {
 
 };
 

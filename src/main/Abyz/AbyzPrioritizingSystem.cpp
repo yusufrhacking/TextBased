@@ -2,7 +2,7 @@
 
 #include <ranges>
 
-#include "AbyzTargetComponent.h"
+#include "TargetForAbyzComponent.h"
 #include "../Health/PendingDeathComponent.h"
 #include "../Maze/HalfwayOpenWallColumnPrefab.h"
 #include "../Middlemarch/WordRelicComponent.h"
@@ -32,7 +32,7 @@ void AbyzPrioritizingSystem::update(double deltaTime) {
         std::chrono::milliseconds timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
         if (timeDiff.count() > workDelayMilliseconds) {
             lastUpdateTime = currentTime;
-            ecsManager->addComponentToEntity<AbyzTargetComponent>(entity);
+            ecsManager->addComponentToEntity<TargetForAbyzComponent>(entity);
             ecsManager->removeComponentFromEntity<WordRelicComponent>(entity);
             // ecsManager->killEntity(entity);
         }

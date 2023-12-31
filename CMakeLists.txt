@@ -101,9 +101,11 @@ set(SOURCE_FILES
         src/main/HighLevel/SystemAddSystem.h
         src/main/Abyz/AbyzPrioritizingSystem.cpp
         src/main/Abyz/AbyzPrioritizingSystem.h
-        src/main/Abyz/AbyzTargetComponent.h
+        src/main/Abyz/TargetForAbyzComponent.h
         src/main/Abyz/AbyzRunningSystem.cpp
-        src/main/Abyz/AbyzRunningSystem.h)
+        src/main/Abyz/AbyzRunningSystem.h
+        src/main/Abyz/AbyzRenderingSystem.cpp
+        src/main/Abyz/AbyzRenderingSystem.h)
 
 
 Message("")
