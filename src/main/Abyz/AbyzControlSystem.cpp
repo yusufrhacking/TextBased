@@ -20,6 +20,7 @@ AbyzControlSystem::AbyzControlSystem() {
     requireComponent<AbyzComponent>();
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
+    requireComponent<HealthComponent>();
 }
 
 void AbyzControlSystem::update(double deltaTime) {
