@@ -98,7 +98,10 @@ set(SOURCE_FILES
         src/main/Middlemarch/WordRelicComponent.h
         src/main/Middlemarch/EndOfReadingEvent.h
         src/main/HighLevel/SystemAddSystem.cpp
-        src/main/HighLevel/SystemAddSystem.h)
+        src/main/HighLevel/SystemAddSystem.h
+        src/main/Abyz/AbyzPrioritizingSystem.cpp
+        src/main/Abyz/AbyzPrioritizingSystem.h
+        src/main/Abyz/AbyzTargetComponent.h)
 
 
 Message("")
