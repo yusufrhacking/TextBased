@@ -1,7 +1,7 @@
 #include "NovelTextRenderSystem.h"
 
 #include "EndOfReadingEvent.h"
-#include "NovelWordComponent.h"
+#include "WordRelicComponent.h"
 #include "SubjectComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
@@ -139,7 +139,7 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         }
 
         Entity wordEntity = ecsManager->createEntity();
-        ecsManager->addComponentToEntity<NovelWordComponent>(wordEntity);
+        ecsManager->addComponentToEntity<WordRelicComponent>(wordEntity);
         ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
         ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
         ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);

@@ -95,8 +95,10 @@ set(SOURCE_FILES
         src/main/Middlemarch/SubjectRenderSystem.h
         src/main/Rendering/TextStyles.h
         src/main/Middlemarch/PunctuationMarks.h
-        src/main/Middlemarch/NovelWordComponent.h
-        src/main/Middlemarch/EndOfReadingEvent.h)
+        src/main/Middlemarch/WordRelicComponent.h
+        src/main/Middlemarch/EndOfReadingEvent.h
+        src/main/HighLevel/SystemAddSystem.cpp
+        src/main/HighLevel/SystemAddSystem.h)
 
 
 Message("")

@@ -1,7 +1,7 @@
 #ifndef NOVELWORDCOMPONENT_H
 #define NOVELWORDCOMPONENT_H
 
-struct NovelWordComponent {
+struct WordRelicComponent {
 
 };
 
