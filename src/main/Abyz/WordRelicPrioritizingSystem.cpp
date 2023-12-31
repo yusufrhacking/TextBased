@@ -1,8 +1,8 @@
-#include "AbyzPrioritizingSystem.h"
+#include "WordRelicPrioritizingSystem.h"
 
 #include <ranges>
 
-#include "TargetForAbyzComponent.h"
+#include "PriorityTargetComponent.h"
 #include "../Health/PendingDeathComponent.h"
 #include "../Maze/HalfwayOpenWallColumnPrefab.h"
 #include "../Middlemarch/WordRelicComponent.h"
@@ -11,7 +11,7 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-AbyzPrioritizingSystem::AbyzPrioritizingSystem() {
+WordRelicPrioritizingSystem::WordRelicPrioritizingSystem() {
     requireComponent<WordRelicComponent>();
     requireComponent<PositionComponent>();
     requireComponent<LiveComponent>();
@@ -21,7 +21,7 @@ AbyzPrioritizingSystem::AbyzPrioritizingSystem() {
 
 }
 
-void AbyzPrioritizingSystem::update(double deltaTime) {
+void WordRelicPrioritizingSystem::update(double deltaTime) {
     for(auto entity : std::ranges::reverse_view(getRelevantEntities())) {
         auto& relic = ecsManager->getComponentFromEntity<WordRelicComponent>(entity);
         if (relic.isCaptured) {
@@ -32,7 +32,7 @@ void AbyzPrioritizingSystem::update(double deltaTime) {
         std::chrono::milliseconds timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastUpdateTime);
         if (timeDiff.count() > workDelayMilliseconds) {
             lastUpdateTime = currentTime;
-            ecsManager->addComponentToEntity<TargetForAbyzComponent>(entity);
+            ecsManager->addComponentToEntity<PriorityTargetComponent>(entity);
             ecsManager->removeComponentFromEntity<WordRelicComponent>(entity);
             // ecsManager->killEntity(entity);
         }

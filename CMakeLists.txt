@@ -99,11 +99,11 @@ set(SOURCE_FILES
         src/main/Middlemarch/EndOfReadingEvent.h
         src/main/HighLevel/SystemAddSystem.cpp
         src/main/HighLevel/SystemAddSystem.h
-        src/main/Abyz/AbyzPrioritizingSystem.cpp
-        src/main/Abyz/AbyzPrioritizingSystem.h
-        src/main/Abyz/TargetForAbyzComponent.h
-        src/main/Abyz/AbyzRunningSystem.cpp
-        src/main/Abyz/AbyzRunningSystem.h
+        src/main/Abyz/WordRelicPrioritizingSystem.cpp
+        src/main/Abyz/WordRelicPrioritizingSystem.h
+        src/main/Abyz/PriorityTargetComponent.h
+        src/main/Abyz/AbyzTargetingSystem.cpp
+        src/main/Abyz/AbyzTargetingSystem.h
         src/main/Abyz/AbyzRenderingSystem.cpp
         src/main/Abyz/AbyzRenderingSystem.h
         src/main/Abyz/AbyzTargetingComponent.h)

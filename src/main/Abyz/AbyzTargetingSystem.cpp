@@ -1,21 +1,21 @@
-#include "AbyzRunningSystem.h"
+#include "AbyzTargetingSystem.h"
 
 #include "AbyzPrefab.h"
 #include "AbyzTargetingComponent.h"
-#include "TargetForAbyzComponent.h"
+#include "PriorityTargetComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-AbyzRunningSystem::AbyzRunningSystem() {
-    requireComponent<TargetForAbyzComponent>();
+AbyzTargetingSystem::AbyzTargetingSystem() {
+    requireComponent<PriorityTargetComponent>();
     requireComponent<PositionComponent>();
     requireComponent<LiveComponent>();
     requireComponent<TextComponent>();
 }
 
-void AbyzRunningSystem::update(double deltaTime) {
+void AbyzTargetingSystem::update(double deltaTime) {
     for(auto target: getRelevantEntities()) {
         auto targetPosition = ecsManager->getComponentFromEntity<PositionComponent>(target).getPosition();
 
@@ -27,6 +27,6 @@ void AbyzRunningSystem::update(double deltaTime) {
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzTargetingComponent>(abyz, AbyzTargetingComponent(target, targetPosition));
 
-        ecsManager->removeComponentFromEntity<TargetForAbyzComponent>(target);
+        ecsManager->removeComponentFromEntity<PriorityTargetComponent>(target);
     }
 }

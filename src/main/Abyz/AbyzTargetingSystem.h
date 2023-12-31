@@ -3,9 +3,9 @@
 #include "../ECSObjects/UpdateSystem.h"
 
 
-class AbyzRunningSystem: public UpdateSystem {
+class AbyzTargetingSystem: public UpdateSystem {
 public:
-    AbyzRunningSystem();
+    AbyzTargetingSystem();
     void update(double deltaTime) override;
 };
 

@@ -3,11 +3,11 @@
 #include "../ECSObjects/UpdateSystem.h"
 
 
-class AbyzPrioritizingSystem: public UpdateSystem {
+class WordRelicPrioritizingSystem: public UpdateSystem {
     std::chrono::steady_clock::time_point lastUpdateTime;
     int workDelayMilliseconds = 50;
 public:
-    AbyzPrioritizingSystem();
+    WordRelicPrioritizingSystem();
     void update(double deltaTime) override;
 };
 
