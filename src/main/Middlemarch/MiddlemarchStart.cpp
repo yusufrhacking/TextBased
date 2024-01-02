@@ -28,14 +28,18 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     //Abyz show up at the bottom and chew through it, quickly
     //Theresa turns into entity, has to fight the Abyz
     //Pull out concepts from the prelude to make gamic
-    // 
+    //
+
+    // Gravity hits once all the text is destroyed, and then Avila as text shows up at the bottom
+    // Becomes a platformer kinda thing, where you gotta jump up
+    // So need gravity system, and to then transform the keyboard movement system into a jumping system
 
 
 }
 
 void MiddlemarchStart::createPreludeText() const {
     Entity preludeTextEntity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, shortTesting);
+    ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);
     ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Window::deriveRelativeTopLeft(startPosition));
     ecsManager->addComponentToEntity<LiveComponent>(preludeTextEntity);
     ecsManager->addComponentToEntity<NovelTextComponent>(preludeTextEntity, "Saint Theresa");
