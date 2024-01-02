@@ -3,6 +3,7 @@
 #include "AbyzPrefab.h"
 #include "AbyzTargetingComponent.h"
 #include "JourneyComponent.h"
+#include "../PositionsAndMovement/DistanceCalculator.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 
@@ -27,12 +28,15 @@ void AbyzTargetExecutionSystem::update(double deltaTime) {
 
         positionComponent.shiftPosition(xChange, yChange);
 
+        const auto& abyzSize = ecsManager->getComponentFromEntity<TextComponent>(abyz).getSurfaceSize();
+        const auto& abyzPosition = positionComponent.getPosition();
+
         auto targetComponent = ecsManager->getComponentFromEntity<AbyzTargetingComponent>(abyz);
 
-        auto& secondPosition = ecsManager->getComponentFromEntity<PositionComponent>(second);
-        auto& secondText = ecsManager->getComponentFromEntity<TextComponent>(second);
+        auto& secondPosition = ecsManager->getComponentFromEntity<PositionComponent>(targetComponent.target);
+        auto& secondText = ecsManager->getComponentFromEntity<TextComponent>(targetComponent.target);
 
-        bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstText.getSurfaceSize(),
+        bool isAABCollision = DistanceCalculator::checkAABBCollision(abyzPosition, abyzSize,
                                                  secondPosition.getPosition(), secondText.getSurfaceSize());
          //JourneyComponent says how far to go + how fast --> this is generated from some cool entity calculations when the jit is created
         // multiply that stuff by delta time to figure out how far to send this time, and then if the journey is done
