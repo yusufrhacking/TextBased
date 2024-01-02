@@ -2,6 +2,7 @@
 
 #include "AbyzPrefab.h"
 #include "AbyzTargetingComponent.h"
+#include "JourneyComponent.h"
 #include "PriorityTargetComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
@@ -26,6 +27,10 @@ void AbyzTargetingSystem::update(double deltaTime) {
         ecsManager->addComponentToEntity<LiveComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzTargetingComponent>(abyz, AbyzTargetingComponent(target, targetPosition));
+
+        JourneyComponent journeyComponent{Velocity(MONACO_HEIGHT_OF_A_LINE_OF_TEXT, MONACO_RENDERED_TEXT_WIDTH_SCALER), 0, 400};
+        ecsManager->addComponentToEntity<JourneyComponent>(abyz, journeyComponent);
+
 
         ecsManager->removeComponentFromEntity<PriorityTargetComponent>(target);
     }

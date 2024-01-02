@@ -2,6 +2,7 @@
 
 #include "AbyzPrefab.h"
 #include "AbyzTargetingComponent.h"
+#include "JourneyComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 
@@ -13,10 +14,18 @@ AbyzTargetExecutionSystem::AbyzTargetExecutionSystem() {
     requireComponent<LiveComponent>();
     requireComponent<TextComponent>();
     requireComponent<AbyzComponent>();
+    requireComponent<JourneyComponent>();
 }
 
 void AbyzTargetExecutionSystem::update(double deltaTime) {
     for(auto abyz: getRelevantEntities()) {
+        auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(abyz);
+        const auto journeyComponent = ecsManager->getComponentFromEntity<JourneyComponent>(abyz);
+
+        double xChange = journeyComponent.velocity.xVelocity * deltaTime;
+        double yChange = journeyComponent.velocity.yVelocity * deltaTime;
+
+        positionComponent.shiftPosition(xChange, yChange);
          //JourneyComponent says how far to go + how fast --> this is generated from some cool entity calculations when the jit is created
         // multiply that stuff by delta time to figure out how far to send this time, and then if the journey is done
         //remove live component from the stored, targeted entity and add it to the Abyz's pouch or something
