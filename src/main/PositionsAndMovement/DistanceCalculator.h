@@ -16,6 +16,19 @@ public:
         return shortestDistance <= allowedDistance;
     }
 
+    static bool checkAABBCollision(const Position firstPosition, EntitySize firstCollider,
+                                              const Position secondPosition, EntitySize secondCollider) {
+        bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
+        bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
+        bool xOverlap = firstXOverlap && secondXOverlap;
+
+        bool firstYOverlap = firstPosition.yPos < secondPosition.yPos + secondCollider.height;
+        bool secondYOverlap = firstPosition.yPos + firstCollider.height > secondPosition.yPos;
+        bool yOverlap = firstYOverlap && secondYOverlap;
+
+        return xOverlap && yOverlap;
+    }
+
 private:
     static float calculateSideDistance(float entityBegin, float entityEnd, float otherBegin, float otherEnd) {
         if (entityEnd < otherBegin) {

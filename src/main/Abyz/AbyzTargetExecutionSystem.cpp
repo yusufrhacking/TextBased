@@ -20,12 +20,20 @@ AbyzTargetExecutionSystem::AbyzTargetExecutionSystem() {
 void AbyzTargetExecutionSystem::update(double deltaTime) {
     for(auto abyz: getRelevantEntities()) {
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(abyz);
-        const auto journeyComponent = ecsManager->getComponentFromEntity<JourneyComponent>(abyz);
+        const auto& journeyComponent = ecsManager->getComponentFromEntity<JourneyComponent>(abyz);
 
         double xChange = journeyComponent.velocity.xVelocity * deltaTime;
         double yChange = journeyComponent.velocity.yVelocity * deltaTime;
 
         positionComponent.shiftPosition(xChange, yChange);
+
+        auto targetComponent = ecsManager->getComponentFromEntity<AbyzTargetingComponent>(abyz);
+
+        auto& secondPosition = ecsManager->getComponentFromEntity<PositionComponent>(second);
+        auto& secondText = ecsManager->getComponentFromEntity<TextComponent>(second);
+
+        bool isAABCollision = checkAABBCollision(firstPosition.getPosition(), firstText.getSurfaceSize(),
+                                                 secondPosition.getPosition(), secondText.getSurfaceSize());
          //JourneyComponent says how far to go + how fast --> this is generated from some cool entity calculations when the jit is created
         // multiply that stuff by delta time to figure out how far to send this time, and then if the journey is done
         //remove live component from the stored, targeted entity and add it to the Abyz's pouch or something

@@ -2,6 +2,7 @@
 #include "CollisionCheckSystem.h"
 #include "PositionComponent.h"
 #include "CollisionEvent.h"
+#include "DistanceCalculator.h"
 #include "LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -47,15 +48,8 @@ void CollisionCheckSystem::update(double deltaTime) {
 
 bool CollisionCheckSystem::checkAABBCollision(const Position firstPosition, EntitySize firstCollider,
                                               const Position secondPosition, EntitySize secondCollider) {
-    bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
-    bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
-    bool xOverlap = firstXOverlap && secondXOverlap;
-
-    bool firstYOverlap = firstPosition.yPos < secondPosition.yPos + secondCollider.height;
-    bool secondYOverlap = firstPosition.yPos + firstCollider.height > secondPosition.yPos;
-    bool yOverlap = firstYOverlap && secondYOverlap;
-
-    return xOverlap && yOverlap;
+    return DistanceCalculator::checkAABBCollision(firstPosition, firstCollider,
+                                                 secondPosition, secondCollider);
 }
 
 
