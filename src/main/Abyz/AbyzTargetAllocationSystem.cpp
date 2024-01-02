@@ -28,7 +28,7 @@ void AbyzTargetingSystem::update(double deltaTime) {
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzTargetingComponent>(abyz, AbyzTargetingComponent(target));
 
-        JourneyComponent journeyComponent{Velocity(0, -4*static_cast<double>(MONACO_HEIGHT_OF_A_LINE_OF_TEXT)), 0, 400};
+        JourneyComponent journeyComponent{Velocity(0, -4*static_cast<double>(MONACO_HEIGHT_OF_A_LINE_OF_TEXT)), 0, -400};
         ecsManager->addComponentToEntity<JourneyComponent>(abyz, journeyComponent);
 
 

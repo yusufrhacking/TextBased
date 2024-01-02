@@ -4,13 +4,15 @@
 
 struct JourneyComponent {
     Velocity velocity;
-    float xChange;
-    float yChange;
+    double goalXChange;
+    double goalYChange;
+    double totalXTraveled = 0;
+    double totalYTraveled = 0;
 
     JourneyComponent() = default;
 
-    JourneyComponent(Velocity velocity, float xChange, float yChange):
-    velocity(velocity), xChange(xChange), yChange(yChange) {}
+    JourneyComponent(Velocity velocity, double goalXChange, double goalYChange):
+    velocity(velocity), goalXChange(goalXChange), goalYChange(goalYChange) {}
 };
 
 #endif //JOURNEYCOMPONENT_H
