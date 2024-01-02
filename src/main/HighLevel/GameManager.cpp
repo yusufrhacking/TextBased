@@ -27,6 +27,7 @@
 #include "../Health/HealthSystem.h"
 #include "../Health/PendingDeathSystem.h"
 #include "../Abyz/AbyzControlSystem.h"
+#include "../Abyz/AbyzTargetExecutionSystem.h"
 #include "../Abyz/AbyzTargetingSystem.h"
 #include "../Levels/FullBasicLevel.h"
 #include "../Levels/IntroPac.h"
@@ -78,6 +79,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AxeFlipSystem>();
     ecsManager->addSystem<SystemAddSystem>();
     ecsManager->addSystem<AbyzTargetingSystem>();
+    ecsManager->addSystem<AbyzTargetExecutionSystem>();
 }
 
 void GameManager::update(double deltaTime) {
