@@ -28,7 +28,8 @@
 #include "../Health/PendingDeathSystem.h"
 #include "../Abyz/AbyzControlSystem.h"
 #include "../Abyz/AbyzTargetExecutionSystem.h"
-#include "../Abyz/AbyzTargetingSystem.h"
+#include "../Abyz/AbyzTargetAllocationSystem.h"
+#include "../Abyz/WordRelicPrioritizingSystem.h"
 #include "../Levels/FullBasicLevel.h"
 #include "../Levels/IntroPac.h"
 #include "../MainPlayer/PlayerRotateSystem.h"
@@ -78,8 +79,9 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<UIControllerSystem>();
     ecsManager->addSystem<AxeFlipSystem>();
     ecsManager->addSystem<SystemAddSystem>();
-    ecsManager->addSystem<AbyzTargetingSystem>();
+    ecsManager->addSystem<AbyzTargetAllocationSystem>();
     ecsManager->addSystem<AbyzTargetExecutionSystem>();
+    ecsManager->addSystem<WordRelicPrioritizingSystem>();
 }
 
 void GameManager::update(double deltaTime) {

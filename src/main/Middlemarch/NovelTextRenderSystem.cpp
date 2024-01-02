@@ -9,6 +9,7 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../Text/Split.h"
 #include "../Health/PendingDeathComponent.h"
+#include "../MainPlayer/MainPlayerAccessSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -145,7 +146,12 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         ecsManager->addComponentToEntity<PositionComponent>(wordEntity, currPosition);
         ecsManager->addComponentToEntity<TextComponent>(wordEntity, word);
 
-        if(i == subjectWordInd) {
+
+        if (ecsManager->getSystem<MainPlayerAccessSystem>().hasMainPlayer()) {//workaround to prevent multiple subjects
+            ecsManager->addComponentToEntity<GenericStyleComponent>(wordEntity);
+            ecsManager->addComponentToEntity<WordRelicComponent>(wordEntity);
+        }
+        else if(i == subjectWordInd) {
             ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
             ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
             ecsManager->addComponentToEntity<SubjectComponent>(wordEntity);

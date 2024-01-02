@@ -10,9 +10,9 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 
 SystemAddSystem::SystemAddSystem() {
-    eventBus->listenToEvent<EndOfReadingEvent>(this, &SystemAddSystem::onEndOfReading);
+    // eventBus->listenToEvent<EndOfReadingEvent>(this, &SystemAddSystem::onEndOfReading);
 }
 
 void SystemAddSystem::onEndOfReading(EndOfReadingEvent& event) {
-    ecsManager->addSystem<WordRelicPrioritizingSystem>();
+    // ecsManager->addSystem<WordRelicPrioritizingSystem>();
 }

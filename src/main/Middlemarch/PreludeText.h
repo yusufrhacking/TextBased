@@ -4,6 +4,11 @@
 #include <string>
 const std::string tab = "   ";
 
+const std::string shortTesting = tab + "Who that cares much to know the history of man, and how the mysterious mixture "
+                                      "behaves under the varying experiments of Time, has not dwelt, at least briefly, "
+                                      "on the life of Saint Theresa"
+                                      ", has not smiled with some gentleness at the thought ";
+
 const std::string testingStuff = tab + "Who that cares much to know the history of man, and how the mysterious mixture "
                                       "behaves under the varying experiments of Time, has not dwelt, at least briefly, "
                                       "on the life of Saint Theresa"

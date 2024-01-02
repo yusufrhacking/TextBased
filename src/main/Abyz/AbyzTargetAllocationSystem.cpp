@@ -1,4 +1,4 @@
-#include "AbyzTargetingSystem.h"
+#include "AbyzTargetAllocationSystem.h"
 
 #include "AbyzPrefab.h"
 #include "AbyzTargetingComponent.h"
@@ -9,16 +9,17 @@
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-AbyzTargetingSystem::AbyzTargetingSystem() {
+AbyzTargetAllocationSystem::AbyzTargetAllocationSystem() {
     requireComponent<PriorityTargetComponent>();
     requireComponent<PositionComponent>();
     requireComponent<LiveComponent>();
     requireComponent<TextComponent>();
 }
 
-void AbyzTargetingSystem::update(double deltaTime) {
+void AbyzTargetAllocationSystem::update(double deltaTime) {
     for(auto target: getRelevantEntities()) {
         auto targetPosition = ecsManager->getComponentFromEntity<PositionComponent>(target).getPosition();
+        spdlog::info("Text of Target: {}", ecsManager->getComponentFromEntity<TextComponent>(target).text);
 
 
         Entity abyz = ecsManager->createEntity();

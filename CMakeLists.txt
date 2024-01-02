@@ -103,7 +103,7 @@ set(SOURCE_FILES
         src/main/Abyz/WordRelicPrioritizingSystem.h
         src/main/Abyz/PriorityTargetComponent.h
         src/main/Abyz/AbyzTargetAllocationSystem.cpp
-        src/main/Abyz/AbyzTargetingSystem.h
+        src/main/Abyz/AbyzTargetAllocationSystem.h
         src/main/Abyz/AbyzRenderingSystem.cpp
         src/main/Abyz/AbyzRenderingSystem.h
         src/main/Abyz/AbyzTargetingComponent.h
