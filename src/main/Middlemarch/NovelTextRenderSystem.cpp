@@ -129,15 +129,15 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
             break;
         }
     }
-    currPosition.xPos += leadingWhitespaceCount * MONACO_RENDERED_TEXT_WIDTH_SCALER;
+    currPosition.x += leadingWhitespaceCount * MONACO_RENDERED_TEXT_WIDTH_SCALER;
 
 
     for (size_t i = 0; i < words.size(); i++) {
         std::string word = words[i];
 
         if (word.find('\n') != std::string::npos) {
-            currPosition.xPos = positionComponent.getPosition().xPos;
-            currPosition.yPos += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+            currPosition.x = positionComponent.getPosition().x;
+            currPosition.y += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
             word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
                 return c == '\n';}), word.end());
         }

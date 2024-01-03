@@ -19,12 +19,12 @@ void UnprocessedKeyboardMovementSystem::run() {
         int entity = unprocessedMovement.entity.getId();
         if (totalChangeForEntities.count(entity) > 0) {
             Velocity& existingVelocity = totalChangeForEntities[entity];
-            existingVelocity.xVelocity += unprocessedMovement.xChange;
-            existingVelocity.yVelocity += unprocessedMovement.yChange;
+            existingVelocity.x += unprocessedMovement.xChange;
+            existingVelocity.y += unprocessedMovement.yChange;
         } else {
             Velocity velocity;
-            velocity.xVelocity = unprocessedMovement.xChange;
-            velocity.yVelocity = unprocessedMovement.yChange;
+            velocity.x = unprocessedMovement.xChange;
+            velocity.y = unprocessedMovement.yChange;
             totalChangeForEntities[entity] = velocity;
         }
     }
@@ -33,7 +33,7 @@ void UnprocessedKeyboardMovementSystem::run() {
     for (const auto& changes : totalChangeForEntities) {
         int entityID = changes.first;
         const Velocity& velocity = changes.second;
-        spdlog::trace("Emitting event for entity {} to velocity {}, {}", entityID, velocity.xVelocity, velocity.yVelocity);
+        spdlog::trace("Emitting event for entity {} to velocity {}, {}", entityID, velocity.x, velocity.y);
         eventBus->emitEvent<ReadyToMoveEvent>(Entity(entityID), velocity);
     }
     unprocessedMovements->clear();

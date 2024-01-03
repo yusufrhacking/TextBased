@@ -55,7 +55,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 
 void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const GenericStyleComponent& style){
     auto cameraPos = camera.getCameraPosition();
-    FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
+    FC_Draw(styleToFont(style.getStyle()), renderer, position.x - cameraPos.x, position.y - cameraPos.y, sprite.text.c_str());
 }
 
 void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite, const GenericStyleComponent& style){
@@ -65,14 +65,14 @@ void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     SDL_Rect backgroundRect;
-    backgroundRect.x = (int)position.xPos;
-    backgroundRect.y = (int)position.yPos;
+    backgroundRect.x = (int)position.x;
+    backgroundRect.y = (int)position.y;
     backgroundRect.w = (int)textWidth;
     backgroundRect.h = (int)textHeight;
     SDL_RenderFillRect(renderer, &backgroundRect);
 
 
-    FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
+    FC_Draw(styleToFont(style.getStyle()), renderer, position.x, position.y, sprite.text.c_str());
 }
 
 void SDLRenderer::renderNovelText(Camera camera, Position position, const TextComponent& sprite, const NovelTextComponent& novelStyle){
@@ -82,13 +82,13 @@ void SDLRenderer::renderNovelText(Camera camera, Position position, const TextCo
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     SDL_Rect backgroundRect;
-    backgroundRect.x = (int)position.xPos;
-    backgroundRect.y = (int)position.yPos;
+    backgroundRect.x = (int)position.x;
+    backgroundRect.y = (int)position.y;
     backgroundRect.w = (int)textWidth;
     backgroundRect.h = (int)textHeight;
     SDL_RenderFillRect(renderer, &backgroundRect);
 
-    FC_Draw(genericMonacoFont, renderer, position.xPos - camera.getCameraPosition().xPos, position.yPos - camera.getCameraPosition().yPos, sprite.text.c_str());
+    FC_Draw(genericMonacoFont, renderer, position.x - camera.getCameraPosition().x, position.y - camera.getCameraPosition().y, sprite.text.c_str());
 }
 
 void SDLRenderer::renderTerminal(std::string text) {

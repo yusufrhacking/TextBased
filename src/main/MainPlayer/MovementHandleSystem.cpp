@@ -18,16 +18,16 @@ void MovementHandleSystem::onMovement(ReadyToMoveEvent& event){
     auto& change = event.change;
     auto entity = event.entity;
     auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    position.shiftPosition(change.xVelocity, change.yVelocity);
+    position.shiftPosition(change.x, change.y);
 
     if (ecsManager->hasComponent<TiedChildComponent>(entity)){
         auto& children = ecsManager->getComponentFromEntity<TiedChildComponent>(entity).entities;
         for (auto child : children){
             auto& childPosition = ecsManager->getComponentFromEntity<PositionComponent>(child);
-            childPosition.shiftPosition(change.xVelocity, change.yVelocity);
+            childPosition.shiftPosition(change.x, change.y);
         }
     }
 
-    spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), change.xVelocity, change.yVelocity, position.getPosition().xPos, position.getPosition().yPos);
+    spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), change.x, change.y, position.getPosition().x, position.getPosition().y);
     eventBus->emitEvent<PostMovementEvent>(entity, change);
 }

@@ -20,7 +20,9 @@ CollisionHandleSystem::CollisionHandleSystem() {
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
     auto entityA = event.a;
     auto entityB = event.b;
+    resolveOverlapBasedOnVelocity(entityA, entityB);
 }
+
 
 
 void CollisionHandleSystem::listenToEvents() {

@@ -35,8 +35,8 @@ public:
     void shiftPosition(double xChange, double yChange){
         previousPosition = position;
         frameLastMoved = currFrame;
-        position.xPos += (float)xChange;
-        position.yPos += (float)yChange;
+        position.x += (float)xChange;
+        position.y += (float)yChange;
         mapPosition = Canon::getMapPosition(position);
     }
 

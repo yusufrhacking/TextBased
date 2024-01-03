@@ -23,7 +23,7 @@ struct HalfwayOpenWallRowPrefab {
         Position wallAdjustment{(float)(wallSize.width), (float)0};
         for (int x=0; x<length; x++) {
             if (x == (length / 2) || x == (length / 2) - 1 || x == (length / 2) + 1) {
-                if (startOfIncision.xPos == -1){
+                if (startOfIncision.x == -1){
                     startOfIncision = currPosition;
                 }
                 currPosition = currPosition + wallAdjustment;

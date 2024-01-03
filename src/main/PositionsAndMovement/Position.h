@@ -3,46 +3,46 @@
 #include <stdlib.h>
 
 struct Position {
-    float xPos;
-    float yPos;
+    float x;
+    float y;
 
     Position(float x, float y){
-        this->xPos = x;
-        this->yPos = y;
+        this->x = x;
+        this->y = y;
     }
 
     Position(int x, int y){
-        this->xPos = (float)x;
-        this->yPos = (float)y;
+        this->x = (float)x;
+        this->y = (float)y;
     }
 
 
 
     Position(){
-        this->xPos = 0;
-        this->yPos = 0;
+        this->x = 0;
+        this->y = 0;
     }
 
     float getAbsoluteDifference(Position position) const{
-        return abs(position.xPos - this->xPos) + abs(position.yPos - this->yPos);
+        return abs(position.x - this->x) + abs(position.y - this->y);
     }
 
     Position operator+(const Position& other) const {
-        return {this->xPos + other.xPos, this->yPos + other.yPos};
+        return {this->x + other.x, this->y + other.y};
     }
 
     Position operator-(const Position& other) const {
-        return {this->xPos - other.xPos, this->yPos - other.yPos};
+        return {this->x - other.x, this->y - other.y};
     }
 
     Position& operator+=(const Position& other) {
-        this->xPos += other.xPos;
-        this->yPos += other.yPos;
+        this->x += other.x;
+        this->y += other.y;
         return *this;
     }
 
     Position operator/(const Position& other) const{
-        return {(xPos + other.xPos) / 2, (yPos + other.yPos) / 2};
+        return {(x + other.x) / 2, (y + other.y) / 2};
     }
 };
 

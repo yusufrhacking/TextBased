@@ -17,11 +17,11 @@ void VelocitySystem::update(double deltaTime) {
         auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto movement = ecsManager->getComponentFromEntity<VelocityComponent>(entity);
 
-        double xChange = movement.velocity.xVelocity * deltaTime;
-        double yChange = movement.velocity.yVelocity * deltaTime;
+        double xChange = movement.velocity.x * deltaTime;
+        double yChange = movement.velocity.y * deltaTime;
 
         position.shiftPosition(xChange, yChange);
-        spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), xChange, yChange, position.getPosition().xPos, position.getPosition().yPos);
+        spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), xChange, yChange, position.getPosition().x, position.getPosition().y);
     }
 }
 

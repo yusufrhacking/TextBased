@@ -59,22 +59,22 @@ struct IntroMazePrefab {
     }
 
     void createWalls(Position startingPosition) {
-        Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position(horizontalRowStartOffset, Window::getMiddlePosition().yPos + 25);
+        Position leftWallStartPosition = Window::deriveRelativeTopLeft(startingPosition) + Position(horizontalRowStartOffset, Window::getMiddlePosition().y + 25);
         HalfwayOpenWallRowPrefab bottomMiddleRow{leftWallStartPosition, innerHorizontalLengthInWalls};
         leftWallStartPosition += Position(0, -50);
         HalfwayOpenWallRowPrefab topMiddleRow{leftWallStartPosition, innerHorizontalLengthInWalls};
 
-        HalfwayOpenWallColumnPrefab leftTopMiddleCol{Position(static_cast<int>(topMiddleRow.startOfIncision.xPos), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.yPos))), 7};
+        HalfwayOpenWallColumnPrefab leftTopMiddleCol{Position(static_cast<int>(topMiddleRow.startOfIncision.x), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.y))), 7};
 
-        HalfwayOpenWallColumnPrefab rightTopMiddleCol{Position(static_cast<int>(topMiddleRow.endOfIncision.xPos), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.yPos))), 7};
+        HalfwayOpenWallColumnPrefab rightTopMiddleCol{Position(static_cast<int>(topMiddleRow.endOfIncision.x), Window::getTopYPosition(static_cast<int>(topMiddleRow.startOfIncision.y))), 7};
 
-        HalfwayOpenWallColumnPrefab leftBottomMiddleCol{Position((topMiddleRow.startOfIncision.xPos), bottomMiddleRow.startOfIncision.yPos), 7};
-        HalfwayOpenWallColumnPrefab rightBottomMiddleCol{Position((topMiddleRow.endOfIncision.xPos), bottomMiddleRow.endOfIncision.yPos), 7};
+        HalfwayOpenWallColumnPrefab leftBottomMiddleCol{Position((topMiddleRow.startOfIncision.x), bottomMiddleRow.startOfIncision.y), 7};
+        HalfwayOpenWallColumnPrefab rightBottomMiddleCol{Position((topMiddleRow.endOfIncision.x), bottomMiddleRow.endOfIncision.y), 7};
     }
 
 private:
     static HalfwayOpenWallRowPrefab placeTopRow(Position startingPosition) {
-        Position wallStartPosition = {Window::deriveRelativeTopLeft(startingPosition).xPos + horizontalRowStartOffset, Window::deriveRelativeTopLeft(startingPosition).yPos};
+        Position wallStartPosition = {Window::deriveRelativeTopLeft(startingPosition).x + horizontalRowStartOffset, Window::deriveRelativeTopLeft(startingPosition).y};
         return HalfwayOpenWallRowPrefab{wallStartPosition, outerHorizontalLengthInWalls};
     }
 
@@ -90,7 +90,7 @@ private:
                 BOTTOM_SPACING_MULTIPLIER * (float)HorizontalWallPrefab::getSize().height
         };
         Position newBottomLeft = bottomLeft + bottomWallVisibilityAdjustment;
-        spdlog::info("new bottom left x: {}", bottomLeft.xPos);
+        spdlog::info("new bottom left x: {}", bottomLeft.x);
         return HalfwayOpenWallRowPrefab{newBottomLeft, outerHorizontalLengthInWalls};
     }
 

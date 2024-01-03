@@ -94,8 +94,8 @@ void AbyzControlSystem::update(double deltaTime) {
 
 void AbyzControlSystem::chase(AbyzComponent& abyz, const Position& playerPosition, const Position& currentPosition) {
     abyz.state = AbyzState::CHASE;
-    float directionX = playerPosition.xPos - currentPosition.xPos;
-    float directionY = playerPosition.yPos - currentPosition.yPos;
+    float directionX = playerPosition.x - currentPosition.x;
+    float directionY = playerPosition.y - currentPosition.y;
     float magnitude = std::sqrt(directionX * directionX + directionY * directionY);
     abyz.directionX = directionX / magnitude;
     abyz.directionY = directionY / magnitude;

@@ -29,8 +29,8 @@ void AbyzTargetExecutionSystem::update(double deltaTime) {
         auto& journeyComponent = ecsManager->getComponentFromEntity<JourneyComponent>(abyz);
         const auto& abyzSize = ecsManager->getComponentFromEntity<TextComponent>(abyz).getSurfaceSize();
 
-        double xChange = journeyComponent.velocity.xVelocity * deltaTime;
-        double yChange = journeyComponent.velocity.yVelocity * deltaTime;
+        double xChange = journeyComponent.velocity.x * deltaTime;
+        double yChange = journeyComponent.velocity.y * deltaTime;
 
         positionComponent.shiftPosition(xChange, yChange);
 

@@ -38,8 +38,8 @@ TEST_CASE("AutonomousMovementSystem updateCameraPosition function moves entities
 
 
     Position pos;
-    pos.xPos = 0.0f;
-    pos.yPos = 0.0f;
+    pos.x = 0.0f;
+    pos.y = 0.0f;
     std::shared_ptr<Velocity> velocity = std::make_shared<Velocity>(2.0, 3.0);
 
     Entity entity = ecsManager->createEntity();

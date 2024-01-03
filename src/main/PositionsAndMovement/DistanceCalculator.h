@@ -24,8 +24,8 @@ enum class CollisionDirection {
 class DistanceCalculator {
 public:
     static bool isInAllowedRange(Position pos1, Position pos2, const EntitySize& size1, const EntitySize& size2, float allowedDistance) {
-        float horizontalDistance = calculateSideDistance(pos1.xPos, pos1.xPos + size1.width, pos2.xPos, pos2.xPos + size2.width);
-        float verticalDistance = calculateSideDistance(pos1.yPos, pos1.yPos + size1.height, pos2.yPos, pos2.yPos + size2.height);
+        float horizontalDistance = calculateSideDistance(pos1.x, pos1.x + size1.width, pos2.x, pos2.x + size2.width);
+        float verticalDistance = calculateSideDistance(pos1.y, pos1.y + size1.height, pos2.y, pos2.y + size2.height);
 
         float shortestDistance = calculateEuclideanDistance(horizontalDistance, verticalDistance);
 
@@ -34,12 +34,12 @@ public:
 
     static bool checkAABBCollision(const Position firstPosition, EntitySize firstCollider,
                                               const Position secondPosition, EntitySize secondCollider) {
-        bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
-        bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
+        bool firstXOverlap = firstPosition.x < (secondPosition.x + secondCollider.width);
+        bool secondXOverlap = (firstPosition.x + firstCollider.width) > secondPosition.x;
         bool xOverlap = firstXOverlap && secondXOverlap;
 
-        bool firstYOverlap = firstPosition.yPos < secondPosition.yPos + secondCollider.height;
-        bool secondYOverlap = firstPosition.yPos + firstCollider.height > secondPosition.yPos;
+        bool firstYOverlap = firstPosition.y < secondPosition.y + secondCollider.height;
+        bool secondYOverlap = firstPosition.y + firstCollider.height > secondPosition.y;
         bool yOverlap = firstYOverlap && secondYOverlap;
 
         return xOverlap && yOverlap;
@@ -47,19 +47,19 @@ public:
 
     static CollisionAxis getCollisionAxes(const Position& firstPosition, const EntitySize& firstCollider,
                                  const Position& secondPosition, const EntitySize& secondCollider) {
-        bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
-        bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
+        bool firstXOverlap = firstPosition.x < (secondPosition.x + secondCollider.width);
+        bool secondXOverlap = (firstPosition.x + firstCollider.width) > secondPosition.x;
         bool xOverlap = firstXOverlap && secondXOverlap;
 
-        bool firstYOverlap = firstPosition.yPos < (secondPosition.yPos + secondCollider.height);
-        bool secondYOverlap = (firstPosition.yPos + firstCollider.height) > secondPosition.yPos;
+        bool firstYOverlap = firstPosition.y < (secondPosition.y + secondCollider.height);
+        bool secondYOverlap = (firstPosition.y + firstCollider.height) > secondPosition.y;
         bool yOverlap = firstYOverlap && secondYOverlap;
 
         if (xOverlap && yOverlap) {
-            float xOverlapDepth = std::min(firstPosition.xPos + firstCollider.width, secondPosition.xPos + secondCollider.width) -
-                                  std::max(firstPosition.xPos, secondPosition.xPos);
-            float yOverlapDepth = std::min(firstPosition.yPos + firstCollider.height, secondPosition.yPos + secondCollider.height) -
-                                  std::max(firstPosition.yPos, secondPosition.yPos);
+            float xOverlapDepth = std::min(firstPosition.x + firstCollider.width, secondPosition.x + secondCollider.width) -
+                                  std::max(firstPosition.x, secondPosition.x);
+            float yOverlapDepth = std::min(firstPosition.y + firstCollider.height, secondPosition.y + secondCollider.height) -
+                                  std::max(firstPosition.y, secondPosition.y);
 
             if (xOverlapDepth > yOverlapDepth) {
                 return CollisionAxis::VERTICAL;
@@ -75,29 +75,29 @@ public:
 
     static CollisionDirection getCollisionDirection(const Position& firstPosition, const EntitySize& firstCollider,
                                          const Position& secondPosition, const EntitySize& secondCollider) {
-        bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
-        bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
+        bool firstXOverlap = firstPosition.x < (secondPosition.x + secondCollider.width);
+        bool secondXOverlap = (firstPosition.x + firstCollider.width) > secondPosition.x;
         bool xOverlap = firstXOverlap && secondXOverlap;
 
-        bool firstYOverlap = firstPosition.yPos < (secondPosition.yPos + secondCollider.height);
-        bool secondYOverlap = (firstPosition.yPos + firstCollider.height) > secondPosition.yPos;
+        bool firstYOverlap = firstPosition.y < (secondPosition.y + secondCollider.height);
+        bool secondYOverlap = (firstPosition.y + firstCollider.height) > secondPosition.y;
         bool yOverlap = firstYOverlap && secondYOverlap;
 
         if (xOverlap && yOverlap) {
-            float xOverlapDepth = std::min(firstPosition.xPos + firstCollider.width, secondPosition.xPos + secondCollider.width) -
-                                  std::max(firstPosition.xPos, secondPosition.xPos);
-            float yOverlapDepth = std::min(firstPosition.yPos + firstCollider.height, secondPosition.yPos + secondCollider.height) -
-                                  std::max(firstPosition.yPos, secondPosition.yPos);
+            float xOverlapDepth = std::min(firstPosition.x + firstCollider.width, secondPosition.x + secondCollider.width) -
+                                  std::max(firstPosition.x, secondPosition.x);
+            float yOverlapDepth = std::min(firstPosition.y + firstCollider.height, secondPosition.y + secondCollider.height) -
+                                  std::max(firstPosition.y, secondPosition.y);
 
             // Determine the collision direction based on the overlap depth and relative positions
             if (yOverlapDepth > xOverlapDepth) {
-                if (firstPosition.yPos + firstCollider.height - yOverlapDepth == secondPosition.yPos) {
+                if (firstPosition.y + firstCollider.height - yOverlapDepth == secondPosition.y) {
                     return CollisionDirection::DOWN; // First entity is above the second
                 } else {
                     return CollisionDirection::UP; // First entity is below the second
                 }
             } else if (xOverlapDepth > yOverlapDepth) {
-                if (firstPosition.xPos + firstCollider.width - xOverlapDepth == secondPosition.xPos) {
+                if (firstPosition.x + firstCollider.width - xOverlapDepth == secondPosition.x) {
                     return CollisionDirection::RIGHT; // First entity is to the left of the second
                 } else {
                     return CollisionDirection::LEFT; // First entity is to the right of the second

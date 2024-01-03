@@ -23,7 +23,7 @@ void JumpingSystem::onKeyPressed(GameKeyEvent& event) {
 
         switch (event.getKey()) {
             case GameKey::MOVE_UP:
-                playerVelocity.yVelocity -= 300;
+                playerVelocity.y -= 300;
             default:
                 break;
         }

@@ -17,7 +17,7 @@ GravitySystem::GravitySystem() {
 void GravitySystem::update(double deltaTime) {
     for(const auto& entity: getRelevantEntities()) {
         auto& velocityComponent = ecsManager->getComponentFromEntity<VelocityComponent>(entity);
-        float newVelocity = velocityComponent.velocity.yVelocity + velocityForce*deltaTime;
-        velocityComponent.velocity.yVelocity = std::ranges::min(newVelocity, terminalVelocity);
+        float newVelocity = velocityComponent.velocity.y + velocityForce*deltaTime;
+        velocityComponent.velocity.y = std::ranges::min(newVelocity, terminalVelocity);
     }
 }

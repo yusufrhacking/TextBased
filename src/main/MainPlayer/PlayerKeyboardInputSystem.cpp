@@ -24,13 +24,13 @@ void PlayerKeyboardInputSystem::onKeyPressed(GameKeyEvent& event) {
 
         switch (event.getKey()){
             case GameKey::MOVE_UP:
-                yChange += -1*playerVelocity->yVelocity; break;
+                yChange += -1*playerVelocity->y; break;
             case GameKey::MOVE_LEFT:
-                xChange += -1*playerVelocity->xVelocity; break;
+                xChange += -1*playerVelocity->x; break;
             case GameKey::MOVE_DOWN:
-                yChange += playerVelocity->yVelocity; break;
+                yChange += playerVelocity->y; break;
             case GameKey::MOVE_RIGHT:
-                xChange += playerVelocity->xVelocity; break;
+                xChange += playerVelocity->x; break;
             default:
                 break;
         }
