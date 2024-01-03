@@ -112,6 +112,9 @@ set(SOURCE_FILES
         src/main/Abyz/JourneyComponent.h
         src/main/Gravity/GravityComponent.h
         src/main/MainPlayer/MainPlayerComponent.h
+        src/main/Gravity/VelocityComponent.h
+        src/main/Gravity/GravitySystem.cpp
+        src/main/Gravity/GravitySystem.h
 )
 
 
