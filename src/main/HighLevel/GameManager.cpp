@@ -33,6 +33,7 @@
 #include "../Levels/FullBasicLevel.h"
 #include "../Levels/IntroPac.h"
 #include "../MainPlayer/PlayerRotateSystem.h"
+#include "../Maze/IntroMazePrefab.h"
 #include "../UIShow/UIControllerSystem.h"
 #include "../Woodworking/AxeFlipSystem.h"
 #include "../Middlemarch/MiddlemarchStart.h"
