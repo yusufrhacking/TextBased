@@ -118,6 +118,7 @@ set(SOURCE_FILES
         src/main/Gravity/JumpingComponent.h
         src/main/Gravity/JumpingSystem.cpp
         src/main/Gravity/JumpingSystem.h
+        src/main/ECSObjects/FinalSystem.h
 )
 
 

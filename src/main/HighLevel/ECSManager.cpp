@@ -1,5 +1,7 @@
 #include <spdlog/spdlog.h>
 #include "ECSManager.h"
+
+#include "../ECSObjects/FinalSystem.h"
 #include "../Rendering/RenderControllerSystem.h"
 
 
@@ -45,6 +47,9 @@ void ECSManager::removeEntity(const Entity &entity) {
 
 void ECSManager::runTimedSystems(double deltaTime) const {
     for (const auto& system : systemManager->getSystemsOfType<UpdateSystem>()){
+        system->update(deltaTime);
+    }
+    for (const auto& system : systemManager->getSystemsOfType<FinalSystem>()){
         system->update(deltaTime);
     }
 }
