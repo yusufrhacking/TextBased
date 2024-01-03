@@ -29,7 +29,7 @@ set(SOURCE_FILES
         src/main/TextInput/InputProcessor.cpp src/main/TextInput/InputProcessor.h
         src/main/PositionsAndMovement/PositionComponent.h
         src/main/PositionsAndMovement/Position.h src/main/PositionsAndMovement/Velocity.h
-        src/main/PositionsAndMovement/AutonomousMovementSystem.cpp src/main/PositionsAndMovement/AutonomousMovementSystem.h
+        src/main/PositionsAndMovement/VelocitySystem.cpp src/main/PositionsAndMovement/VelocitySystem.h
         "src/main/ECSObjects/Entity.cpp" "src/main/ECSObjects/Entity.h"
         "src/main/ECSObjects/Component.h"
         "src/main/ECSObjects/System.cpp" "src/main/ECSObjects/System.h"

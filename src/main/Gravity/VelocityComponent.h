@@ -3,7 +3,8 @@
 #include "../PositionsAndMovement/Velocity.h"
 
 struct VelocityComponent {
-    Velocity velocity;
+    Velocity velocity{};
+    VelocityComponent() = default;
     explicit VelocityComponent(Velocity velocity): velocity(velocity) {}
 };
 

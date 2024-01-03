@@ -4,7 +4,7 @@
 
 #include "SystemAddSystem.h"
 #include "../Levels/BasicLevel.h"
-#include "../PositionsAndMovement/AutonomousMovementSystem.h"
+#include "../PositionsAndMovement/VelocitySystem.h"
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../TextCommands/TextCommandSystem.h"
 #include "../Rendering/SDLRenderer.h"
@@ -37,6 +37,7 @@
 #include "../UIShow/UIControllerSystem.h"
 #include "../Woodworking/AxeFlipSystem.h"
 #include "../Middlemarch/MiddlemarchStart.h"
+#include "../Gravity/GravitySystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -50,7 +51,7 @@ void GameManager::setup() {
 
 void GameManager::setupSystems() {
     ecsManager->addSystem<RenderControllerSystem>();
-    ecsManager->addSystem<AutonomousMovementSystem>();
+    ecsManager->addSystem<VelocitySystem>();
     ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
@@ -83,6 +84,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AbyzTargetAllocationSystem>();
     ecsManager->addSystem<AbyzTargetExecutionSystem>();
     ecsManager->addSystem<WordRelicPrioritizingSystem>();
+    ecsManager->addSystem<GravitySystem>();
 }
 
 void GameManager::update(double deltaTime) {

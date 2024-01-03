@@ -1,18 +1,18 @@
 #include <spdlog/spdlog.h>
-#include "AutonomousMovementSystem.h"
+#include "VelocitySystem.h"
 #include "CollisionCheckSystem.h"
 #include "LiveComponent.h"
 #include "../Gravity/VelocityComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
-AutonomousMovementSystem::AutonomousMovementSystem(){
+VelocitySystem::VelocitySystem(){
     requireComponent<PositionComponent>();
     requireComponent<VelocityComponent>();
     requireComponent<LiveComponent>();
 }
 
-void AutonomousMovementSystem::update(double deltaTime) {
+void VelocitySystem::update(double deltaTime) {
     for (Entity entity: getRelevantEntities()){
         auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto movement = ecsManager->getComponentFromEntity<VelocityComponent>(entity);
