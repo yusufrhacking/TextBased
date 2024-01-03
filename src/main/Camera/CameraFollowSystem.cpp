@@ -2,12 +2,13 @@
 #include "CameraFollowSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../HighLevel/Game.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 CameraFollowSystem::CameraFollowSystem() {
-    requireComponent<KeyboardMovementComponent>();
+    requireComponent<MainPlayerComponent>();
     requireComponent<TextComponent>();
     requireComponent<PositionComponent>();
 }
