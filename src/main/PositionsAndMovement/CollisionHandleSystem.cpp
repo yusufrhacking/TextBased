@@ -17,18 +17,28 @@ CollisionHandleSystem::CollisionHandleSystem() {
     listenToEvents();
 }
 
+
+
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
     float deltaTime = event.deltaTime;
     auto entityA = event.a;
-    auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entityA);
-    auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entityA).velocity;
-    positionComponent.shiftPosition(-velocity.x * deltaTime, -velocity.y * deltaTime);
-
-    if (ecsManager->hasComponent<VelocityComponent>(entityA)) {
-        ecsManager->getComponentFromEntity<VelocityComponent>(entityA).velocity.y = 0;
-    }
+    handleCollision(deltaTime, entityA);
 
     auto entityB = event.b;
+    handleCollision(deltaTime, entityB);
+}
+
+void CollisionHandleSystem::handleCollision(float deltaTime, Entity entity) {
+    if (!ecsManager->hasComponent<VelocityComponent>(entity)) {
+        return;
+    }
+
+    auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
+    positionComponent.shiftPosition(-velocity.x * deltaTime, -velocity.y * deltaTime);
+
+    velocity.y = 0;
+
 }
 
 
