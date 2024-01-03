@@ -115,6 +115,7 @@ set(SOURCE_FILES
         src/main/PositionsAndMovement/VelocityComponent.h
         src/main/Gravity/GravitySystem.cpp
         src/main/Gravity/GravitySystem.h
+        src/main/Gravity/JumpingComponent.h
 )
 
 
