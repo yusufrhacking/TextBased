@@ -10,6 +10,7 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "NovelTextComponent.h"
+#include "SubjectComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../Health/HealthComponent.h"
 #include "../MainPlayer/RotateComponent.h"
@@ -20,7 +21,15 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(startingPosition) {
     speakEngineer();
-    createPreludeText();
+
+    Entity subject = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<LiveComponent>(subject);
+    ecsManager->addComponentToEntity<PositionComponent>(subject, Position(11895, 10532));
+    ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
+    ecsManager->addComponentToEntity<MainPlayerComponent>(subject, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
+    ecsManager->addComponentToEntity<SubjectComponent>(subject);
+
+    // createPreludeText();
 
     // createWitt(startingPosition);
 
