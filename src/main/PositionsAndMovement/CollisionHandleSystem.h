@@ -10,7 +10,7 @@ public:
 
     void listenToEvents();
 
-    void zeroOutVelocity(Entity entity, CollisionAxis collisionAxis);
+    void zeroOutVelocity(Entity entity, CollisionDirection collisionDirection);
 
     void onCollision(CollisionEvent &event);
 

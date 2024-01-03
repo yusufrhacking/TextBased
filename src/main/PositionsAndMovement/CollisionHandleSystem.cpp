@@ -31,15 +31,15 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
 
     if (aLastFrameMoved > bLastFrameMoved) {
         revertPosition(entityA, aEntities);
-        zeroOutVelocity(entityA, event.collisionAxis);
+        zeroOutVelocity(entityA, event.collisionDirection);
     } else if (aLastFrameMoved == bLastFrameMoved) {
         revertPosition(entityA, aEntities);
-        zeroOutVelocity(entityA, event.collisionAxis);
+        zeroOutVelocity(entityA, event.collisionDirection);
         revertPosition(entityB, bEntities);
-        zeroOutVelocity(entityB, event.collisionAxis);
+        zeroOutVelocity(entityB, event.collisionDirection);
     } else {
         revertPosition(entityB, bEntities);
-        zeroOutVelocity(entityB, event.collisionAxis);
+        zeroOutVelocity(entityB, event.collisionDirection);
     }
 
 }
@@ -67,20 +67,36 @@ void CollisionHandleSystem::listenToEvents() {
     eventBus->listenToEvent<CollisionEvent>(this, &CollisionHandleSystem::onCollision);
 }
 
-void CollisionHandleSystem::zeroOutVelocity(Entity entity, CollisionAxis collisionAxis) {
+void CollisionHandleSystem::zeroOutVelocity(Entity entity, CollisionDirection collisionDirection) {
     if (!ecsManager->hasComponent<VelocityComponent>(entity)) {
         return;
     }
-    switch (collisionAxis) {
-        case CollisionAxis::VERTICAL:
-            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.yVelocity = 0; break;
-        case CollisionAxis::HORIZONTAL:
-            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.xVelocity = 0; break;
-        case CollisionAxis::BOTH:
-            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.yVelocity = 0;
-            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.xVelocity = 0;
-            break;
+
+    auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
+
+    switch (collisionDirection) {
+        case CollisionDirection::UP:
+                if (velocity.yVelocity > 0) {
+                    velocity.yVelocity = 0;
+                }
+        break;
+        case CollisionDirection::DOWN:
+                if (velocity.yVelocity < 0) {
+                    velocity.yVelocity = 0;
+                }
+        break;
+        case CollisionDirection::LEFT:
+                if (velocity.xVelocity > 0) {
+                    velocity.xVelocity = 0;
+                }
+        break;
+        case CollisionDirection::RIGHT:
+                if (velocity.xVelocity < 0) {
+                    velocity.xVelocity = 0;
+                }
+        break;
         default:
             break;
     }
 }
+
