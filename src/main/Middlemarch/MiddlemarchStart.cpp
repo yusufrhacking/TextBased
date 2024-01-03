@@ -33,6 +33,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<SubjectComponent>(subject);
     ecsManager->addComponentToEntity<GravityComponent>(subject);
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
+    ecsManager->addComponentToEntity<CollisionComponent>(subject);
 
     // createPreludeText();
 
