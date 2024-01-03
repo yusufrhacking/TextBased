@@ -11,6 +11,7 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "NovelTextComponent.h"
 #include "SubjectComponent.h"
+#include "../Gravity/GravityComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../Health/HealthComponent.h"
 #include "../MainPlayer/RotateComponent.h"
@@ -28,6 +29,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
     ecsManager->addComponentToEntity<MainPlayerComponent>(subject, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
     ecsManager->addComponentToEntity<SubjectComponent>(subject);
+    ecsManager->addComponentToEntity<GravityComponent>(subject);
 
     // createPreludeText();
 
