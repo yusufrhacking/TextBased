@@ -19,7 +19,7 @@ private:
 
     void revertPosition(const Entity &entity, const std::set<Entity> &childEntities);
 
-    void CollisionHandleSystem::resolveOverlapBasedOnVelocity(Entity entity1, Entity entity2);
+    void resolveOverlapBasedOnVelocity(Entity entity1, Entity entity2);
 
 
     void updateChildPositions(const std::set<Entity> &childEntities, float overlap, bool movePositive);

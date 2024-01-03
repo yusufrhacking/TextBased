@@ -46,8 +46,8 @@ std::set<Entity> Canon::getEntitiesAtPage(MapPosition mapPosition){
 }
 
 MapPosition Canon::getMapPosition(Position position) {
-    int mapX = (int)position.xPos/Page::pageWidth;
-    int mapY = (int)position.yPos/Page::pageHeight;
+    int mapX = (int)position.x/Page::pageWidth;
+    int mapY = (int)position.y/Page::pageHeight;
     return {mapX, mapY};
 }
 
