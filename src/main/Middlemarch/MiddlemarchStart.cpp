@@ -12,6 +12,7 @@
 #include "NovelTextComponent.h"
 #include "SubjectComponent.h"
 #include "../Gravity/GravityComponent.h"
+#include "../Gravity/JumpingComponent.h"
 #include "../PositionsAndMovement//VelocityComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../Health/HealthComponent.h"
@@ -36,6 +37,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<GravityComponent>(subject);
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
     ecsManager->addComponentToEntity<CollisionComponent>(subject);
+    ecsManager->addComponentToEntity<JumpingComponent>(subject);
 
     Entity avila = ecsManager->createEntity();
     ecsManager->addComponentToEntity<LiveComponent>(avila);

@@ -4,12 +4,14 @@
 #include "../PositionsAndMovement/VelocityComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../PositionsAndMovement/LiveComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 GravitySystem::GravitySystem() {
     requireComponent<GravityComponent>();
     requireComponent<VelocityComponent>();
+    requireComponent<LiveComponent>();
 }
 
 void GravitySystem::update(double deltaTime) {
