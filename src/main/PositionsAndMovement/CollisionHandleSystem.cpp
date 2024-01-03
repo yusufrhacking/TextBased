@@ -31,12 +31,17 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
 
     if (aLastFrameMoved > bLastFrameMoved) {
         revertPosition(entityA, aEntities);
+        zeroOutVelocity(entityA, event.collisionAxis);
     } else if (aLastFrameMoved == bLastFrameMoved) {
         revertPosition(entityA, aEntities);
+        zeroOutVelocity(entityA, event.collisionAxis);
         revertPosition(entityB, bEntities);
+        zeroOutVelocity(entityB, event.collisionAxis);
     } else {
         revertPosition(entityB, bEntities);
+        zeroOutVelocity(entityB, event.collisionAxis);
     }
+
 }
 
 std::set<Entity> CollisionHandleSystem::getChildEntities(const Entity& entity) {
@@ -60,4 +65,22 @@ void CollisionHandleSystem::revertPosition(const Entity& entity, const std::set<
 
 void CollisionHandleSystem::listenToEvents() {
     eventBus->listenToEvent<CollisionEvent>(this, &CollisionHandleSystem::onCollision);
+}
+
+void CollisionHandleSystem::zeroOutVelocity(Entity entity, CollisionAxis collisionAxis) {
+    if (!ecsManager->hasComponent<VelocityComponent>(entity)) {
+        return;
+    }
+    switch (collisionAxis) {
+        case CollisionAxis::VERTICAL:
+            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.yVelocity = 0; break;
+        case CollisionAxis::HORIZONTAL:
+            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.xVelocity = 0; break;
+        case CollisionAxis::BOTH:
+            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.yVelocity = 0;
+            ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity.xVelocity = 0;
+            break;
+        default:
+            break;
+    }
 }
