@@ -7,7 +7,7 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 CameraFollowSystem::CameraFollowSystem() {
-    requireComponent<MainPlayerComponent>();
+    requireComponent<KeyboardMovementComponent>();
     requireComponent<TextComponent>();
     requireComponent<PositionComponent>();
 }

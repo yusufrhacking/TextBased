@@ -56,7 +56,7 @@ set(SOURCE_FILES
         src/main/ECSObjects/EventConsumerSystem.h
         src/main/PositionsAndMovement/CollisionEvent.h
         src/main/TextInput/GameKeyEvent.h
-        src/main/MainPlayer/MainPlayerComponent.h
+        src/main/MainPlayer/KeyboardMovementComponent.h
         src/main/MainPlayer/PlayerKeyboardInputSystem.cpp src/main/MainPlayer/PlayerKeyboardInputSystem.h
         src/main/Woodworking/TreeComponent.h
         "src/main/Camera/CameraFollowSystem.cpp" "src/main/Camera/CameraFollowSystem.h"
@@ -110,7 +110,9 @@ set(SOURCE_FILES
         src/main/Abyz/AbyzTargetExecutionSystem.cpp
         src/main/Abyz/AbyzTargetExecutionSystem.h
         src/main/Abyz/JourneyComponent.h
-        src/main/Gravity/GravityComponent.h)
+        src/main/Gravity/GravityComponent.h
+        src/main/MainPlayer/MainPlayerComponent.h
+)
 
 
 Message("")

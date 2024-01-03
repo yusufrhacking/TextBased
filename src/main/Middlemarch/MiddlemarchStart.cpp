@@ -16,6 +16,7 @@
 #include "../Health/HealthComponent.h"
 #include "../MainPlayer/RotateComponent.h"
 #include "../Inventory/InventoryComponent.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -27,7 +28,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<LiveComponent>(subject);
     ecsManager->addComponentToEntity<PositionComponent>(subject, Position(11895, 10532));
     ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
-    ecsManager->addComponentToEntity<MainPlayerComponent>(subject, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
+    ecsManager->addComponentToEntity<MainPlayerComponent>(subject);
     ecsManager->addComponentToEntity<SubjectComponent>(subject);
     ecsManager->addComponentToEntity<GravityComponent>(subject);
 
@@ -64,11 +65,12 @@ void MiddlemarchStart::createWitt(Position startingPosition) {
     Entity witt = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
+    ecsManager->addComponentToEntity<KeyboardMovementComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
     ecsManager->addComponentToEntity<LiveComponent>(witt);
     ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
     ecsManager->addComponentToEntity<RotationComponent>(witt);
+    ecsManager->addComponentToEntity<MainPlayerComponent>(witt);
 }

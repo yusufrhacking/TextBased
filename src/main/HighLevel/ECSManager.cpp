@@ -63,7 +63,7 @@ Entity ECSManager::createEntity() {
 }
 
 void ECSManager::killEntity(Entity entity) {
-    if (!hasComponent<MainPlayerComponent>(entity)){
+    if (!hasComponent<KeyboardMovementComponent>(entity)){
         entityManager->killEntity(entity);
     } else{
 //        spdlog::debug("Main Player Should Have Died!");

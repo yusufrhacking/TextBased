@@ -11,7 +11,7 @@
 #include "../ECSObjects/UpdateSystem.h"
 #include "../ECSManagers/SystemManager.h"
 #include "../Camera/Camera.h"
-#include "../MainPlayer/MainPlayerComponent.h"
+#include "../MainPlayer/KeyboardMovementComponent.h"
 #include "../ECSObjects/FirstSystem.h"
 #include "../Camera/CameraFollowSystem.h"
 #include "../EventSystem/EventBus.h"

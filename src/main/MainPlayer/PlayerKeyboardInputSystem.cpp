@@ -10,7 +10,7 @@ extern std::unique_ptr<EventBus> eventBus;
 PlayerKeyboardInputSystem::PlayerKeyboardInputSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
-    requireComponent<MainPlayerComponent>();
+    requireComponent<KeyboardMovementComponent>();
     requireComponent<LiveComponent>();
     eventBus->listenToEvent<GameKeyEvent>(this, &PlayerKeyboardInputSystem::onKeyPressed);
 }
@@ -18,7 +18,7 @@ PlayerKeyboardInputSystem::PlayerKeyboardInputSystem() {
 void PlayerKeyboardInputSystem::onKeyPressed(GameKeyEvent& event) {
     for (auto entity: getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-        auto playerVelocity = ecsManager->getComponentFromEntity<MainPlayerComponent>(entity).movementSpeed;
+        auto playerVelocity = ecsManager->getComponentFromEntity<KeyboardMovementComponent>(entity).movementSpeed;
         double xChange = 0;
         double yChange = 0;
 

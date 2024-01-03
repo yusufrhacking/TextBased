@@ -1,5 +1,7 @@
 #include "MainPlayerAccessSystem.h"
 
+#include "MainPlayerComponent.h"
+
 MainPlayerAccessSystem::MainPlayerAccessSystem() {
     requireComponent<MainPlayerComponent>();
 }

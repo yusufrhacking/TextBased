@@ -33,7 +33,7 @@ BasicLevel::BasicLevel(Position startingPosition): startingPosition(startingPosi
 void BasicLevel::createPlayer() {
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
+    ecsManager->addComponentToEntity<KeyboardMovementComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);

@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_CAMERAFOLLOWSYSTEM_H
 #define TEXTBASED_CAMERAFOLLOWSYSTEM_H
-#include "../MainPlayer/MainPlayerComponent.h"
+#include "../MainPlayer/KeyboardMovementComponent.h"
 #include "../ECSObjects/UpdateSystem.h"
 #include "../ECSObjects/System.h"
 #include "Camera.h"

@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_PLAYERKEYBOARDINPUTSYSTEM_H
 #define TEXTBASED_PLAYERKEYBOARDINPUTSYSTEM_H
-#include "MainPlayerComponent.h"
+#include "KeyboardMovementComponent.h"
 #include "../HighLevel/ECSManager.h"
 #include "../ECSObjects/EventConsumerSystem.h"
 #include "../TextInput/GameKeyEvent.h"

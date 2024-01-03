@@ -10,6 +10,7 @@
 #include "../Text/Split.h"
 #include "../Health/PendingDeathComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -153,7 +154,8 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         }
         else if(i == subjectWordInd) {
             ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
-            ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
+            ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity);
+            // ecsManager->addComponentToEntity<KeyboardMovementComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
             ecsManager->addComponentToEntity<SubjectComponent>(wordEntity);
             i += Split::getWordsAndPunctuation(subject).size();
             word = subject;

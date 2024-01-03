@@ -41,7 +41,7 @@ IntroPac::IntroPac(Position startingPosition): startingPosition(startingPosition
 void IntroPac::createPlayer() {
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(speed, speed));
+    ecsManager->addComponentToEntity<KeyboardMovementComponent>(witt, std::make_shared<Velocity>(speed, speed));
     ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);

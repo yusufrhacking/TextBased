@@ -17,6 +17,7 @@
 #include "../Lettering/LetterComponent.h"
 #include "../Attacking/ActiveWeaponComponent.h"
 #include "CreateLetterAtPositionEvent.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

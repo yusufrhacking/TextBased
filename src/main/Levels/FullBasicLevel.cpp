@@ -16,7 +16,7 @@
 #include "../Creation/ItemCreationSystem.h"
 #include "../Text/TextGenerator.h"
 #include "../Woodworking/TreeComponent.h"
-#include "../MainPlayer/MainPlayerComponent.h"
+#include "../MainPlayer/KeyboardMovementComponent.h"
 #include "../HighLevel/ECSManager.h"
 #include "../Woodworking/TreePrefab.h"
 #include "../Abyz/AbyzPrefab.h"
@@ -41,7 +41,7 @@ FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(star
 void FullBasicLevel::createPlayer() {
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
+    ecsManager->addComponentToEntity<KeyboardMovementComponent>(witt, std::make_shared<Velocity>(15, 15));
     ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
