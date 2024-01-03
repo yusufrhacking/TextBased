@@ -109,7 +109,8 @@ set(SOURCE_FILES
         src/main/Abyz/AbyzTargetingComponent.h
         src/main/Abyz/AbyzTargetExecutionSystem.cpp
         src/main/Abyz/AbyzTargetExecutionSystem.h
-        src/main/Abyz/JourneyComponent.h)
+        src/main/Abyz/JourneyComponent.h
+        src/main/Gravity/GravityComponent.h)
 
 
 Message("")
