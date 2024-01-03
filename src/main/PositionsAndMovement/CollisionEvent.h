@@ -2,12 +2,7 @@
 #define TEXTBASED_COLLISIONEVENT_H
 
 #include "../EventSystem/Event.h"
-
-enum class CollisionAxis {
-    HORIZONTAL,
-    VERTICAL,
-    UNKNOWN
-};
+#include "DistanceCalculator.h"
 
 class CollisionEvent: public Event{
 public:
@@ -16,7 +11,7 @@ public:
     double deltaTime;
     CollisionAxis collisionAxis;
     CollisionEvent(Entity a, Entity b, double deltaTime):
-            a(a), b(b), deltaTime(deltaTime) {collisionAxis = CollisionAxis::UNKNOWN;}
+            a(a), b(b), deltaTime(deltaTime) {collisionAxis = CollisionAxis::NONE;}
     CollisionEvent(Entity a, Entity b, double deltaTime, CollisionAxis collisionAxis):
             a(a), b(b), deltaTime(deltaTime), collisionAxis(collisionAxis) {}
 };

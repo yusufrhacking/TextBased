@@ -5,6 +5,13 @@
 #include "Position.h"
 #include "../Text/TextComponent.h"
 
+enum class CollisionAxis {
+    HORIZONTAL,
+    VERTICAL,
+    NONE,
+    BOTH
+};
+
 class DistanceCalculator {
 public:
     static bool isInAllowedRange(Position pos1, Position pos2, const EntitySize& size1, const EntitySize& size2, float allowedDistance) {
@@ -27,6 +34,34 @@ public:
         bool yOverlap = firstYOverlap && secondYOverlap;
 
         return xOverlap && yOverlap;
+    }
+
+    static CollisionAxis getCollisionAxes(const Position& firstPosition, const EntitySize& firstCollider,
+                                 const Position& secondPosition, const EntitySize& secondCollider) {
+        bool firstXOverlap = firstPosition.xPos < (secondPosition.xPos + secondCollider.width);
+        bool secondXOverlap = (firstPosition.xPos + firstCollider.width) > secondPosition.xPos;
+        bool xOverlap = firstXOverlap && secondXOverlap;
+
+        bool firstYOverlap = firstPosition.yPos < (secondPosition.yPos + secondCollider.height);
+        bool secondYOverlap = (firstPosition.yPos + firstCollider.height) > secondPosition.yPos;
+        bool yOverlap = firstYOverlap && secondYOverlap;
+
+        if (xOverlap && yOverlap) {
+            float xOverlapDepth = std::min(firstPosition.xPos + firstCollider.width, secondPosition.xPos + secondCollider.width) -
+                                  std::max(firstPosition.xPos, secondPosition.xPos);
+            float yOverlapDepth = std::min(firstPosition.yPos + firstCollider.height, secondPosition.yPos + secondCollider.height) -
+                                  std::max(firstPosition.yPos, secondPosition.yPos);
+
+            if (xOverlapDepth > yOverlapDepth) {
+                return CollisionAxis::VERTICAL;
+            } else if (yOverlapDepth > xOverlapDepth) {
+                return CollisionAxis::HORIZONTAL;
+            } else {
+                return CollisionAxis::BOTH;
+            }
+        }
+
+        return CollisionAxis::NONE;
     }
 
 private:
