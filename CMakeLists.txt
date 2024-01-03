@@ -61,7 +61,7 @@ set(SOURCE_FILES
         src/main/Woodworking/TreeComponent.h
         "src/main/Camera/CameraFollowSystem.cpp" "src/main/Camera/CameraFollowSystem.h"
         "src/main/MainPlayer/UnprocessedMovement.cpp" "src/main/MainPlayer/UnprocessedMovement.h"
-        "src/main/MainPlayer/UnprocessedKeyboardMovementSystem.cpp" "src/main/MainPlayer/UnprocessedKeyboardMovementSystem.h"
+        "src/main/MainPlayer/UnprocessedMovementSystem.cpp" "src/main/MainPlayer/UnprocessedMovementSystem.h"
         src/main/ECSObjects/ComponentSignature.cpp src/main/ECSObjects/ComponentSignature.h
         src/main/Camera/Camera.cpp src/main/Camera/Camera.h
         src/main/TheCanon/MapPosition.h

@@ -1,5 +1,5 @@
 #include "PlayerKeyboardInputSystem.h"
-#include "UnprocessedKeyboardMovementSystem.h"
+#include "UnprocessedMovementSystem.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 
@@ -37,7 +37,7 @@ void PlayerKeyboardInputSystem::onKeyPressed(GameKeyEvent& event) {
 
         UnprocessedMovement movement = UnprocessedMovement(entity, xChange, yChange);
 
-        ecsManager->getSystem<UnprocessedKeyboardMovementSystem>().queueMovement(movement);
+        ecsManager->getSystem<UnprocessedMovementSystem>().queueMovement(movement);
 
     }
 }

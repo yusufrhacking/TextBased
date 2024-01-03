@@ -1,20 +1,20 @@
 #include <spdlog/spdlog.h>
-#include "UnprocessedKeyboardMovementSystem.h"
+#include "UnprocessedMovementSystem.h"
 #include "../PositionsAndMovement/ReadyToMoveEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 
-UnprocessedKeyboardMovementSystem::UnprocessedKeyboardMovementSystem() {
+UnprocessedMovementSystem::UnprocessedMovementSystem() {
     unprocessedMovements = std::make_unique<std::vector<UnprocessedMovement>>();
 }
 
-void UnprocessedKeyboardMovementSystem::queueMovement(UnprocessedMovement movement) {
+void UnprocessedMovementSystem::queueMovement(UnprocessedMovement movement) {
     unprocessedMovements->push_back(movement);
 }
 
-void UnprocessedKeyboardMovementSystem::run() {
+void UnprocessedMovementSystem::run() {
     for (auto unprocessedMovement : *unprocessedMovements) {
         int entity = unprocessedMovement.entity.getId();
         if (totalChangeForEntities.count(entity) > 0) {

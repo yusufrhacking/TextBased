@@ -5,6 +5,8 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../MainPlayer/UnprocessedMovement.h"
+#include "../MainPlayer/UnprocessedMovementSystem.h"
 #include "../PositionsAndMovement/VelocityComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;

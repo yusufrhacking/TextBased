@@ -57,7 +57,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
-    ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
+    ecsManager->addSystem<UnprocessedMovementSystem>();
     ecsManager->addSystem<CanonRegisteringSystem>(canon);
     ecsManager->addSystem<MovementHandleSystem>();
     ecsManager->addSystem<CanonMovementHandleSystem>(canon);

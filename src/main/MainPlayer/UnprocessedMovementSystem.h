@@ -7,12 +7,12 @@
 #include <tuple>
 
 
-class UnprocessedKeyboardMovementSystem: public FirstSystem {
+class UnprocessedMovementSystem: public FirstSystem {
     std::unique_ptr<std::vector<UnprocessedMovement>> unprocessedMovements;
     std::unordered_map<int, Velocity> totalChangeForEntities;
 
 public:
-    UnprocessedKeyboardMovementSystem();
+    UnprocessedMovementSystem();
 
     void queueMovement(UnprocessedMovement movement);
 
