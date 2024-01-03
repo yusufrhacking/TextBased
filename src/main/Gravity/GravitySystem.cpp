@@ -1,7 +1,7 @@
 #include "GravitySystem.h"
 
 #include "GravityComponent.h"
-#include "VelocityComponent.h"
+#include "../PositionsAndMovement/VelocityComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
 

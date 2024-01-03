@@ -12,7 +12,7 @@
 #include "NovelTextComponent.h"
 #include "SubjectComponent.h"
 #include "../Gravity/GravityComponent.h"
-#include "../Gravity/VelocityComponent.h"
+#include "../PositionsAndMovement//VelocityComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../Health/HealthComponent.h"
 #include "../MainPlayer/RotateComponent.h"

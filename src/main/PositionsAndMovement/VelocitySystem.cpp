@@ -2,7 +2,7 @@
 #include "VelocitySystem.h"
 #include "CollisionCheckSystem.h"
 #include "LiveComponent.h"
-#include "../Gravity/VelocityComponent.h"
+#include "VelocityComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

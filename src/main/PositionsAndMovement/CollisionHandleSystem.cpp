@@ -6,7 +6,7 @@
 #include "LiveComponent.h"
 #include <stdexcept>
 
-#include "../Gravity/VelocityComponent.h"
+#include "VelocityComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

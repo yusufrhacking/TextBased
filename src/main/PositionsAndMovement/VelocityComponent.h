@@ -1,6 +1,6 @@
 #ifndef VELOCITYCOMPONENT_H
 #define VELOCITYCOMPONENT_H
-#include "../PositionsAndMovement/Velocity.h"
+#include "Velocity.h"
 
 struct VelocityComponent {
     Velocity velocity{};
