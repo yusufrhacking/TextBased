@@ -4,6 +4,7 @@
 #include "PositionComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
 #include "LiveComponent.h"
+#include "../Gravity/JumpingComponent.h"
 #include <stdexcept>
 
 #include "VelocityComponent.h"
@@ -29,16 +30,19 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
 }
 
 void CollisionHandleSystem::handleCollision(float deltaTime, Entity entity) {
-    if (!ecsManager->hasComponent<VelocityComponent>(entity)) {
-        return;
+    auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
+    positionComponent.revertPosition();
+    if(ecsManager->hasComponent<JumpingComponent>(entity)) {
+        ecsManager->getComponentFromEntity<JumpingComponent>(entity).onGround = true;
     }
 
-    auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-    auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
-    positionComponent.shiftPosition(-velocity.x * deltaTime, -velocity.y * deltaTime);
-
-    velocity.y = 0;
-
+    if(ecsManager->hasComponent<VelocityComponent>(entity)) {
+        auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
+        if (velocity.y < 0) {
+            spdlog::info("Zeroing velocity!");
+        }
+        velocity.y = 0;
+    }
 }
 
 

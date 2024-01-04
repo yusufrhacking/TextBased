@@ -12,6 +12,8 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
+
+
 JumpingSystem::JumpingSystem() {
     requireComponent<VelocityComponent>();
     requireComponent<JumpingComponent>();
@@ -19,13 +21,25 @@ JumpingSystem::JumpingSystem() {
     eventBus->listenToEvent<GameKeyEvent>(this, &JumpingSystem::onKeyPressed);
 }
 
+void JumpingSystem::update() {
+    for(auto i: jumps) {
+        auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(i.entity).velocity;
+        velocity.y = i.jump.y;
+        ecsManager->getComponentFromEntity<JumpingComponent>(i.entity).onGround = false;
+        spdlog::info("PLayer velocity: {}, {}", velocity.x, velocity.y);
+    }
+    jumps.clear();
+}
+
 void JumpingSystem::onKeyPressed(GameKeyEvent& event) {
     for (auto entity: getRelevantEntities()) {
-        auto& playerVelocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
-
+        if (!ecsManager->getComponentFromEntity<JumpingComponent>(entity).onGround) {
+            continue;
+        }
         switch (event.getKey()) {
             case GameKey::MOVE_UP:
-                playerVelocity.y -= 300;
+                jumps.emplace_back(entity, Velocity(0, -300));
+                break;
             default:
                 break;
         }

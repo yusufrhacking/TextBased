@@ -24,7 +24,7 @@ void VelocitySystem::update(double deltaTime) {
         ecsManager->getSystem<UnprocessedMovementSystem>().queueMovement(UnprocessedMovement(entity, xChange, yChange));
 
         // position.shiftPosition(xChange, yChange);
-        spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), xChange, yChange, position.getPosition().x, position.getPosition().y);
+        // spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), xChange, yChange, position.getPosition().x, position.getPosition().y);
     }
 }
 

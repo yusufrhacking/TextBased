@@ -86,7 +86,6 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AbyzTargetExecutionSystem>();
     ecsManager->addSystem<WordRelicPrioritizingSystem>();
     ecsManager->addSystem<GravitySystem>();
-    ecsManager->addSystem<JumpingSystem>();
 }
 
 void GameManager::update(double deltaTime) {

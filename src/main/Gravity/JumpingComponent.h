@@ -3,6 +3,7 @@
 
 struct JumpingComponent {
     float jumpHeight;
+    bool onGround = false;
     JumpingComponent() = default;
     explicit JumpingComponent(float jumpHeight): jumpHeight(jumpHeight){}
 };
