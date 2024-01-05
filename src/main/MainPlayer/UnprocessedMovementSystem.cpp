@@ -17,7 +17,7 @@ void UnprocessedMovementSystem::queueMovement(UnprocessedMovement movement) {
     unprocessedMovements->push_back(movement);
 }
 
-void UnprocessedMovementSystem::run() {
+void UnprocessedMovementSystem::update(double deltaTime) {
     for (auto unprocessedMovement : *unprocessedMovements) {
         int entity = unprocessedMovement.entity.getId();
         if (totalChangeForEntities.count(entity) > 0) {
@@ -43,6 +43,6 @@ void UnprocessedMovementSystem::run() {
     totalChangeForEntities.clear();
     spdlog::trace("Done processing movements");
 
-    ecsManager->getSystem<CollisionCheckSystem>().update(0.0);
+    ecsManager->getSystem<CollisionCheckSystem>().update(deltaTime);
 }
 

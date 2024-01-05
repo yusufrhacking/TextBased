@@ -6,8 +6,10 @@
 #include "../ECSObjects/FirstSystem.h"
 #include <tuple>
 
+#include "../ECSObjects/FinalSystem.h"
 
-class UnprocessedMovementSystem: public FirstSystem {
+
+class UnprocessedMovementSystem: public FinalSystem {
     std::unique_ptr<std::vector<UnprocessedMovement>> unprocessedMovements;
     std::unordered_map<int, Velocity> totalChangeForEntities;
 
@@ -16,7 +18,7 @@ public:
 
     void queueMovement(UnprocessedMovement movement);
 
-    void run() override;
+    void update(double deltaTime) override;
 
 };
 

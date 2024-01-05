@@ -92,7 +92,7 @@ void GameManager::update(double deltaTime) {
     auto recentlyAddedEntities = ecsManager->addNewEntities();
     ecsManager->getSystem<CanonRegisteringSystem>().placeEntities(recentlyAddedEntities);
     ecsManager->removeDeadEntities();
-    ecsManager->runFirstSystems();
+    // ecsManager->runFirstSystems();
     ecsManager->runTimedSystems(deltaTime);
     ecsManager->runCameraSystem();
 }
