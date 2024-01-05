@@ -18,6 +18,12 @@ public:
 
     void queueMovement(UnprocessedMovement movement);
 
+    void runXMotion(double deltaTime);
+
+    void runYMotion(double deltaTime);
+
+    void buildTotalChange();
+
     void update(double deltaTime) override;
 
 };

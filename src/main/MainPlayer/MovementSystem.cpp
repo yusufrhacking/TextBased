@@ -18,6 +18,36 @@ void MovementSystem::queueMovement(UnprocessedMovement movement) {
 }
 
 void MovementSystem::update(double deltaTime) {
+    buildTotalChange();
+    runXMotion(deltaTime);
+    runYMotion(deltaTime);
+    unprocessedMovements->clear();
+    totalChangeForEntities.clear();
+    spdlog::trace("Done processing movements");
+}
+
+
+void MovementSystem::runXMotion(double deltaTime) {
+    for (const auto& changes : totalChangeForEntities) {
+        int entityID = changes.first;
+        const Velocity& velocity = changes.second;
+        spdlog::trace("Emitting event for entity {} to velocity {}, {}", entityID, velocity.x, 0);
+        eventBus->emitEvent<ReadyToMoveEvent>(Entity(entityID), velocity.x, 0);
+    }
+    ecsManager->getSystem<CollisionCheckSystem>().update(deltaTime);
+}
+
+void MovementSystem::runYMotion(double deltaTime) {
+    for (const auto& changes : totalChangeForEntities) {
+        int entityID = changes.first;
+        const Velocity& velocity = changes.second;
+        spdlog::trace("Emitting event for entity {} to velocity {}, {}", entityID, 0, velocity.y);
+        eventBus->emitEvent<ReadyToMoveEvent>(Entity(entityID), 0, velocity.y);
+    }
+    ecsManager->getSystem<CollisionCheckSystem>().update(deltaTime);
+}
+
+void MovementSystem::buildTotalChange() {
     for (auto unprocessedMovement : *unprocessedMovements) {
         int entity = unprocessedMovement.entity.getId();
         if (totalChangeForEntities.count(entity) > 0) {
@@ -31,27 +61,5 @@ void MovementSystem::update(double deltaTime) {
             totalChangeForEntities[entity] = velocity;
         }
     }
-
-
-    for (const auto& changes : totalChangeForEntities) {
-        int entityID = changes.first;
-        const Velocity& velocity = changes.second;
-        spdlog::trace("Emitting event for entity {} to velocity {}, {}", entityID, velocity.x, 0);
-        eventBus->emitEvent<ReadyToMoveEvent>(Entity(entityID), velocity.x, 0);
-    }
-
-    ecsManager->getSystem<CollisionCheckSystem>().update(deltaTime);
-
-    for (const auto& changes : totalChangeForEntities) {
-        int entityID = changes.first;
-        const Velocity& velocity = changes.second;
-        spdlog::trace("Emitting event for entity {} to velocity {}, {}", entityID, 0, velocity.y);
-        eventBus->emitEvent<ReadyToMoveEvent>(Entity(entityID), 0, velocity.y);
-    }
-    ecsManager->getSystem<CollisionCheckSystem>().update(deltaTime);
-
-    unprocessedMovements->clear();
-    totalChangeForEntities.clear();
-    spdlog::trace("Done processing movements");
 }
 
