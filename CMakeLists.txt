@@ -119,6 +119,9 @@ set(SOURCE_FILES
         src/main/Gravity/JumpingSystem.cpp
         src/main/Gravity/JumpingSystem.h
         src/main/ECSObjects/FinalSystem.h
+        src/main/PositionsAndMovement/RightLeftMovementSystem.cpp
+        src/main/PositionsAndMovement/RightLeftMovementSystem.h
+        src/main/PositionsAndMovement/RightLeftMovementComponent.h
 )
 
 

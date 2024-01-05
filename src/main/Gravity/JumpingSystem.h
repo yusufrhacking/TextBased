@@ -4,16 +4,16 @@
 #include "../TextInput/GameKeyEvent.h"
 #include "../PositionsAndMovement/Velocity.h"
 
-struct EntityShift {
+struct EntityJump {
     Entity entity;
     Velocity jump;
 
-    EntityShift(Entity entity, Velocity shift): entity(entity), jump(shift){}
+    EntityJump(Entity entity, Velocity shift): entity(entity), jump(shift){}
 };
 
 class JumpingSystem: public System {
     void onKeyPressed(GameKeyEvent& event);
-    std::vector<EntityShift> jumps{};
+    std::vector<EntityJump> jumps{};
 public:
     JumpingSystem();
     void update();
