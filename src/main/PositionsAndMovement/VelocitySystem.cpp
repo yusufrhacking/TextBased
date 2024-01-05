@@ -3,7 +3,7 @@
 #include "CollisionCheckSystem.h"
 #include "LiveComponent.h"
 #include "VelocityComponent.h"
-#include "../MainPlayer/UnprocessedMovementSystem.h"
+#include "../MainPlayer/MovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -27,7 +27,7 @@ void VelocitySystem::update(double deltaTime) {
             spdlog::info("Curr Position: {}, {}", position.getPosition().x, position.getPosition().y);
         }
 
-        ecsManager->getSystem<UnprocessedMovementSystem>().queueMovement(UnprocessedMovement(entity, xChange, yChange));
+        ecsManager->getSystem<MovementSystem>().queueMovement(UnprocessedMovement(entity, xChange, yChange));
 
         // position.shiftPosition(xChange, yChange);
         // spdlog::trace("Entity {} moved {}, {} to {}, {}", entity.getId(), xChange, yChange, position.getPosition().x, position.getPosition().y);

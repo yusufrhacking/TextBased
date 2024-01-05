@@ -1,5 +1,5 @@
 #include <spdlog/spdlog.h>
-#include "UnprocessedMovementSystem.h"
+#include "MovementSystem.h"
 
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../PositionsAndMovement/ReadyToMoveEvent.h"
@@ -8,16 +8,16 @@ extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
 
-UnprocessedMovementSystem::UnprocessedMovementSystem() {
+MovementSystem::MovementSystem() {
     unprocessedMovements = std::make_unique<std::vector<UnprocessedMovement>>();
     ecsManager->addSystem<CollisionCheckSystem>();
 }
 
-void UnprocessedMovementSystem::queueMovement(UnprocessedMovement movement) {
+void MovementSystem::queueMovement(UnprocessedMovement movement) {
     unprocessedMovements->push_back(movement);
 }
 
-void UnprocessedMovementSystem::update(double deltaTime) {
+void MovementSystem::update(double deltaTime) {
     for (auto unprocessedMovement : *unprocessedMovements) {
         int entity = unprocessedMovement.entity.getId();
         if (totalChangeForEntities.count(entity) > 0) {

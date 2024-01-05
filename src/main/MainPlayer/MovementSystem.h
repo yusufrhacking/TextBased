@@ -9,12 +9,12 @@
 #include "../ECSObjects/FinalSystem.h"
 
 
-class UnprocessedMovementSystem: public FinalSystem {
+class MovementSystem: public FinalSystem {
     std::unique_ptr<std::vector<UnprocessedMovement>> unprocessedMovements;
     std::unordered_map<int, Velocity> totalChangeForEntities;
 
 public:
-    UnprocessedMovementSystem();
+    MovementSystem();
 
     void queueMovement(UnprocessedMovement movement);
 
