@@ -21,15 +21,14 @@ CollisionHandleSystem::CollisionHandleSystem() {
 
 
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
-    float deltaTime = event.deltaTime;
     auto entityA = event.a;
-    handleCollision(deltaTime, entityA);
+    handleCollision(entityA);
 
     auto entityB = event.b;
-    handleCollision(deltaTime, entityB);
+    handleCollision(entityB);
 }
 
-void CollisionHandleSystem::handleCollision(float deltaTime, Entity entity) {
+void CollisionHandleSystem::handleCollision(Entity entity) {
     auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     positionComponent.revertPosition();
     if(ecsManager->hasComponent<JumpingComponent>(entity)) {

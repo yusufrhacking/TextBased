@@ -8,7 +8,7 @@ class CollisionHandleSystem: public EventConsumerSystem {
 public:
     CollisionHandleSystem();
 
-    void handleCollision(float deltaTime, Entity entity);
+    void handleCollision(Entity entity);
 
     void listenToEvents();
 
