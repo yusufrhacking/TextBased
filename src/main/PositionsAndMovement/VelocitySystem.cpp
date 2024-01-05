@@ -21,12 +21,6 @@ void VelocitySystem::update(double deltaTime) {
         double xChange = velocity.x * deltaTime;
         double yChange = velocity.y * deltaTime;
 
-        spdlog::info("Velocity! {}, {}", velocity.x, velocity.y);
-        if (velocity.y < 0) {
-            spdlog::info("Changes: {}, {}", xChange, yChange);
-            spdlog::info("Curr Position: {}, {}", position.getPosition().x, position.getPosition().y);
-        }
-
         ecsManager->getSystem<MovementSystem>().queueMovement(UnprocessedMovement(entity, xChange, yChange));
 
         // position.shiftPosition(xChange, yChange);

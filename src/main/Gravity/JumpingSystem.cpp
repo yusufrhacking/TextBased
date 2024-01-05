@@ -36,9 +36,10 @@ void JumpingSystem::onKeyPressed(GameKeyEvent& event) {
         if (!ecsManager->getComponentFromEntity<JumpingComponent>(entity).onGround) {
             continue;
         }
+        auto jumpHeight = ecsManager->getComponentFromEntity<JumpingComponent>(entity).jumpHeight;
         switch (event.getKey()) {
             case GameKey::MOVE_UP:
-                jumps.emplace_back(entity, Velocity(0, -300));
+                jumps.emplace_back(entity, Velocity(0, -jumpHeight));
                 break;
             default:
                 break;
