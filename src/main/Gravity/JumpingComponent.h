@@ -2,10 +2,10 @@
 #define JUMPINGCOMPONENT_H
 
 struct JumpingComponent {
-    float jumpHeight;
+    float jumpSpeed;
     bool onGround = false;
     JumpingComponent() = default;
-    explicit JumpingComponent(float jumpHeight): jumpHeight(jumpHeight){}
+    explicit JumpingComponent(float jumpHeight): jumpSpeed(jumpHeight){}
 };
 
 #endif //JUMPINGCOMPONENT_H

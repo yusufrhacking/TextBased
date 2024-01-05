@@ -38,7 +38,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<GravityComponent>(subject);
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
     ecsManager->addComponentToEntity<CollisionComponent>(subject);
-    ecsManager->addComponentToEntity<JumpingComponent>(subject);
+    ecsManager->addComponentToEntity<JumpingComponent>(subject, 200);
     ecsManager->addComponentToEntity<RightLeftMovementComponent>(subject, 400.0);
 
     Entity avila = ecsManager->createEntity();
