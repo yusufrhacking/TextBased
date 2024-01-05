@@ -36,7 +36,7 @@ void RightLeftMovementSystem::update(double deltaTime) {
     for(auto move: moves) {
         Entity entity = move.entity;
         float movementDistance = ecsManager->getComponentFromEntity<RightLeftMovementComponent>(entity).movementDistance;
-        float xChange = move.intDirection * movementDistance;
+        float xChange = move.intDirection * movementDistance * deltaTime;
 
         ecsManager->getSystem<MovementSystem>().queueMovement(UnprocessedMovement(move.entity, xChange, 0));
     }
