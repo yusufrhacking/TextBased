@@ -26,27 +26,27 @@ extern std::unique_ptr<ECSManager> ecsManager;
 MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(startingPosition) {
     speakEngineer();
 
-    Position subjectPosition{11895, 10532};
+    // Position subjectPosition{11895, 10532};
+    //
+    // Entity subject = ecsManager->createEntity();
+    // ecsManager->addComponentToEntity<LiveComponent>(subject);
+    // ecsManager->addComponentToEntity<PositionComponent>(subject, subjectPosition);
+    // ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
+    // ecsManager->addComponentToEntity<MainPlayerComponent>(subject);
+    // ecsManager->addComponentToEntity<SubjectComponent>(subject);
+    // ecsManager->addComponentToEntity<GravityComponent>(subject);
+    // ecsManager->addComponentToEntity<VelocityComponent>(subject);
+    // ecsManager->addComponentToEntity<CollisionComponent>(subject);
+    // ecsManager->addComponentToEntity<JumpingComponent>(subject);
+    //
+    // Entity avila = ecsManager->createEntity();
+    // ecsManager->addComponentToEntity<LiveComponent>(avila);
+    // ecsManager->addComponentToEntity<PositionComponent>(avila, subjectPosition + Position(25, 800));
+    // ecsManager->addComponentToEntity<TextComponent>(avila, "Avila");
+    // ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
+    // ecsManager->addComponentToEntity<CollisionComponent>(avila);
 
-    Entity subject = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<LiveComponent>(subject);
-    ecsManager->addComponentToEntity<PositionComponent>(subject, subjectPosition);
-    ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
-    ecsManager->addComponentToEntity<MainPlayerComponent>(subject);
-    ecsManager->addComponentToEntity<SubjectComponent>(subject);
-    ecsManager->addComponentToEntity<GravityComponent>(subject);
-    ecsManager->addComponentToEntity<VelocityComponent>(subject);
-    ecsManager->addComponentToEntity<CollisionComponent>(subject);
-    ecsManager->addComponentToEntity<JumpingComponent>(subject);
-
-    Entity avila = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<LiveComponent>(avila);
-    ecsManager->addComponentToEntity<PositionComponent>(avila, subjectPosition + Position(25, 800));
-    ecsManager->addComponentToEntity<TextComponent>(avila, "Avila");
-    ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
-    ecsManager->addComponentToEntity<CollisionComponent>(avila);
-
-    // createPreludeText();
+    createPreludeText();
 
     // createWitt(startingPosition);
 
