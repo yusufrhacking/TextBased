@@ -26,40 +26,29 @@ extern std::unique_ptr<ECSManager> ecsManager;
 MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(startingPosition) {
     speakEngineer();
 
-    // Position subjectPosition{11895, 10532};
-    //
-    // Entity subject = ecsManager->createEntity();
-    // ecsManager->addComponentToEntity<LiveComponent>(subject);
-    // ecsManager->addComponentToEntity<PositionComponent>(subject, subjectPosition);
-    // ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
-    // ecsManager->addComponentToEntity<MainPlayerComponent>(subject);
-    // ecsManager->addComponentToEntity<SubjectComponent>(subject);
-    // ecsManager->addComponentToEntity<GravityComponent>(subject);
-    // ecsManager->addComponentToEntity<VelocityComponent>(subject);
-    // ecsManager->addComponentToEntity<CollisionComponent>(subject);
-    // ecsManager->addComponentToEntity<JumpingComponent>(subject);
-    //
-    // Entity avila = ecsManager->createEntity();
-    // ecsManager->addComponentToEntity<LiveComponent>(avila);
-    // ecsManager->addComponentToEntity<PositionComponent>(avila, subjectPosition + Position(25, 800));
-    // ecsManager->addComponentToEntity<TextComponent>(avila, "Avila");
-    // ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
-    // ecsManager->addComponentToEntity<CollisionComponent>(avila);
+    Position subjectPosition{11895, 10532};
 
-    createPreludeText();
+    Entity subject = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<LiveComponent>(subject);
+    ecsManager->addComponentToEntity<PositionComponent>(subject, subjectPosition);
+    ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
+    ecsManager->addComponentToEntity<MainPlayerComponent>(subject);
+    ecsManager->addComponentToEntity<SubjectComponent>(subject);
+    ecsManager->addComponentToEntity<GravityComponent>(subject);
+    ecsManager->addComponentToEntity<VelocityComponent>(subject);
+    ecsManager->addComponentToEntity<CollisionComponent>(subject);
+    ecsManager->addComponentToEntity<JumpingComponent>(subject);
 
-    // createWitt(startingPosition);
+    Entity avila = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<LiveComponent>(avila);
+    ecsManager->addComponentToEntity<PositionComponent>(avila, subjectPosition + Position(25, 800));
+    ecsManager->addComponentToEntity<TextComponent>(avila, "Avila");
+    ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
+    ecsManager->addComponentToEntity<CollisionComponent>(avila);
 
-    //Make Theresa standout in the text
-    //Abyz show up at the bottom and chew through it, quickly
-    //Theresa turns into entity, has to fight the Abyz
-    //Pull out concepts from the prelude to make gamic
-    //
-
-    // Gravity hits once all the text is destroyed, and then Avila as text shows up at the bottom
-    // Becomes a platformer kinda thing, where you gotta jump up
-    // So need gravity system, and to then transform the keyboard movement system into a jumping system
-
+    // Need other platforms to jump to
+    // Need to be able to jump sideways
+    // Need abyz on the sides
 
 }
 
