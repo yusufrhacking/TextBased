@@ -53,7 +53,7 @@ void GameManager::setup() {
 void GameManager::setupSystems() {
     ecsManager->addSystem<RenderControllerSystem>();
     ecsManager->addSystem<VelocitySystem>();
-    ecsManager->addSystem<CollisionCheckSystem>();
+    // ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();

@@ -39,7 +39,7 @@ void CollisionHandleSystem::handleCollision(float deltaTime, Entity entity) {
     if(ecsManager->hasComponent<VelocityComponent>(entity)) {
         auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
         if (velocity.y < 0) {
-            spdlog::info("Zeroing velocity!");
+            spdlog::info("Zeroing velocity that was negative!");
         }
         velocity.y = 0;
     }

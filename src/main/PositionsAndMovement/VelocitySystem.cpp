@@ -16,10 +16,16 @@ VelocitySystem::VelocitySystem(){
 void VelocitySystem::update(double deltaTime) {
     for (Entity entity: getRelevantEntities()){
         auto& position = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-        const auto movement = ecsManager->getComponentFromEntity<VelocityComponent>(entity);
+        const auto velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
 
-        double xChange = movement.velocity.x * deltaTime;
-        double yChange = movement.velocity.y * deltaTime;
+        double xChange = velocity.x * deltaTime;
+        double yChange = velocity.y * deltaTime;
+
+        spdlog::info("Velocity! {}, {}", velocity.x, velocity.y);
+        if (velocity.y < 0) {
+            spdlog::info("Changes: {}, {}", xChange, yChange);
+            spdlog::info("Curr Position: {}, {}", position.getPosition().x, position.getPosition().y);
+        }
 
         ecsManager->getSystem<UnprocessedMovementSystem>().queueMovement(UnprocessedMovement(entity, xChange, yChange));
 
