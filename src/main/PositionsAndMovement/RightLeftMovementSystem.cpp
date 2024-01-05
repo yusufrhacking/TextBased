@@ -40,4 +40,5 @@ void RightLeftMovementSystem::update(double deltaTime) {
 
         ecsManager->getSystem<MovementSystem>().queueMovement(UnprocessedMovement(move.entity, xChange, 0));
     }
+    moves.clear();
 }

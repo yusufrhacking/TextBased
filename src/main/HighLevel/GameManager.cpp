@@ -39,6 +39,7 @@
 #include "../Middlemarch/MiddlemarchStart.h"
 #include "../Gravity/GravitySystem.h"
 #include "../Gravity/JumpingSystem.h"
+#include "../PositionsAndMovement/RightLeftMovementSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -86,6 +87,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AbyzTargetExecutionSystem>();
     ecsManager->addSystem<WordRelicPrioritizingSystem>();
     ecsManager->addSystem<GravitySystem>();
+    ecsManager->addSystem<RightLeftMovementSystem>();
 }
 
 void GameManager::update(double deltaTime) {

@@ -19,6 +19,7 @@
 #include "../MainPlayer/RotateComponent.h"
 #include "../Inventory/InventoryComponent.h"
 #include "../MainPlayer/MainPlayerComponent.h"
+#include "../PositionsAndMovement/RightLeftMovementComponent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -38,6 +39,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
     ecsManager->addComponentToEntity<CollisionComponent>(subject);
     ecsManager->addComponentToEntity<JumpingComponent>(subject);
+    ecsManager->addComponentToEntity<RightLeftMovementComponent>(subject, 400.0);
 
     Entity avila = ecsManager->createEntity();
     ecsManager->addComponentToEntity<LiveComponent>(avila);
