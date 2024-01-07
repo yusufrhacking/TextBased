@@ -19,6 +19,7 @@
 #include "../MainPlayer/RotateComponent.h"
 #include "../Inventory/InventoryComponent.h"
 #include "../MainPlayer/MainPlayerComponent.h"
+#include "../Platformer/TargetComponent.h"
 #include "../PositionsAndMovement/RightLeftMovementComponent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -47,6 +48,15 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<TextComponent>(avila, "Avila");
     ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
     ecsManager->addComponentToEntity<CollisionComponent>(avila);
+
+    std::string targetStr = "country of the Moors";
+    Entity target = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<LiveComponent>(target);
+    ecsManager->addComponentToEntity<PositionComponent>(target, Window::deriveRelativeTopRight(startPosition) + Position(-200, 100));
+    ecsManager->addComponentToEntity<TextComponent>(target, targetStr);
+    ecsManager->addComponentToEntity<TargetComponent>(target);
+    // ecsManager->addComponentToEntity<GenericStyleComponent>(target);
+    ecsManager->addComponentToEntity<CollisionComponent>(target);
 
     // Need other platforms to jump to
     // Need to be able to jump sideways

@@ -122,6 +122,7 @@ set(SOURCE_FILES
         src/main/PositionsAndMovement/RightLeftMovementSystem.cpp
         src/main/PositionsAndMovement/RightLeftMovementSystem.h
         src/main/PositionsAndMovement/RightLeftMovementComponent.h
+        src/main/Platformer/TargetComponent.h
 )
 
 
