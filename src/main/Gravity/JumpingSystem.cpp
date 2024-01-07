@@ -26,7 +26,6 @@ void JumpingSystem::update() {
         auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(i.entity).velocity;
         velocity.y = i.jump.y;
         ecsManager->getComponentFromEntity<JumpingComponent>(i.entity).onGround = false;
-        spdlog::info("PLayer velocity: {}, {}", velocity.x, velocity.y);
     }
     jumps.clear();
 }

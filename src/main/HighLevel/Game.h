@@ -11,7 +11,7 @@
 #include "spdlog/spdlog.h"
 #include "GameManager.h"
 
-const size_t FPS = 60;
+const size_t FPS = 120;
 const size_t MILLISECS_PER_FRAME = 1000 / FPS;
 
 
