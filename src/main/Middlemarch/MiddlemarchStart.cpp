@@ -50,12 +50,17 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<CollisionComponent>(avila);
 
     std::string targetStr = "country of the Moors";
+    auto targetSize = TextComponent::getSurfaceSize(targetStr);
+    TextComponent tc(targetStr);
+    Position adjustment(-1.0f * static_cast<float>(targetSize.width), targetSize.height);
+
+
     Entity target = ecsManager->createEntity();
     ecsManager->addComponentToEntity<LiveComponent>(target);
-    ecsManager->addComponentToEntity<PositionComponent>(target, Window::deriveRelativeTopRight(startPosition) + Position(-200, 100));
+    ecsManager->addComponentToEntity<PositionComponent>(target, Window::deriveRelativeTopRight(startPosition) + adjustment);
     ecsManager->addComponentToEntity<TextComponent>(target, targetStr);
     ecsManager->addComponentToEntity<TargetComponent>(target);
-    // ecsManager->addComponentToEntity<GenericStyleComponent>(target);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(target);
     ecsManager->addComponentToEntity<CollisionComponent>(target);
 
     // Need other platforms to jump to
