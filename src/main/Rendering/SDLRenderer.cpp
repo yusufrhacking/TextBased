@@ -54,7 +54,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
 
     goldFont = FC_CreateFont();
     FC_LoadFont(goldFont, renderer, "../../resources/Monaco.ttf",
-        TEXT_C_FONT_SIZE, red, TTF_STYLE_NORMAL);
+        TEXT_C_FONT_SIZE, gold, TTF_STYLE_NORMAL);
 }
 
 void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const GenericStyleComponent& style){
