@@ -13,7 +13,8 @@ enum class RenderStyle{
     WHITE_LETTER_IN_BANK,
     TINY_GREEN_NUMBER,
     TINY_WHITE_NUMBER,
-    RED
+    RED,
+    GOLD
 //    LETTER,
 //    TERMINAL,
 //    ENGINEER_TERMINAL,
