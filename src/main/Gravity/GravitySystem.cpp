@@ -19,7 +19,7 @@ GravitySystem::GravitySystem() {
 void GravitySystem::update(double deltaTime) {
     for(const auto& entity: getRelevantEntities()) {
         auto& velocityComponent = ecsManager->getComponentFromEntity<VelocityComponent>(entity);
-        float newVelocity = velocityComponent.velocity.y + velocityForce*deltaTime;
+        float newVelocity = velocityComponent.velocity.y + gravityForce*deltaTime;
         velocityComponent.velocity.y = std::ranges::min(newVelocity, terminalVelocity);
     }
     ecsManager->getSystem<JumpingSystem>().update();

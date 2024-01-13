@@ -4,7 +4,7 @@
 
 
 class GravitySystem: public UpdateSystem {
-    float velocityForce = 125.0;
+    float gravityForce = 200.0;
     float terminalVelocity = 500.0;
 public:
     GravitySystem();
