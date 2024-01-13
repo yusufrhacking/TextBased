@@ -1,7 +1,6 @@
 #include "InputProcessor.h"
 #include "SDL_keycode.h"
 #include "../EventSystem/EventBus.h"
-#include "GameKeyEvent.h"
 #include "TextInputEvent.h"
 #include <SDL.h>
 #include <spdlog/spdlog.h>
@@ -27,44 +26,39 @@ std::map<SDL_KeyCode, GameKey> keyPressMappings = {
         {SDLK_BACKSPACE, GameKey::BACKSPACE},
         {SDLK_SPACE, GameKey::REPEAT_COMMAND}
 };
-
-bool InputProcessor::processInput(SDL_Event event) {
-    unsigned int eventType = event.type;
-    if(eventType == SDL_QUIT){
-        spdlog::critical("SDL QUIT Executed");
-        return false;
-    }
-    return readInput(event);
+void InputProcessor::updateKeyStates() {
+    currentKeyStates = SDL_GetKeyboardState(nullptr);
 }
 
-bool InputProcessor::readInput(SDL_Event event){
-    if (event.type != SDL_KEYDOWN && event.type != SDL_TEXTINPUT){
-        return true;
-    }
-
-    auto key = static_cast<SDL_KeyCode>(event.key.keysym.sym);
-    if (event.type == SDL_KEYDOWN){
-        auto it = keyPressMappings.find(key);
-        if (it != keyPressMappings.end()) {
-            eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(it->second));
+void InputProcessor::processKeyPresses() {
+    for (const auto& pair : keyStateMappings) {
+        if (currentKeyStates[pair.first]) {
+            eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(pair.second));
+            spdlog::info("{} key pressed", SDL_GetScancodeName(pair.first));
         }
-    } else if(event.type == SDL_TEXTINPUT){
-        eventBus->emitEvent<TextInputEvent>(TextInputEvent(event.text));
+    }
+}
+
+
+bool InputProcessor::processInput() {
+    SDL_Event sdlEvent;
+    while (SDL_PollEvent(&sdlEvent)) {
+        if (sdlEvent.type == SDL_QUIT) {
+            spdlog::critical("SDL QUIT Executed");
+            return false;
+        }
+        if (sdlEvent.type == SDL_TEXTINPUT) {
+            eventBus->emitEvent<TextInputEvent>(TextInputEvent(sdlEvent.text));
+        }
     }
 
-    SDL_PumpEvents();
-    const Uint8 *keyboard_state_array = SDL_GetKeyboardState(nullptr);
+    updateKeyStates(); // Update the state of all keys
+    processKeyPresses(); // Process the key presses
 
-    if(key == SDLK_ESCAPE){
+    // Check for the ESC key
+    if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
         spdlog::critical("Escape key pressed");
         return false;
-    }
-
-    for(const auto& scanCodeGameKeyPair : keyStateMappings) {
-        if(keyboard_state_array[scanCodeGameKeyPair.first]) {
-            spdlog::trace("{} key noted", SDL_GetScancodeName(scanCodeGameKeyPair.first));
-            eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(scanCodeGameKeyPair.second));
-        }
     }
 
     return true;
