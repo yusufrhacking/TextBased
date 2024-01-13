@@ -49,13 +49,19 @@ bool InputProcessor::processInput() {
         }
         if (sdlEvent.type == SDL_TEXTINPUT) {
             eventBus->emitEvent<TextInputEvent>(TextInputEvent(sdlEvent.text));
+        }if (sdlEvent.type == SDL_KEYDOWN || sdlEvent.type == SDL_KEYUP) {
+            auto key = static_cast<SDL_KeyCode>(sdlEvent.key.keysym.sym);
+            auto it = keyPressMappings.find(key);
+            if (it != keyPressMappings.end()) {
+                auto gameKey = it->second;
+                eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(gameKey));
+            }
         }
     }
 
-    updateKeyStates(); // Update the state of all keys
-    processKeyPresses(); // Process the key presses
+    updateKeyStates();
+    processKeyPresses();
 
-    // Check for the ESC key
     if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
         spdlog::critical("Escape key pressed");
         return false;
