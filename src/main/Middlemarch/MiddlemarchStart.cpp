@@ -20,6 +20,7 @@
 #include "../Inventory/InventoryComponent.h"
 #include "../MainPlayer/MainPlayerComponent.h"
 #include "../Platformer/TargetComponent.h"
+#include "../Platformer/TextStepPrefab.h"
 #include "../PositionsAndMovement/RightLeftMovementComponent.h"
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -42,24 +43,28 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<JumpingComponent>(subject, 200);
     ecsManager->addComponentToEntity<RightLeftMovementComponent>(subject, 100.0);
 
+
+    Position avilaPosition = subjectPosition + Position(25, 800);
     Entity avila = ecsManager->createEntity();
     ecsManager->addComponentToEntity<LiveComponent>(avila);
-    ecsManager->addComponentToEntity<PositionComponent>(avila, subjectPosition + Position(25, 800));
+    ecsManager->addComponentToEntity<PositionComponent>(avila,avilaPosition );
     ecsManager->addComponentToEntity<TextComponent>(avila, "Avila");
     ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
     ecsManager->addComponentToEntity<CollisionComponent>(avila);
 
     std::string targetStr = "country of the Moors";
     auto targetSize = TextComponent::getSurfaceSize(targetStr);
-    TextComponent tc(targetStr);
-    Position adjustment(-1.0f * static_cast<float>(targetSize.width), targetSize.height);
+    TextComponent targetTC(targetStr);
+    Position targetPosAdjustment(-1.0f * static_cast<float>(targetSize.width), targetSize.height);
+    Position targetPosition = Window::deriveRelativeTopRight(startPosition) + targetPosAdjustment;
+    TextStepPrefab targetPrefab{targetStr, targetPosition};
+    ecsManager->addComponentToEntity<TargetComponent>(targetPrefab.entity);
 
-    Entity target = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<LiveComponent>(target);
-    ecsManager->addComponentToEntity<PositionComponent>(target, Window::deriveRelativeTopRight(startPosition) + adjustment);
-    ecsManager->addComponentToEntity<TextComponent>(target, targetStr);
-    ecsManager->addComponentToEntity<TargetComponent>(target);
-    ecsManager->addComponentToEntity<CollisionComponent>(target);
+
+    std::string nextStepStr = "That child-pilgrimage";
+    Position nextStepPos = avilaPosition + Position(150, -50);
+    TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
+    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
 
     // Need other platforms to jump to
     // Need to be able to jump sideways
