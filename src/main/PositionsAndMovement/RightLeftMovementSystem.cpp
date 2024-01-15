@@ -33,7 +33,6 @@ void RightLeftMovementSystem::onKeyPressed(GameKeyEvent& event) {
 }
 
 void RightLeftMovementSystem::update(double deltaTime) {
-    spdlog::info("Moves Size: {}", moves.size());
     for(auto move: moves) {
         Entity entity = move.entity;
         float movementDistance = ecsManager->getComponentFromEntity<RightLeftMovementComponent>(entity).movementDistance;

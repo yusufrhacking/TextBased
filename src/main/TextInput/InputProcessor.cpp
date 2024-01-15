@@ -34,7 +34,6 @@ void InputProcessor::processKeyPresses() {
     for (const auto& pair : keyStateMappings) {
         if (currentKeyStates[pair.first]) {
             eventBus->emitEvent<GameKeyEvent>(GameKeyEvent(pair.second));
-            spdlog::info("{} key pressed", SDL_GetScancodeName(pair.first));
         }
     }
 }
