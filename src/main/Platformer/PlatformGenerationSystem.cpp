@@ -4,15 +4,13 @@
 
 PlatformGenerationSystem::PlatformGenerationSystem(Position startPosition, std::vector<std::string> stepStrs) {
     this->startPosition = startPosition;
-    Position nextStepPos = startPosition;
+    nextStepPos = startPosition;
     nextStepPos = nextStepPos - stepJump;
 
-    // for (const auto& nextStepStr : stepStrs) {
-    createNextStep(nextStepPos, stepStrs[stepInd]);
-    // }
+    createNextStep(stepStrs[stepInd]);
 }
 
-void PlatformGenerationSystem::createNextStep(Position& nextStepPos, const std::string& nextStepStr) {
+void PlatformGenerationSystem::createNextStep(const std::string& nextStepStr) {
     if(direction == -1) {
         prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
     }
