@@ -60,7 +60,6 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
 
     std::string targetStr = "country of the Moors";
     auto targetSize = TextComponent::getSurfaceSize(targetStr);
-    TextComponent targetTC(targetStr);
     Position targetPosAdjustment(-1.0f * static_cast<float>(targetSize.width), targetSize.height);
     Position targetPosition = Window::deriveRelativeTopRight(startPosition) + targetPosAdjustment;
     TextStepPrefab targetPrefab{targetStr, targetPosition};
