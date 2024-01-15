@@ -3,10 +3,7 @@
 #include "TextStepPrefab.h"
 
 PlatformGenerationSystem::PlatformGenerationSystem(Position startPosition, std::vector<std::string> stepStrs) {
-    Position stepJump{100, -50};
     Position nextStepPos = startPosition;
-    float prevWordX = 0;
-    float direction = 1;
     nextStepPos = nextStepPos - stepJump;
 
     for (const auto& nextStepStr : stepStrs) {
