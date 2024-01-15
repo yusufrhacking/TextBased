@@ -61,14 +61,16 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     Position stepJump{50, -50};
     Position nextStepPos = avilaPosition;
     float prevWordX = static_cast<float>(TextComponent::getSurfaceSize(avilaStr).width);
+    float direction = 1;
 
     for (const auto& nextStepStr : nextSteps) {
-        nextStepPos = nextStepPos + stepJump + Position(prevWordX, 0.0f);
+        nextStepPos.x += (stepJump.x + prevWordX) * direction;
+        nextStepPos.y += stepJump.y;
         if (nextStepPos.x + TextComponent::getSurfaceSize(nextStepStr).width > Window::deriveRelativeBottomRight(avilaPosition).x) {
             nextStepPos.x -= stepJump.x * 2;
             nextStepPos.x -= prevWordX;
             nextStepPos.x -= static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
-            stepJump.x = stepJump.x * -1;
+            direction = -1;
         }
         TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
         ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
