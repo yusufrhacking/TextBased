@@ -44,13 +44,19 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<RightLeftMovementComponent>(subject, 100.0);
 
 
-    Position avilaPosition = subjectPosition + Position(25, 800);
+    Position avilaPosition = subjectPosition + Position(0, 800);
     Entity avila = ecsManager->createEntity();
     ecsManager->addComponentToEntity<LiveComponent>(avila);
     ecsManager->addComponentToEntity<PositionComponent>(avila,avilaPosition );
-    ecsManager->addComponentToEntity<TextComponent>(avila, "Avila");
+    ecsManager->addComponentToEntity<TextComponent>(avila, "rugged Avila");
     ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
     ecsManager->addComponentToEntity<CollisionComponent>(avila);
+
+
+    std::string nextStepStr = "That child-pilgrimage";
+    Position nextStepPos = avilaPosition + Position(200, -50);
+    TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
+    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
 
     std::string targetStr = "country of the Moors";
     auto targetSize = TextComponent::getSurfaceSize(targetStr);
@@ -60,16 +66,12 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     TextStepPrefab targetPrefab{targetStr, targetPosition};
     ecsManager->addComponentToEntity<TargetComponent>(targetPrefab.entity);
 
-
-    std::string nextStepStr = "That child-pilgrimage";
-    Position nextStepPos = avilaPosition + Position(150, -50);
-    TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
-    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
-
     // Need other platforms to jump to
     // Need to be able to jump sideways
     // Need abyz on the sides
 
+    // Probably want to make it where the next step appears as you land on the previous one?
+    // So I want to do a chain? And a LandEvent that is emitted when the jit lands from the jump system?
 }
 
 void MiddlemarchStart::createPreludeText() const {
