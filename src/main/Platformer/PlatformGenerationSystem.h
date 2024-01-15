@@ -8,6 +8,7 @@ class PlatformGenerationSystem: public System {
     Position stepJump{100, -50};
     float prevWordX = 0;
     float direction = 1;
+    size_t stepInd = 0;
     void createNextStep(Position&nextStepPos, const std::string&nextStepStr);
 public:
 

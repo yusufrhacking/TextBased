@@ -7,9 +7,9 @@ PlatformGenerationSystem::PlatformGenerationSystem(Position startPosition, std::
     Position nextStepPos = startPosition;
     nextStepPos = nextStepPos - stepJump;
 
-    for (const auto& nextStepStr : stepStrs) {
-        createNextStep(nextStepPos, nextStepStr);
-    }
+    // for (const auto& nextStepStr : stepStrs) {
+    createNextStep(nextStepPos, stepStrs[stepInd]);
+    // }
 }
 
 void PlatformGenerationSystem::createNextStep(Position& nextStepPos, const std::string& nextStepStr) {
