@@ -72,6 +72,8 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
 
     // Probably want to make it where the next step appears as you land on the previous one?
     // So I want to do a chain? And a LandEvent that is emitted when the jit lands from the jump system?
+
+    //Supreme Power drops Abyz down from above on top of the platforms
 }
 
 void MiddlemarchStart::createPreludeText() const {

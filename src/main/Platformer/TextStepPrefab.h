@@ -2,6 +2,7 @@
 #define TEXTSTEPPREFAB_H
 #include <string>
 
+#include "PlatformComponent.h"
 #include "../Maze/HalfwayOpenWallColumnPrefab.h"
 #include "../PositionsAndMovement/Position.h"
 
@@ -17,6 +18,7 @@ struct TextStepPrefab {
         ecsManager->addComponentToEntity<PositionComponent>(entity, position);
         ecsManager->addComponentToEntity<TextComponent>(entity, text);
         ecsManager->addComponentToEntity<CollisionComponent>(entity);
+        ecsManager->addComponentToEntity<PlatformComponent>(entity);
     }
 
     Entity getEntity() const{
