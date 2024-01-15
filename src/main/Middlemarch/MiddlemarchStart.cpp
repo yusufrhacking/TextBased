@@ -49,21 +49,26 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     TextStepPrefab firstStepPrefab{avilaStr, avilaPosition};
     ecsManager->addComponentToEntity<GenericStyleComponent>(firstStepPrefab.entity);
 
-    std::array<std::string, 6> nextSteps = {
+    std::array<std::string, 8> nextSteps = {
         "That child-pilgrimage",
         "romances of chivalry",
         "social conquests of\n  a brilliant girl",
-        "a certain spiritual grandeur",
+        "spiritual grandeur",
         "social faith",
-        "yearning of women"
+        "yearning of womanhood",
+        "blundering lives",
+        "inconvenient indefiniteness"
     };
 
-    Position stepJump{50, -50};
+    Position stepJump{100, -50};
     Position nextStepPos = avilaPosition;
     float prevWordX = static_cast<float>(TextComponent::getSurfaceSize(avilaStr).width);
     float direction = 1;
 
     for (const auto& nextStepStr : nextSteps) {
+        if(direction == -1) {
+            prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
+        }
         nextStepPos.x += (stepJump.x + prevWordX) * direction;
         nextStepPos.y += stepJump.y;
         if (nextStepPos.x + TextComponent::getSurfaceSize(nextStepStr).width > Window::deriveRelativeBottomRight(avilaPosition).x) {
