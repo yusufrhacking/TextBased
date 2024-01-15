@@ -49,10 +49,21 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     TextStepPrefab firstStepPrefab{avilaStr, avilaPosition};
     ecsManager->addComponentToEntity<GenericStyleComponent>(firstStepPrefab.entity);
 
+    Position stepJump{200, -50};
 
     std::string nextStepStr = "That child-pilgrimage";
-    Position nextStepPos = avilaPosition + Position(200, -50);
+    Position nextStepPos = avilaPosition + stepJump;
     TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
+    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
+
+    nextStepStr = "romances of chivalry";
+    nextStepPos = nextStepPos + stepJump;
+    nextStepPrefab = {nextStepStr, nextStepPos};
+    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
+
+    nextStepStr = "social conquests of\n  a brilliant girl";
+    nextStepPos = nextStepPos + stepJump;
+    nextStepPrefab = {nextStepStr, nextStepPos};
     ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
 
     std::string targetStr = "country of the Moors";
