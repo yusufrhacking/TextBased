@@ -45,12 +45,9 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
 
 
     Position avilaPosition = subjectPosition + Position(0, 800);
-    Entity avila = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<LiveComponent>(avila);
-    ecsManager->addComponentToEntity<PositionComponent>(avila,avilaPosition );
-    ecsManager->addComponentToEntity<TextComponent>(avila, "rugged Avila");
-    ecsManager->addComponentToEntity<GenericStyleComponent>(avila);
-    ecsManager->addComponentToEntity<CollisionComponent>(avila);
+    std::string avilaStr = "rugged Avila";
+    TextStepPrefab firstStepPrefab{avilaStr, avilaPosition};
+    ecsManager->addComponentToEntity<GenericStyleComponent>(firstStepPrefab.entity);
 
 
     std::string nextStepStr = "That child-pilgrimage";
