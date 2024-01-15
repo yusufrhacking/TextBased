@@ -13,7 +13,6 @@ PlatformGenerationSystem::PlatformGenerationSystem(Position startPosition, std::
 }
 
 void PlatformGenerationSystem::createNextStep(Position& nextStepPos, const std::string& nextStepStr) {
-    Position startPosition;
     if(direction == -1) {
         prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
     }
