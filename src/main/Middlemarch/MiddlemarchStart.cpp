@@ -45,26 +45,24 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
 
 
     Position avilaPosition = subjectPosition + Position(0, 800);
-    std::string avilaStr = "rugged Avila";
+    std::string avilaStr = "from rugged Avila";
     TextStepPrefab firstStepPrefab{avilaStr, avilaPosition};
     ecsManager->addComponentToEntity<GenericStyleComponent>(firstStepPrefab.entity);
 
+    std::array<std::string, 3> nextSteps = {
+        "That child-pilgrimage",
+        "romances of chivalry",
+        "social conquests of\n  a brilliant girl"
+    };
+
     Position stepJump{200, -50};
+    Position nextStepPos = avilaPosition;
 
-    std::string nextStepStr = "That child-pilgrimage";
-    Position nextStepPos = avilaPosition + stepJump;
-    TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
-    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
-
-    nextStepStr = "romances of chivalry";
-    nextStepPos = nextStepPos + stepJump;
-    nextStepPrefab = {nextStepStr, nextStepPos};
-    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
-
-    nextStepStr = "social conquests of\n  a brilliant girl";
-    nextStepPos = nextStepPos + stepJump;
-    nextStepPrefab = {nextStepStr, nextStepPos};
-    ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
+    for (const auto& nextStepStr : nextSteps) {
+        nextStepPos = nextStepPos + stepJump;
+        TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
+        ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
+    }
 
     std::string targetStr = "country of the Moors";
     auto targetSize = TextComponent::getSurfaceSize(targetStr);
@@ -80,7 +78,9 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     // Probably want to make it where the next step appears as you land on the previous one?
     // So I want to do a chain? And a LandEvent that is emitted when the jit lands from the jump system?
 
-    //Supreme Power drops Abyz down from above on top of the platforms
+    // Supreme Power drops Abyz down from above on top of the platforms
+    // Abyz are fine with dropping down the levels and stuff, but also just move across them
+    // Abyz also rotate and move upwards??? So the vertical ones are harder to kill
 }
 
 void MiddlemarchStart::createPreludeText() const {
