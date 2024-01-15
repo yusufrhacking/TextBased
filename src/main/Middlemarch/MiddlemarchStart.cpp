@@ -19,6 +19,7 @@
 #include "../MainPlayer/RotateComponent.h"
 #include "../Inventory/InventoryComponent.h"
 #include "../MainPlayer/MainPlayerComponent.h"
+#include "../Platformer/PlatformGenerationSystem.h"
 #include "../Platformer/TargetComponent.h"
 #include "../Platformer/TextStepPrefab.h"
 #include "../PositionsAndMovement/RightLeftMovementComponent.h"
@@ -45,11 +46,12 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
 
 
     Position avilaPosition = subjectPosition + Position(0, 800);
-    std::string avilaStr = "from rugged Avila";
-    TextStepPrefab firstStepPrefab{avilaStr, avilaPosition};
-    ecsManager->addComponentToEntity<GenericStyleComponent>(firstStepPrefab.entity);
+    // std::string avilaStr = "from rugged Avila";
+    // TextStepPrefab firstStepPrefab{avilaStr, avilaPosition};
+    // ecsManager->addComponentToEntity<GenericStyleComponent>(firstStepPrefab.entity);
 
-    std::array<std::string, 8> nextSteps = {
+    std::vector<std::string> nextSteps = {
+        "from rugged Avila",
         "That child-pilgrimage",
         "romances of chivalry",
         "social conquests of\n  a brilliant girl",
@@ -60,27 +62,29 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
         "inconvenient indefiniteness"
     };
 
-    Position stepJump{100, -50};
-    Position nextStepPos = avilaPosition;
-    float prevWordX = static_cast<float>(TextComponent::getSurfaceSize(avilaStr).width);
-    float direction = 1;
+    PlatformGenerationSystem platforms{avilaPosition, nextSteps};
 
-    for (const auto& nextStepStr : nextSteps) {
-        if(direction == -1) {
-            prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
-        }
-        nextStepPos.x += (stepJump.x + prevWordX) * direction;
-        nextStepPos.y += stepJump.y;
-        if (nextStepPos.x + TextComponent::getSurfaceSize(nextStepStr).width > Window::deriveRelativeBottomRight(avilaPosition).x) {
-            nextStepPos.x -= stepJump.x * 2;
-            nextStepPos.x -= prevWordX;
-            nextStepPos.x -= static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
-            direction = -1;
-        }
-        TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
-        ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
-        prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
-    }
+    // Position stepJump{100, -50};
+    // Position nextStepPos = avilaPosition;
+    // float prevWordX = static_cast<float>(TextComponent::getSurfaceSize(avilaStr).width);
+    // float direction = 1;
+    //
+    // for (const auto& nextStepStr : nextSteps) {
+    //     if(direction == -1) {
+    //         prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
+    //     }
+    //     nextStepPos.x += (stepJump.x + prevWordX) * direction;
+    //     nextStepPos.y += stepJump.y;
+    //     if (nextStepPos.x + TextComponent::getSurfaceSize(nextStepStr).width > Window::deriveRelativeBottomRight(avilaPosition).x) {
+    //         nextStepPos.x -= stepJump.x * 2;
+    //         nextStepPos.x -= prevWordX;
+    //         nextStepPos.x -= static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
+    //         direction = -1;
+    //     }
+    //     TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
+    //     ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
+    //     prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
+    // }
 
     std::string targetStr = "country of the Moors";
     auto targetSize = TextComponent::getSurfaceSize(targetStr);

@@ -127,6 +127,8 @@ set(SOURCE_FILES
         src/main/Platformer/TargetRenderingSystem.h
         src/main/Platformer/TextStepPrefab.h
         src/main/Platformer/PlatformComponent.h
+        src/main/Platformer/PlatformGenerationSystem.cpp
+        src/main/Platformer/PlatformGenerationSystem.h
 )
 
 
