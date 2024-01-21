@@ -1,6 +1,9 @@
 #include "PlatformGenerationSystem.h"
 
 #include "TextStepPrefab.h"
+#include "../PositionsAndMovement/CollisionEvent.h"
+
+extern std::unique_ptr<EventBus> eventBus;
 
 PlatformGenerationSystem::PlatformGenerationSystem(Position startPosition, std::vector<std::string> stepStrs) {
     this->startPosition = startPosition;
@@ -8,6 +11,7 @@ PlatformGenerationSystem::PlatformGenerationSystem(Position startPosition, std::
     nextStepPos = nextStepPos - stepJump;
 
     createNextStep(stepStrs[stepInd]);
+    listenToEvents();
 }
 
 void PlatformGenerationSystem::createNextStep(const std::string& nextStepStr) {
@@ -25,4 +29,12 @@ void PlatformGenerationSystem::createNextStep(const std::string& nextStepStr) {
     TextStepPrefab nextStepPrefab{nextStepStr, nextStepPos};
     ecsManager->addComponentToEntity<GenericStyleComponent>(nextStepPrefab.entity);
     prevWordX = static_cast<float>(TextComponent::getSurfaceSize(nextStepStr).width);
+}
+
+void PlatformGenerationSystem::listenToEvents() {
+    eventBus->listenToEvent<CollisionEvent>(this, &PlatformGenerationSystem::screenCollisionForLanding);
+}
+
+void PlatformGenerationSystem::screenCollisionForLanding(CollisionEvent& event){
+
 }

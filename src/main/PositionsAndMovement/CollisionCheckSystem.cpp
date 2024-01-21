@@ -38,12 +38,8 @@ void CollisionCheckSystem::update(double deltaTime) {
                                                      secondPosition.getPosition(), secondText.getSurfaceSize());
 
             if (isAABCollision){
-                CollisionAxis result = DistanceCalculator::getCollisionAxes(firstPosition.getPosition(), firstText.getSurfaceSize(),
-                                                     secondPosition.getPosition(), secondText.getSurfaceSize());
-                CollisionDirection direction = DistanceCalculator::getCollisionDirection(firstPosition.getPosition(), firstText.getSurfaceSize(),
-                                                     secondPosition.getPosition(), secondText.getSurfaceSize());
                 spdlog::trace("COLLISION between entities {} and {}", first.getId(), second.getId());
-                eventBus->emitEvent<CollisionEvent>(first, second, deltaTime, result, direction);
+                eventBus->emitEvent<CollisionEvent>(first, second, deltaTime);
             }
 
         }

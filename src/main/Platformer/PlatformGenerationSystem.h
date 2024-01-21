@@ -1,6 +1,7 @@
 #ifndef PLATFORMGENERATIONSYSTEM_H
 #define PLATFORMGENERATIONSYSTEM_H
 #include "../ECSObjects/System.h"
+#include "../PositionsAndMovement/CollisionEvent.h"
 
 
 class PlatformGenerationSystem: public System {
@@ -12,10 +13,14 @@ class PlatformGenerationSystem: public System {
     size_t stepInd = 0;
     void createNextStep(const std::string&nextStepStr);
 public:
+    void listenToEvents();
+
+    void screenCollisionForLanding(CollisionEvent& event);
 
     PlatformGenerationSystem(Position startPosition, std::vector<std::string> stepStrs);
 
 };
+
 
 
 
