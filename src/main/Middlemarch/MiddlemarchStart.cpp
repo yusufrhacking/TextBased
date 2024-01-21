@@ -62,7 +62,9 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
         "inconvenient indefiniteness"
     };
 
-    PlatformGenerationSystem platforms{avilaPosition, nextSteps};
+    ecsManager->addSystem<PlatformGenerationSystem>(avilaPosition, nextSteps);
+
+    // PlatformGenerationSystem platforms{avilaPosition, nextSteps};
 
     // Position stepJump{100, -50};
     // Position nextStepPos = avilaPosition;
