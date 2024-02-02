@@ -10,6 +10,10 @@ private:
 public:
     void createWitt(Position startingPosition);
 
+    void createSubject(Position subjectPosition);
+
+    void createTarget();
+
     explicit MiddlemarchStart(Position startingPosition);
 
     void createPreludeText() const;

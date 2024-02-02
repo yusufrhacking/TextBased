@@ -17,6 +17,7 @@
 #include "../HighLevel/TerminalGlobals.h"
 #include "../HighLevel/FontGlobals.h"
 #include "../Middlemarch/SubjectRenderSystem.h"
+#include "../Middlemarch/SupremePowerRenderSystem.h"
 #include "../Platformer/TargetRenderingSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -67,6 +68,9 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     if (ecsManager->hasSystem<TargetRenderingSystem>()) {
         ecsManager->getSystem<TargetRenderingSystem>().render(renderer, camera);
     }
+    if (ecsManager->hasSystem<SupremePowerRenderSystem>()) {
+        ecsManager->getSystem<SupremePowerRenderSystem>().render(renderer, camera);
+    }
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -80,5 +84,6 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<SubjectRenderSystem>();
     ecsManager->addSystem<AbyzRenderingSystem>();
     ecsManager->addSystem<TargetRenderingSystem>();
+    ecsManager->addSystem<SupremePowerRenderSystem>();
     // ecsManager->addSystem<PlayerSideTextSystem>();
 }

@@ -129,6 +129,9 @@ set(SOURCE_FILES
         src/main/Platformer/PlatformComponent.h
         src/main/Platformer/PlatformGenerationSystem.cpp
         src/main/Platformer/PlatformGenerationSystem.h
+        src/main/Middlemarch/SupremePowerComponent.h
+        src/main/Middlemarch/SupremePowerRenderSystem.cpp
+        src/main/Middlemarch/SupremePowerRenderSystem.h
 )
 
 
