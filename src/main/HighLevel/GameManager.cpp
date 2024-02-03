@@ -29,6 +29,8 @@
 #include "../Abyz/AbyzControlSystem.h"
 #include "../Abyz/AbyzTargetExecutionSystem.h"
 #include "../Abyz/AbyzTargetAllocationSystem.h"
+#include "../Abyz/LifeGateComponent.h"
+#include "../Abyz/LifeGateSystem.h"
 #include "../Abyz/WordRelicPrioritizingSystem.h"
 #include "../Levels/FullBasicLevel.h"
 #include "../Levels/IntroPac.h"
@@ -90,6 +92,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<GravitySystem>();
     ecsManager->addSystem<RightLeftMovementSystem>();
     ecsManager->addSystem<SpawnAbyzSystem>();
+    ecsManager->addSystem<LifeGateSystem>();
 }
 
 void GameManager::update(double deltaTime) {

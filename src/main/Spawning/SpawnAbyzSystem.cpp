@@ -1,9 +1,12 @@
 #include "SpawnAbyzSystem.h"
 
 #include "SpawnAbyzComponent.h"
+#include "../Abyz/LifeGateComponent.h"
 #include "../Abyz/PlainAbyzPrefab.h"
+#include "../Gravity/GravityComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../PositionsAndMovement/VelocityComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -24,5 +27,8 @@ void SpawnAbyzSystem::update(double deltaTime) {
         ecsManager->addComponentToEntity<PositionComponent>(abyz, abyzPosition);
         ecsManager->addComponentToEntity<LiveComponent>(abyz);
         ecsManager->addComponentToEntity<AbyzComponent>(abyz);
+        ecsManager->addComponentToEntity<GravityComponent>(abyz);
+        ecsManager->addComponentToEntity<VelocityComponent>(abyz);
+        ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
     }
 }

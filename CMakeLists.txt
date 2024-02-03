@@ -135,6 +135,9 @@ set(SOURCE_FILES
         src/main/Spawning/SpawnAbyzComponent.h
         src/main/Spawning/SpawnAbyzSystem.cpp
         src/main/Spawning/SpawnAbyzSystem.h
+        src/main/Abyz/LifeGateComponent.h
+        src/main/Abyz/LifeGateSystem.cpp
+        src/main/Abyz/LifeGateSystem.h
 )
 
 
