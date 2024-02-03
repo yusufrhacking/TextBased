@@ -1,5 +1,6 @@
 #include "SpawnAbyzSystem.h"
 
+#include "SpawnAbyzComponent.h"
 #include "../Abyz/PlainAbyzPrefab.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
@@ -7,7 +8,7 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 
 SpawnAbyzSystem::SpawnAbyzSystem() {
-    requireComponent<SpawnAbyzSystem>();
+    requireComponent<SpawnAbyzComponent>();
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
 }
