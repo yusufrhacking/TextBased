@@ -41,28 +41,22 @@ void PlatformGenerationSystem::listenToEvents() {
 void PlatformGenerationSystem::screenCollisionForLanding(CollisionEvent& event){
     if (ecsManager->hasComponent<PlatformComponent>(event.a)) {
         if (ecsManager->hasComponent<SubjectComponent>(event.b)) {
-            if (stepInd > 0 && entities.size() > stepInd - 1) {
-                if (event.a != entities[stepInd - 1]) {
-                    stepInd++;
-                    createNextStep(stepStrs[stepInd]);
-                }
-            } else {
-                stepInd++;
-                createNextStep(stepStrs[stepInd]);
+            if(ecsManager->getComponentFromEntity<PlatformComponent>(event.a).beenReached) {
+                return;
             }
+            ecsManager->getComponentFromEntity<PlatformComponent>(event.a).beenReached = true;
+            stepInd++;
+            createNextStep(stepStrs[stepInd]);
         }
     }
     if (ecsManager->hasComponent<PlatformComponent>(event.b)) {
         if (ecsManager->hasComponent<SubjectComponent>(event.a)) {
-            if (stepInd > 0 && entities.size() > stepInd - 1) {
-                if (event.b != entities[stepInd - 1]) {
-                    stepInd++;
-                    createNextStep(stepStrs[stepInd]);
-                }
-            } else {
-                stepInd++;
-                createNextStep(stepStrs[stepInd]);
+            if(ecsManager->getComponentFromEntity<PlatformComponent>(event.b).beenReached) {
+                return;
             }
+            ecsManager->getComponentFromEntity<PlatformComponent>(event.b).beenReached = true;
+            stepInd++;
+            createNextStep(stepStrs[stepInd]);
         }
     }
 }

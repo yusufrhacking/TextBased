@@ -2,6 +2,7 @@
 #define PLATFORMCOMPONENT_H
 
 struct PlatformComponent {
+    bool beenReached = false;
     PlatformComponent() = default;
 };
 
