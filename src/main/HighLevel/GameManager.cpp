@@ -40,6 +40,7 @@
 #include "../Gravity/GravitySystem.h"
 #include "../Gravity/JumpingSystem.h"
 #include "../PositionsAndMovement/RightLeftMovementSystem.h"
+#include "../Spawning/SpawnAbyzSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -88,6 +89,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<WordRelicPrioritizingSystem>();
     ecsManager->addSystem<GravitySystem>();
     ecsManager->addSystem<RightLeftMovementSystem>();
+    ecsManager->addSystem<SpawnAbyzSystem>();
 }
 
 void GameManager::update(double deltaTime) {

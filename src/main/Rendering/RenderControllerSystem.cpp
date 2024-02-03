@@ -17,7 +17,7 @@
 #include "../HighLevel/TerminalGlobals.h"
 #include "../HighLevel/FontGlobals.h"
 #include "../Middlemarch/SubjectRenderSystem.h"
-#include "../Middlemarch/SupremePowerRenderSystem.h"
+#include "../Spawning/SupremePowerRenderSystem.h"
 #include "../Platformer/TargetRenderingSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;

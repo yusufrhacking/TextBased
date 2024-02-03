@@ -1,5 +1,4 @@
 #include "SupremePowerRenderSystem.h"
-#include "SubjectComponent.h"
 #include "../HighLevel/ECSManager.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"

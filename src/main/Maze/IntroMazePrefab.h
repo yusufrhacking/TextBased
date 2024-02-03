@@ -23,7 +23,7 @@
 #include "../LetterMaze/LetterStreamPrefab.h"
 #include "../LetterMaze/VerticalLetterStreamPrefab.h"
 #include "../Woodworking/TreePrefab.h"
-#include "../Abyz/AbyzPrefab.h"
+#include "../Abyz/PlainAbyzPrefab.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 

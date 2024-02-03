@@ -19,7 +19,7 @@
 #include "../MainPlayer/KeyboardMovementComponent.h"
 #include "../HighLevel/ECSManager.h"
 #include "../Woodworking/TreePrefab.h"
-#include "../Abyz/AbyzPrefab.h"
+#include "../Abyz/PlainAbyzPrefab.h"
 #include "../Lettering/LetterPrefab.h"
 #include "../Woodworking/ForestPrefab.h"
 
@@ -32,7 +32,7 @@ FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(star
     createPlayer();
     ForestPrefab forest{Window::deriveRelativeTopLeft(startingPosition), 2, 5};
     TreePrefab tree{startingPosition + Position(100, 200)};
-    AbyzPrefab abyz{startingPosition + Position(400, -150)};
+    PlainAbyzPrefab abyz{startingPosition + Position(400, -150)};
     LetterPrefab a{'a', startingPosition + Position(-100, 0)};
     LetterPrefab x{'x', startingPosition + Position(100, 0)};
     LetterPrefab e{'e', startingPosition + Position(0, -100)};

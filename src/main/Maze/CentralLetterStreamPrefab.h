@@ -22,7 +22,7 @@
 #include "../LetterMaze/LetterStreamPrefab.h"
 #include "../LetterMaze/VerticalLetterStreamPrefab.h"
 #include "../Woodworking/TreePrefab.h"
-#include "../Abyz/AbyzPrefab.h"
+#include "../Abyz/PlainAbyzPrefab.h"
 
 struct CentralLetterStreamPrefab {
     CentralLetterStreamPrefab(Position startingPosition) {

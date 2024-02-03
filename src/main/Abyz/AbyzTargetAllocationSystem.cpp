@@ -1,6 +1,6 @@
 #include "AbyzTargetAllocationSystem.h"
 
-#include "AbyzPrefab.h"
+#include "PlainAbyzPrefab.h"
 #include "AbyzTargetingComponent.h"
 #include "JourneyComponent.h"
 #include "PriorityTargetComponent.h"

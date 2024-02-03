@@ -16,9 +16,9 @@
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
 
-struct AbyzPrefab{
+struct PlainAbyzPrefab{
     Entity abyz;
-    explicit AbyzPrefab(Position position){
+    explicit PlainAbyzPrefab(Position position){
         abyz = ecsManager->createEntity();
         ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
         ecsManager->addComponentToEntity<PositionComponent>(abyz, position);
