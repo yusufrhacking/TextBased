@@ -55,6 +55,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
 
     Position supremePowerPosition = Window::deriveRelativeTopLeft(subjectPosition);
     supremePowerPosition.x += Window::getMiddlePosition().x;
+    supremePowerPosition.x -= TextComponent::getSurfaceSize("Supreme Power").width/2;
 
     Entity supremePower = ecsManager->createEntity();
     ecsManager->addComponentToEntity<LiveComponent>(supremePower);

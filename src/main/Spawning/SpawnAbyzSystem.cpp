@@ -20,6 +20,7 @@ void SpawnAbyzSystem::spawnAbyz(std::set<Entity>::value_type entity) {
     auto abyzPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
     auto surfaceSize = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
     abyzPosition.y += static_cast<float>(surfaceSize.height);
+    abyzPosition.x += ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize().width/2;
 
     Entity abyz = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
@@ -29,6 +30,7 @@ void SpawnAbyzSystem::spawnAbyz(std::set<Entity>::value_type entity) {
     ecsManager->addComponentToEntity<GravityComponent>(abyz);
     ecsManager->addComponentToEntity<VelocityComponent>(abyz);
     ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
+    ecsManager->addComponentToEntity<CollisionComponent>(abyz);
 }
 
 void SpawnAbyzSystem::update(double deltaTime) {
