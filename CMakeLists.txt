@@ -138,6 +138,7 @@ set(SOURCE_FILES
         src/main/Abyz/LifeGateComponent.h
         src/main/Abyz/LifeGateSystem.cpp
         src/main/Abyz/LifeGateSystem.h
+        src/main/PositionsAndMovement/RandomRightLeftMovementComponent.h
 )
 
 

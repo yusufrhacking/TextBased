@@ -61,7 +61,7 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     ecsManager->addComponentToEntity<LiveComponent>(supremePower);
     ecsManager->addComponentToEntity<PositionComponent>(supremePower, supremePowerPosition);
     ecsManager->addComponentToEntity<TextComponent>(supremePower, "Supreme Power");
-    // ecsManager->addComponentToEntity<RightLeftMovementComponent>(supremePower, 100.0);
+    ecsManager->addComponentToEntity<RandomRightLeftMovementComponent>(supremePower, 100.0);
     ecsManager->addComponentToEntity<SupremePowerComponent>(supremePower);
     ecsManager->addComponentToEntity<SpawnAbyzComponent>(supremePower);
 }
