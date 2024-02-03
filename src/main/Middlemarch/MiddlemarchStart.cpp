@@ -11,7 +11,8 @@
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "NovelTextComponent.h"
 #include "SubjectComponent.h"
-#include "SupremePowerComponent.h"
+#include "../Spawning/SupremePowerComponent.h"
+#include "../Spawning/SpawnAbyzComponent.h"
 #include "../Gravity/GravityComponent.h"
 #include "../Gravity/JumpingComponent.h"
 #include "../PositionsAndMovement//VelocityComponent.h"
@@ -53,14 +54,15 @@ MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(sta
     createTarget();
 
     Position supremePowerPosition = Window::deriveRelativeTopLeft(subjectPosition);
-    supremePowerPosition.x += Window::deriveRelativeMiddle(subjectPosition).x;
+    supremePowerPosition.x += Window::getMiddlePosition().x;
 
     Entity supremePower = ecsManager->createEntity();
     ecsManager->addComponentToEntity<LiveComponent>(supremePower);
-    ecsManager->addComponentToEntity<PositionComponent>(supremePower, subjectPosition);
+    ecsManager->addComponentToEntity<PositionComponent>(supremePower, supremePowerPosition);
     ecsManager->addComponentToEntity<TextComponent>(supremePower, "Supreme Power");
-    ecsManager->addComponentToEntity<RightLeftMovementComponent>(supremePower, 100.0);
+    // ecsManager->addComponentToEntity<RightLeftMovementComponent>(supremePower, 100.0);
     ecsManager->addComponentToEntity<SupremePowerComponent>(supremePower);
+    ecsManager->addComponentToEntity<SpawnAbyzComponent>(supremePower);
 }
 
 void MiddlemarchStart::createPreludeText() const {
