@@ -1,7 +1,7 @@
 #ifndef TEXTBASED_UNPROCESSEDKEYBOARDMOVEMENTSYSTEM_H
 #define TEXTBASED_UNPROCESSEDKEYBOARDMOVEMENTSYSTEM_H
 #include <vector>
-#include "UnprocessedMovement.h"
+#include "../MainPlayer/UnprocessedMovement.h"
 #include "../HighLevel/ECSManager.h"
 #include "../ECSObjects/FirstSystem.h"
 #include <tuple>

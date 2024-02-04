@@ -1,8 +1,8 @@
 #include <spdlog/spdlog.h>
 #include "MovementSystem.h"
 
-#include "../PositionsAndMovement/CollisionCheckSystem.h"
-#include "../PositionsAndMovement/ReadyToMoveEvent.h"
+#include "CollisionCheckSystem.h"
+#include "ReadyToMoveEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;

@@ -41,6 +41,7 @@
 #include "../Middlemarch/MiddlemarchStart.h"
 #include "../Gravity/GravitySystem.h"
 #include "../Gravity/JumpingSystem.h"
+#include "../PositionsAndMovement/RandomRightLeftMovementSystem.h"
 #include "../PositionsAndMovement/RightLeftMovementSystem.h"
 #include "../Spawning/SpawnAbyzSystem.h"
 
@@ -93,6 +94,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<RightLeftMovementSystem>();
     ecsManager->addSystem<SpawnAbyzSystem>();
     ecsManager->addSystem<LifeGateSystem>();
+    ecsManager->addSystem<RandomRightLeftMovementSystem>();
 }
 
 void GameManager::update(double deltaTime) {

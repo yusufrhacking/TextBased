@@ -25,6 +25,8 @@
 #include "../Platformer/TargetComponent.h"
 #include "../Platformer/TextStepPrefab.h"
 #include "../PositionsAndMovement/RightLeftMovementComponent.h"
+#include "../PositionsAndMovement/RandomRightLeftMovementComponent.h"
+
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;

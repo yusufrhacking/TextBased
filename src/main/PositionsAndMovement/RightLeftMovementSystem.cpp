@@ -3,7 +3,7 @@
 #include "LiveComponent.h"
 #include "PositionComponent.h"
 #include "RightLeftMovementComponent.h"
-#include "../MainPlayer/MovementSystem.h"
+#include "MovementSystem.h"
 #include "../Maze/HalfwayOpenWallColumnPrefab.h"
 
 extern std::unique_ptr<EventBus> eventBus;

@@ -61,7 +61,7 @@ set(SOURCE_FILES
         src/main/Woodworking/TreeComponent.h
         "src/main/Camera/CameraFollowSystem.cpp" "src/main/Camera/CameraFollowSystem.h"
         "src/main/MainPlayer/UnprocessedMovement.cpp" "src/main/MainPlayer/UnprocessedMovement.h"
-        "src/main/MainPlayer/MovementSystem.cpp" "src/main/MainPlayer/MovementSystem.h"
+        "src/main/PositionsAndMovement/MovementSystem.cpp" "src/main/PositionsAndMovement/MovementSystem.h"
         src/main/ECSObjects/ComponentSignature.cpp src/main/ECSObjects/ComponentSignature.h
         src/main/Camera/Camera.cpp src/main/Camera/Camera.h
         src/main/TheCanon/MapPosition.h
@@ -139,6 +139,8 @@ set(SOURCE_FILES
         src/main/Abyz/LifeGateSystem.cpp
         src/main/Abyz/LifeGateSystem.h
         src/main/PositionsAndMovement/RandomRightLeftMovementComponent.h
+        src/main/PositionsAndMovement/RandomRightLeftMovementSystem.cpp
+        src/main/PositionsAndMovement/RandomRightLeftMovementSystem.h
 )
 
 

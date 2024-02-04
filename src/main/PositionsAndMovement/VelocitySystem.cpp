@@ -3,7 +3,7 @@
 #include "CollisionCheckSystem.h"
 #include "LiveComponent.h"
 #include "VelocityComponent.h"
-#include "../MainPlayer/MovementSystem.h"
+#include "MovementSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
