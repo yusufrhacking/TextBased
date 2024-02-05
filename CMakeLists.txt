@@ -141,6 +141,9 @@ set(SOURCE_FILES
         src/main/PositionsAndMovement/RandomRightLeftMovementComponent.h
         src/main/PositionsAndMovement/RandomRightLeftMovementSystem.cpp
         src/main/PositionsAndMovement/RandomRightLeftMovementSystem.h
+        src/main/Platformer/ProspectivePlatformLandingEvent.h
+        src/main/Platformer/PlatformLandingSystem.cpp
+        src/main/Platformer/PlatformLandingSystem.h
 )
 
 

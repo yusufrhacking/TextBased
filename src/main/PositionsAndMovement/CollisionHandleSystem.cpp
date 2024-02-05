@@ -8,6 +8,7 @@
 #include <stdexcept>
 
 #include "VelocityComponent.h"
+#include "../Platformer/ProspectivePlatformLandingEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -26,22 +27,13 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
 
     auto entityB = event.b;
     handleCollision(entityB);
+
+    eventBus->emitEvent<ProspectivePlatformLandingEvent>(entityA, entityB);
 }
 
 void CollisionHandleSystem::handleCollision(Entity entity) {
     auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     positionComponent.revertPosition();
-    if(ecsManager->hasComponent<JumpingComponent>(entity)) {
-        ecsManager->getComponentFromEntity<JumpingComponent>(entity).onGround = true;
-    }
-
-    if(ecsManager->hasComponent<VelocityComponent>(entity)) {
-        auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
-        if (velocity.y < 0) {
-            spdlog::info("Zeroing velocity that was negative!");
-        }
-        velocity.y = 0;
-    }
 }
 
 
