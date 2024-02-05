@@ -51,9 +51,7 @@ void PlatformLandingSystem::lockAbyzToPlatform(Entity abyz, Entity platform) {
     auto abyzSize = ecsManager->getComponentFromEntity<TextComponent>(abyz).getSurfaceSize();
 
     auto leftBound = static_cast<unsigned int>(platformPosition.x);
-    spdlog::info("CREATED LEFT BOUND: {}", leftBound);
     auto rightBound = static_cast<int>(platformPosition.x) + platformSize.width - abyzSize.width;
-    spdlog::info("CREATED RIGHT BOUND: {}", rightBound);
 
 
     float abyzSpeed = 25.0;

@@ -23,12 +23,8 @@ void HorizontalPlatformMovementSystem::update(double deltaTime) {
 
         if (position.x < movementComponent.leftBound) {
             movementComponent.moveDirection = 1;
-            spdlog::info("Position x: {}", position.x);
-            spdlog::info("Left Bound: {}", movementComponent.leftBound);
         } else if (position.x > movementComponent.rightBound) {
             movementComponent.moveDirection = -1;
-            spdlog::info("Position x: {}", position.x);
-            spdlog::info("Right Bound: {}", movementComponent.rightBound);
         }
 
         float xChange = movementComponent.moveDirection * movementDistance * deltaTime;
