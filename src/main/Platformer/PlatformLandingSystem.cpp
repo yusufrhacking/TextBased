@@ -47,7 +47,9 @@ void PlatformLandingSystem::lockAbyzToPlatform(Entity abyz, Entity platform) {
     auto leftBound = static_cast<unsigned int>(platformPosition.x);
     auto rightBound = static_cast<int>(platformPosition.x) + platformSize.width - abyzSize.width;
 
-    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, leftBound, rightBound);
+    float abyzSpeed = 10.0;
+
+    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, abyzSpeed, leftBound, rightBound);
 }
 
 void PlatformLandingSystem::handlePhysics(Entity entity) {
@@ -57,9 +59,6 @@ void PlatformLandingSystem::handlePhysics(Entity entity) {
 
     if(ecsManager->hasComponent<VelocityComponent>(entity)) {
         auto& velocity = ecsManager->getComponentFromEntity<VelocityComponent>(entity).velocity;
-        if (velocity.y < 0) {
-            spdlog::info("Zeroing velocity that was negative!");
-        }
         velocity.y = 0;
     }
 }

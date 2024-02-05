@@ -6,6 +6,7 @@
 #include "../Gravity/GravityComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../Platformer/HorizontalPlatformMovementComponent.h"
 #include "../PositionsAndMovement/VelocityComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -31,6 +32,7 @@ void SpawnAbyzSystem::spawnAbyz(std::set<Entity>::value_type entity) {
     ecsManager->addComponentToEntity<VelocityComponent>(abyz);
     ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
     ecsManager->addComponentToEntity<CollisionComponent>(abyz);
+    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz);
 }
 
 void SpawnAbyzSystem::update(double deltaTime) {

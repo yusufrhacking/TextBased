@@ -41,6 +41,7 @@
 #include "../Middlemarch/MiddlemarchStart.h"
 #include "../Gravity/GravitySystem.h"
 #include "../Gravity/JumpingSystem.h"
+#include "../Platformer/HorizontalPlatformMovementSystem.h"
 #include "../Platformer/PlatformLandingSystem.h"
 #include "../PositionsAndMovement/RandomRightLeftMovementSystem.h"
 #include "../PositionsAndMovement/RightLeftMovementSystem.h"
@@ -97,6 +98,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<LifeGateSystem>();
     ecsManager->addSystem<RandomRightLeftMovementSystem>();
     ecsManager->addSystem<PlatformLandingSystem>();
+    ecsManager->addSystem<HorizontalPlatformMovementSystem>();
 }
 
 void GameManager::update(double deltaTime) {
