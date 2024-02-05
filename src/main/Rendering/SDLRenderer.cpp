@@ -40,7 +40,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
     amberTerminalFont = FC_CreateFont();
     FC_LoadFont(amberTerminalFont, renderer, "../../resources/Monaco.ttf",
-                TERMINAL_FONT_SIZE, faded_amber, TTF_STYLE_NORMAL);
+                TERMINAL_FONT_SIZE, amber, TTF_STYLE_NORMAL);
     whiteNumberBankFont = FC_CreateFont();
     FC_LoadFont(whiteNumberBankFont, renderer, "../../resources/Monaco.ttf",
                 10, white, TTF_STYLE_NORMAL);
@@ -129,7 +129,7 @@ FC_Font* SDLRenderer::styleToFont(RenderStyle style) {
         case RenderStyle::GREEN_TERMINAL:
             return greenTerminalFont;
         case RenderStyle::AMBER_TERMINAL:
-            return greenTerminalFont;
+            return amberTerminalFont;
         case RenderStyle::WHITE_LETTER_IN_BANK:
             return whiteLetterBankFont;
         case RenderStyle::TINY_WHITE_NUMBER:

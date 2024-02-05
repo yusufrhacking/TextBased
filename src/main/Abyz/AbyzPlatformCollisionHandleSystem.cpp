@@ -2,6 +2,7 @@
 
 #include "AbyzComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../MainPlayer/DamageEvent.h"
 #include "../MainPlayer/MainPlayerComponent.h"
 #include "../Platformer/PlatformComponent.h"
 #include "../PositionsAndMovement/RightLeftCollisionEvent.h"
@@ -29,12 +30,12 @@ void AbyzPlatformCollisionHandleSystem::onTopBottomCollision(TopBottomCollisionE
 void AbyzPlatformCollisionHandleSystem::onRightLeftCollision(RightLeftCollisionEvent& event) {
     if (ecsManager->hasComponent<MainPlayerComponent>(event.left)) {
         if(ecsManager->hasComponent<AbyzComponent>(event.right)) {
-            // ecsManager->killEntity(event.left);
+            eventBus->emitEvent<DamageEvent>(event.left, 1);
         }
     }
     if (ecsManager->hasComponent<MainPlayerComponent>(event.right)) {
         if(ecsManager->hasComponent<AbyzComponent>(event.left)) {
-            // ecsManager->killEntity(event.right);
+            eventBus->emitEvent<DamageEvent>(event.right, 1);
         }
     }
 }

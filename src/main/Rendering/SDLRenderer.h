@@ -34,7 +34,7 @@ class SDLRenderer: public Renderer {
     SDL_Color black = {0, 0, 0, 255};
     SDL_Color gray = {178, 190, 181, 255};
     SDL_Color matrix_green = {102, 255, 102, 255};
-    SDL_Color faded_amber = {255, 176, 0, 180};
+    SDL_Color amber = {255, 191, 0, 255};
     SDL_Color red = {255, 0, 0, 255};
     SDL_Color gold = {255, 225, 64, 255};
 

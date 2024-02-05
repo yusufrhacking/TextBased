@@ -42,6 +42,7 @@
 #include "../Middlemarch/MiddlemarchStart.h"
 #include "../Gravity/GravitySystem.h"
 #include "../Gravity/JumpingSystem.h"
+#include "../MainPlayer/DamageSystem.h"
 #include "../Platformer/HorizontalPlatformMovementSystem.h"
 #include "../Platformer/PlatformLandingSystem.h"
 #include "../PositionsAndMovement/RandomRightLeftMovementSystem.h"
@@ -101,6 +102,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<PlatformLandingSystem>();
     ecsManager->addSystem<HorizontalPlatformMovementSystem>();
     ecsManager->addSystem<AbyzPlatformCollisionHandleSystem>();
+    ecsManager->addSystem<DamageSystem>();
 }
 
 void GameManager::update(double deltaTime) {

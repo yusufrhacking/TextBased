@@ -17,6 +17,6 @@ void SupremePowerRenderSystem::render(const std::shared_ptr<Renderer>& renderer,
     for (auto entity : getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, GenericStyleComponent(RenderStyle::RED));
+        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, GenericStyleComponent(RenderStyle::AMBER_TERMINAL));
     }
 }

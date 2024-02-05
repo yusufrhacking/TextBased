@@ -18,6 +18,6 @@ void SubjectRenderSystem::render(const std::shared_ptr<Renderer>& renderer, Came
     for (auto entity : getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
         const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, GenericStyleComponent(Type::BRICOLEUR_TERMINAL_TEXT));
+        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, GenericStyleComponent(RenderStyle::GREEN_TERMINAL));
     }
 }
