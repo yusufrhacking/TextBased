@@ -30,7 +30,7 @@ void SpawnAbyzSystem::update(double deltaTime) {
         auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
         auto spawnerPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
 
-        float allowedRange = 100;
+        float allowedRange = 150;
         if (mainPlayerPosition.x <= spawnerPosition.x + allowedRange && mainPlayerPosition.x >= spawnerPosition.x - allowedRange) {
             if (timeDiff.count() >= currentWaitingTimeMilliseconds) {
                 spawnAbyz(entity);

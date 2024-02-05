@@ -54,7 +54,7 @@ void PlatformLandingSystem::lockAbyzToPlatform(Entity abyz, Entity platform) {
     auto rightBound = static_cast<int>(platformPosition.x) + platformSize.width - abyzSize.width;
 
 
-    float abyzSpeed = 25.0;
+    float abyzSpeed = 40.0;
 
     ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, abyzSpeed, leftBound, rightBound);
 }
