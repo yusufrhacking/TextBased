@@ -102,4 +102,5 @@ void MiddlemarchStart::createTarget() {
     Position targetPosition = Window::deriveRelativeTopRight(startPosition) + targetPosAdjustment;
     TextStepPrefab targetPrefab{targetStr, targetPosition};
     ecsManager->addComponentToEntity<TargetComponent>(targetPrefab.entity);
+    ecsManager->removeComponentFromEntity<CollisionComponent>(targetPrefab.entity);
 }

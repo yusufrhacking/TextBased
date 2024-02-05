@@ -144,6 +144,7 @@ set(SOURCE_FILES
         src/main/Platformer/ProspectivePlatformLandingEvent.h
         src/main/Platformer/PlatformLandingSystem.cpp
         src/main/Platformer/PlatformLandingSystem.h
+        src/main/Platformer/HorizontalPlatformMovementComponent.h
 )
 
 

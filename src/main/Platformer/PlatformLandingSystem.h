@@ -6,6 +6,9 @@
 
 class PlatformLandingSystem: public System {
     void listenToEvents();
+
+    void lockAbyzToPlatform(Entity abyz, Entity platform);
+
     void onProspectiveLanding(ProspectivePlatformLandingEvent& event);
     void handlePhysics(Entity entity);
 

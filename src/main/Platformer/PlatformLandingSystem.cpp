@@ -4,6 +4,10 @@
 #include "../Gravity/JumpingComponent.h"
 #include <stdexcept>
 
+#include "HorizontalPlatformMovementComponent.h"
+#include "PlatformComponent.h"
+#include "../Abyz/AbyzComponent.h"
+#include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/VelocityComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -20,6 +24,30 @@ void PlatformLandingSystem::listenToEvents() {
 void PlatformLandingSystem::onProspectiveLanding(ProspectivePlatformLandingEvent& event) {
     handlePhysics(event.a);
     handlePhysics(event.b);
+
+    if (ecsManager->hasComponent<AbyzComponent>(event.a)) {
+        if (ecsManager->hasComponent<PlatformComponent>(event.b)) {
+            lockAbyzToPlatform(event.a, event.b);
+        }
+    }
+    if (ecsManager->hasComponent<AbyzComponent>(event.b)) {
+        if (ecsManager->hasComponent<PlatformComponent>(event.a)) {
+            lockAbyzToPlatform(event.b, event.a);
+        }
+    }
+
+}
+
+
+void PlatformLandingSystem::lockAbyzToPlatform(Entity abyz, Entity platform) {
+    auto platformPosition = ecsManager->getComponentFromEntity<PositionComponent>(platform).getPosition();
+    auto platformSize = ecsManager->getComponentFromEntity<TextComponent>(platform).getSurfaceSize();
+    auto abyzSize = ecsManager->getComponentFromEntity<TextComponent>(abyz).getSurfaceSize();
+
+    auto leftBound = static_cast<unsigned int>(platformPosition.x);
+    auto rightBound = static_cast<int>(platformPosition.x) + platformSize.width - abyzSize.width;
+
+    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, leftBound, rightBound);
 }
 
 void PlatformLandingSystem::handlePhysics(Entity entity) {
@@ -35,4 +63,6 @@ void PlatformLandingSystem::handlePhysics(Entity entity) {
         velocity.y = 0;
     }
 }
+
+
 
