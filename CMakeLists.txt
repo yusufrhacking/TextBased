@@ -151,6 +151,9 @@ set(SOURCE_FILES
         src/main/Abyz/AbyzPlatformCollisionHandleSystem.cpp
         src/main/Abyz/AbyzPlatformCollisionHandleSystem.h
         src/main/PositionsAndMovement/RightLeftCollisionEvent.h
+        src/main/MainPlayer/DamageSystem.cpp
+        src/main/MainPlayer/DamageSystem.h
+        src/main/MainPlayer/DamageEvent.h
 )
 
 
