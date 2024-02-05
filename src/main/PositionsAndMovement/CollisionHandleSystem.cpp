@@ -7,6 +7,7 @@
 #include "../Gravity/JumpingComponent.h"
 #include <stdexcept>
 
+#include "RightLeftCollisionEvent.h"
 #include "TopBottomCollisionEvent.h"
 #include "VelocityComponent.h"
 #include "../Platformer/ProspectivePlatformLandingEvent.h"
@@ -36,6 +37,7 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
 
     float acceptableRange = 1.0;
 
+    //Check Top Bottom Collisions
     if (aPosition.y <= bPosition.y - bSize.height + acceptableRange) {
         eventBus->emitEvent<TopBottomCollisionEvent>(entityA, entityB);
     }
@@ -43,17 +45,16 @@ void CollisionHandleSystem::onCollision(CollisionEvent &event) {
         eventBus->emitEvent<TopBottomCollisionEvent>(entityB, entityA);
     }
 
-    // if (aPosition.y >= bPosition.y + bSize.height - acceptableRange) {
-    //     eventBus->emitEvent<TopBottomCollisionEvent>(entityA, entityB);
-    // }
-    // if (bPosition.y >= aPosition.y + aSize.height - acceptableRange) {
-    //     eventBus->emitEvent<TopBottomCollisionEvent>(entityB, entityA);
-    // }
+    //Check Left Right Collisions
+    if (aPosition.x >= bPosition.x + bSize.width - acceptableRange) {
+        eventBus->emitEvent<RightLeftCollisionEvent>(entityA, entityB);
+    }
+    if (bPosition.x >= aPosition.x + aSize.width - acceptableRange) {
+        eventBus->emitEvent<RightLeftCollisionEvent>(entityB, entityA);
+    }
 
     handleCollision(entityA);
     handleCollision(entityB);
-
-
 
     eventBus->emitEvent<ProspectivePlatformLandingEvent>(entityA, entityB);
 }

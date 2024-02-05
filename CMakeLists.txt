@@ -150,6 +150,7 @@ set(SOURCE_FILES
         src/main/PositionsAndMovement/TopBottomCollisionEvent.h
         src/main/Abyz/AbyzPlatformCollisionHandleSystem.cpp
         src/main/Abyz/AbyzPlatformCollisionHandleSystem.h
+        src/main/PositionsAndMovement/RightLeftCollisionEvent.h
 )
 
 
