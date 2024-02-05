@@ -4,8 +4,8 @@
 
 
 class GravitySystem: public UpdateSystem {
-    float gravityForce = 200.0;
-    float terminalVelocity = 500.0;
+    float gravityForce = 300.0;
+    float terminalVelocity = 750.0;
 public:
     GravitySystem();
     void update(double deltaTime) override;
