@@ -27,6 +27,7 @@
 #include "../Health/HealthSystem.h"
 #include "../Health/PendingDeathSystem.h"
 #include "../Abyz/AbyzControlSystem.h"
+#include "../Abyz/AbyzPlatformCollisionHandleSystem.h"
 #include "../Abyz/AbyzTargetExecutionSystem.h"
 #include "../Abyz/AbyzTargetAllocationSystem.h"
 #include "../Abyz/LifeGateComponent.h"
@@ -99,6 +100,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<RandomRightLeftMovementSystem>();
     ecsManager->addSystem<PlatformLandingSystem>();
     ecsManager->addSystem<HorizontalPlatformMovementSystem>();
+    ecsManager->addSystem<AbyzPlatformCollisionHandleSystem>();
 }
 
 void GameManager::update(double deltaTime) {

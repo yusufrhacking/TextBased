@@ -147,6 +147,9 @@ set(SOURCE_FILES
         src/main/Platformer/HorizontalPlatformMovementComponent.h
         src/main/Platformer/HorizontalPlatformMovementSystem.cpp
         src/main/Platformer/HorizontalPlatformMovementSystem.h
+        src/main/PositionsAndMovement/TopBottomCollisionEvent.h
+        src/main/Abyz/AbyzPlatformCollisionHandleSystem.cpp
+        src/main/Abyz/AbyzPlatformCollisionHandleSystem.h
 )
 
 

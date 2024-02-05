@@ -6,6 +6,7 @@
 #include "../Gravity/GravityComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../HighLevel/ECSManager.h"
+#include "../MainPlayer/MainPlayerAccessSystem.h"
 #include "../Platformer/HorizontalPlatformMovementComponent.h"
 #include "../PositionsAndMovement/VelocityComponent.h"
 
@@ -16,6 +17,30 @@ SpawnAbyzSystem::SpawnAbyzSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
 }
+
+
+void SpawnAbyzSystem::update(double deltaTime) {
+    for(auto entity: getRelevantEntities()) {
+        auto& spawner = ecsManager->getComponentFromEntity<SpawnAbyzComponent>(entity);
+
+        auto currentTime = std::chrono::steady_clock::now();
+        std::chrono::milliseconds timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - spawner.lastUpdateTime);
+
+        Entity mainPlayer = ecsManager->getSystem<MainPlayerAccessSystem>().getMainPlayer();
+        auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
+        auto spawnerPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
+
+        float allowedRange = 100;
+        if (mainPlayerPosition.x <= spawnerPosition.x + allowedRange && mainPlayerPosition.x >= spawnerPosition.x - allowedRange) {
+            if (timeDiff.count() >= currentWaitingTimeMilliseconds) {
+                spawnAbyz(entity);
+                spawner.lastUpdateTime = std::chrono::steady_clock::now();
+            }
+        }
+
+    }
+}
+
 
 void SpawnAbyzSystem::spawnAbyz(std::set<Entity>::value_type entity) {
     auto abyzPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
@@ -32,18 +57,4 @@ void SpawnAbyzSystem::spawnAbyz(std::set<Entity>::value_type entity) {
     ecsManager->addComponentToEntity<VelocityComponent>(abyz);
     ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
     ecsManager->addComponentToEntity<CollisionComponent>(abyz);
-}
-
-void SpawnAbyzSystem::update(double deltaTime) {
-    for(auto entity: getRelevantEntities()) {
-        auto& spawner = ecsManager->getComponentFromEntity<SpawnAbyzComponent>(entity);
-
-        auto currentTime = std::chrono::steady_clock::now();
-        std::chrono::milliseconds timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - spawner.lastUpdateTime);
-
-        if (timeDiff.count() >= currentWaitingTimeMilliseconds) {
-            spawnAbyz(entity);
-            spawner.lastUpdateTime = std::chrono::steady_clock::now();
-        }
-    }
 }

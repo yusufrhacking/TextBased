@@ -1,0 +1,16 @@
+#ifndef ABYZPLATFORMCOLLISIONHANDLESYSTEM_H
+#define ABYZPLATFORMCOLLISIONHANDLESYSTEM_H
+
+#include "../ECSObjects/System.h"
+#include "../PositionsAndMovement/TopBottomCollisionEvent.h"
+
+class AbyzPlatformCollisionHandleSystem: public System {
+public:
+    AbyzPlatformCollisionHandleSystem();
+    void listenToEvents();
+    void onTopBottomCollision(TopBottomCollisionEvent& event);
+};
+
+
+
+#endif //ABYZPLATFORMCOLLISIONHANDLESYSTEM_H
