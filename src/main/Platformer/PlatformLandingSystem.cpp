@@ -27,11 +27,17 @@ void PlatformLandingSystem::onProspectiveLanding(ProspectivePlatformLandingEvent
 
     if (ecsManager->hasComponent<AbyzComponent>(event.a)) {
         if (ecsManager->hasComponent<PlatformComponent>(event.b)) {
+            if (ecsManager->hasComponent<HorizontalPlatformMovementComponent>(event.a)) {
+                return;
+            }
             lockAbyzToPlatform(event.a, event.b);
         }
     }
     if (ecsManager->hasComponent<AbyzComponent>(event.b)) {
         if (ecsManager->hasComponent<PlatformComponent>(event.a)) {
+            if (ecsManager->hasComponent<HorizontalPlatformMovementComponent>(event.b)) {
+                return;
+            }
             lockAbyzToPlatform(event.b, event.a);
         }
     }
@@ -45,9 +51,12 @@ void PlatformLandingSystem::lockAbyzToPlatform(Entity abyz, Entity platform) {
     auto abyzSize = ecsManager->getComponentFromEntity<TextComponent>(abyz).getSurfaceSize();
 
     auto leftBound = static_cast<unsigned int>(platformPosition.x);
+    spdlog::info("CREATED LEFT BOUND: {}", leftBound);
     auto rightBound = static_cast<int>(platformPosition.x) + platformSize.width - abyzSize.width;
+    spdlog::info("CREATED RIGHT BOUND: {}", rightBound);
 
-    float abyzSpeed = 10.0;
+
+    float abyzSpeed = 25.0;
 
     ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, abyzSpeed, leftBound, rightBound);
 }

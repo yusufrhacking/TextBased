@@ -32,7 +32,6 @@ void SpawnAbyzSystem::spawnAbyz(std::set<Entity>::value_type entity) {
     ecsManager->addComponentToEntity<VelocityComponent>(abyz);
     ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
     ecsManager->addComponentToEntity<CollisionComponent>(abyz);
-    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz);
 }
 
 void SpawnAbyzSystem::update(double deltaTime) {
