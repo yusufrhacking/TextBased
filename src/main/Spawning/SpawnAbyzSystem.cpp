@@ -37,7 +37,6 @@ void SpawnAbyzSystem::update(double deltaTime) {
                 spawner.lastUpdateTime = std::chrono::steady_clock::now();
             }
         }
-
     }
 }
 
