@@ -154,6 +154,7 @@ set(SOURCE_FILES
         src/main/MainPlayer/DamageSystem.cpp
         src/main/MainPlayer/DamageSystem.h
         src/main/MainPlayer/DamageEvent.h
+        src/main/Emma/ReadEmma.cpp
 )
 
 
