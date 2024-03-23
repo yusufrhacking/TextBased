@@ -158,6 +158,8 @@ set(SOURCE_FILES
         src/main/Emma/EmmaStart.cpp
         src/main/Emma/EmmaStart.h
         src/main/Emma/EmmaWoodhouseComponent.h
+        src/main/Emma/EmmaWoodhouseSystem.cpp
+        src/main/Emma/EmmaWoodhouseSystem.h
 )
 
 

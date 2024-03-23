@@ -15,12 +15,14 @@
 #include "../Platformer/PlatformComponent.h"
 #include "../Lettering/LetterPrefab.h"
 #include "EmmaWoodhouseComponent.h"
+#include "EmmaWoodhouseSystem.h"
 
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
 
 EmmaStart::EmmaStart(Position startingPosition): startingPosition(startingPosition) {
+    ecsManager->addSystem<EmmaWoodhouseSystem>();
     Position subjectPosition{11895, 10532};
     Position terrainPosition{subjectPosition + Position(0, 800)};
 
@@ -40,7 +42,7 @@ void EmmaStart::createSubject(Position subjectPosition) {
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
     ecsManager->addComponentToEntity<CollisionComponent>(subject);
     ecsManager->addComponentToEntity<JumpingComponent>(subject, 200);
-    ecsManager->addComponentToEntity<WalkingComponent>(subject, 150.0);
+    ecsManager->addComponentToEntity<WalkingComponent>(subject, 350.0);
     ecsManager->addComponentToEntity<EmmaWoodhouseComponent>(subject);
 }
 
@@ -67,11 +69,27 @@ void EmmaStart::createTerrain(Position position) {
     ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
     ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
     ecsManager->addComponentToEntity<GenericStyleComponent>(terrainBase);
+
+    Position newPosition = position + ecsManager->getComponentFromEntity<TextComponent>(terrainBase).getSurfaceSizeAsPosition();
+
+
 }
 
 void EmmaStart::createCandidateLetters(Position terrainPosition) {
     float xShift = 300.0;
     float yShift = -1 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
     Position letterPosition = terrainPosition + Position(xShift, yShift);
-    LetterPrefab questionMark{'?', letterPosition};
+
+    for(int x=0; x<10; x++){
+        Entity letterEntity = ecsManager->createEntity();
+        char character = '?';
+        ecsManager->addComponentToEntity<TextComponent>(letterEntity, std::string(1, character));
+        ecsManager->addComponentToEntity<PositionComponent>(letterEntity, letterPosition);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(letterEntity, RenderStyle::GREEN_TERMINAL);
+        ecsManager->addComponentToEntity<LiveComponent>(letterEntity);
+        ecsManager->addComponentToEntity<LetterComponent>(letterEntity, char_to_enum(character));
+        letterPosition += Position(xShift, 0.0);
+    }
+
+
 }

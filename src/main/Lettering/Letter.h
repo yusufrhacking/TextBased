@@ -5,7 +5,7 @@
 
 enum class Letter {
     A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
-    ALPHABET_SIZE
+    ALPHABET_SIZE, QUESTION_MARK
 };
 
 inline char enum_to_char(Letter character_enum) {
@@ -17,6 +17,10 @@ inline char enum_to_char(Letter character_enum) {
 }
 
 inline Letter char_to_enum(char character) {
+    if(character == '?'){
+        return Letter::QUESTION_MARK;
+    }
+
     if(character >= 'a' && character <= 'z') {
         character = character - 'a' + 'A';
     }

@@ -1,5 +1,6 @@
 #ifndef TEXTBASED_POSITION_H
 #define TEXTBASED_POSITION_H
+#include "PositionsAndMovement/Size.h"
 #include <stdlib.h>
 
 struct Position {
@@ -15,8 +16,6 @@ struct Position {
         this->x = (float)x;
         this->y = (float)y;
     }
-
-
 
     Position(){
         this->x = 0;

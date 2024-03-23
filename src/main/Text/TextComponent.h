@@ -23,6 +23,10 @@ struct TextComponent {
         return {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
     }
 
+    [[nodiscard]] Position getSurfaceSizeAsPosition() const{
+        return {(float)(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), (float)(MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight())};
+    }
+
 
     static EntitySize getSurfaceSize(const std::string& text){
         return {static_cast<RenderedVal>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
