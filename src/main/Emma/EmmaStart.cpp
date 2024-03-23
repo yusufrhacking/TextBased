@@ -47,10 +47,6 @@ void EmmaStart::createSubject(Position subjectPosition) {
 }
 
 void EmmaStart::createTerrain(Position position) {
-    Entity terrainBase = ecsManager->createEntity();
-
-    std::vector<std::string> terrainText = readParagraphs("/Users/yusufhacking/Documents/Projects/TextBased/resources/emma.txt");
-
     // Iterate through the jit, once I get enough characters to go wide of the window + a third of the screen down
     // New lines for horizontal;
 
@@ -63,14 +59,25 @@ void EmmaStart::createTerrain(Position position) {
     // Eventually add a typing effect power up (mushroom typa thing)
     // For that to help, I need there to be some stuff you gotta jump up that is burdensome
 
-    ecsManager->addComponentToEntity<LiveComponent>(terrainBase);
-    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, position);
-    ecsManager->addComponentToEntity<TextComponent>(terrainBase, terrainText[1]);
-    ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
-    ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
-    ecsManager->addComponentToEntity<GenericStyleComponent>(terrainBase);
+    std::vector<std::string> terrainText = readParagraphs("/Users/yusufhacking/Documents/Projects/TextBased/resources/emma.txt");
 
-    Position newPosition = position + ecsManager->getComponentFromEntity<TextComponent>(terrainBase).getSurfaceSizeAsPosition();
+    for(int x=0; x<3; x++){
+        Entity terrainBase = ecsManager->createEntity();
+
+
+        ecsManager->addComponentToEntity<LiveComponent>(terrainBase);
+        ecsManager->addComponentToEntity<PositionComponent>(terrainBase, position);
+        ecsManager->addComponentToEntity<TextComponent>(terrainBase, terrainText[x+1]);
+        ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
+        ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
+        ecsManager->addComponentToEntity<GenericStyleComponent>(terrainBase);
+
+
+
+        position += ecsManager->getComponentFromEntity<TextComponent>(terrainBase).getSurfaceSizeAsPosition();
+
+    }
+
 
 
 }

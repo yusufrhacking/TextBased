@@ -1,6 +1,5 @@
 #ifndef TEXTBASED_POSITION_H
 #define TEXTBASED_POSITION_H
-#include "PositionsAndMovement/Size.h"
 #include <stdlib.h>
 
 struct Position {
