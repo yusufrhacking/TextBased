@@ -10,6 +10,8 @@ public:
     EmmaStart(Position startingPosition);
 
     void createSubject(Position position);
+
+    void createTerrain(Position position);
 };
 
 

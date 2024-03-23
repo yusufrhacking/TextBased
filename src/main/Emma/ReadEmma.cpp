@@ -4,7 +4,7 @@
 #include <string>
 #include <spdlog/spdlog.h>
 
-std::vector<std::string> readParagraphs(const std::string& filename) {
+static std::vector<std::string> readParagraphs(const std::string& filename) {
     std::vector<std::string> paragraphs;
     std::ifstream file(filename);
     std::string line;
