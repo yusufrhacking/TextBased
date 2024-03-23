@@ -13,6 +13,8 @@
 #include "../PositionsAndMovement/WalkingComponent.h"
 #include "ReadEmma.cpp"
 #include "../Platformer/PlatformComponent.h"
+#include "../Lettering/LetterPrefab.h"
+#include "EmmaWoodhouseComponent.h"
 
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -20,9 +22,11 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 EmmaStart::EmmaStart(Position startingPosition): startingPosition(startingPosition) {
     Position subjectPosition{11895, 10532};
+    Position terrainPosition{subjectPosition + Position(0, 800)};
 
     createSubject(subjectPosition);
-    createTerrain(subjectPosition);
+    createTerrain(terrainPosition);
+    createCandidateLetters(terrainPosition);
 }
 
 void EmmaStart::createSubject(Position subjectPosition) {
@@ -36,7 +40,8 @@ void EmmaStart::createSubject(Position subjectPosition) {
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
     ecsManager->addComponentToEntity<CollisionComponent>(subject);
     ecsManager->addComponentToEntity<JumpingComponent>(subject, 200);
-    ecsManager->addComponentToEntity<WalkingComponent>(subject, 100.0);
+    ecsManager->addComponentToEntity<WalkingComponent>(subject, 150.0);
+    ecsManager->addComponentToEntity<EmmaWoodhouseComponent>(subject);
 }
 
 void EmmaStart::createTerrain(Position position) {
@@ -57,9 +62,16 @@ void EmmaStart::createTerrain(Position position) {
     // For that to help, I need there to be some stuff you gotta jump up that is burdensome
 
     ecsManager->addComponentToEntity<LiveComponent>(terrainBase);
-    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, position + Position(0, 800));
+    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, position);
     ecsManager->addComponentToEntity<TextComponent>(terrainBase, terrainText[1]);
     ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
     ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
     ecsManager->addComponentToEntity<GenericStyleComponent>(terrainBase);
+}
+
+void EmmaStart::createCandidateLetters(Position terrainPosition) {
+    float xShift = 300.0;
+    float yShift = -1 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+    Position letterPosition = terrainPosition + Position(xShift, yShift);
+    LetterPrefab questionMark{'?', letterPosition};
 }
