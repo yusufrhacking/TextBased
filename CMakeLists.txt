@@ -121,7 +121,7 @@ set(SOURCE_FILES
         src/main/ECSObjects/FinalSystem.h
         src/main/PositionsAndMovement/RightLeftMovementSystem.cpp
         src/main/PositionsAndMovement/RightLeftMovementSystem.h
-        src/main/PositionsAndMovement/RightLeftMovementComponent.h
+        src/main/PositionsAndMovement/WalkingComponent.h
         src/main/Platformer/TargetComponent.h
         src/main/Platformer/TargetRenderingSystem.cpp
         src/main/Platformer/TargetRenderingSystem.h
@@ -155,6 +155,8 @@ set(SOURCE_FILES
         src/main/MainPlayer/DamageSystem.h
         src/main/MainPlayer/DamageEvent.h
         src/main/Emma/ReadEmma.cpp
+        src/main/Emma/EmmaStart.cpp
+        src/main/Emma/EmmaStart.h
 )
 
 

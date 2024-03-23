@@ -24,7 +24,7 @@
 #include "../Platformer/PlatformGenerationSystem.h"
 #include "../Platformer/TargetComponent.h"
 #include "../Platformer/TextStepPrefab.h"
-#include "../PositionsAndMovement/RightLeftMovementComponent.h"
+#include "../PositionsAndMovement/WalkingComponent.h"
 #include "../PositionsAndMovement/RandomRightLeftMovementComponent.h"
 
 
@@ -92,7 +92,7 @@ void MiddlemarchStart::createSubject(Position subjectPosition) {
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
     ecsManager->addComponentToEntity<CollisionComponent>(subject);
     ecsManager->addComponentToEntity<JumpingComponent>(subject, 200);
-    ecsManager->addComponentToEntity<RightLeftMovementComponent>(subject, 100.0);
+    ecsManager->addComponentToEntity<WalkingComponent>(subject, 100.0);
 }
 
 void MiddlemarchStart::createTarget() {

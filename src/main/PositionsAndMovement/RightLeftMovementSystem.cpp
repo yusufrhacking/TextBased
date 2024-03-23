@@ -2,7 +2,7 @@
 
 #include "LiveComponent.h"
 #include "PositionComponent.h"
-#include "RightLeftMovementComponent.h"
+#include "WalkingComponent.h"
 #include "MovementSystem.h"
 #include "../Maze/HalfwayOpenWallColumnPrefab.h"
 
@@ -11,7 +11,7 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 
 RightLeftMovementSystem::RightLeftMovementSystem() {
-    requireComponent<RightLeftMovementComponent>();
+    requireComponent<WalkingComponent>();
     requireComponent<PositionComponent>();
     requireComponent<LiveComponent>();
     eventBus->listenToEvent<GameKeyEvent>(this, &RightLeftMovementSystem::onKeyPressed);
@@ -35,7 +35,7 @@ void RightLeftMovementSystem::onKeyPressed(GameKeyEvent& event) {
 void RightLeftMovementSystem::update(double deltaTime) {
     for(auto move: moves) {
         Entity entity = move.entity;
-        float movementDistance = ecsManager->getComponentFromEntity<RightLeftMovementComponent>(entity).movementDistance;
+        float movementDistance = ecsManager->getComponentFromEntity<WalkingComponent>(entity).movementDistance;
         float xChange = move.intDirection * movementDistance * deltaTime;
 
         ecsManager->getSystem<MovementSystem>().queueMovement(UnprocessedMovement(move.entity, xChange, 0));

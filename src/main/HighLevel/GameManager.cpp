@@ -48,6 +48,7 @@
 #include "../PositionsAndMovement/RandomRightLeftMovementSystem.h"
 #include "../PositionsAndMovement/RightLeftMovementSystem.h"
 #include "../Spawning/SpawnAbyzSystem.h"
+#include "../Emma/EmmaStart.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -56,7 +57,7 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    MiddlemarchStart level1{startingPosition + Window::getMiddlePosition()};
+    EmmaStart level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {
