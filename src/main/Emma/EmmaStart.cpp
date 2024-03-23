@@ -51,6 +51,11 @@ void EmmaStart::createTerrain(Position position) {
 
     // Meta idea is that as you get more words, it is burdensome.
 
+    // So, I should spawn in some question mark letters that give Emma more
+
+    // Eventually add a typing effect power up (mushroom typa thing)
+    // For that to help, I need there to be some stuff you gotta jump up that is burdensome
+
     ecsManager->addComponentToEntity<LiveComponent>(terrainBase);
     ecsManager->addComponentToEntity<PositionComponent>(terrainBase, position + Position(0, 800));
     ecsManager->addComponentToEntity<TextComponent>(terrainBase, terrainText[1]);
