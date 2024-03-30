@@ -11,81 +11,28 @@ struct TextComponent {
     std::string text;
     bool isLined = false;
 
-    explicit TextComponent(std::string text){
-        this->text = std::move(text);
-    }
+    explicit TextComponent(std::string text);
 
-    TextComponent() {
-        this->text = "Robert C. Martin";
-    }
+    TextComponent();
 
-    [[nodiscard]] EntitySize getSurfaceSize() const {
-        return {static_cast<RenderedVal>(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight()};
-    }
+    [[nodiscard]] EntitySize getSurfaceSize() const;
 
-    [[nodiscard]] Position getSurfaceSizeAsPosition() const{
-        return {(float)(getTextWidth() * MONACO_RENDERED_TEXT_WIDTH_SCALER), (float)(MONACO_HEIGHT_OF_A_LINE_OF_TEXT * getTextHeight())};
-    }
+    [[nodiscard]] Position getSurfaceSizeAsPosition() const;
 
 
-    static EntitySize getSurfaceSize(const std::string& text){
-        return {static_cast<RenderedVal>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
-                                                                                                         getTextHeightInChars(text)};
-    }
+    static EntitySize getSurfaceSize(const std::string& text);
 
-    static Position getSurfaceSizeAsPosition(const std::string& text){
-        return {static_cast<float>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
-                                                                                                         getTextHeightInChars(text)};
-    }
+    static Position getSurfaceSizeAsPosition(const std::string& text);
 
-    static Position getSurfaceSizeAsAddablePosition(const std::string& text){
-        return {static_cast<float>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), -1*(float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
-                                                                                                   getTextHeightInChars(text)};
-    }
+    static Position getSurfaceSizeAsAddablePosition(const std::string& text);
 
-    static int getTextHeightInChars(const std::string& text) {
-        int height = 0;
-        std::istringstream textStream(text);
-        std::string token;
-        while(std::getline(textStream, token, '\n')) {
-            height++;
-        }
-        return height;
-    }
+    static int getTextHeightInChars(const std::string& text);
 
-    static unsigned int getTextWidthInChars(const std::string& text) {
-        unsigned int longestWidth = 0;
-        std::istringstream textStream(text);
-        std::string token;
-        while(std::getline(textStream, token, '\n')) {
-            if (token.size() > longestWidth){
-                longestWidth = token.size();
-            }
-        }
-        return longestWidth;
-    }
+    static unsigned int getTextWidthInChars(const std::string& text);
 
-    [[nodiscard]] int getTextHeight() const {
-        int height = 0;
-        std::istringstream textStream(text);
-        std::string token;
-        while(std::getline(textStream, token, '\n')) {
-            height++;
-        }
-        return height;
-    }
+    [[nodiscard]] int getTextHeight() const;
 
-    [[nodiscard]] unsigned int getTextWidth() const {
-        unsigned int longestWidth = 0;
-        std::istringstream textStream(text);
-        std::string token;
-        while(std::getline(textStream, token, '\n')) {
-            if (token.size() > longestWidth){
-                longestWidth = token.size();
-            }
-        }
-        return longestWidth;
-    }
+    [[nodiscard]] unsigned int getTextWidth() const;
 };
 
 

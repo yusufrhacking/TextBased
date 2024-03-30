@@ -160,6 +160,7 @@ set(SOURCE_FILES
         src/main/Emma/EmmaWoodhouseComponent.h
         src/main/Emma/EmmaWoodhouseSystem.cpp
         src/main/Emma/EmmaWoodhouseSystem.h
+        src/main/Text/TextComponent.cpp
 )
 
 
