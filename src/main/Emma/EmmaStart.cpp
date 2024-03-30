@@ -28,7 +28,11 @@ EmmaStart::EmmaStart(Position startingPosition): startingPosition(startingPositi
 
     createSubject(subjectPosition);
     createTerrain(terrainPosition);
+
+
     createCandidateLetters(terrainPosition);
+
+    createObstacle(terrainPosition);
 }
 
 void EmmaStart::createSubject(Position subjectPosition) {
@@ -60,6 +64,8 @@ void EmmaStart::createTerrain(Position position) {
     // For that to help, I need there to be some stuff you gotta jump up that is burdensome
 
     std::vector<std::string> terrainText = readParagraphs("/Users/yusufhacking/Documents/Projects/TextBased/resources/emma.txt");
+    float paragraphGap = 50.0;
+
 
     for(int x=0; x<3; x++){
         Entity terrainBase = ecsManager->createEntity();
@@ -72,9 +78,9 @@ void EmmaStart::createTerrain(Position position) {
         ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
         ecsManager->addComponentToEntity<GenericStyleComponent>(terrainBase);
 
+        float prevXSize = ecsManager->getComponentFromEntity<TextComponent>(terrainBase).getSurfaceSize().width;
 
-
-        position += ecsManager->getComponentFromEntity<TextComponent>(terrainBase).getSurfaceSizeAsPosition();
+        position += Position(paragraphGap + prevXSize, 0.0);
 
     }
 
@@ -85,9 +91,10 @@ void EmmaStart::createTerrain(Position position) {
 void EmmaStart::createCandidateLetters(Position terrainPosition) {
     float xShift = 300.0;
     float yShift = -1 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+
     Position letterPosition = terrainPosition + Position(xShift, yShift);
 
-    for(int x=0; x<10; x++){
+    for(int x=0; x<20; x++){
         Entity letterEntity = ecsManager->createEntity();
         char character = '?';
         ecsManager->addComponentToEntity<TextComponent>(letterEntity, std::string(1, character));
@@ -99,4 +106,37 @@ void EmmaStart::createCandidateLetters(Position terrainPosition) {
     }
 
 
+}
+
+void EmmaStart::createObstacle(Position terrainPosition) {
+    std::string obstacleStr = "handsome\nhandsome\nhandsome";
+    Entity obstacleEntity = ecsManager->createEntity();
+
+    float xShift = 500.0;
+    float yShift = -3 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+
+    Position obstaclePosition = terrainPosition + Position(xShift, yShift);
+
+    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
+    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
+    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+
+    // Make like a lil tower to climb over? I don't know how to standardize it quite yet
+    obstaclePosition += TextComponent::getSurfaceSizeAsAddablePosition(obstacleStr);
+    obstacleEntity = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
+    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
+    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+
+    obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
+    obstacleEntity = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
+    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
+    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
 }

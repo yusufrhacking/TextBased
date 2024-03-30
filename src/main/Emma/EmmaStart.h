@@ -14,6 +14,8 @@ public:
     void createTerrain(Position position);
 
     void createCandidateLetters(Position terrainPosition);
+
+    void createObstacle(Position terrainPosition);
 };
 
 

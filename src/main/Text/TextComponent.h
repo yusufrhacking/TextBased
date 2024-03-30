@@ -33,6 +33,16 @@ struct TextComponent {
                                                                                                          getTextHeightInChars(text)};
     }
 
+    static Position getSurfaceSizeAsPosition(const std::string& text){
+        return {static_cast<float>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
+                                                                                                         getTextHeightInChars(text)};
+    }
+
+    static Position getSurfaceSizeAsAddablePosition(const std::string& text){
+        return {static_cast<float>(getTextWidthInChars(text) * MONACO_RENDERED_TEXT_WIDTH_SCALER), -1*(float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT *
+                                                                                                   getTextHeightInChars(text)};
+    }
+
     static int getTextHeightInChars(const std::string& text) {
         int height = 0;
         std::istringstream textStream(text);
