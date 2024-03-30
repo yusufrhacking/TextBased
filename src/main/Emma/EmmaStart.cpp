@@ -89,7 +89,7 @@ void EmmaStart::createTerrain(Position position) {
 }
 
 void EmmaStart::createCandidateLetters(Position terrainPosition) {
-    float xShift = 300.0;
+    float xShift = 500.0;
     float yShift = -1 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
 
     Position letterPosition = terrainPosition + Position(xShift, yShift);
@@ -109,11 +109,11 @@ void EmmaStart::createCandidateLetters(Position terrainPosition) {
 }
 
 void EmmaStart::createObstacle(Position terrainPosition) {
-    std::string obstacleStr = "handsome\nhandsome\nhandsome";
+    std::string obstacleStr = "handsome\nhandsome\nhandsome\nhandsome\n";
     Entity obstacleEntity = ecsManager->createEntity();
 
-    float xShift = 500.0;
-    float yShift = -3 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+    float xShift = 550.0;
+    float yShift = -4 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
 
     Position obstaclePosition = terrainPosition + Position(xShift, yShift);
 
@@ -131,6 +131,7 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
     ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+
 
     obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
     obstacleEntity = ecsManager->createEntity();
