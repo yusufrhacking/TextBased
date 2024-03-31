@@ -20,12 +20,15 @@
 #include "../Abyz/LifeGateComponent.h"
 #include "../PositionsAndMovement/RandomRightLeftMovementComponent.h"
 #include "../Platformer/HorizontalPlatformMovementComponent.h"
+#include "../Diegesis/EngineerSpeakEvent.h"
 
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
 
 EmmaStart::EmmaStart(Position startingPosition): startingPosition(startingPosition) {
+    eventBus->emitEvent<EngineerSpeakEvent>("Emma by Jane Austen");
+
     ecsManager->addSystem<EmmaWoodhouseSystem>();
     Position subjectPosition{11895, 10532};
     Position terrainPosition{subjectPosition + Position(0, 800)};
