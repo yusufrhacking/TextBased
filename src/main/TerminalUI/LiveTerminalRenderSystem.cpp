@@ -21,6 +21,7 @@ void LiveTerminalRenderSystem::render(const std::shared_ptr<Renderer> &renderer)
 }
 
 void LiveTerminalRenderSystem::renderLiveLine(const std::shared_ptr<Renderer> &renderer) {
+    spdlog::info("LIVE TERMINAL: {}", isTerminalLive);
     Type type = Type::PLAIN_TERMINAL_TEXT;
     auto style = GenericStyleComponent(type);
     auto startingPosition = terminalRenderer.renderAuthor(renderer, startingTerminalPosition, AuthorCommands::authorToText(Author::PLAYER), style);

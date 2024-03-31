@@ -48,7 +48,7 @@ bool InputProcessor::processInput() {
         }
         if (sdlEvent.type == SDL_TEXTINPUT) {
             eventBus->emitEvent<TextInputEvent>(TextInputEvent(sdlEvent.text));
-        }if (sdlEvent.type == SDL_KEYDOWN || sdlEvent.type == SDL_KEYUP) {
+        }if (sdlEvent.type == SDL_KEYDOWN) { //Used to have SDL_KEYUP too, but I don't think needed
             auto key = static_cast<SDL_KeyCode>(sdlEvent.key.keysym.sym);
             auto it = keyPressMappings.find(key);
             if (it != keyPressMappings.end()) {
