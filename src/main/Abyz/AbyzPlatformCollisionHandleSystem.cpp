@@ -6,6 +6,7 @@
 #include "../MainPlayer/MainPlayerComponent.h"
 #include "../Platformer/PlatformComponent.h"
 #include "../PositionsAndMovement/RightLeftCollisionEvent.h"
+#include "../Health/OnDeathComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -22,6 +23,10 @@ void AbyzPlatformCollisionHandleSystem::listenToEvents() {
 void AbyzPlatformCollisionHandleSystem::onTopBottomCollision(TopBottomCollisionEvent& event) {
     if (ecsManager->hasComponent<MainPlayerComponent>(event.top)) {
         if(ecsManager->hasComponent<AbyzComponent>(event.bottom)) {
+            if (ecsManager->hasComponent<OnDeathComponent>(event.bottom)){
+                auto& onDeathComponent = ecsManager->getComponentFromEntity<OnDeathComponent>(event.bottom);
+                onDeathComponent.emitEvent();
+            }
             ecsManager->killEntity(event.bottom);
         }
     }

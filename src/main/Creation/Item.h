@@ -7,7 +7,8 @@
 enum class Item {
     AXE,
     WOOD,
-    LETTER
+    LETTER,
+    QUESTION_MARK
 };
 
 static std::string ItemToString(const Item& item) {

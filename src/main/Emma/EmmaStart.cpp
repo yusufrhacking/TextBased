@@ -16,6 +16,10 @@
 #include "../Lettering/LetterPrefab.h"
 #include "EmmaWoodhouseComponent.h"
 #include "EmmaWoodhouseSystem.h"
+#include "../Abyz/AbyzComponent.h"
+#include "../Abyz/LifeGateComponent.h"
+#include "../PositionsAndMovement/RandomRightLeftMovementComponent.h"
+#include "../Platformer/HorizontalPlatformMovementComponent.h"
 
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -33,6 +37,27 @@ EmmaStart::EmmaStart(Position startingPosition): startingPosition(startingPositi
     createCandidateLetters(terrainPosition);
 
     createObstacle(terrainPosition);
+
+
+    Position abyzPosition = terrainPosition + Position(200, -1.0 * MONACO_HEIGHT_OF_A_LINE_OF_TEXT);
+    Entity abyz = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
+    ecsManager->addComponentToEntity<PositionComponent>(abyz, abyzPosition);
+    ecsManager->addComponentToEntity<LiveComponent>(abyz);
+    ecsManager->addComponentToEntity<AbyzComponent>(abyz);
+
+    auto leftBound = static_cast<unsigned int>(abyzPosition.x);
+    auto rightBound = static_cast<int>(abyzPosition.x) + 150;
+    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, 50.0, leftBound, rightBound);
+    ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
+    ecsManager->addComponentToEntity<CollisionComponent>(abyz);
+    int id = abyz.getId();
+    ecsManager->addComponentToEntity<OnDeathComponent>(abyz, [this, id]() {
+        eventBus->emitEvent<CreateItemAtEntityEvent>(Item::QUESTION_MARK, Entity{id});
+    });
+
+    // Dialogue Clouds takes in a vector of strings, then it passes them along, every few seconds or so
+    // Starts at the right edge of the screen and floats along to the left, kinda slowly
 }
 
 void EmmaStart::createSubject(Position subjectPosition) {
@@ -125,6 +150,26 @@ void EmmaStart::createObstacle(Position terrainPosition) {
 
     // Make like a lil tower to climb over? I don't know how to standardize it quite yet
     obstaclePosition += TextComponent::getSurfaceSizeAsAddablePosition(obstacleStr);
+    obstacleStr = "clever\nclever\nclever\nclever\n";
+    obstacleEntity = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
+    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
+    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+
+
+    obstaclePosition += TextComponent::getSurfaceSizeAsAddablePosition(obstacleStr);
+    obstacleStr = "rich\nrich\nrich\nrich\n";
+    obstacleEntity = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
+    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
+    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
+    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+
+    obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
+    obstacleStr = "clever\nclever\nclever\nclever\n";
     obstacleEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
     ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
@@ -134,10 +179,14 @@ void EmmaStart::createObstacle(Position terrainPosition) {
 
 
     obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
+    obstacleStr = "handsome\nhandsome\nhandsome\nhandsome\n";
     obstacleEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
     ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
     ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
     ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+
+
+    // Dialogue should pass along the sky like clouds (there are clouds in Mario)
 }

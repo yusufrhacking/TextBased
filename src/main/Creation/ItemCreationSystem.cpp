@@ -82,6 +82,10 @@ void ItemCreationSystem::onCreateItemAtEntity(CreateItemAtEntityEvent &event) {
         case Item::LETTER:
             createLetter(get_random_letter(), ecsManager->getComponentFromEntity<PositionComponent>(event.entity).getPosition());
             break;
+        case Item::QUESTION_MARK:
+            spdlog::info("AQUI");
+            createLetter(Letter::QUESTION_MARK, ecsManager->getComponentFromEntity<PositionComponent>(event.entity).getPosition());
+            break;
         default: break;
     }
 }
