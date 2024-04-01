@@ -36,32 +36,16 @@ EmmaStart::EmmaStart(Position startingPosition): startingPosition(startingPositi
     createSubject(subjectPosition);
     createTerrain(terrainPosition);
 
-
-    createCandidateLetters(terrainPosition);
+    createAbyz(terrainPosition);
 
     createObstacle(terrainPosition);
 
 
-    Position abyzPosition = terrainPosition + Position(200, -1.0 * MONACO_HEIGHT_OF_A_LINE_OF_TEXT);
-    Entity abyz = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
-    ecsManager->addComponentToEntity<PositionComponent>(abyz, abyzPosition);
-    ecsManager->addComponentToEntity<LiveComponent>(abyz);
-    ecsManager->addComponentToEntity<AbyzComponent>(abyz);
-
-    auto leftBound = static_cast<unsigned int>(abyzPosition.x);
-    auto rightBound = static_cast<int>(abyzPosition.x) + 150;
-    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, 50.0, leftBound, rightBound);
-    ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
-    ecsManager->addComponentToEntity<CollisionComponent>(abyz);
-    int id = abyz.getId();
-    ecsManager->addComponentToEntity<OnDeathComponent>(abyz, [this, id]() {
-        eventBus->emitEvent<CreateItemAtEntityEvent>(Item::QUESTION_MARK, Entity{id});
-    });
-
     // Dialogue Clouds takes in a vector of strings, then it passes them along, every few seconds or so
     // Starts at the right edge of the screen and floats along to the left, kinda slowly
 }
+
+
 
 void EmmaStart::createSubject(Position subjectPosition) {
     Entity subject = ecsManager->createEntity();
@@ -74,7 +58,7 @@ void EmmaStart::createSubject(Position subjectPosition) {
     ecsManager->addComponentToEntity<VelocityComponent>(subject);
     ecsManager->addComponentToEntity<CollisionComponent>(subject);
     ecsManager->addComponentToEntity<JumpingComponent>(subject, 200);
-    ecsManager->addComponentToEntity<WalkingComponent>(subject, 350.0);
+    ecsManager->addComponentToEntity<WalkingComponent>(subject, 200.0);
     ecsManager->addComponentToEntity<EmmaWoodhouseComponent>(subject);
 }
 
@@ -140,10 +124,12 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     std::string obstacleStr = "handsome\nhandsome\nhandsome\nhandsome\n";
     Entity obstacleEntity = ecsManager->createEntity();
 
-    float xShift = 550.0;
-    float yShift = -4 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+    newItemX += 750;
 
-    Position obstaclePosition = terrainPosition + Position(xShift, yShift);
+    float yShift = -4 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+    yShift -= 80;
+
+    Position obstaclePosition = terrainPosition + Position(newItemX, yShift);
 
     ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
     ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
@@ -152,7 +138,8 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
 
     // Make like a lil tower to climb over? I don't know how to standardize it quite yet
-    obstaclePosition += TextComponent::getSurfaceSizeAsAddablePosition(obstacleStr);
+    newItemX += TextComponent::getSurfaceSize(obstacleStr).width + 25;
+    obstaclePosition.x = terrainPosition.x + newItemX;
     obstacleStr = "clever\nclever\nclever\nclever\n";
     obstacleEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
@@ -161,35 +148,53 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
 
-
-    obstaclePosition += TextComponent::getSurfaceSizeAsAddablePosition(obstacleStr);
-    obstacleStr = "rich\nrich\nrich\nrich\n";
+    newItemX += TextComponent::getSurfaceSize(obstacleStr).width + 25.0;
+    obstaclePosition.x = terrainPosition.x + newItemX;    obstacleStr = "rich\nrich\nrich\nrich\n";
     obstacleEntity = ecsManager->createEntity();
     ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
     ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
     ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
     ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
-
-    obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
-    obstacleStr = "clever\nclever\nclever\nclever\n";
-    obstacleEntity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
-    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
-    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
-    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
-    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
-
-
-    obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
-    obstacleStr = "handsome\nhandsome\nhandsome\nhandsome\n";
-    obstacleEntity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
-    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
-    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
-    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
-    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+//
+//    obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
+//    obstacleStr = "clever\nclever\nclever\nclever\n";
+//    obstacleEntity = ecsManager->createEntity();
+//    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
+//    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
+//    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
+//    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
+//    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+//
+//
+//    obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
+//    obstacleStr = "handsome\nhandsome\nhandsome\nhandsome\n";
+//    obstacleEntity = ecsManager->createEntity();
+//    ecsManager->addComponentToEntity<TextComponent>(obstacleEntity, obstacleStr);
+//    ecsManager->addComponentToEntity<PositionComponent>(obstacleEntity, obstaclePosition);
+//    ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
+//    ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
+//    ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
 
 
     // Dialogue should pass along the sky like clouds (there are clouds in Mario)
+}
+
+void EmmaStart::createAbyz(const Position &terrainPosition) const {
+    Position abyzPosition = terrainPosition + Position(newItemX, -1.0 * MONACO_HEIGHT_OF_A_LINE_OF_TEXT);
+    Entity abyz = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<TextComponent>(abyz, "Abyz");
+    ecsManager->addComponentToEntity<PositionComponent>(abyz, abyzPosition);
+    ecsManager->addComponentToEntity<LiveComponent>(abyz);
+    ecsManager->addComponentToEntity<AbyzComponent>(abyz);
+
+    auto leftBound = static_cast<unsigned int>(abyzPosition.x);
+    auto rightBound = static_cast<int>(abyzPosition.x) + 400;
+    ecsManager->addComponentToEntity<HorizontalPlatformMovementComponent>(abyz, 50.0, leftBound, rightBound);
+    ecsManager->addComponentToEntity<LifeGateComponent>(abyz, abyzPosition.y + Window::windowHeight);
+    ecsManager->addComponentToEntity<CollisionComponent>(abyz);
+    int id = abyz.getId();
+    ecsManager->addComponentToEntity<OnDeathComponent>(abyz, [this, id]() {
+        eventBus->emitEvent<CreateItemAtEntityEvent>(Item::QUESTION_MARK, Entity{id});
+    });
 }

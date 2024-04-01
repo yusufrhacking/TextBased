@@ -4,8 +4,11 @@
 
 #include "../PositionsAndMovement/Position.h"
 
+
 class EmmaStart {
     Position startingPosition;
+    float newItemX = 1000;
+
 public:
     EmmaStart(Position startingPosition);
 
@@ -16,6 +19,8 @@ public:
     void createCandidateLetters(Position terrainPosition);
 
     void createObstacle(Position terrainPosition);
+
+    void createAbyz(const Position &terrainPosition) const;
 };
 
 
