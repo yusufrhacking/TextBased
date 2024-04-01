@@ -14,6 +14,8 @@ public:
     void listenToEvents();
 
     void onTopBottomCollision(TopBottomCollisionEvent& event);
+
+    void createCoin(Entity boxEntity);
 };
 
 
