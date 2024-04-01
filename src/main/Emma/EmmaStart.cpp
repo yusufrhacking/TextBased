@@ -21,6 +21,7 @@
 #include "../PositionsAndMovement/RandomRightLeftMovementComponent.h"
 #include "../Platformer/HorizontalPlatformMovementComponent.h"
 #include "../Diegesis/EngineerSpeakEvent.h"
+#include "CoinBoxComponent.h"
 
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -31,7 +32,7 @@ EmmaStart::EmmaStart(Position startingPosition): startingPosition(startingPositi
 
     ecsManager->addSystem<EmmaWoodhouseSystem>();
     Position subjectPosition{11895, 10532};
-    Position terrainPosition{subjectPosition + Position(0, 800)};
+    Position terrainPosition{subjectPosition + Position(0, 1300)};
 
     createSubject(subjectPosition);
     createTerrain(terrainPosition);
@@ -127,7 +128,7 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     newItemX += 750;
 
     float yShift = -4 * (float)MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
-    yShift -= 80;
+    yShift -= 75;
 
     Position obstaclePosition = terrainPosition + Position(newItemX, yShift);
 
@@ -136,6 +137,7 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
     ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CoinBoxComponent>(obstacleEntity);
 
     // Make like a lil tower to climb over? I don't know how to standardize it quite yet
     newItemX += TextComponent::getSurfaceSize(obstacleStr).width + 25;
@@ -147,6 +149,7 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
     ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CoinBoxComponent>(obstacleEntity);
 
     newItemX += TextComponent::getSurfaceSize(obstacleStr).width + 25.0;
     obstaclePosition.x = terrainPosition.x + newItemX;    obstacleStr = "rich\nrich\nrich\nrich\n";
@@ -156,6 +159,7 @@ void EmmaStart::createObstacle(Position terrainPosition) {
     ecsManager->addComponentToEntity<GenericStyleComponent>(obstacleEntity, RenderStyle::WHITE_MONACO_GENERIC);
     ecsManager->addComponentToEntity<LiveComponent>(obstacleEntity);
     ecsManager->addComponentToEntity<CollisionComponent>(obstacleEntity);
+    ecsManager->addComponentToEntity<CoinBoxComponent>(obstacleEntity);
 //
 //    obstaclePosition += TextComponent::getSurfaceSizeAsPosition(obstacleStr);
 //    obstacleStr = "clever\nclever\nclever\nclever\n";

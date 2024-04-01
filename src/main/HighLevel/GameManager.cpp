@@ -49,6 +49,7 @@
 #include "../PositionsAndMovement/RightLeftMovementSystem.h"
 #include "../Spawning/SpawnAbyzSystem.h"
 #include "../Emma/EmmaStart.h"
+#include "../Diegesis/CoinBoxCollisionSystem.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -104,6 +105,7 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<HorizontalPlatformMovementSystem>();
     ecsManager->addSystem<AbyzPlatformCollisionHandleSystem>();
     ecsManager->addSystem<DamageSystem>();
+    ecsManager->addSystem<CoinBoxCollisionSystem>();
 }
 
 void GameManager::update(double deltaTime) {

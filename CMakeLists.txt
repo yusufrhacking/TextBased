@@ -162,6 +162,8 @@ set(SOURCE_FILES
         src/main/Emma/EmmaWoodhouseSystem.h
         src/main/Text/TextComponent.cpp
         src/main/Emma/CoinBoxComponent.h
+        src/main/Diegesis/CoinBoxCollisionSystem.cpp
+        src/main/Diegesis/CoinBoxCollisionSystem.h
 )
 
 
