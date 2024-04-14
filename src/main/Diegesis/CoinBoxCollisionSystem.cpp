@@ -23,7 +23,6 @@ void CoinBoxCollisionSystem::onTopBottomCollision(TopBottomCollisionEvent &event
     if (ecsManager->hasComponent<CoinBoxComponent>(event.top)) {
         if(ecsManager->hasComponent<MainPlayerComponent>(event.bottom)) {
             createCoin(event.top);
-            spdlog::info("COIN BOX COLLISION!");
         }
     }
 }
