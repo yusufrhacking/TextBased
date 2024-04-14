@@ -2,6 +2,7 @@
 #define TEXTBASED_COINBOXCOMPONENT_H
 
 struct CoinBoxComponent{
+    bool isHit = false;
     CoinBoxComponent() = default;
 };
 

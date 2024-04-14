@@ -22,7 +22,11 @@ void CoinBoxCollisionSystem::listenToEvents() {
 void CoinBoxCollisionSystem::onTopBottomCollision(TopBottomCollisionEvent &event) {
     if (ecsManager->hasComponent<CoinBoxComponent>(event.top)) {
         if(ecsManager->hasComponent<MainPlayerComponent>(event.bottom)) {
-            createCoin(event.top);
+            auto& coinBoxComponent = ecsManager->getComponentFromEntity<CoinBoxComponent>(event.top);
+            if (!coinBoxComponent.isHit){
+                coinBoxComponent.isHit = true;
+                createCoin(event.top);
+            }
         }
     }
 }
