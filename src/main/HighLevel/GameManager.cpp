@@ -50,6 +50,7 @@
 #include "../Spawning/SpawnAbyzSystem.h"
 #include "../Emma/EmmaStart.h"
 #include "../Diegesis/CoinBoxCollisionSystem.h"
+#include "../Tractatus/TractatusStart.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -58,7 +59,7 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    EmmaStart level1{startingPosition + Window::getMiddlePosition()};
+    TractatusStart level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {
