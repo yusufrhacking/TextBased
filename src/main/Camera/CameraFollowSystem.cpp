@@ -22,7 +22,7 @@ Camera CameraFollowSystem::updateCameraPosition(Position previousCameraPosition)
     auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
     auto playerSizeOffset = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
 
-    auto newCameraPosition = getNewCameraPositionByPlatformFollow(previousCameraPosition, playerPosition, playerSizeOffset);
+    auto newCameraPosition = getNewCameraPositionByPlatformCenter(previousCameraPosition, playerPosition, playerSizeOffset);
     spdlog::trace("Camera moved to position {}, {}", newCameraPosition.x, newCameraPosition.y);
     return Camera(newCameraPosition);
 }
@@ -76,6 +76,16 @@ Position CameraFollowSystem::getNewCameraPositionByCentering(Position previousCa
 Position CameraFollowSystem::getNewCameraPositionByPlatformFollow(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset){
     auto newCameraPosition = previousCameraPosition;
     auto xPositionWithPlayerInMiddle = playerPosition.x - (float)Window::windowWidth/8;
+    newCameraPosition.x = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width / 2;
+    auto yPositionWithPlayerInMiddle = playerPosition.y - (float)Window::windowHeight/2 - (float)Window::windowHeight/4;
+    newCameraPosition.y = yPositionWithPlayerInMiddle;
+
+    return newCameraPosition;
+}
+
+Position CameraFollowSystem::getNewCameraPositionByPlatformCenter(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset){
+    auto newCameraPosition = previousCameraPosition;
+    auto xPositionWithPlayerInMiddle = playerPosition.x - (float)Window::windowWidth/2;
     newCameraPosition.x = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width / 2;
     auto yPositionWithPlayerInMiddle = playerPosition.y - (float)Window::windowHeight/2 - (float)Window::windowHeight/4;
     newCameraPosition.y = yPositionWithPlayerInMiddle;

@@ -26,6 +26,8 @@ private:
 
     Position getNewCameraPositionByPlatformFollow(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
 
+    Position getNewCameraPositionByPlatformCenter(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
+
 };
 
 
