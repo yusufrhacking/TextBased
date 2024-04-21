@@ -20,7 +20,8 @@ You will have to fight the forces of nonsense as you go through.
 You will build propositions as you climb the tower. Does this mean I have to use basic objects?
 Wittgenstein doesn't really use examples in it, but I suppose I will. It has to be a game after all.
 
-I will
+You will hop between propositions, and then you will have to build the atomic propositions. Or break them down.
+Using actual objects will help me figure out more mechanics, too. 
 
 
 - Make a vertical camera

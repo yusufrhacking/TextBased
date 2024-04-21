@@ -164,6 +164,8 @@ set(SOURCE_FILES
         src/main/Emma/CoinBoxComponent.h
         src/main/Diegesis/CoinBoxCollisionSystem.cpp
         src/main/Diegesis/CoinBoxCollisionSystem.h
+        src/main/Tractatus/TractatusStart.cpp
+        src/main/Tractatus/TractatusStart.h
 )
 
 
