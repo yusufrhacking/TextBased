@@ -24,9 +24,10 @@ extern std::unique_ptr<ECSManager> ecsManager;
 
 TractatusStart::TractatusStart(Position startingPosition): startingPosition() {
     wittgenstein = ecsManager->createEntity();
+    std::string wittgensteinStr = "Wittgenstein";
     ecsManager->addComponentToEntity<LiveComponent>(wittgenstein);
     ecsManager->addComponentToEntity<PositionComponent>(wittgenstein, startingPosition);
-    ecsManager->addComponentToEntity<TextComponent>(wittgenstein, "Wittgenstein");
+    ecsManager->addComponentToEntity<TextComponent>(wittgenstein, wittgensteinStr);
     ecsManager->addComponentToEntity<MainPlayerComponent>(wittgenstein);
     ecsManager->addComponentToEntity<SubjectComponent>(wittgenstein);
     ecsManager->addComponentToEntity<GravityComponent>(wittgenstein);
@@ -36,10 +37,11 @@ TractatusStart::TractatusStart(Position startingPosition): startingPosition() {
     ecsManager->addComponentToEntity<WalkingComponent>(wittgenstein, 200.0);
 
     Entity terrainBase = ecsManager->createEntity();
+    Position terrainBasePosition = startingPosition + Position(0, 800) - Position(TextComponent::getSurfaceSize(wittgensteinStr).width, 0.0f);
 
     ecsManager->addComponentToEntity<LiveComponent>(terrainBase);
-    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, startingPosition + Position(0, 800));
-    ecsManager->addComponentToEntity<TextComponent>(terrainBase, "The world is all that is the case");
+    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, terrainBasePosition);
+    ecsManager->addComponentToEntity<TextComponent>(terrainBase, "1.0 The world is all that is the case");
     ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
     ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
     ecsManager->addComponentToEntity<GenericStyleComponent>(terrainBase);

@@ -4,8 +4,8 @@ It serves as the foundation, obviously
 
 Color-code the tiers of thought? I could do it with size, but that is stag
 
-- Make foundational 1.0 point
-- Make a vertical camera
+- Make foundational 1.0 point // Check
+- Make a vertical camera // Check
 - Make the basic sub-points (you have to hit all of these before you get to the next one, obviously)
 
 Perhaps I can line the walls so that it looks like a ladder? Maybe it says Tractatus Logico-Philosophicus around the walls
