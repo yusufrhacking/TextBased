@@ -30,3 +30,9 @@ Using actual objects will help me figure out more mechanics, too.
 
 Perhaps, when you climb the ladder in the level, something about how language functions changes.
 Like Baba is You, almost. I am not sure. 
+
+## 4-21-24
+
+You have to complete the current chain of steps before you can go to the next one
+These will be color coded to help
+Adds a nice obstacle to make there more to play with
