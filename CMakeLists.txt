@@ -169,6 +169,8 @@ set(SOURCE_FILES
         src/main/Tractatus/PropositionComponent.h
         src/main/Tractatus/PropositionRenderSystem.cpp
         src/main/Tractatus/PropositionRenderSystem.h
+        src/main/Tractatus/TractatusPlatformGenerationSystem.cpp
+        src/main/Tractatus/TractatusPlatformGenerationSystem.h
 )
 
 
