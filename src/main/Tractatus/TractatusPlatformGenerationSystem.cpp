@@ -92,7 +92,15 @@ TractatusPlatformGenerationSystem::TractatusPlatformGenerationSystem(Position st
     ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
     ecsManager->addComponentToEntity<PropositionComponent>(terrainBase, TractatusLayer::ONE);
 
+    terrainBase = ecsManager->createEntity();
+    entities.push(terrainBase);
+    startPosition += Position(-450, -100);
 
+    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, startPosition);
+    ecsManager->addComponentToEntity<TextComponent>(terrainBase, "2.0 What is the case — a fact — is the existence of states of affairs.");
+    ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PropositionComponent>(terrainBase, TractatusLayer::TWO);
 }
 
 void TractatusPlatformGenerationSystem::listenToEvents() {
