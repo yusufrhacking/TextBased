@@ -41,6 +41,20 @@ class SDLRenderer: public Renderer {
     SDL_Color gold = {255, 225, 64, 255};
     SDL_Color violet = {127, 0, 180, 255};
 
+    SDL_Color whiteTwo = {220, 220, 220, 255};
+    SDL_Color whiteThree = {185, 185, 185, 255};
+    SDL_Color whiteFour = {150, 150, 150, 255};
+    SDL_Color whiteFive = {115, 115, 115, 255};
+    SDL_Color whiteSix = {80, 80, 80, 255};
+    SDL_Color whiteSeven = {45, 45, 45, 255};
+
+    FC_Font* whiteTwoFont;
+    FC_Font* whiteThreeFont;
+    FC_Font* whiteFourFont;
+    FC_Font* whiteFiveFont;
+    FC_Font* whiteSixFnt;
+    FC_Font* whiteSevenFont;
+
 
 
 public:
