@@ -33,7 +33,7 @@ TractatusStart::TractatusStart(Position startingPosition): startingPosition() {
     ecsManager->addComponentToEntity<GravityComponent>(wittgenstein);
     ecsManager->addComponentToEntity<VelocityComponent>(wittgenstein);
     ecsManager->addComponentToEntity<CollisionComponent>(wittgenstein);
-    ecsManager->addComponentToEntity<JumpingComponent>(wittgenstein, 200);
+    ecsManager->addComponentToEntity<JumpingComponent>(wittgenstein, 300);
     ecsManager->addComponentToEntity<WalkingComponent>(wittgenstein, 200.0);
 
     Entity terrainBase = ecsManager->createEntity();
