@@ -15,7 +15,18 @@ PropositionRenderSystem::PropositionRenderSystem() {
 void PropositionRenderSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     for (auto entity : getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-        const auto textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
-        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, GenericStyleComponent(RenderStyle::RED));
+        const auto& textComponent = ecsManager->getComponentFromEntity<TextComponent>(entity);
+        const auto& propositionComponent = ecsManager->getComponentFromEntity<PropositionComponent>(entity);
+
+        GenericStyleComponent style = getStyleFromProposition(propositionComponent);
+
+
+        renderer->renderDynamicText(camera, positionComponent.getPosition(), textComponent, style);
     }
 }
+
+GenericStyleComponent PropositionRenderSystem::getStyleFromProposition(const PropositionComponent &component) {
+    switch(component.layer){
+        case TractatusLayer::ONE: return GenericStyleComponent(RenderStyle::GREEN_TERMINAL);
+        default: return GenericStyleComponent(RenderStyle::GREEN_TERMINAL);
+    }}
