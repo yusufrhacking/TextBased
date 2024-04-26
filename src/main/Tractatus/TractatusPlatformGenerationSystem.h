@@ -2,6 +2,7 @@
 #define TEXTBASED_TRACTATUSPLATFORMGENERATIONSYSTEM_H
 #include "../ECSObjects/System.h"
 #include "../PositionsAndMovement/CollisionEvent.h"
+#include <queue>
 
 
 class TractatusPlatformGenerationSystem: public System {
@@ -11,9 +12,9 @@ class TractatusPlatformGenerationSystem: public System {
     std::vector<std::string> stepStrs;
     float prevWordX = 0;
     float direction = 1;
+    int stepsInSameDirection = 0;
     size_t stepInd = 0;
-    std::vector<Entity> entities;
-    void createNextStep(const std::string&nextStepStr);
+    std::queue<Entity> entities;
 public:
     void listenToEvents();
 
@@ -21,6 +22,7 @@ public:
 
     TractatusPlatformGenerationSystem(Position startPosition, std::vector<std::string> stepStrs);
 
+    void toNextStep();
 };
 
 
