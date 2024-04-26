@@ -27,6 +27,12 @@ void PropositionRenderSystem::render(const std::shared_ptr<Renderer> &renderer, 
 
 GenericStyleComponent PropositionRenderSystem::getStyleFromProposition(const PropositionComponent &component) {
     switch(component.layer){
-        case TractatusLayer::ONE: return GenericStyleComponent(RenderStyle::VIOLET);
+        case TractatusLayer::ONE: return GenericStyleComponent(RenderStyle::WHITE_ONE);
+        case TractatusLayer::TWO: return GenericStyleComponent(RenderStyle::WHITE_TWO);
+        case TractatusLayer::THREE: return GenericStyleComponent(RenderStyle::WHITE_THREE);
+        case TractatusLayer::FOUR: return GenericStyleComponent(RenderStyle::WHITE_FOUR);
+        case TractatusLayer::FIVE: return GenericStyleComponent(RenderStyle::WHITE_FIVE);
+        case TractatusLayer::SIX: return GenericStyleComponent(RenderStyle::WHITE_SIX);
+        case TractatusLayer::SEVEN: return GenericStyleComponent(RenderStyle::WHITE_SEVEN);
         default: return GenericStyleComponent(RenderStyle::GREEN_TERMINAL);
     }}

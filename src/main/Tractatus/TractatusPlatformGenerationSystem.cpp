@@ -91,6 +91,8 @@ TractatusPlatformGenerationSystem::TractatusPlatformGenerationSystem(Position st
     ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
     ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
     ecsManager->addComponentToEntity<PropositionComponent>(terrainBase, TractatusLayer::ONE);
+
+
 }
 
 void TractatusPlatformGenerationSystem::listenToEvents() {

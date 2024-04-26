@@ -15,7 +15,14 @@ enum class RenderStyle{
     TINY_WHITE_NUMBER,
     RED,
     GOLD,
-    VIOLET
+    VIOLET,
+    WHITE_ONE,
+    WHITE_TWO,
+    WHITE_THREE,
+    WHITE_FOUR,
+    WHITE_FIVE,
+    WHITE_SIX,
+    WHITE_SEVEN
 //    LETTER,
 //    TERMINAL,
 //    ENGINEER_TERMINAL,
