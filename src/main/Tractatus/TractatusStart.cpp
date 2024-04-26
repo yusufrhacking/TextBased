@@ -17,6 +17,7 @@
 #include "../PositionsAndMovement/RandomRightLeftMovementComponent.h"
 #include "../Platformer/HorizontalPlatformMovementComponent.h"
 #include "../Diegesis/EngineerSpeakEvent.h"
+#include "PropositionComponent.h"
 
 
 extern std::unique_ptr<EventBus> eventBus;
@@ -44,5 +45,18 @@ TractatusStart::TractatusStart(Position startingPosition): startingPosition() {
     ecsManager->addComponentToEntity<TextComponent>(terrainBase, "1.0 The world is all that is the case");
     ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
     ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
-    ecsManager->addComponentToEntity<GenericStyleComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PropositionComponent>(terrainBase, TractatusLayer::ONE);
+
+
+    terrainBase = ecsManager->createEntity();
+   terrainBasePosition += Position(450, -100);
+
+    ecsManager->addComponentToEntity<LiveComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, terrainBasePosition);
+    ecsManager->addComponentToEntity<TextComponent>(terrainBase, "1.1 The world is the totality of facts, not of things");
+    ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PropositionComponent>(terrainBase, TractatusLayer::ONE);
+
+
 }

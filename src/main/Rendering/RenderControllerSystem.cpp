@@ -19,6 +19,7 @@
 #include "../Middlemarch/SubjectRenderSystem.h"
 #include "../Spawning/SupremePowerRenderSystem.h"
 #include "../Platformer/TargetRenderingSystem.h"
+#include "../Tractatus/PropositionRenderSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
@@ -72,6 +73,9 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     if (ecsManager->hasSystem<SupremePowerRenderSystem>()) {
         ecsManager->getSystem<SupremePowerRenderSystem>().render(renderer, camera);
     }
+    if (ecsManager->hasSystem<PropositionRenderSystem>()){
+        ecsManager->getSystem<PropositionRenderSystem>().render(renderer, camera);
+    }
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -86,5 +90,6 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<AbyzRenderingSystem>();
     ecsManager->addSystem<TargetRenderingSystem>();
     ecsManager->addSystem<SupremePowerRenderSystem>();
+    ecsManager->addSystem<PropositionRenderSystem>();
     // ecsManager->addSystem<PlayerSideTextSystem>();
 }

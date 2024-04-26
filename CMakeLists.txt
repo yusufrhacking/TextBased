@@ -166,6 +166,9 @@ set(SOURCE_FILES
         src/main/Diegesis/CoinBoxCollisionSystem.h
         src/main/Tractatus/TractatusStart.cpp
         src/main/Tractatus/TractatusStart.h
+        src/main/Tractatus/PropositionComponent.h
+        src/main/Tractatus/PropositionRenderSystem.cpp
+        src/main/Tractatus/PropositionRenderSystem.h
 )
 
 
