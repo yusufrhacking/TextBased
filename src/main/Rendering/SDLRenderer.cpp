@@ -55,6 +55,10 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     goldFont = FC_CreateFont();
     FC_LoadFont(goldFont, renderer, "../../resources/Monaco.ttf",
         TEXT_C_FONT_SIZE, gold, TTF_STYLE_NORMAL);
+
+    violetFont = FC_CreateFont();
+    FC_LoadFont(violetFont, renderer, "../../resources/Monaco.ttf",
+                TEXT_C_FONT_SIZE, violet, TTF_STYLE_NORMAL);
 }
 
 void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const GenericStyleComponent& style){
@@ -142,6 +146,8 @@ FC_Font* SDLRenderer::styleToFont(RenderStyle style) {
             return redFont;
         case RenderStyle::GOLD:
             return goldFont;
+        case RenderStyle::VIOLET:
+            return violetFont;
         default:
             throw NoStyleException();
     }

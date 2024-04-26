@@ -29,6 +29,8 @@ class SDLRenderer: public Renderer {
     FC_Font* greenNumberBankFont;
     FC_Font* redFont;
     FC_Font* goldFont;
+    FC_Font* violetFont;
+
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color faded_white = {255, 255, 255, 180};
     SDL_Color black = {0, 0, 0, 255};
@@ -37,6 +39,7 @@ class SDLRenderer: public Renderer {
     SDL_Color amber = {255, 191, 0, 255};
     SDL_Color red = {255, 0, 0, 255};
     SDL_Color gold = {255, 225, 64, 255};
+    SDL_Color violet = {127, 0, 180, 255};
 
 
 

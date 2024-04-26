@@ -14,7 +14,8 @@ enum class RenderStyle{
     TINY_GREEN_NUMBER,
     TINY_WHITE_NUMBER,
     RED,
-    GOLD
+    GOLD,
+    VIOLET
 //    LETTER,
 //    TERMINAL,
 //    ENGINEER_TERMINAL,
