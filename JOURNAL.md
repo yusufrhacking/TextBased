@@ -41,4 +41,4 @@ Adds a nice obstacle to make there more to play with
 ## 4-27-24
 
 Fight off the facts as they come; when you get to level 2, it adds the new system
-Easy as just adding a check when you add the LiveComponents, to see the Proposition Component level
+Easy as just adding a check when you add the LiveComponents, to see the Proposition Component level and if it is 2, add the stuff
