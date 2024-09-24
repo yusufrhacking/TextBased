@@ -101,6 +101,16 @@ TractatusPlatformGenerationSystem::TractatusPlatformGenerationSystem(Position st
     ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
     ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
     ecsManager->addComponentToEntity<PropositionComponent>(terrainBase, TractatusLayer::TWO);
+
+    terrainBase = ecsManager->createEntity();
+    entities.push(terrainBase);
+    startPosition += Position(-450, -100);
+
+    ecsManager->addComponentToEntity<PositionComponent>(terrainBase, startPosition);
+    ecsManager->addComponentToEntity<TextComponent>(terrainBase, "2.01 A state of affairs (a state of things) is a combination of objects (things).");
+    ecsManager->addComponentToEntity<CollisionComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PlatformComponent>(terrainBase);
+    ecsManager->addComponentToEntity<PropositionComponent>(terrainBase, TractatusLayer::TWO);
 }
 
 void TractatusPlatformGenerationSystem::listenToEvents() {
@@ -131,6 +141,10 @@ void TractatusPlatformGenerationSystem::screenCollisionForLanding(CollisionEvent
 void TractatusPlatformGenerationSystem::toNextStep() {
     if (!entities.empty()){
         ecsManager->addComponentToEntity<LiveComponent>(entities.front());
+        const auto& propositionComponent = ecsManager->getComponentFromEntity<PropositionComponent>(entities.front());
+        if (propositionComponent.layer == TractatusLayer::TWO){
+            // ecsManager->addSystem<FactSystem>();
+        }
         entities.pop();
     }
 }

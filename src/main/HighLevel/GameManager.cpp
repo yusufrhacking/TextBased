@@ -59,7 +59,8 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    TractatusStart level1{startingPosition + Window::getMiddlePosition()};
+    FullBasicLevel levelJit{startingPosition + Window::getMiddlePosition()};
+    //TractatusStart level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {

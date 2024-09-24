@@ -25,7 +25,7 @@ void LetterPickupSystem::update(double deltaTime) {
     auto mainPlayerPosition = ecsManager->getComponentFromEntity<PositionComponent>(mainPlayer).getPosition();
     auto mainPlayerSurfaceSize = ecsManager->getComponentFromEntity<TextComponent>(mainPlayer).getSurfaceSize();
 
-
+    spdlog::info("Letter Pickup Entity Size: ", getRelevantEntities().size());
 
     for (auto entity: getRelevantEntities()){
         auto letterPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
