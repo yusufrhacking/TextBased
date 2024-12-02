@@ -1,6 +1,7 @@
 #include "PlayerSideTextSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../TextCommands/CommandLogSystem.h"
 

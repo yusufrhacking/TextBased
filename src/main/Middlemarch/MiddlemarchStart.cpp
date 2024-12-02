@@ -10,36 +10,67 @@
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 #include "NovelTextComponent.h"
+#include "SubjectComponent.h"
+#include "../Spawning/SupremePowerComponent.h"
+#include "../Spawning/SpawnAbyzComponent.h"
+#include "../Gravity/GravityComponent.h"
+#include "../Gravity/JumpingComponent.h"
+#include "../PositionsAndMovement//VelocityComponent.h"
 #include "../PositionsAndMovement/CollisionComponent.h"
 #include "../Health/HealthComponent.h"
 #include "../MainPlayer/RotateComponent.h"
 #include "../Inventory/InventoryComponent.h"
+#include "../MainPlayer/MainPlayerComponent.h"
+#include "../Platformer/PlatformGenerationSystem.h"
+#include "../Platformer/TargetComponent.h"
+#include "../Platformer/TextStepPrefab.h"
+#include "../PositionsAndMovement/WalkingComponent.h"
+#include "../PositionsAndMovement/RandomRightLeftMovementComponent.h"
+
 
 extern std::unique_ptr<EventBus> eventBus;
 extern std::unique_ptr<ECSManager> ecsManager;
 
+
 MiddlemarchStart::MiddlemarchStart(Position startingPosition): startPosition(startingPosition) {
     speakEngineer();
-    createPreludeText();
 
-    // createWitt(startingPosition);
+    Position subjectPosition{11895, 10532};
 
-    //Make Theresa standout in the text
-    //Abyz show up at the bottom and chew through it, quickly
-    //Theresa turns into entity, has to fight the Abyz
-    //Pull out concepts from the prelude to make gamic
-    //
+    createSubject(subjectPosition);
 
-    // Gravity hits once all the text is destroyed, and then Avila as text shows up at the bottom
-    // Becomes a platformer kinda thing, where you gotta jump up
-    // So need gravity system, and to then transform the keyboard movement system into a jumping system
+    Position avilaPosition = subjectPosition + Position(0, 800);
+    std::vector<std::string> nextSteps = {
+        "from rugged Avila",
+        "That child-pilgrimage",
+        "romances of chivalry",
+        "social conquests of\n  a brilliant girl",
+        "spiritual grandeur",
+        "social faith",
+        "yearning of womanhood",
+        "blundering lives",
+        "inconvenient indefiniteness"
+    };
+    ecsManager->addSystem<PlatformGenerationSystem>(avilaPosition, nextSteps);
+    
+    createTarget();
 
+    Position supremePowerPosition = Window::deriveRelativeTopLeft(subjectPosition);
+    supremePowerPosition.x += Window::getMiddlePosition().x;
+    supremePowerPosition.x -= TextComponent::getSurfaceSize("Supreme Power").width/2;
 
+    Entity supremePower = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<LiveComponent>(supremePower);
+    ecsManager->addComponentToEntity<PositionComponent>(supremePower, supremePowerPosition);
+    ecsManager->addComponentToEntity<TextComponent>(supremePower, "The Bricoleur");
+    ecsManager->addComponentToEntity<RandomRightLeftMovementComponent>(supremePower, 100.0);
+    ecsManager->addComponentToEntity<SupremePowerComponent>(supremePower);
+    ecsManager->addComponentToEntity<SpawnAbyzComponent>(supremePower);
 }
 
 void MiddlemarchStart::createPreludeText() const {
     Entity preludeTextEntity = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, preludeText);
+    ecsManager->addComponentToEntity<TextComponent>(preludeTextEntity, shortTesting);
     ecsManager->addComponentToEntity<PositionComponent>(preludeTextEntity, Window::deriveRelativeTopLeft(startPosition));
     ecsManager->addComponentToEntity<LiveComponent>(preludeTextEntity);
     ecsManager->addComponentToEntity<NovelTextComponent>(preludeTextEntity, "Saint Theresa");
@@ -49,15 +80,27 @@ void MiddlemarchStart::speakEngineer() const {
     eventBus->emitEvent<EngineerSpeakEvent>("Middlemarch by George Eliot");
 }
 
-void MiddlemarchStart::createWitt(Position startingPosition) {
-    Entity witt = ecsManager->createEntity();
-    ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
-    ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
-    ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
-    ecsManager->addComponentToEntity<CollisionComponent>(witt);
-    ecsManager->addComponentToEntity<InventoryComponent>(witt);
-    ecsManager->addComponentToEntity<LiveComponent>(witt);
-    ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
-    ecsManager->addComponentToEntity<RotationComponent>(witt);
+
+void MiddlemarchStart::createSubject(Position subjectPosition) {
+    Entity subject = ecsManager->createEntity();
+    ecsManager->addComponentToEntity<LiveComponent>(subject);
+    ecsManager->addComponentToEntity<PositionComponent>(subject, subjectPosition);
+    ecsManager->addComponentToEntity<TextComponent>(subject, "Saint Theresa");
+    ecsManager->addComponentToEntity<MainPlayerComponent>(subject);
+    ecsManager->addComponentToEntity<SubjectComponent>(subject);
+    ecsManager->addComponentToEntity<GravityComponent>(subject);
+    ecsManager->addComponentToEntity<VelocityComponent>(subject);
+    ecsManager->addComponentToEntity<CollisionComponent>(subject);
+    ecsManager->addComponentToEntity<JumpingComponent>(subject, 200);
+    ecsManager->addComponentToEntity<WalkingComponent>(subject, 100.0);
+}
+
+void MiddlemarchStart::createTarget() {
+    std::string targetStr = "country of the Moors";
+    auto targetSize = TextComponent::getSurfaceSize(targetStr);
+    Position targetPosAdjustment(-1.0f * static_cast<float>(targetSize.width), targetSize.height);
+    Position targetPosition = Window::deriveRelativeTopRight(startPosition) + targetPosAdjustment;
+    TextStepPrefab targetPrefab{targetStr, targetPosition};
+    ecsManager->addComponentToEntity<TargetComponent>(targetPrefab.entity);
+    ecsManager->removeComponentFromEntity<CollisionComponent>(targetPrefab.entity);
 }

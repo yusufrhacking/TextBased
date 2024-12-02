@@ -2,11 +2,12 @@
 #define TEXTBASED_COLLISIONCHECKSYSTEM_H
 #include "../ECSObjects/UpdateSystem.h"
 #include "CollisionComponent.h"
+#include "../ECSObjects/FinalSystem.h"
 #include "../Text/TextComponent.h"
 #include "../HighLevel/ECSManager.h"
 
 
-class CollisionCheckSystem: public UpdateSystem {
+class CollisionCheckSystem: public FinalSystem {
     public:
         CollisionCheckSystem();
 

@@ -4,7 +4,13 @@
 #include "PositionComponent.h"
 #include "../MainPlayer/TiedChildComponent.h"
 #include "LiveComponent.h"
+#include "../Gravity/JumpingComponent.h"
 #include <stdexcept>
+
+#include "RightLeftCollisionEvent.h"
+#include "TopBottomCollisionEvent.h"
+#include "VelocityComponent.h"
+#include "../Platformer/ProspectivePlatformLandingEvent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -15,47 +21,52 @@ CollisionHandleSystem::CollisionHandleSystem() {
     listenToEvents();
 }
 
+
+
 void CollisionHandleSystem::onCollision(CollisionEvent &event) {
     auto entityA = event.a;
+
     auto entityB = event.b;
-    auto& aPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entityA);
-    auto& bPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entityB);
 
-    auto aLastFrameMoved = aPositionComponent.getFrameLastMoved();
-    auto bLastFrameMoved = bPositionComponent.getFrameLastMoved();
+    // Check if top-bottom collision?
+    auto aPosition = ecsManager->getComponentFromEntity<PositionComponent>(entityA).getPosition();
+    auto bPosition = ecsManager->getComponentFromEntity<PositionComponent>(entityB).getPosition();
 
-    auto aEntities = getChildEntities(entityA);
-    auto bEntities = getChildEntities(entityB);
+    auto aSize = ecsManager->getComponentFromEntity<TextComponent>(entityA).getSurfaceSize();
+    auto bSize = ecsManager->getComponentFromEntity<TextComponent>(entityB).getSurfaceSize();
 
-    if (aLastFrameMoved > bLastFrameMoved) {
-        revertPosition(entityA, aEntities);
-    } else if (aLastFrameMoved == bLastFrameMoved) {
-        revertPosition(entityA, aEntities);
-        revertPosition(entityB, bEntities);
-    } else {
-        revertPosition(entityB, bEntities);
+    float acceptableRange = 1.0;
+
+    //Check Top Bottom Collisions
+    if (aPosition.y <= bPosition.y - bSize.height + acceptableRange) {
+        eventBus->emitEvent<TopBottomCollisionEvent>(entityA, entityB);
     }
+    if (bPosition.y <= aPosition.y - aSize.height + acceptableRange) {
+        eventBus->emitEvent<TopBottomCollisionEvent>(entityB, entityA);
+    }
+
+    //Check Left Right Collisions
+    if (aPosition.x >= bPosition.x + bSize.width - acceptableRange) {
+        eventBus->emitEvent<RightLeftCollisionEvent>(entityA, entityB);
+    }
+    if (bPosition.x >= aPosition.x + aSize.width - acceptableRange) {
+        eventBus->emitEvent<RightLeftCollisionEvent>(entityB, entityA);
+    }
+
+    handleCollision(entityA);
+    handleCollision(entityB);
+
+    eventBus->emitEvent<ProspectivePlatformLandingEvent>(entityA, entityB);
 }
 
-std::set<Entity> CollisionHandleSystem::getChildEntities(const Entity& entity) {
-    try {
-        auto& childrenComponent = ecsManager->getComponentFromEntity<TiedChildComponent>(entity);
-        return childrenComponent.entities;
-    } catch (...) {
-        return {};
-    }
-}
-
-void CollisionHandleSystem::revertPosition(const Entity& entity, const std::set<Entity>& childEntities) {
+void CollisionHandleSystem::handleCollision(Entity entity) {
     auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
     positionComponent.revertPosition();
-
-    for (const auto& child : childEntities) {
-        auto& childPositionComponent = ecsManager->getComponentFromEntity<PositionComponent>(child);
-        childPositionComponent.revertPosition();
-    }
 }
+
 
 void CollisionHandleSystem::listenToEvents() {
     eventBus->listenToEvent<CollisionEvent>(this, &CollisionHandleSystem::onCollision);
 }
+
+

@@ -17,18 +17,22 @@
 #include "../HighLevel/TerminalGlobals.h"
 #include "../HighLevel/FontGlobals.h"
 #include "../Middlemarch/SubjectRenderSystem.h"
+#include "../Spawning/SupremePowerRenderSystem.h"
+#include "../Platformer/TargetRenderingSystem.h"
+#include "../Tractatus/PropositionRenderSystem.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 
 void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, Camera camera) {
     ecsManager->getSystem<EntityRenderSystem>().render(renderer, camera);
 
-    // auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
-    // ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer, authoredCommands);
-    // ecsManager->getSystem<LiveTerminalRenderSystem>().render(renderer);
-    // if (ecsManager->hasSystem<LetterBankRenderSystem>()) {
-    //     ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
-    // }
+     auto authoredCommands = ecsManager->getSystem<CommandLogSystem>().getAuthoredCommands();
+     ecsManager->getSystem<TerminalHistoryRenderSystem>().render(renderer, authoredCommands);
+     ecsManager->getSystem<LiveTerminalRenderSystem>().render(renderer);
+     
+//     if (ecsManager->hasSystem<LetterBankRenderSystem>()) {
+//         ecsManager->getSystem<LetterBankRenderSystem>().render(renderer);
+//     }
 
     if (ecsManager->hasSystem<PlayerSideTextSystem>()){
         ecsManager->getSystem<PlayerSideTextSystem>().render(renderer, camera);
@@ -63,6 +67,15 @@ void RenderControllerSystem::render(const std::shared_ptr<Renderer> &renderer, C
     if (ecsManager->hasSystem<AbyzRenderingSystem>()) {
         ecsManager->getSystem<AbyzRenderingSystem>().render(renderer, camera);
     }
+    if (ecsManager->hasSystem<TargetRenderingSystem>()) {
+        ecsManager->getSystem<TargetRenderingSystem>().render(renderer, camera);
+    }
+    if (ecsManager->hasSystem<SupremePowerRenderSystem>()) {
+        ecsManager->getSystem<SupremePowerRenderSystem>().render(renderer, camera);
+    }
+    if (ecsManager->hasSystem<PropositionRenderSystem>()){
+        ecsManager->getSystem<PropositionRenderSystem>().render(renderer, camera);
+    }
 }
 
 RenderControllerSystem::RenderControllerSystem() {
@@ -75,5 +88,8 @@ RenderControllerSystem::RenderControllerSystem() {
     ecsManager->addSystem<NovelTextRenderSystem>();
     ecsManager->addSystem<SubjectRenderSystem>();
     ecsManager->addSystem<AbyzRenderingSystem>();
+    ecsManager->addSystem<TargetRenderingSystem>();
+    ecsManager->addSystem<SupremePowerRenderSystem>();
+    ecsManager->addSystem<PropositionRenderSystem>();
     // ecsManager->addSystem<PlayerSideTextSystem>();
 }

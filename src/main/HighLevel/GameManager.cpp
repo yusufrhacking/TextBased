@@ -4,7 +4,7 @@
 
 #include "SystemAddSystem.h"
 #include "../Levels/BasicLevel.h"
-#include "../PositionsAndMovement/AutonomousMovementSystem.h"
+#include "../PositionsAndMovement/VelocitySystem.h"
 #include "../PositionsAndMovement/CollisionCheckSystem.h"
 #include "../TextCommands/TextCommandSystem.h"
 #include "../Rendering/SDLRenderer.h"
@@ -27,15 +27,30 @@
 #include "../Health/HealthSystem.h"
 #include "../Health/PendingDeathSystem.h"
 #include "../Abyz/AbyzControlSystem.h"
+#include "../Abyz/AbyzPlatformCollisionHandleSystem.h"
 #include "../Abyz/AbyzTargetExecutionSystem.h"
 #include "../Abyz/AbyzTargetAllocationSystem.h"
+#include "../Abyz/LifeGateComponent.h"
+#include "../Abyz/LifeGateSystem.h"
 #include "../Abyz/WordRelicPrioritizingSystem.h"
 #include "../Levels/FullBasicLevel.h"
 #include "../Levels/IntroPac.h"
 #include "../MainPlayer/PlayerRotateSystem.h"
+#include "../Maze/IntroMazePrefab.h"
 #include "../UIShow/UIControllerSystem.h"
 #include "../Woodworking/AxeFlipSystem.h"
 #include "../Middlemarch/MiddlemarchStart.h"
+#include "../Gravity/GravitySystem.h"
+#include "../Gravity/JumpingSystem.h"
+#include "../MainPlayer/DamageSystem.h"
+#include "../Platformer/HorizontalPlatformMovementSystem.h"
+#include "../Platformer/PlatformLandingSystem.h"
+#include "../PositionsAndMovement/RandomRightLeftMovementSystem.h"
+#include "../PositionsAndMovement/RightLeftMovementSystem.h"
+#include "../Spawning/SpawnAbyzSystem.h"
+#include "../Emma/EmmaStart.h"
+#include "../Diegesis/CoinBoxCollisionSystem.h"
+#include "../Tractatus/TractatusStart.h"
 
 GameManager::GameManager(Position position): canon(position), startingPosition(position) {
     window = std::make_unique<Window>();
@@ -44,17 +59,18 @@ GameManager::GameManager(Position position): canon(position), startingPosition(p
 
 void GameManager::setup() {
     setupSystems();
-    MiddlemarchStart level1{startingPosition + Window::getMiddlePosition()};
+    FullBasicLevel levelJit{startingPosition + Window::getMiddlePosition()};
+    //TractatusStart level1{startingPosition + Window::getMiddlePosition()};
 }
 
 void GameManager::setupSystems() {
     ecsManager->addSystem<RenderControllerSystem>();
-    ecsManager->addSystem<AutonomousMovementSystem>();
-    ecsManager->addSystem<CollisionCheckSystem>();
+    ecsManager->addSystem<VelocitySystem>();
+    // ecsManager->addSystem<CollisionCheckSystem>();
     ecsManager->addSystem<CollisionHandleSystem>();
     ecsManager->addSystem<PlayerKeyboardInputSystem>();
     ecsManager->addSystem<CameraFollowSystem>();
-    ecsManager->addSystem<UnprocessedKeyboardMovementSystem>();
+    ecsManager->addSystem<MovementSystem>();
     ecsManager->addSystem<CanonRegisteringSystem>(canon);
     ecsManager->addSystem<MovementHandleSystem>();
     ecsManager->addSystem<CanonMovementHandleSystem>(canon);
@@ -82,13 +98,23 @@ void GameManager::setupSystems() {
     ecsManager->addSystem<AbyzTargetAllocationSystem>();
     ecsManager->addSystem<AbyzTargetExecutionSystem>();
     ecsManager->addSystem<WordRelicPrioritizingSystem>();
+    ecsManager->addSystem<GravitySystem>();
+    ecsManager->addSystem<RightLeftMovementSystem>();
+    ecsManager->addSystem<SpawnAbyzSystem>();
+    ecsManager->addSystem<LifeGateSystem>();
+    ecsManager->addSystem<RandomRightLeftMovementSystem>();
+    ecsManager->addSystem<PlatformLandingSystem>();
+    ecsManager->addSystem<HorizontalPlatformMovementSystem>();
+    ecsManager->addSystem<AbyzPlatformCollisionHandleSystem>();
+    ecsManager->addSystem<DamageSystem>();
+    ecsManager->addSystem<CoinBoxCollisionSystem>();
 }
 
 void GameManager::update(double deltaTime) {
     auto recentlyAddedEntities = ecsManager->addNewEntities();
     ecsManager->getSystem<CanonRegisteringSystem>().placeEntities(recentlyAddedEntities);
     ecsManager->removeDeadEntities();
-    ecsManager->runFirstSystems();
+    // ecsManager->runFirstSystems();
     ecsManager->runTimedSystems(deltaTime);
     ecsManager->runCameraSystem();
 }

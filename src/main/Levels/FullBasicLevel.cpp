@@ -16,12 +16,13 @@
 #include "../Creation/ItemCreationSystem.h"
 #include "../Text/TextGenerator.h"
 #include "../Woodworking/TreeComponent.h"
-#include "../MainPlayer/MainPlayerComponent.h"
+#include "../MainPlayer/KeyboardMovementComponent.h"
 #include "../HighLevel/ECSManager.h"
 #include "../Woodworking/TreePrefab.h"
-#include "../Abyz/AbyzPrefab.h"
+#include "../Abyz/PlainAbyzPrefab.h"
 #include "../Lettering/LetterPrefab.h"
 #include "../Woodworking/ForestPrefab.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -32,7 +33,7 @@ FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(star
     createPlayer();
     ForestPrefab forest{Window::deriveRelativeTopLeft(startingPosition), 2, 5};
     TreePrefab tree{startingPosition + Position(100, 200)};
-    AbyzPrefab abyz{startingPosition + Position(400, -150)};
+    PlainAbyzPrefab abyz{startingPosition + Position(400, -150)};
     LetterPrefab a{'a', startingPosition + Position(-100, 0)};
     LetterPrefab x{'x', startingPosition + Position(100, 0)};
     LetterPrefab e{'e', startingPosition + Position(0, -100)};
@@ -41,12 +42,13 @@ FullBasicLevel::FullBasicLevel(Position startingPosition): startingPosition(star
 void FullBasicLevel::createPlayer() {
     ecsManager->addComponentToEntity<TextComponent>(witt, "Witt");
     ecsManager->addComponentToEntity<PositionComponent>(witt, startingPosition);
-    ecsManager->addComponentToEntity<MainPlayerComponent>(witt, std::make_shared<Velocity>(15, 15));
+    ecsManager->addComponentToEntity<KeyboardMovementComponent>(witt, std::make_shared<Velocity>(2, 2));
     ecsManager->addComponentToEntity<GenericStyleComponent>(witt);
     ecsManager->addComponentToEntity<CollisionComponent>(witt);
     ecsManager->addComponentToEntity<InventoryComponent>(witt);
     ecsManager->addComponentToEntity<LiveComponent>(witt);
     ecsManager->addComponentToEntity<HealthComponent>(witt, 10);
+    ecsManager->addComponentToEntity<MainPlayerComponent>(witt);
 }
 
 

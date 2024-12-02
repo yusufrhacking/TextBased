@@ -11,6 +11,11 @@ public:
         this->entity = entity;
         this->change = change;
     }
+
+    explicit ReadyToMoveEvent(Entity entity, float xChange, float yChange){
+        this->entity = entity;
+        this->change = Velocity(xChange, yChange);
+    }
 };
 
 #endif //TEXTBASED_READYTOMOVEEVENT_H

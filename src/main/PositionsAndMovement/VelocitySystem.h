@@ -7,9 +7,9 @@
 #include "../ECSObjects/UpdateSystem.h"
 
 
-class AutonomousMovementSystem: public UpdateSystem{
+class VelocitySystem: public UpdateSystem{
     public:
-        explicit AutonomousMovementSystem();
+        explicit VelocitySystem();
 
 
         void update(double deltaTime) override;

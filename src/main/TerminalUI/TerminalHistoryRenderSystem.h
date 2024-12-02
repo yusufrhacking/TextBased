@@ -7,7 +7,7 @@
 
 class TerminalHistoryRenderSystem: public FixedRenderSystem {
 private:
-    int maxLinesShown = 6;
+    int maxLinesShown = 5;
     int typedTextInd = 0;
     int typedFramePerNewCharacter = 10;
     int typeNewCharacter = 0;

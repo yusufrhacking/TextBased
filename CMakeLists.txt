@@ -29,7 +29,7 @@ set(SOURCE_FILES
         src/main/TextInput/InputProcessor.cpp src/main/TextInput/InputProcessor.h
         src/main/PositionsAndMovement/PositionComponent.h
         src/main/PositionsAndMovement/Position.h src/main/PositionsAndMovement/Velocity.h
-        src/main/PositionsAndMovement/AutonomousMovementSystem.cpp src/main/PositionsAndMovement/AutonomousMovementSystem.h
+        src/main/PositionsAndMovement/VelocitySystem.cpp src/main/PositionsAndMovement/VelocitySystem.h
         "src/main/ECSObjects/Entity.cpp" "src/main/ECSObjects/Entity.h"
         "src/main/ECSObjects/Component.h"
         "src/main/ECSObjects/System.cpp" "src/main/ECSObjects/System.h"
@@ -56,17 +56,17 @@ set(SOURCE_FILES
         src/main/ECSObjects/EventConsumerSystem.h
         src/main/PositionsAndMovement/CollisionEvent.h
         src/main/TextInput/GameKeyEvent.h
-        src/main/MainPlayer/MainPlayerComponent.h
+        src/main/MainPlayer/KeyboardMovementComponent.h
         src/main/MainPlayer/PlayerKeyboardInputSystem.cpp src/main/MainPlayer/PlayerKeyboardInputSystem.h
         src/main/Woodworking/TreeComponent.h
         "src/main/Camera/CameraFollowSystem.cpp" "src/main/Camera/CameraFollowSystem.h"
         "src/main/MainPlayer/UnprocessedMovement.cpp" "src/main/MainPlayer/UnprocessedMovement.h"
-        "src/main/MainPlayer/UnprocessedKeyboardMovementSystem.cpp" "src/main/MainPlayer/UnprocessedKeyboardMovementSystem.h"
+        "src/main/PositionsAndMovement/MovementSystem.cpp" "src/main/PositionsAndMovement/MovementSystem.h"
         src/main/ECSObjects/ComponentSignature.cpp src/main/ECSObjects/ComponentSignature.h
         src/main/Camera/Camera.cpp src/main/Camera/Camera.h
         src/main/TheCanon/MapPosition.h
         src/main/TheCanon/Canon.cpp src/main/TheCanon/Canon.h src/main/TheCanon/Page.cpp src/main/TheCanon/Page.h src/main/TheCanon/CanonRegisteringSystem.cpp src/main/TheCanon/CanonRegisteringSystem.h src/main/ECSObjects/FirstSystem.h src/main/PositionsAndMovement/ReadyToMoveEvent.h src/main/MainPlayer/MovementHandleSystem.cpp src/main/MainPlayer/MovementHandleSystem.h src/main/TheCanon/CanonMovementHandleSystem.cpp src/main/TheCanon/CanonMovementHandleSystem.h src/main/PositionsAndMovement/PostMovementEvent.h src/main/Levels/ForestGenerator.cpp src/main/Levels/ForestGenerator.h src/main/TextInput/GameKeyEvent.cpp src/main/TextInput/WordInputSystem.cpp src/main/TextInput/TextInputEvent.h src/main/TextInput/TextCommandEvent.h src/main/TextCommands/TextCommandSystem.cpp src/main/TextCommands/TextCommandSystem.h src/main/TextInput/TextQueuedEvent.h src/main/MainPlayer/TiedChildComponent.h src/main/Woodworking/AxeComponent.h src/main/Woodworking/ChopEvent.h src/main/Woodworking/ChoppingSystem.cpp src/main/Woodworking/ChoppingSystem.h src/main/Creation/CreateItemAtPositionEvent.h src/main/Creation/ItemCreationSystem.cpp src/main/Creation/ItemCreationSystem.h src/main/Woodworking/AxeComponent.cpp src/main/Woodworking/WoodComponent.h src/main/Inventory/InventoryPickupComponent.h src/main/Creation/ItemComponent.h src/main/Inventory/PlayerPickUpEvent.h src/main/Inventory/InventorySystem.cpp src/main/Inventory/InventorySystem.h src/main/PositionsAndMovement/DistanceCalculator.cpp src/main/PositionsAndMovement/DistanceCalculator.h src/main/Creation/CreatePlayerItemEvent.h src/main/Creation/Item.h src/main/MainPlayer/MainPlayerAccessSystem.h src/main/MainPlayer/MainPlayerAccessSystem.cpp src/main/Inventory/InventoryComponent.h src/main/PositionsAndMovement/LiveComponent.h src/main/Inventory/PlaceSystem.cpp src/main/Inventory/PlaceSystem.h src/main/Inventory/PlaceEvent.h
-        src/main/Inventory/StashPlayerItemEvent.h src/main/Lettering/CharacterStorageSystem.cpp src/main/Lettering/CharacterStorageSystem.h src/main/Lettering/Alphabet.h src/main/Lettering/Letter.h src/main/TextCommands/CharacterSpendEvent.h src/main/Grammar/GrammarSystem.cpp src/main/Grammar/GrammarSystem.h src/main/Grammar/GrammarEvent.h src/main/Text/Split.h src/main/Lettering/LetterComponent.h src/main/Lettering/LetterPickupSystem.cpp src/main/Lettering/LetterPickupSystem.h src/main/Lettering/CharacterDepositEvent.h src/main/TerminalUI/LiveTerminalRenderSystem.cpp src/main/TerminalUI/LiveTerminalRenderSystem.h src/main/TerminalUI/FixedPositionComponent.h src/main/Rendering/DynamicRenderSystem.h src/main/TerminalUI/TerminalUnderscoreComponent.h src/main/TerminalUI/TerminalTextUpdateEvent.h src/main/TerminalUI/TakingInputFlipEvent.h src/main/TextCommands/CommandLogSystem.cpp src/main/TextCommands/CommandLogSystem.h src/main/TextCommands/AuthoredCommand.h src/main/TextCommands/Command.h src/main/TerminalUI/TerminalHistoryRenderSystem.cpp src/main/TerminalUI/TerminalHistoryRenderSystem.h src/main/Diegesis/EngineerDialogueSystem.cpp src/main/Diegesis/EngineerDialogueSystem.h src/main/TerminalUI/TerminalRenderer.cpp src/main/TerminalUI/TerminalRenderer.h src/main/Diegesis/EngineerTerminalEvent.h src/main/Lettering/LetterBankRenderSystem.cpp src/main/Lettering/LetterBankRenderSystem.h src/main/Inventory/InventoryRenderSystem.cpp src/main/Inventory/InventoryRenderSystem.h src/main/Rendering/RenderControllerSystem.cpp src/main/Rendering/RenderControllerSystem.h src/main/Rendering/FixedRenderSystem.h src/main/Rendering/TypeToStyleMapper.h src/main/Rendering/RenderStyle.h src/main/Inventory/Inventory.h src/main/Lettering/FreeWordSystem.cpp src/main/Lettering/FreeWordSystem.h src/main/Lettering/FreeWordEvent.h src/main/Lettering/WordDepositEvent.h src/main/Abyz/AbyzComponent.h src/main/Health/HealthComponent.h src/main/Health/PendingDeathComponent.h src/main/Attacking/AttemptedAttackEvent.h src/main/Attacking/SuccessfulAttackEvent.h src/main/Attacking/AttackAttemptSystem.cpp src/main/Attacking/AttackAttemptSystem.h src/main/Health/HealthSystem.cpp src/main/Health/HealthSystem.h src/main/Attacking/AttackableComponent.h src/main/Attacking/AttackType.h src/main/Health/PendingDeathSystem.cpp src/main/Health/PendingDeathSystem.h src/main/Health/OnDeathComponent.h src/main/Creation/CreateItemAtEntityEvent.h src/main/Abyz/AbyzControlSystem.cpp src/main/Abyz/AbyzControlSystem.h src/main/Attacking/ActiveWeaponComponent.h src/main/Health/HealthBarRenderSystem.cpp src/main/Health/HealthBarRenderSystem.h src/main/Levels/FullBasicLevel.cpp src/main/Levels/FullBasicLevel.h src/main/Woodworking/TreePrefab.h src/main/Abyz/AbyzPrefab.h src/main/Lettering/LetterPrefab.h src/main/Woodworking/ForestPrefab.h src/main/PlayerDialogueSystem/PlayerSideTextSystem.cpp src/main/Levels/IntroPac.cpp src/main/Levels/IntroPac.h src/main/Diegesis/EngineerSpeakEvent.h src/main/Woodworking/ChoppableComponent.h src/main/Woodworking/PunchEvent.h src/main/Creation/CreateLetterAtPositionEvent.h src/main/Maze/HorizontalWallPrefab.h src/main/Maze/SolidWallRowPrefab.h src/main/Maze/SolidColumnPrefab.h src/main/Maze/IntroMazePrefab.h src/main/Maze/VerticalWallPrefab.h src/main/Maze/HalfwayOpenWallRowPrefab.h src/main/Maze/HalfwayOpenWallColumnPrefab.h src/main/Maze/IntroMazePrefab.cpp src/main/MainPlayer/RotateEvent.h src/main/MainPlayer/PlayerRotateSystem.cpp src/main/MainPlayer/PlayerRotateSystem.h src/main/MainPlayer/RotateComponent.h
+        src/main/Inventory/StashPlayerItemEvent.h src/main/Lettering/CharacterStorageSystem.cpp src/main/Lettering/CharacterStorageSystem.h src/main/Lettering/Alphabet.h src/main/Lettering/Letter.h src/main/TextCommands/CharacterSpendEvent.h src/main/Grammar/GrammarSystem.cpp src/main/Grammar/GrammarSystem.h src/main/Grammar/GrammarEvent.h src/main/Text/Split.h src/main/Lettering/LetterComponent.h src/main/Lettering/LetterPickupSystem.cpp src/main/Lettering/LetterPickupSystem.h src/main/Lettering/CharacterDepositEvent.h src/main/TerminalUI/LiveTerminalRenderSystem.cpp src/main/TerminalUI/LiveTerminalRenderSystem.h src/main/TerminalUI/FixedPositionComponent.h src/main/Rendering/DynamicRenderSystem.h src/main/TerminalUI/TerminalUnderscoreComponent.h src/main/TerminalUI/TerminalTextUpdateEvent.h src/main/TerminalUI/TakingInputFlipEvent.h src/main/TextCommands/CommandLogSystem.cpp src/main/TextCommands/CommandLogSystem.h src/main/TextCommands/AuthoredCommand.h src/main/TextCommands/Command.h src/main/TerminalUI/TerminalHistoryRenderSystem.cpp src/main/TerminalUI/TerminalHistoryRenderSystem.h src/main/Diegesis/EngineerDialogueSystem.cpp src/main/Diegesis/EngineerDialogueSystem.h src/main/TerminalUI/TerminalRenderer.cpp src/main/TerminalUI/TerminalRenderer.h src/main/Diegesis/EngineerTerminalEvent.h src/main/Lettering/LetterBankRenderSystem.cpp src/main/Lettering/LetterBankRenderSystem.h src/main/Inventory/InventoryRenderSystem.cpp src/main/Inventory/InventoryRenderSystem.h src/main/Rendering/RenderControllerSystem.cpp src/main/Rendering/RenderControllerSystem.h src/main/Rendering/FixedRenderSystem.h src/main/Rendering/TypeToStyleMapper.h src/main/Rendering/RenderStyle.h src/main/Inventory/Inventory.h src/main/Lettering/FreeWordSystem.cpp src/main/Lettering/FreeWordSystem.h src/main/Lettering/FreeWordEvent.h src/main/Lettering/WordDepositEvent.h src/main/Abyz/AbyzComponent.h src/main/Health/HealthComponent.h src/main/Health/PendingDeathComponent.h src/main/Attacking/AttemptedAttackEvent.h src/main/Attacking/SuccessfulAttackEvent.h src/main/Attacking/AttackAttemptSystem.cpp src/main/Attacking/AttackAttemptSystem.h src/main/Health/HealthSystem.cpp src/main/Health/HealthSystem.h src/main/Attacking/AttackableComponent.h src/main/Attacking/AttackType.h src/main/Health/PendingDeathSystem.cpp src/main/Health/PendingDeathSystem.h src/main/Health/OnDeathComponent.h src/main/Creation/CreateItemAtEntityEvent.h src/main/Abyz/AbyzControlSystem.cpp src/main/Abyz/AbyzControlSystem.h src/main/Attacking/ActiveWeaponComponent.h src/main/Health/HealthBarRenderSystem.cpp src/main/Health/HealthBarRenderSystem.h src/main/Levels/FullBasicLevel.cpp src/main/Levels/FullBasicLevel.h src/main/Woodworking/TreePrefab.h src/main/Abyz/PlainAbyzPrefab.h src/main/Lettering/LetterPrefab.h src/main/Woodworking/ForestPrefab.h src/main/PlayerDialogueSystem/PlayerSideTextSystem.cpp src/main/Levels/IntroPac.cpp src/main/Levels/IntroPac.h src/main/Diegesis/EngineerSpeakEvent.h src/main/Woodworking/ChoppableComponent.h src/main/Woodworking/PunchEvent.h src/main/Creation/CreateLetterAtPositionEvent.h src/main/Maze/HorizontalWallPrefab.h src/main/Maze/SolidWallRowPrefab.h src/main/Maze/SolidColumnPrefab.h src/main/Maze/IntroMazePrefab.h src/main/Maze/VerticalWallPrefab.h src/main/Maze/HalfwayOpenWallRowPrefab.h src/main/Maze/HalfwayOpenWallColumnPrefab.h src/main/Maze/IntroMazePrefab.cpp src/main/MainPlayer/RotateEvent.h src/main/MainPlayer/PlayerRotateSystem.cpp src/main/MainPlayer/PlayerRotateSystem.h src/main/MainPlayer/RotateComponent.h
         src/main/LetterMaze/LetterStreamPrefab.h
         src/main/LetterMaze/VerticalLetterStreamPrefab.h
         src/main/UIShow/HideUIEvent.h
@@ -109,7 +109,69 @@ set(SOURCE_FILES
         src/main/Abyz/AbyzTargetingComponent.h
         src/main/Abyz/AbyzTargetExecutionSystem.cpp
         src/main/Abyz/AbyzTargetExecutionSystem.h
-        src/main/Abyz/JourneyComponent.h)
+        src/main/Abyz/JourneyComponent.h
+        src/main/Gravity/GravityComponent.h
+        src/main/MainPlayer/MainPlayerComponent.h
+        src/main/PositionsAndMovement/VelocityComponent.h
+        src/main/Gravity/GravitySystem.cpp
+        src/main/Gravity/GravitySystem.h
+        src/main/Gravity/JumpingComponent.h
+        src/main/Gravity/JumpingSystem.cpp
+        src/main/Gravity/JumpingSystem.h
+        src/main/ECSObjects/FinalSystem.h
+        src/main/PositionsAndMovement/RightLeftMovementSystem.cpp
+        src/main/PositionsAndMovement/RightLeftMovementSystem.h
+        src/main/PositionsAndMovement/WalkingComponent.h
+        src/main/Platformer/TargetComponent.h
+        src/main/Platformer/TargetRenderingSystem.cpp
+        src/main/Platformer/TargetRenderingSystem.h
+        src/main/Platformer/TextStepPrefab.h
+        src/main/Platformer/PlatformComponent.h
+        src/main/Platformer/PlatformGenerationSystem.cpp
+        src/main/Platformer/PlatformGenerationSystem.h
+        src/main/Spawning/SupremePowerComponent.h
+        src/main/Spawning/SupremePowerRenderSystem.cpp
+        src/main/Spawning/SupremePowerRenderSystem.h
+        src/main/Spawning/SpawnAbyzComponent.h
+        src/main/Spawning/SpawnAbyzSystem.cpp
+        src/main/Spawning/SpawnAbyzSystem.h
+        src/main/Abyz/LifeGateComponent.h
+        src/main/Abyz/LifeGateSystem.cpp
+        src/main/Abyz/LifeGateSystem.h
+        src/main/PositionsAndMovement/RandomRightLeftMovementComponent.h
+        src/main/PositionsAndMovement/RandomRightLeftMovementSystem.cpp
+        src/main/PositionsAndMovement/RandomRightLeftMovementSystem.h
+        src/main/Platformer/ProspectivePlatformLandingEvent.h
+        src/main/Platformer/PlatformLandingSystem.cpp
+        src/main/Platformer/PlatformLandingSystem.h
+        src/main/Platformer/HorizontalPlatformMovementComponent.h
+        src/main/Platformer/HorizontalPlatformMovementSystem.cpp
+        src/main/Platformer/HorizontalPlatformMovementSystem.h
+        src/main/PositionsAndMovement/TopBottomCollisionEvent.h
+        src/main/Abyz/AbyzPlatformCollisionHandleSystem.cpp
+        src/main/Abyz/AbyzPlatformCollisionHandleSystem.h
+        src/main/PositionsAndMovement/RightLeftCollisionEvent.h
+        src/main/MainPlayer/DamageSystem.cpp
+        src/main/MainPlayer/DamageSystem.h
+        src/main/MainPlayer/DamageEvent.h
+        src/main/Emma/ReadEmma.cpp
+        src/main/Emma/EmmaStart.cpp
+        src/main/Emma/EmmaStart.h
+        src/main/Emma/EmmaWoodhouseComponent.h
+        src/main/Emma/EmmaWoodhouseSystem.cpp
+        src/main/Emma/EmmaWoodhouseSystem.h
+        src/main/Text/TextComponent.cpp
+        src/main/Emma/CoinBoxComponent.h
+        src/main/Diegesis/CoinBoxCollisionSystem.cpp
+        src/main/Diegesis/CoinBoxCollisionSystem.h
+        src/main/Tractatus/TractatusStart.cpp
+        src/main/Tractatus/TractatusStart.h
+        src/main/Tractatus/PropositionComponent.h
+        src/main/Tractatus/PropositionRenderSystem.cpp
+        src/main/Tractatus/PropositionRenderSystem.h
+        src/main/Tractatus/TractatusPlatformGenerationSystem.cpp
+        src/main/Tractatus/TractatusPlatformGenerationSystem.h
+)
 
 
 Message("")

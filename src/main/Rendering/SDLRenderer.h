@@ -28,13 +28,32 @@ class SDLRenderer: public Renderer {
     FC_Font* whiteNumberBankFont;
     FC_Font* greenNumberBankFont;
     FC_Font* redFont;
+    FC_Font* goldFont;
+    FC_Font* violetFont;
+
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color faded_white = {255, 255, 255, 180};
     SDL_Color black = {0, 0, 0, 255};
     SDL_Color gray = {178, 190, 181, 255};
     SDL_Color matrix_green = {102, 255, 102, 255};
-    SDL_Color faded_amber = {255, 176, 0, 180};
+    SDL_Color amber = {255, 191, 0, 255};
     SDL_Color red = {255, 0, 0, 255};
+    SDL_Color gold = {255, 225, 64, 255};
+    SDL_Color violet = {127, 0, 180, 255};
+
+    SDL_Color whiteTwo = {220, 220, 220, 255};
+    SDL_Color whiteThree = {185, 185, 185, 255};
+    SDL_Color whiteFour = {150, 150, 150, 255};
+    SDL_Color whiteFive = {115, 115, 115, 255};
+    SDL_Color whiteSix = {80, 80, 80, 255};
+    SDL_Color whiteSeven = {45, 45, 45, 255};
+
+    FC_Font* whiteTwoFont;
+    FC_Font* whiteThreeFont;
+    FC_Font* whiteFourFont;
+    FC_Font* whiteFiveFont;
+    FC_Font* whiteSixFnt;
+    FC_Font* whiteSevenFont;
 
 
 

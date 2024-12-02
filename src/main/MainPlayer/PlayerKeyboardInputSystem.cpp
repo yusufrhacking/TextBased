@@ -1,5 +1,5 @@
 #include "PlayerKeyboardInputSystem.h"
-#include "UnprocessedKeyboardMovementSystem.h"
+#include "../PositionsAndMovement/MovementSystem.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 #include "../PositionsAndMovement/LiveComponent.h"
 
@@ -10,7 +10,7 @@ extern std::unique_ptr<EventBus> eventBus;
 PlayerKeyboardInputSystem::PlayerKeyboardInputSystem() {
     requireComponent<PositionComponent>();
     requireComponent<TextComponent>();
-    requireComponent<MainPlayerComponent>();
+    requireComponent<KeyboardMovementComponent>();
     requireComponent<LiveComponent>();
     eventBus->listenToEvent<GameKeyEvent>(this, &PlayerKeyboardInputSystem::onKeyPressed);
 }
@@ -18,26 +18,26 @@ PlayerKeyboardInputSystem::PlayerKeyboardInputSystem() {
 void PlayerKeyboardInputSystem::onKeyPressed(GameKeyEvent& event) {
     for (auto entity: getRelevantEntities()){
         auto& positionComponent = ecsManager->getComponentFromEntity<PositionComponent>(entity);
-        auto playerVelocity = ecsManager->getComponentFromEntity<MainPlayerComponent>(entity).movementSpeed;
+        auto playerVelocity = ecsManager->getComponentFromEntity<KeyboardMovementComponent>(entity).movementSpeed;
         double xChange = 0;
         double yChange = 0;
 
         switch (event.getKey()){
             case GameKey::MOVE_UP:
-                yChange += -1*playerVelocity->yVelocity; break;
+                yChange += -1*playerVelocity->y; break;
             case GameKey::MOVE_LEFT:
-                xChange += -1*playerVelocity->xVelocity; break;
+                xChange += -1*playerVelocity->x; break;
             case GameKey::MOVE_DOWN:
-                yChange += playerVelocity->yVelocity; break;
+                yChange += playerVelocity->y; break;
             case GameKey::MOVE_RIGHT:
-                xChange += playerVelocity->xVelocity; break;
+                xChange += playerVelocity->x; break;
             default:
                 break;
         }
 
         UnprocessedMovement movement = UnprocessedMovement(entity, xChange, yChange);
 
-        ecsManager->getSystem<UnprocessedKeyboardMovementSystem>().queueMovement(movement);
+        ecsManager->getSystem<MovementSystem>().queueMovement(movement);
 
     }
 }

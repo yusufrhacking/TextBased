@@ -40,7 +40,7 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
                 TERMINAL_FONT_SIZE, matrix_green, TTF_STYLE_NORMAL);
     amberTerminalFont = FC_CreateFont();
     FC_LoadFont(amberTerminalFont, renderer, "../../resources/Monaco.ttf",
-                TERMINAL_FONT_SIZE, faded_amber, TTF_STYLE_NORMAL);
+                TERMINAL_FONT_SIZE, amber, TTF_STYLE_NORMAL);
     whiteNumberBankFont = FC_CreateFont();
     FC_LoadFont(whiteNumberBankFont, renderer, "../../resources/Monaco.ttf",
                 10, white, TTF_STYLE_NORMAL);
@@ -51,11 +51,23 @@ SDLRenderer::SDLRenderer(SDL_Window *sdlWindow){
     redFont = FC_CreateFont();
     FC_LoadFont(redFont, renderer, "../../resources/Monaco.ttf",
         TEXT_C_FONT_SIZE, red, TTF_STYLE_NORMAL);
+
+    goldFont = FC_CreateFont();
+    FC_LoadFont(goldFont, renderer, "../../resources/Monaco.ttf",
+        TEXT_C_FONT_SIZE, gold, TTF_STYLE_NORMAL);
+
+    violetFont = FC_CreateFont();
+    FC_LoadFont(violetFont, renderer, "../../resources/Monaco.ttf",
+                TEXT_C_FONT_SIZE, violet, TTF_STYLE_NORMAL);
+
+    whiteTwoFont = FC_CreateFont();
+    FC_LoadFont(whiteTwoFont, renderer, "../../resources/Monaco.ttf",
+                TEXT_C_FONT_SIZE, whiteTwo, TTF_STYLE_NORMAL);
 }
 
 void SDLRenderer::renderDynamicText(Camera camera, Position position, const TextComponent& sprite, const GenericStyleComponent& style){
     auto cameraPos = camera.getCameraPosition();
-    FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos - cameraPos.xPos, position.yPos - cameraPos.yPos, sprite.text.c_str());
+    FC_Draw(styleToFont(style.getStyle()), renderer, position.x - cameraPos.x, position.y - cameraPos.y, sprite.text.c_str());
 }
 
 void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite, const GenericStyleComponent& style){
@@ -65,14 +77,14 @@ void SDLRenderer::renderFixedText(Position position, const TextComponent& sprite
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     SDL_Rect backgroundRect;
-    backgroundRect.x = (int)position.xPos;
-    backgroundRect.y = (int)position.yPos;
+    backgroundRect.x = (int)position.x;
+    backgroundRect.y = (int)position.y;
     backgroundRect.w = (int)textWidth;
     backgroundRect.h = (int)textHeight;
     SDL_RenderFillRect(renderer, &backgroundRect);
 
 
-    FC_Draw(styleToFont(style.getStyle()), renderer, position.xPos, position.yPos, sprite.text.c_str());
+    FC_Draw(styleToFont(style.getStyle()), renderer, position.x, position.y, sprite.text.c_str());
 }
 
 void SDLRenderer::renderNovelText(Camera camera, Position position, const TextComponent& sprite, const NovelTextComponent& novelStyle){
@@ -82,13 +94,13 @@ void SDLRenderer::renderNovelText(Camera camera, Position position, const TextCo
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     SDL_Rect backgroundRect;
-    backgroundRect.x = (int)position.xPos;
-    backgroundRect.y = (int)position.yPos;
+    backgroundRect.x = (int)position.x;
+    backgroundRect.y = (int)position.y;
     backgroundRect.w = (int)textWidth;
     backgroundRect.h = (int)textHeight;
     SDL_RenderFillRect(renderer, &backgroundRect);
 
-    FC_Draw(genericMonacoFont, renderer, position.xPos - camera.getCameraPosition().xPos, position.yPos - camera.getCameraPosition().yPos, sprite.text.c_str());
+    FC_Draw(genericMonacoFont, renderer, position.x - camera.getCameraPosition().x, position.y - camera.getCameraPosition().y, sprite.text.c_str());
 }
 
 void SDLRenderer::renderTerminal(std::string text) {
@@ -125,7 +137,7 @@ FC_Font* SDLRenderer::styleToFont(RenderStyle style) {
         case RenderStyle::GREEN_TERMINAL:
             return greenTerminalFont;
         case RenderStyle::AMBER_TERMINAL:
-            return greenTerminalFont;
+            return amberTerminalFont;
         case RenderStyle::WHITE_LETTER_IN_BANK:
             return whiteLetterBankFont;
         case RenderStyle::TINY_WHITE_NUMBER:
@@ -136,6 +148,14 @@ FC_Font* SDLRenderer::styleToFont(RenderStyle style) {
             return greenNumberBankFont;
         case RenderStyle::RED:
             return redFont;
+        case RenderStyle::GOLD:
+            return goldFont;
+        case RenderStyle::VIOLET:
+            return violetFont;
+        case RenderStyle::WHITE_ONE:
+            return genericMonacoFont;
+        case RenderStyle::WHITE_TWO:
+            return whiteTwoFont;
         default:
             throw NoStyleException();
     }

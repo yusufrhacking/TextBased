@@ -2,17 +2,17 @@
 #define TEXTBASED_VELOCITY_H
 
 struct Velocity{
-    double xVelocity;
-    double yVelocity;
+    double x;
+    double y;
 
     Velocity(double x, double y){
-        this->xVelocity = x;
-        this->yVelocity = y;
+        this->x = x;
+        this->y = y;
     }
 
     Velocity(){
-        this->xVelocity = 0;
-        this->yVelocity = 0;
+        this->x = 0;
+        this->y = 0;
     }
 };
 

@@ -17,6 +17,7 @@
 #include "../Lettering/LetterComponent.h"
 #include "../Attacking/ActiveWeaponComponent.h"
 #include "CreateLetterAtPositionEvent.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -80,6 +81,10 @@ void ItemCreationSystem::onCreateItemAtEntity(CreateItemAtEntityEvent &event) {
     switch (event.item){
         case Item::LETTER:
             createLetter(get_random_letter(), ecsManager->getComponentFromEntity<PositionComponent>(event.entity).getPosition());
+            break;
+        case Item::QUESTION_MARK:
+            spdlog::info("AQUI");
+            createLetter(Letter::QUESTION_MARK, ecsManager->getComponentFromEntity<PositionComponent>(event.entity).getPosition());
             break;
         default: break;
     }

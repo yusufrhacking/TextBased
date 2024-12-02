@@ -10,6 +10,7 @@
 #include "../Text/Split.h"
 #include "../Health/PendingDeathComponent.h"
 #include "../MainPlayer/MainPlayerAccessSystem.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
 extern std::unique_ptr<EventBus> eventBus;
@@ -128,15 +129,15 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
             break;
         }
     }
-    currPosition.xPos += leadingWhitespaceCount * MONACO_RENDERED_TEXT_WIDTH_SCALER;
+    currPosition.x += leadingWhitespaceCount * MONACO_RENDERED_TEXT_WIDTH_SCALER;
 
 
     for (size_t i = 0; i < words.size(); i++) {
         std::string word = words[i];
 
         if (word.find('\n') != std::string::npos) {
-            currPosition.xPos = positionComponent.getPosition().xPos;
-            currPosition.yPos += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
+            currPosition.x = positionComponent.getPosition().x;
+            currPosition.y += MONACO_HEIGHT_OF_A_LINE_OF_TEXT;
             word.erase(std::remove_if(word.begin(), word.end(), [](char c) {
                 return c == '\n';}), word.end());
         }
@@ -153,7 +154,8 @@ void NovelTextRenderSystem::createEntitiesFromText(Entity entity, PositionCompon
         }
         else if(i == subjectWordInd) {
             ecsManager->getComponentFromEntity<TextComponent>(wordEntity).text = subject;
-            ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
+            ecsManager->addComponentToEntity<MainPlayerComponent>(wordEntity);
+            // ecsManager->addComponentToEntity<KeyboardMovementComponent>(wordEntity, std::make_shared<Velocity>(MONACO_RENDERED_TEXT_WIDTH_SCALER, MONACO_HEIGHT_OF_A_LINE_OF_TEXT));
             ecsManager->addComponentToEntity<SubjectComponent>(wordEntity);
             i += Split::getWordsAndPunctuation(subject).size();
             word = subject;

@@ -3,16 +3,19 @@
 #include <SDL.h>
 #include <set>
 #include <string>
+#include "GameKeyEvent.h"
 
 class InputProcessor {
-    public:
-        InputProcessor() = default;
-        ~InputProcessor() = default;
-        bool processInput(SDL_Event event);
+public:
+    InputProcessor() = default;
+    ~InputProcessor() = default;
+    bool processInput();
 
-    private:
-        std::string text;
-        bool readInput(SDL_Event event);
+private:
+    std::string text;
+    const Uint8* currentKeyStates;
+    void updateKeyStates();
+    void processKeyPresses();
 };
 
 

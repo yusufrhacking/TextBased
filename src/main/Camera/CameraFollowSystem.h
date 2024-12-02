@@ -1,6 +1,6 @@
 #ifndef TEXTBASED_CAMERAFOLLOWSYSTEM_H
 #define TEXTBASED_CAMERAFOLLOWSYSTEM_H
-#include "../MainPlayer/MainPlayerComponent.h"
+#include "../MainPlayer/KeyboardMovementComponent.h"
 #include "../ECSObjects/UpdateSystem.h"
 #include "../ECSObjects/System.h"
 #include "Camera.h"
@@ -23,6 +23,11 @@ private:
     Position getNewCameraPositionByFrame(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
 
     Position getNewCameraPositionByCentering(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
+
+    Position getNewCameraPositionByPlatformFollow(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
+
+    Position getNewCameraPositionByPlatformCenter(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset);
+
 };
 
 

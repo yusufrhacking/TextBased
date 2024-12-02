@@ -22,14 +22,14 @@
 #include "../LetterMaze/LetterStreamPrefab.h"
 #include "../LetterMaze/VerticalLetterStreamPrefab.h"
 #include "../Woodworking/TreePrefab.h"
-#include "../Abyz/AbyzPrefab.h"
+#include "../Abyz/PlainAbyzPrefab.h"
 
 struct CentralLetterStreamPrefab {
     CentralLetterStreamPrefab(Position startingPosition) {
         const Position letterStartPosition = startingPosition + Position(70, 0);
         LetterStreamPrefab{letterStartPosition, 0, 32};
-        LetterStreamPrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().yPos), 0, 35, true};
-        VerticalLetterStreamPrefab{Position(startingPosition.xPos + 10, static_cast<float>(Window::getTopYPosition(startingPosition.yPos))), 0, 15, true};
+        LetterStreamPrefab{Window::deriveRelativeTopLeft(startingPosition) + Position((float)75, Window::getMiddlePosition().y), 0, 35, true};
+        VerticalLetterStreamPrefab{Position(startingPosition.x + 10, static_cast<float>(Window::getTopYPosition(startingPosition.y))), 0, 15, true};
         VerticalLetterStreamPrefab{startingPosition + Position(10, 25), 0, 15};
     }
 };

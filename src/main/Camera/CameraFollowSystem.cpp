@@ -2,6 +2,7 @@
 #include "CameraFollowSystem.h"
 #include "../HighLevel/ECSManager.h"
 #include "../HighLevel/Game.h"
+#include "../MainPlayer/MainPlayerComponent.h"
 #include "../PositionsAndMovement/PositionComponent.h"
 
 extern std::unique_ptr<ECSManager> ecsManager;
@@ -21,27 +22,27 @@ Camera CameraFollowSystem::updateCameraPosition(Position previousCameraPosition)
     auto playerPosition = ecsManager->getComponentFromEntity<PositionComponent>(entity).getPosition();
     auto playerSizeOffset = ecsManager->getComponentFromEntity<TextComponent>(entity).getSurfaceSize();
 
-    auto newCameraPosition = getNewCameraPositionByFrame(previousCameraPosition, playerPosition, playerSizeOffset);
-    spdlog::trace("Camera moved to position {}, {}", newCameraPosition.xPos, newCameraPosition.yPos);
+    auto newCameraPosition = getNewCameraPositionByPlatformCenter(previousCameraPosition, playerPosition, playerSizeOffset);
+    spdlog::trace("Camera moved to position {}, {}", newCameraPosition.x, newCameraPosition.y);
     return Camera(newCameraPosition);
 }
 
 Position CameraFollowSystem::getNewCameraPositionByFrame(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset) {
     auto newCameraPosition = previousCameraPosition;
-    auto relativePlayerYPos = playerPosition.yPos - previousCameraPosition.yPos;
+    auto relativePlayerYPos = playerPosition.y - previousCameraPosition.y;
     if (this->isAboveScreen(relativePlayerYPos, (float) playerSizeOffset.height)){
-        newCameraPosition.yPos -= (float)Window::windowHeight;
+        newCameraPosition.y -= (float)Window::windowHeight;
     }
     if (this->isBelowScreen(relativePlayerYPos, (float) playerSizeOffset.height)){
-        newCameraPosition.yPos += (float)Window::windowHeight;
+        newCameraPosition.y += (float)Window::windowHeight;
     }
 
-    auto relativePlayerXPos = playerPosition.xPos - previousCameraPosition.xPos;
+    auto relativePlayerXPos = playerPosition.x - previousCameraPosition.x;
     if (this->isRightOfScreen(relativePlayerXPos, (float) playerSizeOffset.width)){
-        newCameraPosition.xPos -= (float)Window::windowWidth;
+        newCameraPosition.x -= (float)Window::windowWidth;
     }
     if (this->isLeftOfScreen(relativePlayerXPos, (float) playerSizeOffset.height)){
-        newCameraPosition.xPos += (float)Window::windowWidth;
+        newCameraPosition.x += (float)Window::windowWidth;
     }
     return newCameraPosition;
 }
@@ -64,10 +65,30 @@ bool CameraFollowSystem::isLeftOfScreen(float relativePlayerXPos, float playerWi
 
 Position CameraFollowSystem::getNewCameraPositionByCentering(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset){
     auto newCameraPosition = previousCameraPosition;
-    auto xPositionWithPlayerInMiddle = playerPosition.xPos - (float)Window::windowWidth/2;
-    newCameraPosition.xPos = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width / 2;
-    auto yPositionWithPlayerInMiddle = playerPosition.yPos - (float)Window::windowHeight/2;
-    newCameraPosition.yPos = yPositionWithPlayerInMiddle;
+    auto xPositionWithPlayerInMiddle = playerPosition.x - (float)Window::windowWidth/2;
+    newCameraPosition.x = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width / 2;
+    auto yPositionWithPlayerInMiddle = playerPosition.y - (float)Window::windowHeight/2;
+    newCameraPosition.y = yPositionWithPlayerInMiddle;
+
+    return newCameraPosition;
+}
+
+Position CameraFollowSystem::getNewCameraPositionByPlatformFollow(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset){
+    auto newCameraPosition = previousCameraPosition;
+    auto xPositionWithPlayerInMiddle = playerPosition.x - (float)Window::windowWidth/8;
+    newCameraPosition.x = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width / 2;
+    auto yPositionWithPlayerInMiddle = playerPosition.y - (float)Window::windowHeight/2 - (float)Window::windowHeight/4;
+    newCameraPosition.y = yPositionWithPlayerInMiddle;
+
+    return newCameraPosition;
+}
+
+Position CameraFollowSystem::getNewCameraPositionByPlatformCenter(Position previousCameraPosition, const Position &playerPosition, const EntitySize &playerSizeOffset){
+    auto newCameraPosition = previousCameraPosition;
+    auto xPositionWithPlayerInMiddle = playerPosition.x - (float)Window::windowWidth/2;
+    newCameraPosition.x = xPositionWithPlayerInMiddle + (float)playerSizeOffset.width / 2;
+    auto yPositionWithPlayerInMiddle = playerPosition.y - (float)Window::windowHeight/2 - (float)Window::windowHeight/4;
+    newCameraPosition.y = yPositionWithPlayerInMiddle;
 
     return newCameraPosition;
 }

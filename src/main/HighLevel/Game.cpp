@@ -34,11 +34,11 @@ void Game::run() {
 }
 
 void Game::processInput() {
-    SDL_Event sdlEvent;
-    while (SDL_PollEvent(&sdlEvent)){
-        spdlog::trace("Event polled");
-        isRunning = inputProcessor->processInput(sdlEvent);
-    }
+    isRunning = inputProcessor->processInput();
+    // SDL_Event sdlEvent;
+    // while (SDL_PollEvent(&sdlEvent)){
+    //     spdlog::trace("Event polled");
+    // }
 }
 
 void Game::update() {

@@ -13,6 +13,7 @@ enum class GameKey {
     BACKSPACE,
     REPEAT_COMMAND
 };
+
 class GameKeyEvent : public Event {
 public:
     explicit GameKeyEvent(GameKey key);
